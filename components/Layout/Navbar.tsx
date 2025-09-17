@@ -1,9 +1,10 @@
 "use client"
 import React, { useState } from 'react';
-import { Menu, X, Search, User } from 'lucide-react';
+import { Menu, X, Search, User, SearchIcon } from 'lucide-react';
 import UsdIcon from '../Icons/UsdIcon';
 import LanguageGlobalIcon from '../Icons/LanguageGlobalIcon';
 import Link from 'next/link';
+import UserIcon from '../Icons/UserIcon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,9 +31,9 @@ const Header = () => {
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
-        <div className="flex justify-between items-center ">
+        <div className="flex justify-between lg:gap-6 gap-0 items-center ">
           {/* Left side - Language and currency */}
-          <div className="hidden md:flex items-center lg:gap-6 gap-4">
+          <div className="hidden md:flex items-center xl:gap-6 gap-4">
             {leftOptions.map((option, index) => (
               <div key={index} className="flex items-center gap-1.5">
                 <span className="">{option?.icon}  </span>
@@ -42,12 +43,12 @@ const Header = () => {
           </div>
 
           {/* Center - Navigation Links */}
-          <div className="hidden lg:flex items-center lg:gap-10 gap-6">
+          <div className="hidden lg:flex items-center xl:gap-10 gap-6">
             {navigationLinks.slice(0, 3).map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
-                className="textPrimary hover:text-gray-900 leading-[100%] md:text-base text-sm font-normal"
+                className="textPrimary hover:text-gray-900 leading-[100%] xl:text-base text-sm font-normal"
               >
                 {link.label}
               </Link>
@@ -64,7 +65,7 @@ const Header = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="textPrimary hover:text-gray-900 leading-[100%] md:text-base text-sm font-normal"
+                className="textPrimary hover:text-gray-900 leading-[100%] xl:text-base text-sm font-normal"
               >
                 {link.label}
               </Link>
@@ -82,11 +83,12 @@ const Header = () => {
 
           {/* Right side - Search and User icons */}
           <div className="flex items-center space-x-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Search className="w-5 h-5 text-gray-600" />
-            </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <User className="w-5 h-5 text-gray-600" />
+            <div className='relative'>
+              <input className="border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] w-[132px] h-[32px] rounded-full transition-colors pl-7" />
+              <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
+            </div>
+            <button className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors">
+              <UserIcon className="size-[18px] "  />
             </button>
 
             {/* Mobile menu button */}

@@ -3,7 +3,7 @@
 
 
 .maxContainer {
-    @apply max-w-[1440px] px-5 xl:px-0 mx-auto
+    @apply max-w-[1440px] px-5 2xl:px-0 mx-auto
 }
 
 .bgPrimary {
