@@ -8,9 +8,9 @@ export default function ClientLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <div className="uppercase">
             <Header />
-            <div className='pt-[100px]'>
+            <div className='pt-[100px] '>
                 {children}
             </div>
             <Footer />
