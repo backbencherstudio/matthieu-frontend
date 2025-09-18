@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"; // Make sure HoverCard is imported from your UI components
+import Link from "next/link";
+import { Separator } from "../ui/separator";
 
 export default function HoverItems({ items }) {
     console.log(items);
@@ -19,21 +21,37 @@ export default function HoverItems({ items }) {
                                     {item?.category}
                                 </span>
                             </HoverCardTrigger>
-                            
+
                             {/* HoverCardContent */}
-                            <HoverCardContent align="end"  className="w-auto p-0  bg-white shadow-lg rounded-lg absolute left-0 top-0 ">
+                            <HoverCardContent align="end" className="w-[420px] p-0 border-0 absolute left-0   rounded-none">
                                 {/* Conditional rendering for dropdown */}
                                 {item?.items && (
                                     <div className="w-full">
                                         {item?.items.map((subItem, subIndex) => (
-                                            <div key={subIndex} className="py-1 ">
+                                            <div key={subIndex} className="bg-[#1F274B] ">
                                                 {/* If subItems have links, show them */}
-                                                <a
+                                                <Link
                                                     href={subItem.href || "#"} // Set the correct link if href is present
-                                                    className="block text-sm text-gray-700 py-1 hover:bg-gray-100"
+                                                    className="block  hover:bg-[#454F7B94]"
                                                 >
-                                                    {subItem.label}
-                                                </a>
+                                                    <div className="flex px-6 py-3 flex-col gap-4">
+                                                        <div className="flex gap-4">
+                                                            <p className="text-white text-sm font-bold leading-[100%] tracking-[.28px] uppercase">{subItem.label}</p>
+                                                            <span className="text-xs leading-[100%] text-white tracking-[.24px] uppercase">{subItem?.subtitle}</span>
+                                                        </div>
+                                                        <div className="flex ">
+                                                            {subItem?.items?.map((itm, index) => (
+                                                                <div className="flex items-center text-sm leading-[100%] tracking-[.28px] uppercase text-white">
+                                                                    <span key={index}>{itm}</span>
+                                                                    {index !== subItem.items.length - 1 && (
+                                                                        <Separator className="mx-3" orientation="vertical" />
+                                                                    )}
+                                                                </div>
+
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </Link>
 
                                                 {/* If there are further sub-sub items */}
                                                 {subItem.subItems && (
