@@ -24,6 +24,9 @@
   --color-primary-text: #1f274b;
   --color-secondary-text: #4c526f;
 
+  --color-primary-bg: #1f274b;
+  --color-select-active-bg: #454f7b8a;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -139,10 +142,11 @@
   }
 }
 
-
 /* Find Us */
-.find-us-custom-select 
-{
-    @apply w-[150px] shadow-none outline-none focus:ring-0 focus-visible:ring-0 rounded-none px-4 py-2 border-primary-text text-secondary-text text-base cursor-pointer;
+.find-us-custom-select {
+  @apply w-[150px] shadow-none outline-none focus:ring-0 focus-visible:ring-0 rounded-none px-4 py-2 border-primary-text text-secondary-text text-base cursor-pointer;
 }
 
+.find-us-button {
+  @apply bg-primary-bg text-white uppercase font-extrabold text-base cursor-pointer h-14 py-4 px-8 w-full;
+}
