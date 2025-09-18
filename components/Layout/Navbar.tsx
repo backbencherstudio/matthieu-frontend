@@ -17,7 +17,7 @@ const Header = () => {
     { label: 'TACK', href: '#' },
     { label: 'BRAND', href: '#' },
     { label: 'TRY A SADDLE', href: '#' },
-    { label: 'FIND US', href: '#' }
+    { label: 'FIND US', href: '/find-us' }
   ];
 
   const navigationLinks2 = [
