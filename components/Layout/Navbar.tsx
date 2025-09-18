@@ -155,7 +155,7 @@ const Header = () => {
           {/* Right side - Search and User icons */}
           <div className="flex items-center md:space-x-4 space-x-2">
             <div className='relative'>
-              <input className="border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] w-[132px] h-[32px] rounded-full transition-colors pl-7" />
+              <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
             <button className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors">

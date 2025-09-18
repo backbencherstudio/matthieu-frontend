@@ -2,10 +2,26 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* @font-face {
+    font-family: "Avenir" ;
+    src: url("@/public/fonts/Avenir Regular/Avenir Regular.ttf");
+} */
+/* @font-face {
+    font-family: "Avenir" ;
+    src: url("@/public/fonts/Avenir Heavy/Avenir Heavy.ttf");
+} */
+body {
+    font-family: Avenir , sans-serif;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 .maxContainer {
   @apply max-w-[1440px] px-5 2xl:px-0 mx-auto;
+}
+
+.inputStyle {
+    @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B]
 }
 
 .bgPrimary {
