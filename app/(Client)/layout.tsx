@@ -1,11 +1,10 @@
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Navbar";
 
-
 export default function ClientLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
     return (
         <div className="uppercase">
