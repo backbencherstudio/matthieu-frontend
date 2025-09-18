@@ -83,8 +83,8 @@ const Header = () => {
 
   // Left side options
   const leftOptions = [
-    { label: 'USD', icon: <UsdIcon /> },
-    { label: 'ENGLISH', icon: <LanguageGlobalIcon /> }
+    { label: "USD", icon: <UsdIcon /> },
+    { label: "ENGLISH", icon: <LanguageGlobalIcon /> },
   ];
 
   const toggleMenu = () => {
@@ -100,8 +100,10 @@ const Header = () => {
           <div className="hidden md:flex items-center xl:gap-6 gap-4">
             {leftOptions.map((option, index) => (
               <div key={index} className="flex items-center gap-1.5">
-                <span className="">{option?.icon}  </span>
-                <span className='textPrimary text-xs leading-[100%]'>{option.label}</span>
+                <span className="">{option?.icon} </span>
+                <span className="textPrimary text-xs leading-[100%]">
+                  {option.label}
+                </span>
               </div>
             ))}
           </div>
@@ -134,7 +136,7 @@ const Header = () => {
 
             {/* Logo */}
             <div className="">
-              <div className='w-[156px] h-[56px]'>
+              <div className="w-[156px] h-[56px]">
                 <img src="/matheiu-logo.png" alt="" />
               </div>
             </div>
@@ -153,7 +155,7 @@ const Header = () => {
           {/* Mobile Logo (visible on mobile/tablet) */}
           <div className="lg:hidden">
             <div className="">
-              <div className='w-[156px] h-[56px]'>
+              <div className="w-[156px] h-[56px]">
                 <img src="/matheiu-logo.png" alt="" />
               </div>
             </div>
