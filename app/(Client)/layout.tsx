@@ -9,7 +9,7 @@ export default function ClientLayout({
     return (
         <div className="uppercase">
             <Header />
-            <div className='pt-[100px] '>
+            <div className=''>
                 {children}
             </div>
             <Footer />

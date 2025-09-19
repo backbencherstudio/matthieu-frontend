@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
             <form >
               <div className="flex flex-wrap gap-3 mt-6 mb-4 ">
                 <input type="email" placeholder="EMAIL" className="bg-[#F8FAFB] upppercase text-[#777980] text-base leading-[100%] font-normal flex-1 px-5 inputStyle" />
-                <button type="submit" className="text-base leading-[136%] md:py-4  py-3 md:px-8 px-4 bg-[#5465B3] text-white uppercase font-normal">send</button>
+                <button type="submit" className="text-base leading-[136%] md:py-4  py-3 md:px-8 px-4 bg-[#5465B3] hover:bg-[#526ad3] text-white uppercase font-normal cursor-pointer">send</button>
               </div>
               <div className="flex text-white items-center justify-center gap-3">
                 <Checkbox
