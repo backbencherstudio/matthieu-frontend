@@ -55,25 +55,24 @@ const Header = () => {
       ]
     },
     {
-      label: 'TACK', href: '#', subItems: [
-        { label: 'Bridles', href: '#' },
-        { label: 'Reins', href: '#' },
-        { label: 'Martingales', href: '#' },
-        { label: 'Girths', href: '#' },
-        { label: 'Halters & Ropes', href: '#' },
-        { label: 'Boots', href: '#' },
-        { label: 'Leather Care', href: '#' },
-        { label: 'Accessories', href: '#' }
+      label: 'TACK', href: '#', hasDropdown: true, dropdownContent: [
+        { category: 'Bridles', href: '#' },
+        { category: 'Reins', href: '#' },
+        { category: 'Martingales', href: '#' },
+        { category: 'Girths', href: '#' },
+        { category: 'Halters & Ropes', href: '#' },
+        { category: 'Boots', href: '#' },
+        { category: 'Leather Care', href: '#' },
+        { category: 'Accessories', href: '#' }
       ]
     },
     {
-      label: 'BRAND', href: '#',
-      subItems: [
-        { label: 'Our Story', href: '#' },
-        { label: 'Meet The Team', href: '#' },
-        { label: 'Workshop', href: '#' },
-        { label: 'Ambassadors', href: '#' },
-        { label: 'Blog', href: '#' }
+      label: 'BRAND', href: '#', hasDropdown: true, dropdownContent: [
+        { category: 'Our Story', href: '#' },
+        { category: 'Meet The Team', href: '#' },
+        { category: 'Workshop', href: '#' },
+        { category: 'Ambassadors', href: '#' },
+        { category: 'Blog', href: '#' }
       ]
     },
     { label: 'TRY A SADDLE', href: '#' },
@@ -111,7 +110,7 @@ const Header = () => {
           {/* Center - Navigation Links */}
           <div className="hidden lg:flex items-center xl:gap-10 gap-6">
             {navigationLinks2.slice(0, 3).map((link, index) => (
-              <HoverCard key={index}>
+              <HoverCard key={index} openDelay={200}>
                 <HoverCardTrigger asChild>
                   <Link
                     href={link.href}
@@ -120,18 +119,10 @@ const Header = () => {
                     {link.label}
                   </Link>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-auto p-0 mt-3">
-                    <HoverItems items = {link}/>
+                <HoverCardContent className="w-auto p-0 mt-6 transition-all duration-100 border-0  rounded-none">
+                  <HoverItems items={link} />
                 </HoverCardContent>
               </HoverCard>
-              // <Link
-              //   key={index}
-              //   href={link.href}
-
-              //   className="textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm font-normal"
-              // >
-              //   {link.label}
-              // </Link>
             ))}
 
             {/* Logo */}
@@ -164,7 +155,7 @@ const Header = () => {
           {/* Right side - Search and User icons */}
           <div className="flex items-center md:space-x-4 space-x-2">
             <div className='relative'>
-              <input className="border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] w-[132px] h-[32px] rounded-full transition-colors pl-7" />
+              <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
             <button className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors">

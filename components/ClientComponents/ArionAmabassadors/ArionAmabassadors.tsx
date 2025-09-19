@@ -26,8 +26,6 @@ interface Blog {
 export default function ArionAmabassadors() {
   const [activeBlogType, setActiveBlogType] = useState<string>("all");
 
-
-
   const blogs: Blog[] = [
     {
       id: 1,

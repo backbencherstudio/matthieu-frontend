@@ -123,7 +123,7 @@ export default function Blog() {
             {filterButton.map((item, idx) => (
               <button
                 key={idx}
-                className={`text-sm lg:text-base text-secondary-text whitespace-nowrap cursor-pointer ${
+                className={`text-sm lg:text-base whitespace-nowrap cursor-pointer ${
                   activeBlogType === item.value
                     ? "text-primary-text font-extrabold underline"
                     : "text-secondary-text font-normal"
@@ -168,7 +168,7 @@ export default function Blog() {
                   </h1>
                   <Link
                     href={`/blog/${blog.id}`}
-                    className="text-xl md:text-2xl pb-[2px] border-b border-primary-text text-primary-text"
+                    className="text-xl md:text-2xl pb-[2px] border-b border-primary-text text-primary-text capitalize"
                   >
                     Read More
                   </Link>

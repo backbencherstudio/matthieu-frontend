@@ -6,11 +6,13 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div>
-      <Header />
-      <div className="pt-[0px]">{children}</div>
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="uppercase">
+            <Header />
+            <div className='pt-[100px] '>
+                {children}
+            </div>
+            <Footer />
+        </div>
+    );
 }

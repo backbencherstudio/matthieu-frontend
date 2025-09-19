@@ -1,256 +1,176 @@
 "use client";
 
 import React, { useState } from "react";
-// import footer from "@/public/Footer.jpg";
-// import logo from "@/public/dark-logo.png";
-import Image from "next/image";
-
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 import Link from "next/link";
 
-const companyLinks = [
-  { label: "About Us", href: "#" },
-  // { label: "Freebies", href: "#" },
-  { label: "Premium", href: "#" },
-  // { label: "Blog", href: "#" },
-  { label: "Affiliate Program", href: "#" },
-  // { label: "Get coupon", href: "#" },
-];
-
-const helpLinks = [
-  // { label: "Knowledge Center", href: "#" },
-  { label: "Contact Us", href: "#" },
-  { label: "Premium Support", href: "#" },
-  // { label: "Sponsorships", href: "#" },
-  { label: "Custom Development", href: "#" },
-];
 
 const Footer: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [agreeToPrivacy, setAgreeToPrivacy] = useState<boolean>(false);
 
-  const handleEmailSubmit = (e: React.FormEvent): void => {
-    e.preventDefault();
-    if (!agreeToPrivacy) {
-      alert("Please agree to the privacy policy");
-      return;
-    }
-    console.log("Email submitted:", email);
-    setEmail("");
-    setAgreeToPrivacy(false);
-  };
+  const [checked, setChecked] = React.useState(false)
 
   return (
     <footer
-      className=" text-white mulish bgPrimary"
-      style={{
-        backgroundImage: `url('')`, // relative to public folder
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
+
     >
-      <div className="max-w-[1320px] mx-auto px-4 2xl:px-0 lg:pt-[80px] md:pt-[60px] pt-[40px] lg:pb-6 pb-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand and Description */}
-          <div className="lg:col-span-1">
-            <div className="mb-5">
-              <div className="w-[64px] h-[64px] mb-auto">
-                <Link href="/">
-                  <Image
-                    src=""
-                    width={100}
-                    height={100}
-                    alt="login image"
-                    className="w-full h-full"
-                    unoptimized
-                  />
-                </Link>
-              </div>
-            </div>
-            <p className="lg:text-lg md:text-base text-sm leading-[160%] mb-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
-            </p>
-            {/* Social Media Icons */}
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="w-[44px] h-[44px] bg-[#0CAF60] rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
-                aria-label="Facebook"
-              >
-                {/* <FacebookIcon /> */}
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-[#0CAF60] rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
-                aria-label="Instagram"
-              >
-                {/* <InstaIcon /> */}
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-[#0CAF60] rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
-                aria-label="Twitter"
-              >
-                {/* <TwitterIcon /> */}
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-[#0CAF60] rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                {/* <LinkdinIcon /> */}
-              </a>
-            </div>
-          </div>
-
-          {/* Company Links */}
+      {/* =========footer top ======== */}
+      <div className="lg:py-9 py-6 bgPrimary px-5 2xl:px-0">
+        <div className="max-w-[555px] mx-auto">
+          <h1 className="text-center text-white font-extrabold lg:text-2xl text-xl leading-[100%] ">Stay in touch</h1>
           <div>
-            <h3 className="text-white font-semibold md:text-lg lg:text-xl xl:text-2xl mb-4 tracking-[.12px] leading-[130%]  ">
-              Company
-            </h3>
-            <ul className="space-y-4">
-              {companyLinks.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-[#E9E9EA] hover:text-white transition-colors duration-200 lg:text-lg md:text-base text-sm leading-[160%]"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Help and Support Links */}
-          <div>
-            <h3
-              className=" text-white font-semibold md:text-lg lg:text-xl xl:text-2xl mb-4 tracking-[.12px] leading-[130%] 
-"
-            >
-              Help and Support
-            </h3>
-            <ul className="space-y-4">
-              {helpLinks.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-[#E9E9EA] hover:text-white transition-colors duration-200 lg:text-lg md:text-base text-sm leading-[160%]"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Us */}
-          <div>
-            <h3 className="text-white font-semibold text-lg mb-4">
-              Contact Us
-            </h3>
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center">
-                <div className="  rounded-sm flex items-center justify-center mr-3">
-                  {/* <MessageIcon /> */}
-                </div>
-                <span className="text-[#E9E9EA] lg:text-lg md:text-base text-sm">
-                  example@gmail.com
-                </span>
+            <form >
+              <div className="flex flex-wrap gap-3 mt-6 mb-4 ">
+                <input type="email" placeholder="EMAIL" className="bg-[#F8FAFB] upppercase text-[#777980] text-base leading-[100%] font-normal flex-1 px-5 inputStyle" />
+                <button type="submit" className="text-base leading-[136%] md:py-4  py-3 md:px-8 px-4 bg-[#5465B3] text-white uppercase font-normal">send</button>
               </div>
-              <div className="flex items-center">
-                <div className="rounded-sm flex items-center justify-center mr-3">
-                  {/* <CallIcon /> */}
-                </div>
-                <span className="text-[#E9E9EA] lg:text-lg md:text-base text-sm">
-                  (555) 123-4567
-                </span>
-              </div>
-            </div>
-
-            {/* Email Subscription */}
-            <form onSubmit={handleEmailSubmit} className="mb-4">
-              <div className="flex flex-wrap">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className="flex-1 px-4 py-2 rounded-l-md bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#0CAF60]"
-                  required
+              <div className="flex text-white items-center justify-center gap-3">
+                <Checkbox
+                  id="controlled"
+                  checked={checked}
+                  className="cursor-pointer"
+                  onCheckedChange={(value) => setChecked(value === true)}
                 />
-                <button
-                  type="submit"
-                  className="shrink bg-[#0CAF60] hover:bg-green-600 px-4 py-2 rounded-r-md transition-colors duration-200"
-                >
-                  <svg
-                    className="w-5 h-5 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </button>
+                <Label htmlFor="controlled" className="font-normal leading-[100%] md:text-base text-sm tracking-[0.32px] ]">SIGN ME UP FOR EXCLUSIVE OFFERS FROM ARION SELLIER USA.</Label>
               </div>
             </form>
-
-            {/* Privacy Policy Checkbox */}
-            <div className="flex items-start">
-              <input
-                type="checkbox"
-                id="privacy-policy"
-                checked={agreeToPrivacy}
-                onChange={(e) => setAgreeToPrivacy(e.target.checked)}
-                className="mt-1 h-4 w-4 text-[#0CAF60] focus:ring-[#0CAF60] border-gray-300 rounded"
-              />
-              <label
-                htmlFor="privacy-policy"
-                className="ml-2 text-[#E9E9EA] lg:text-lg md:text-base text-sm"
-              >
-                I agree to the privacy policy
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-[#FFFFFF1A] mt-10 pt-4 ">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
-              © 2025 . All rights reserved.
-            </p>
-            <div className="flex flex-wrap justify-center md:justify-end space-x-6">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Licenses
-              </a>
-            </div>
           </div>
         </div>
       </div>
+
+
+      <div className="bgPrimary my-8 ">
+        <div className=" maxContainer py-[60px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {footerData.map((section, index) => (
+              <div key={index}>
+                {/* Main Category Title */}
+                <h3 className="text-white font-normal lg:text-2xl text-xl leading-[100%]  mb-6">
+                  {section.title}
+                </h3>
+
+                {/* Handle SADDLE category with subcategories */}
+                {section.subcategories ? (
+                  <div className="space-y-6">
+                    {section.subcategories.map((subcategory, subIndex) => (
+                      <div key={subIndex}>
+                        {/* Subcategory Title */}
+                        <h4 className="text-[#FFFFFFCC] lg:text-xl text-base underline-offset-1  leading-[100%] underline mb-4">
+                          {subcategory.name}
+                        </h4>
+                        {/* Subcategory Links */}
+                        <ul className="space-y-4">
+                          {subcategory.links.map((link, linkIndex) => (
+                            <li className="p-0 leading-[100%]" key={linkIndex}>
+                              <Link
+                                href={link.href}
+                                className="text-[#FFFFFFCC] hover:text-white font-normal  md:text-base text-sm leading-[100%]  transition-colors duration-200 "
+                              >
+                                {link.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  /* Handle other categories with direct links */
+                  <ul className="space-y-3">
+                    {section.links.map((link, linkIndex) => (
+                      <li key={linkIndex} className="p-0 leading-[100%]">
+                        <Link 
+                          href={link.href}
+                          className="text-[#FFFFFFCC] hover:text-white font-normal   md:text-base text-sm leading-[100%]  transition-colors duration-200"
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </footer>
   );
 };
 
 export default Footer;
+
+
+
+// Footer data structure
+const footerData = [
+  {
+    title: "SADDLE",
+    subcategories: [
+      {
+        name: "ARION",
+        links: [
+          { name: "JUMPING", href: "#" },
+          { name: "DRESSAGE", href: "#" },
+          { name: "CROSS COUNTRY", href: "#" }
+        ]
+      },
+      {
+        name: "ATLAS",
+        links: [
+          { name: "JUMPING", href: "#" },
+          { name: "DRESSAGE", href: "#" },
+          { name: "CROSS COUNTRY", href: "#" }
+        ]
+      },
+      {
+        name: "USED SADDLE",
+        links: []
+      },
+      {
+        name: "ATHENA",
+        links: [
+          { name: "JUMPING", href: "#" },
+          { name: "DRESSAGE", href: "#" },
+          { name: "CROSS COUNTRY", href: "#" }
+        ]
+      }
+    ]
+  },
+  {
+    title: "SHOP",
+    links: [
+      { name: "BRIDLES", href: "#" },
+      { name: "REINS", href: "#" },
+      { name: "MARTINGALES", href: "#" },
+      { name: "GIRTHS", href: "#" },
+      { name: "STIRRUP LEATHERS", href: "#" },
+      { name: "BOOTS", href: "#" },
+      { name: "HALTERS & ROPES", href: "#" },
+      { name: "LEATHER CARE", href: "#" },
+      { name: "ACCESSORIES", href: "#" }
+    ]
+  },
+  {
+    title: "ARION",
+    links: [
+      { name: "OUR STORY", href: "#" },
+      { name: "MEET THE TEAM", href: "#" },
+      { name: "WORKSHOP", href: "#" },
+      { name: "AMBASSADORS", href: "#" },
+      { name: "BLOG", href: "#" },
+      { name: "CAREERS", href: "#" }
+    ]
+  },
+  {
+    title: "CUSTOMER RELATIONS",
+    links: [
+      { name: "CONTACT US", href: "#" },
+      { name: "HELP/FAQ", href: "#" },
+      { name: "SIZE GUIDE", href: "#" },
+      { name: "CARE INSTRUCTIONS", href: "#" },
+      { name: "SHIPPING AND RETURNS", href: "#" }
+    ]
+  }
+];
