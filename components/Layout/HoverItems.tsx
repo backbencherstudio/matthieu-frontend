@@ -44,7 +44,7 @@ export default function HoverItems({ items }) {
                                                                 <div className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white">
                                                                     <span className="py-[3px]" key={index}>{itm}</span>
                                                                     {index !== subItem.items.length - 1 && (
-                                                                        <Separator className="mx-3  h-5" orientation="vertical" />
+                                                                        <Separator className="mx-3  h-5 " orientation="vertical" />
                                                                     )}
                                                                 </div>
 
