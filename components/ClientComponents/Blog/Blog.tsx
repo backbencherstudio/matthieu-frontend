@@ -111,7 +111,7 @@ export default function Blog() {
   ];
 
   return (
-    <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
+    <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
       <div className="maxContainer">
         {/* Header */}
         <div className="flex flex-col items-center gap-5">
