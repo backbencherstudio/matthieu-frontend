@@ -7,6 +7,7 @@ import Link from 'next/link';
 import UserIcon from '../Icons/UserIcon';
 import HoverItems from './HoverItems';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,6 +91,8 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const router = useRouter()
+
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
@@ -127,7 +130,7 @@ const Header = () => {
 
             {/* Logo */}
             <div className="">
-              <div className="w-[156px] h-[56px]">
+              <div className="w-[156px] h-[56px] cursor-pointer" onClick={() => router.push("/")}>
                 <img src="/matheiu-logo.png" alt="" />
               </div>
             </div>
