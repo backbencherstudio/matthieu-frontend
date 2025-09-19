@@ -82,7 +82,7 @@ export default function FindUs() {
             alt="find-us-hero"
             width={1000}
             height={1000}
-            className="w-full h-auto xl:h-[530px] object-cover object-top"
+            className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>
 
