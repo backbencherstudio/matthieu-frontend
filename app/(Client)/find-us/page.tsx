@@ -76,7 +76,7 @@ export default function FindUs() {
     <div>
       <div className="maxContainer">
         {/* Banner */}
-        <div className="pt-6 xl:pt-12">
+        <div>
           <Image
             src="/images/find-us-hero.png"
             alt="find-us-hero"

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import FilterIcon from "@/components/Icons/FilterIcon";
 
 import {
@@ -15,82 +14,155 @@ import { ChevronDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-interface Blog {
+interface Country {
+  label: string;
+  value: string;
+}
+
+interface Discipline {
+  label: string;
+  value: string;
+}
+
+interface Data {
   id: number;
-  type: string;
+  nation: string;
+  discipline: string;
   image: string;
-  date: string;
   title: string;
 }
 
 export default function ArionAmabassadors() {
-  const [activeBlogType, setActiveBlogType] = useState<string>("all");
+  const [nationType, setNationType] = useState<string>("");
+  const [disciplineType, setDisciplineType] = useState<string>("");
 
-  const blogs: Blog[] = [
+  const country: Country[] = [
     {
-      id: 1,
-      type: "rider-spotlights",
-      image: "/images/blog-01.png",
-      date: "26-Jun-2025",
-      title:
-        "Top Finishes, Big Moments: Arion Riders Make Their Mark in Kentucky",
+      label: "USA",
+      value: "usa",
     },
     {
-      id: 2,
-      type: "competition-highlights",
-      image: "/images/blog-02.png",
-      date: "26-Jun-2025",
-      title: "Job of a Saddle Fitting Expert",
+      label: "BRAZIL",
+      value: "brazil",
     },
     {
-      id: 3,
-      type: "arion-on-the-road",
-      image: "/images/blog-03.png",
-      date: "26-Jun-2025",
-      title: "Arion Sellier is a Proud Sponsor at Wellington International",
+      label: "GUATEMALA",
+      value: "guatemala",
     },
     {
-      id: 4,
-      type: "saddles",
-      image: "/images/blog-04.png",
-      date: "26-Jun-2025",
-      title: "Rider Spotlight: Emma Hakim",
+      label: "NEW ZELAND",
+      value: "new-zeland",
     },
     {
-      id: 5,
-      type: "saddles",
-      image: "/images/blog-05.png",
-      date: "26-Jun-2025",
-      title: "Rider Spotlight: Parker Peacock",
+      label: "CANADA",
+      value: "canada",
     },
     {
-      id: 6,
-      type: "tack-accessories",
-      image: "/images/blog-06.png",
-      date: "26-Jun-2025",
-      title: "Why choose a made to measure saddle ?",
-    },
-    {
-      id: 7,
-      type: "arion-world",
-      image: "/images/blog-07.png",
-      date: "26-Jun-2025",
-      title: "Equipment made in France for your horse!",
-    },
-    {
-      id: 8,
-      type: "arion-world",
-      image: "/images/blog-08.png",
-      date: "26-Jun-2025",
-      title: "Light on our range of ATLAS half-measure saddles",
+      label: "IRELAND",
+      value: "ireland",
     },
   ];
 
+  const discipline: Discipline[] = [
+    {
+      label: "SHOW JUMPING",
+      value: "show-jumping",
+    },
+    {
+      label: "EVENTING",
+      value: "eventing",
+    },
+    {
+      label: "DRESSAGE",
+      value: "dressage",
+    },
+    {
+      label: "EQUITATION",
+      value: "equitation",
+    },
+    {
+      label: "HUNTER",
+      value: "hunter",
+    },
+  ];
+
+  const data: Data[] = [
+    {
+      id: 1,
+      nation: "usa",
+      discipline: "show-jumping",
+      image: "/images/arion-1.png",
+      title: "NICK DELLO JOIO",
+    },
+    {
+      id: 2,
+      nation: "usa",
+      discipline: "show-jumping",
+      image: "/images/arion-2.png",
+      title: "TAYLOR CAWLEY",
+    },
+    {
+      id: 3,
+      nation: "france",
+      discipline: "eventing",
+      image: "/images/arion-3.png",
+      title: "MOLLY ASHE CAWLEY",
+    },
+    {
+      id: 4,
+      nation: "new-zeland",
+      discipline: "dressage",
+      image: "/images/arion-4.png",
+      title: "EMI RICHARD",
+    },
+    {
+      id: 5,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/arion-5.png",
+      title: "ADRIANA FORTE",
+    },
+    {
+      id: 6,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/arion-6.png",
+      title: "PARKER PEACOCK",
+    },
+    {
+      id: 7,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/arion-7.png",
+      title: "EMMA HAKIM",
+    },
+    {
+      id: 8,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/arion-8.png",
+      title: "CRISTIAN HACKER",
+    },
+    {
+      id: 9,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/arion-9.png",
+      title: "MONICA SPENCER",
+    },
+  ];
+
+  const filteredData = data
+    .filter((item) => nationType === "" || nationType === item.nation)
+    .filter(
+      (item) => disciplineType === "" || disciplineType === item.discipline
+    );
+
   return (
-    <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
+    <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
       <div className="maxContainer">
         {/* Header */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-1 md:gap-4">
           <h1 className="uppercase text-3xl md:text-[40px] font-extrabold">
             ARION AMABASSADORS
           </h1>
@@ -107,15 +179,31 @@ export default function ArionAmabassadors() {
               <span>NATION</span> <ChevronDown />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-[#F4F5F7] rounded-none">
-              <DropdownMenuItem className="text-sm">
-                <div className="flex items-center gap-3">
-                  <Checkbox id="terms" />
-                  <Label htmlFor="terms">Accept terms and conditions</Label>
-                </div>
-                s
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-sm">FRANCE</DropdownMenuItem>
-              <DropdownMenuItem className="text-sm">BRAZIL</DropdownMenuItem>
+              {country.map((item, idx) => (
+                <DropdownMenuItem
+                  key={idx}
+                  className="text-sm"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  <div className="flex items-start gap-2">
+                    <Checkbox
+                      id={`nation-${item.value}`}
+                      value={item.label}
+                      checked={nationType === item.value}
+                      onCheckedChange={(checked) =>
+                        setNationType(checked ? item.value : "")
+                      }
+                      className="cursor-pointer"
+                    />
+                    <Label
+                      htmlFor={`nation-${item.value}`}
+                      className="text-sm cursor-pointer text-primary-text"
+                    >
+                      {item.label}
+                    </Label>
+                  </div>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -124,54 +212,74 @@ export default function ArionAmabassadors() {
               <span>DISCIPLINE</span> <ChevronDown />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-[#F4F5F7] rounded-none">
-              <DropdownMenuItem className="text-sm">
-                SHOWJUMPING
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-sm">EVENTING</DropdownMenuItem>
-              <DropdownMenuItem className="text-sm">DRESSAGE</DropdownMenuItem>
+              {discipline.map((item, idx) => (
+                <DropdownMenuItem
+                  key={idx}
+                  className="text-sm"
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  <div className="flex items-start gap-2">
+                    <Checkbox
+                      id={`discipline-${item.value}`}
+                      value={item.label}
+                      checked={disciplineType === item.value}
+                      onCheckedChange={(checked) =>
+                        setDisciplineType(checked ? item.value : "")
+                      }
+                      className="cursor-pointer"
+                    />
+                    <Label
+                      htmlFor={`discipline-${item.value}`}
+                      className="text-sm cursor-pointer text-primary-text"
+                    >
+                      {item.label}
+                    </Label>
+                  </div>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
-        {/* Blogs */}
-        <div className="grid sm:grid-cols-2 gap-12 sm:gap-6 xl:gap-12 mt-12">
-          {blogs
-            .filter(
-              (blog) => activeBlogType === "all" || blog.type === activeBlogType
-            )
-            .map((blog, idx) => (
-              <div key={idx}>
-                <div className="relative">
-                  <Image
-                    src={blog.image}
-                    alt="Blog Image"
-                    width={1000}
-                    height={1000}
-                    className="h-auto xl:h-[400px] w-full object-cover"
-                  />
-
-                  <div className="bg-[#262626] absolute top-5 right-0 h-[65px] w-[90px] flex flex-col gap-1  justify-center items-center text-white">
-                    <p className="text-sm font-normal">
-                      {blog.date.split("-")[0]}
-                    </p>
-                    <p className="text-sm font-normal">
-                      {blog.date.split("-")[1]} - {blog.date.split("-")[2]}
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="text-xl md:text-2xl font-extrabold uppercase mt-6 mb-4 text-[#262626]">
-                    {blog.title}
-                  </h1>
-                  <Link
-                    href={`/blog/${blog.id}`}
-                    className="text-xl md:text-2xl pb-[2px] border-b border-primary-text text-primary-text"
-                  >
-                    Read More
-                  </Link>
-                </div>
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
+          {filteredData.length === 0 && (
+            <div className="col-span-full flex flex-col items-center justify-center py-12">
+              <div className="text-center">
+                <h3 className="text-xl font-semibold text-dark-primary mb-2">
+                  No Ambassadors Found
+                </h3>
+                <p className="text-secondary-text">
+                  No ambassadors match your current filter criteria. Try
+                  adjusting your filters to see more results.
+                </p>
+                <button
+                  className="mt-2 bg-primary-text text-white px-4 py-2 rounded cursor-pointer"
+                  onClick={() => {
+                    setNationType("");
+                    setDisciplineType("");
+                  }}
+                >
+                  Reset Filters
+                </button>
               </div>
-            ))}
+            </div>
+          )}
+
+          {filteredData.map((item, idx) => (
+            <div key={idx}>
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={1000}
+                height={1000}
+                className="h-auto xl:h-[450px] w-full object-cover"
+              />
+              <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 text-dark-primary text-center">
+                {item.title}
+              </h1>
+            </div>
+          ))}
         </div>
       </div>
     </div>
