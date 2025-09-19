@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function ClientMainPage() {
+export default function ClientHomePage() {
   return (
-    <div>ClientMainPage</div>
+    <div className=''>
+      
+    </div>
   )
 }
