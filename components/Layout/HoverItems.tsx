@@ -50,7 +50,7 @@ export default function HoverItems({ items }) {
                             </div>
                             <div className="flex ">
                               {subItem?.items?.map((itm, index) => (
-                                <div className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white">
+                                <div key={index} className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white">
                                   <span className="py-[3px]" key={index}>
                                     {itm}
                                   </span>
