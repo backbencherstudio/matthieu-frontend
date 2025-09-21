@@ -33,12 +33,15 @@ body {
 .textPrimary {
   color: #262626;
 }
+.textSecondary { 
+  color:"#1F274B"
+}
 
 .avenir {
   font-family: "Avenir", sans-serif;
 }
 
-/* ============ */
+/* ============ swipper bullet point style============ */
 .custom-dots {
   position: absolute !important;
   bottom: 20px !important;
