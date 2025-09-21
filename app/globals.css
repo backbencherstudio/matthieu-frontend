@@ -12,6 +12,7 @@
 } */
 body {
   font-family: Avenir, sans-serif;
+  font-family: Avenir, sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -21,6 +22,7 @@ body {
 }
 
 .inputStyle {
+  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
   @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B]
 }
 
@@ -99,6 +101,7 @@ body {
 @theme inline {
   --color-primary-text: #1f274b;
   --color-secondary-text: #4c526f;
+  --color-dark-primary: #262626;
 
   --color-primary-bg: #1f274b;
   --color-select-active-bg: #454f7b8a;

@@ -76,13 +76,13 @@ export default function FindUs() {
     <div>
       <div className="maxContainer">
         {/* Banner */}
-        <div className="pt-6 xl:pt-12">
+        <div>
           <Image
             src="/images/find-us-hero.png"
             alt="find-us-hero"
             width={1000}
             height={1000}
-            className="w-full h-auto xl:h-[530px] object-cover object-top"
+            className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>
 
@@ -92,7 +92,7 @@ export default function FindUs() {
             <div className="grid md:grid-cols-[48%_4%_48%] items-center">
               <div className="p-6 flex flex-col items-center max-w-[350px] mx-auto">
                 <HandShake className="h-16 w-16" />
-                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl md:text-[32px] text-center text-primary-text leading-[124%]">
+                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl lg:text-[32px] text-center text-primary-text leading-[124%]">
                   FIND AN EXPERT <br /> NEAR YOU
                 </h1>
 
@@ -145,7 +145,7 @@ export default function FindUs() {
 
               <div className="p-6 flex flex-col items-center max-w-[350px] mx-auto">
                 <MapMarker className="h-16 w-16" />
-                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl md:text-[32px] text-center text-primary-text leading-[124%]">
+                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl lg:text-[32px] text-center text-primary-text leading-[124%]">
                   FIND US AT <br /> COMPETITIONS
                 </h1>
 
@@ -210,7 +210,7 @@ export default function FindUs() {
                 </div>
                 <div className="bgPrimary h-full w-[1.5px] mx-auto hidden md:block"></div>
                 <div className="flex flex-col gap-4 md:pl-4 pt-6 md:pt-0 items-center md:items-start">
-                  <h2 className="text-2xl font-extrabold uppercase">
+                  <h2 className="text-2xl font-extrabold uppercase text-primary-text">
                     VICTORIA BRILL
                   </h2>
                   <p className="text-base text-secondary-text">

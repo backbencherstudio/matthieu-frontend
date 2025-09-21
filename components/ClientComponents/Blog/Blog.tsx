@@ -111,11 +111,11 @@ export default function Blog() {
   ];
 
   return (
-    <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
+    <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
       <div className="maxContainer">
         {/* Header */}
         <div className="flex flex-col items-center gap-5">
-          <h1 className="uppercase text-3xl md:text-[40px] font-extrabold">
+          <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
             Blog
           </h1>
 
@@ -153,7 +153,7 @@ export default function Blog() {
                     className="h-auto xl:h-[400px] w-full object-cover"
                   />
 
-                  <div className="bg-[#262626] absolute top-5 right-0 h-[65px] w-[90px] flex flex-col gap-1  justify-center items-center text-white">
+                  <div className="bg-dark-primary absolute top-5 right-0 h-[65px] w-[90px] flex flex-col gap-1  justify-center items-center text-white">
                     <p className="text-sm font-normal">
                       {blog.date.split("-")[0]}
                     </p>
@@ -163,12 +163,12 @@ export default function Blog() {
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-xl md:text-2xl font-extrabold uppercase mt-6 mb-4 text-[#262626]">
+                  <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 mb-4 text-dark-primary">
                     {blog.title}
                   </h1>
                   <Link
                     href={`/blog/${blog.id}`}
-                    className="text-xl md:text-2xl pb-[2px] border-b border-primary-text text-primary-text capitalize"
+                    className="text-xl lg:text-2xl pb-[2px] border-b border-primary-text text-primary-text capitalize"
                   >
                     Read More
                   </Link>

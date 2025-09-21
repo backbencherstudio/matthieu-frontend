@@ -204,18 +204,18 @@ const footerData = [
   {
     title: "ARION",
     links: [
-      { name: "OUR STORY", href: "#" },
-      { name: "MEET THE TEAM", href: "#" },
-      { name: "WORKSHOP", href: "#" },
-      { name: "AMBASSADORS", href: "#" },
-      { name: "BLOG", href: "#" },
+      { name: "OUR STORY", href: "/our-story" },
+      { name: "MEET THE TEAM", href: "/meet-the-team" },
+      { name: "WORKSHOP", href: "/our-workshop" },
+      { name: "AMBASSADORS", href: "/arion-amabassadors" },
+      { name: "BLOG", href: "/blog" },
       { name: "CAREERS", href: "#" }
     ]
   },
   {
     title: "CUSTOMER RELATIONS",
     links: [
-      { name: "CONTACT US", href: "#" },
+      { name: "CONTACT US", href: "/find-us" },
       { name: "HELP/FAQ", href: "#" },
       { name: "SIZE GUIDE", href: "#" },
       { name: "CARE INSTRUCTIONS", href: "#" },
