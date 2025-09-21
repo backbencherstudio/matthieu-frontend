@@ -100,6 +100,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
