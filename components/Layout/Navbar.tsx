@@ -1,84 +1,94 @@
-"use client"
-import React, { useState } from 'react';
-import { Menu, X, Search, User, SearchIcon } from 'lucide-react';
-import UsdIcon from '../Icons/UsdIcon';
-import LanguageGlobalIcon from '../Icons/LanguageGlobalIcon';
-import Link from 'next/link';
-import UserIcon from '../Icons/UserIcon';
-import HoverItems from './HoverItems';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card';
+"use client";
+import React, { useState } from "react";
+import { Menu, X, Search, User, SearchIcon } from "lucide-react";
+import UsdIcon from "../Icons/UsdIcon";
+import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
+import Link from "next/link";
+import UserIcon from "../Icons/UserIcon";
+import HoverItems from "./HoverItems";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../ui/hover-card";
+import Image from "next/image";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Navigation links data
   const navigationLinks = [
-    { label: 'SADDLES', href: '#' },
-    { label: 'TACK', href: '#' },
-    { label: 'BRAND', href: '#' },
-    { label: 'TRY A SADDLE', href: '#' },
-    { label: 'FIND US', href: '/find-us' }
+    { label: "SADDLES", href: "#" },
+    { label: "TACK", href: "#" },
+    { label: "BRAND", href: "#" },
+    { label: "TRY A SADDLE", href: "#" },
+    { label: "FIND US", href: "/find-us" },
   ];
 
   const navigationLinks2 = [
     {
-      label: 'SADDLES',
-      href: '#',
+      label: "SADDLES",
+      href: "#",
       hasDropdown: true,
       dropdownContent: [
         {
-          category: 'BY COLLECTION',
+          category: "BY COLLECTION",
           hasLink: true,
           items: [
             {
-              label: 'Arion Saddles',
-              subtitle: 'FULL CUSTOM',
-              items: ['JUMPING', 'DRESSAGE', 'CROSS-COUNTRY', 'KIDS'],
-              href: "/something where"
+              label: "Arion Saddles",
+              subtitle: "FULL CUSTOM",
+              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              href: "/something where",
             },
             {
-              label: 'Atlas Saddles',
-              subtitle: 'SEMI CUSTOM',
-              items: ['JUMPING', 'DRESSAGE', 'CROSS-COUNTRY', 'KIDS'],
-              href: "/something where"
+              label: "Atlas Saddles",
+              subtitle: "SEMI CUSTOM",
+              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              href: "/something where",
             },
             {
-              label: 'Athena Saddles',
-              subtitle: 'TAILOR MADE',
-              items: ['JUMPING', 'DRESSAGE', 'CROSS-COUNTRY', 'KIDS'],
-              href: "/something where"
-            }
-          ]
+              label: "Athena Saddles",
+              subtitle: "TAILOR MADE",
+              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              href: "/something where",
+            },
+          ],
         },
-        { category: 'USED SADDLES', items: [], hasLink: false, },
-        { category: 'ALL SADDLES', items: [], hasLink: false, }
-      ]
+        { category: "USED SADDLES", items: [], hasLink: false },
+        { category: "ALL SADDLES", items: [], hasLink: false },
+      ],
     },
     {
-      label: 'TACK', href: '#', hasDropdown: true, dropdownContent: [
-        { category: 'Bridles', href: '#' },
-        { category: 'Reins', href: '#' },
-        { category: 'Martingales', href: '#' },
-        { category: 'Girths', href: '#' },
-        { category: 'Halters & Ropes', href: '#' },
-        { category: 'Boots', href: '#' },
-        { category: 'Leather Care', href: '#' },
-        { category: 'Accessories', href: '#' }
-      ]
+      label: "TACK",
+      href: "#",
+      hasDropdown: true,
+      dropdownContent: [
+        { category: "Bridles", href: "#" },
+        { category: "Reins", href: "#" },
+        { category: "Martingales", href: "#" },
+        { category: "Girths", href: "#" },
+        { category: "Halters & Ropes", href: "#" },
+        { category: "Boots", href: "#" },
+        { category: "Leather Care", href: "#" },
+        { category: "Accessories", href: "#" },
+      ],
     },
     {
-      label: 'BRAND', href: '#', hasDropdown: true, dropdownContent: [
-        { category: 'Our Story', href: '#' },
-        { category: 'Meet The Team', href: '#' },
-        { category: 'Workshop', href: '#' },
-        { category: 'Ambassadors', href: '#' },
-        { category: 'Blog', href: '#' }
-      ]
+      label: "BRAND",
+      href: "#",
+      hasDropdown: true,
+      dropdownContent: [
+        { category: "Our Story", href: "/our-story" },
+        { category: "Meet The Team", href: "/meet-the-team" },
+        { category: "Workshop", href: "/our-workshop" },
+        { category: "Ambassadors", href: "/arion-amabassadors" },
+        { category: "Blog", href: "/blog" },
+      ],
     },
-    { label: 'TRY A SADDLE', href: '#' },
-    { label: 'FIND US', href: '#' }
+    { label: "TRY A SADDLE", href: "#" },
+    { label: "FIND US", href: "/find-us" },
   ];
-
 
   // Left side options
   const leftOptions = [
@@ -94,7 +104,6 @@ const Header = () => {
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
         <div className="flex justify-between lg:gap-6 gap-0 items-center ">
-
           {/* Left side - Language and currency */}
           <div className="hidden md:flex items-center xl:gap-6 gap-4">
             {leftOptions.map((option, index) => (
@@ -128,7 +137,14 @@ const Header = () => {
             {/* Logo */}
             <div className="">
               <div className="w-[156px] h-[56px]">
-                <img src="/matheiu-logo.png" alt="" />
+                <Link href="/">
+                  <Image
+                    src="/matheiu-logo.png"
+                    alt="Logo"
+                    width={156}
+                    height={56}
+                  />
+                </Link>
               </div>
             </div>
 
@@ -147,14 +163,21 @@ const Header = () => {
           <div className="lg:hidden">
             <div className="">
               <div className="w-[156px] h-[56px]">
-                <img src="/matheiu-logo.png" alt="" />
+                <Link href="/">
+                  <Image
+                    src="/matheiu-logo.png"
+                    alt="Logo"
+                    width={156}
+                    height={56}
+                  />
+                </Link>
               </div>
             </div>
           </div>
 
           {/* Right side - Search and User icons */}
           <div className="flex items-center md:space-x-4 space-x-2">
-            <div className='relative'>
+            <div className="relative">
               <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
@@ -185,8 +208,10 @@ const Header = () => {
                 <div className="flex items-center space-x-4 text-sm text-gray-600">
                   {leftOptions.map((option, index) => (
                     <div key={index} className="flex items-center gap-1.5">
-                      <span className="">{option?.icon}  </span>
-                      <span className='textPrimary text-xs leading-[100%]'>{option.label}</span>
+                      <span className="">{option?.icon} </span>
+                      <span className="textPrimary text-xs leading-[100%]">
+                        {option.label}
+                      </span>
                     </div>
                   ))}
                 </div>

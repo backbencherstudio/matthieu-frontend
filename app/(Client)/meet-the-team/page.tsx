@@ -20,7 +20,7 @@ export default function MeetTheTeam() {
         <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
           {/* Header */}
           <div className="flex flex-col items-center gap-1 md:gap-4">
-            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold">
+            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
               MEET THE TEAM
             </h1>
             <p className="text-secondary-text text-center text-base md:text-lg max-w-[600px] w-full mx-auto">
@@ -30,17 +30,17 @@ export default function MeetTheTeam() {
           </div>
 
           {/* Team List */}
-          <div className="grid md:grid-cols-6 gap-x-6 gap-y-8 mt-12">
-            <div className="col-span-2 md:col-start-1 ">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-8 mt-12">
+            <div className="md:col-span-2 md:col-start-1">
               <Image
                 src="/images/team-1.png"
                 alt="Team"
                 width={1000}
                 height={1000}
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] object-cover object-top"
+                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl sm:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Sylvain Houry
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -48,16 +48,16 @@ export default function MeetTheTeam() {
               </p>
             </div>
 
-            <div className="col-span-2 md:col-start-3 ">
+            <div className="md:col-span-2 md:col-start-3">
               <Image
                 src="/images/team-2.png"
                 alt="Team"
                 width={1000}
                 height={1000}
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] object-cover object-top"
+                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl sm:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Hadrien Schenck
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -65,16 +65,16 @@ export default function MeetTheTeam() {
               </p>
             </div>
 
-            <div className="col-span-2 md:col-start-5 ">
+            <div className="md:col-span-2 md:col-start-5">
               <Image
                 src="/images/team-3.png"
                 alt="Team"
                 width={1000}
                 height={1000}
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] object-cover object-top"
+                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl sm:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Kirsten Rose
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -82,16 +82,16 @@ export default function MeetTheTeam() {
               </p>
             </div>
 
-            <div className="col-span-2 md:col-start-2 row-start-2">
+            <div className="md:col-span-2 md:col-start-2 ">
               <Image
                 src="/images/team-4.png"
                 alt="Team"
                 width={1000}
                 height={1000}
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] object-cover object-top"
+                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl sm:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Chloe Cazebon
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -99,16 +99,16 @@ export default function MeetTheTeam() {
               </p>
             </div>
 
-            <div className="col-span-2 md:col-start-4 row-start-2">
+            <div className="md:col-span-2 md:col-start-4 ">
               <Image
                 src="/images/team-5.png"
                 alt="Team"
                 width={1000}
                 height={1000}
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] object-cover object-top"
+                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl sm:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Gabrielle Fournier
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">

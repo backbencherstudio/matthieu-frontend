@@ -163,7 +163,7 @@ export default function ArionAmabassadors() {
       <div className="maxContainer">
         {/* Header */}
         <div className="flex flex-col items-center gap-1 md:gap-4">
-          <h1 className="uppercase text-3xl md:text-[40px] font-extrabold">
+          <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
             ARION AMABASSADORS
           </h1>
           <p className="text-secondary-text text-center text-base md:text-lg">

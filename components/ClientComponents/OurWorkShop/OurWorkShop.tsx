@@ -20,7 +20,7 @@ export default function OurWorkShop() {
         <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
           {/* Header */}
           <div className="text-center">
-            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold">
+            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
               OUR WORKSHOP
             </h1>
             <p className="text-secondary-text text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto">
