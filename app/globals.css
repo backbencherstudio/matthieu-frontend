@@ -11,7 +11,7 @@
     src: url("@/public/fonts/Avenir Heavy/Avenir Heavy.ttf");
 } */
 body {
-    font-family: Avenir , sans-serif;
+  font-family: Avenir, sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -21,7 +21,7 @@ body {
 }
 
 .inputStyle {
-    @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B]
+  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B]
 }
 
 .bgPrimary {
@@ -38,60 +38,62 @@ body {
 
 /* ============ */
 .custom-dots {
-    position: absolute !important;
-    bottom: 20px !important;
-    left: 50% !important; /* Center horizontally */
-    transform: translateX(-50%) !important; /* Offset the width to center */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  /* Center horizontally */
+  transform: translateX(-50%) !important;
+  /* Offset the width to center */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
 
-                .custom-dots li {
-                    margin: 0 !important;
-                    padding: 0 !important;
-                    width: auto !important;
-                    height: auto !important;
-                }
+.custom-dots li {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+}
 
-                .custom-dots li button {
-                    width: 14px !important;
-                    height: 14px !important;
-                    border-radius: 50% !important;
-                    background: #DFE1E7 !important;
-                    /* border: 2px solid rgba(255, 255, 255, 0.8) !important; */
-                    padding: 0 !important;
-                    margin: 0 !important;
-                    font-size: 0 !important;
-                    line-height: 0 !important;
-                    cursor: pointer !important;
-                    transition: all 0.3s ease !important;
-                }
+.custom-dots li button {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #DFE1E7 !important;
+  /* border: 2px solid rgba(255, 255, 255, 0.8) !important; */
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
 
-                .custom-dots li button:before {
-                    content: '' !important;
-                    display: none !important;
-                }
+.custom-dots li button:before {
+  content: '' !important;
+  display: none !important;
+}
 
-                .custom-dots li.slick-active button {
-                    background: #1F274B !important;
-                    border: 2.8px solid #FFFFFF !important;
-                    border-color: rgba(255, 255, 255, 1) !important;
-                    transform: scale(1.2) !important;
-                }
+.custom-dots li.slick-active button {
+  background: #1F274B !important;
+  border: 2.8px solid #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.2) !important;
+}
 
-                .custom-dots li button:hover {
-                    background: rgba(255, 255, 255, 0.8) !important;
-                    transform: scale(1.1) !important;
-                }
+.custom-dots li button:hover {
+  background: rgba(255, 255, 255, 0.8) !important;
+  transform: scale(1.1) !important;
+}
 
-                .banner-container {
-                    position: relative !important;
-                }
+.banner-container {
+  position: relative !important;
+}
 
 
 @theme inline {
@@ -211,6 +213,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
