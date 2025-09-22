@@ -10,7 +10,9 @@ export default function TackMainSections() {
             <div className='lg:my-12 my-8'>
                 <TrackProductList items={reinsItems} title="Reins" />
             </div>
-
+            <div className='lg:my-12 my-8'>
+                <TrackProductList items={girthItems} title="girths" />
+            </div>
         </>
     )
 }
@@ -131,6 +133,66 @@ const reinsItems = [
         name: "Reins with handles",
         category: "Reins",
         image: "/images/tacks/tack4.png", // Replace with actual image path
+        price: "$370.00",
+    },
+
+
+];
+const girthItems = [
+    {
+        id: 1,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 2,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 3,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 4,
+        name: "Short dressage girth",
+        category: "Girths",
+       image: "/home/grith.png",// Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 5,
+        name: "Short dressage girth",
+        category: "Girths",
+       image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 6,
+        name: "Short dressage girth",
+        category: "Girths",
+       image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 7,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/home/grith.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 8,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/home/grith.png", // Replace with actual image path
         price: "$370.00",
     },
 
