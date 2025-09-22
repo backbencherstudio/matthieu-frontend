@@ -13,6 +13,9 @@ export default function TackMainSections() {
             <div className='lg:my-12 my-8'>
                 <TrackProductList items={girthItems} title="girths" />
             </div>
+            <div className='lg:my-12 my-8'>
+                <TrackProductList items={breatsPlatesItems} title="BREASTPLATES" />
+            </div>
         </>
     )
 }
@@ -197,4 +200,34 @@ const girthItems = [
     },
 
 
+];
+const breatsPlatesItems = [
+    {
+        id: 1,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/images/tacks/breastPlates.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 2,
+        name: "Short dressage girth",
+        category: "Girths",
+        image: "/images/tacks/breastPlates2.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 3,
+        name: "Short dressage girth",
+        category: "Girths",
+         image: "/images/tacks/breastPlates3.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 4,
+        name: "Short dressage girth",
+        category: "Girths",
+       image: "/images/tacks/breastPlates4.png",// Replace with actual image path
+        price: "$370.00",
+    },
 ];
