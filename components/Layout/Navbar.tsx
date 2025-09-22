@@ -56,7 +56,7 @@ const Header = () => {
     },
     {
       label: "TACK",
-      href: "#",
+      href: "/tack",
       hasDropdown: true,
       dropdownContent: [
         { category: "Bridles", href: "#" },
