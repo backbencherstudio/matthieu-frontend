@@ -25,6 +25,9 @@ export default function TackMainSections() {
             <div className='lg:my-12 my-8'>
                 <TrackProductList items={leatherItems} title="Leather Care" />
             </div>
+            <div className='lg:my-12 my-8'>
+                <TrackProductList items={accesoriesItems} title="Accessories" />
+            </div>
         </>
     )
 }
@@ -253,29 +256,29 @@ const halterItems = [
 const bootsItems = [
     {
         id: 1,
-        name: "Halter lead rope",
-        category: "HALTERS & ROPES",
+        name: "Front Show Jumping Boots",
+        category: "BOOTS",
         image: "/images/tacks/boots1.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 2,
-        name: "Halter lead rope",
-        category: "HALTERS & ROPES",
+        name: "Hind Show Jumping Boots",
+        category: "BOOTS",
         image: "/images/tacks/boots2.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 3,
-        name: "Halter lead rope",
-        category: "HALTERS & ROPES",
+        name: "Front Training Boots",
+        category: "BOOTS",
         image: "/images/tacks/boots3.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 4,
-        name: "Halter lead rope",
-        category: "HALTERS & ROPES",
+        name: "Hind Training Boots",
+        category: "BOOTS",
         image: "/images/tacks/boots4.jpg", // Replace with actual image path
         price: "$370.00",
     },
@@ -285,22 +288,38 @@ const leatherItems = [
     {
         id: 1,
         name: "Leather Soap",
-        category: "HALTERS & ROPES",
+        category: "Leather Care",
         image: "/images/tacks/leather-care.jpg", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 2,
         name: "Leather Grease",
-        category: "HALTERS & ROPES",
+        category: "Leather Care",
         image: "/images/tacks/leather-care2.jpg", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 3,
         name: "Cleaning Kit",
-        category: "HALTERS & ROPES",
+        category: "Leather Care",
         image: "/images/tacks/leather-care3.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+];
+const accesoriesItems = [
+    {
+        id: 1,
+        name: "3-point hunting collar ",
+        category: "Accessories",
+        image: "/images/tacks/accessories.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 2,
+        name: "Classic Martingale",
+        category: "Accessories",
+        image: "/images/tacks/accessories2.jpg", // Replace with actual image path
         price: "$370.00",
     },
 ];
