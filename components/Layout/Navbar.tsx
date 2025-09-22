@@ -12,23 +12,18 @@ import {
   HoverCardTrigger,
 } from "../ui/hover-card";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Navigation links data
-  const navigationLinks = [
-    { label: "SADDLES", href: "#" },
-    { label: "TACK", href: "#" },
-    { label: "BRAND", href: "#" },
-    { label: "TRY A SADDLE", href: "#" },
-    { label: "FIND US", href: "/find-us" },
-  ];
+  const pathName = usePathname();
 
-  const navigationLinks2 = [
+
+  const navigationLinks = [
     {
       label: "SADDLES",
-      href: "#",
+      href: "/saddles",
       hasDropdown: true,
       dropdownContent: [
         {
@@ -119,21 +114,26 @@ const Header = () => {
 
           {/* Center - Navigation Links */}
           <div className="hidden lg:flex items-center xl:gap-10 gap-6">
-            {navigationLinks2.slice(0, 3).map((link, index) => (
-              <HoverCard key={index} openDelay={200}>
-                <HoverCardTrigger asChild>
-                  <Link
-                    href={link.href}
-                    className="textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm font-normal"
-                  >
-                    {link.label}
-                  </Link>
-                </HoverCardTrigger>
-                <HoverCardContent className="w-auto p-0 mt-6 transition-all duration-100 border-0  rounded-none">
-                  <HoverItems items={link} />
-                </HoverCardContent>
-              </HoverCard>
-            ))}
+            {navigationLinks.slice(0, 3).map((link, index) => {
+              const isActive = pathName.includes(link.href);
+              return (
+                (
+                  <HoverCard key={index} openDelay={200}>
+                    <HoverCardTrigger asChild>
+                      <Link
+                        href={link.href}
+                        className={`${isActive ? "font-semibold" : "font-normal"}  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                      >
+                        {link.label}
+                      </Link>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-auto p-0 mt-6 transition-all duration-100 border-0  rounded-none">
+                      <HoverItems items={link} />
+                    </HoverCardContent>
+                  </HoverCard>
+                )
+              )
+            })}
 
             {/* Logo */}
             <div className="">
