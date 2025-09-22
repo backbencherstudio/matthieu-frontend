@@ -1,7 +1,10 @@
+import TackMainSections from '@/components/ClientComponents/Tacks/TackMainSections'
 import React from 'react'
 
 export default function TackPage() {
   return (
-    <div>TackPage</div>
+    <div className='maxContainer'>
+        <TackMainSections/>
+    </div>
   )
 }
