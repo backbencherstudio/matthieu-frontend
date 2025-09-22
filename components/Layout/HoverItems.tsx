@@ -6,7 +6,7 @@ import {
   HoverCardContent,
 } from "@/components/ui/hover-card"; // Make sure HoverCard is imported from your UI components
 import Link from "next/link";
-import { Separator } from "../ui/separator";
+import { Separators } from "../ui/separator";
 
 export default function HoverItems({ items }) {
   console.log(items);
@@ -55,7 +55,7 @@ export default function HoverItems({ items }) {
                                     {itm}
                                   </span>
                                   {index !== subItem.items.length - 1 && (
-                                    <Separator
+                                    <Separators
                                       className="mx-3  h-5 "
                                       orientation="vertical"
                                     />
