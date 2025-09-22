@@ -12,6 +12,7 @@ interface SAddlesCategoryItemsProps {
         items?: string[];
         btns?: { title: string; href: string }[];
         images?: { id: number; name: string; image: string }[];
+        video?: string;
     };
 }
 
@@ -45,7 +46,7 @@ export default function SAddlesCategoryItems({ saddlesItems }: SAddlesCategoryIt
             </div>
             <div>
                 <div className='grid  md:grid-cols-2 grid-cols-1 gap-8 md:max-w-[952px]'>
-                    {saddlesItems?.images.map((product) => (
+                    {saddlesItems?.images?.map((product) => (
                         <div key={product.id} className=' flex flex-col gap-5 items-center justify-center '>
                             <img src={product.image} alt={product.name} className='w-full h-full object-cover ' />
                             <p className='text-[#4A4C56] text-center md:text-xl text-base leading-[124%]   md:pb-5 font-normal'>{product.name}</p>
