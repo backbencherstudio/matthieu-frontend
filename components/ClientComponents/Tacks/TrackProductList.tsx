@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 
 
@@ -22,11 +23,12 @@ export default function TrackProductList({ items,title }:TrackProductListProps) 
                         key={item.id}
                         className=" p-3 bg-[#F8F9FB] shadow-none hover:shadow-lg transition-shadow duration-200 cursor-pointer"
                     >
-                        <div className="relative w-full bg-white">
+                        <div className=" w-full  bg-white overflow-hidden">
                             <img
                                 src={item.image}
                                 alt={item.name}
-                                className="object-cover w-full h-full"
+                                className=" "
+
                             />
                         </div>
                         <div className="mt-5 flex flex-col gap-[14px]">

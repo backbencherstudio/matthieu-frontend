@@ -11,10 +11,16 @@ export default function TackMainSections() {
                 <TrackProductList items={reinsItems} title="Reins" />
             </div>
             <div className='lg:my-12 my-8'>
+                <TrackProductList items={breatsPlatesItems} title="BREASTPLATES" />
+            </div>
+            <div className='lg:my-12 my-8'>
                 <TrackProductList items={girthItems} title="girths" />
             </div>
             <div className='lg:my-12 my-8'>
-                <TrackProductList items={breatsPlatesItems} title="BREASTPLATES" />
+                <TrackProductList items={halterItems} title="HALTERS & ROPES" />
+            </div>
+            <div className='lg:my-12 my-8'>
+                <TrackProductList items={bootsItems} title="BOOTS" />
             </div>
         </>
     )
@@ -205,29 +211,70 @@ const breatsPlatesItems = [
     {
         id: 1,
         name: "Short dressage girth",
-        category: "Girths",
+        category: "BREASTPLATES",
         image: "/images/tacks/breastPlates.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 2,
         name: "Short dressage girth",
-        category: "Girths",
+        category: "BREASTPLATES",
         image: "/images/tacks/breastPlates2.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 3,
         name: "Short dressage girth",
-        category: "Girths",
+        category: "BREASTPLATES",
          image: "/images/tacks/breastPlates3.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 4,
         name: "Short dressage girth",
-        category: "Girths",
+        category: "BREASTPLATES",
        image: "/images/tacks/breastPlates4.png",// Replace with actual image path
         price: "$370.00",
     },
+];
+const halterItems = [
+    {
+        id: 1,
+        name: "Halter lead rope",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/halter.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+
+];
+const bootsItems = [
+    {
+        id: 1,
+        name: "Halter lead rope",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/boots1.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 1,
+        name: "Halter lead rope",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/boots2.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 1,
+        name: "Halter lead rope",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/boots3.png", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 1,
+        name: "Halter lead rope",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/boots4.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+
 ];
