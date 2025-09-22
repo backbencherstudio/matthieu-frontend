@@ -22,6 +22,9 @@ export default function TackMainSections() {
             <div className='lg:my-12 my-8'>
                 <TrackProductList items={bootsItems} title="BOOTS" />
             </div>
+            <div className='lg:my-12 my-8'>
+                <TrackProductList items={leatherItems} title="Leather Care" />
+            </div>
         </>
     )
 }
@@ -256,25 +259,48 @@ const bootsItems = [
         price: "$370.00",
     },
     {
-        id: 1,
+        id: 2,
         name: "Halter lead rope",
         category: "HALTERS & ROPES",
         image: "/images/tacks/boots2.png", // Replace with actual image path
         price: "$370.00",
     },
     {
-        id: 1,
+        id: 3,
         name: "Halter lead rope",
         category: "HALTERS & ROPES",
         image: "/images/tacks/boots3.png", // Replace with actual image path
         price: "$370.00",
     },
     {
-        id: 1,
+        id: 4,
         name: "Halter lead rope",
         category: "HALTERS & ROPES",
         image: "/images/tacks/boots4.jpg", // Replace with actual image path
         price: "$370.00",
     },
 
+];
+const leatherItems = [
+    {
+        id: 1,
+        name: "Leather Soap",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/leather-care.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 2,
+        name: "Leather Grease",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/leather-care2.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
+    {
+        id: 3,
+        name: "Cleaning Kit",
+        category: "HALTERS & ROPES",
+        image: "/images/tacks/leather-care3.jpg", // Replace with actual image path
+        price: "$370.00",
+    },
 ];
