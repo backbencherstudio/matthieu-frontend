@@ -1,19 +1,31 @@
+import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
 import SAddlesCategoryItems from '@/components/ClientComponents/Saddles/SAddlesCategoryItems'
 import React from 'react'
 
 export default function SaddlesPage() {
-    return (
-        <div className='maxContainer'>
-            <div className=' lg:pt-[80px] lg:pb-[60px] pt-[60px] pb-[50px]'>
-                <SAddlesCategoryItems saddlesItems={saddlesItemsArion} />
-            </div>
-            <div className=' lg:py-[60px] py-[50px]'>
-                <SAddlesCategoryItems saddlesItems={saddlesItemsAtlas} />
-            </div>
-            <div className=' lg:py-[80px] py-[60px]'>
-                <SAddlesCategoryItems saddlesItems={saddlesItemsAthena} />
-            </div>
 
+    const breadLink = [
+        {
+            label: "SADDLES",
+            href: "/saddles",
+        },
+    ];
+
+    return (
+        <div>
+            <BreadCrumb breadLink={breadLink} />
+            <div className='maxContainer'>
+                <div className=' lg:pt-[80px] lg:pb-[60px] pt-[60px] pb-[50px]'>
+                    <SAddlesCategoryItems saddlesItems={saddlesItemsArion} />
+                </div>
+                <div className=' lg:py-[60px] py-[50px]'>
+                    <SAddlesCategoryItems saddlesItems={saddlesItemsAtlas} />
+                </div>
+                <div className=' lg:py-[80px] py-[60px]'>
+                    <SAddlesCategoryItems saddlesItems={saddlesItemsAthena} />
+                </div>
+
+            </div>
         </div>
     )
 }
@@ -88,5 +100,5 @@ const saddlesItemsAthena = {
     btns: [
         { title: "Connect with a saddle expert", href: "" },
     ],
-    video : "/videos/athena.mp4",
+    video: "/videos/athena.mp4",
 }
