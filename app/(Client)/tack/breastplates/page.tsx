@@ -10,7 +10,7 @@ export default function BreastPlatesPage() {
       href: "/TACK",
     },
     {
-      label: "BRIDLES",
+      label: "BREASTPLATES",
       href: "/tack/breastplates",
     },
   ];

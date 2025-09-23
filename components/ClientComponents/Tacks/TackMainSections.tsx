@@ -129,9 +129,9 @@ const sizes: Category[] = [
 
 export default function TackMainSections() {
   const [category, setCategory] = useState<string>("");
-  const [priceRange, setPriceRange] = useState<string>("all");
-  const [color, setColor] = useState<string>("all");
-  const [size, setSize] = useState<string>("all");
+  const [priceRange, setPriceRange] = useState<string>("");
+  const [color, setColor] = useState<string>("");
+  const [size, setSize] = useState<string>("");
 
   const filterProducts = (): Product[] => {
     let filtered = allProducts;
@@ -140,7 +140,7 @@ export default function TackMainSections() {
       filtered = filtered.filter((product) => product.category === category);
     }
 
-    if (priceRange !== "all") {
+    if (priceRange) {
       const [min, max] = priceRange.split('-').map(Number) || [0, Infinity];
       const price = parseFloat(filtered[0]?.price.replace('$', '') || "0");
       filtered = filtered.filter((product) => {
@@ -149,11 +149,11 @@ export default function TackMainSections() {
       });
     }
 
-    if (color !== "all") {
+    if (color) {
       filtered = filtered.filter((product) => product.color === color);
     }
 
-    if (size !== "all") {
+    if (size) {
       filtered = filtered.filter((product) => product.size === size);
     }
 
