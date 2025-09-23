@@ -16,7 +16,7 @@ export const categories: Category[] = [
 ];
 
 export const priceRanges: Category[] = [
-  { label: "All Prices", value: "all" },
+  { label: "All Prices", value: "" },
   { label: "Under $100", value: "0-100" },
   { label: "$100 - $200", value: "100-200" },
   { label: "$200 - $300", value: "200-300" },
@@ -24,14 +24,14 @@ export const priceRanges: Category[] = [
 ];
 
 export const colors: Category[] = [
-  { label: "All Colors", value: "all" },
+  { label: "All Colors", value: "" },
   { label: "Black", value: "Black" },
   { label: "Brown", value: "Brown" },
   { label: "N/A", value: "N/A" },
 ];
 
 export const sizes: Category[] = [
-  { label: "All Sizes", value: "all" },
+  { label: "All Sizes", value: "" },
   { label: "Full", value: "Full" },
   { label: "Cob", value: "Cob" },
   { label: "Pony", value: "Pony" },

@@ -20,7 +20,7 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({ title, items, selectedV
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="text-secondary-text text-base flex items-center gap-2 cursor-pointer focus-visible:border-none">
-        <span>{title}</span> <ChevronDown />
+        <span className='uppercase'>{`${selectedValue ? selectedValue : title}`}</span> <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#F4F5F7] rounded-none">
         {items.map((item, idx) => (
