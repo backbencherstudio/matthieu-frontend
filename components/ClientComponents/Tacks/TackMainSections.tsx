@@ -1,9 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TrackProductList from './TrackProductList';
+import FilterIcon from '@/components/Icons/FilterIcon';
+
+interface Catgory {
+    label: string;
+    value: string;
+}
 
 export default function TackMainSections() {
+
+    const [category, setCategory] = useState<string>("");
+
+    const categoryies: Catgory[] = [
+        {
+            label: "BRIDLES",
+            value: "Bridles",
+        },
+        {
+            label: "REINS",
+            value: "Reins",
+        },
+        {
+            label: "BREASTPLATES",
+            value: "BREASTPLATES",
+        },
+        {
+            label: "GIRTHS",
+            value: "girths",
+        },
+        {
+            label: "HALTERS & ROPES",
+            value: "Halters & Ropes",
+        },
+        {
+            label: "BOOTS",
+            value: "Boots",
+        },
+        {
+            label: "LEATHER CARE",
+            value: "Leather Care",
+        },
+        {
+            label: "ACCESSORIES",
+            value: "Accessories",
+        },
+    ];
+
     return (
         <>
+            <div>
+                <FilterIcon className="h-8 w-8" />
+            </div>
+
             <div className='lg:my-12 my-8'>
                 <TrackProductList items={bridleasItems} title="Bridles" />
             </div>
@@ -133,7 +181,7 @@ const reinsItems = [
         id: 6,
         name: "Reins with handles",
         category: "Reins",
-       image: "/images/tacks/tack2.png", // Replace with actual image path
+        image: "/images/tacks/tack2.png", // Replace with actual image path
         price: "$370.00",
     },
     {
@@ -179,21 +227,21 @@ const girthItems = [
         id: 4,
         name: "Short dressage girth",
         category: "Girths",
-       image: "/home/grith.png",// Replace with actual image path
+        image: "/home/grith.png",// Replace with actual image path
         price: "$370.00",
     },
     {
         id: 5,
         name: "Short dressage girth",
         category: "Girths",
-       image: "/home/grith.png", // Replace with actual image path
+        image: "/home/grith.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 6,
         name: "Short dressage girth",
         category: "Girths",
-       image: "/home/grith.png", // Replace with actual image path
+        image: "/home/grith.png", // Replace with actual image path
         price: "$370.00",
     },
     {
@@ -232,14 +280,14 @@ const breatsPlatesItems = [
         id: 3,
         name: "Short dressage girth",
         category: "BREASTPLATES",
-         image: "/images/tacks/breastPlates3.png", // Replace with actual image path
+        image: "/images/tacks/breastPlates3.png", // Replace with actual image path
         price: "$370.00",
     },
     {
         id: 4,
         name: "Short dressage girth",
         category: "BREASTPLATES",
-       image: "/images/tacks/breastPlates4.png",// Replace with actual image path
+        image: "/images/tacks/breastPlates4.png",// Replace with actual image path
         price: "$370.00",
     },
 ];
