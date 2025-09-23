@@ -10,8 +10,8 @@ export default function BootsPage() {
       href: "/TACK",
     },
     {
-      label: "BRIDLES",
-      href: "/tack/bridles",
+      label: "BOOTS",
+      href: "/tack/boots",
     },
   ];
 
@@ -26,8 +26,8 @@ export default function BootsPage() {
 }
 
 const categoryItems = [
-  { id: 1, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates.png", price: "$370.00", color: "Black", size: "Standard" },
-  { id: 2, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates2.png", price: "$370.00", color: "Brown", size: "Standard" },
-  { id: 3, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates3.png", price: "$370.00", color: "Black", size: "Large" },
-  { id: 4, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates4.png", price: "$370.00", color: "Brown", size: "Large" },
+{ id: 1, name: "Front Show Jumping Boots", category: "BOOTS", image: "/images/tacks/boots1.png", price: "$370.00", color: "Black", size: "Medium" },
+    { id: 2, name: "Hind Show Jumping Boots", category: "BOOTS", image: "/images/tacks/boots2.png", price: "$370.00", color: "Brown", size: "Medium" },
+    { id: 3, name: "Front Training Boots", category: "BOOTS", image: "/images/tacks/boots3.png", price: "$370.00", color: "Black", size: "Large" },
+    { id: 4, name: "Hind Training Boots", category: "BOOTS", image: "/images/tacks/boots4.jpg", price: "$370.00", color: "Brown", size: "Large" },
 ];

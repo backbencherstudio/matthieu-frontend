@@ -11,7 +11,7 @@ export default function BreastPlatesPage() {
     },
     {
       label: "BRIDLES",
-      href: "/tack/bridles",
+      href: "/tack/breastplates",
     },
   ];
 
