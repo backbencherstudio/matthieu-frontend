@@ -1,6 +1,6 @@
 
 import React from 'react'
-import AllSaddlesPage from '../all-saddles/page'
+import AllSaddlesPage from './all-saddles/page'
 
 export default function SaddlesPage() {
 

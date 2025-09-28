@@ -51,8 +51,8 @@ const Header = () => {
             },
           ],
         },
-        { category: "USED SADDLES", items: [], hasLink: false },
-        { category: "ALL SADDLES", items: [], hasLink: false },
+        { category: "USED SADDLES", items: [], hasLink: true , href : "/saddles/used-saddles" },
+        { category: "ALL SADDLES", items: [], hasLink: true, href : "/saddles/all-saddles" },
       ],
     },
     {
