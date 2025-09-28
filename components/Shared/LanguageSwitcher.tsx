@@ -177,7 +177,7 @@ const Language = () => {
             <button
               key={lang.label}
               onClick={() => handleLanguageSelect(lang)}
-              className={`flex items-center space-x-2 text-xs w-32 px-2 py-2 hover:bg-gray-100 cursor-pointer notranslate ${
+              className={`flex items-center space-x-2 text-xs w-32 px-2 py-2 bg-[#1F274B] hover:bg-[#454F7B94] text-white cursor-pointer notranslate relative z-50 ${
                 !isLoaded ? "opacity-50" : ""
               }`}
               disabled={!isLoaded}

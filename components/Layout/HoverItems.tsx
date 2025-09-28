@@ -14,7 +14,7 @@ export default function HoverItems({ items }) {
   return (
     <div>
       <div>
-        {items?.dropdownContent?.map((item, index) => (
+        {items?.dropdownContent?.map((item:any, index:number) => (
           <div key={index} className="flex flex-col relative">
             {/* Main Category Item wrapped with HoverCard */}
             <HoverCard openDelay={200}>

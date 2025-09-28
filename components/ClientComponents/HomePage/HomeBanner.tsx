@@ -22,7 +22,7 @@ export default function HomeBanner() {
     };
 
     return (
-        <div className="maxContainer mb-12">
+        <div className="maxContainer mb-12 ">
             <Slider {...settings}>
             <video autoPlay muted loop className="md:h-[500px] w-full object-cover">
                 <source src="/bannerVideo/homeBanner.mp4" type="video/mp4" />

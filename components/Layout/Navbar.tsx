@@ -111,19 +111,8 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-1.5">
               <LanguageSwitcher />
-              {/* <span className=""><UsdIcon /> </span>
-              <span className="textPrimary text-xs leading-[100%]">
-                USD
-              </span> */}
+
             </div>
-            {/* {leftOptions.map((option, index) => (
-              <div key={index} className="flex items-center gap-1.5">
-                <span className="">{option?.icon} </span>
-                <span className="textPrimary text-xs leading-[100%]">
-                  {option.label}
-                </span>
-              </div>
-            ))} */}
           </div>
 
           {/* Center - Navigation Links */}
