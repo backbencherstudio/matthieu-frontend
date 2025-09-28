@@ -13,6 +13,8 @@
 body {
   font-family: Avenir, sans-serif;
   font-family: Avenir, sans-serif;
+  top: 0px !important;
+  position: unset !important;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -33,15 +35,35 @@ body {
 .textPrimary {
   color: #262626;
 }
-.textSecondary { 
-  color:"#1F274B"
+
+.textSecondary {
+  color: "#1F274B"
 }
 
 .avenir {
   font-family: "Avenir", sans-serif;
 }
 
+/* HIDE THE GOOGLE TRANSLATE TOP BAR COMPLETELY */
+.goog-te-banner-frame.skiptranslate,
+body>.skiptranslate,
+.goog-te-gadget-icon,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight,
+.goog-te-balloon-frame,
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  border: none !important;
+}
 
+
+.notranslate {
+  translate: no !important;
+}
 
 /* ============ swipper bullet point style============ */
 .custom-dots {

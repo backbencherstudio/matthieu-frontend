@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppConfig } from "@/config/app.config";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -14,7 +15,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="avenir">{children}</body>
+      <body className="avenir">
+      <head>
+        {/* Google Translate Init Script */}
+        <Script id="google-translate-init" strategy="afterInteractive">
+          {`
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,pl',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  `}
+        </Script>
+
+        {/* Google Translate External JS */}
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+      </head>
+        <div id="google_translate_element" className="hidden"></div>
+        {children}
+      </body>
     </html>
   );
 }

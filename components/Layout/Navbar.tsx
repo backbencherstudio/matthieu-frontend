@@ -13,6 +13,7 @@ import {
 } from "../ui/hover-card";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import LanguageSwitcher from "../Shared/LanguageSwitcher";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -102,14 +103,27 @@ const Header = () => {
         <div className="flex justify-between lg:gap-6 gap-0 items-center ">
           {/* Left side - Language and currency */}
           <div className="hidden md:flex items-center xl:gap-6 gap-4">
-            {leftOptions.map((option, index) => (
+            <div className="flex items-center gap-1.5">
+              <span className=""><UsdIcon /> </span>
+              <span className="textPrimary text-xs leading-[100%]">
+                USD
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <LanguageSwitcher />
+              {/* <span className=""><UsdIcon /> </span>
+              <span className="textPrimary text-xs leading-[100%]">
+                USD
+              </span> */}
+            </div>
+            {/* {leftOptions.map((option, index) => (
               <div key={index} className="flex items-center gap-1.5">
                 <span className="">{option?.icon} </span>
                 <span className="textPrimary text-xs leading-[100%]">
                   {option.label}
                 </span>
               </div>
-            ))}
+            ))} */}
           </div>
 
           {/* Center - Navigation Links */}
