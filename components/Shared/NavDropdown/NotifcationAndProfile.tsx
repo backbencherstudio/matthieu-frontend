@@ -1,11 +1,12 @@
 
 
 
+import NotificationIcon from "@/components/Icons/NotificationIcon";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import NotificationDropdown from "./NotificationDropdown";
 import AdminProfileDropdown from "./AdminProfileDropdown";
-import NotificationIcon from "@/components/Icons/Dashboard/NotificationIcon";
-import NotificationDropdown from "@/components/shared/NavDropdown/NotificationDropdown";
+
 
 const NotifcationAndProfile = () => {
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);

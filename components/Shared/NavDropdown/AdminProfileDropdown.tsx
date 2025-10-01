@@ -1,6 +1,7 @@
-import ProfileIcon from "@/components/Icons/Dashboard/ProfileIcon";
-import SettingsIcon from "@/components/Icons/Dashboard/SettingsIcon";
-import SwitchIcon from "@/components/Icons/Dashboard/SwitchIcon";
+
+import SettingsIcon from "@/components/Icons/DashboardIcons/SettingsIcon";
+import ProfileIcon from "@/components/Icons/ProfileIcon";
+import SwitchIcon from "@/components/Icons/SwitchIcon";
 import Link from "next/link";
 import React from "react";
 
