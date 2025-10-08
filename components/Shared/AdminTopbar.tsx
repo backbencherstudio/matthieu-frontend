@@ -62,7 +62,7 @@ export default function AdminTopBar({
   const pathSegments = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="lg:p-5 p-4 md:pl-8 lg:pl-4 xl:pl-8 flex items-center justify-between border bg-white border-[#EAECF0]">
+    <div className="lg:p-5 p-4 md:pl-8 lg:pl-4 xl:pl-8 flex items-center justify-between border bg-white border-[#EAECF0] sticky top-0 z-50">
       <div className="flex items-center lg:hidden mr-4 lg:mr-0">
         <button onClick={toggleSidebar} className="">
           {!sidebarOpen && <HiOutlineMenuAlt1 size={26} />}

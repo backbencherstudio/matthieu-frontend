@@ -128,9 +128,19 @@ body > .skiptranslate,
   --color-secondary-text: #4c526f;
   --color-dark-primary: #262626;
   --color-error-text: #eb3d4d;
+  --color-gray-black: #4a4c56;
+  --color-success-text: #22caad;
+  --color-progress-text: #ffa600;
+  --color-on-the-way-text: #b081ff;
+  --color-shipped-text: #ff904e;
 
   --color-primary-bg: #1f274b;
   --color-select-active-bg: #454f7b8a;
+  --color-success-bg: #e9faf7;
+  --color-error-bg: #feecee;
+  --color-progress-bg: #fffae8;
+  --color-on-the-way-bg: #f4f1ff;
+  --color-shipped-bg: #fff4ee;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
