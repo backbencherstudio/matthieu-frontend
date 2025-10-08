@@ -52,7 +52,7 @@ export default function AlertProduct() {
   };
 
   return (
-    <div className="h-[95vh]  overflow-y-auto bg-[#1F274B]  lg:px-12 px-6 lg:py-8 py-4">
+    <div className="h-[95vh]  overflow-y-auto bg-[#1F274B]  lg:px-12 px-6 lg:py-8 py-4 custom-scroll">
       <div className="">
         <h1 className="text-white text-3xl font-bold text-center mb-8 tracking-wide">
           ALERT ME WHEN YOU FIND<br />WHAT I'M LOOKING FOR

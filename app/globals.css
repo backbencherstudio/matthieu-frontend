@@ -123,6 +123,27 @@ body > .skiptranslate,
   position: relative !important;
 }
 
+/* Custom scrollbar */
+/* .custom-scroll {
+  scrollbar-width: thin;
+ 
+  scrollbar-color: #e0e0e0;
+} */
+ 
+.custom-scroll::-webkit-scrollbar {
+  width: 2px;
+}
+ 
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+ 
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 15px;
+ 
+}
+
 @theme inline {
   --color-primary-text: #1f274b;
   --color-secondary-text: #4c526f;
