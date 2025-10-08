@@ -1,20 +1,13 @@
-
-
-
-import NotificationIcon from "@/components/Icons/NotificationIcon";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import NotificationDropdown from "./NotificationDropdown";
 import AdminProfileDropdown from "./AdminProfileDropdown";
-
+import NotificationBell from "@/components/Icons/AdminIcon/NotificationBell";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 const NotifcationAndProfile = () => {
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-
-
-  const notification = true;
 
   // Close profile dropdown when clicking outside
   useEffect(() => {
@@ -36,39 +29,25 @@ const NotifcationAndProfile = () => {
   const navLinksUser = [
     {
       label: "Notifications",
-      icon: (
-        <NotificationIcon className="w-6 h-6" notification={notification} />
-      ),
+      icon: <NotificationBell className="w-5 h-5" />,
     },
   ];
 
   return (
     <div>
-      <div className="flex items-center xl:gap-6 gap-2 ">
+      <div className="flex items-center xl:gap-6 gap-2">
         <ul className="flex items-center gap-4">
           {navLinksUser.map((link) => (
             <li key={link.label} className="relative group">
-              <button
-                className="flex items-center gap-2 font-semibold hover:bg-[#F3F3F3] rounded-[10px] transition duration-300 cursor-pointer"
-                onMouseEnter={() => setDropdownOpen(link.label)}
-                onMouseLeave={() => setDropdownOpen(null)}
-                onFocus={() => setDropdownOpen(link.label)}
-                onBlur={() => setDropdownOpen(null)}
+              <Link
+                href="/admin/notification"
+                className="flex items-center justify-center h-12 w-12 rounded-full bg-[#F8FAFB] transition duration-300 cursor-pointer relative"
               >
                 {link.icon}
-              </button>
-              {/* Dropdown */}
-              <div
-                className={`absolute -right-0 xl:right-0 top-11 xl:top-[21px] mt-2  bg-white rounded-b-2xl opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto z-20 ${
-                  dropdownOpen === link.label
-                    ? "opacity-100 pointer-events-auto"
-                    : ""
-                }`}
-                onMouseEnter={() => setDropdownOpen(link.label)}
-                onMouseLeave={() => setDropdownOpen(null)}
-              >
-                <NotificationDropdown />
-              </div>
+                <span className="absolute top-0 right-0 bg-error-text text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">
+                  3
+                </span>
+              </Link>
             </li>
           ))}
         </ul>
@@ -76,20 +55,26 @@ const NotifcationAndProfile = () => {
           {/* profile button */}
           <div className="relative" ref={profileDropdownRef}>
             <button
-              className="cursor-pointer relative"
+              className="cursor-pointer relative flex items-center gap-2"
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
             >
               <Image
-                src="/profile.jpg"
+                src="/images/admin/profile.png"
                 alt="Profile"
-                width={44}
-                height={44}
-                className="object-cover rounded-full"
+                width={36}
+                height={36}
+                className="min-w-[36px] min-h-[36px] object-cover rounded-full"
               />
-              <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+              <div className="hidden sm:flex items-center gap-2">
+                <div>
+                  <h5 className="text-[14px] text-primary-text my-0">Nick</h5>
+                  <p className="text-[12px] text-secondary-text my-0">Admin</p>
+                </div>
+                <ChevronDown />
+              </div>
             </button>
             {profileDropdownOpen && (
-              <div className="absolute top-[73px] -right-0 z-50 xl:right-0">
+              <div className="absolute top-[50px] -right-0 z-50 xl:right-0">
                 <AdminProfileDropdown />
               </div>
             )}

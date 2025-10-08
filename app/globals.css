@@ -25,7 +25,7 @@ body {
 
 .inputStyle {
   @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
-  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B]
+  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
 }
 
 .bgPrimary {
@@ -37,7 +37,7 @@ body {
 }
 
 .textSecondary {
-  color: "#1F274B"
+  color: "#1F274B";
 }
 
 .avenir {
@@ -46,7 +46,7 @@ body {
 
 /* HIDE THE GOOGLE TRANSLATE TOP BAR COMPLETELY */
 .goog-te-banner-frame.skiptranslate,
-body>.skiptranslate,
+body > .skiptranslate,
 .goog-te-gadget-icon,
 .goog-tooltip,
 .goog-tooltip:hover,
@@ -59,7 +59,6 @@ body>.skiptranslate,
   width: 0 !important;
   border: none !important;
 }
-
 
 .notranslate {
   translate: no !important;
@@ -93,7 +92,7 @@ body>.skiptranslate,
   width: 14px !important;
   height: 14px !important;
   border-radius: 50% !important;
-  background: #DFE1E7 !important;
+  background: #dfe1e7 !important;
   /* border: 2px solid rgba(255, 255, 255, 0.8) !important; */
   padding: 0 !important;
   margin: 0 !important;
@@ -104,13 +103,13 @@ body>.skiptranslate,
 }
 
 .custom-dots li button:before {
-  content: '' !important;
+  content: "" !important;
   display: none !important;
 }
 
 .custom-dots li.slick-active button {
-  background: #1F274B !important;
-  border: 2.8px solid #FFFFFF !important;
+  background: #1f274b !important;
+  border: 2.8px solid #ffffff !important;
   border-color: rgba(255, 255, 255, 1) !important;
   transform: scale(1.2) !important;
 }
@@ -124,11 +123,11 @@ body>.skiptranslate,
   position: relative !important;
 }
 
-
 @theme inline {
   --color-primary-text: #1f274b;
   --color-secondary-text: #4c526f;
   --color-dark-primary: #262626;
+  --color-error-text: #eb3d4d;
 
   --color-primary-bg: #1f274b;
   --color-select-active-bg: #454f7b8a;
