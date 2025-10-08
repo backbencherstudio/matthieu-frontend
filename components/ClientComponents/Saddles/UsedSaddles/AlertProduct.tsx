@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
+
 export default function AlertProduct() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   
@@ -52,19 +55,19 @@ export default function AlertProduct() {
   };
 
   return (
-    <div className="h-[95vh]  overflow-y-auto bg-[#1F274B]  lg:px-12 px-6 lg:py-8 py-4 custom-scroll">
+    <div className="h-[95vh] md:w-[708px] overflow-y-auto bg-[#1F274B]  lg:px-12 px-6 lg:py-8 py-4 custom-scroll">
       <div className="">
-        <h1 className="text-white text-3xl font-bold text-center mb-8 tracking-wide">
-          ALERT ME WHEN YOU FIND<br />WHAT I'M LOOKING FOR
+        <h1 className="text-white lg:text-[40px] md:text-[36px] text-2xl font-extrabold text-center  leading-[136%]">
+          ALERT ME WHEN YOU FIND WHAT I'M LOOKING FOR
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 lg:mt-12 md:mt-8 mt-6">
           {/* Price Range */}
           <div>
-            <label className="text-white text-sm font-medium mb-3 block tracking-wide">
+            <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%]">
               PRICE
             </label>
-            <div className="relative">
+            {/* <div className="relative">
               <input
                 type="range"
                 min="1000"
@@ -78,19 +81,20 @@ export default function AlertProduct() {
                 <span>$1,000</span>
                 <span>$10,000</span>
               </div>
-            </div>
+            </div> */}
+             <RangeSlider  min={100} max={1000} />
           </div>
 
           {/* Three Column Section */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 md:gap-6 gap-2">
             {/* Brand Column */}
             <div>
-              <label className="text-white text-sm font-medium mb-3 block tracking-wide">
+              <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-5 block">
                 BRAND
               </label>
-              <div className="space-y-2">
+              <div className="md:space-y-3 space-y-2.5">
                 {brands.map((brand) => (
-                  <label key={brand.id} className="flex items-center text-white text-xs cursor-pointer">
+                  <label key={brand.id} className="flex items-center text-white md:text-sm text-xs cursor-pointer">
                     <input
                       type="checkbox"
                       value={brand.id}
@@ -105,12 +109,12 @@ export default function AlertProduct() {
 
             {/* Discipline & Color Column */}
             <div>
-              <label className="text-white text-sm font-medium mb-3 block tracking-wide">
+              <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-5 block">
                 DISCPLINE
               </label>
-              <div className="space-y-2 mb-6">
+              <div className="md:space-y-3 space-y-2.5">
                 {disciplines.map((discipline) => (
-                  <label key={discipline.id} className="flex items-center text-white text-xs cursor-pointer">
+                  <label key={discipline.id} className="flex items-center text-white md:text-sm text-xs cursor-pointer">
                     <input
                       type="checkbox"
                       value={discipline.id}
@@ -122,12 +126,12 @@ export default function AlertProduct() {
                 ))}
               </div>
 
-              <label className="text-white text-sm font-medium mb-3 block tracking-wide">
+              <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-5 block md:mt-9 mt-6">
                 COLOR
               </label>
               <div className="space-y-2">
                 {colors.map((color) => (
-                  <label key={color.id} className="flex items-center text-white text-xs cursor-pointer">
+                  <label key={color.id} className="flex items-center text-white md:text-sm text-xs cursor-pointer">
                     <input
                       type="checkbox"
                       value={color.id}
@@ -142,12 +146,12 @@ export default function AlertProduct() {
 
             {/* Seat Size Column */}
             <div>
-              <label className="text-white text-sm font-medium mb-3 block tracking-wide">
+              <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-5 block">
                 SEAT SIZE
               </label>
-              <div className="space-y-2">
+              <div className="md:space-y-3 space-y-2.5">
                 {seatSizes.map((size) => (
-                  <label key={size.id} className="flex items-center text-white text-xs cursor-pointer">
+                  <label key={size.id} className="flex items-center text-white md:text-sm text-xs cursor-pointer">
                     <input
                       type="checkbox"
                       value={size.id}
@@ -163,7 +167,7 @@ export default function AlertProduct() {
 
           {/* Contact Information */}
           <div>
-            <h2 className="text-white text-sm font-medium mb-4 tracking-wide">
+            <h2 className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-6 block">
               CONTACT INFORMATION
             </h2>
             
@@ -173,13 +177,13 @@ export default function AlertProduct() {
                   type="text"
                   placeholder="FIRST NAME"
                   {...register('firstName', { required: true })}
-                  className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="w-full md:px-4 px-3 py-4 leading-[100%] text-sm bg-white placeholder-[#696E86] focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
                 <input
                   type="text"
                   placeholder="LAST NAME"
                   {...register('lastName', { required: true })}
-                  className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="w-full md:px-4 px-3 py-4 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
 
@@ -187,14 +191,14 @@ export default function AlertProduct() {
                 type="email"
                 placeholder="E-MAIL"
                 {...register('email', { required: true })}
-                className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full md:px-4 px-3 py-4 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
 
               <input
                 type="tel"
                 placeholder="PHONE NUMBER"
                 {...register('phone')}
-                className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full md:px-4 px-3 py-4 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
 
               <div className="grid grid-cols-2 gap-4">
@@ -202,20 +206,20 @@ export default function AlertProduct() {
                   type="text"
                   placeholder="TOWN"
                   {...register('town')}
-                  className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="w-full md:px-4 px-3 py-4 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
                 <input
                   type="text"
                   placeholder="STATE"
                   {...register('state')}
-                  className="w-full px-4 py-3 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  className="w-full md:px-4 px-3 py-4 text-sm bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
             </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center mt-4">
             <button
               type="submit"
               className="px-8 py-3 bg-white text-[#1e2847] text-sm font-semibold tracking-wide hover:bg-gray-100 transition-colors"
