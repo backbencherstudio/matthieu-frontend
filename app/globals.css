@@ -279,3 +279,19 @@ body > .skiptranslate,
 .filter-custom-scrollbar::-webkit-scrollbar-thumb {
   background: #888;
 }
+
+/* recharts outline remove */
+
+.recharts-wrapper svg:focus {
+  outline: none;
+}
+
+.recharts-wrapper svg {
+  outline: none;
+  pointer-events: none;
+}
+.recharts-wrapper .recharts-pie-sector,
+.recharts-wrapper .recharts-bar-rect,
+.recharts-wrapper .recharts-line-curve {
+  stroke: none;
+}
