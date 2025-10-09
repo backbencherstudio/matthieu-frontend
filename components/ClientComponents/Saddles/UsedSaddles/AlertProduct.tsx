@@ -6,7 +6,8 @@ import 'react-range-slider-input/dist/style.css';
 
 export default function AlertProduct() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  
+  const [value, setValue] = useState<[number, number]>([1000, 10000]);
+
   const brands = [
     { id: 'arion', label: 'ARION' },
     { id: 'devoucoux', label: 'DEVOUCOUX' },
@@ -54,6 +55,8 @@ export default function AlertProduct() {
     alert('Alert submitted successfully!');
   };
 
+
+
   return (
     <div className="h-[95vh] md:w-[708px] overflow-y-auto bg-[#1F274B]  lg:px-12 px-6 lg:py-8 py-4 custom-scroll">
       <div className="">
@@ -67,22 +70,18 @@ export default function AlertProduct() {
             <label className="text-white lg:text-2xl md:text-xl text-lg leading-[100%]">
               PRICE
             </label>
-            {/* <div className="relative">
-              <input
-                type="range"
-                min="1000"
-                max="10000"
-                step="100"
-                defaultValue="5500"
-                {...register('priceMin')}
-                className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-gray-600"
-              />
-              <div className="flex justify-between text-gray-400 text-xs mt-2">
-                <span>$1,000</span>
-                <span>$10,000</span>
+            <div className='bg-white  p-4 mt-4 flex flex-col gap-4'>
+              <div className=' mt-1 '>
+                <RangeSlider min={100} max={1000} step={0}
+                  // value={value}
+                  onInput={setValue} />
+
               </div>
-            </div> */}
-             <RangeSlider  min={100} max={1000} />
+              <div className='flex justify-between items-center text-[#4C526F] leading-[100%] text-sm '>
+                <span>${value?.[0]}</span>
+                <span>${value?.[1]}</span>
+              </div>
+            </div>
           </div>
 
           {/* Three Column Section */}
@@ -170,7 +169,7 @@ export default function AlertProduct() {
             <h2 className="text-white lg:text-2xl md:text-xl text-lg leading-[100%] mb-6 block">
               CONTACT INFORMATION
             </h2>
-            
+
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <input
