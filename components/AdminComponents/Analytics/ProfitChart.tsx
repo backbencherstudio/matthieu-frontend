@@ -10,146 +10,169 @@ import {
 } from "@/components/ui/select";
 
 import {
-  AreaChart,
-  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  Rectangle,
 } from "recharts";
 
 const data = [
   {
     name: "Jan",
     fullName: "January",
-    grow: 20,
+    profit: 2000,
+    sales: 4000,
     date: "2024-01-01",
   },
   {
     name: "Feb",
     fullName: "February",
-    grow: 30,
+    profit: 3000,
+    sales: 5000,
     date: "2024-02-01",
   },
   {
     name: "Mar",
     fullName: "March",
-    grow: 50,
+    profit: 2000,
+    sales: 3000,
     date: "2024-03-01",
   },
   {
     name: "Apr",
     fullName: "April",
-    grow: 60,
+    profit: 4000,
+    sales: 7000,
     date: "2024-04-01",
   },
   {
     name: "May",
     fullName: "May",
-    grow: 70,
+    profit: 2500,
+    sales: 5000,
     date: "2024-05-01",
   },
   {
     name: "Jun",
     fullName: "June",
-    grow: 80,
+    profit: 3000,
+    sales: 6000,
     date: "2024-06-01",
   },
   {
     name: "Jul",
     fullName: "July",
-    grow: 40,
+    profit: 4000,
+    sales: 7000,
     date: "2024-07-01",
   },
   {
     name: "Aug",
     fullName: "August",
-    grow: 30,
+    profit: 3000,
+    sales: 6000,
     date: "2024-08-01",
   },
   {
     name: "Sep",
     fullName: "September",
-    grow: 20,
+    profit: 2000,
+    sales: 5000,
     date: "2024-09-01",
   },
   {
     name: "Oct",
     fullName: "October",
-    grow: 27,
+    profit: 2700,
+    sales: 7000,
     date: "2024-10-01",
   },
   {
     name: "Nov",
     fullName: "November",
-    grow: 18,
+    profit: 1800,
+    sales: 6000,
     date: "2024-11-01",
   },
   {
     name: "Dec",
     fullName: "December",
-    grow: 40,
+    profit: 4000,
+    sales: 8000,
     date: "2024-12-01",
   },
   {
     name: "Jan",
     fullName: "January",
-    grow: 20,
+    profit: 2000,
+    sales: 5000,
     date: "2025-01-01",
   },
   {
     name: "Feb",
     fullName: "February",
-    grow: 30,
+    profit: 3000,
+    sales: 6000,
     date: "2025-02-01",
   },
   {
     name: "Mar",
     fullName: "March",
-    grow: 50,
+    profit: 5000,
+    sales: 7000,
     date: "2025-03-01",
   },
   {
     name: "Apr",
     fullName: "April",
-    grow: 60,
+    profit: 6000,
+    sales: 8000,
     date: "2025-04-01",
   },
   {
     name: "May",
     fullName: "May",
-    grow: 70,
+    profit: 7000,
+    sales: 9000,
     date: "2025-05-01",
   },
   {
     name: "Jun",
     fullName: "June",
-    grow: 80,
+    profit: 8000,
+    sales: 10000,
     date: "2025-06-01",
   },
   {
     name: "Jul",
     fullName: "July",
-    grow: 40,
+    profit: 4000,
+    sales: 11000,
     date: "2025-07-01",
   },
   {
     name: "Aug",
     fullName: "August",
-    grow: 30,
+    profit: 3000,
+    sales: 12000,
     date: "2025-08-01",
   },
   {
     name: "Sep",
     fullName: "September",
-    grow: 20,
+    profit: 2000,
+    sales: 13000,
     date: "2025-09-01",
   },
   {
     name: "Oct",
     fullName: "October",
-    grow: 27,
+    profit: 2700,
+    sales: 14000,
     date: "2025-10-01",
   },
 ];
@@ -171,12 +194,15 @@ function CustomTooltip({ active, payload }: any) {
       }}
     >
       <div style={{ fontWeight: 400, marginBottom: 4 }}>{d.fullName}</div>
-      <div style={{ color: "#1f274b", fontWeight: 400 }}>Grow: {d.grow}%</div>
+      <div style={{ color: "#4ED5BD", fontWeight: 400 }}>
+        Profit: ${d.profit}
+      </div>
+      <div style={{ color: "#1F274B", fontWeight: 400 }}>Sales: ${d.sales}</div>
     </div>
   );
 }
 
-export default function SalesChart() {
+export default function ProfitChart() {
   // Filter Chart
   const [selectedMonth, setSelectedMonth] = useState("last-6-months");
 
@@ -206,7 +232,7 @@ export default function SalesChart() {
   const filteredData = getFilteredData();
 
   // Get Max Value For Show Percentage in Y Axis
-  const maxValue = Math.max(...filteredData.map((item) => item.grow));
+  const maxValue = Math.max(...filteredData.map((item) => item.sales));
   const maxDomain = Math.ceil(maxValue / 10) * 10;
   const generateTicks = (max: number) => {
     const ticks = [0];
@@ -216,6 +242,7 @@ export default function SalesChart() {
     }
     return ticks;
   };
+
   const dynamicTicks = generateTicks(maxDomain);
 
   return (
@@ -223,7 +250,7 @@ export default function SalesChart() {
       {/* Title & Filter */}
       <div className="flex justify-between items-center gap-2">
         <h1 className="text-xl font-extrabold text-primary-text">
-          Sales Growth
+          Product Profit
         </h1>
         <Select
           value={selectedMonth}
@@ -241,38 +268,23 @@ export default function SalesChart() {
       {/* Chart */}
       <div className="mt-4 h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            width={400}
-            height={400}
+          <BarChart
+            width={500}
+            height={300}
             data={filteredData}
             margin={{
-              top: 10,
+              top: 5,
               right: 30,
-              left: 10,
-              bottom: 0,
+              left: 20,
+              bottom: 5,
             }}
           >
-            <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="0%"
-                  stopColor="rgba(31, 39, 75, 0.40)"
-                  stopOpacity={1}
-                />
-                <stop
-                  offset="100%"
-                  stopColor="rgba(31, 39, 75, 0.00)"
-                  stopOpacity={0}
-                />
-              </linearGradient>
-            </defs>
-
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tickMargin={8} />
+            <XAxis dataKey="name" />
             <YAxis
               domain={[0, maxDomain]}
               ticks={dynamicTicks}
-              tickFormatter={(v: number) => `${v}%`}
+              tickFormatter={(v: number) => `$${v}`}
               width={40}
             />
             <Tooltip
@@ -283,14 +295,17 @@ export default function SalesChart() {
               }}
               content={<CustomTooltip />}
             />
-            <Area
-              type="monotone"
-              dataKey="grow"
-              stroke="#1F274B"
-              strokeWidth={3}
-              fill="url(#colorUv)"
+            <Bar
+              dataKey="profit"
+              fill="#1F274B"
+              activeBar={<Rectangle fill="#1F274B" stroke="#1F274B" />}
             />
-          </AreaChart>
+            <Bar
+              dataKey="sales"
+              fill="#BABCC7"
+              activeBar={<Rectangle fill="#BABCC7" stroke="#BABCC7" />}
+            />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </div>

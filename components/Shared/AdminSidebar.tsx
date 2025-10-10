@@ -100,7 +100,7 @@ export default function AdminSidebar({
         <div>
           {/* Logo */}
           <div className="flex justify-between items-center">
-            <Link href="/">
+            <Link href="/admin/dashboard">
               <Image
                 src="/logo.svg"
                 alt="Logo"
