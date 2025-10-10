@@ -9,6 +9,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import StatisticCard from "../reusable/StatisticCard";
+import SalesChart from "./SalesChart";
+import ProfitChart from "./ProfitChart";
 
 export default function Analytics() {
   const statisticCards = [
@@ -75,6 +77,13 @@ export default function Analytics() {
           {statisticCards.map((card) => (
             <StatisticCard key={card.title} card={card} />
           ))}
+        </div>
+      </div>
+      {/* Chart */}
+      <div className="pt-6">
+        <div className="grid xl:grid-cols-2 gap-3">
+          <SalesChart />
+          <ProfitChart />
         </div>
       </div>
     </div>

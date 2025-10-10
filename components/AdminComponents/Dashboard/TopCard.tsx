@@ -3,6 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import CheckCircle from "@/components/Icons/AdminIcon/CheckCircle";
 import ChartUp from "@/components/Icons/AdminIcon/ChartUp";
+import Progress from "@/components/Icons/AdminIcon/Progress";
+import ProductIcon from "@/components/Icons/AdminIcon/ProductIcon";
+import Car from "@/components/Icons/AdminIcon/Car";
 
 interface Cards {
   title: string;
@@ -72,25 +75,25 @@ export default function TopCard({ cards }: { cards: Cards }) {
                 <div>
                   {item.status === "Delivered" && (
                     <div className="flex items-center gap-1 px-2 py-[6px] rounded text-success-text bg-success-bg">
-                      <CheckCircle />
+                      <CheckCircle className="h-5 w-5" />
                       <span>{item.status}</span>
                     </div>
                   )}
                   {item.status === "In Progress" && (
                     <div className="flex items-center gap-1 px-2 py-[6px] rounded text-progress-text bg-progress-bg">
-                      <CheckCircle />
+                      <Progress className="h-5 w-5" />
                       <span>{item.status}</span>
                     </div>
                   )}
                   {item.status === "On the way" && (
                     <div className="flex items-center gap-1 px-2 py-[6px] rounded text-on-the-way-text bg-on-the-way-bg">
-                      <CheckCircle />
+                      <ProductIcon className="h-5 w-5" />
                       <span>{item.status}</span>
                     </div>
                   )}
                   {item.status === "Shipped" && (
                     <div className="flex items-center gap-1 px-2 py-[6px] rounded text-shipped-text bg-shipped-bg">
-                      <CheckCircle />
+                      <Car className="h-6 w-6" />
                       <span>{item.status}</span>
                     </div>
                   )}
