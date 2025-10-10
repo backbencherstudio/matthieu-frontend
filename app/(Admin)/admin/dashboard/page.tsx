@@ -12,28 +12,28 @@ export default function DashboardPage() {
       value: "1,429",
       positiveValue: "+20.1%",
       negativeValue: "",
-      image: "/images/admin/dashboard/customers.svg",
+      image: "/images/admin/customers.svg",
     },
     {
       title: "Products",
       value: "6,225",
       positiveValue: "+12.1%",
       negativeValue: "",
-      image: "/images/admin/dashboard/product.svg",
+      image: "/images/admin/product.svg",
     },
     {
       title: "Orders",
       value: "3,247",
       positiveValue: "",
       negativeValue: "-6.6%",
-      image: "/images/admin/dashboard/cart.svg",
+      image: "/images/admin/cart.svg",
     },
     {
       title: "Total Revenue",
       value: "$12,567",
       positiveValue: "+3.6%",
       negativeValue: "",
-      image: "/images/admin/dashboard/dollar.svg",
+      image: "/images/admin/dollar.svg",
     },
   ];
 

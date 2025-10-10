@@ -19,28 +19,28 @@ export default function Analytics() {
       value: "$12,567",
       positiveValue: "+3.6%",
       negativeValue: "",
-      image: "/images/admin/dashboard/dollar.svg",
+      image: "/images/admin/dollar.svg",
     },
     {
       title: "Total Orders",
       value: "3,247",
       positiveValue: "",
       negativeValue: "-6.6%",
-      image: "/images/admin/dashboard/cart.svg",
+      image: "/images/admin/cart.svg",
     },
     {
       title: "Avg. Order Value",
       value: "6,225",
       positiveValue: "+12.1%",
       negativeValue: "",
-      image: "/images/admin/dashboard/product.svg",
+      image: "/images/admin/product.svg",
     },
     {
       title: "Conversion Rate",
       value: "1,429",
       positiveValue: "+20.1%",
       negativeValue: "",
-      image: "/images/admin/dashboard/conversation-rate.svg",
+      image: "/images/admin/conversation-rate.svg",
     },
   ];
 
@@ -54,12 +54,14 @@ export default function Analytics() {
         <div className="flex items-center gap-4">
           <Select>
             <SelectTrigger className="w-[100px] sm:w-[120px] !h-[43px] py-2.5 px-3 shadow-none outline-none focus-visible:ring-0 cursor-pointer border border-primary-text rounded text-primary-text">
-              <SelectValue placeholder="All Types" />
+              <SelectValue placeholder="Today" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="new">New</SelectItem>
-              <SelectItem value="old">Old</SelectItem>
+              <SelectItem value="today">Today</SelectItem>
+              <SelectItem value=" last-7-days">Last 7 days</SelectItem>
+              <SelectItem value=" last-30-days">Last 30 days</SelectItem>
+              <SelectItem value="last-90-days">Last 90 days</SelectItem>
+              <SelectItem value="last-year">Last year</SelectItem>
             </SelectContent>
           </Select>
           <Link
