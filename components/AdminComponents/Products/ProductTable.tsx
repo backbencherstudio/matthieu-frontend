@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/select";
 import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
-import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
 import Link from "next/link";
+import DeleteDialog from "../reusable/DeleteDialog";
 
 export const columns: ColumnDef<Data>[] = [
   {
@@ -89,9 +89,7 @@ export const columns: ColumnDef<Data>[] = [
           >
             <EditIcon />
           </Link>
-          <button className="cmn-action-btn delete">
-            <TrashIcon />
-          </button>
+          <DeleteDialog id={`${row.original.id}`} title="Product" />
         </div>
       );
     },

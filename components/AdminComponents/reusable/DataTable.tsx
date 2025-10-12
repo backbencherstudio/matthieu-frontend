@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="lg:max-w-[calc(100vw-330px)] max-w-[calc(100vw-70px)] overflow-x-auto rounded border border-[#cccccc65]">
+      <div className="lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] overflow-x-auto rounded border border-[#cccccc65]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
