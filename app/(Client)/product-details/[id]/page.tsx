@@ -5,6 +5,7 @@ import { Heart, ChevronDown } from 'lucide-react';
 import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
 import React, { useState } from 'react'
 import LoveIcon from '@/components/Icons/LoveIcon';
+import AppleIcon from '@/components/Icons/AppleIcon';
 
 const productImages = [
     { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -118,7 +119,7 @@ export default function ProductDetailsPage() {
                                                 <button
                                                     key={size.id}
                                                     onClick={() => setSelectedSize(size.id.toUpperCase())}
-                                                    className={`py-3 w-full text-base  transition-all  leading-[100%] ${selectedSize === size.id.toUpperCase()
+                                                    className={`py-3 w-full text-base  transition-all bg-[#4C526F] hover:bg-[#4C526F] leading-[100%] cursor-pointer ${selectedSize === size.id.toUpperCase()
                                                         ? 'bg-[#4C526F] text-white font-extrabold'
                                                         : 'bg-[#696E86] text-white '
                                                         }`}
@@ -131,35 +132,35 @@ export default function ProductDetailsPage() {
                                     </div>
 
                                     {/* Benefits Section */}
-                                    <div className="flex flex-col gap-3">
-                                        <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Benefits:</p>
+                                    <div className="flex flex-col gap-4">
+                                        <p className="lg:text-xl md:text-lg text-base text-[#262626] leading-[100%] tracking-[.4px]">Benefits:</p>
                                         <ul className="space-y-3">
                                             {benefits.map((benefit, index) => (
-                                                <li key={index} className="flex gap-3 text-sm text-gray-700">
-                                                    <span className="text-indigo-700 font-bold mt-1">•</span>
-                                                    <span>{benefit}</span>
+                                                <li key={index} className="flex gap-2.5 md:text-base text-sm tracking-[.08px] leading-[120%] text-[#4C526F]">
+                                                    <span className="  font-bold ">•</span>
+                                                    <span >{benefit}</span>
                                                 </li>
                                             ))}
                                         </ul>
-                                        <button className="text-sm text-blue-600 hover:text-blue-800 font-semibold">
-                                            More details
-                                        </button>
                                     </div>
 
+                                    <button className="text-[#262626] md:text-lg text-start text-base underline underline-offset-2">
+                                        More details
+                                    </button>
                                     {/* Buttons Section */}
-                                    <div className="space-y-3">
-                                        <button className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3 px-4 transition flex items-center justify-center gap-2">
-                                            <span>BUY WITH</span>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
-                                            </svg>
-                                        </button>
+                                    <div className="space-y-4">
+                                        <div className='flex gap-3'>
+                                            <button className="w-full bg-[#1F274B] text-white flex items-center justify-center cursor-pointer">
+                                                <span className='flex items-center gap-2 '>BUY WITH <AppleIcon/></span>
+                                                
+                                            </button>
 
-                                        <button className="w-full bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-2 border-gray-900 transition">
-                                            ADD TO CART
-                                        </button>
+                                            <button className="w-full bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition">
+                                                ADD TO CART
+                                            </button>
+                                        </div>
 
-                                        <button className="w-full text-sm text-blue-600 hover:text-blue-800 font-semibold py-2">
+                                        <button className="text-[#262626] md:text-lg text-start text-base underline underline-offset-2">
                                             More payment options
                                         </button>
                                     </div>
