@@ -1,3 +1,4 @@
+import CartsIcon from "@/components/Icons/CartsIcon";
 import HomeIcon from "@/components/Icons/HomeIcon";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -32,8 +33,13 @@ export default function BreadCrumb({ breadLink, cart = false }: { breadLink: Bre
             </div>
           ))}
           {cart === true && (
-            <div className="flex  justify-end ml-auto">
-
+            <div className="flex gap-3 items-center justify-end ml-auto">
+              <span className="w-8 h-8 rounded-full border  border-white flex items-center justify-center leading-[100%] text-sm">
+                1
+              </span>
+                <span>
+                  <CartsIcon  />
+                </span>
             </div>
           )}
         </div>
