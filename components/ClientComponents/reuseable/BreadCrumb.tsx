@@ -8,7 +8,7 @@ type BreadLink = {
   label: string;
 };
 
-export default function BreadCrumb({ breadLink }: { breadLink: BreadLink[] }) {
+export default function BreadCrumb({ breadLink, cart = false }: { breadLink: BreadLink[], cart?: boolean }) {
   return (
     <div className="bg-primary-bg">
       <div className="maxContainer py-5">
@@ -31,6 +31,11 @@ export default function BreadCrumb({ breadLink }: { breadLink: BreadLink[] }) {
               </Link>
             </div>
           ))}
+          {cart === true && (
+            <div className="flex  justify-end ml-auto">
+
+            </div>
+          )}
         </div>
       </div>
     </div>
