@@ -25,7 +25,6 @@ body {
 
 .inputStyle {
   @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
-  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
 }
 
 .bgPrimary {
@@ -294,4 +293,39 @@ body > .skiptranslate,
 .recharts-wrapper .recharts-bar-rect,
 .recharts-wrapper .recharts-line-curve {
   stroke: none;
+}
+
+/* Cmn Action Button */
+.cmn-action-btn {
+  @apply bg-[#F8FAFB] text-secondary-text p-[6px] rounded-[6px] flex items-center justify-center cursor-pointer;
+}
+
+.cmn-action-btn.delete {
+  @apply text-error-text;
+}
+
+.cmn-action-btn svg {
+  @apply h-5 w-5;
+}
+
+/* Cmn Button, Input, Textarea, Select */
+.cmn-btn {
+  @apply bg-primary-bg text-white px-3 py-2.5 rounded text-sm cursor-pointer;
+}
+
+.cmn-input {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 rounded h-12 text-secondary-text;
+}
+
+.cmn-textarea {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 pb-10 rounded text-secondary-text;
+}
+
+.cmn-select {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 rounded h-12 text-secondary-text cursor-pointer;
+}
+
+/* Error Message */
+.error-msg {
+  @apply text-error-text text-sm mt-1;
 }

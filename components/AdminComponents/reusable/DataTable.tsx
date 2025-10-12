@@ -20,20 +20,14 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
 
+import SearchIcon from "@/components/Icons/AdminIcon/SearchIcon";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   initialPageSize?: number;
   title: string;
+  customFilters?: React.ReactNode;
 }
 
 // Pagination Helper Function
@@ -91,8 +85,13 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   initialPageSize = 10,
+  customFilters,
 }: DataTableProps<TData, TValue>) {
   const [globalFilter, setGlobalFilter] = useState("");
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: initialPageSize,
+  });
 
   const table = useReactTable({
     data,
@@ -101,43 +100,38 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
     globalFilterFn: "includesString",
     state: {
       globalFilter,
-      pagination: { pageIndex: 0, pageSize: initialPageSize },
+      pagination,
     },
   });
 
   const totalPages = table.getPageCount();
-  const current = table.getState().pagination.pageIndex + 1;
+  const current = pagination.pageIndex + 1;
   const pageItems = getPageItems(current, totalPages, 1);
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-2 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 py-4">
         <h1 className="text-xl font-extrabold text-primary-text">{title}</h1>
 
-        <div className="flex items-center gap-2">
-          <Input
-            placeholder="Search..."
-            value={globalFilter ?? ""}
-            onChange={(event) => setGlobalFilter(event.target.value)}
-            className="max-w-lg w-full shadow-none outline-none focus-visible:ring-0"
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <div className="flex-1 flex items-center justify-end gap-2">
+          <div className="max-w-md w-full relative">
+            <Input
+              placeholder="Search..."
+              value={globalFilter ?? ""}
+              onChange={(event) => setGlobalFilter(event.target.value)}
+              className="w-full shadow-none outline-none focus-visible:ring-0 py-5 px-4 pl-10 rounded-[6px]"
+            />
+            <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-[#696E86]" />
+          </div>
+          {customFilters}
         </div>
       </div>
 
-      <div className="lg:max-w-[calc(100vw-240px)] max-w-[calc(100vw-60px)] overflow-x-auto rounded border border-[#cccccc65]">
+      <div className="lg:max-w-[calc(100vw-330px)] max-w-[calc(100vw-70px)] overflow-x-auto rounded border border-[#cccccc65]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -196,7 +190,6 @@ export function DataTable<TData, TValue>({
 
       {/* Pagination  */}
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-3 py-4">
-        {/* Numbered pagination with ellipses */}
         <div className="flex justify-center md:justify-start items-center gap-1 md:gap-2">
           <Button
             className="cursor-pointer"
@@ -238,11 +231,11 @@ export function DataTable<TData, TValue>({
         </div>
 
         {/* Page size */}
-        <div className="flex items-center gap-2 text-sm">
+        {/*  <div className="flex items-center gap-2 text-sm">
           <span>Rows per page:</span>
           <select
             className="rounded border bg-transparent px-2 py-1"
-            value={table.getState().pagination.pageSize}
+            value={pagination.pageSize}
             onChange={(e) => table.setPageSize(Number(e.target.value))}
           >
             {[5, 10, 20, 30, 50].map((ps) => (
@@ -254,7 +247,7 @@ export function DataTable<TData, TValue>({
           <span className="text-muted-foreground">
             Page {current} of {Math.max(totalPages, 1)}
           </span>
-        </div>
+        </div> */}
       </div>
     </>
   );

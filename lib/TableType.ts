@@ -3,6 +3,7 @@ export type Data = {
   productId?: string;
   productName?: string;
   category?: string;
+  categoryName?: string;
   price?: string;
   stock?: number;
   status?: string;

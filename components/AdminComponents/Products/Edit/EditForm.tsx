@@ -1,0 +1,287 @@
+"use client";
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Image from "next/image";
+import { X } from "lucide-react";
+import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
+
+export default function EditForm() {
+  const [images, setImages] = useState<File[]>([]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setImages(Array.from(files));
+    }
+  };
+
+  return (
+    <div className="bg-white p-4 rounded-[8px]">
+      <form>
+        {/* Header */}
+        <div className="flex flex-wrap gap-2 justify-between items-center">
+          <h1 className="text-2xl font-extrabold text-primary-text">
+            Edit Product
+          </h1>
+          <button className="cmn-btn">Update Product</button>
+        </div>
+        {/* Body */}
+        <div className="mt-4 grid md:grid-cols-2 gap-5">
+          {/* Left */}
+          <div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Product Name*
+              </Label>
+              <Input
+                type="text"
+                className="cmn-input"
+                placeholder="Enter Product Name"
+                value="Arion's Double Noseband Bridle"
+              />
+            </div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Benefits
+              </Label>
+              <Textarea className="cmn-input" placeholder="Enter Benefits">
+                Arion's Double Noseband Bridle combines the effect of a regular
+                noseband and a drop noseband.
+              </Textarea>
+            </div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Description
+              </Label>
+              <Textarea
+                className="cmn-textarea"
+                placeholder="Enter Description"
+              >
+                Arion's Double Noseband Bridle combines the effect of a regular
+                noseband and a drop noseband.
+              </Textarea>
+            </div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Leather Care Guide
+              </Label>
+              <Textarea
+                className="cmn-textarea"
+                placeholder="Enter Leather Care Guide"
+              >
+                Grab your The Cleaning Kit product and let's get to work! Begin
+                by removing all of the dust from your bridle. Then, clean every
+                piece of your bridle with the Leather Soap, wipe your bridle
+                down with a clean towel and store in a dry area. Clean after
+                every use for best results.
+              </Textarea>
+            </div>
+          </div>
+          {/* Right */}
+          <div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product ID
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input"
+                  placeholder="Enter Product ID"
+                  value="SKU: BR7D2NS"
+                />
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Stock Quantity *
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input"
+                  placeholder="Enter Stock Quantity"
+                  value="45"
+                />
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Main Category *
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select">
+                    <SelectValue placeholder="Select Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Category">
+                      Select Category
+                    </SelectItem>
+                    <SelectItem value="Saddles">Saddles</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Sub Category *
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select">
+                    <SelectValue placeholder="Select Sub Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Category">
+                      Select Sub Category
+                    </SelectItem>
+                    <SelectItem value="Bridles">Bridles</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Price ($)
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input"
+                  placeholder="Product Price ($)"
+                  value="260.00"
+                />
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Discount Price ($)
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input"
+                  placeholder="Discount Price ($)"
+                  value="0.00"
+                />
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Color
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select">
+                    <SelectValue placeholder="Select Color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Color">Select Color</SelectItem>
+                    <SelectItem value="Black">Black</SelectItem>
+                    <SelectItem value="Brown">Brown</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Size
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select">
+                    <SelectValue placeholder="Select Size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Size">Select Size</SelectItem>
+                    <SelectItem value="Pony">Pony</SelectItem>
+                    <SelectItem value="Cob">Cob</SelectItem>
+                    <SelectItem value="Full">Full</SelectItem>
+                    <SelectItem value="Oversize">Oversize</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <h4 className="text-sm font-extrabold text-primary-text mb-4">
+                Product Images
+              </h4>
+
+              <div className="flex flex-wrap gap-4">
+                <div className="relative">
+                  <Image
+                    src="/images/admin/products/products-1.png"
+                    alt="Product Image"
+                    width={140}
+                    height={140}
+                    className="w-full h-auto object-cover"
+                  />
+                  <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="relative">
+                  <Image
+                    src="/images/admin/products/products-1.png"
+                    alt="Product Image"
+                    width={140}
+                    height={140}
+                    className="w-full h-auto object-cover"
+                  />
+                  <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="relative">
+                  <Image
+                    src="/images/admin/products/products-1.png"
+                    alt="Product Image"
+                    width={140}
+                    height={140}
+                    className="w-full h-auto object-cover"
+                  />
+                  <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
+                    <X className="size-4" />
+                  </button>
+                </div>
+                <div className="relative">
+                  <Image
+                    src="/images/admin/products/products-1.png"
+                    alt="Product Image"
+                    width={140}
+                    height={140}
+                    className="w-full h-auto object-cover"
+                  />
+                  <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
+                    <X className="size-4" />
+                  </button>
+                </div>
+              </div>
+
+              <label
+                htmlFor="image"
+                className="mt-4 flex items-center justify-center cursor-pointer w-full bg-[#E9E9ED80] rounded border border-dashed border-secondary-text p-10"
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  id="image"
+                  onChange={handleImageChange}
+                />
+                <div className="text-center flex flex-col gap-1 items-center">
+                  <GalleryIcon className="size-8" />
+                  <p className="text-sm text-secondary-text">Add</p>
+                  {images.length > 0 && (
+                    <p>
+                      <span className="text-primary-text">
+                        {images.map((img, i) => img.name).join(", ")}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}
