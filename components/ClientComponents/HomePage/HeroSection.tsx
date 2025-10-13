@@ -1,18 +1,22 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const heroData = [
     {
         title: "BRAND",
-        img: "/home/brand.jpg"
+        img: "/home/brand.jpg",
+        link:"/brand",
     },
     {
         title: "SADDLES",
-        img: "/home/saddles.jpg"
+        img: "/home/saddles.jpg",
+        link:"/saddles",
     },
     {
         title: "TACK",
-        img: "/home/tack.jpg"
+        img: "/home/tack.jpg",
+        link:"/tack",
     }
 ]
 
@@ -21,7 +25,7 @@ export default function HeroSection() {
         <div className="maxContainer mb-12">
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
                 {heroData.map((item, index) => (
-                    <div 
+                    <Link href={item?.link} 
                         key={index}
                         className="relative group cursor-pointer overflow-hidden  transition-all duration-300"
                     >
@@ -46,7 +50,7 @@ export default function HeroSection() {
                         
                         {/* Hover effect border */}
                         <div className="absolute inset-0 border-2 border-transparent  transition-all duration-300 "></div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
