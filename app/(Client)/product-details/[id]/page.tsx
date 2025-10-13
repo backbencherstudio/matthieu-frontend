@@ -91,8 +91,8 @@ export default function ProductDetailsPage() {
                                         <p className="text-[#262626] lg:text-[20px] md:text-lg text-base tracking-[.40px] leading-[100%]">Color:</p>
                                         <div className='flex  gap-4'>
 
-                                            {colors.map((color) => (
-                                                <div className='flex flex-col justify-between items-center gap-2'>
+                                            {colors.map((color,index) => (
+                                                <div key={index} className='flex flex-col justify-between items-center gap-2'>
                                                     <div className={`w-8 h-8 bg-[${color?.code}]`}>
                                                     </div>
                                                     <button
