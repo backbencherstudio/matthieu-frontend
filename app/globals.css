@@ -25,7 +25,6 @@ body {
 
 .inputStyle {
   @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
-  @apply border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B];
 }
 
 .bgPrimary {
@@ -172,9 +171,19 @@ body > .skiptranslate,
   --color-secondary-text: #4c526f;
   --color-dark-primary: #262626;
   --color-error-text: #eb3d4d;
+  --color-gray-black: #4a4c56;
+  --color-success-text: #22caad;
+  --color-progress-text: #ffa600;
+  --color-on-the-way-text: #b081ff;
+  --color-shipped-text: #ff904e;
 
   --color-primary-bg: #1f274b;
   --color-select-active-bg: #454f7b8a;
+  --color-success-bg: #e9faf7;
+  --color-error-bg: #feecee;
+  --color-progress-bg: #fffae8;
+  --color-on-the-way-bg: #f4f1ff;
+  --color-shipped-bg: #fff4ee;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -312,4 +321,55 @@ body > .skiptranslate,
 
 .filter-custom-scrollbar::-webkit-scrollbar-thumb {
   background: #888;
+}
+
+/* recharts outline remove */
+
+.recharts-wrapper svg:focus {
+  outline: none;
+}
+
+.recharts-wrapper svg {
+  outline: none;
+  pointer-events: none;
+}
+.recharts-wrapper .recharts-pie-sector,
+.recharts-wrapper .recharts-bar-rect,
+.recharts-wrapper .recharts-line-curve {
+  stroke: none;
+}
+
+/* Cmn Action Button */
+.cmn-action-btn {
+  @apply bg-[#F8FAFB] text-secondary-text p-[6px] rounded-[6px] flex items-center justify-center cursor-pointer;
+}
+
+.cmn-action-btn.delete {
+  @apply text-error-text;
+}
+
+.cmn-action-btn svg {
+  @apply h-5 w-5;
+}
+
+/* Cmn Button, Input, Textarea, Select */
+.cmn-btn {
+  @apply bg-primary-bg text-white px-3 py-2.5 rounded text-sm cursor-pointer;
+}
+
+.cmn-input {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 rounded h-12 text-secondary-text;
+}
+
+.cmn-textarea {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 pb-10 rounded text-secondary-text;
+}
+
+.cmn-select {
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 rounded h-12 text-secondary-text cursor-pointer;
+}
+
+/* Error Message */
+.error-msg {
+  @apply text-error-text text-sm mt-1;
 }

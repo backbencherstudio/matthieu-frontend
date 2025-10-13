@@ -93,14 +93,14 @@ export default function AdminSidebar({
       )}
 
       <div
-        className={`fixed bg-white md:py-8 py-6 px-4 z-40 h-screen overflow-y-auto w-[250px] transform border-r border-[#EAECF0] transition-transform duration-300 ease-in-out flex flex-col justify-between ${
+        className={`fixed bg-white md:py-8 py-6 px-4 z-50 h-screen overflow-y-auto w-[250px] transform border-r border-[#EAECF0] transition-transform duration-300 ease-in-out flex flex-col justify-between ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
         <div>
           {/* Logo */}
           <div className="flex justify-between items-center">
-            <Link href="/">
+            <Link href="/admin/dashboard">
               <Image
                 src="/logo.svg"
                 alt="Logo"
