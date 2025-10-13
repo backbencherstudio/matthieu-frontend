@@ -6,6 +6,7 @@ import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
 import Link from "next/link";
 import UserIcon from "../Icons/UserIcon";
 import HoverItems from "./HoverItems";
+
 import {
   HoverCard,
   HoverCardContent,
@@ -142,11 +143,9 @@ const Header = () => {
             <div className="">
               <div className="w-[156px] h-[56px]">
                 <Link href="/">
-                  <Image
+                  <img
                     src="/matheiu-logo.png"
                     alt="Logo"
-                    width={156}
-                    height={56}
                   />
                 </Link>
               </div>
