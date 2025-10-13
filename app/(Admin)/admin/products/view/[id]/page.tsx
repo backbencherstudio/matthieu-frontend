@@ -2,7 +2,11 @@ import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductDetails({ params }: { params: { id: string } }) {
+export default function ProductDetails({ params }: { params: any }) {
+
+  const id = params?.id;
+
+  
   const breadLink = [
     {
       label: "Products Management",

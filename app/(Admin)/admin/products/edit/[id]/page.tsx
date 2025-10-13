@@ -1,8 +1,10 @@
 import React from "react";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import EditForm from "@/components/AdminComponents/Products/Edit/EditForm";
+export default function EditProduct({ params }: { params: any }) {
 
-export default function EditProduct({ params }: { params: { id: string } }) {
+  const id = params?.id;
+
   const breadLink = [
     {
       label: "Products Management",

@@ -8,7 +8,6 @@ import FacebookIcon from "../Icons/FacebookIcon";
 import InstagramIcon from "../Icons/InstagramIcon";
 import YoutubeIcon from "../Icons/YoutubeIcon";
 import TiktokIcon from "../Icons/TiktokIcon";
-import { Separator } from "../ui/separator";
 import SeparatorIcon from "../Icons/SeparatorIcon";
 
 
