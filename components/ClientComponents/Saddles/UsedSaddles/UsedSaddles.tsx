@@ -6,11 +6,14 @@ import DropdownFilter from '../../Tacks/DropdownFilter'
 import PriceRangeFilter from './PriceRange';
 import UsedSaddlesProductList from './SaddlesCard';
 import Link from 'next/link';
+import CustomDialog from '@/components/reusable/Features/Dialog';
+import AlertProduct from './AlertProduct';
 
 
 
 export default function UsedSaddles() {
 
+  const [open, setOpen] = useState(false);
   const [priceRange, setPriceRange] = useState<string>("");
   const [discpline, setDiscpline] = useState<string>("");
   const [brand, setBrand] = useState<string>("");
@@ -82,11 +85,13 @@ export default function UsedSaddles() {
 
       <div className='flex py-8 bg-[#F8F9FB] flex-col items-center justify-center gap-6 mt-8'>
         <h3 className='text-[#4C526F] lg:text-xl md:text-lg text-base leading-[124%] tracking-[.4px] '>Don't see what you are looking for?</h3>
-        <Link href={""}  className={` md:px-8 px-4 md:py-4 py-3  bg-[#1F274B] hover:bg-[#1F274B]/80 transition-colors  flex items-center justify-center `}>
+        <button onClick={() => setOpen(true)} className={` md:px-8 px-4 md:py-4 py-3  bg-[#1F274B] hover:bg-[#1F274B]/80 transition-colors  flex items-center justify-center cursor-pointer`}>
           <span className='text-white md:text-base text-sm font-medium leading-[136%] '>CREATE AN ALERT</span>
-        </Link>
+        </button>
       </div>
-
+      <CustomDialog open={open} setOpen={setOpen} >
+        <AlertProduct/>
+      </CustomDialog>
       <UsedSaddlesProductList />
     </div>
   )

@@ -122,6 +122,50 @@ body > .skiptranslate,
   position: relative !important;
 }
 
+/* Custom scrollbar */
+
+/* .custom-scroll {
+  scrollbar-width: thin;
+ 
+  scrollbar-color: #e0e0e0;
+} */
+ 
+.custom-scroll::-webkit-scrollbar {
+  width: 2px;
+}
+ 
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+ 
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 15px;
+ 
+}
+
+/* -----range slider custom css ----------- */
+
+.range-slider {
+  height: 4px !important;
+  background: #80859c !important;
+  border-radius: 0px !important;
+}
+
+.range-slider .range-slider__thumb {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 0 !important;
+  background: #1F274B !important;
+}
+
+.range-slider .range-slider__thumb {
+  background: #1F274B !important;
+}
+.range-slider .range-slider__range {
+  background: #1F274B !important;
+}
+
 @theme inline {
   --color-primary-text: #1f274b;
   --color-secondary-text: #4c526f;
