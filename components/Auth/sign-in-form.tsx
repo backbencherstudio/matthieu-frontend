@@ -33,18 +33,16 @@ export function SignInForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-[464px] mx-auto border p-[32px]">
+      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border p-[32px]">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-[32px] font-extrabold font-avenir">
-            Sign In
-          </CardTitle>
+          <CardTitle className="text-[32px] font-extrabold">Sign In</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-[16px] font-normal font-avenir text-[#4A4C56]"
+                className="text-[16px] font-normal text-[#4A4C56]"
               >
                 Email
               </Label>
@@ -52,7 +50,7 @@ export function SignInForm() {
                 id="email"
                 type="email"
                 placeholder="arionadmin@gmail.com"
-                className="bg-[#DFE1E7] rounded-none px-4 py-3 focus-visible:ring-0"
+                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -71,7 +69,7 @@ export function SignInForm() {
             <div className="space-y-2">
               <Label
                 htmlFor="password"
-                className="text-[16px] font-normal font-avenir text-[#4A4C56]"
+                className="text-[16px] font-normal text-[#4A4C56]"
               >
                 Password
               </Label>
@@ -79,7 +77,7 @@ export function SignInForm() {
                 id="password"
                 type="password"
                 placeholder="••••••••••"
-                className="bg-[#DFE1E7] rounded-none px-4 py-3 focus-visible:ring-0"
+                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -100,18 +98,18 @@ export function SignInForm() {
                 <Checkbox
                   id="remember"
                   {...register("rememberMe")}
-                  className="w-[14px] h-[14px] aspect-square bg-white"
+                  className="!w-[14px] !h-[14px] aspect-square rounded-[3px] bg-[#FFF]"
                 />
                 <Label
                   htmlFor="remember"
-                  className="text-sm font-normal text-[#4A4C56] font-avenir"
+                  className="text-sm font-normal text-[#4A4C56] leading-[100%]"
                 >
                   Remember me
                 </Label>
               </div>
               <Link
                 href="/forgot-password"
-                className="text-[16px] font-normal text-[#2A3988] hover:underline font-avenir"
+                className="text-[16px] font-normal text-[#2A3988] hover:underline leading-[100%]"
               >
                 Lost your password?
               </Link>
@@ -119,30 +117,28 @@ export function SignInForm() {
 
             <Button
               type="submit"
-              className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none px-4 py-3 text-[#FFF] font-avenir"
+              className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#FFF] self-stretch text-[16px] !my-[40px]"
             >
               Sign In
             </Button>
 
-            <div className="text-center text-[18px]">
-              <span className="text-[#4A4C56] font-avenir">
-                Don’t have an account?{" "}
-              </span>
+            <div className="text-center text-[18px] leading-[100%]">
+              <span className="text-[#4A4C56]">Don’t have an account? </span>
               <Link
                 href="/signup"
-                className="font-avenir font-extrabold text-[#2A3988] hover:underline"
+                className="font-extrabold text-[#2A3988] hover:underline"
               >
                 Sign Up
               </Link>
             </div>
 
-            <div className="flex justify-center text-xs">
-              <span className="text-[#717182] text-[16px] font-avenir">or</span>
+            <div className="flex justify-center">
+              <span className="text-[#717182] text-[16px]">or</span>
             </div>
 
             <Button
               type="button"
-              className="w-full bg-[#FFF] rounded-none px-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
+              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
               onClick={() => console.log("Continue as guest")}
             >
               Continue as Guest
