@@ -54,6 +54,7 @@ export default function TopCard({ cards }: { cards: Cards }) {
                 alt="product"
                 width={48}
                 height={48}
+                unoptimized
                 className="object-cover rounded"
               />
               <div>

@@ -33,7 +33,13 @@ export default function StatisticCard({ card }: { card: Card }) {
           ))}
       </div>
       <div>
-        <Image src={card.image} alt="customers" height={40} width={40} />
+        <Image
+          src={card.image}
+          alt="customers"
+          height={40}
+          width={40}
+          unoptimized
+        />
       </div>
     </div>
   );
