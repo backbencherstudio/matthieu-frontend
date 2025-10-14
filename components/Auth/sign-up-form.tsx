@@ -8,39 +8,93 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-type SignInFormData = {
+type SignUpFormData = {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  rememberMe: boolean;
+  confirmPassword: string;
+  subscribe: boolean;
+  conditions: boolean;
 };
 
-export function SignInForm() {
+export function SignUpForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormData>({
+  } = useForm<SignUpFormData>({
     defaultValues: {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      rememberMe: false,
+      confirmPassword: "",
+      subscribe: false,
+      conditions: false,
     },
   });
 
-  const onSubmit = (data: SignInFormData) => {
+  const onSubmit = (data: SignUpFormData) => {
     console.log("Form submitted:", data);
   };
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-[464px] mx-auto border p-[32px]">
+      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border p-[32px]">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-[32px] font-extrabold font-avenir">
-            Sign In
+            Sign Up
           </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex items-center gap-[19px]">
+              <div>
+                <Label
+                  htmlFor="firstName"
+                  className="text-[16px] font-normal font-avenir text-[#4A4C56]"
+                >
+                  Fist Name
+                </Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="Yasir Abed"
+                  className="bg-[#DFE1E7] rounded-none px-4 py-3 focus-visible:ring-0"
+                  {...register("firstName", {
+                    required: "First Name is required",
+                  })}
+                />
+                {errors.firstName && (
+                  <p className="text-sm text-destructive">
+                    {errors.firstName.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label
+                  htmlFor="lastName"
+                  className="text-[16px] font-normal font-avenir text-[#4A4C56]"
+                >
+                  Last Name
+                </Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Rabbu"
+                  className="bg-[#DFE1E7] rounded-none px-4 py-3 focus-visible:ring-0"
+                  {...register("lastName", {
+                    required: "Last Name is required",
+                  })}
+                />
+                {errors.lastName && (
+                  <p className="text-sm text-destructive">
+                    {errors.lastName.message}
+                  </p>
+                )}
+              </div>
+            </div>
             <div className="space-y-2">
               <Label
                 htmlFor="email"
@@ -94,45 +148,78 @@ export function SignInForm() {
                 </p>
               )}
             </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="confirmPassword"
+                className="text-[16px] font-normal font-avenir text-[#4A4C56]"
+              >
+                Confirm Password
+              </Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="••••••••••"
+                className="bg-[#DFE1E7] rounded-none px-4 py-3 focus-visible:ring-0"
+                {...register("confirmPassword", {
+                  required: "Confirm Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Confirm Password must be at least 6 characters",
+                  },
+                })}
+              />
+              {errors.confirmPassword && (
+                <p className="text-sm text-destructive">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
 
-            <div className="flex items-center justify-between">
+            <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <Checkbox
-                  id="remember"
-                  {...register("rememberMe")}
+                  id="subscribe"
+                  {...register("subscribe")}
                   className="w-[14px] h-[14px] aspect-square bg-white"
                 />
                 <Label
-                  htmlFor="remember"
+                  htmlFor="subscribe"
                   className="text-sm font-normal text-[#4A4C56] font-avenir"
                 >
-                  Remember me
+                  Subscribe to our newsletter
                 </Label>
               </div>
-              <Link
-                href="/forgot-password"
-                className="text-[16px] font-normal text-[#2A3988] hover:underline font-avenir"
-              >
-                Lost your password?
-              </Link>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="conditions"
+                  {...register("conditions")}
+                  className="w-[14px] h-[14px] aspect-square bg-white"
+                />
+                <Label
+                  htmlFor="conditions"
+                  className="text-sm font-normal text-[#4A4C56] font-avenir"
+                >
+                  I agree to the Terms & Conditions
+                </Label>
+              </div>
             </div>
 
             <Button
               type="submit"
               className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none px-4 py-3 text-[#FFF] font-avenir"
             >
-              Sign In
+              Create Account
             </Button>
 
             <div className="text-center text-[18px]">
               <span className="text-[#4A4C56] font-avenir">
-                Don’t have an account?{" "}
+                Already have an account?{" "}
               </span>
               <Link
-                href="/signup"
+                href="/signin"
                 className="font-avenir font-extrabold text-[#2A3988] hover:underline"
               >
-                Sign Up
+                Sign In
               </Link>
             </div>
 
