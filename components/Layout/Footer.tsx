@@ -221,7 +221,7 @@ const footerData = [
       { name: "WORKSHOP", href: "/brand/our-workshop" },
       { name: "AMBASSADORS", href: "/brand/arion-amabassadors" },
       { name: "BLOG", href: "/brand/blog" },
-      { name: "CAREERS", href: "#" },
+      { name: "JOB OFFERS", href: "/brand/job-offers" },
     ],
   },
   {
