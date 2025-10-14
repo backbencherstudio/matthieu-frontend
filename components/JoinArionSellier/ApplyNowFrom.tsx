@@ -51,7 +51,15 @@ export function ApplyNowForm() {
   }
 
   return (
-    <Form {...form}>
+   
+    <div>
+        <div className="pt-[60px] pb-[48px]">
+          <h1 className="text-[#1F274B] text-center  text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
+ Apply Now!
+</h1>
+
+        </div>
+        <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="maxContainer"
@@ -62,9 +70,9 @@ export function ApplyNowForm() {
             control={form.control}
             name="username"
             render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="FIRST NAME" {...field} />
+              <FormItem className="bg-[#F8FAFB]">
+                <FormControl  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase">
+                  <Input placeholder="FIRST NAME" {...field}  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,9 +82,9 @@ export function ApplyNowForm() {
             control={form.control}
             name="lastname"
             render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="LAST NAME" {...field} className=" "/>
+              <FormItem className="bg-[#F8FAFB]">
+                <FormControl >
+                  <Input placeholder="LAST NAME" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -91,7 +99,7 @@ export function ApplyNowForm() {
             name="email"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
-                <FormControl>
+                <FormControl className="bg-[#F8FAFB]">
                   <Input placeholder="EMAIL" {...field} type="email" />
                 </FormControl>
                 <FormMessage />
@@ -103,8 +111,8 @@ export function ApplyNowForm() {
             name="phonenumber"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
-                <FormControl>
-                  <Input placeholder="PHONE NUMBER" {...field} />
+                <FormControl className="bg-[#F8FAFB]">
+                  <Input placeholder="PHONE NUMBER" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -119,8 +127,8 @@ export function ApplyNowForm() {
             name="town"
             render={({ field }) => (
               <FormItem>
-                <FormControl>
-                  <Input placeholder="TOWN" {...field} />
+                <FormControl className="bg-[#F8FAFB]">
+                  <Input placeholder="TOWN" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -131,8 +139,8 @@ export function ApplyNowForm() {
             name="state"
             render={({ field }) => (
               <FormItem>
-                <FormControl>
-                  <Input placeholder="STATE" {...field} />
+                <FormControl className="bg-[#F8FAFB]">
+                  <Input placeholder="STATE" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -146,8 +154,8 @@ export function ApplyNowForm() {
           name="experience"
           render={({ field }) => (
             <FormItem className="pb-[16px]">
-              <FormControl>
-                <Input placeholder="EXPRIENCE" {...field} />
+              <FormControl className="bg-[#F8FAFB]">
+                <Input placeholder="EXPRIENCE" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -160,8 +168,8 @@ export function ApplyNowForm() {
           name="message"
           render={({ field }) => (
             <FormItem className="pb-[16px]">
-              <FormControl>
-                <Textarea placeholder="MASSAGE" {...field} className="min-h-[120px]" />
+              <FormControl className="bg-[#F8FAFB]">
+                <Textarea placeholder="MASSAGE" {...field} className="min-h-[120px]"  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -175,5 +183,6 @@ export function ApplyNowForm() {
         </div>
       </form>
     </Form>
+    </div>
   )
 }

@@ -4,11 +4,11 @@ import React from 'react'
 const JoinArionSellier = () => {
     return (
         <div className='maxContainer'>
-            <Image src="/joinarion/horse1.png" alt='horse1' width={800} height={300} className='object-cover justify-center w-full h-[400px]'></Image>
+            <Image src="/joinarion/horse1.png" alt='horse1' width={100} height={100} className='object-contain w-full h-full' unoptimized></Image>
             <p className="text-[#1F274B] text-center  text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[60px] pb-[48px] normal-case">
                 Join Arion Sellier
             </p>
-            <Image src="/joinarion/horse2.png" alt='horse' height={540} width={1400}></Image>
+            <Image src="/joinarion/horse2.png" alt='horse'width={100} height={100} className='object-contain w-full h-full' unoptimized></Image>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-[64px]'>
                 <div className='w-6/6'>
@@ -31,12 +31,12 @@ const JoinArionSellier = () => {
                     <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] pt-[20px]">
                         Why Arion Sellier?
                     </p>
-                    <p className='text-[#4A4C56] text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case'>
+                    <p className='text-[#4A4C56] text-[18px] font-[400px] leading-[148%] tracking-[0.36px] normal-case'>
                         Arion Sellier is a company built with the sole desire to offer top-of-the-range saddles that are completely made in France through our leathers and workmanship. As one of the most customizable saddles on the market, our team is available for the horse and rider on all scales within a variety of disciplines. We are dedicated to your success and that of your customers. Our growing trust by top <br />
                         level riders and barns has driven Arion Sellier to expand nationwide, pushing us to grow our team of saddle experts across the country. We pride ourselves in our ability to be there for one another and work together as a team to grow our knowledge in sales, saddle fitting, leather, horse biomechanics, and more!
                     </p>
                     <p className='text-[#4A4C56]  text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case '>What we are looking for…</p>
-                    <p className='normal-case text-[#4A4C56] text-[18px] font-extrabold leading-[148%] tracking-[0.36px] pb-[60px]'>Arion Sellier is looking for an independent candidate who is fascinated by the world of horses at all levels and sport. This candidate is self-motivated and hardworking. They are organized and great at communicating with their riders, professional and amateur, and other Arion team members. They are easy to talk to and knowledgeable in the sport of equestrian.</p>
+                    <p className='normal-case text-[#4A4C56] text-[18px] font-[400px] leading-[148%] tracking-[0.36px] pb-[60px]'>Arion Sellier is looking for an independent candidate who is fascinated by the world of horses at all levels and sport. This candidate is self-motivated and hardworking. They are organized and great at communicating with their riders, professional and amateur, and other Arion team members. They are easy to talk to and knowledgeable in the sport of equestrian.</p>
 
                 </div>
                 <div className='w-6/6'>

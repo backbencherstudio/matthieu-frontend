@@ -105,13 +105,13 @@ const BlogDetailPage = ({ id }: PageProps) => {
 
       {/* children 1 section */}
 
-      <div className="mt-12 w-[990px] sm:w-[1000px] md:w-[990px]">
+      <div className="mt-12 ">
         <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
           Children's Division Competition Recap
         </p>
 
         <div className="mt-5">
-          <Image src="/blogDetails/childern1.png" alt="children" width={132} height={476} className=" w-[990px] sm:w-[1000px] md:w-[990px] " />
+          <Image src="/blogDetails/childern1.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
           <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
             Ryan Haselden & Hector Du Gue's victory lap after receiving team gold with Zone 4. ©USEquestrian
           </p>
@@ -123,11 +123,11 @@ const BlogDetailPage = ({ id }: PageProps) => {
        {/* children 2 section */}
 
         <div className="mt-10">
-          <Image src="/blogDetails/childern2.png" alt="children" width={1032} height={476} className="w-full " />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/childern2.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
             Ryan Haselden & Hector Du Gue. ©USEquestrian
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
             Haselden also delivered consistent rounds that kept her in the mix on the individual leaderboard. She closed out her competition 7th place individually.
           </p>
         </div>
@@ -135,33 +135,33 @@ const BlogDetailPage = ({ id }: PageProps) => {
 
     {/* Pre-Junior section  */}
 
-      <div className="mt-12 w-[990px] sm:w-[1000px] md:w-[990px] ">
+      <div className="mt-12 ">
 
          {/* Pre-Junior section 1 */}
 
-        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 rounded">
+        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 rounded normal-case">
           Pre-Junior Division Competition Recap
 
         </p>
 
         <div className="mt-5">
-          <Image src="/blogDetails/childern1.png" alt="children" width={1032} height={476} className="w-full rounded" />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/preJunion1.png" alt="pre" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
            Zone 2 wins team gold. Pictured left to right, Rylie True (Bedminster, N.J.), Cecilia Chatterjee (New York, N.Y.), Agatha Lignelli (New York, N.Y.), and Kaitlyn Linck (Clinton Corners, N.Y.). ©USEquestrian
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
-           Cecilia Chatterjee made her mark with standout performances in both the team and individual Pre-Junior Jumping competition. Riding Cartouche VD Cumel, a 2013 Zangersheide mare owned by Victor Depaolo, Chatterjee was a key contributor to Zone 2’s gold medal victory. Carrying just from Wednesday’s speed round into the team final, she delivered confident rides that helped keep the team’s score low, adding only a single rail across two rounds to secure the win.
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
+           Cecilia Chatterjee made her mark with standout performances in both the team and individual Pre-Junior Jumping competition. Riding Cartouche VD Cumel, a 2013 Zangersheide mare owned by Victor Depaolo, Chatterjee was a key contributor to Zone 2’s gold medal victory. Carrying just from Wednesday’s speed round into the team final, she delivered confident rides that helped keep the team's score low, adding only a single rail across two rounds to secure the win.
           </p>
         </div>
   
    {/* Pre-Junior section 2 */}
 
         <div className="mt-10">
-          <Image src="/blogDetails/childern2.png" alt="children" width={1032} height={476} className="w-full rounded" />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/preJunion2.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
            Cecilia Chatterjee & Cartouche VD Cumel. ©KindMediaLLC
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
            In the individual final held on Saturday, Chatterjee posted a total of 6.15 penalty points, coming from a single rail and a clear round. The combination finished in 8th place overall among the top 25 qualifiers who advanced to the final round.
           </p>
         </div>
@@ -169,19 +169,19 @@ const BlogDetailPage = ({ id }: PageProps) => {
      
  {/* Pre-Junior Division */}
 
-      <div className="mt-12 w-[990px] sm:w-[1000px] md:w-[990px]">
+      <div className="mt-12 ">
 
          {/* Pre-Junior Division 1 */}
-        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 rounded">
+        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
          Pre-Junior Division Competition Recap
         </p>
 
         <div className="mt-5">
-          <Image src="/blogDetails/childern1.png" alt="children" width={1032} height={476} className="w-full rounded" />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/preJunion3.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
             Adriana Forte & Artic Blue jumping to team bronze. ©USEquestrian
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
            Adriana Forte was a key contributor to Zone 2’s bronze medal finish in the Junior division at the 2025 FEI North American Youth Championships. Partnered with Arctic Blue, a 13‑year‑old Holsteiner stallion (Larimar x San Patrignano Cassini) owned by First Blue, LLC, Forte delivered steady, competitive rounds that helped keep her team in podium position. On the individual stage, Forte continued to impress through the Junior individual final in the top 25.
           </p>
         </div>
@@ -189,16 +189,16 @@ const BlogDetailPage = ({ id }: PageProps) => {
        {/* Pre-Junior Division 2 */}
 
         <div className="mt-10">
-          <Image src="/blogDetails/childern2.png" alt="children" width={1032} height={476} className="w-full rounded" />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/preJunion4.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
           Cristian Hacker & Caramix finished 10th individually. ©MonarchCreative
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
            Cristian Hacker represented Guatemala in the Junior category at the 2025 FEI North American Youth Championships riding Caramix. Tackling the demanding Junior courses, Hacker delivered a series of determined rounds, demonstrating accuracy and persistence in a highly competitive field. He concluded the week 10th overall in the Junior individual standings.
           </p>
         </div>
         <div>
-        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 rounded">
+        <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
          Pre-Junior Division Competition Recap
 
         </p>
@@ -206,14 +206,14 @@ const BlogDetailPage = ({ id }: PageProps) => {
 {/* last division */}
 
         <div className="mt-5">
-          <Image src="/blogDetails/childern1.png" alt="children" width={1032} height={476} className="w-full rounded" />
-          <p className="text-[#777980] text-center text-[16px] mt-4">
+          <Image src="/blogDetails/preJunion5.png" alt="children" width={100} height={100} className="object-contain w-full h-full " unoptimized />
+          <p className="text-[#777980] text-center text-[16px] mt-4 normal-case">
           James Leone & Galliano LW helped Zone 2 took home silver in the team competition, while Leoene finished 7th individually. ©USEquestrian
           </p>
-          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+          <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
            James Leone delivered a strong performance to help Zone 2 secure the silver medal in the Young Rider division at the 2025 FEI North American Youth Championships. Riding Galliano LW, an 11‑year‑old Holsteiner gelding (Acolino x Candillo) owned by Mark Leone, he contributed consistent rounds to keep the team in medal contention. Despite a single rail falling in each round of Friday’s team final, Zone 2’s combined efforts earned them a well‑deserved spot on the podium.
           </p>
-           <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6">
+           <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-6 normal-case">
            Individually, Leone delivered steady rounds throughout the week, keeping competitive scores over the challenging Junior courses. He finished top 12 overall.
           </p>
         </div>
@@ -221,13 +221,11 @@ const BlogDetailPage = ({ id }: PageProps) => {
 
       <div className='pt-[32px]'>
         <div className='bg-[#1F274B] '>
-        <p className='text-white text-center text-[32px] font-extrabold leading-[148%] tracking-[0.64px]'>Ride with Purpose. Ride with Arion.</p>
-        <p className='text-white/80 text-center text-[18px] font-normal leading-[148%] tracking-[0.36px]'>Whether you’re preparing for national finals or building your foundation in the ring, Arion’s French craftsmanship and technical innovation are designed to help you and your horse perform at your best.</p>
+        <p className='text-white text-center text-[32px] font-extrabold leading-[148%] tracking-[0.64px] normal-case'>Ride with Purpose. Ride with Arion.</p>
+        <p className='text-white/80 text-center text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case'>Whether you’re preparing for national finals or building your foundation in the ring, Arion’s French craftsmanship and technical innovation are designed to help you and your horse perform at your best.</p>
       </div>
       </div>
       </div>
-
-<Link href="/join-arion-seller">click</Link>
       
 </div>
     </div>
