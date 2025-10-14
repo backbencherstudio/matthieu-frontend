@@ -41,7 +41,7 @@ export function SignUpForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] px-[10px] py-[12px]">
+      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px]">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-[32px] font-extrabold ">Sign Up</CardTitle>
         </CardHeader>
@@ -173,7 +173,7 @@ export function SignUpForm() {
               )}
             </div>
 
-            <div>
+            <div className="mb-0">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="subscribe"
@@ -187,7 +187,7 @@ export function SignUpForm() {
                   Subscribe to our newsletter
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 mt-[7px]">
+              <div className="flex items-center space-x-2 mt-3">
                 <Checkbox
                   id="conditions"
                   {...register("conditions")}
@@ -204,7 +204,7 @@ export function SignUpForm() {
 
             <Button
               type="submit"
-              className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#FFF] self-stretch text-[16px] !my-[40px]"
+              className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none !h-auto !leading-[100%]  lg:py-4 py-3 text-[#FFF] self-stretch text-[16px] lg:my-[40px] md:my-8 my-6"
             >
               Create Account
             </Button>
@@ -225,7 +225,7 @@ export function SignUpForm() {
 
             <Button
               type="button"
-              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
+              className="w-full bg-[#FFF] rounded-none !h-auto !leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
               onClick={() => console.log("Continue as guest")}
             >
               Continue as Guest
