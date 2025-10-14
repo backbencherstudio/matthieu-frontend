@@ -12,7 +12,7 @@ const productDetails = [
     {
         id: "item-1",
         title: "DESCRIPTION:",
-        content: <p className='leading-[160%] tracking-[.32px] md:text-base text-sm font-light'>Arion's Double Noseband Bridle combines the effect of a regular noseband and a drop noseband. The lateral strap is designed to minimize jaw shifting and stabilize the bit without pressing on the corners of the mouth. Providing more comfort for the horse through its foam-padded headpiece, noseband, and crownpiece. The beautiful, detailed stitching and silver Arion hardware give this bridle an elegant finish. Best for competition and training. <span className='block font-normal text-[#1F274B]'> Reins are not included.</span></p>
+        content: <p className='leading-[160%] tracking-[.32px] md:text-base text-sm font-medium'>Arion's Double Noseband Bridle combines the effect of a regular noseband and a drop noseband. The lateral strap is designed to minimize jaw shifting and stabilize the bit without pressing on the corners of the mouth. Providing more comfort for the horse through its foam-padded headpiece, noseband, and crownpiece. The beautiful, detailed stitching and silver Arion hardware give this bridle an elegant finish. Best for competition and training. <span className='block font-normal text-[#1F274B]'> Reins are not included.</span></p>
     },
     {
         id: "item-2",
@@ -65,6 +65,7 @@ export default function ProductDetailsAccordion() {
                         </AccordionTrigger>
                         <AccordionContent className="text-[#4C526F] leading-[160%] tracking-[.32px] md:text-base text-sm normal-case font-light">
                             {item.content}
+                            
                         </AccordionContent>
                     </AccordionItem>
                 ))}
