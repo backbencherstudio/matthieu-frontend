@@ -14,6 +14,7 @@ export function AuthHero({ heroImage, title }: AuthHeroProps) {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
+        <div className="absolute bg-[#0000004D]/100 inset-0" />
         <div className="relative h-full flex items-center justify-center ">
           <h1 className="text-[40px] font-extrabold text-white text-center leading-[124%]">
             {title}
