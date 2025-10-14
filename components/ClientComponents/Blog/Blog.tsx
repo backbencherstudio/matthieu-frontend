@@ -150,6 +150,7 @@ export default function Blog() {
                     alt="Blog Image"
                     width={1000}
                     height={1000}
+                    unoptimized
                     className="h-auto xl:h-[400px] w-full object-cover"
                   />
 

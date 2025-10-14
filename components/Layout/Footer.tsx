@@ -10,24 +10,31 @@ import YoutubeIcon from "../Icons/YoutubeIcon";
 import TiktokIcon from "../Icons/TiktokIcon";
 import SeparatorIcon from "../Icons/SeparatorIcon";
 
-
 const Footer: React.FC = () => {
-
-  const [checked, setChecked] = React.useState(false)
+  const [checked, setChecked] = React.useState(false);
 
   return (
-    <footer
-
-    >
+    <footer>
       {/* =========footer top ======== */}
       <div className="lg:py-9 py-6 bgPrimary px-5 2xl:px-0">
         <div className="max-w-[555px] mx-auto">
-          <h1 className="text-center text-white font-extrabold lg:text-2xl text-xl leading-[100%] ">Stay in touch</h1>
+          <h1 className="text-center text-white font-extrabold lg:text-2xl text-xl leading-[100%] ">
+            Stay in touch
+          </h1>
           <div>
-            <form >
+            <form>
               <div className="flex flex-wrap gap-3 mt-6 mb-4 ">
-                <input type="email" placeholder="EMAIL" className="bg-[#F8FAFB] upppercase text-[#777980] text-base leading-[100%] font-normal flex-1 px-5 inputStyle" />
-                <button type="submit" className="text-base leading-[136%] md:py-4  py-3 md:px-8 px-4 bg-[#5465B3] hover:bg-[#526ad3] text-white uppercase font-normal cursor-pointer">send</button>
+                <input
+                  type="email"
+                  placeholder="EMAIL"
+                  className="bg-[#F8FAFB] upppercase text-[#777980] text-base leading-[100%] font-normal flex-1 px-5 inputStyle"
+                />
+                <button
+                  type="submit"
+                  className="text-base leading-[136%] md:py-4  py-3 md:px-8 px-4 bg-[#5465B3] hover:bg-[#526ad3] text-white uppercase font-normal cursor-pointer"
+                >
+                  send
+                </button>
               </div>
               <div className="flex text-white items-center justify-center gap-3">
                 <Checkbox
@@ -36,7 +43,12 @@ const Footer: React.FC = () => {
                   className="cursor-pointer"
                   onCheckedChange={(value) => setChecked(value === true)}
                 />
-                <Label htmlFor="controlled" className="font-normal leading-[100%] md:text-base text-sm tracking-[0.32px] ]">SIGN ME UP FOR EXCLUSIVE OFFERS FROM ARION SELLIER USA.</Label>
+                <Label
+                  htmlFor="controlled"
+                  className="font-normal leading-[100%] md:text-base text-sm tracking-[0.32px] ]"
+                >
+                  SIGN ME UP FOR EXCLUSIVE OFFERS FROM ARION SELLIER USA.
+                </Label>
               </div>
             </form>
           </div>
@@ -104,15 +116,12 @@ const Footer: React.FC = () => {
 
       <div className="maxContainer text-center py-8 flex flex-col items-center">
         {/* Social Media Section */}
-        <h1 className="lg:text-2xl text-xl font-extrabold leading-[100%] text-[#1F274B]">Follow us</h1>
+        <h1 className="lg:text-2xl text-xl font-extrabold leading-[100%] text-[#1F274B]">
+          Follow us
+        </h1>
         <div className="mt-6  flex items-center md:gap-6 gap-4">
           {socialIcons.map((icons) => (
-            <a
-              key={icons.id}
-              href={icons.href}
-              className=""
-              id={icons.id}
-            >
+            <a key={icons.id} href={icons.href} className="" id={icons.id}>
               {icons?.icon}
             </a>
           ))}
@@ -120,7 +129,9 @@ const Footer: React.FC = () => {
 
         {/* Company Information Section */}
         <div className="">
-          <p className=" mt-8 lg:text-2xl text-xl font-extrabold leading-[100%] text-[#1F274B] tracking-[.48px]">ARION SELLER</p>
+          <p className=" mt-8 lg:text-2xl text-xl font-extrabold leading-[100%] text-[#1F274B] tracking-[.48px]">
+            ARION SELLER
+          </p>
           <p className="text-[#4C526F] lg:text-xl text-lg  md:leading-[100%] tracking-[.4px] mt-4">
             3080 FAIRLANE FARMS RD SUITE 2 WELLINGTON, FL 33414
           </p>
@@ -137,19 +148,21 @@ const Footer: React.FC = () => {
               >
                 {link.text}
               </Link>
-              {index < footerLinks.length - 1 && <span className="md:block hidden mx-3 text-[2rem]" > <SeparatorIcon/> </span>}
+              {index < footerLinks.length - 1 && (
+                <span className="md:block hidden mx-3 text-[2rem]">
+                  {" "}
+                  <SeparatorIcon />{" "}
+                </span>
+              )}
             </div>
           ))}
         </div>
       </div>
-
     </footer>
   );
 };
 
 export default Footer;
-
-
 
 // Footer data structure
 const footerData = [
@@ -161,30 +174,30 @@ const footerData = [
         links: [
           { name: "JUMPING", href: "#" },
           { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" }
-        ]
+          { name: "CROSS COUNTRY", href: "#" },
+        ],
       },
       {
         name: "ATLAS",
         links: [
           { name: "JUMPING", href: "#" },
           { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" }
-        ]
+          { name: "CROSS COUNTRY", href: "#" },
+        ],
       },
       {
         name: "USED SADDLE",
-        links: []
+        links: [],
       },
       {
         name: "ATHENA",
         links: [
           { name: "JUMPING", href: "#" },
           { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" }
-        ]
-      }
-    ]
+          { name: "CROSS COUNTRY", href: "#" },
+        ],
+      },
+    ],
   },
   {
     title: "SHOP",
@@ -197,19 +210,19 @@ const footerData = [
       { name: "BOOTS", href: "#" },
       { name: "HALTERS & ROPES", href: "#" },
       { name: "LEATHER CARE", href: "#" },
-      { name: "ACCESSORIES", href: "#" }
-    ]
+      { name: "ACCESSORIES", href: "#" },
+    ],
   },
   {
     title: "ARION",
     links: [
-      { name: "OUR STORY", href: "/our-story" },
-      { name: "MEET THE TEAM", href: "/meet-the-team" },
-      { name: "WORKSHOP", href: "/our-workshop" },
-      { name: "AMBASSADORS", href: "/arion-amabassadors" },
-      { name: "BLOG", href: "/blog" },
-      { name: "CAREERS", href: "#" }
-    ]
+      { name: "OUR STORY", href: "/brand/our-story" },
+      { name: "MEET THE TEAM", href: "/brand/meet-the-team" },
+      { name: "WORKSHOP", href: "/brand/our-workshop" },
+      { name: "AMBASSADORS", href: "/brand/arion-amabassadors" },
+      { name: "BLOG", href: "/brand/blog" },
+      { name: "CAREERS", href: "#" },
+    ],
   },
   {
     title: "CUSTOMER RELATIONS",
@@ -218,21 +231,21 @@ const footerData = [
       { name: "HELP/FAQ", href: "#" },
       { name: "SIZE GUIDE", href: "#" },
       { name: "CARE INSTRUCTIONS", href: "#" },
-      { name: "SHIPPING AND RETURNS", href: "#" }
-    ]
-  }
+      { name: "SHIPPING AND RETURNS", href: "#" },
+    ],
+  },
 ];
 
 const footerLinks = [
-  { text: 'DATA PROTECTION', href: '#', id: 'data-protection' },
-  { text: 'SALES TEAMS & CONDITIONS', href: '#', id: 'sales-conditions' },
-  { text: 'LEGAL INFORMATION', href: '#', id: 'legal-info' },
-  { text: 'TERMS OF USA', href: '#', id: 'terms-usa' }
+  { text: "DATA PROTECTION", href: "#", id: "data-protection" },
+  { text: "SALES TEAMS & CONDITIONS", href: "#", id: "sales-conditions" },
+  { text: "LEGAL INFORMATION", href: "#", id: "legal-info" },
+  { text: "TERMS OF USA", href: "#", id: "terms-usa" },
 ];
 
 const socialIcons = [
-  { icon: <FacebookIcon />, href: '#', id: 'facebook' },
-  { icon: <InstagramIcon />, href: '#', id: 'instagram' },
-  { icon: <YoutubeIcon />, href: '#', id: 'youtube' },
-  { icon: <TiktokIcon />, href: '#', id: 'tiktok' }
+  { icon: <FacebookIcon />, href: "#", id: "facebook" },
+  { icon: <InstagramIcon />, href: "#", id: "instagram" },
+  { icon: <YoutubeIcon />, href: "#", id: "youtube" },
+  { icon: <TiktokIcon />, href: "#", id: "tiktok" },
 ];

@@ -18,6 +18,7 @@ export default function Gallery({ gallery }: { gallery: Gallery[] }) {
               alt={item.alt}
               width={1000}
               height={1000}
+              unoptimized
               className="w-full h-auto xl:h-[500px] object-cover"
             />
           </div>

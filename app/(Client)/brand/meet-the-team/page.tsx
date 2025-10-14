@@ -12,6 +12,7 @@ export default function MeetTheTeam() {
             alt="Team"
             width={1000}
             height={1000}
+            unoptimized
             className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>
@@ -37,6 +38,7 @@ export default function MeetTheTeam() {
                 alt="Team"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
@@ -54,6 +56,7 @@ export default function MeetTheTeam() {
                 alt="Team"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
@@ -71,6 +74,7 @@ export default function MeetTheTeam() {
                 alt="Team"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
@@ -88,6 +92,7 @@ export default function MeetTheTeam() {
                 alt="Team"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
@@ -105,6 +110,7 @@ export default function MeetTheTeam() {
                 alt="Team"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 

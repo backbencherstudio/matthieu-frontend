@@ -63,6 +63,7 @@ const NotifcationAndProfile = () => {
                 alt="Profile"
                 width={36}
                 height={36}
+                unoptimized
                 className="min-w-[36px] min-h-[36px] object-cover rounded-full"
               />
               <div className="hidden sm:flex items-center gap-2">

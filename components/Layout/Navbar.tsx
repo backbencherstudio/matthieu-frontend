@@ -21,7 +21,6 @@ const Header = () => {
 
   const pathName = usePathname();
 
-
   const navigationLinks = [
     {
       label: "SADDLES",
@@ -52,8 +51,18 @@ const Header = () => {
             },
           ],
         },
-        { category: "USED SADDLES", items: [], hasLink: true , href : "/saddles/used-saddles" },
-        { category: "ALL SADDLES", items: [], hasLink: true, href : "/saddles/all-saddles" },
+        {
+          category: "USED SADDLES",
+          items: [],
+          hasLink: true,
+          href: "/saddles/used-saddles",
+        },
+        {
+          category: "ALL SADDLES",
+          items: [],
+          hasLink: true,
+          href: "/saddles/all-saddles",
+        },
       ],
     },
     {
@@ -73,14 +82,14 @@ const Header = () => {
     },
     {
       label: "BRAND",
-      href: "#",
+      href: "/brand/our-story",
       hasDropdown: true,
       dropdownContent: [
-        { category: "Our Story", href: "/our-story" },
-        { category: "Meet The Team", href: "/meet-the-team" },
-        { category: "Workshop", href: "/our-workshop" },
-        { category: "Ambassadors", href: "/arion-amabassadors" },
-        { category: "Blog", href: "/blog" },
+        { category: "Our Story", href: "/brand/our-story" },
+        { category: "Meet The Team", href: "/brand/meet-the-team" },
+        { category: "Workshop", href: "/brand/our-workshop" },
+        { category: "Ambassadors", href: "/brand/arion-amabassadors" },
+        { category: "Blog", href: "/brand/blog" },
       ],
     },
     { label: "TRY A SADDLE", href: "#" },
@@ -97,7 +106,6 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
@@ -105,14 +113,13 @@ const Header = () => {
           {/* Left side - Language and currency */}
           <div className="hidden md:flex items-center xl:gap-6 gap-4">
             <div className="flex items-center gap-1.5">
-              <span className=""><UsdIcon /> </span>
-              <span className="textPrimary text-xs leading-[100%]">
-                USD
+              <span className="">
+                <UsdIcon />{" "}
               </span>
+              <span className="textPrimary text-xs leading-[100%]">USD</span>
             </div>
             <div className="flex items-center gap-1.5">
               <LanguageSwitcher />
-
             </div>
           </div>
 
@@ -121,32 +128,29 @@ const Header = () => {
             {navigationLinks.slice(0, 3).map((link, index) => {
               const isActive = pathName.includes(link.href);
               return (
-                (
-                  <HoverCard key={index} openDelay={200}>
-                    <HoverCardTrigger asChild>
-                      <Link
-                        href={link.href}
-                        className={`${isActive ? "font-semibold" : "font-normal"}  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
-                      >
-                        {link.label}
-                      </Link>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-auto p-0 mt-6 transition-all duration-100 border-0  rounded-none">
-                      <HoverItems items={link} />
-                    </HoverCardContent>
-                  </HoverCard>
-                )
-              )
+                <HoverCard key={index} openDelay={200}>
+                  <HoverCardTrigger asChild>
+                    <Link
+                      href={link.href}
+                      className={`${
+                        isActive ? "font-semibold" : "font-normal"
+                      }  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                    >
+                      {link.label}
+                    </Link>
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-auto p-0 mt-6 transition-all duration-100 border-0  rounded-none">
+                    <HoverItems items={link} />
+                  </HoverCardContent>
+                </HoverCard>
+              );
             })}
 
             {/* Logo */}
             <div className="">
               <div className="w-[156px] h-[56px]">
                 <Link href="/">
-                  <img
-                    src="/matheiu-logo.png"
-                    alt="Logo"
-                  />
+                  <img src="/matheiu-logo.png" alt="Logo" />
                 </Link>
               </div>
             </div>
@@ -172,6 +176,7 @@ const Header = () => {
                     alt="Logo"
                     width={156}
                     height={56}
+                    unoptimized
                   />
                 </Link>
               </div>
