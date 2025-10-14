@@ -44,7 +44,7 @@ export function SignInForm() {
                 htmlFor="email"
                 className="text-[16px] font-normal text-[#4A4C56]"
               >
-                Email
+                Emails
               </Label>
               <Input
                 id="email"
