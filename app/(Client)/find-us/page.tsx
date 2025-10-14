@@ -91,57 +91,6 @@ export default function FindUs() {
         <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
           <div className="max-w-[985px] w-full mx-auto">
             <div className="grid md:grid-cols-[48%_4%_48%] items-center">
-              {/* <div className="p-6 flex flex-col items-center max-w-[350px] mx-auto">
-                <HandShake className="h-16 w-16" />
-                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl lg:text-[32px] text-center text-primary-text leading-[124%]">
-                  FIND AN EXPERT <br /> NEAR YOU
-                </h1>
-
-                <div className="grid grid-cols-2 items-center w-full mb-6">
-                  <p className="text-lg">COUNTRY :</p>
-
-                  <Select defaultValue="USA">
-                    <SelectTrigger className="find-us-custom-select">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#F4F5F7] rounded-none">
-                      {country.map((item, idx) => (
-                        <SelectItem
-                          key={idx}
-                          value={item.value}
-                          className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-2 items-center w-full mb-8">
-                  <p className="text-lg">REGION :</p>
-
-                  <Select defaultValue="CT">
-                    <SelectTrigger className="find-us-custom-select">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#F4F5F7] rounded-none">
-                      {region.map((item, idx) => (
-                        <SelectItem
-                          key={idx}
-                          value={item.value}
-                          className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <button className="find-us-button">Try a Saddle</button>
-              </div> */}
-
               <div className="p-6 flex flex-col gap-5 justify-between h-full items-center max-w-[350px] mx-auto">
                 <div className="flex md:justify-center">
                   <Image
