@@ -106,7 +106,7 @@ export default function AdminSidebar({
                 alt="Logo"
                 width={112}
                 height={40}
-                className=""
+                unoptimized
               />
             </Link>
             <MdClose

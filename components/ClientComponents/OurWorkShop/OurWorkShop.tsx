@@ -12,6 +12,7 @@ export default function OurWorkShop() {
             alt="our-workshop-banner"
             width={1000}
             height={1000}
+            unoptimized
             className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>
@@ -64,6 +65,7 @@ export default function OurWorkShop() {
                 alt="play-icon"
                 width={300}
                 height={300}
+                unoptimized
                 className="w-[60px] h-[60px] rounded-full"
               />
             </button>
@@ -103,6 +105,7 @@ export default function OurWorkShop() {
                 alt="our-workshop-gallery-01"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
@@ -112,6 +115,7 @@ export default function OurWorkShop() {
                 alt="our-workshop-gallery-02"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
@@ -121,6 +125,7 @@ export default function OurWorkShop() {
                 alt="our-workshop-gallery-03"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
@@ -130,6 +135,7 @@ export default function OurWorkShop() {
                 alt="our-workshop-gallery-04"
                 width={1000}
                 height={1000}
+                unoptimized
                 className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>

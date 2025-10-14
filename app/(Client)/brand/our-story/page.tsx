@@ -55,6 +55,7 @@ export default function page() {
             alt="our-story-banner"
             width={1000}
             height={1000}
+            unoptimized
             className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>

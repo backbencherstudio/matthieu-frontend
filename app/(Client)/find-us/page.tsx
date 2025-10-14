@@ -82,6 +82,7 @@ export default function FindUs() {
             alt="find-us-hero"
             width={1000}
             height={1000}
+            unoptimized
             className="w-full h-[200px] md:h-auto object-cover object-top"
           />
         </div>
@@ -90,55 +91,31 @@ export default function FindUs() {
         <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
           <div className="max-w-[985px] w-full mx-auto">
             <div className="grid md:grid-cols-[48%_4%_48%] items-center">
-              <div className="p-6 flex flex-col items-center max-w-[350px] mx-auto">
-                <HandShake className="h-16 w-16" />
-                <h1 className="mt-4 mb-8 uppercase font-extrabold text-2xl lg:text-[32px] text-center text-primary-text leading-[124%]">
-                  FIND AN EXPERT <br /> NEAR YOU
-                </h1>
-
-                <div className="grid grid-cols-2 items-center w-full mb-6">
-                  <p className="text-lg">COUNTRY :</p>
-
-                  <Select defaultValue="USA">
-                    <SelectTrigger className="find-us-custom-select">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#F4F5F7] rounded-none">
-                      {country.map((item, idx) => (
-                        <SelectItem
-                          key={idx}
-                          value={item.value}
-                          className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+              <div className="p-6 flex flex-col gap-5 justify-between h-full items-center max-w-[350px] mx-auto">
+                <div className="flex md:justify-center">
+                  <Image
+                    src="/matheiu-logo.png"
+                    alt="matheiu-logo"
+                    width={500}
+                    height={500}
+                    unoptimized
+                    className="w-[270px] "
+                  />
                 </div>
-
-                <div className="grid grid-cols-2 items-center w-full mb-8">
-                  <p className="text-lg">REGION :</p>
-
-                  <Select defaultValue="CT">
-                    <SelectTrigger className="find-us-custom-select">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#F4F5F7] rounded-none">
-                      {region.map((item, idx) => (
-                        <SelectItem
-                          key={idx}
-                          value={item.value}
-                          className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <div className="text-center space-y-5">
+                  <h2 className="text-2xl font-extrabold uppercase text-primary-text">
+                    VICTORIA BRILL
+                  </h2>
+                  <p className="text-base text-secondary-text">
+                    (203) 598-8691
+                  </p>
+                  <p className="text-base text-secondary-text">
+                    V.BRILL@ARION-HST.COM
+                  </p>
                 </div>
-
-                <button className="find-us-button">Try a Saddle</button>
+                <button className="find-us-button block mx-auto">
+                  Save Business Card
+                </button>
               </div>
 
               <div className="bgPrimary h-[90%] w-[3px] mx-auto hidden md:block"></div>
@@ -193,40 +170,6 @@ export default function FindUs() {
 
                 <button className="find-us-button">Calendar</button>
               </div>
-            </div>
-
-            {/* Info */}
-            <div className="pt-16">
-              {/* contact info */}
-              <div className="grid md:grid-cols-[48%_4%_48%] items-center justify-center">
-                <div className="flex md:justify-end md:pr-4">
-                  <Image
-                    src="/matheiu-logo.png"
-                    alt="matheiu-logo"
-                    width={500}
-                    height={500}
-                    className="w-[270px] "
-                  />
-                </div>
-                <div className="bgPrimary h-full w-[1.5px] mx-auto hidden md:block"></div>
-                <div className="flex flex-col gap-4 md:pl-4 pt-6 md:pt-0 items-center md:items-start">
-                  <h2 className="text-2xl font-extrabold uppercase text-primary-text">
-                    VICTORIA BRILL
-                  </h2>
-                  <p className="text-base text-secondary-text">
-                    (203) 598-8691
-                  </p>
-                  <p className="text-base text-secondary-text">
-                    V.BRILL@ARION-HST.COM
-                  </p>
-                </div>
-              </div>
-              <button
-                className="find-us-button mt-6 md:mt-12 block mx-auto"
-                style={{ width: "fit-content" }}
-              >
-                Save Business Card
-              </button>
             </div>
           </div>
         </div>
