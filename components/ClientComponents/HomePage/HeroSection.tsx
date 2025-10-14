@@ -35,6 +35,7 @@ export default function HeroSection() {
                                 src={item.img}
                                 alt={item.title}
                                 fill
+                                unoptimized
                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                             {/* Dark overlay */}
