@@ -41,13 +41,13 @@ export function SignUpForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border p-[32px]">
+      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] px-[10px] py-[12px]">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-[32px] font-extrabold ">Sign Up</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="flex items-center gap-[19px] self-stretch">
+            <div className="flex items-center gap-[19px] self-stretch w-full md:justify-between">
               <div className="flex flex-col gap-2">
                 <Label
                   htmlFor="firstName"
@@ -209,7 +209,7 @@ export function SignUpForm() {
               Create Account
             </Button>
 
-            <div className="text-center text-[18px] leading-[100%]">
+            <div className="text-center lg:text-[18px] text-[16px] leading-[100%]">
               <span className="text-[#4A4C56] ">Already have an account? </span>
               <Link
                 href="/signin"
