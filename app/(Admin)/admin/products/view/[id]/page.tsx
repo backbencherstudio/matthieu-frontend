@@ -51,6 +51,7 @@ export default function ProductDetails({ params }: { params: any }) {
                     width={150}
                     height={150}
                     quality={100}
+                    unoptimized
                     className="object-cover rounded-[8px]"
                   />
                 </div>
@@ -62,6 +63,7 @@ export default function ProductDetails({ params }: { params: any }) {
                       alt="Product Image"
                       width={140}
                       height={140}
+                      unoptimized
                       className="w-full h-auto object-cover rounded-[8px]"
                     />
                   </div>
@@ -71,6 +73,7 @@ export default function ProductDetails({ params }: { params: any }) {
                       alt="Product Image"
                       width={140}
                       height={140}
+                      unoptimized
                       className="w-full h-auto object-cover rounded-[8px]"
                     />
                   </div>
@@ -80,6 +83,7 @@ export default function ProductDetails({ params }: { params: any }) {
                       alt="Product Image"
                       width={140}
                       height={140}
+                      unoptimized
                       className="w-full h-auto object-cover rounded-[8px]"
                     />
                   </div>
@@ -89,6 +93,7 @@ export default function ProductDetails({ params }: { params: any }) {
                       alt="Product Image"
                       width={140}
                       height={140}
+                      unoptimized
                       className="w-full h-auto object-cover rounded-[8px]"
                     />
                   </div>

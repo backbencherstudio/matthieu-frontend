@@ -198,6 +198,7 @@ export default function AddForm() {
                     alt="Product Image"
                     width={140}
                     height={140}
+                    unoptimized
                     className="w-full h-auto object-cover"
                   />
                   <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
@@ -210,6 +211,7 @@ export default function AddForm() {
                     alt="Product Image"
                     width={140}
                     height={140}
+                    unoptimized
                     className="w-full h-auto object-cover"
                   />
                   <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
@@ -222,6 +224,7 @@ export default function AddForm() {
                     alt="Product Image"
                     width={140}
                     height={140}
+                    unoptimized
                     className="w-full h-auto object-cover"
                   />
                   <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
@@ -234,6 +237,7 @@ export default function AddForm() {
                     alt="Product Image"
                     width={140}
                     height={140}
+                    unoptimized
                     className="w-full h-auto object-cover"
                   />
                   <button className="absolute -top-2 -right-2 p-1 rounded-full bg-primary-bg text-white cursor-pointer">
