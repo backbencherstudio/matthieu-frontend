@@ -15,16 +15,19 @@
   font-family: "Avenir";
   src: url("/fonts/Avenir Heavy/Avenir Heavy.ttf") format("truetype");
   font-weight: 700;
+   font-display: swap;
 }
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Regular/Avenir Regular.ttf") format("truetype");
   font-weight: 400;
+   font-display: swap;
 }
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Light/Avenir Light.ttf") format("truetype");
   font-weight: 300;
+   font-display: swap;
 }
 
 body {
