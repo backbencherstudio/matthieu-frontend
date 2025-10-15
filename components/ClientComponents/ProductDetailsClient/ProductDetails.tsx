@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import LoveIcon from '@/components/Icons/LoveIcon';
 import AppleIcon from '@/components/Icons/AppleIcon';
 import ProductDetailsAccordion from './ProductDetailsAccordion';
+import RelatedProduts from './RelatedProduts';
 
 const productImages = [
     { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -178,9 +179,12 @@ export default function ProductDetailsClient() {
                             </div>
                         </div>
                         <div>
-                            <ProductDetailsAccordion/>
+                            <ProductDetailsAccordion />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <RelatedProduts />
                 </div>
             </div>
         </div>
