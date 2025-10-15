@@ -1,23 +1,24 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, DragEvent } from "react";
+import { cn } from "@/lib/utils";
+import { Upload } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
-// ✅ Define schema with proper validation messages
+// ✅ Validation Schema
 const formSchema = z.object({
   username: z.string().min(2, { message: "First name must be at least 2 characters." }),
   lastname: z.string().min(2, { message: "Last name must be at least 2 characters." }),
@@ -27,10 +28,10 @@ const formSchema = z.object({
   state: z.string().min(2, { message: "State must be at least 2 characters." }),
   experience: z.string().min(2, { message: "Experience field cannot be empty." }),
   message: z.string().min(2, { message: "Message must be at least 2 characters." }),
-})
+});
 
 export function ApplyNowForm() {
-  // ✅ Initialize form
+  // ✅ React Hook Form setup
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,146 +44,186 @@ export function ApplyNowForm() {
       experience: "",
       message: "",
     },
-  })
+  });
+
+  // ✅ File Upload State (moved inside the component)
+  const [isDragging, setIsDragging] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => setIsDragging(false);
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2)); // max 2 files
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
+    setFiles((prev) => [...prev, ...selectedFiles].slice(0, 2));
+  };
 
   // ✅ Submit handler
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log({ ...values, files });
   }
 
   return (
-   
     <div>
-        <div className="pt-[60px] pb-[48px]">
-          <h1 className="text-[#1F274B] text-center  text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
- Apply Now!
-</h1>
+      <div className="pt-[60px] pb-[48px]">
+        <h1 className="text-[#1F274B] text-center text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
+          Apply Now!
+        </h1>
+      </div>
 
-        </div>
-        <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="maxContainer"
-      >
-        {/* ✅ Row 1: First + Last Name */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem className="bg-[#F8FAFB]">
-                <FormControl  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase">
-                  <Input placeholder="FIRST NAME" {...field}  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastname"
-            render={({ field }) => (
-              <FormItem className="bg-[#F8FAFB]">
-                <FormControl >
-                  <Input placeholder="LAST NAME" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer">
+          {/* ✅ Row 1: First + Last Name */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem className="bg-[#F8FAFB]">
+                  <FormControl>
+                    <Input placeholder="FIRST NAME" {...field} className="text-[#696E86] text-[14px] uppercase" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastname"
+              render={({ field }) => (
+                <FormItem className="bg-[#F8FAFB]">
+                  <FormControl>
+                    <Input placeholder="LAST NAME" {...field} className="text-[#696E86] text-[14px] uppercase" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        {/* ✅ Row 2: Email + Phone */}
-        <div className="grid-row  grid-cols-1 md:grid-cols-2 gap-6 ">
+          {/* ✅ Row 2: Email + Phone */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl className="bg-[#F8FAFB]">
+                    <Input placeholder="EMAIL" {...field} type="email" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phonenumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl className="bg-[#F8FAFB]">
+                    <Input placeholder="PHONE NUMBER" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* ✅ Row 3: Town + State */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+            <FormField
+              control={form.control}
+              name="town"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl className="bg-[#F8FAFB]">
+                    <Input placeholder="TOWN" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="state"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl className="bg-[#F8FAFB]">
+                    <Input placeholder="STATE" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* ✅ Experience */}
           <FormField
             control={form.control}
-            name="email"
+            name="experience"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
                 <FormControl className="bg-[#F8FAFB]">
-                  <Input placeholder="EMAIL" {...field} type="email" />
+                  <Input placeholder="EXPERIENCE" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          {/* ✅ Message */}
           <FormField
             control={form.control}
-            name="phonenumber"
+            name="message"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
                 <FormControl className="bg-[#F8FAFB]">
-                  <Input placeholder="PHONE NUMBER" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
+                  <Textarea placeholder="MESSAGE" {...field} className="min-h-[120px]" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
 
-        {/* ✅ Row 3: Town + State */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
-          <FormField
-            control={form.control}
-            name="town"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl className="bg-[#F8FAFB]">
-                  <Input placeholder="TOWN" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="state"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl className="bg-[#F8FAFB]">
-                  <Input placeholder="STATE" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+          {/* ✅ Drag & Drop Upload */}
+          <div className="flex flex-col items-center gap-2 pb-4 bg-[#F8FAFB]">
+            <label
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={cn(
+                "w-full border border-dashed rounded-md h-28 flex flex-col items-center justify-center cursor-pointer transition-all",
+                isDragging
+                  ? "border-primary bg-primary/5"
+                  : "border-muted-foreground/30"
+              )}
+            >
+              <Upload className="w-5 h-5 mb-1 text-muted-foreground" />
+              <span className="text-[#4C526F] font-[Avenir] text-[20px] not-italic font-extrabold leading-[100%] normal-case pb-[8px]">Drag & Drop Files Here</span>
+              <span className="text-[#4C526F] font-[Avenir] text-[14px] not-italic font-normal leading-[100%] normal-case">Format: PDF, Doc, PNG (Max: 6 mb)</span>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,.png"
+                multiple
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </label>
+          </div>
 
-        {/* ✅ Experience */}
-        <FormField
-          control={form.control}
-          name="experience"
-          render={({ field }) => (
-            <FormItem className="pb-[16px]">
-              <FormControl className="bg-[#F8FAFB]">
-                <Input placeholder="EXPRIENCE" {...field} className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase"/>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* ✅ Message */}
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem className="pb-[16px]">
-              <FormControl className="bg-[#F8FAFB]">
-                <Textarea placeholder="MASSAGE" {...field} className="min-h-[120px]"  className="text-[#696E86]  text-[14px] font-normal leading-[100%] uppercase" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="flex justify-center pb-[16px]">
-          <Button type="submit" className="w-full md:w-auto px-10">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
     </div>
-  )
+  );
 }
