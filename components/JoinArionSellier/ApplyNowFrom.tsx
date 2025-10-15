@@ -3,11 +3,10 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, DragEvent } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Upload } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -18,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-//  Validation Schema
+// ✅ Validation Schema
 const formSchema = z.object({
   username: z.string().min(2, { message: "First name must be at least 2 characters." }),
   lastname: z.string().min(2, { message: "Last name must be at least 2 characters." }),
@@ -31,7 +30,7 @@ const formSchema = z.object({
 });
 
 export function ApplyNowForm() {
-  //  React Hook Form setup
+  // ✅ React Hook Form setup
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,22 +45,26 @@ export function ApplyNowForm() {
     },
   });
 
-  //  File Upload State (moved inside the component)
+  // ✅ File Upload State
   const [isDragging, setIsDragging] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
 
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+  // ✅ Drag & Drop Handlers
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => setIsDragging(false);
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
 
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
     const droppedFiles = Array.from(e.dataTransfer.files);
-    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2));   
+    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +72,7 @@ export function ApplyNowForm() {
     setFiles((prev) => [...prev, ...selectedFiles].slice(0, 2));
   };
 
-  //  Submit handler
+  // ✅ Submit handler
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ ...values, files });
   }
@@ -84,15 +87,19 @@ export function ApplyNowForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer">
-          {/*  Row 1: First + Last Name */}
+          {/* Row 1: First + Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem className="bg-[#F8FAFB]">
+                <FormItem className="">
                   <FormControl>
-                    <Input placeholder="FIRST NAME" {...field} className="text-[#696E86] text-[14px] uppercase" />
+                    <Input
+                      placeholder="FIRST NAME"
+                      {...field}
+                      className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,7 +111,11 @@ export function ApplyNowForm() {
               render={({ field }) => (
                 <FormItem className="bg-[#F8FAFB]">
                   <FormControl>
-                    <Input placeholder="LAST NAME" {...field} className="text-[#696E86] text-[14px] uppercase" />
+                    <Input
+                      placeholder="LAST NAME"
+                      {...field}
+                      className="text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none "
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -112,14 +123,14 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/*  Row 2: Email + Phone */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+          {/* Row 2: Email + Phone */}
+          <div className="grid grid-cols-1 md:grid-row-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl className="bg-[#F8FAFB]">
+                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
                     <Input placeholder="EMAIL" {...field} type="email" />
                   </FormControl>
                   <FormMessage />
@@ -131,7 +142,7 @@ export function ApplyNowForm() {
               name="phonenumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl className="bg-[#F8FAFB]">
+                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
                     <Input placeholder="PHONE NUMBER" {...field} />
                   </FormControl>
                   <FormMessage />
@@ -140,14 +151,14 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/*  Row 3: Town + State */}
+          {/* Row 3: Town + State */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
               name="town"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl className="bg-[#F8FAFB]">
+                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
                     <Input placeholder="TOWN" {...field} />
                   </FormControl>
                   <FormMessage />
@@ -159,7 +170,7 @@ export function ApplyNowForm() {
               name="state"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl className="bg-[#F8FAFB]">
+                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
                     <Input placeholder="STATE" {...field} />
                   </FormControl>
                   <FormMessage />
@@ -168,13 +179,13 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/*  Experience */}
+          {/* Experience */}
           <FormField
             control={form.control}
             name="experience"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
-                <FormControl className="bg-[#F8FAFB]">
+                <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
                   <Input placeholder="EXPERIENCE" {...field} />
                 </FormControl>
                 <FormMessage />
@@ -182,36 +193,44 @@ export function ApplyNowForm() {
             )}
           />
 
-          {/*  Message */}
+          {/* Message */}
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
               <FormItem className="pb-[16px]">
                 <FormControl className="bg-[#F8FAFB]">
-                  <Textarea placeholder="MESSAGE" {...field} className="min-h-[120px]" />
+                  <Textarea
+                    placeholder="MESSAGE"
+                    {...field}
+                    className="min-h-[120px]"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/*  Drag & Drop Upload */}
-          <div className="flex flex-col items-center gap-2 pb-4 bg-[#F8FAFB]">
-            <label
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              className={cn(
-                "w-full border border-dashed rounded-md h-28 flex flex-col items-center justify-center cursor-pointer transition-all",
-                isDragging
-                  ? "border-primary bg-primary/5"
-                  : "border-muted-foreground/30"
-              )}
-            >
+          {/* ✅ Drag & Drop Upload */}
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={cn(
+              "w-full border border-dashed rounded-md h-28 flex flex-col items-center justify-center cursor-pointer transition-all bg-[#F8FAFB] mb-[164px] pt-[16px]",
+              isDragging
+                ? "border-primary bg-primary/5"
+                : "border-muted-foreground/30"
+            )}
+          >
+            <label className="flex flex-col items-center justify-center cursor-pointer">
               <Upload className="w-5 h-5 mb-1 text-muted-foreground" />
-              <span className="text-[#4C526F] font-[Avenir] text-[20px] not-italic font-extrabold leading-[100%] normal-case pb-[8px]">Drag & Drop Files Here</span>
-              <span className="text-[#4C526F] font-[Avenir] text-[14px] not-italic font-normal leading-[100%] normal-case">Format: PDF, Doc, PNG (Max: 6 mb)</span>
+              <span className="text-[#4C526F] font-[Avenir] text-[20px] font-extrabold leading-[100%] pb-[8px] normal-case">
+                Drag & Drop Files Here
+              </span>
+              <span className="text-[#4C526F] font-[Avenir] text-[14px] font-normal leading-[100%] normal-case">
+                Format: PDF, Doc, PNG (Max: 6 mb)
+              </span>
               <input
                 type="file"
                 accept=".pdf,.doc,.docx,.png"
@@ -221,7 +240,6 @@ export function ApplyNowForm() {
               />
             </label>
           </div>
-
         </form>
       </Form>
     </div>
