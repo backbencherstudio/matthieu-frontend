@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function LogoutIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -15,14 +13,14 @@ export default function LogoutIcon({ className }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.2475 13.75C14.2475 13.75 17.9974 10.9882 17.9974 10C17.9974 9.01175 14.2474 6.25 14.2474 6.25M17.164 10H7.16406"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
