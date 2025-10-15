@@ -15,7 +15,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "DASHBOARD", href: "/dashboard" },
+  { icon: LayoutDashboard, label: "DASHBOARD", href: "/my-account/dashboard" },
   { icon: ShoppingCart, label: "ORDERS", href: "/orders" },
   { icon: MapPin, label: "MY ADDRESS", href: "/address" },
   { icon: Heart, label: "SAVED", href: "/saved" },
@@ -31,10 +31,7 @@ export function Sidebar() {
         {/* Profile Section */}
         <div className="flex flex-col items-center p-4">
           <Avatar className="h-20 w-20 mb-6">
-            <AvatarImage
-              src="/professional-portrait.png"
-              alt="Yasir Abed Rabbu"
-            />
+            <AvatarImage src="/myAccount/profile.jpg" alt="Yasir Abed Rabbu" />
             <AvatarFallback>YA</AvatarFallback>
           </Avatar>
 

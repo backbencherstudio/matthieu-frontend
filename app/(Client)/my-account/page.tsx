@@ -1,21 +1,5 @@
-import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
-import { Sidebar } from "@/components/MyAccount/sidebar";
-
-const MyAccountPage = () => {
-  const breadLink = [
-    {
-      label: "My account",
-      href: "/my-account",
-    },
-  ];
-  return (
-    <>
-      <BreadCrumb breadLink={breadLink} />
-      <div className="maxContainer my-8">
-        <Sidebar />
-      </div>
-    </>
-  );
+const MyAccountHome = () => {
+  return <h1>My accoutnt</h1>;
 };
 
-export default MyAccountPage;
+export default MyAccountHome;
