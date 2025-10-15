@@ -18,7 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-// ✅ Validation Schema
+//  Validation Schema
 const formSchema = z.object({
   username: z.string().min(2, { message: "First name must be at least 2 characters." }),
   lastname: z.string().min(2, { message: "Last name must be at least 2 characters." }),
@@ -31,7 +31,7 @@ const formSchema = z.object({
 });
 
 export function ApplyNowForm() {
-  // ✅ React Hook Form setup
+  //  React Hook Form setup
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +46,7 @@ export function ApplyNowForm() {
     },
   });
 
-  // ✅ File Upload State (moved inside the component)
+  //  File Upload State (moved inside the component)
   const [isDragging, setIsDragging] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
 
@@ -61,7 +61,7 @@ export function ApplyNowForm() {
     e.preventDefault();
     setIsDragging(false);
     const droppedFiles = Array.from(e.dataTransfer.files);
-    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2)); // max 2 files
+    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2));   
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +69,7 @@ export function ApplyNowForm() {
     setFiles((prev) => [...prev, ...selectedFiles].slice(0, 2));
   };
 
-  // ✅ Submit handler
+  //  Submit handler
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ ...values, files });
   }
@@ -84,7 +84,7 @@ export function ApplyNowForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer">
-          {/* ✅ Row 1: First + Last Name */}
+          {/*  Row 1: First + Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
@@ -112,7 +112,7 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/* ✅ Row 2: Email + Phone */}
+          {/*  Row 2: Email + Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
@@ -140,7 +140,7 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/* ✅ Row 3: Town + State */}
+          {/*  Row 3: Town + State */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
@@ -168,7 +168,7 @@ export function ApplyNowForm() {
             />
           </div>
 
-          {/* ✅ Experience */}
+          {/*  Experience */}
           <FormField
             control={form.control}
             name="experience"
@@ -182,7 +182,7 @@ export function ApplyNowForm() {
             )}
           />
 
-          {/* ✅ Message */}
+          {/*  Message */}
           <FormField
             control={form.control}
             name="message"
@@ -196,7 +196,7 @@ export function ApplyNowForm() {
             )}
           />
 
-          {/* ✅ Drag & Drop Upload */}
+          {/*  Drag & Drop Upload */}
           <div className="flex flex-col items-center gap-2 pb-4 bg-[#F8FAFB]">
             <label
               onDragOver={handleDragOver}
