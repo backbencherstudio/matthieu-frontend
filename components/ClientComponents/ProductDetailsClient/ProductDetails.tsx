@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import LoveIcon from '@/components/Icons/LoveIcon';
 import AppleIcon from '@/components/Icons/AppleIcon';
 import ProductDetailsAccordion from './ProductDetailsAccordion';
+import RelatedProduts from './RelatedProduts';
 
 const productImages = [
     { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -160,12 +161,12 @@ export default function ProductDetailsClient() {
                                     {/* Buttons Section */}
                                     <div className="xl:space-y-4 space-y-3">
                                         <div className='flex gap-3'>
-                                            <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-white flex items-center justify-center cursor-pointer">
-                                                <span className='flex items-center gap-2 '>BUY WITH <AppleIcon /></span>
+                                            <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-white flex items-center justify-center cursor-pointer lg:text-lg text-base">
+                                                <span className='flex items-center gap-2 '>BUY WITH <AppleIcon className='lg:size-[54px] size-12' /></span>
 
                                             </button>
 
-                                            <button className="w-full cursor-pointer bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition">
+                                            <button className="w-full cursor-pointer bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition lg:text-lg text-base">
                                                 ADD TO CART
                                             </button>
                                         </div>
@@ -178,9 +179,12 @@ export default function ProductDetailsClient() {
                             </div>
                         </div>
                         <div>
-                            <ProductDetailsAccordion/>
+                            <ProductDetailsAccordion />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <RelatedProduts />
                 </div>
             </div>
         </div>
