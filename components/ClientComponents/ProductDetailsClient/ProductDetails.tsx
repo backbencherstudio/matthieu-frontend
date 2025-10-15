@@ -50,7 +50,7 @@ export default function ProductDetailsClient() {
     return (
         <div>
             <BreadCrumb breadLink={breadLink} cart={true} />
-            <div className=' lg:py-12 md:py-10 py-8 maxContainer'>
+            <div className=' lg:py-12 md:py-10 py-8 maxContainer '>
                 <div className='flex xl:flex-row flex-col gap-6'>
                     {/* image div */}
                     <div className='xl:block hidden'>

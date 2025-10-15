@@ -10,36 +10,36 @@ export default function ShoppingCardIcon() {
       <path
         d="M9.20703 18.894L20.3686 17.9638C23.8611 17.6729 24.6451 16.91 25.0322 13.427L25.8469 6.09412"
         stroke="#0077FF"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M6.65625 6.09412H27.136"
         stroke="#0077FF"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M6.65372 26.5766C8.06756 26.5766 9.2137 25.4304 9.2137 24.0166C9.2137 22.6027 8.06756 21.4566 6.65372 21.4566C5.23989 21.4566 4.09375 22.6027 4.09375 24.0166C4.09375 25.4304 5.23989 26.5766 6.65372 26.5766Z"
         stroke="#0077FF"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M20.7279 26.5766C22.1418 26.5766 23.2879 25.4304 23.2879 24.0166C23.2879 22.6027 22.1418 21.4566 20.7279 21.4566C19.3141 21.4566 18.168 22.6027 18.168 24.0166C18.168 25.4304 19.3141 26.5766 20.7279 26.5766Z"
         stroke="#0077FF"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M9.20703 24.0129H18.1669"
         stroke="#0077FF"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M1.53125 0.975342H2.76772C3.9769 0.975342 5.03092 1.77481 5.32419 2.91443L9.13248 17.7131C9.32493 18.461 9.16023 19.2532 8.68413 19.87L7.46032 21.4551"
         stroke="#0077FF"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );
