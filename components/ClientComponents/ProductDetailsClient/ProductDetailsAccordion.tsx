@@ -8,11 +8,14 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import Link from 'next/link'
+import WhatsAppIcon from '@/components/Icons/WhatsAppIcon'
+import EmailIcon from '@/components/Icons/EmailIcon'
+import CallingIcon from '@/components/Icons/CallingIcon'
 
 const answerQuestion = [
-    {icon:"",title:"WhatsApp"},
-    {icon:"",title:"E-Mail"},
-    {icon:"",title:"Call Or Text"},
+    {icon:<WhatsAppIcon/>,title:"WhatsApp"},
+    {icon:<EmailIcon/>,title:"E-Mail"},
+    {icon:<CallingIcon /> ,title:"Call Or Text"},
 ]
 
 const productDetails = [
@@ -63,8 +66,13 @@ const productDetails = [
             </div>
             <div>
                 <p className='text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal'>Gabrielle will answer your questions!</p>
-                <div>
-                    
+                <div className='flex items-center gap-6 md:mt-4 mt-3'>
+                    {answerQuestion?.map((item,index) => (
+                      <Link href={""} className='flex items-center gap-3' key={index}>
+                        <span className='text-[#000000]'>{item?.icon}</span>
+                        <span className='text-[#4C526F] leading-[100%] text-base'>{item?.title}</span>
+                      </Link>
+                    ))}
                 </div>
             </div>
         </div>
@@ -74,7 +82,7 @@ const productDetails = [
 export default function ProductDetailsAccordion() {
     return (
         <div className="mt-8">
-            <Accordion type="single" collapsible className="w-full space-y-6">
+            <Accordion type="single" collapsible className="w-full lg:space-y-6 space-y-4">
                 {productDetails.map((item) => (
                     <AccordionItem key={item.id} value={item.id} className='bg-[#F6F8FA] px-4 border-b-0'>
                         <AccordionTrigger className="text-[#1F274B] lg:text-2xl md:text-xl text-lg font-extrabold  tracking-[.48px]  hover:no-underline cursor-pointer">
