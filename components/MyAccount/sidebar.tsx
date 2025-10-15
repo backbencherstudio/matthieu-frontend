@@ -21,9 +21,9 @@ const menuItems = [
     href: "/my-account/dashboard",
   },
   { icon: SideBarShoppingIcon, label: "ORDERS", href: "/my-account/orders" },
-  { icon: AddressBookIcon, label: "MY ADDRESS", href: "/address" },
-  { icon: HeartIcon, label: "SAVED", href: "/saved" },
-  { icon: SettingIcon, label: "SETTINGS", href: "/settings" },
+  { icon: AddressBookIcon, label: "MY ADDRESS", href: "/my-account/address" },
+  { icon: HeartIcon, label: "SAVED", href: "/my-account/saved" },
+  { icon: SettingIcon, label: "SETTINGS", href: "/my-account/settings" },
 ];
 
 export function Sidebar() {
