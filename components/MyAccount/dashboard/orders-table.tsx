@@ -16,7 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import ChevronLeftIcon from "@/public/icon/ChevronLeftIcon";
+import ChevronRightIcon from "@/public/icon/ChevronRightIcon";
 
 const orders = [
   {
@@ -148,40 +149,40 @@ export function OrdersTable() {
       <div className="flex items-center justify-center gap-1 mt-8">
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#FFFFFF] hover:bg-[#FFFFFF]/100 py-1.5 cursor-pointer border border-[#F1F2F4]"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeftIcon />
         </Button>
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 py-1.5 cursor-pointer"
         >
           1
         </Button>
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 py-1.5 cursor-pointer"
         >
           2
         </Button>
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 py-1.5 cursor-pointer"
         >
           3
         </Button>
         <span className="px-2">...</span>
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 py-1.5 cursor-pointer"
         >
           6
         </Button>
         <Button
           size="icon"
-          className="h-8 w-8 rounded-none bg-[#1F274B] py-1.5 cursor-pointer"
+          className="h-8 w-8 rounded-none bg-[#FFFFFF] hover:bg-[#FFFFFF]/100 py-1.5 cursor-pointer border border-[#F1F2F4]"
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRightIcon />
         </Button>
       </div>
     </div>

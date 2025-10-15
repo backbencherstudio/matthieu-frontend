@@ -3,23 +3,25 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import {
-  Heart,
-  LayoutDashboard,
-  LogOut,
-  MapPin,
-  Settings,
-  ShoppingCart,
-} from "lucide-react";
+import AddressBookIcon from "@/public/icon/AddressBookIcon";
+import DashboardLayoutIcon from "@/public/icon/DashboardLayoutIcon";
+import HeartIcon from "@/public/icon/HeartIcon";
+import SideBarShoppingIcon from "@/public/icon/SideBarShoppingIcon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
+import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "DASHBOARD", href: "/my-account/dashboard" },
-  { icon: ShoppingCart, label: "ORDERS", href: "/orders" },
-  { icon: MapPin, label: "MY ADDRESS", href: "/address" },
-  { icon: Heart, label: "SAVED", href: "/saved" },
-  { icon: Settings, label: "SETTINGS", href: "/settings" },
+  {
+    icon: DashboardLayoutIcon,
+    label: "DASHBOARD",
+    href: "/my-account/dashboard",
+  },
+  { icon: SideBarShoppingIcon, label: "ORDERS", href: "/orders" },
+  { icon: AddressBookIcon, label: "MY ADDRESS", href: "/address" },
+  { icon: HeartIcon, label: "SAVED", href: "/saved" },
+  { icon: SettingIcon, label: "SETTINGS", href: "/settings" },
 ];
 
 export function Sidebar() {
@@ -69,7 +71,7 @@ export function Sidebar() {
 
         {/* Logout Button */}
         <Button className="w-full justify-start bg-[#F6F8FA] text-[#EB3D4D] hover:bg-[#F6F8FA]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer rounded-none py-3.5 my-1.5">
-          <LogOut className="h-4 w-4" />
+          <LogoutIcon />
           LOGOUT
         </Button>
       </div>
