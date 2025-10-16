@@ -194,22 +194,22 @@ export function ApplyNowForm() {
           />
 
           {/* Message */}
-         <FormField
-  control={form.control}
-  name="message"
-  render={({ field }) => (
-    <FormItem className="pb-[16px] uppercase">
-      <FormControl>
-        <Textarea
-          placeholder="MESSAGE"
-          {...field}
-          className="bg-[#F8FAFB] min-h-[120px] h-[154px] px-4 pt-5 pb-4 border-none rounded-none !leading-0 focus-visible:ring-ring/50 focus-visible:ring-[1px]"
+   <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem className="pb-[16px] uppercase">
+              <FormControl>
+                <Textarea
+                  placeholder="MESSAGE"
+                  {...field}
+                  className="bg-[#F8FAFB] min-h-[120px] px-4 pt-5 pb-4 border-none h-[50px] rounded-none leading-5 focus-visible:ring-1  "
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
 
 
 
