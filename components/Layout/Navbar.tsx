@@ -1,24 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import { Menu, X, Search, User, SearchIcon } from "lucide-react";
-import UsdIcon from "../Icons/UsdIcon";
-import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
+import { Menu, SearchIcon, X } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
+import UsdIcon from "../Icons/UsdIcon";
 import UserIcon from "../Icons/UserIcon";
 import HoverItems from "./HoverItems";
 
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import LanguageSwitcher from "../Shared/LanguageSwitcher";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import LanguageSwitcher from "../Shared/LanguageSwitcher";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [open, setOpen] = useState(false);
   const pathName = usePathname();
 
   const navigationLinks = [
@@ -190,9 +190,25 @@ const Header = () => {
               <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
-            <button className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors">
+            <button
+              className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors"
+              onClick={() => setOpen((prev) => !prev)}
+            >
               <UserIcon className="size-[18px] " />
             </button>
+
+            {/*Dropdown*/}
+            {open && (
+              <div className="absolute top-10 right-16 mt-2 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-50">
+                <Link
+                  href="/my-account/dashboard"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setOpen((prev) => !prev)}
+                >
+                  My Account
+                </Link>
+              </div>
+            )}
 
             {/* Mobile menu button */}
             <button
