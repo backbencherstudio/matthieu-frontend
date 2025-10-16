@@ -96,7 +96,7 @@ export function Sidebar() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                 >
-                  <Button
+                  <button
                     className={cn(
                       "w-full justify-start bg-[#F6F8FA] text-[#4A4C56] hover:bg-[#F6F8FA]/90 text-[16px] uppercase cursor-pointer rounded-none py-3.5 px-4 my-1.5 !h-auto",
                       isActive &&
@@ -105,11 +105,11 @@ export function Sidebar() {
                   >
                     <div className="flex items-center w-full h-full gap-2">
                       <Icon className="size-5" />
-                      <span className="text-base font-bold leading-[100%]">
+                      <span className="leading-[100%] text-[16px]">
                         {item.label}
                       </span>
                     </div>
-                  </Button>
+                  </button>
                 </Link>
               );
             })}

@@ -11,8 +11,7 @@ const MyAccountLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <BreadCrumb breadLink={breadLink} />
-      <div className="maxContainer my-8 flex gap-x-8">
-        {/* Sidebar stays visible */}
+      <div className="lg:max-w-[1194px] mx-auto xl:px-0 px-5 my-8 flex gap-x-8">
         <Sidebar />
 
         {/* Right side: changes per page */}
