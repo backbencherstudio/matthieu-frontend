@@ -1,9 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -42,10 +40,12 @@ export function SignUpForm() {
   return (
     <div className="maxContainer my-12">
       <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px] px-4">
-        <CardHeader className="space-y-1 text-center p-0">
-          <CardTitle className="text-[32px] font-extrabold ">Sign Up</CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
+        <div className="space-y-1 text-center p-0 mt-8 mb-10">
+          <h1 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%]">
+            Sign Up
+          </h1>
+        </div>
+        <div className="p-0">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex items-center gap-[19px] self-stretch w-full md:justify-between">
               <div className="flex flex-col gap-2">
@@ -55,11 +55,11 @@ export function SignUpForm() {
                 >
                   Fist Name
                 </Label>
-                <Input
+                <input
                   id="firstName"
                   type="text"
                   placeholder="Yasir Abed"
-                  className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
                   {...register("firstName", {
                     required: "First Name is required",
                   })}
@@ -77,11 +77,11 @@ export function SignUpForm() {
                 >
                   Last Name
                 </Label>
-                <Input
+                <input
                   id="lastName"
                   type="text"
                   placeholder="Rabbu"
-                  className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2 focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
                   {...register("lastName", {
                     required: "Last Name is required",
                   })}
@@ -100,11 +100,11 @@ export function SignUpForm() {
               >
                 Email
               </Label>
-              <Input
+              <input
                 id="email"
                 type="email"
                 placeholder="arionadmin@gmail.com"
-                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2 focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -127,11 +127,11 @@ export function SignUpForm() {
               >
                 Password
               </Label>
-              <Input
+              <input
                 id="password"
                 type="password"
                 placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2 focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -153,11 +153,11 @@ export function SignUpForm() {
               >
                 Confirm Password
               </Label>
-              <Input
+              <input
                 id="confirmPassword"
                 type="password"
                 placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2 focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
                   minLength: {
@@ -231,7 +231,7 @@ export function SignUpForm() {
               Continue as Guest
             </Button>
           </form>
-        </CardContent>
+        </div>
       </div>
     </div>
   );
