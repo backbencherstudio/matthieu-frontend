@@ -35,7 +35,7 @@ export function Sidebar() {
   return (
     <>
       {/* Toggle button for all devices */}
-      <div className="md:hidden mb-4">
+      <div className="lg:hidden mb-4">
         <button
           onClick={() => setIsOpen(true)}
           className="flex items-center gap-2 text-[#1F274B] font-bold"
@@ -47,12 +47,12 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:static top-0 left-0 h-full md:h-[740px] w-64 md:w-2xs border border-[#DFE1E7] bg-[#F6F8FA] p-3 z-50 transition-transform duration-300 ease-in-out",
-          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          "fixed lg:static top-0 left-0 h-full lg:h-[740px] w-1/2 md:w-[40%] lg:w-full border border-[#DFE1E7] bg-[#F6F8FA] p-3 z-50 transition-transform duration-300 ease-in-out",
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         {/* Mobile Close Button (top-right corner) */}
-        <div className="flex justify-end md:hidden mb-2">
+        <div className="flex justify-end lg:hidden mb-2">
           <button
             onClick={() => setIsOpen(false)}
             className="text-[#1F274B] p-1 hover:bg-[#E2E6F0] rounded-full"
@@ -126,7 +126,7 @@ export function Sidebar() {
       {/* Background overlay (clicking closes sidebar on mobile) */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-40 md:hidden"
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
