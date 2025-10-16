@@ -2,6 +2,9 @@
 
 import ChevronLeftIcon from "@/components/Icons/MyAccoountIcon/ChevronLeftIcon";
 import ChevronRightIcon from "@/components/Icons/MyAccoountIcon/ChevronRightIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
+import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useRef } from "react";
 
 export interface Order {
   id: string;
@@ -32,8 +35,18 @@ export function OrdersTable({
   onStatusChange,
   pagination,
 }: OrdersTableProps) {
+
+  
+
+  const idRef = useRef<HTMLDivElement>(null);
+  const { currentItems, currentPage, totalPages, setCurrentPage } =
+    useFilterPagination(data, 6);
+
+  const loading = false
+
+
   return (
-    <div className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]">
+    <div ref={idRef} className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
@@ -72,7 +85,7 @@ export function OrdersTable({
 
           <tbody>
             {data.length > 0 ? (
-              data.map((order, index) => (
+              currentItems.map((order, index) => (
                 <tr key={index}>
                   <td className="py-3 px-4 text-[14px] text-[#14191F]">
                     {order.id}
@@ -92,11 +105,10 @@ export function OrdersTable({
                   </td>
                   <td className="py-3 px-4 text-center">
                     <span
-                      className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded ${
-                        order.status === "Delivered"
-                          ? "text-[#13AF81] bg-[#F2FCF9]"
-                          : "text-[#EDA217] bg-[#FFFBF4]"
-                      }`}
+                      className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded ${order.status === "Delivered"
+                        ? "text-[#13AF81] bg-[#F2FCF9]"
+                        : "text-[#EDA217] bg-[#FFFBF4]"
+                        }`}
                     >
                       {order.status}
                     </span>
@@ -118,45 +130,21 @@ export function OrdersTable({
       </div>
 
       {/* Pagination */}
-      {pagination && (
-        <div className="flex items-center justify-center gap-2 mt-8">
-          <button
-            disabled={pagination.currentPage === 1}
-            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50"
-            onClick={() =>
-              pagination.onPageChange(Math.max(1, pagination.currentPage - 1))
-            }
+      <div>
+        {!loading && (
+          <div
+            className={`flex justify-center pt-12 pb-4 ${data?.length >= 5 ? "block" : "hidden"
+              } `}
           >
-            <ChevronLeftIcon />
-          </button>
-
-          {[...Array(pagination.totalPages)].map((_, i) => (
-            <button
-              key={i}
-              className={`h-8 w-8 flex items-center justify-center border ${
-                pagination.currentPage === i + 1
-                  ? "bg-[#1F274B] text-white"
-                  : "bg-white text-gray-700 border-[#F1F2F4]"
-              }`}
-              onClick={() => pagination.onPageChange(i + 1)}
-            >
-              {i + 1}
-            </button>
-          ))}
-
-          <button
-            disabled={pagination.currentPage === pagination.totalPages}
-            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50"
-            onClick={() =>
-              pagination.onPageChange(
-                Math.min(pagination.totalPages, pagination.currentPage + 1)
-              )
-            }
-          >
-            <ChevronRightIcon />
-          </button>
-        </div>
-      )}
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              scrollTargetRef={idRef}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
