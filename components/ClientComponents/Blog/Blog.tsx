@@ -168,7 +168,7 @@ export default function Blog() {
                     {blog.title}
                   </h1>
                   <Link
-                    href={`/blog/${blog.id}`}
+                    href={`/brand/blog/${blog.id}`}
                     className="text-xl lg:text-2xl pb-[2px] border-b border-primary-text text-primary-text capitalize"
                   >
                     Read More
