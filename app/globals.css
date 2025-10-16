@@ -15,19 +15,19 @@
   font-family: "Avenir";
   src: url("/fonts/Avenir Heavy/Avenir Heavy.ttf") format("truetype");
   font-weight: 700;
-   font-display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Regular/Avenir Regular.ttf") format("truetype");
   font-weight: 400;
-   font-display: swap;
+  font-display: swap;
 }
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Light/Avenir Light.ttf") format("truetype");
   font-weight: 300;
-   font-display: swap;
+  font-display: swap;
 }
 
 body {
@@ -69,7 +69,7 @@ body {
 
 /* HIDE THE GOOGLE TRANSLATE TOP BAR COMPLETELY */
 .goog-te-banner-frame.skiptranslate,
-body>.skiptranslate,
+body > .skiptranslate,
 .goog-te-gadget-icon,
 .goog-tooltip,
 .goog-tooltip:hover,
@@ -165,7 +165,6 @@ body>.skiptranslate,
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: #ffffff;
   border-radius: 15px;
-
 }
 
 /* -----range slider custom css ----------- */
@@ -180,15 +179,15 @@ body>.skiptranslate,
   width: 16px !important;
   height: 16px !important;
   border-radius: 0 !important;
-  background: #1F274B !important;
+  background: #1f274b !important;
 }
 
 .range-slider .range-slider__thumb {
-  background: #1F274B !important;
+  background: #1f274b !important;
 }
 
 .range-slider .range-slider__range {
-  background: #1F274B !important;
+  background: #1f274b !important;
 }
 
 @theme inline {

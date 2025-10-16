@@ -33,7 +33,7 @@ export function OrdersTable({
   pagination,
 }: OrdersTableProps) {
   return (
-    <div className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]">
+    <div className="p-4 bg-white border border-[#DFE1E7] w-full">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
@@ -44,13 +44,13 @@ export function OrdersTable({
         <select
           defaultValue={defaultStatus.toLowerCase().replace(" ", "-")}
           onChange={(e) => onStatusChange?.(e.target.value)}
-          className="w-40 text-[16px] text-[#4C526F] border border-gray-300 rounded-none focus:ring-0 focus:outline-none py-2 px-3 leading-[100%]"
+          className="w-40 text-[16px] text-[#4C526F] border border-gray-300 rounded-none focus:ring-0 focus:outline-none py-1.5 leading-[100%]"
         >
           {statuses.map((status, i) => (
             <option
               key={i}
               value={status.toLowerCase().replace(" ", "-")}
-              className="capitalize"
+              className="capitalize p-0"
             >
               {status}
             </option>
@@ -59,13 +59,15 @@ export function OrdersTable({
       </div>
 
       {/* Table */}
-      <div className="mt-5 border max-h-[600px] overflow-y-auto relative">
+      <div className="mt-5 border">
         <table className="w-full">
-          <thead className="bg-[#F6F8FA] normal-case sticky top-0 z-40">
+          <thead className="bg-[#F6F8FA] normal-case text-left">
             <tr className="text-[14px] leading-[144%]">
-              <th className="py-3 px-4 text-[#4A4C56]">Order ID</th>
-              <th className="py-3 px-4 text-[#4A4C56]">Product</th>
-              <th className="py-3 px-4 text-[#4A4C56]">Total Price</th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left">Order ID</th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left">Product</th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left">
+                Total Price
+              </th>
               <th className="py-3 px-4 text-center text-[#4A4C56]">Status</th>
             </tr>
           </thead>
@@ -82,7 +84,7 @@ export function OrdersTable({
                       <div className="text-[14px] uppercase text-[#1F274B]">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5 normal-case">
+                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86]">
                         Size: {order.size}
                       </div>
                     </div>
@@ -122,7 +124,7 @@ export function OrdersTable({
         <div className="flex items-center justify-center gap-2 mt-8">
           <button
             disabled={pagination.currentPage === 1}
-            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50"
+            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50 cursor-pointer"
             onClick={() =>
               pagination.onPageChange(Math.max(1, pagination.currentPage - 1))
             }
@@ -133,7 +135,7 @@ export function OrdersTable({
           {[...Array(pagination.totalPages)].map((_, i) => (
             <button
               key={i}
-              className={`h-8 w-8 flex items-center justify-center border ${
+              className={`h-8 w-8 flex items-center justify-center border cursor-pointer ${
                 pagination.currentPage === i + 1
                   ? "bg-[#1F274B] text-white"
                   : "bg-white text-gray-700 border-[#F1F2F4]"
@@ -146,7 +148,7 @@ export function OrdersTable({
 
           <button
             disabled={pagination.currentPage === pagination.totalPages}
-            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50"
+            className="h-8 w-8 flex items-center justify-center border border-[#F1F2F4] bg-white text-gray-600 disabled:opacity-50 cursor-pointer"
             onClick={() =>
               pagination.onPageChange(
                 Math.min(pagination.totalPages, pagination.currentPage + 1)
