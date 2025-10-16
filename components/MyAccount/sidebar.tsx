@@ -4,7 +4,6 @@ import AddressBookIcon from "@/components/Icons/MyAccoountIcon/AddressBookIcon";
 import DashboardLayoutIcon from "@/components/Icons/MyAccoountIcon/DashboardLayoutIcon";
 import HeartIcon from "@/components/Icons/MyAccoountIcon/HeartIcon";
 import SideBarShoppingIcon from "@/components/Icons/MyAccoountIcon/SideBarShoppingIcon";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -13,6 +12,7 @@ import { useState } from "react";
 import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import CameraIcon from "../Icons/MyAccoountIcon/CameraIcon";
+import ImageUploader from "./imageUploader";
 
 const menuItems = [
   {
@@ -47,21 +47,9 @@ export function Sidebar() {
         {/* Profile Section */}
         <div className="flex flex-col p-4 mb-12">
           <div className="relative w-20 h-20">
-            <input
-              id="avatarUploader"
-              type="file"
-              accept="image/*"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
+            <ImageUploader />
 
-            <label htmlFor="avatarUploader" className="cursor-pointer block">
-              <Avatar className="w-20 h-20">
-                <AvatarImage src={preview} alt="Profile image" />
-                <AvatarFallback>YA</AvatarFallback>
-              </Avatar>
-            </label>
-
+            {/* Camera icon overlay */}
             <label
               htmlFor="avatarUploader"
               className="absolute top-0 right-0 bg-[#1F274B] rounded-full p-1 border border-white cursor-pointer"

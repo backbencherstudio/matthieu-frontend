@@ -102,14 +102,14 @@ export function SignInForm() {
                 />
                 <Label
                   htmlFor="remember"
-                  className="text-sm font-normal text-[#4A4C56] leading-[100%]"
+                  className="text-sm text-[#4A4C56] leading-[100%]"
                 >
                   Remember me
                 </Label>
               </div>
               <Link
                 href="/forgot-password"
-                className="text-[16px] font-normal text-[#2A3988] hover:underline leading-[100%]"
+                className="text-[16px] text-[#2A3988] hover:underline hover:underline-offset-4 leading-[100%] font-extrabold "
               >
                 Lost your password?
               </Link>
@@ -126,7 +126,7 @@ export function SignInForm() {
               <span className="text-[#4A4C56]">Don’t have an account? </span>
               <Link
                 href="/signup"
-                className="font-extrabold text-[#2A3988] hover:underline"
+                className="font-extrabold text-[#2A3988] hover:underline hover:underline-offset-4"
               >
                 Sign Up
               </Link>

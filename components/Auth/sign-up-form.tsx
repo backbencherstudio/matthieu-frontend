@@ -213,7 +213,7 @@ export function SignUpForm() {
               <span className="text-[#4A4C56] ">Already have an account? </span>
               <Link
                 href="/signin"
-                className=" font-extrabold text-[#2A3988] hover:underline"
+                className=" font-extrabold text-[#2A3988] hover:underline hover:underline-offset-4"
               >
                 Sign In
               </Link>
