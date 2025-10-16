@@ -33,7 +33,7 @@ export function SignInForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px]">
+      <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px] px-4">
         <CardHeader className="space-y-1 text-center p-0">
           <CardTitle className="text-[32px] font-extrabold">Sign In</CardTitle>
         </CardHeader>
@@ -76,7 +76,7 @@ export function SignInForm() {
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••••"
+                placeholder="• • • • • • • • • •"
                 className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
                 {...register("password", {
                   required: "Password is required",
@@ -138,7 +138,7 @@ export function SignInForm() {
 
             <Button
               type="button"
-              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
+              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer text-[16px]"
               onClick={() => console.log("Continue as guest")}
             >
               Continue as Guest
