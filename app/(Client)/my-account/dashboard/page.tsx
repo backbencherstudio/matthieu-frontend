@@ -14,6 +14,7 @@ const DashboardPage = () => {
       icon: <ConfirmationIcon />,
       number: 29,
       iconBgColor: "#FEF6E8",
+      iconColor: "#EDA217",
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ const DashboardPage = () => {
       icon: <SuccessIcon />,
       number: 36,
       iconBgColor: "#E8F7F3",
+      iconColor: "#20C997",
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ const DashboardPage = () => {
       icon: <ShoppingCardIcon />,
       number: 109,
       iconBgColor: "#E6F2FF",
+      iconColor: "#0077FF",
     },
   ];
 
@@ -100,6 +103,7 @@ const DashboardPage = () => {
             icon={status.icon}
             number={status.number}
             iconBgColor={status?.iconBgColor}
+            iconColor={status.iconColor}
           />
         ))}
       </div>

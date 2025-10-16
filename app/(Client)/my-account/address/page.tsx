@@ -9,12 +9,18 @@ export default function MyAddressPage() {
 
       {/* Address Card */}
       <div className="bg-[#FFFFFF] border border-[#DFE1E7] p-4">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-[16px] uppercase leading-[160%] text-[#4A4C56]">
+            <h3
+              className="text-[16px] uppercase leading-[160%] text-[#4A4C56] mb-2"
+              style={{ letterSpacing: "0.08px" }}
+            >
               HOME ADDRESS (DEFAULT)
             </h3>
-            <p className="leading-[150%] text-[#1D1F2C] text-[16px]">
+            <p
+              className="leading-[150%] text-[#1D1F2C] text-[16px]"
+              style={{ letterSpacing: "0.08px" }}
+            >
               2972 Westheimer Rd. Santa Ana, Illinois 85486
             </p>
           </div>
@@ -24,7 +30,7 @@ export default function MyAddressPage() {
         </div>
 
         {/* Phone Section */}
-        <div>
+        <div className="mt-10">
           <h4 className="text-[16px] uppercase text-[#4A4C56] leading-[160%]">
             PHONE
           </h4>

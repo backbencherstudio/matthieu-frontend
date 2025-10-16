@@ -40,36 +40,35 @@ const Saved: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto grid md:grid-cols-2 px-[12px] gap-[24px] pb-[16px]">
       {data.map((item) => (
-        <div key={item.id} className="">
-          <div className="bg-[#F8FAFB] shadow-sm hover:shadow-md transition-all duration-200 p-[12px] ">
+        <div className=" ">
+          <div
+            key={item?.id}
+            className="bg-[#F8FAFB] shadow-sm hover:shadow-md transition-all duration-200 p-[12px] "
+          >
             <Image
               src={item.img}
               alt={item.title}
-              width={425}
-              height={300}
-              className="w-full h-auto object-contain"
-              priority={item.id === 1}
+              width={100}
+              height={100}
+              className=" w-full h-auto object-contain"
+              unoptimized
             />
-            <div className="">
-              <h2
-                className="md:text-[16px] lg:text-[16px] font-normal leading-[124%] uppercase font-avenir text-primary"
-              >
+            <div className="p-4">
+              <h2 className=" text-[#1F274B] text-[20px] font-normal leading-[124%] uppercase ">
                 {item.title}
               </h2>
-              <p className="md:text-[10px] lg:text-[20px]  text-[#1F274B] font-avenir text-[20px] font-extrabold leading-[136%] normal-case pt-[12px]">
+              <p className="text-[#1F274B] font-[Avenir] text-[20px] font-extrabold leading-[136%] normal-case pt-[12px]">
                 {item.desc}
               </p>
-              <div className="flex flex-col md:flex-row gap-[12px] pt-[16px]">
-                <div className="bg-[#1F274B] w-full md:w-3/6 ">
-                  <div className="flex justify-center items-center mx-auto h-full">
-                    <button className=" md:text-[10px] lg:text-[16px] py-[16px] md:py-[12px] text-white text-[14px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto w-full cursor-pointer">
-                    BUY NOW
+              <div className="flex flex-col md:flex-row  gap-[12px] pt-[16px]">
+                <div className=" bg-[#1F274B] w-full md:w-2/4">
+                  <button className="py-[16px] text-white  text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
+                    BYE NOW
                   </button>
-                  </div>
                 </div>
-                <div className="w-full md:w-3/6 border border-[#262626]">
-                  <button className="md:text-[10px] lg:text-[16px]  py-[16px] md:py-[12px] text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto w-full cursor-pointer">
-                    ADD TO CART
+                <div className="w-full  md:w-2/4 border-1 border-[#262626]">
+                  <button className=" py-[16px] text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
+                    add to cart
                   </button>
                 </div>
               </div>

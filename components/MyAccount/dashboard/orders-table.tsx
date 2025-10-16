@@ -1,23 +1,8 @@
 "use client";
 
-import ChevronLeftIcon from "@/components/Icons/MyAccoountIcon/ChevronLeftIcon";
-import ChevronRightIcon from "@/components/Icons/MyAccoountIcon/ChevronRightIcon";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
+import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useRef } from "react";
 
 export interface Order {
   id: string;
@@ -48,69 +33,78 @@ export function OrdersTable({
   onStatusChange,
   pagination,
 }: OrdersTableProps) {
+  const idRef = useRef<HTMLDivElement>(null);
+  const { currentItems, currentPage, totalPages, setCurrentPage } =
+    useFilterPagination(data, 6);
+
+  const loading = false;
+
   return (
-    <div className="p-4 bg-[#FFF] border border-[#DFE1E7]">
+    <div
+      ref={idRef}
+      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]"
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
           {title}
         </h1>
 
-        <Select
+        {/* Tailwind dropdown */}
+        <select
           defaultValue={defaultStatus.toLowerCase().replace(" ", "-")}
-          onValueChange={(value) => onStatusChange?.(value)}
+          onChange={(e) => onStatusChange?.(e.target.value)}
+          className="w-40 text-[16px] text-[#4C526F] border border-gray-300 rounded-none focus:ring-0 focus:outline-none py-1.5 leading-[100%]"
         >
-          <SelectTrigger className="w-40 focus-visible:ring-0 rounded-none text-[16px] text-[#4C526F] leading-[100%]">
-            <SelectValue placeholder="Select Status" />
-          </SelectTrigger>
-          <SelectContent>
-            {statuses.map((status, i) => (
-              <SelectItem
-                key={i}
-                value={status.toLowerCase().replace(" ", "-")}
-              >
-                {status}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          {statuses.map((status, i) => (
+            <option
+              key={i}
+              value={status.toLowerCase().replace(" ", "-")}
+              className="capitalize p-0"
+            >
+              {status}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Table */}
-      <div className="border mt-5">
-        <Table>
-          <TableHeader className="bg-[#F6F8FA]">
-            <TableRow className="text-[14px] leading-[144%] normal-case">
-              <TableHead>Order ID</TableHead>
-              <TableHead>Product</TableHead>
-              <TableHead>Total Price</TableHead>
-              <TableHead className="text-center">Status</TableHead>
-            </TableRow>
-          </TableHeader>
+      <div className="mt-5 border">
+        <table className="w-full">
+          <thead className="bg-[#F6F8FA] normal-case text-left">
+            <tr className="text-[14px] leading-[144%]">
+              <th className="py-3 px-4 text-[#4A4C56] text-left">Order ID</th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left">Product</th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left">
+                Total Price
+              </th>
+              <th className="py-3 px-4 text-center text-[#4A4C56]">Status</th>
+            </tr>
+          </thead>
 
-          <TableBody>
+          <tbody>
             {data.length > 0 ? (
-              data.map((order, index) => (
-                <TableRow key={index} className="border-none p-4">
-                  <TableCell className="text-[14px] text-[#14191F]">
+              currentItems.map((order, index) => (
+                <tr key={index}>
+                  <td className="py-3 px-4 text-[14px] text-[#14191F]">
                     {order.id}
-                  </TableCell>
-                  <TableCell>
+                  </td>
+                  <td className="py-3 px-4">
                     <div>
                       <div className="text-[14px] uppercase text-[#1F274B]">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5 normal-case">
+                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86]">
                         Size: {order.size}
                       </div>
                     </div>
-                  </TableCell>
-                  <TableCell className="text-[14px] text-[#14191F]">
+                  </td>
+                  <td className="py-3 px-4 text-[14px] text-[#14191F]">
                     {order.price}
-                  </TableCell>
-                  <TableCell className="flex items-center justify-center">
+                  </td>
+                  <td className="py-3 px-4 text-center">
                     <span
-                      className={`px-2.5 py-2 text-[14px] leading-[100%] ${
+                      className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded ${
                         order.status === "Delivered"
                           ? "text-[#13AF81] bg-[#F2FCF9]"
                           : "text-[#EDA217] bg-[#FFFBF4]"
@@ -118,63 +112,40 @@ export function OrdersTable({
                     >
                       {order.status}
                     </span>
-                  </TableCell>
-                </TableRow>
+                  </td>
+                </tr>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={4} className="text-center py-8">
+              <tr>
+                <td
+                  colSpan={4}
+                  className="text-center py-8 text-gray-500 text-sm"
+                >
                   No orders found.
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </div>
 
       {/* Pagination */}
-      {pagination && (
-        <div className="flex items-center justify-center gap-1 mt-8">
-          <Button
-            size="icon"
-            disabled={pagination.currentPage === 1}
-            className="h-8 w-8 rounded-none bg-white border border-[#F1F2F4] cursor-pointer hover:bg-white"
-            onClick={() =>
-              pagination.onPageChange(Math.max(1, pagination.currentPage - 1))
-            }
+      <div>
+        {!loading && (
+          <div
+            className={`flex justify-center pt-12 pb-4 ${
+              data?.length >= 5 ? "block" : "hidden"
+            } `}
           >
-            <ChevronLeftIcon />
-          </Button>
-
-          {[...Array(pagination.totalPages)].map((_, i) => (
-            <Button
-              key={i}
-              size="icon"
-              className={`h-8 w-8 rounded-none py-1.5 cursor-pointer ${
-                pagination.currentPage === i + 1
-                  ? "bg-[#1F274B] text-white hover:bg-[#1F274B]/100"
-                  : "bg-white border border-[#F1F2F4] text-[#111827] hover:bg-white"
-              }`}
-              onClick={() => pagination.onPageChange(i + 1)}
-            >
-              {i + 1}
-            </Button>
-          ))}
-
-          <Button
-            size="icon"
-            disabled={pagination.currentPage === pagination.totalPages}
-            className="h-8 w-8 rounded-none bg-white border border-[#F1F2F4] cursor-pointer hover:bg-white"
-            onClick={() =>
-              pagination.onPageChange(
-                Math.min(pagination.totalPages, pagination.currentPage + 1)
-              )
-            }
-          >
-            <ChevronRightIcon />
-          </Button>
-        </div>
-      )}
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              scrollTargetRef={idRef}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
