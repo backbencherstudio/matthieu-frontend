@@ -91,13 +91,19 @@ export function Sidebar() {
               <Link key={item.href} href={item.href}>
                 <Button
                   className={cn(
-                    "w-full justify-start bg-[#F6F8FA] text-[#4A4C56] hover:bg-[#F6F8FA]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer rounded-none py-3.5 px-4 my-1.5 !h-auto",
+                    "w-full justify-start bg-[#F6F8FA] text-[#4A4C56] hover:bg-[#F6F8FA]/90 text-[16px] uppercase  cursor-pointer rounded-none py-3.5 px-4 my-1.5 !h-auto",
                     isActive &&
                       "w-full justify-start bg-[#1F274B] text-[#FFF] hover:bg-[#1F274B]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer my-1.5"
                   )}
                 >
-                  <Icon className="h-4 w-4" />
-                  {item.label}
+                  <div className="flex items-center w-full h-full gap-2 ">
+                    <span className="">
+                      <Icon className="size-5" />
+                    </span>
+                    <span className="text-base font-bold leading-[100%] ">
+                      {item.label}
+                    </span>
+                  </div>
                 </Button>
               </Link>
             );

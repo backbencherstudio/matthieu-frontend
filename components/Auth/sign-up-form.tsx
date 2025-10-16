@@ -41,11 +41,11 @@ export function SignUpForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px]">
-        <CardHeader className="space-y-1 text-center">
+      <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px]">
+        <CardHeader className="space-y-1 text-center p-0">
           <CardTitle className="text-[32px] font-extrabold ">Sign Up</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex items-center gap-[19px] self-stretch w-full md:justify-between">
               <div className="flex flex-col gap-2">

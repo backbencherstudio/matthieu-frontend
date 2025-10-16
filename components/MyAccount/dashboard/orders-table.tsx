@@ -80,7 +80,7 @@ export function OrdersTable({
       <div className="border mt-5">
         <Table>
           <TableHeader className="bg-[#F6F8FA]">
-            <TableRow className="text-[14px] leading-[144%]">
+            <TableRow className="text-[14px] leading-[144%] normal-case">
               <TableHead>Order ID</TableHead>
               <TableHead>Product</TableHead>
               <TableHead>Total Price</TableHead>
@@ -91,7 +91,7 @@ export function OrdersTable({
           <TableBody>
             {data.length > 0 ? (
               data.map((order, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} className="border-none p-4">
                   <TableCell className="text-[14px] text-[#14191F]">
                     {order.id}
                   </TableCell>
@@ -100,7 +100,7 @@ export function OrdersTable({
                       <div className="text-[14px] uppercase text-[#1F274B]">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5">
+                      <div className="text-[12px] mt-2.5 normal-case">
                         Size: {order.size}
                       </div>
                     </div>

@@ -43,7 +43,11 @@
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.3.1",
+<<<<<<< HEAD
     "zod": "^4.1.12"
+=======
+    "vaul": "^1.1.2"
+>>>>>>> 33fb6400b73d0778e3886f649c31c7751cd08c92
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
