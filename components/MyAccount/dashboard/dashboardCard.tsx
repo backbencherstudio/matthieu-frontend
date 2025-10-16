@@ -23,13 +23,11 @@ const DashboardCard = ({
       >
         {icon}
       </div>
-      <div>
+      <div className="space-y-4">
         <p className="text-[16px] text-[#1F274B] normal-case leading-[100%]">
           {title}
         </p>
-        <h1 className="text-[24px] font-extrabold leading-[100%] my-4">
-          {number}
-        </h1>
+        <h1 className="text-[24px] font-extrabold leading-[100%]">{number}</h1>
       </div>
     </div>
   );

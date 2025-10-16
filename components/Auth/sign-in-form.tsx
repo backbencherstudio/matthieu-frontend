@@ -1,9 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -33,11 +31,13 @@ export function SignInForm() {
 
   return (
     <div className="maxContainer my-12">
-      <div className="w-full xl:w-[464px] lg:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px]">
-        <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-[32px] font-extrabold">Sign In</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px] px-4">
+        <div className="space-y-1 text-center p-0 mt-8 mb-10">
+          <h1 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%]">
+            Sign In
+          </h1>
+        </div>
+        <div className="p-0">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label
@@ -46,11 +46,11 @@ export function SignInForm() {
               >
                 Email
               </Label>
-              <Input
+              <input
                 id="email"
                 type="email"
                 placeholder="arionadmin@gmail.com"
-                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B] w-full"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -73,11 +73,11 @@ export function SignInForm() {
               >
                 Password
               </Label>
-              <Input
+              <input
                 id="password"
                 type="password"
-                placeholder="••••••••••"
-                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B]"
+                placeholder="• • • • • • • • • •"
+                className="bg-[#E9E9ED80] rounded-none !h-auto leading-[150%] lg:px-4 px-3 lg:py-3 py-2  focus-visible:ring-0 focus-visible:border-[#1F274B] w-full"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -102,14 +102,14 @@ export function SignInForm() {
                 />
                 <Label
                   htmlFor="remember"
-                  className="text-sm font-normal text-[#4A4C56] leading-[100%]"
+                  className="text-sm text-[#4A4C56] leading-[100%]"
                 >
                   Remember me
                 </Label>
               </div>
               <Link
                 href="/forgot-password"
-                className="text-[16px] font-normal text-[#2A3988] hover:underline leading-[100%]"
+                className="text-[16px] text-[#2A3988] hover:underline hover:underline-offset-4 leading-[100%] font-extrabold "
               >
                 Lost your password?
               </Link>
@@ -126,7 +126,7 @@ export function SignInForm() {
               <span className="text-[#4A4C56]">Don’t have an account? </span>
               <Link
                 href="/signup"
-                className="font-extrabold text-[#2A3988] hover:underline"
+                className="font-extrabold text-[#2A3988] hover:underline hover:underline-offset-4"
               >
                 Sign Up
               </Link>
@@ -136,15 +136,15 @@ export function SignInForm() {
               <span className="text-[#717182] text-[16px]">or</span>
             </div>
 
-            <Button
+            <button
               type="button"
-              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer"
+              className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer text-[16px]"
               onClick={() => console.log("Continue as guest")}
             >
               Continue as Guest
-            </Button>
+            </button>
           </form>
-        </CardContent>
+        </div>
       </div>
     </div>
   );
