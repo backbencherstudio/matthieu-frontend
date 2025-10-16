@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { zodnResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Upload } from "lucide-react";
@@ -32,7 +32,7 @@ const formSchema = z.object({
 export function ApplyNowForm() {
   // ✅ React Hook Form setup
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
       lastname: "",

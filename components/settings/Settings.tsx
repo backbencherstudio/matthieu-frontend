@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z
   .object({
@@ -32,7 +33,7 @@ const formSchema = z
 
 export function Settings() {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -46,16 +47,16 @@ export function Settings() {
   };
 
   return (
-  <div className="pb-[48px]">
-      <Card className="max-w-3xl mx-auto mt-10 border border-[#DFE1E7] shadow-sm normal-case">
+  <div className="">
+      <Card className=" border border-[#DFE1E7]  normal-case rounded-none">
       <CardHeader>
-        <CardTitle className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] uppercase p-[24px]">
+        <CardTitle className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] uppercase px-[24px]">
           Account Settings
         </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-[24px]">
             {/* Personal Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
