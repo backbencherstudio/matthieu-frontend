@@ -10,7 +10,7 @@ export default function CardIcon({ className }: { className?: string }) {
       fill="none"
       className={className}
     >
-      <g clip-path="url(#clip0_7278_3639)">
+      <g clipPath="url(#clip0_7278_3639)">
         <path
           d="M2.78711 13.4984L13.4779 2.80762M15.5254 9.2134L13.6924 11.0463M12.1281 12.592L11.3125 13.4076"
           stroke="currentColor"
