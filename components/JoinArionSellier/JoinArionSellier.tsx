@@ -4,16 +4,16 @@ import React from 'react'
 const JoinArionSellier = () => {
     return (
         <div className='maxContainer'>
-            <Image src="/joinarion/horse1.png" alt='horse1' width={100} height={100} className='object-contain w-full h-full' unoptimized></Image>
+            <Image src="/joinarion/horse1.png" alt='horse1' width={100} height={100} className='object-contain w-full h-auto' unoptimized></Image>
             <p className="text-[#1F274B] text-center  text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[60px] pb-[48px] normal-case">
                 Join Arion Sellier
             </p>
-            <Image src="/joinarion/horse2.png" alt='horse'width={100} height={100} className='object-contain w-full h-full' unoptimized></Image>
+            <Image src="/joinarion/horse2.png" alt='horse'width={100} height={100} className='object-contain w-full h-auto' unoptimized></Image>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-[64px]'>
                 <div className='w-6/6'>
                     <p className='normal-case pt-[48px]'>Join Arion Sellier as a…  <strong>Saddle Fitting Expert</strong></p>
-                    <p className="text-[#4A4C56]  text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case">
+                    <p className="text-[#4A4C56]  text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case pt-[16px]">
                         As we continue to grow, we are actively recruiting sales professionals in several areas of the United States to join our team!
                     </p>
                     <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pt-[20px] pb-[16px]">

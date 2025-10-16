@@ -50,7 +50,7 @@ export function Settings() {
   <div className="">
       <Card className=" border border-[#DFE1E7]  normal-case rounded-none">
       <CardHeader>
-        <CardTitle className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] uppercase px-[24px]">
+        <CardTitle className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] uppercase px-[24px] pb-[]">
           Account Settings
         </CardTitle>
       </CardHeader>
