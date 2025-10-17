@@ -40,10 +40,7 @@ export function OrdersTable({
   const loading = false;
 
   return (
-    <div
-      ref={idRef}
-      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]"
-    >
+    <div ref={idRef} className="p-4 bg-white border border-[#DFE1E7] w-full">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
