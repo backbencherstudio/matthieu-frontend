@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/drawer"
 import CartsIcon from "@/components/Icons/CartsIcon";
 import CloseIcon from "@/components/Icons/CloseIcon";
+import CartsDetails from "./CartsDetails";
 
 export default function CartsProducts() {
     const [cartOpen, setCartOpen] = useState(false);
@@ -20,17 +21,17 @@ export default function CartsProducts() {
     const handleCart = () => setCartOpen((prev) => !prev);
 
     return (
-        <Drawer direction="right">
+        <Drawer direction="right" >
             <DrawerTrigger className="cursor-pointer"> <CartsIcon /></DrawerTrigger>
-            <DrawerContent className="p-8 !w-auto">
+            <DrawerContent className="p-8  !max-w-max !w-[500px] border border-red-400">
                 <DrawerHeader className="flex flex-row justify-between items-center p-0 ">
                     <DrawerTitle className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%]  ">Your Cart</DrawerTitle>
                     <DrawerClose className="cursor-pointer">
                         <CloseIcon/>
                     </DrawerClose>
                 </DrawerHeader>
-                <div className="w-[600px]">
-
+                <div className=" border">
+                    <CartsDetails/>
                 </div>
             </DrawerContent>
         </Drawer>
