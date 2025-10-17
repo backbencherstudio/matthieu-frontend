@@ -8,6 +8,7 @@ import LoveIcon from '@/components/Icons/LoveIcon';
 import AppleIcon from '@/components/Icons/AppleIcon';
 import ProductDetailsAccordion from './ProductDetailsAccordion';
 import RelatedProduts from './RelatedProduts';
+import { toast } from "sonner"
 
 const productImages = [
     { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -48,20 +49,35 @@ export default function ProductDetailsClient() {
     ];
 
     const handleCart = () => {
+        const productName = "horseDoubleBand2";
+
         const cartData = {
+            productName,
             color: selectedColor,
             size: selectedSize,
+            SKU: "BR7D2NS",
         };
 
-        const productName = "horseDoubleBand"
+        // get existing cart array
+        
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        const existingCart = JSON.parse(localStorage.getItem("cart")) || {};
-        existingCart[productName] = cartData;
+        const alreadyExists = existingCart.some(
+            (item) => item.productName === productName
+        );
+
+        if (alreadyExists) {
+            toast.warning(`${productName} already exists in the cart.`);
+            return;
+        }
+
+        existingCart.push(cartData);
 
         localStorage.setItem("cart", JSON.stringify(existingCart));
 
         console.log(`Saved for ${productName}:`, cartData);
     };
+
 
 
     return (
@@ -125,7 +141,7 @@ export default function ProductDetailsClient() {
                                                     </button>
                                                     <span
                                                         key={color.name}
-                                                        className={`text-[#4C526F] xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light ${selectedColor === color?.name  ? `underline ` :"no-underline"}`}
+                                                        className={`text-[#4C526F] xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light ${selectedColor === color?.name ? `underline ` : "no-underline"}`}
                                                     >
                                                         {color.name}
                                                     </span>
