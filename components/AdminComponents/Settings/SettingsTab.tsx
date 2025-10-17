@@ -32,15 +32,15 @@ export function SettingTabs({
   return (
     <div className="bg-[#FFF] p-2 w-full rounded-[8px] shadow">
       <div className="w-full bg-white">
-        <div className="space-y-2">
+        <div>
           {tabs.map((tab) => (
             <button
               key={tab.value}
               onClick={() => handleTabChange(tab.value)}
               className={`w-full p-3 rounded-[6px] cursor-pointer ${
                 activeTab === tab.value
-                  ? "bg-[#1F274B] text-[#FFF] text-base font-extrabold"
-                  : "bg-[#FFF] text-[#4C526F] text-base hover:bg-[#FFF]/100"
+                  ? "bg-[#1F274B] text-[#FFF] font-extrabold leading-[124%] text-[16px]"
+                  : "bg-[#FFF] text-[#4C526F] hover:bg-[#FFF]/100"
               }`}
             >
               {tab.label}

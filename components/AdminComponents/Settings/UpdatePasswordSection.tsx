@@ -105,10 +105,10 @@ export default function UpdatePasswordSection() {
             </div>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-5">
             <button
               type="submit"
-              className="bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-[4px] leading-[117%] text-[#FFF] self-stretch text-[14px] px-3 py-2.5 mt-5 mb-8"
+              className="bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-[4px] leading-[117%] text-[#FFF] self-stretch text-[14px] px-3 py-2.5"
             >
               Update Password
             </button>
