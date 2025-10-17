@@ -4,15 +4,13 @@ import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
 import { Label } from "@/components/ui/label";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import UpdatePasswordSection from "./UpdatePasswordSection";
 
 type adminInfoFormData = {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
 };
 
 export default function AccountSection() {
@@ -68,9 +66,6 @@ export default function AccountSection() {
       lastName: "",
       email: "",
       phone: "",
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
     },
   });
 
@@ -80,7 +75,7 @@ export default function AccountSection() {
 
   return (
     <section className="w-full">
-      <div className="p-8 bg-[#FFF] border border-[#F5F5F7] rounded-[12px] w-full">
+      <div className="p-8 bg-[#FFF] border border-[#F5F5F7] rounded-[12px] w-full shadow">
         <h2 className="text-xl font-extrabold leading-[100%] text-[#1F274B]">
           Edit Admin Info
         </h2>
@@ -101,29 +96,33 @@ export default function AccountSection() {
               )}
             </div>
 
-            <div className="flex flex-col gap-2 items-center">
-              <button
-                onClick={triggerFileInput}
-                className="cursor-pointer p-[7px] rounded-[6px] bg-[#F6F8FA]"
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
-                <ImageSelectIcon className="cursor-pointer" />
-              </button>
+            <div className="flex flex-col gap-2">
+              <div>
+                <button
+                  onClick={triggerFileInput}
+                  className="cursor-pointer p-[7px] rounded-[6px] bg-[#F6F8FA]"
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <ImageSelectIcon className="cursor-pointer" />
+                </button>
+              </div>
 
-              <button
-                type="button"
-                onClick={removeImage}
-                aria-label="Remove image"
-                className="text-[#EB3D4D] cursor-pointer p-[7px] rounded-[6px] bg-[#F6F8FA]"
-              >
-                <DeleteIcon className="w-5 h-5" />
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={removeImage}
+                  aria-label="Remove image"
+                  className="text-[#EB3D4D] cursor-pointer p-[7px] rounded-[6px] bg-[#F6F8FA]"
+                >
+                  <DeleteIcon className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -137,7 +136,7 @@ export default function AccountSection() {
               <div>
                 <Label
                   htmlFor="firstName"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
+                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%] mb-2"
                 >
                   First name
                 </Label>
@@ -159,7 +158,7 @@ export default function AccountSection() {
               <div>
                 <Label
                   htmlFor="lastName"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
+                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%] mb-2"
                 >
                   Last name
                 </Label>
@@ -184,7 +183,7 @@ export default function AccountSection() {
               <div>
                 <Label
                   htmlFor="email"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
+                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%] mb-2"
                 >
                   Email
                 </Label>
@@ -210,7 +209,7 @@ export default function AccountSection() {
               <div>
                 <Label
                   htmlFor="phone"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
+                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%] mb-2"
                 >
                   Phone
                 </Label>
@@ -244,96 +243,7 @@ export default function AccountSection() {
       </div>
 
       {/* Password update form */}
-      <div className="p-8 bg-[#FFF] border border-[#F5F5F7] rounded-[12px] w-full mt-5">
-        <h2 className="text-xl font-extrabold leading-[100%] text-[#1F274B]">
-          Password Update
-        </h2>
-
-        <div className="mt-6">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <div>
-                <Label
-                  htmlFor="currentPassword"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
-                >
-                  Current Password
-                </Label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="• • • • • • • • • •"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
-                  {...register("currentPassword", {
-                    required: "Current Password is required",
-                  })}
-                />
-                {errors.currentPassword && (
-                  <p className="text-sm text-destructive">
-                    {errors.currentPassword.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-5">
-              <div>
-                <Label
-                  htmlFor="newPassword"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
-                >
-                  New Password
-                </Label>
-                <input
-                  id="newPassword"
-                  type="password"
-                  placeholder="• • • • • • • • • •"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
-                  {...register("newPassword", {
-                    required: "New Password is required",
-                  })}
-                />
-                {errors.newPassword && (
-                  <p className="text-sm text-destructive">
-                    {errors.newPassword.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <Label
-                  htmlFor="confirmPassword"
-                  className="text-[14px] font-normal text-[#4A4C56] leading-[160%]"
-                >
-                  Confirm Password
-                </Label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="• • • • • • • • • •"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
-                  {...register("confirmPassword", {
-                    required: "Confirm Password is required",
-                  })}
-                />
-                {errors.confirmPassword && (
-                  <p className="text-sm text-destructive">
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-[4px] leading-[117%] text-[#FFF] self-stretch text-[14px] px-3 py-2.5 mt-5 mb-8"
-              >
-                Update Password
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <UpdatePasswordSection />
     </section>
   );
 }
