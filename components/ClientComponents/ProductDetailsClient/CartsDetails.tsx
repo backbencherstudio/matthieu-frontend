@@ -53,12 +53,13 @@ export default function CartsDetails() {
             className="flex items-center gap-4 bg-white "
           >
             {/* Product Image */}
+            
             <img
               src={item.image}
               alt={item.name}
               className="w-16 h-16 object-cover rounded"
             />
-            
+
             {/* Product Details */}
             <div className="flex-1">
               <h3 className="font-medium text-gray-900">{item.name}</h3>
