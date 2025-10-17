@@ -1,8 +1,15 @@
 "use client";
 
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useFilterPagination } from "@/hooks/useFilterHook";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export interface Order {
   id: string;
@@ -15,57 +22,38 @@ export interface Order {
 interface OrdersTableProps {
   title?: string;
   data: Order[];
-  statuses?: string[];
-  defaultStatus?: string;
-  onStatusChange?: (status: string) => void;
-  pagination?: {
-    currentPage: number;
-    totalPages: number;
-    onPageChange: (page: number) => void;
-  };
 }
 
-export function OrdersTable({
-  title,
-  data,
-  statuses = ["All Status", "In Process", "Delivered"],
-  defaultStatus = "All Status",
-  onStatusChange,
-  pagination,
-}: OrdersTableProps) {
+export function OrdersTable({ title, data }: OrdersTableProps) {
   const idRef = useRef<HTMLDivElement>(null);
   const { currentItems, currentPage, totalPages, setCurrentPage } =
     useFilterPagination(data, 6);
 
   const loading = false;
+  const [categories, setCategories] = useState("all");
 
   return (
     <div
       ref={idRef}
-      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[432px]"
+      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[691px] overflow-x-auto"
     >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between min-w-[800px]">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
           {title}
         </h1>
 
         {/* Tailwind dropdown */}
-        <select
-          defaultValue={defaultStatus.toLowerCase().replace(" ", "-")}
-          onChange={(e) => onStatusChange?.(e.target.value)}
-          className="w-40 text-[16px] text-[#4C526F] border border-gray-300 rounded-none focus:ring-0 focus:outline-none py-1.5 leading-[100%]"
-        >
-          {statuses.map((status, i) => (
-            <option
-              key={i}
-              value={status.toLowerCase().replace(" ", "-")}
-              className="capitalize p-0"
-            >
-              {status}
-            </option>
-          ))}
-        </select>
+        <Select value={categories} onValueChange={setCategories}>
+          <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+            <SelectValue placeholder="All Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Status</SelectItem>
+            <SelectItem value="Saddles">In Process</SelectItem>
+            <SelectItem value="Tack & Accessories">Delivered</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Table */}
