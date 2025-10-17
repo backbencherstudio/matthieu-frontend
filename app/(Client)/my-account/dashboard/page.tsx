@@ -107,16 +107,7 @@ const DashboardPage = () => {
           />
         ))}
       </div>
-      <OrdersTable
-        title="Recent Orders"
-        data={orders}
-        onStatusChange={(value) => console.log("Filter changed to:", value)}
-        pagination={{
-          currentPage: 1,
-          totalPages: 6,
-          onPageChange: (page) => console.log("Page:", page),
-        }}
-      />
+      <OrdersTable title="Recent Orders" data={orders} />
     </>
   );
 };

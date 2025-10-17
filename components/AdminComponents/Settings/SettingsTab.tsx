@@ -30,7 +30,7 @@ export function SettingTabs({
   };
 
   return (
-    <div className="bg-[#FFF] p-2 w-fit rounded-xl">
+    <div className="bg-[#FFF] p-2 w-full rounded-[8px] shadow">
       <div className="w-full bg-white">
         <div className="space-y-2">
           {tabs.map((tab) => (
