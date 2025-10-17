@@ -13,9 +13,7 @@ import LanguageSwitcher from "../Shared/LanguageSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import {
@@ -205,19 +203,13 @@ const Header = () => {
                   <UserIcon className="size-[18px]" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 rounded-none">
-                <DropdownMenuLabel> </DropdownMenuLabel>
-
+              <DropdownMenuContent className="w-20 rounded-none">
                 <DropdownMenuRadioGroup
                   value={position}
                   onValueChange={setPosition}
+                  className="text-center"
                 >
-                  <DropdownMenuRadioItem
-                    value="top"
-                    className="cursor-pointer rounded-none"
-                  >
-                    <Link href="/my-account/dashboard">My Account</Link>
-                  </DropdownMenuRadioItem>
+                  <Link href="/my-account/dashboard">My Account</Link>
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>

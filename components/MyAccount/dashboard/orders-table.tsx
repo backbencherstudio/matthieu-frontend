@@ -33,12 +33,9 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
   const [categories, setCategories] = useState("all");
 
   return (
-    <div
-      ref={idRef}
-      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[691px] overflow-x-auto"
-    >
+    <div ref={idRef} className="p-4 bg-white border border-[#DFE1E7]">
       {/* Header */}
-      <div className="flex items-center justify-between min-w-[800px]">
+      <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
           {title}
         </h1>
@@ -57,16 +54,22 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
       </div>
 
       {/* Table */}
-      <div className="mt-5 border">
+      <div className="mt-5 border  md:w-full w-[400px] overflow-x-auto">
         <table className="w-full">
           <thead className="bg-[#F6F8FA] normal-case text-left">
             <tr className="text-[14px] leading-[144%]">
-              <th className="py-3 px-4 text-[#4A4C56] text-left">Order ID</th>
-              <th className="py-3 px-4 text-[#4A4C56] text-left">Product</th>
-              <th className="py-3 px-4 text-[#4A4C56] text-left">
+              <th className="py-3 px-4 text-[#4A4C56] text-left text-nowrap">
+                Order ID
+              </th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left text-nowrap">
+                Product
+              </th>
+              <th className="py-3 px-4 text-[#4A4C56] text-left text-nowrap">
                 Total Price
               </th>
-              <th className="py-3 px-4 text-center text-[#4A4C56]">Status</th>
+              <th className="py-3 px-4 text-center text-[#4A4C56] text-nowrap">
+                Status
+              </th>
             </tr>
           </thead>
 
@@ -74,25 +77,25 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
             {data.length > 0 ? (
               currentItems.map((order, index) => (
                 <tr key={index}>
-                  <td className="py-3 px-4 text-[14px] text-[#14191F]">
+                  <td className="py-3 px-4 text-[14px] text-[#14191F] text-nowrap">
                     {order.id}
                   </td>
                   <td className="py-3 px-4">
                     <div>
-                      <div className="text-[14px] uppercase text-[#1F274B]">
+                      <div className="text-[14px] uppercase text-[#1F274B] text-nowrap">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86]">
+                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86] text-nowrap">
                         Size: {order.size}
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-[14px] text-[#14191F]">
+                  <td className="py-3 px-4 text-[14px] text-[#14191F] text-nowrap">
                     {order.price}
                   </td>
                   <td className="py-3 px-4 text-center">
                     <span
-                      className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded ${
+                      className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded text-nowrap ${
                         order.status === "Delivered"
                           ? "text-[#13AF81] bg-[#F2FCF9]"
                           : "text-[#EDA217] bg-[#FFFBF4]"

@@ -82,8 +82,8 @@ export default function AccountSection() {
 
         {/* Image upload */}
         <div className="mt-[24.5px]">
-          <div className="flex items-center gap-4">
-            <div className="w-[100px] h-[100px] border border-[#F5F5F7] rounded-md overflow-hidden flex items-center justify-center bg-gray-50">
+          <div className="flex gap-x-4">
+            <div className="w-[100px] h-[100px] border border-[#F5F5F7] rounded-[6px] flex items-center justify-center bg-gray-50">
               {image ? (
                 <img
                   src={image}
@@ -230,10 +230,10 @@ export default function AccountSection() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-5">
               <button
                 type="submit"
-                className="bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-[4px] leading-[117%] text-[#FFF] self-stretch text-[14px] px-3 py-2.5 mt-5 mb-8"
+                className="bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-[4px] leading-[117%] text-[#FFF] self-stretch text-[14px] px-3 py-2.5"
               >
                 Update Info
               </button>
