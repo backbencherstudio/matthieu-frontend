@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils"; // optional utility if you use shadcn's `cn`
+import { cn } from "@/lib/utils";
 import { Loader2, UploadCloud, X } from "lucide-react";
 import React, { useState } from "react";
 
@@ -27,7 +27,6 @@ export default function ImageUploader() {
     setError(null);
     setLoading(true);
 
-    // Simulate upload (or upload to your backend here)
     setTimeout(() => {
       const reader = new FileReader();
       reader.onloadend = () => {
