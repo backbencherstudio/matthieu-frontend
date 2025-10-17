@@ -33,9 +33,12 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
   const [categories, setCategories] = useState("all");
 
   return (
-    <div ref={idRef} className="p-4 bg-white border border-[#DFE1E7] w-full">
+    <div
+      ref={idRef}
+      className="p-4 bg-white border border-[#DFE1E7] lg:w-full w-[691px] overflow-x-auto"
+    >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between min-w-[800px]">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
           {title}
         </h1>

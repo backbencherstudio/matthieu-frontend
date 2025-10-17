@@ -64,16 +64,7 @@ export default function OrdersPage() {
 
   return (
     <div>
-      <OrdersTable
-        title="My Orders"
-        data={orders}
-        onStatusChange={(value) => console.log("Filter changed to:", value)}
-        pagination={{
-          currentPage: 1,
-          totalPages: 6,
-          onPageChange: (page) => console.log("Page:", page),
-        }}
-      />
+      <OrdersTable title="My Orders" data={orders} />
     </div>
   );
 }

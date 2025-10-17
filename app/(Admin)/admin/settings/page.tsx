@@ -16,20 +16,22 @@ export default function AdminSettingsPage() {
   ];
 
   return (
-    <div className="flex gap-5">
-      <div>
+    <div className="lg:flex gap-5 flex-row">
+      <div className="w-full mb-2 lg:w-fit">
         <SettingTabs
           tabs={tabs}
           defaultValue="account"
           onTabChange={setActiveTab}
         />
       </div>
-      <TabContent value="account" activeTab={activeTab}>
-        <AccountSection />
-      </TabContent>
-      <TabContent value="notifications" activeTab={activeTab}>
-        <NotificationSection />
-      </TabContent>
+      <div className="w-full">
+        <TabContent value="account" activeTab={activeTab}>
+          <AccountSection />
+        </TabContent>
+        <TabContent value="notifications" activeTab={activeTab}>
+          <NotificationSection />
+        </TabContent>
+      </div>
     </div>
   );
 }
