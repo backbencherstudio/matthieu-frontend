@@ -20,7 +20,7 @@ export default function ProductDetailsClient() {
 
     const [selectedColor, setSelectedColor] = useState('BLACK');
     const [selectedSize, setSelectedSize] = useState('FULL');
-    const [quantity, setQuantity] = useState(1);
+
 
     const colors = [
         { name: 'BLACK', code: 'bg-[#070707]' },
@@ -46,6 +46,23 @@ export default function ProductDetailsClient() {
             href: "/saddles",
         },
     ];
+
+    const handleCart = () => {
+        const cartData = {
+            color: selectedColor,
+            size: selectedSize,
+        };
+
+        const productName = "horseDoubleBand"
+
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || {};
+        existingCart[productName] = cartData;
+
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+
+        console.log(`Saved for ${productName}:`, cartData);
+    };
+
 
     return (
         <div>
@@ -104,15 +121,14 @@ export default function ProductDetailsClient() {
 
                                             {colors.map((color, index) => (
                                                 <div key={index} className='flex flex-col justify-between items-center gap-2'>
-                                                    <div className={`xl:w-8 xl:h-8 w-6 h-6 ${color?.code}`}>
-                                                    </div>
-                                                    <button
+                                                    <button onClick={() => setSelectedColor(color.name)} className={`xl:w-8 xl:h-8 w-6 h-6 cursor-pointer ${color?.code}`}>
+                                                    </button>
+                                                    <span
                                                         key={color.name}
-                                                        onClick={() => setSelectedColor(color.name)}
-                                                        className={`text-[#4C526F] xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light`}
+                                                        className={`text-[#4C526F] xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light ${selectedColor === color?.name  ? `underline ` :"no-underline"}`}
                                                     >
                                                         {color.name}
-                                                    </button>
+                                                    </span>
 
                                                 </div>
                                             ))}
@@ -166,7 +182,7 @@ export default function ProductDetailsClient() {
 
                                             </button>
 
-                                            <button className="w-full cursor-pointer bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition lg:text-lg text-base">
+                                            <button onClick={handleCart} className="w-full cursor-pointer bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition lg:text-lg text-base">
                                                 ADD TO CART
                                             </button>
                                         </div>
