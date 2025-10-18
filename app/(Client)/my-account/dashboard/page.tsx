@@ -95,7 +95,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {dashboardStats.map((status) => (
           <DashboardCard
             key={status?.id}
@@ -107,16 +107,7 @@ const DashboardPage = () => {
           />
         ))}
       </div>
-      <OrdersTable
-        title="Recent Orders"
-        data={orders}
-        onStatusChange={(value) => console.log("Filter changed to:", value)}
-        pagination={{
-          currentPage: 1,
-          totalPages: 6,
-          onPageChange: (page) => console.log("Page:", page),
-        }}
-      />
+      <OrdersTable title="Recent Orders" data={orders} />
     </>
   );
 };

@@ -12,7 +12,9 @@ const MyAccountLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <BreadCrumb breadLink={breadLink} />
       <div className="lg:max-w-[1194px] mx-auto xl:px-0 px-5 my-8 flex gap-x-8">
-        <Sidebar />
+        <div className="lg:w-[24.12%] ">
+          <Sidebar />
+        </div>
 
         {/* Right side: changes per page */}
         <div className="flex-1">{children}</div>

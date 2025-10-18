@@ -11,6 +11,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "../Shared/LanguageSwitcher";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
@@ -18,7 +24,7 @@ import {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [position, setPosition] = useState("bottom");
   const pathName = usePathname();
 
   const navigationLinks = [
@@ -190,25 +196,23 @@ const Header = () => {
               <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
-            <button
-              className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[#F6F8FA] hover:bg-gray-100 rounded-full transition-colors"
-              onClick={() => setOpen((prev) => !prev)}
-            >
-              <UserIcon className="size-[18px] " />
-            </button>
 
-            {/*Dropdown*/}
-            {open && (
-              <div className="absolute top-10 right-16 mt-2 w-40 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-50">
-                <Link
-                  href="/my-account/dashboard"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setOpen((prev) => !prev)}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="cursor-pointer p-3 rounded-full bg-[#F6F8FA]">
+                  <UserIcon className="size-[18px]" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-20 rounded-none">
+                <DropdownMenuRadioGroup
+                  value={position}
+                  onValueChange={setPosition}
+                  className="text-center"
                 >
-                  My Account
-                </Link>
-              </div>
-            )}
+                  <Link href="/my-account/dashboard">My Account</Link>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Mobile menu button */}
             <button
