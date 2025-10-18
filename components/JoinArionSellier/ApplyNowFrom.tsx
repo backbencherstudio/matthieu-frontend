@@ -22,7 +22,9 @@ const formSchema = z.object({
   username: z.string().min(2, { message: "First name must be at least 2 characters." }),
   lastname: z.string().min(2, { message: "Last name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  phonenumber: z.string().min(8, { message: "Phone number must be valid." }),
+ phonenumber: z
+  .string()
+  .regex(/^\d{8,15}$/, { message: "Phone number must be 8–15 digits and only numbers." }),
   town: z.string().min(2, { message: "Town must be at least 2 characters." }),
   state: z.string().min(2, { message: "State must be at least 2 characters." }),
   experience: z.string().min(2, { message: "Experience field cannot be empty." }),
@@ -37,7 +39,7 @@ export function ApplyNowForm() {
       username: "",
       lastname: "",
       email: "",
-      phonenumber: "",
+      phonenumber:"" ,
       town: "",
       state: "",
       experience: "",
@@ -75,11 +77,13 @@ export function ApplyNowForm() {
   // ✅ Submit handler
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ ...values, files });
+     form.reset();
+  setFiles([]);
   }
 
   return (
     <div>
-      <div className="pt-[60px]">
+      <div className="mt-6">
         <h1 className="text-[#1F274B] text-center text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
           Apply Now!
         </h1>
@@ -98,6 +102,7 @@ export function ApplyNowForm() {
                     <Input
                       placeholder="FIRST NAME"
                       {...field}
+                        required
                       className="bg-[#F8FAFB]  text-sm file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]"
                     />
                   </FormControl>
@@ -114,6 +119,7 @@ export function ApplyNowForm() {
                     <Input
                       placeholder="LAST NAME"
                       {...field}
+                        required
                       className=" text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]"
                     />
                   </FormControl>
@@ -131,7 +137,7 @@ export function ApplyNowForm() {
               render={({ field }) => (
                 <FormItem className="uppercase ">
                   <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
-                    <Input placeholder="EMAIL" {...field} type="email" />
+                    <Input placeholder="EMAIL" {...field}   required type="email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,7 +149,10 @@ export function ApplyNowForm() {
               render={({ field }) => (
                 <FormItem className="uppercase ">
                   <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
-                    <Input placeholder="PHONE NUMBER" {...field} />
+                    <Input placeholder="PHONE NUMBER" {...field}  type="tel"  onChange={(e) => {
+  const value = e.target.value.replace(/\D/g, "");
+  form.setValue("phonenumber", value, { shouldValidate: true });
+}}  required/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -159,7 +168,7 @@ export function ApplyNowForm() {
               render={({ field }) => (
                 <FormItem className="uppercase ">
                   <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
-                    <Input placeholder="TOWN" {...field} />
+                    <Input placeholder="TOWN" {...field}   required />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -171,7 +180,7 @@ export function ApplyNowForm() {
               render={({ field }) => (
                 <FormItem className="uppercase ">
                   <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
-                    <Input placeholder="STATE" {...field} />
+                    <Input placeholder="STATE" {...field}   required/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -186,7 +195,7 @@ export function ApplyNowForm() {
             render={({ field }) => (
               <FormItem className="pb-[16px] uppercase ">
                 <FormControl className="bg-[#F8FAFB] text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
-                  <Input placeholder="EXPERIENCE" {...field} />
+                  <Input placeholder="EXPERIENCE" {...field}   required/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -203,6 +212,7 @@ export function ApplyNowForm() {
                 <Textarea
                   placeholder="MESSAGE"
                   {...field}
+                    required
                   className="bg-[#F8FAFB] min-h-[120px] px-4 pt-5 pb-4 border-none h-[50px] rounded-none leading-5 focus-visible:ring-1  "
                 />
               </FormControl>
@@ -246,10 +256,10 @@ export function ApplyNowForm() {
             </div>
 
           </div>
-          <div className="pt-[48px]">
+          <div className="pt-[48px] ">
             <button
               type="submit"
-              className="bg-[#1F274B] py-[32px] px-[16px] w-[117px] h-[56px] text-white flex justify-center items-center ">
+              className="bg-[#1F274B] py-[16px] px-[32px] w-[117px] h-[56px] text-white flex justify-center items-center cursor-pointer">
               Submit
             </button>
           </div>

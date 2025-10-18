@@ -53,7 +53,7 @@ const Saved: React.FC = () => {
               className=" w-full h-auto object-contain"
               unoptimized
             />
-            <div className="p-4">
+            <div className="">
               <h2 className=" text-[#1F274B] text-[20px] font-normal leading-[124%] uppercase ">
                 {item.title}
               </h2>

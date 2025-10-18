@@ -90,28 +90,28 @@ const BlogDetailPage = () => {
             <p className="text-[#1D1F2C] text-[16px] sm:text-[18px] font-extrabold leading-[148%] tracking-[0.36px] mb-[16px]">
               6 Aug, 2025
             </p>
-            <p className="text-[#1D1F2C] text-[16px] sm:text-[18px] leading-normal  normal-case ">
-              The 2025 FEI North American Youth Championships (NAYC) showcased the skill, determination, and sportsmanship of young equestrians from across the continent, and Arion Sellier riders were no exception. Competing in divisions ranging from Children's to Young Rider Jumping divisions, our athletes delivered outstanding performances, earning team gold, silver, and bronze medals, as well as notable individual achievements.
+            <p className="text-[#4A4C56] text-[16px] sm:text-[18px] leading-normal  normal-case ">
+              The 2025 FEI North American Youth Championships (NAYC) showcased the skill, determination, and sportsmanship of young equestrians from across the continent, and Arion Sellier riders were no exception. Competing in divisions ranging from Children’s to Young Rider Jumping divisions, our athletes delivered outstanding performances, earning team gold, silver, and bronze medals, as well as notable individual achievements. For more information about the competition format, click here.
             </p>
           </div>
 
           <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block">
-            <div className="flex justify-between items-center bg-[#1F274B] text-white p-4 rounded">
+            <div className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
               <p className="text-sm font-semibold normal-case">Saddles</p>
               <Image src="/blogDetails/sadeles.png" alt="saddles" width={24} height={24} />
             </div>
 
-            <div className="flex justify-between items-center border border-black p-4 rounded">
+            <div className="flex justify-between items-center border border-black p-4 ">
               <p className="text-sm font-semibold normal-case">Used Saddles</p>
               <Image src="/blogDetails/usedsadless.png" alt="used saddles" width={24} height={24} />
             </div>
 
-            <div className="flex justify-between items-center border border-black p-4 rounded">
+            <div className="flex justify-between items-center border border-black p-4 ">
               <p className="text-sm font-semibold normal-case">Tack & Accessories</p>
               <Image src="/blogDetails/trac.png" alt="tack" width={24} height={24} />
             </div>
 
-            <div className="border border-black p-4 rounded text-sm font-semibold normal-case">
+            <div className="border border-black p-4  text-sm font-semibold normal-case">
               Follow Us
             </div>
           </div>
@@ -121,7 +121,7 @@ const BlogDetailPage = () => {
         <div className='w-[385px] md:w-[727px] lg:w-[983px] xl:w-[1032px] pb-[60px]'>
 
           <div className="mt-[32px]">
-            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
+            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-[4px] normal-case">
               Children's Division Competition Recap
             </p>
 
@@ -131,7 +131,7 @@ const BlogDetailPage = () => {
                 Ryan Haselden & Hector Du Gue's victory lap after receiving team gold with Zone 4. ©USEquestrian
               </p>
               <p className="text-[#4A4C56] text-[16px] sm:text-[18px] tracking-[0.36px] leading-[148%] mt-[24px] normal-case">
-                Ryan Haselden played a key role in Zone 4’s gold medal victory in the Children’s category at the 2025 FEI North American Youth Championships. Riding Hector du Gue, her 2017 Selle Français gelding (Satisfaction FRH x Lando), Haselden helped the team finish on a total of just eight faults after two strong rounds on Thursday.
+                Ryan Haselden played a key role in Zone 4’s gold medal victory in the Children’s category at the 2025 FEI North American Youth Championships. Riding Hector du Gue, her 2017 Selle Français gelding (Satisfaction FRH x Lando), Haselden helped the team finish on a total of just eight faults after two strong rounds on Thursday. Carrying a fault‑free score from Wednesday’s opener into the team final, Haselden delivered consistent, composed rides that contributed to Zone 4’s dominant performance.
               </p>
             </div>
 
@@ -154,7 +154,7 @@ const BlogDetailPage = () => {
 
             {/* Pre-Junior section 1 */}
 
-            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 rounded normal-case">
+            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-[4px] rounded normal-case">
               Pre-Junior Division Competition Recap
 
             </p>
@@ -187,7 +187,7 @@ const BlogDetailPage = () => {
           <div className="mt-[32px] ">
 
             {/* Pre-Junior Division 1 */}
-            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
+            <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-[4px] normal-case">
               Pre-Junior Division Competition Recap
             </p>
 
@@ -213,7 +213,7 @@ const BlogDetailPage = () => {
               </p>
             </div>
             <div className='mt-[32px]'>
-              <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-3 normal-case">
+              <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-[4px] normal-case">
                 Pre-Junior Division Competition Recap
 
               </p>
@@ -235,7 +235,7 @@ const BlogDetailPage = () => {
             </div>
 
             <div className='pt-[32px] '>
-              <div className='bg-[#1F274B] h-[400px] lg:h-[175px] p-[32px]'>
+              <div className='bg-[#1F274B] h-auto  p-[32px]'>
                 <p className='text-white text-center text-[32px] font-extrabold leading-[148%] tracking-[0.64px] normal-case'>Ride with Purpose. Ride with Arion.</p>
                 <p className='text-white/80 text-center text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case mt-[10px]'>Whether you’re preparing for national finals or building your foundation in the ring, Arion’s French craftsmanship and technical innovation are designed to help you and your horse perform at your best.</p>
               </div>
