@@ -22,7 +22,9 @@ const formSchema = z.object({
   username: z.string().min(2, { message: "First name must be at least 2 characters." }),
   lastname: z.string().min(2, { message: "Last name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  phonenumber: z.string().min(8, { message: "Phone number must be valid." }),
+ phonenumber: z
+  .string()
+  .regex(/^\d{8,15}$/, { message: "Phone number must be 8–15 digits and only numbers." }),
   town: z.string().min(2, { message: "Town must be at least 2 characters." }),
   state: z.string().min(2, { message: "State must be at least 2 characters." }),
   experience: z.string().min(2, { message: "Experience field cannot be empty." }),
@@ -37,7 +39,7 @@ export function ApplyNowForm() {
       username: "",
       lastname: "",
       email: "",
-      phonenumber: "",
+      phonenumber:"" ,
       town: "",
       state: "",
       experience: "",
@@ -75,30 +77,33 @@ export function ApplyNowForm() {
   // ✅ Submit handler
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ ...values, files });
+     form.reset();
+  setFiles([]);
   }
 
   return (
     <div>
-      <div className="pt-[60px] pb-[48px]">
+      <div className="pt-[60px]">
         <h1 className="text-[#1F274B] text-center text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
           Apply Now!
         </h1>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer py-[48px]">
           {/* Row 1: First + Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem className="">
+                <FormItem className="uppercase ">
                   <FormControl>
                     <Input
                       placeholder="FIRST NAME"
                       {...field}
-                      className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none"
+                        required
+                      className="bg-[#F8FAFB]  text-sm file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]"
                     />
                   </FormControl>
                   <FormMessage />
@@ -109,12 +114,13 @@ export function ApplyNowForm() {
               control={form.control}
               name="lastname"
               render={({ field }) => (
-                <FormItem className="bg-[#F8FAFB]">
+                <FormItem className="bg-[#F8FAFB] uppercase ">
                   <FormControl>
                     <Input
                       placeholder="LAST NAME"
                       {...field}
-                      className="text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none "
+                        required
+                      className=" text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]"
                     />
                   </FormControl>
                   <FormMessage />
@@ -129,9 +135,9 @@ export function ApplyNowForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
-                    <Input placeholder="EMAIL" {...field} type="email" />
+                <FormItem className="uppercase ">
+                  <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
+                    <Input placeholder="EMAIL" {...field}   required type="email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,9 +147,12 @@ export function ApplyNowForm() {
               control={form.control}
               name="phonenumber"
               render={({ field }) => (
-                <FormItem>
-                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
-                    <Input placeholder="PHONE NUMBER" {...field} />
+                <FormItem className="uppercase ">
+                  <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
+                    <Input placeholder="PHONE NUMBER" {...field}  type="tel"  onChange={(e) => {
+  const value = e.target.value.replace(/\D/g, "");
+  form.setValue("phonenumber", value, { shouldValidate: true });
+}}  required/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,9 +166,9 @@ export function ApplyNowForm() {
               control={form.control}
               name="town"
               render={({ field }) => (
-                <FormItem>
-                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
-                    <Input placeholder="TOWN" {...field} />
+                <FormItem className="uppercase ">
+                  <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5  !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
+                    <Input placeholder="TOWN" {...field}   required />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -169,9 +178,9 @@ export function ApplyNowForm() {
               control={form.control}
               name="state"
               render={({ field }) => (
-                <FormItem>
-                  <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
-                    <Input placeholder="STATE" {...field} />
+                <FormItem className="uppercase ">
+                  <FormControl className="bg-[#F8FAFB]  text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
+                    <Input placeholder="STATE" {...field}   required/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -184,9 +193,9 @@ export function ApplyNowForm() {
             control={form.control}
             name="experience"
             render={({ field }) => (
-              <FormItem className="pb-[16px]">
-                <FormControl className="bg-[#F8FAFB] text-[#696E86] text-sm uppercase file:h-0 py-3.5 !h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none">
-                  <Input placeholder="EXPERIENCE" {...field} />
+              <FormItem className="pb-[16px] uppercase ">
+                <FormControl className="bg-[#F8FAFB] text-sm  file:h-0 py-3.5 !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none px-4 pt-5 pb-4 border-none h-[50px]">
+                  <Input placeholder="EXPERIENCE" {...field}   required/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -194,22 +203,25 @@ export function ApplyNowForm() {
           />
 
           {/* Message */}
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem className="pb-[16px]">
-                <FormControl className="bg-[#F8FAFB]">
-                  <Textarea
-                    placeholder="MESSAGE"
-                    {...field}
-                    className="min-h-[120px]"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+   <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem className="pb-[16px] uppercase">
+              <FormControl>
+                <Textarea
+                  placeholder="MESSAGE"
+                  {...field}
+                    required
+                  className="bg-[#F8FAFB] min-h-[120px] px-4 pt-5 pb-4 border-none h-[50px] rounded-none leading-5 focus-visible:ring-1  "
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+
 
           {/* ✅ Drag & Drop Upload */}
           <div
@@ -217,7 +229,7 @@ export function ApplyNowForm() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={cn(
-              "w-full border border-dashed rounded-md h-28 flex flex-col items-center justify-center cursor-pointer transition-all bg-[#F8FAFB] mb-[164px] pt-[16px]",
+              "w-full border border-dashed   flex flex-col items-center justify-center cursor-pointer transition-all bg-[#F8FAFB]  pt-[16px] h-[140px]",
               isDragging
                 ? "border-primary bg-primary/5"
                 : "border-muted-foreground/30"
@@ -225,10 +237,10 @@ export function ApplyNowForm() {
           >
             <label className="flex flex-col items-center justify-center cursor-pointer">
               <Upload className="w-5 h-5 mb-1 text-muted-foreground" />
-              <span className="text-[#4C526F] font-[Avenir] text-[20px] font-extrabold leading-[100%] pb-[8px] normal-case">
+              <span className="text-[#4C526F] font-[Avenir] text-[20px] font-extrabold leading-[100%]  normal-case">
                 Drag & Drop Files Here
               </span>
-              <span className="text-[#4C526F] font-[Avenir] text-[14px] font-normal leading-[100%] normal-case">
+              <span className="text-[#4C526F] font-[Avenir] text-[14px] font-normal leading-[100%] normal-case pt-[8px]">
                 Format: PDF, Doc, PNG (Max: 6 mb)
               </span>
               <input
@@ -239,8 +251,22 @@ export function ApplyNowForm() {
                 className="hidden"
               />
             </label>
+            <div className="w-full flex justify-end px-4">
+              <p className="text-[#4C526F] text-[14px] normal-case">0 of 2</p>
+            </div>
+
           </div>
+          <div className="pt-[48px] ">
+            <button
+              type="submit"
+              className="bg-[#1F274B] py-[16px] px-[32px] w-[117px] h-[56px] text-white flex justify-center items-center cursor-pointer">
+              Submit
+            </button>
+          </div>
+
+
         </form>
+
       </Form>
     </div>
   );

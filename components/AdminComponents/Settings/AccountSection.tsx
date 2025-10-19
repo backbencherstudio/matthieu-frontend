@@ -144,7 +144,7 @@ export default function AccountSection() {
                   id="firstName"
                   type="text"
                   placeholder="Md"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
+                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("firstName", {
                     required: "First Name is required",
                   })}
@@ -166,7 +166,7 @@ export default function AccountSection() {
                   id="lastName"
                   type="text"
                   placeholder="Yasir"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
+                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("lastName", {
                     required: "Last Name is required",
                   })}
@@ -191,7 +191,7 @@ export default function AccountSection() {
                   id="email"
                   type="email"
                   placeholder="arionadmin@gmail.com"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
+                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -217,7 +217,7 @@ export default function AccountSection() {
                   id="phone"
                   type="text"
                   placeholder="+1 (555) 987-6543"
-                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px]"
+                  className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("phone", {
                     required: "Phone number is required",
                   })}

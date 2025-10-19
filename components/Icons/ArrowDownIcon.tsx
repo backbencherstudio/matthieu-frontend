@@ -1,4 +1,8 @@
-export default function ArrowDownIcon() {
+
+
+import React from "react";
+
+const ArrowDownIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +10,7 @@ export default function ArrowDownIcon() {
       height="10"
       viewBox="0 0 16 10"
       fill="none"
+      className={className}
     >
       <path
         d="M15 1.5L8 8.5L1 1.5"
@@ -16,4 +21,6 @@ export default function ArrowDownIcon() {
       />
     </svg>
   );
-}
+};
+
+export default ArrowDownIcon;

@@ -11,12 +11,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "../Shared/LanguageSwitcher";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
@@ -113,6 +107,8 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const isLogInUers = false;
+
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
@@ -197,22 +193,19 @@ const Header = () => {
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="cursor-pointer p-3 rounded-full bg-[#F6F8FA]">
+            {isLogInUers ? (
+              <button className="cursor-pointer p-3 rounded-full bg-[#F6F8FA]">
+                <Link href="/my-account/dashboard">
                   <UserIcon className="size-[18px]" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-20 rounded-none">
-                <DropdownMenuRadioGroup
-                  value={position}
-                  onValueChange={setPosition}
-                  className="text-center"
-                >
-                  <Link href="/my-account/dashboard">My Account</Link>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </Link>
+              </button>
+            ) : (
+              <button className="cursor-pointer p-3 rounded-full bg-[#F6F8FA]">
+                <Link href="/signin">
+                  <UserIcon className="size-[18px]" />
+                </Link>
+              </button>
+            )}
 
             {/* Mobile menu button */}
             <button
