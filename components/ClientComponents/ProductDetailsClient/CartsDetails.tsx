@@ -14,6 +14,8 @@ interface CartItem {
 }
 
 export default function CartsDetails() {
+
+
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: '1',
@@ -73,7 +75,7 @@ export default function CartsDetails() {
   };
 
   return (
-    <div className="flex flex-col gap-6 justify-between  h-full overflow-y-auto">
+    <div className="flex flex-col gap-6 justify-between md:h-full h-[92vh] overflow-y-auto custom-scroll">
 
       {/* product details section  */}
       <div className="flex flex-col gap-3">
@@ -83,7 +85,7 @@ export default function CartsDetails() {
             className="flex md:flex-row flex-col  gap-4 bg-white py-4  border-b border-[#ECEFF3] last:border-b-0 items-stretch"
           >
             {/* Product Image */}
-            <div className='flex-shrink-0 flex gap-3'>
+            <div className='flex-shrink-0 flex md:gap-3 gap-4 items-center'>
               <img
                 src={item.image}
                 alt={item.name}
@@ -91,7 +93,7 @@ export default function CartsDetails() {
               />
 
               {/* product details here show it on mobile screen */}
-              <div className='flex md:hidden flex-col gap-2 '>
+              <div className='flex md:hidden flex-col gap-3  '>
                 <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
                 <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                 <div className='flex  gap-4 '>
