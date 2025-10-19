@@ -109,7 +109,7 @@ export default function JobApplicant() {
       <div className="overflow-auto">
         <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
           {/* search bar */}
-          <div className="flex flex-col md:flex-row justify-between md:items-center gap-2.5 my-[23px]">
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-2.5 mb-[23px]">
             <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%]">
               Job Applicants List
             </h2>
