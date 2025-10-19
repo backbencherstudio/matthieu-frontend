@@ -170,7 +170,7 @@ export function Settings() {
               name="currentPassword"
               render={({ field }) => (
                 <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none ">
-                  <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] pb-[8px] ">
+                  <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] ">
                     Current Password
                   </FormLabel>
                   <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB]  ">
@@ -193,7 +193,7 @@ export function Settings() {
                 name="newPassword"
                 render={({ field }) => (
                   <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-[16px] mb-[8px]">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-[16px] ">
                       New Password
                     </FormLabel>
                     <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB] ">
@@ -214,7 +214,7 @@ export function Settings() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-0 md:mt-[16px] mb-[8px]">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-0 md:mt-[16px] ">
                       Confirm Password
                     </FormLabel>
                     <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB] py-[12px] pt-[16px]">

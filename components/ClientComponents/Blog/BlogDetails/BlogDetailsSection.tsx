@@ -80,9 +80,9 @@ const BlogDetailPage = () => {
             </p>
           </div>
 
-          <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block">
+          <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block text-[#4A4C56] text-4">
             <div className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
-              <p className="text-sm font-semibold normal-case">Saddles</p>
+              <p className="text-sm font-semibold normal-case ">Saddles</p>
               <Image src="/blogDetails/sadeles.png" alt="saddles" width={24} height={24} />
             </div>
 
