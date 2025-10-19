@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { TableItem } from '@/components/reusable/Features/reuseable-table';
+=======
+import { TableItem } from "@/components/reusable/Features/reuseable-table";
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
 import { StaticImageData } from "next/image";
 
 export interface TableRowItem extends TableItem {
@@ -62,12 +66,22 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
+<<<<<<< HEAD
   action?: string;
+=======
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
   code?: string;
   discount?: number;
   limit?: number;
   limitPerUse?: number;
   used?: number;
+<<<<<<< HEAD
+=======
+  phone?: string;
+  state?: string;
+  action?: React.ReactNode;
+  experience?: string;
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
   attachment?: string;
   companyName?: string;
   workspaceName?: string;
