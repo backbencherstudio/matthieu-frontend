@@ -17,7 +17,7 @@ export interface TableItem {
 }
 
 interface ReuseAbleTableProps<T extends TableItem> {
-  allClientDataList?: T[]; // or a defined type
+  allClientDataList?: T[];
   isLoadings: boolean;
   currentItems: T[];
   tableHeader: string[];
