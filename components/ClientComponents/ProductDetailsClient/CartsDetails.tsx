@@ -33,6 +33,31 @@ export default function CartsDetails() {
     }
   ]);
 
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState('');
+
+  const subtotal = 590.00;
+  const shipping = 15.00;
+  const taxRate = 0.08;
+  const couponDiscount = appliedCoupon ? 0.00 : 0.00;
+
+  const tax = (subtotal + shipping) * taxRate;
+  const total = subtotal + shipping + tax - couponDiscount;
+
+  const summaryItems = [
+    { label: "Subtotal", value: subtotal, },
+    { label: "Shipping", value: shipping,  },
+    { label: "Tax (8%)", value: tax,  },
+    { label: "Coupon Discount", value: -couponDiscount,  },
+  ];
+
+  const handleApplyCoupon = () => {
+    if (couponCode.trim()) {
+      setAppliedCoupon(couponCode);
+      // In a real app, you would validate the coupon here
+    }
+  };
+
   const updateQuantity = (id: string, delta: number) => {
     setCartItems(items =>
       items.map(item =>
@@ -48,7 +73,9 @@ export default function CartsDetails() {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-6 justify-between  h-full overflow-y-auto">
+
+      {/* product details section  */}
       <div className="flex flex-col gap-3">
         {cartItems.map((item) => (
           <div
@@ -56,18 +83,29 @@ export default function CartsDetails() {
             className="flex md:flex-row flex-col  gap-4 bg-white py-4  border-b border-[#ECEFF3] last:border-b-0 items-stretch"
           >
             {/* Product Image */}
-            <div className='flex-shrink-0'>
+            <div className='flex-shrink-0 flex gap-3'>
               <img
                 src={item.image}
                 alt={item.name}
                 className="w-[102px] h-[104px] object-cover "
               />
+
+              {/* product details here show it on mobile screen */}
+              <div className='flex md:hidden flex-col gap-2 '>
+                <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
+                <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
+                <div className='flex  gap-4 '>
+                  <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
+                  <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>color: brawn</span>
+                </div>
+              </div>
             </div>
 
             {/* Product Details */}
-            <div className="flex-1  flex  justify-between">
-              <div className='flex flex-col justify-between gap-3 md:gap'>
-                <div className='flex flex-col gap-2'>
+            {/* product details here show it on large screen */}
+            <div className="flex-1  flex  justify-between items-center md:items-stretch">
+              <div className='flex flex-col justify-between gap-3 md:gap '>
+                <div className='md:flex hidden flex-col gap-2 '>
                   <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
                   <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                   <div className='flex  gap-4 '>
@@ -77,7 +115,7 @@ export default function CartsDetails() {
                 </div>
 
                 {/* Quantity Controls */}
-                <div className='flex justify-between'>
+                <div className='flex justify-between '>
                   <div className="flex items-center gap-3">
                     <div className='flex gap-4 items-center bg-[#F3F3F4] p-1.5'>
                       <button
@@ -106,11 +144,17 @@ export default function CartsDetails() {
               </div>
 
               {/* Price and Quantity Info */}
+              {/* this quantity will show only mobile screen */}
+              <div className='md:hidden inline'>
+                <p className="md:text-base text-sm leading-[100%] font-extrabold text-[#4C526F]  ">Qty: {item.quantity}</p>
+              </div>
+
               <div className="text-right flex flex-col justify-between ">
                 <p className="md:text-xl text-lg font-extrabold leading-[120%] text-[#4C526F]">
                   ${item.price.toFixed(2)}
                 </p>
-                <p className="md:text-base text-sm leading-[100%] font-extrabold text-[#4C526F]  ">Qty: {item.quantity}</p>
+                {/* this quantity will show only large screen */}
+                <p className="md:text-base text-sm leading-[100%] font-extrabold text-[#4C526F] md:block hidden ">Qty: {item.quantity}</p>
               </div>
             </div>
 
@@ -118,6 +162,72 @@ export default function CartsDetails() {
           </div>
         ))}
       </div>
+
+
+      {/* //checkout section  */}
+      <div className="mt-auto">
+        <div className=" ">
+          {/* Coupon Section */}
+          <div className="flex flex-col gap-3">
+            <label htmlFor="coupon" className="text-[#1F274B] md:text-lg text-base font-extrabold leaqding-[100%]">
+              Have a coupon?
+            </label>
+            <div className="relative px-[2px] md:px-[1px]">
+              <input
+                type="text"
+                id="coupon"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
+                placeholder="GTH678"
+                className="flex-1 pl-4  md:py-3.5 py-2.5 border border-[#1F274B3D]  focus:outline-none focus:ring-1 focus:ring-[#1F274B] focus:border-transparent w-full text-[#4C526F] md:text-base leading-[100%] font-normal bg-[#F8FAFB]"
+              />
+              <button
+                onClick={handleApplyCoupon}
+                className="px-4 py-2 absolute top-1/2 -translate-y-1/2  right-3 text-base leading-[100%] font-normal text-white bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer"
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+
+          {/* Divider */}
+          {/* <hr className="" /> */}
+
+          {/* Price Breakdown */}
+          <div className="space-y-5 mt-6 pb-4 border-b">
+            {summaryItems.map((item, index) => (
+              <div
+                key={index}
+                className={`flex justify-between md:text-base text-sm leading-[100%] font-normal text-[#4C526F] `}
+              >
+                <span>{item.label}</span>
+                <span className={` ${item?.label === "Coupon Discount" && "text-[#F38B94]"}`}>
+                  ${(item?.value).toFixed(2)}
+                </span>
+              </div>
+            ))}
+          </div>
+
+
+          {/* Total */}
+          <div className="flex justify-between items-center mt-6">
+            <span className="text-lg sm:text-xl font-semibold text-gray-800">
+              Total Amount
+            </span>
+            <span className="text-lg sm:text-xl font-semibold text-gray-800">
+              ${total.toFixed(2)}
+            </span>
+          </div>
+
+          {/* Checkout Button */}
+          <button className="w-full bg-slate-800 text-white py-3.5 rounded hover:bg-slate-700 transition-colors font-medium text-base md:mt-8 mt-6">
+            Checkout Now
+          </button>
+        </div>
+      </div>
+
     </div>
   );
 }
+
+
