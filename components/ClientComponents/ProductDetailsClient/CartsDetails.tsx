@@ -102,7 +102,7 @@ export default function CartsDetails() {
             </div>
 
             {/* Price and Quantity Info */}
-            <div className="text-right flex flex-col justify-between border">
+            <div className="text-right flex flex-col justify-between ">
               <p className="text-lg font-semibold text-gray-900">
                 ${item.price.toFixed(2)}
               </p>
