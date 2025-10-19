@@ -40,7 +40,7 @@ export function SignUpForm() {
   return (
     <div className="maxContainer my-12">
       <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px] px-4">
-        <div className="space-y-1 text-center p-0 mt-8 mb-10">
+        <div className="space-y-1 text-center p-0 mb-10">
           <h1 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%]">
             Sign Up
           </h1>
@@ -59,7 +59,7 @@ export function SignUpForm() {
                   id="firstName"
                   type="text"
                   placeholder="Yasir Abed"
-                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
+                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                   {...register("firstName", {
                     required: "First Name is required",
                   })}
@@ -81,7 +81,7 @@ export function SignUpForm() {
                   id="lastName"
                   type="text"
                   placeholder="Rabbu"
-                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
+                  className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                   {...register("lastName", {
                     required: "Last Name is required",
                   })}
@@ -104,7 +104,7 @@ export function SignUpForm() {
                 id="email"
                 type="email"
                 placeholder="arionadmin@gmail.com"
-                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -131,7 +131,7 @@ export function SignUpForm() {
                 id="password"
                 type="password"
                 placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -157,7 +157,7 @@ export function SignUpForm() {
                 id="confirmPassword"
                 type="password"
                 placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] border"
+                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
                   minLength: {

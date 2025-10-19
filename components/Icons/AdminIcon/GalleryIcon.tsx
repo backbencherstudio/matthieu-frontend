@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function GalleryIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -15,21 +13,21 @@ export default function GalleryIcon({ className }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="1.26"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.5015 3.01953C6.94851 3.01953 5.17202 3.01953 3.9938 4.02583C3.82649 4.16872 3.67067 4.32454 3.52778 4.49185C2.52148 5.67007 2.52148 7.44656 2.52148 10.9995C2.52148 14.5525 2.52148 16.329 3.52778 17.5072C3.67067 17.6745 3.82649 17.8303 3.9938 17.9732C5.17202 18.9795 6.94851 18.9795 10.5015 18.9795C14.0544 18.9795 15.8309 18.9795 17.0091 17.9732C17.1765 17.8303 17.3323 17.6745 17.4752 17.5072C18.4815 16.329 18.4815 14.5525 18.4815 10.9995"
         stroke="currentColor"
         strokeWidth="1.26"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M13.4355 5.53953C13.931 5.02979 15.2497 3.01953 15.9555 3.01953C16.6614 3.01953 17.9801 5.02979 18.4755 5.53953M15.9555 3.43953V8.89953"
         stroke="currentColor"
         strokeWidth="1.26"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
