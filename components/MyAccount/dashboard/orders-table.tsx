@@ -54,7 +54,7 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
       </div>
 
       {/* Table */}
-      <div className="mt-5 border  md:w-full w-[400px] overflow-x-auto">
+      <div className="mt-5 border  md:w-full w-[380px] overflow-x-auto">
         <table className="w-full">
           <thead className="bg-[#F6F8FA] normal-case text-left">
             <tr className="text-[14px] leading-[144%]">
