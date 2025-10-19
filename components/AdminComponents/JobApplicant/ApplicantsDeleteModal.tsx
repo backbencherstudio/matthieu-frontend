@@ -18,7 +18,7 @@ export default function ApplicantsDeleteModal() {
       </button>
 
       <CustomDialog open={open} setOpen={setOpen}>
-        <div className="p-8 rounded-[8px] bg-[#FFF]">
+        <div className="p-8 rounded-[8px] bg-[#FFF] md:w-[417px] w-full">
           <div className="flex items-center justify-center">
             <button className="cursor-pointer p-3 border-[6px] border-[#FBD8DB] bg-[#FEECEE] rounded-full">
               <DeleteIcon />
@@ -32,17 +32,12 @@ export default function ApplicantsDeleteModal() {
           <div className="mt-9 flex items-center justify-center space-x-4 w-full">
             <button
               onClick={() => setOpen(false)}
-              className="px-4 py-3 rounded-[8px] bg-[#E9E9ED] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#777980]"
+              className="px-4 py-3 rounded-[8px] bg-[#E9E9ED] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#777980] w-full"
             >
               No
             </button>
 
-            <button
-              className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF]"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
+            <button className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full">
               Yes, Delete
             </button>
           </div>

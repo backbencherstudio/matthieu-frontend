@@ -7,7 +7,7 @@ export default function JobApplicantDetail({
   onClose: () => void;
 }) {
   return (
-    <div className="px-6 py-8 rounded-[8px] bg-[#FFF]">
+    <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
       <div className="flex items-center justify-between mb-[35px]">
         <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
           Job Applicants Details
