@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Trash2, Minus, Plus } from 'lucide-react';
 import MinusIcon from '@/components/Icons/MinusIcon';
+import PlusIcon from '@/components/Icons/PlusIcon';
+import DeleteIcon from '@/components/Icons/DashboardIcons/DeleteIcon';
 
 interface CartItem {
   id: string;
@@ -74,7 +76,7 @@ export default function CartsDetails() {
               </div>
 
               {/* Quantity Controls */}
-              <div className="flex items-center gap-2 ">
+              <div className="flex items-center gap-3">
                 <div className='flex gap-4 items-center bg-[#F3F3F4] p-1.5'>
                   <button
                     onClick={() => updateQuantity(item.id, -1)}
@@ -82,19 +84,19 @@ export default function CartsDetails() {
                   >
                     <MinusIcon className="" />
                   </button>
-                  <span className=" text-center text-sm">{item.quantity}</span>
+                  <span className="text-[#1D1F2C] md:text-base text-sm font-extrabold leading-[100%] py-[2px]">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.id, 1)}
-                    className="flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                    className="flex items-center cursor-pointer text-[#1D1F2C] hover:text-[#1D1F2C]/50"
                   >
-                    <Plus className="w-3 h-3" />
+                    <PlusIcon className="" />
                   </button>
                 </div>
                 <button
                   onClick={() => removeItem(item.id)}
-                  className="ml-2 text-red-500 hover:text-red-700"
+                  className="cursor-pointer "
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <DeleteIcon className="size-5 scale-100 hover:scale-120 duration-200" />
                 </button>
               </div>
             </div>
