@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function NotificationBell({
   className,
 }: {
@@ -19,14 +17,14 @@ export default function NotificationBell({
         stroke="#1F274B"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M13.2255 15.775C13.2285 16.202 13.1505 16.626 12.9955 17.025C12.8279 17.42 12.587 17.7797 12.2855 18.085C11.9807 18.3908 11.6171 18.6317 11.2167 18.7933C10.8162 18.9548 10.3872 19.0336 9.95554 19.025C9.52296 19.0277 9.09432 18.9427 8.69554 18.775C7.89599 18.4404 7.26019 17.8046 6.92554 17.005C6.76868 16.6142 6.69052 16.1962 6.69554 15.775"
         stroke="#1F274B"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M13.2266 5.97498C14.6073 5.97498 15.7266 4.85569 15.7266 3.47498C15.7266 2.09426 14.6073 0.974976 13.2266 0.974976C11.8459 0.974976 10.7266 2.09426 10.7266 3.47498C10.7266 4.85569 11.8459 5.97498 13.2266 5.97498Z"

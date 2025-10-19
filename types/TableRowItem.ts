@@ -1,4 +1,4 @@
-import { TableItem } from '@/components/reusable/Features/reuseable-table';
+import { TableItem } from "@/components/reusable/Features/reuseable-table";
 import { StaticImageData } from "next/image";
 
 export interface TableRowItem extends TableItem {
@@ -62,12 +62,15 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
-  action?: string;
   code?: string;
   discount?: number;
   limit?: number;
   limitPerUse?: number;
   used?: number;
+  phone?: string;
+  state?: string;
+  action?: React.ReactNode;
+  experience?: string;
   attachment?: string;
   companyName?: string;
   workspaceName?: string;

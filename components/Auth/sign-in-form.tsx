@@ -32,7 +32,7 @@ export function SignInForm() {
   return (
     <div className="maxContainer my-12">
       <div className="w-full md:w-[464px] mx-auto border lg:p-[32px] md:p-[32px] py-[12px] px-4">
-        <div className="space-y-1 text-center p-0 mt-8 mb-10">
+        <div className="space-y-1 text-center p-0 mb-10">
           <h1 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%]">
             Sign In
           </h1>
@@ -50,7 +50,7 @@ export function SignInForm() {
                 id="email"
                 type="email"
                 placeholder="arionadmin@gmail.com"
-                className="bg-[#E9E9ED80] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] "
+                className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -77,7 +77,7 @@ export function SignInForm() {
                 id="password"
                 type="password"
                 placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80]  leading-[150%] border lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B]"
+                className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {

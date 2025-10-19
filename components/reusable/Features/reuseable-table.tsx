@@ -1,6 +1,9 @@
 "use client";
 
+<<<<<<< HEAD
 import React from "react";
+=======
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
 import {
   Table,
   TableBody,
@@ -10,6 +13,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
 
 export interface TableItem {
   id?: string | number;
@@ -54,17 +61,30 @@ const ReuseAbleTable = <T extends TableItem>({
               ))}
             </div>
           ) : (
+<<<<<<< HEAD
             <Table className="rounded-md overflow-hidden">
               <TableCaption></TableCaption>
               <TableHeader className="text-[#0CAF60]  text-sm px-4 py-[11px]  font-normal leading-[140%] tracking-[0.07px] ">
                 <TableRow
                   className="!border-b-0 !rounded-lg  bg-[#E7F7EF] hover:bg-[#E7F7EF]"
                   style={{ borderRadius: "40px" }}
+=======
+            <Table className=" overflow-hidden">
+              <TableCaption></TableCaption>
+              <TableHeader className="text-[#0CAF60]  text-sm px-4 !py-3  font-normal leading-[140%] tracking-[0.07px] ">
+                <TableRow
+                  className="!border-b-0 !rounded-none bg-[#F6F8FA] hover:bg-[#F6F8FA]/90"
+                  // style={{ borderRadius: "40px" }}
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
                 >
                   {tableHeader.map((header: string, index: number) => (
                     <TableHead
                       key={index}
+<<<<<<< HEAD
                       className="px-4 py-[11px] xl:text-base lg:text-sm  font-medium leading-[128%] tracking-[-0.32px] textColor last:text-right"
+=======
+                      className="px-4 !py-3 text-sm  font-normal leading-[144%] text-[#4A4C56] last:text-right"
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
                     >
                       {header}
                     </TableHead>
@@ -77,7 +97,11 @@ const ReuseAbleTable = <T extends TableItem>({
                     <TableRow
                       key={item?.id || index}
                       className={`text-gray-800 inter font-normal text-[14px] border-0 rounded-[16px] ${
+<<<<<<< HEAD
                         index % 2 === 0 ? "bg-white" : "bg-[#F8FAFB]"
+=======
+                        index % 2 === 0 ? "bg-white" : "bg-white"
+>>>>>>> c29307935a71bcf8f54a41be72a0fe32e7f6232d
                       }`}
                     >
                       {tableRowDataRenderers.map((renderFn, colIndex) => (
