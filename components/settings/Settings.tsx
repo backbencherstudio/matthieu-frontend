@@ -51,23 +51,24 @@ export function Settings() {
   };
 
   return (
-    <div className="p-4 md:p-[24px] border border-bg-[#DFE1E7]">
-      <CardHeader>
-        <CardTitle className="text-[#1F274B]  text-[24px] not-italic font-extrabold leading-[100%] uppercase ">
+<div className="">
+      <div className="p-4 md:p-[24px] border border-bg-[#DFE1E7]">
+   
+        <p className="text-[#1F274B] text-[20px] px-0  md:text-[24px] not-italic font-extrabold leading-[100%] uppercase ">
           Account Settings
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="normal-case">
+        </p>
+   
+      <CardContent className="normal-case px-0">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="">
             {/* Personal Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
               <FormField
                 control={form.control}
                 name="firstName"
                 render={({ field }) => (
                   <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none mt-[24px] ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px]  mb-[8px]">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px]  ">
                       First Name
                     </FormLabel>
                     <div className="">
@@ -76,7 +77,7 @@ export function Settings() {
                           placeholder="Yasir abid"
                           {...field}
                           required
-                          className="text-[#1D1F2C] py-[12px] px-[16px] text-[16px] not-italic font-normal leading-[150%] tracking-[0.08px]"
+                          className="text-[#1D1F2C] py-[12px] px-[16px]  text-[16px] not-italic font-normal leading-[150%] tracking-[0.08px]"
                         />
                       </FormControl>
                       <FormMessage />
@@ -89,8 +90,8 @@ export function Settings() {
                 control={form.control}
                 name="lastName"
                 render={({ field }) => (
-                  <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none  mt-[24px] ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mb-[8px]">
+                  <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none mt-3 md:mt-6">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] ">
                       Last Name
                     </FormLabel>
                     <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB]">
@@ -107,13 +108,13 @@ export function Settings() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 ">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none mt-[16px] ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mb-[8px]   ">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px]   ">
                       Email
                     </FormLabel>
                     <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB]">
@@ -135,8 +136,8 @@ export function Settings() {
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none mt-[16px]">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+                  <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none mt-3 md:mt-[16px]">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] ">
                       Phone
                     </FormLabel>
                     <FormControl className="h-[48px] !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB]">
@@ -160,7 +161,7 @@ export function Settings() {
             </div>
 
             {/* Change Password */}
-            <h2 className="text-[#1F274B] text-[24px] not-italic font-extrabold leading-[100%] uppercase mt-[32px] mb-[24px]">
+            <h2 className="text-[#1F274B] text-[20px] md:text-[24px] not-italic font-extrabold leading-[100%] uppercase mt-[32px] mb-[24px]">
               Change Password
             </h2>
 
@@ -213,7 +214,7 @@ export function Settings() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] border-none rounded-none ">
-                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-[16px] pb-[8px]">
+                    <FormLabel className="text-[#4A4C56] text-[16px] not-italic font-normal leading-[160%] tracking-[0.08px] mt-0 md:mt-[16px] mb-[8px]">
                       Confirm Password
                     </FormLabel>
                     <FormControl className="!h-auto !leading-0 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[1px] rounded-none border-none bg-[#F8FAFB] py-[12px] pt-[16px]">
@@ -243,5 +244,6 @@ export function Settings() {
         </Form>
       </CardContent>
     </div>
+</div>
   );
 }
