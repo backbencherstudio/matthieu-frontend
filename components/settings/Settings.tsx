@@ -234,7 +234,7 @@ export function Settings() {
             <div className="flex justify-end mt-[40px] ">
               <Button
                 type="submit"
-                className="bg-[#1F274B]  text-white px-4 md:px-[32px]  rounded-none py-[20px]"
+                className="bg-[#1F274B] cursor-pointer  text-white px-4 md:px-[32px]  rounded-none py-[20px]"
               >
                 Save Changes
               </Button>

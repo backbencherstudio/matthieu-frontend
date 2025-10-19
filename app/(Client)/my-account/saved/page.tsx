@@ -62,12 +62,12 @@ const Saved: React.FC = () => {
               </p>
               <div className="flex flex-col md:flex-row  gap-[12px] pt-[16px]">
                 <div className=" bg-[#1F274B] w-full md:w-2/4">
-                  <button className="py-[16px] text-white  text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
+                  <button className="py-[16px] text-white cursor-pointer  text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
                     BYE NOW
                   </button>
                 </div>
                 <div className="w-full  md:w-2/4 border-1 border-[#262626]">
-                  <button className=" py-[16px] text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
+                  <button className=" py-[16px] cursor-pointer text-[16px] font-normal leading-[124%] text-center uppercase flex justify-center items-center mx-auto">
                     add to cart
                   </button>
                 </div>

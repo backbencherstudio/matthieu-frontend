@@ -330,7 +330,7 @@ export function Billing() {
                 <div className="flex justify-end pt-[40px] pb-[24px]">
                   <Button
                     type="submit"
-                    className="bg-[#1F274B] text-white px-[32px] py-[20px] rounded-none border-none shadow-none"
+                    className="bg-[#1F274B] cursor-pointer text-white px-[32px] py-[20px] rounded-none border-none shadow-none"
                   >
                     Next
                   </Button>
