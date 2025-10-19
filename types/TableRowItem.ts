@@ -12,6 +12,7 @@ export interface TableRowItem extends TableItem {
   serviceType?: string;
   date?: string;
   daysLeft?: string;
+  productPrice?: string;
   orderId?: string;
   amount?: string;
   type?: string;
@@ -25,10 +26,12 @@ export interface TableRowItem extends TableItem {
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
+  deliveryFee?: string;
   lastLogin?: string;
   ip?: string;
   country?: string;
   device?: string;
+  paymentMethod?: string;
   os?: string;
   description?: string;
   permissions?: string[];
@@ -37,8 +40,10 @@ export interface TableRowItem extends TableItem {
   accountType?: string;
   rate?: string;
   account?: string;
+  priceRange?: string;
   issueDate?: string;
   dueDate?: string;
+  createdDate?: string;
   totalAmount?: string;
   sku?: string;
   salePrice?: string;
@@ -67,7 +72,9 @@ export interface TableRowItem extends TableItem {
   limit?: number;
   limitPerUse?: number;
   used?: number;
+  customer?: string;
   phone?: string;
+  preferences?: string;
   state?: string;
   action?: React.ReactNode;
   experience?: string;
