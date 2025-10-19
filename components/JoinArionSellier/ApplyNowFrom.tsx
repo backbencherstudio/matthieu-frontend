@@ -83,7 +83,7 @@ export function ApplyNowForm() {
 
   return (
     <div>
-      <div className="mt-6">
+      <div className="pt-[60px]">
         <h1 className="text-[#1F274B] text-center text-[48px] font-extrabold leading-[100%] tracking-[0.96px] capitalize">
           Apply Now!
         </h1>

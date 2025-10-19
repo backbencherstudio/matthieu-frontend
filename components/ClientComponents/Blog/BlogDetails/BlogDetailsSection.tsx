@@ -1,7 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { url } from './../../../../node_modules/zod/src/v4/classic/schemas';
 
 // const blogs = [
 //   {
@@ -51,22 +49,9 @@ import { url } from './../../../../node_modules/zod/src/v4/classic/schemas';
 // }
 
 const BlogDetailPage = () => {
-  //   const blog = blogs.find((item) => item.id === id);
-
-  //   if (!blog) {
-  //     return <p className="text-center">No blog found for ID: {id}</p>;
-  //   }
-
   return (
     <div className=" maxContainer">
-      {/* Main Image
-      <Image
-        src={blog.image}
-        alt={blog.type}
-        width={800}
-        height={480}
-        className=" h-[200px] sm:h-[300px] md:h-[400px] w-[1600px] object-cover"
-      /> */}
+
 
 
       <div className="  bg-no-repeat bg-cover bg-center lg:py-[190px] md:py-[140px] py-[100px] w-full"
