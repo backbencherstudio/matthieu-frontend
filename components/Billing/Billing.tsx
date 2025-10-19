@@ -57,16 +57,16 @@ export function Billing() {
   };
 
   return (
-    <div className="pb-[48px]">
-      <Card className="max-w-3xl mx-auto mt-10 shadow-none border-none rounded-none normal-case">
+    <div className="pb-[48px] ">
+      <div className="max-w-3xl mx-auto mt-10 shadow-none border-none rounded-none normal-case ">
         <div className="border-[#DFE1E7] border-2 p-[32px]">
-          <CardTitle className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] pb-[32px]">
+          <p className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] pb-[32px] ">
             Billing Details
-          </CardTitle>
+          </p>
 
-          <CardContent className="border-none rounded-none">
+          <div className="border-none rounded-none">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 {/* First + Last Name */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
@@ -81,7 +81,7 @@ export function Billing() {
                           <Input
                             placeholder="Yasir abid"
                             {...field}
-                            className="!text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                            className="!text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px]  bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                           />
                         </FormControl>
                         <FormMessage className="text-black text-[14px]" />
@@ -101,7 +101,7 @@ export function Billing() {
                           <Input
                             placeholder="Rabbu"
                             {...field}
-                            className="!text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                            className="!text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                           />
                         </FormControl>
                         <FormMessage className="text-black text-[14px]" />
@@ -125,7 +125,7 @@ export function Billing() {
                             type="email"
                             placeholder="arionadmin@gmail.com"
                             {...field}
-                            className="text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                            className="text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px]  bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                           />
                         </FormControl>
                         <FormMessage className="text-black text-[14px]" />
@@ -151,7 +151,7 @@ export function Billing() {
                               const onlyNums = e.target.value.replace(/\D/g, "");
                               field.onChange(onlyNums);
                             }}
-                            className="text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                            className="text-[#1D1F2C] text-[16px]  leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px]  bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                           />
                         </FormControl>
                         <FormMessage className="text-black text-[14px]" />
@@ -166,14 +166,14 @@ export function Billing() {
                   name="company"
                   render={({ field }) => (
                     <FormItem className="!h-auto border-none rounded-none ">
-                      <FormLabel className="text-[#4A4C56] text-center font-avenir text-[16px] leading-[150%] tracking-[0.08px]">
+                      <FormLabel className="text-[#4A4C56] text-center  font-avenir text-[16px] leading-[150%] tracking-[0.08px]">
                         Company name (optional)
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           placeholder=""
-                          className="border px-4 h-[48px] mt-[8px] text-[16px] font-extrabold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                          className="border px-4 h-[48px]  text-[16px] font-extrabold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                         />
                       </FormControl>
                       <FormMessage className="text-black text-[14px]" />
@@ -187,7 +187,7 @@ export function Billing() {
                   name="streetAddress"
                   render={({ field }) => (
                     <FormItem className="!h-auto border-none rounded-none">
-                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                         Street address
                       </FormLabel>
                       <FormControl>
@@ -227,7 +227,7 @@ export function Billing() {
                     name="city"
                     render={({ field }) => (
                       <FormItem className="!h-auto border-none rounded-none">
-                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                           Town / City
                         </FormLabel>
                         <FormControl>
@@ -247,7 +247,7 @@ export function Billing() {
                     name="state"
                     render={({ field }) => (
                       <FormItem className="!h-auto border-none rounded-none">
-                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                           State
                         </FormLabel>
                         <FormControl>
@@ -267,7 +267,7 @@ export function Billing() {
                     name="zipCode"
                     render={({ field }) => (
                       <FormItem className="!h-auto border-none rounded-none">
-                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+                        <FormLabel className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                           Zip code
                         </FormLabel>
                         <FormControl>
@@ -311,7 +311,7 @@ export function Billing() {
                 />
 
                 {/* Checkboxes */}
-                <div className="space-y-[8px]">
+                <div className="space-y-3">
                   <div className="flex gap-[8px] items-start">
                     <Checkbox className="border-[1px] border-solid border-[#DFE1E7] rounded-[3px]" />
                     <p className="text-[#4A4C56] text-[14px] leading-[160%]">
@@ -326,6 +326,12 @@ export function Billing() {
                   </div>
                 </div>
 
+                <p className="text-[#4A4C56] font-bold text-4 leading-[160%]">By checking this box and entering your phone number above. you consent to receive marketing text
+messages (e.g. promos. cart reminders) from HC & Company at the number provided. including
+messages sent by auto dialer. Consent is not a condition of any purchase. Message and data rates may
+apply. Message frequency varies. You can unsubscribe at any time by replying STOP or clicking the
+unsubscribe link (where available). Review our Privacy Policy and Terms of Service for more information.</p>
+
                 {/* Submit */}
                 <div className="flex justify-end pt-[40px] pb-[24px]">
                   <Button
@@ -337,9 +343,9 @@ export function Billing() {
                 </div>
               </form>
             </Form>
-          </CardContent>
+          </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 }
