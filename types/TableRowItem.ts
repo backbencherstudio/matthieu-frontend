@@ -37,8 +37,10 @@ export interface TableRowItem extends TableItem {
   accountType?: string;
   rate?: string;
   account?: string;
+  priceRange?: string;
   issueDate?: string;
   dueDate?: string;
+  createdDate?: string;
   totalAmount?: string;
   sku?: string;
   salePrice?: string;
@@ -67,7 +69,9 @@ export interface TableRowItem extends TableItem {
   limit?: number;
   limitPerUse?: number;
   used?: number;
+  customer?: string;
   phone?: string;
+  preferences?: string;
   state?: string;
   action?: React.ReactNode;
   experience?: string;
