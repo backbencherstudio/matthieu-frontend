@@ -45,7 +45,7 @@ export default function UpdatePasswordSection() {
                 id="password"
                 type="password"
                 placeholder="••••••••••"
-                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px] placeholder:tracking-[0.2em]"
+                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px] placeholder:tracking-[0.2em]"
                 {...register("currentPassword", {
                   required: "Current Password is required",
                 })}
@@ -70,7 +70,7 @@ export default function UpdatePasswordSection() {
                 id="newPassword"
                 type="password"
                 placeholder="••••••••••"
-                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px] placeholder:tracking-[0.2em]"
+                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px] placeholder:tracking-[0.2em]"
                 {...register("newPassword", {
                   required: "New Password is required",
                 })}
@@ -92,7 +92,7 @@ export default function UpdatePasswordSection() {
                 id="confirmPassword"
                 type="password"
                 placeholder="••••••••••"
-                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#DFE1E7] rounded-[8px] placeholder:tracking-[0.2em]"
+                className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px] placeholder:tracking-[0.2em]"
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
                 })}
