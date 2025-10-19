@@ -65,7 +65,7 @@ export default function CartsDetails() {
             </div>
 
             {/* Product Details */}
-            <div className="flex-1 border flex  flex-col justify-between">
+            <div className="flex-1  flex  flex-col justify-between">
               <div className='flex flex-col gap-2'>
                 <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
                 <p className="text-sm text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
