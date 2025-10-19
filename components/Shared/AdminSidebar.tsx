@@ -58,6 +58,11 @@ const menuItems = [
     icon: AlertIcon,
   },
   {
+    label: "Job Applicants",
+    href: "/admin/job-applicants",
+    icon: AlertIcon,
+  },
+  {
     label: "Settings",
     href: "/admin/settings",
     icon: SettingIcon,
