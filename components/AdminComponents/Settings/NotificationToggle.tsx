@@ -9,7 +9,7 @@ export default function Toggle({ checked, onChange }: ToggleProps) {
   return (
     <button
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-4.5 w-9 items-center rounded-full transition-colors ${
+      className={`relative inline-flex h-5 w-10 items-center rounded-full transition-colors ${
         checked ? "bg-[#1F274B]" : "bg-[#ECEFF3]"
       }`}
       role="switch"
