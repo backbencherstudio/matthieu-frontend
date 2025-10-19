@@ -15,7 +15,7 @@ interface CustomDialogProps {
   showFooter?: boolean;
   onSubmit?: () => void;
   showCancel?: boolean;
-  width?:boolean;
+  width?: boolean;
 }
 
 export default function CustomDialog({
@@ -26,9 +26,11 @@ export default function CustomDialog({
 }: CustomDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className={`${width? "sm:max-w-[906px]" : "sm:max-w-[620px]"} p-0 bg-white border-0 rounded-[16px]`}>
+      <DialogContent
+        className={`sm:max-w-max p-0 bg-white border-0 rounded-[16px]`}
+      >
         <DialogHeader className="hidden">
-          <DialogTitle ></DialogTitle>
+          <DialogTitle></DialogTitle>
         </DialogHeader>
         <div className="grid gap-4">{children}</div>
       </DialogContent>

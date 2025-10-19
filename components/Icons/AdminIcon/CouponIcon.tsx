@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function CouponIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -15,21 +13,21 @@ export default function CouponIcon({ className }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.2002 6.28333L5.40015 11.0833"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10.2002 11.0833H10.193M5.40732 6.28333H5.40015"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

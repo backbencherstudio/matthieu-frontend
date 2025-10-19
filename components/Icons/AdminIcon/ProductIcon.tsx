@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ProductIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -15,28 +13,28 @@ export default function ProductIcon({ className }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M2.15293 3.85362L1 5.69397H17.0002L15.9457 3.9365C15.2268 2.73833 14.8673 2.13924 14.2881 1.81132C13.709 1.4834 13.0103 1.4834 11.6131 1.4834H6.43476C5.06739 1.4834 4.38371 1.4834 3.81277 1.79944C3.24183 2.11549 2.87887 2.69487 2.15293 3.85362Z"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9 5.69403V1.48346"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.94727 14.5361H8.15783M3.94727 12.0098H6.47361"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
