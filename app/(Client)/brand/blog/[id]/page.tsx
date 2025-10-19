@@ -27,7 +27,8 @@ export default function BlogPage({ params }: PageProps) {
   return (
     <>
       <BreadCrumbDetails breadLink={breadLink} />
-      <BlogDetailPage id={parseInt(params.id)} />
+      {/* id={parseInt(params.id)}  */}
+      <BlogDetailPage />
     </>
   );
 }

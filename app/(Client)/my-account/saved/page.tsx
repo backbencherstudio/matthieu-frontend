@@ -1,3 +1,4 @@
+// app/components/Saved.tsx
 import Image from "next/image";
 import React from "react";
 
@@ -9,21 +10,35 @@ interface SavedItem {
 }
 
 const Saved: React.FC = () => {
-  // Base item
-  const baseItem: SavedItem = {
-    id: 1,
-    img: "/saved/saved.png",
-    title: "Anatomical double noseband bridle",
-    desc: "$370.00",
-  };
-
-  // Create 4 copies of the same item
-  const data: SavedItem[] = Array(4)
-    .fill(null)
-    .map((_, index) => ({ ...baseItem, id: index + 1 }));
+  const data: SavedItem[] = [
+    {
+      id: 1,
+      img: "/saved/saved.png",
+      title: "Anatomical double noseband bridle",
+      desc: "$370.00",
+    },
+    {
+      id: 2,
+      img: "/saved/saved.png",
+      title: "Anatomical double noseband bridle",
+      desc: "$370.00",
+    },
+    {
+      id: 3,
+      img: "/saved/saved.png",
+      title: "Anatomical double noseband bridle",
+      desc: "$370.00",
+    },
+    {
+      id: 4,
+      img: "/saved/saved.png",
+      title: "Anatomical double noseband bridle",
+      desc: "$370.00",
+    },
+  ];
 
   return (
-    <div className="maxContainer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-[24px] px-[12px] ">
+    <div className="max-w-7xl mx-auto grid md:grid-cols-2 px-[12px] gap-[24px] pb-[16px]">
       {data.map((item) => (
         <div className=" ">
           <div
@@ -38,7 +53,7 @@ const Saved: React.FC = () => {
               className=" w-full h-auto object-contain"
               unoptimized
             />
-            <div className="p-4">
+            <div className="">
               <h2 className=" text-[#1F274B] text-[20px] font-normal leading-[124%] uppercase ">
                 {item.title}
               </h2>

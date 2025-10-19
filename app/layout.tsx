@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AppConfig } from "@/config/app.config";
 import Script from "next/script";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -15,7 +16,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="avenir">
       <head>
         {/* Google Translate Init Script */}
         <Script id="google-translate-init" strategy="afterInteractive">
@@ -36,8 +36,10 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
+      <body className="avenir">
         <div id="google_translate_element" className="hidden"></div>
         {children}
+        <Toaster position="top-right" richColors/>
       </body>
     </html>
   );
