@@ -210,17 +210,17 @@ export default function CartsDetails() {
 
 
           {/* Total */}
-          <div className="flex justify-between items-center mt-6">
-            <span className="text-lg sm:text-xl font-semibold text-gray-800">
+          <div className="flex justify-between items-center mt-6 text-[#4C526F] lg:text-2xl md:text-xl text-lg ">
+            <span className="leading-[100%] font-extrabold">
               Total Amount
             </span>
-            <span className="text-lg sm:text-xl font-semibold text-gray-800">
+            <span className="leading-[100%] font-normal" >
               ${total.toFixed(2)}
             </span>
           </div>
 
           {/* Checkout Button */}
-          <button className="w-full bg-slate-800 text-white py-3.5 rounded hover:bg-slate-700 transition-colors font-medium text-base md:mt-8 mt-6">
+          <button className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6">
             Checkout Now
           </button>
         </div>
