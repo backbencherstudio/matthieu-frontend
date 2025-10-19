@@ -172,7 +172,7 @@ const Header = () => {
           {/* Mobile Logo (visible on mobile/tablet) */}
           <div className="lg:hidden">
             <div className="">
-              <div className="w-[156px] h-[56px]">
+              <div className="w-[156px]  h-[56px]">
                 <Link href="/">
                   <Image
                     src="/matheiu-logo.png"

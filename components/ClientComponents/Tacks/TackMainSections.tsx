@@ -201,7 +201,7 @@ export default function TackMainSections() {
 
   return (
     <>
-      <div className="mt-12 flex items-center gap-4">
+      <div className="mt-12 flex flex-wrap items-center gap-4 ">
         <FilterIcon className="h-8 w-8" />
         <DropdownFilter
           title="CATEGORY"
