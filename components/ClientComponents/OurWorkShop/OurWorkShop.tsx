@@ -13,7 +13,7 @@ export default function OurWorkShop() {
             width={1000}
             height={1000}
             unoptimized
-            className="w-full h-[200px] md:h-auto object-cover object-top"
+            className="w-full h-[200px] md:h-full max-h-[400px] object-cover object-top"
           />
         </div>
 
