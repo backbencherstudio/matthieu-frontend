@@ -94,7 +94,7 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
 
               {/* product details here show it on mobile screen */}
               <div className='flex md:hidden flex-col gap-3  '>
-                <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
+                <h3 className={`text-[#4C526F] md:text-lg text-base  normal-case leading-[100%] font-extrabold`}>{item.name}</h3>
                 <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                 <div className='flex  gap-4 '>
                   <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
@@ -108,14 +108,13 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
             <div className="flex-1  flex  justify-between items-center md:items-stretch">
               <div className='flex flex-col justify-between gap-3 md:gap '>
                 <div className='md:flex hidden flex-col gap-2 '>
-                  <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
+                  <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold  normal-case">{item.name}</h3>
                   <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                   <div className='flex  gap-4 '>
                     <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
                     <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>color: brawn</span>
                   </div>
                 </div>
-
                 {/* Quantity Controls */}
                 <div className='flex justify-between '>
                   <div className="flex items-center gap-3">
@@ -152,7 +151,7 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
               </div>
 
               <div className="text-right flex flex-col justify-between ">
-                <p className="md:text-xl text-lg font-extrabold leading-[120%] text-[#4C526F]">
+                <p className="md:text-xl text-lg font-extrabold leading-[100%] text-[#4C526F]">
                   ${item.price.toFixed(2)}
                 </p>
                 {/* this quantity will show only large screen */}
