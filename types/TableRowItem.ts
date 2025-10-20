@@ -62,6 +62,7 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
+
   code?: string;
   discount?: number;
   limit?: number;
