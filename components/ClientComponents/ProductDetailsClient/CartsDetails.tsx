@@ -13,7 +13,7 @@ interface CartItem {
   image: string;
 }
 
-export default function CartsDetails() {
+export default function CartsDetails({ checkoutButton = true }: { checkoutButton?: Boolean }) {
 
 
   const [cartItems, setCartItems] = useState<CartItem[]>([
@@ -48,9 +48,9 @@ export default function CartsDetails() {
 
   const summaryItems = [
     { label: "Subtotal", value: subtotal, },
-    { label: "Shipping", value: shipping,  },
-    { label: "Tax (8%)", value: tax,  },
-    { label: "Coupon Discount", value: -couponDiscount,  },
+    { label: "Shipping", value: shipping, },
+    { label: "Tax (8%)", value: tax, },
+    { label: "Coupon Discount", value: -couponDiscount, },
   ];
 
   const handleApplyCoupon = () => {
@@ -222,9 +222,11 @@ export default function CartsDetails() {
           </div>
 
           {/* Checkout Button */}
-          <button className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6">
-            Checkout Now
-          </button>
+          {checkoutButton && (
+            <button className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6">
+              Checkout Now
+            </button>
+          )}
         </div>
       </div>
 

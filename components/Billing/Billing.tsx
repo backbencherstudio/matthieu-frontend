@@ -31,73 +31,79 @@ export function Billing() {
   };
 
   return (
-    <div className="maxContainer lg:mt-12 md:mt-10 mt-8">
-      <div className="flex gap-8">
-        <div className="border-[#DFE1E7] border-2 lg:p-8 p-6 w-[65.55%]">
-          <h2 className="text-[#1F274B] font-[Avenir] text-[24px] not-italic font-extrabold leading-[100%] pb-[32px]">
+    <div className="maxContainer lg:my-12 md:my-10 my-8">
+      <div className="flex lg:flex-row flex-col gap-8">
+        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 lg:w-[65.55%] normal-case">
+          <h2 className="text-[#1F274B]  text-[24px] md:text-[28px] lg:text-[32px]  not-italic font-extrabold leading-[100%] md:pb-[32px] pb-6">
             Billing Details
           </h2>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* First + Last Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   First Name
                 </label>
-                <Input
+                <input
                   placeholder="Yasir abid"
                   {...register("firstName", { required: "First name is required" })}
-                  className="!text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B] "
                 />
                 {errors.firstName && (
                   <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.firstName.message}*</p>
                 )}
               </div>
 
-              <div>
+              <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   Last Name
                 </label>
-                <Input
+                <input
                   placeholder="Rabbu"
-                  {...register("lastName", { required: "Last name is required" })}
-                  className="!text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  {...register("lastName")}
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.lastName && (
-                  <p className="text-black text-[14px] mt-1">{errors.lastName.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.lastName.message}</p>
                 )}
               </div>
             </div>
 
             {/* Email + Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   Email
                 </label>
-                <Input
+                <input
                   type="email"
                   placeholder="arionadmin@gmail.com"
-                  {...register("email", { 
+                  {...register("email", {
                     required: "Email is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       message: "Invalid email address"
                     }
                   })}
-                  className="text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.email && (
-                  <p className="text-black text-[14px] mt-1">{errors.email.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.email.message}</p>
                 )}
               </div>
 
-              <div>
+              <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   Phone
                 </label>
-                <Input
+                <input
                   type="tel"
                   inputMode="numeric"
                   placeholder="+330 612-345-678"
@@ -112,76 +118,82 @@ export function Billing() {
                     const onlyNums = e.target.value.replace(/\D/g, "");
                     e.target.value = onlyNums;
                   }}
-                  className="text-[#1D1F2C] text-[16px] leading-[150%] tracking-[0.08px] py-[12px] px-4 h-[48px] mt-[8px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.phone && (
-                  <p className="text-black text-[14px] mt-1">{errors.phone.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.phone.message}</p>
                 )}
               </div>
             </div>
 
             {/* Company */}
-            <div>
-              <label className="text-[#4A4C56] text-center font-avenir text-[16px] leading-[150%] tracking-[0.08px]">
+            <div className="flex flex-col gap-2">
+              <label className="text-[#4A4C56] font-avenir text-[16px] leading-[150%] tracking-[0.08px]">
                 Company name (optional)
               </label>
-              <Input
+              <input
                 {...register("company")}
                 placeholder=""
-                className="border px-4 h-[48px] mt-[8px] text-[16px] font-extrabold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
             </div>
 
             {/* Street Address */}
-            <div>
-              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+            <div className="flex flex-col gap-2">
+              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                 Street address
               </label>
-              <Input
+              <input
                 placeholder="House number and street name"
                 {...register("streetAddress")}
-                className="py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+              />
+            {/* Apartment */}
+              <input
+                placeholder="Apartment, suite, unit, etc. (optional)"
+                {...register("apartment")}
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
             </div>
 
-            {/* Apartment */}
-            <div>
-              <Input
-                placeholder="Apartment, suite, unit, etc. (optional)"
-                {...register("apartment")}
-                className="py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
-              />
-            </div>
 
             {/* City, State, Zip */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
-              <div>
-                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+              <div className="flex flex-col gap-2">
+                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                   Town / City
                 </label>
-                <Input
+                <input
                   placeholder="Paris"
                   {...register("city")}
                   className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                 />
               </div>
 
-              <div>
-                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+              <div className="flex flex-col gap-2">
+                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   State
                 </label>
-                <Input
+                <input
                   placeholder="France"
                   {...register("state")}
                   className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
                 />
               </div>
 
-              <div>
-                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
+              <div className="flex flex-col gap-2">
+                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
                   Zip code
                 </label>
-                <Input
+                <input
                   placeholder="75001"
                   {...register("zipCode")}
                   className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
@@ -210,7 +222,7 @@ export function Billing() {
             </div>
 
             {/* Checkboxes */}
-            <div className="space-y-[8px]">
+            <div className="space-y-[8px] mb-0">
               <div className="flex gap-[8px] items-start">
                 <Checkbox className="border-[1px] border-solid border-[#DFE1E7] rounded-[3px]" />
                 <p className="text-[#4A4C56] text-[14px] leading-[160%]">
@@ -226,19 +238,19 @@ export function Billing() {
             </div>
 
             {/* Submit */}
-            <div className="flex justify-end pt-[40px] pb-[24px]">
-              <Button
+            <div className="flex justify-end md:mt-8 mt-6">
+              <button
                 type="submit"
-                className="bg-[#1F274B] cursor-pointer text-white px-[32px] py-[20px] rounded-none border-none shadow-none"
+                className="bg-[#1F274B] cursor-pointer text-white md:px-8 px-6 md:py-4 py-3 rounded-none border-none shadow-none"
               >
                 Next
-              </Button>
+              </button>
             </div>
           </form>
         </div>
 
-        <div className="border w-[32.22%] px-4">
-          <CartsDetails/>
+        <div className="border lg:w-[32.22%] w-full px-6 py-6">
+          <CartsDetails checkoutButton = {false} />
         </div>
       </div>
     </div>
