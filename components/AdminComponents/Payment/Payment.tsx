@@ -2,7 +2,8 @@ import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
 import ProcessingIcon from "@/components/Icons/AdminIcon/ProcessingIcon";
 import TransactionIcon from "@/components/Icons/AdminIcon/TransactionIcon";
 import SuccessIcon from "@/components/Icons/MyAccoountIcon/SuccessIcon";
-import PaymentCard from "./PaymentCard";
+
+import HeaderCard from "../reusable/HeaderCard";
 import PaymentTable from "./PaymentTable";
 
 export default function Payment() {
@@ -47,7 +48,7 @@ export default function Payment() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
         {paymentStats.map((status) => (
-          <PaymentCard
+          <HeaderCard
             key={status?.id}
             title={status?.title}
             icon={status.icon}
