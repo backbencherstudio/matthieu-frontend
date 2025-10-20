@@ -11,7 +11,7 @@ type BreadLink = {
   label: string;
 };
 
-export default function BreadCrumb({ breadLink, cart = false }: { breadLink: BreadLink[], cart?: boolean }) {
+export default function BreadCrumb({ breadLink }: { breadLink: BreadLink[] }) {
 
   const [cartCount, setCartCount] = React.useState<number>(0);
 
@@ -43,14 +43,6 @@ export default function BreadCrumb({ breadLink, cart = false }: { breadLink: Bre
               </Link>
             </div>
           ))}
-          {cart === true && (
-            <div className="flex gap-3 items-center justify-end ml-auto">
-              <span className="w-8 h-8 rounded-full border  border-white flex items-center justify-center leading-[100%] text-sm">
-                {cartCount || 0}
-              </span>
-              <CartsProducts />
-            </div>
-          )}
         </div>
       </div>
     </div>

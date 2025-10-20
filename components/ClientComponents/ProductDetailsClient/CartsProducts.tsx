@@ -27,11 +27,13 @@ export default function CartsProducts() {
                 <DrawerHeader className="flex flex-row justify-between items-center p-0 ">
                     <DrawerTitle className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%]  ">Your Cart</DrawerTitle>
                     <DrawerClose className="cursor-pointer">
-                        <CloseIcon/>
+                        <CloseIcon />
                     </DrawerClose>
                 </DrawerHeader>
-                <div className="md:mt-8 mt-4 h-full">
-                    <CartsDetails/>
+                <div className="md:mt-8 mt-4 h-full ">
+                    <div className="md:h-full h-[92vh] overflow-y-auto custom-scroll">
+                        <CartsDetails />
+                    </div>
                 </div>
             </DrawerContent>
         </Drawer>

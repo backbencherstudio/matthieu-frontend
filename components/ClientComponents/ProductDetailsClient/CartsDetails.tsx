@@ -75,7 +75,7 @@ export default function CartsDetails() {
   };
 
   return (
-    <div className="flex flex-col gap-6 justify-between md:h-full h-[92vh] overflow-y-auto custom-scroll">
+    <div className="flex flex-col gap-6 justify-between h-full">
 
       {/* product details section  */}
       <div className="flex flex-col gap-3">
