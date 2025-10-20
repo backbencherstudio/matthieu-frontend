@@ -32,8 +32,8 @@ export function Billing() {
 
   return (
     <div className="maxContainer lg:my-12 md:my-10 my-8">
-      <div className="flex lg:flex-row flex-col gap-8">
-        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 lg:w-[65%] normal-case">
+      <div className="flex lg:flex-row flex-col xl:gap-8 lg:gap-6">
+        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-[65%] lg:w-full normal-case">
           <h2 className="text-[#1F274B]  text-[24px] md:text-[28px] lg:text-[32px]  not-italic font-extrabold leading-[100%] md:pb-[32px] pb-6">
             Billing Details
           </h2>
@@ -249,7 +249,7 @@ export function Billing() {
           </form>
         </div>
 
-        <div className="border lg:w-[33%] w-full px-6 py-6">
+        <div className="border xl:w-[33%] md:w-full w-full px-6 py-6">
           <CartsDetails checkoutButton = {false} />
         </div>
       </div>
