@@ -8,7 +8,7 @@ export default function MeetTheTeam() {
         {/* Banner */}
         <div>
           <Image
-            src="/images/team.png"
+            src="/images/meet-the-team/COVER PICTURE.jpg"
             alt="Team"
             width={1000}
             height={1000}
@@ -34,7 +34,7 @@ export default function MeetTheTeam() {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-8 mt-12">
             <div className="md:col-span-2 md:col-start-1">
               <Image
-                src="/images/team-1.png"
+                src="/images/meet-the-team/sylvain-houry-fondateur-arionhst.jpg"
                 alt="Team"
                 width={1000}
                 height={1000}
@@ -52,7 +52,7 @@ export default function MeetTheTeam() {
 
             <div className="md:col-span-2 md:col-start-3">
               <Image
-                src="/images/team-2.png"
+                src="/images/meet-the-team/hadrien-schenck-responsable-ventes-arionhst.jpg"
                 alt="Team"
                 width={1000}
                 height={1000}
@@ -70,7 +70,7 @@ export default function MeetTheTeam() {
 
             <div className="md:col-span-2 md:col-start-5">
               <Image
-                src="/images/team-3.png"
+                src="/images/meet-the-team/kristen-rose-arion.jpeg"
                 alt="Team"
                 width={1000}
                 height={1000}
@@ -88,7 +88,7 @@ export default function MeetTheTeam() {
 
             <div className="md:col-span-2 md:col-start-2 ">
               <Image
-                src="/images/team-4.png"
+                src="/images/meet-the-team/CHLOE.png"
                 alt="Team"
                 width={1000}
                 height={1000}
@@ -106,7 +106,7 @@ export default function MeetTheTeam() {
 
             <div className="md:col-span-2 md:col-start-4 ">
               <Image
-                src="/images/team-5.png"
+                src="/images/meet-the-team/GABRIELLE.png"
                 alt="Team"
                 width={1000}
                 height={1000}

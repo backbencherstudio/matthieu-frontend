@@ -8,7 +8,7 @@ export default function OurWorkShop() {
         {/* Banner */}
         <div>
           <Image
-            src="/images/our-workshop-banner.png"
+            src="/images/workshop/top.JPG"
             alt="our-workshop-banner"
             width={1000}
             height={1000}
@@ -48,7 +48,7 @@ export default function OurWorkShop() {
                 }
               }}
             >
-              <source src="/video/our-workshop-video.mp4" type="video/mp4" />
+              <source src="/images/workshop/factory-video.mp4" type="video/mp4" />
             </video>
 
             <button
@@ -101,7 +101,7 @@ export default function OurWorkShop() {
           <div className="pb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="overflow-hidden cursor-pointer">
               <Image
-                src="/images/workshop-1.png"
+                src="/images/workshop/bottom_1.JPG"
                 alt="our-workshop-gallery-01"
                 width={1000}
                 height={1000}
@@ -111,7 +111,7 @@ export default function OurWorkShop() {
             </div>
             <div className="overflow-hidden cursor-pointer">
               <Image
-                src="/images/workshop-2.png"
+                src="/images/workshop/bottom_2.JPG"
                 alt="our-workshop-gallery-02"
                 width={1000}
                 height={1000}
@@ -121,7 +121,7 @@ export default function OurWorkShop() {
             </div>
             <div className="overflow-hidden cursor-pointer">
               <Image
-                src="/images/workshop-3.png"
+                src="/images/workshop/bottom_3.JPG"
                 alt="our-workshop-gallery-03"
                 width={1000}
                 height={1000}
@@ -131,7 +131,7 @@ export default function OurWorkShop() {
             </div>
             <div className="overflow-hidden cursor-pointer">
               <Image
-                src="/images/workshop-4.png"
+                src="/images/workshop/bottom_4.JPG"
                 alt="our-workshop-gallery-04"
                 width={1000}
                 height={1000}

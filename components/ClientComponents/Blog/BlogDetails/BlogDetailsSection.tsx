@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // const blogs = [
 //   {
@@ -81,20 +82,20 @@ const BlogDetailPage = () => {
           </div>
 
           <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block text-[#4A4C56] text-4">
-            <div className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
+            <Link href="/saddles" className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
               <p className="text-sm font-semibold normal-case ">Saddles</p>
               <Image src="/blogDetails/sadeles.png" alt="saddles" width={24} height={24} />
-            </div>
+            </Link>
 
-            <div className="flex justify-between items-center border border-black p-4 ">
+            <Link href="/saddles/used-saddles" className="flex justify-between items-center border border-black p-4 ">
               <p className="text-sm font-semibold normal-case">Used Saddles</p>
               <Image src="/blogDetails/usedsadless.png" alt="used saddles" width={24} height={24} />
-            </div>
+            </Link>
 
-            <div className="flex justify-between items-center border border-black p-4 ">
+            <Link href="/tack" className="flex justify-between items-center border border-black p-4 ">
               <p className="text-sm font-semibold normal-case">Tack & Accessories</p>
               <Image src="/blogDetails/trac.png" alt="tack" width={24} height={24} />
-            </div>
+            </Link>
 
             <div className="border border-black p-4  text-sm font-semibold normal-case">
               Follow Us
