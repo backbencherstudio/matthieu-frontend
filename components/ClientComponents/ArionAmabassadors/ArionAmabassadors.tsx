@@ -212,7 +212,7 @@ export default function ArionAmabassadors() {
       id: 16,
       nation: "canada",
       discipline: "equitation",
-      image: "/images/arion-9.png",
+      image: "/images/ambassadors/quinn-hunter (2).png",
       title: "QUINN HUNTER",
       link:"https://www.instagram.com/_quinnhunter_/"
     },

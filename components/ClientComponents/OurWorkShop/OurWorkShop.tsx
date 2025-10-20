@@ -34,7 +34,7 @@ export default function OurWorkShop() {
           <div className="mt-12 relative">
             <video
               className="h-[300px] md:h-[450px] xl:h-[600px] w-full object-cover"
-              poster="/video/thumbnail.png"
+              poster="/video/movie_thumbnail.JPG"
               muted
               onClick={() => {
                 const video = document.querySelector("video");
