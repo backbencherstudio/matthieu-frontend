@@ -1,11 +1,10 @@
 import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 import DownloadIcon from "@/components/Icons/AdminIcon/DownloadIcon";
+import { JSX } from "react";
 
-export default function JobApplicantDetail({
-  onClose,
-}: {
-  onClose: () => void;
-}) {
+export default function JobApplicantDetail({ onClose, }: {
+    onClose: () => void;
+}):JSX.Element {
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
       <div className="flex items-center justify-between mb-[35px]">
@@ -52,7 +51,7 @@ export default function JobApplicantDetail({
 
         <div className="mt-5">
           <label className="text-[14px] text-[#696E86]">Message</label>
-          <p className="text-[16px] text-[#1F274B] mt-3">
+          <p className="text-[16px] text-[#1F274B]">
             I am passionate about saddle fitting and customer service.
           </p>
         </div>

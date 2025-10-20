@@ -1,8 +1,8 @@
 import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import ModalWrapper from "../reusable/ModalWrapper";
-import JobApplicantDetail from "./JobApplicantDetail";
+import SaddleAlertDetail from "./SaddleAlertDetail";
 
-export default function ApplicantsDetailsModal() {
+export default function SaddleAlertDetailModal() {
   return (
     <ModalWrapper
       trigger={
@@ -11,9 +11,7 @@ export default function ApplicantsDetailsModal() {
         </span>
       }
     >
-      <JobApplicantDetail onClose={function (): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <SaddleAlertDetail />
     </ModalWrapper>
   );
 }
