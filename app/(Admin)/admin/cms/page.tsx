@@ -2,6 +2,7 @@
 
 import BlogPostTable from "@/components/AdminComponents/Cms/BlogPostTable";
 import CmsTabs from "@/components/AdminComponents/Cms/CmsTabs";
+import ContactTab from "@/components/AdminComponents/Cms/ContactTab";
 import { TabContent } from "@/components/AdminComponents/Settings/SettingsTab";
 import BlogIcon from "@/components/Icons/AdminIcon/BlogIcon";
 import ContactIcon from "@/components/Icons/AdminIcon/ContactIcon";
@@ -28,7 +29,7 @@ export default function CmsPage() {
           <BlogPostTable />
         </TabContent>
         <TabContent value="contact" activeTab={activeTab}>
-          <h1>Contact</h1>
+          <ContactTab />
         </TabContent>
       </div>
     </div>

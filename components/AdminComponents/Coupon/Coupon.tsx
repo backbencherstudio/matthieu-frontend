@@ -3,7 +3,7 @@ import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import TotalCouponIcon from "@/components/Icons/AdminIcon/TotalCouponIcon";
 import TotalUsageIcon from "@/components/Icons/AdminIcon/TotalUsageIcon";
-import PaymentCard from "../Payment/PaymentCard";
+import HeaderCard from "../reusable/HeaderCard";
 import CouponTable from "./CouponTable";
 
 export default function Coupon() {
@@ -54,7 +54,7 @@ export default function Coupon() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
         {couponStats.map((status) => (
-          <PaymentCard
+          <HeaderCard
             key={status?.id}
             title={status?.title}
             icon={status.icon}

@@ -1,6 +1,5 @@
 import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import {
@@ -15,6 +14,7 @@ import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
+import BlogDeleteModal from "./BlogDeleteModal";
 
 export default function BlogPostTable() {
   const relevantData = [
@@ -184,7 +184,7 @@ export default function BlogPostTable() {
         </div>
         <div>
           <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <DeleteIcon />
+            <BlogDeleteModal />
           </button>
         </div>
       </div>
