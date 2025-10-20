@@ -113,7 +113,7 @@ export function DataTable<TData, TValue>({
   const pageItems = getPageItems(current, totalPages, 1);
 
   return (
-    <>
+    <div className="w-full">
       <div className="flex flex-wrap items-center justify-between gap-3 py-4">
         <h1 className="text-xl font-extrabold text-primary-text">{title}</h1>
 
@@ -131,7 +131,9 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] overflow-x-auto rounded border border-[#cccccc65]">
+      {/* xl:max-w-screen lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] */}
+
+      <div className="xl:max-w-screen lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] overflow-x-auto rounded border border-[#cccccc65]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -249,6 +251,6 @@ export function DataTable<TData, TValue>({
           </span>
         </div> */}
       </div>
-    </>
+    </div>
   );
 }
