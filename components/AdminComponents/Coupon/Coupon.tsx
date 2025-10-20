@@ -1,11 +1,13 @@
-import ActiveCouponIcon from "@/components/Icons/AdminIcon/ActiveCouponIcon";
 import AvgUsageRateIcon from "@/components/Icons/AdminIcon/AvgUsageRateIcon";
+import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
+import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import TotalCouponIcon from "@/components/Icons/AdminIcon/TotalCouponIcon";
 import TotalUsageIcon from "@/components/Icons/AdminIcon/TotalUsageIcon";
 import PaymentCard from "../Payment/PaymentCard";
+import CouponTable from "./CouponTable";
 
 export default function Coupon() {
-  const paymentStats = [
+  const couponStats = [
     {
       id: 1,
       title: "Total Coupons",
@@ -17,7 +19,7 @@ export default function Coupon() {
     {
       id: 2,
       title: "Active Coupons",
-      icon: <ActiveCouponIcon />,
+      icon: <EyeIcon />,
       number: "4",
       iconBgColor: "#F3E6F3",
       iconColor: "#800080",
@@ -41,8 +43,17 @@ export default function Coupon() {
   ];
   return (
     <div>
+      <div className="flex items-center justify-between mb-5">
+        <h1 className="text-2xl font-extrabold leading-[100%] text-[#1F274B]">
+          Coupons & Discounts
+        </h1>
+        <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+          <PlusIcon className="h-4 w-4" />
+          <span className="text-[14px] leading-[114%]">Create Coupon</span>
+        </button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
-        {paymentStats.map((status) => (
+        {couponStats.map((status) => (
           <PaymentCard
             key={status?.id}
             title={status?.title}
@@ -53,6 +64,7 @@ export default function Coupon() {
           />
         ))}
       </div>
+      <CouponTable />
     </div>
   );
 }
