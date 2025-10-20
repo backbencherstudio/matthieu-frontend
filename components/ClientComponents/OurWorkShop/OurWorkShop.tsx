@@ -48,7 +48,7 @@ export default function OurWorkShop() {
                 }
               }}
             >
-              <source src="/video/our-workshop-video.mp4" type="video/mp4" />
+              <source src="/images/workshop/factory-video.mp4" type="video/mp4" />
             </video>
 
             <button
