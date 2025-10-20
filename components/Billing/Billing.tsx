@@ -2,8 +2,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import ArrowDownIcon from "../Icons/ArrowDownIcon";
 import CartsDetails from "../ClientComponents/ProductDetailsClient/CartsDetails";
@@ -85,10 +83,6 @@ export function Billing() {
                   placeholder="arionadmin@gmail.com"
                   {...register("email", {
                     required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address"
-                    }
                   })}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
@@ -109,14 +103,9 @@ export function Billing() {
                   placeholder="+330 612-345-678"
                   {...register("phone", {
                     required: "Phone is required",
-                    pattern: {
-                      value: /^\d{6,15}$/,
-                      message: "Phone number must be 6–15 digits only"
-                    }
                   })}
                   onChange={(e) => {
-                    const onlyNums = e.target.value.replace(/\D/g, "");
-                    e.target.value = onlyNums;
+                    e.target.value
                   }}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
@@ -154,7 +143,7 @@ export function Billing() {
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
-            {/* Apartment */}
+              {/* Apartment */}
               <input
                 placeholder="Apartment, suite, unit, etc. (optional)"
                 {...register("apartment")}
@@ -250,7 +239,7 @@ export function Billing() {
         </div>
 
         <div className="border xl:w-[33%] md:w-full w-full px-6 py-6">
-          <CartsDetails checkoutButton = {false} />
+          <CartsDetails checkoutButton={false} />
         </div>
       </div>
     </div>
