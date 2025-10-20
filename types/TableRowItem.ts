@@ -3,6 +3,7 @@ import { StaticImageData } from "next/image";
 
 export interface TableRowItem extends TableItem {
   name?: string;
+  title?: string;
   service?: string;
   price?: string;
   deliveryTime?: string;
@@ -30,8 +31,13 @@ export interface TableRowItem extends TableItem {
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
+  publishDate?: string;
+  tags?: string[];
+  categories?: string[];
   typeValue?: string;
   deliveryFee?: string;
+  author?: string;
+  clicks?: number;
   lastLogin?: string;
   ip?: string;
   country?: string;
