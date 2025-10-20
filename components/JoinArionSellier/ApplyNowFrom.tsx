@@ -92,7 +92,7 @@ export function ApplyNowForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="maxContainer py-[48px]">
           {/* Row 1: First + Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-[16px]">
             <FormField
               control={form.control}
               name="username"
@@ -161,7 +161,7 @@ export function ApplyNowForm() {
           </div>
 
           {/* Row 3: Town + State */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-[16px]">
             <FormField
               control={form.control}
               name="town"
@@ -207,13 +207,13 @@ export function ApplyNowForm() {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem className="pb-[16px] uppercase">
+            <FormItem className=" uppercase">
               <FormControl>
                 <Textarea
                   placeholder="MESSAGE"
                   {...field}
                     required
-                  className="bg-[#F8FAFB] min-h-[120px] px-4 pt-5 pb-4 border-none h-[50px] rounded-none leading-5 focus-visible:ring-1  "
+                  className="bg-[#F8FAFB] px-[16px]n pt-5 pb-[90px] md:pb-[100px] lg:pb-[120px]  border-none  rounded-none leading-5 focus-visible:ring-1  "
                 />
               </FormControl>
               <FormMessage />
@@ -229,7 +229,7 @@ export function ApplyNowForm() {
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={cn(
-              "w-full border border-dashed   flex flex-col items-center justify-center cursor-pointer transition-all bg-[#F8FAFB]  pt-[16px] h-[140px]",
+              "w-full border border-dashed   flex flex-col items-center justify-center cursor-pointer transition-all bg-[#F8FAFB]  mt-[16px] h-[140px]",
               isDragging
                 ? "border-primary bg-primary/5"
                 : "border-muted-foreground/30"
@@ -259,7 +259,7 @@ export function ApplyNowForm() {
           <div className="pt-[48px] ">
             <button
               type="submit"
-              className="bg-[#1F274B] py-[16px] px-[32px] w-[117px] h-[56px] text-white flex justify-center items-center cursor-pointer">
+              className="bg-[#1F274B] py-[12px] px-[32px]  text-white flex justify-center items-center cursor-pointer">
               Submit
             </button>
           </div>

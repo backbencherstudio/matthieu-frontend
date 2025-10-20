@@ -1,13 +1,10 @@
 import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 import DownloadIcon from "@/components/Icons/AdminIcon/DownloadIcon";
+import { JSX } from "react";
 
-interface JobApplicantDetailProps {
-  onClose?: () => void;
-}
-
-export default function JobApplicantDetail({
-  onClose,
-}: JobApplicantDetailProps) {
+export default function JobApplicantDetail({ onClose, }: {
+    onClose: () => void;
+}):JSX.Element {
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
       <div className="flex items-center justify-between mb-[35px]">
@@ -23,30 +20,32 @@ export default function JobApplicantDetail({
       </div>
 
       <div className="p-4 border border-[#ECEFF3] rounded-[6px]">
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[14px] text-[#696E86]">Name</label>
-            <p className="text-[16px] text-[#1F274B]">Emma Taylor</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">Emma Taylor</p>
           </div>
           <div>
             <label className="text-[14px] text-[#696E86]">Email</label>
-            <p className="text-[16px] text-[#1F274B]">emma.taylor@gmail.com</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">
+              emma.taylor@gmail.com
+            </p>
           </div>
-          <div>
+          <div className="mt-5">
             <label className="text-[14px] text-[#696E86]">Phone</label>
-            <p className="text-[16px] text-[#1F274B]">+1 234 567 890</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">+1 234 567 890</p>
           </div>
-          <div>
+          <div className="mt-5">
             <label className="text-[14px] text-[#696E86]">Experience</label>
-            <p className="text-[16px] text-[#1F274B]">6 Years</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">6 Years</p>
           </div>
-          <div>
+          <div className="mt-5">
             <label className="text-[14px] text-[#696E86]">Town</label>
-            <p className="text-[16px] text-[#1F274B]">Kern</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">Kern</p>
           </div>
-          <div>
+          <div className="mt-5">
             <label className="text-[14px] text-[#696E86]">State</label>
-            <p className="text-[16px] text-[#1F274B]">California</p>
+            <p className="text-[16px] text-[#1F274B] mt-3">California</p>
           </div>
         </div>
 
@@ -57,7 +56,7 @@ export default function JobApplicantDetail({
           </p>
         </div>
 
-        <div className="space-y-2 mt-4">
+        <div className="space-y-2 mt-5">
           <label className="text-[14px] text-[#696E86]">
             Attached Document
           </label>
