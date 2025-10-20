@@ -22,10 +22,15 @@ export interface TableRowItem extends TableItem {
   musician?: string;
   role?: string;
   commission?: string;
+  usage?: string;
+  validityStart?: string;
+  validityEnd?: string;
+  minAmount?: string;
   method?: string;
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
+  typeValue?: string;
   deliveryFee?: string;
   lastLogin?: string;
   ip?: string;
