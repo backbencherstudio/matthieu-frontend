@@ -13,7 +13,7 @@ interface CartItem {
   image: string;
 }
 
-export default function CartsDetails() {
+export default function CartsDetails({ checkoutButton = true }: { checkoutButton?: Boolean }) {
 
 
   const [cartItems, setCartItems] = useState<CartItem[]>([
@@ -48,9 +48,9 @@ export default function CartsDetails() {
 
   const summaryItems = [
     { label: "Subtotal", value: subtotal, },
-    { label: "Shipping", value: shipping,  },
-    { label: "Tax (8%)", value: tax,  },
-    { label: "Coupon Discount", value: -couponDiscount,  },
+    { label: "Shipping", value: shipping, },
+    { label: "Tax (8%)", value: tax, },
+    { label: "Coupon Discount", value: -couponDiscount, },
   ];
 
   const handleApplyCoupon = () => {
@@ -75,7 +75,7 @@ export default function CartsDetails() {
   };
 
   return (
-    <div className="flex flex-col gap-6 justify-between md:h-full h-[92vh] overflow-y-auto custom-scroll">
+    <div className="flex flex-col gap-6 justify-between h-full normal-case">
 
       {/* product details section  */}
       <div className="flex flex-col gap-3">
@@ -94,7 +94,7 @@ export default function CartsDetails() {
 
               {/* product details here show it on mobile screen */}
               <div className='flex md:hidden flex-col gap-3  '>
-                <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
+                <h3 className={`text-[#4C526F] md:text-lg text-base  normal-case leading-[100%] font-extrabold`}>{item.name}</h3>
                 <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                 <div className='flex  gap-4 '>
                   <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
@@ -108,14 +108,13 @@ export default function CartsDetails() {
             <div className="flex-1  flex  justify-between items-center md:items-stretch">
               <div className='flex flex-col justify-between gap-3 md:gap '>
                 <div className='md:flex hidden flex-col gap-2 '>
-                  <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold">{item.name}</h3>
+                  <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold  normal-case">{item.name}</h3>
                   <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                   <div className='flex  gap-4 '>
-                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
-                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>color: brawn</span>
+                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] normal-case'>Size: pony</span>
+                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] normal-case'>Color: brawn</span>
                   </div>
                 </div>
-
                 {/* Quantity Controls */}
                 <div className='flex justify-between '>
                   <div className="flex items-center gap-3">
@@ -152,7 +151,7 @@ export default function CartsDetails() {
               </div>
 
               <div className="text-right flex flex-col justify-between ">
-                <p className="md:text-xl text-lg font-extrabold leading-[120%] text-[#4C526F]">
+                <p className="md:text-xl text-lg font-extrabold leading-[100%] text-[#4C526F]">
                   ${item.price.toFixed(2)}
                 </p>
                 {/* this quantity will show only large screen */}
@@ -200,7 +199,7 @@ export default function CartsDetails() {
             {summaryItems.map((item, index) => (
               <div
                 key={index}
-                className={`flex justify-between md:text-base text-sm leading-[100%] font-normal text-[#4C526F] `}
+                className={`flex justify-between md:text-base  text-sm leading-[100%] font-extrabold text-[#4C526F] `}
               >
                 <span>{item.label}</span>
                 <span className={` ${item?.label === "Coupon Discount" && "text-[#F38B94]"}`}>
@@ -216,20 +215,21 @@ export default function CartsDetails() {
             <span className="leading-[100%] font-extrabold">
               Total Amount
             </span>
-            <span className="leading-[100%] font-normal" >
+            <span className="leading-[100%] font-extrabold" >
               ${total.toFixed(2)}
             </span>
           </div>
 
           {/* Checkout Button */}
-          <button className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6">
-            Checkout Now
-          </button>
+          {checkoutButton && (
+            <button className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6">
+              Checkout Now
+            </button>
+          )}
         </div>
       </div>
 
     </div>
   );
 }
-
 

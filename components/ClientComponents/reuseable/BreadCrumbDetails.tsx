@@ -1,8 +1,10 @@
-import CartsIcon from "@/components/Icons/CartsIcon";
+
+"use client"
 import HomeIcon from "@/components/Icons/HomeIcon";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import CartsProducts from "../ProductDetailsClient/CartsProducts";
 
 type BreadLink = {
   href: string;
@@ -10,6 +12,15 @@ type BreadLink = {
 };
 
 export default function BreadCrumbDetails({ breadLink, cart = false }: { breadLink: BreadLink[], cart?: boolean }) {
+
+  const [cartCount, setCartCount] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const c = typeof window === 'undefined' ? 0 : (JSON.parse(localStorage.getItem('cart') || '[]') || []).length;
+    setCartCount(c);
+  }, []);
+
+
   return (
     <div className="bg-primary-bg">
       <div className="maxContainer py-5">
@@ -35,11 +46,9 @@ export default function BreadCrumbDetails({ breadLink, cart = false }: { breadLi
           {cart === true && (
             <div className="flex gap-3 items-center justify-end ml-auto">
               <span className="w-8 h-8 rounded-full border  border-white flex items-center justify-center leading-[100%] text-sm">
-                1
+                {cartCount || 0}
               </span>
-                <span>
-                  <CartsIcon  />
-                </span>
+              <CartsProducts />
             </div>
           )}
         </div>

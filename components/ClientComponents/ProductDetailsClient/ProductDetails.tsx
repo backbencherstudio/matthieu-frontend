@@ -2,13 +2,15 @@
 "use client"
 
 
-import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
+
 import React, { useState } from 'react'
 import LoveIcon from '@/components/Icons/LoveIcon';
 import AppleIcon from '@/components/Icons/AppleIcon';
 import ProductDetailsAccordion from './ProductDetailsAccordion';
 import RelatedProduts from './RelatedProduts';
 import { toast } from "sonner"
+import BreadCrumbDetails from '../reuseable/BreadCrumbDetails';
+
 
 const productImages = [
     { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -82,7 +84,7 @@ export default function ProductDetailsClient() {
 
     return (
         <div>
-            <BreadCrumb breadLink={breadLink} cart={true} />
+            <BreadCrumbDetails breadLink={breadLink} cart={true} />
             <div className=' lg:py-12 md:py-10 py-8 maxContainer '>
                 <div className='flex xl:flex-row flex-col gap-6'>
                     {/* image div */}

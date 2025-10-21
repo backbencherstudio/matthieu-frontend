@@ -11,7 +11,9 @@ export default function ApplicantsDetailsModal() {
         </span>
       }
     >
-      <JobApplicantDetail />
+      <JobApplicantDetail onClose={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
     </ModalWrapper>
   );
 }

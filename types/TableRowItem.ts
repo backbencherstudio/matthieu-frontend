@@ -3,6 +3,7 @@ import { StaticImageData } from "next/image";
 
 export interface TableRowItem extends TableItem {
   name?: string;
+  title?: string;
   service?: string;
   price?: string;
   deliveryTime?: string;
@@ -10,28 +11,54 @@ export interface TableRowItem extends TableItem {
   profileImage?: StaticImageData; // StaticImageData for the profile image
   serviceImage?: StaticImageData; // StaticImageData for the service image
   serviceType?: string;
+  trackingNumber?: string;
+  destination?: string;
   date?: string;
   daysLeft?: string;
+  productName?: string;
+  productStatus?: string;
+  totalPrice?: string;
+  orderType?: string;
+  deliveryDate?: string;
+  estimatedDelivery?: string;
+  deliveryStatus?: string;
+  number?: string;
   productPrice?: string;
   orderId?: string;
   amount?: string;
+  lastOrder?: string;
   type?: string;
+  order?: string;
+  totalSpent?: string;
+  location?: string;
   invoice?: string;
   orderWith?: string;
   artist?: string;
   musician?: string;
   role?: string;
   commission?: string;
+  usage?: string;
+  validityStart?: string;
+  validityEnd?: string;
+  minAmount?: string;
   method?: string;
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
+<<<<<<< HEAD
+=======
+  publishDate?: string;
+  tags?: string[];
+  categories?: string[];
+  typeValue?: string;
   deliveryFee?: string;
+  author?: string;
+  clicks?: number;
+>>>>>>> 593e4ba9c143a0a72c0665fd0a5353dfabd3de83
   lastLogin?: string;
   ip?: string;
   country?: string;
   device?: string;
-  paymentMethod?: string;
   os?: string;
   description?: string;
   permissions?: string[];
@@ -40,10 +67,8 @@ export interface TableRowItem extends TableItem {
   accountType?: string;
   rate?: string;
   account?: string;
-  priceRange?: string;
   issueDate?: string;
   dueDate?: string;
-  createdDate?: string;
   totalAmount?: string;
   sku?: string;
   salePrice?: string;
@@ -67,14 +92,13 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
+
   code?: string;
   discount?: number;
   limit?: number;
   limitPerUse?: number;
   used?: number;
-  customer?: string;
   phone?: string;
-  preferences?: string;
   state?: string;
   action?: React.ReactNode;
   experience?: string;
