@@ -13,10 +13,15 @@ export interface TableRowItem extends TableItem {
   serviceType?: string;
   date?: string;
   daysLeft?: string;
+  number?: string;
   productPrice?: string;
   orderId?: string;
   amount?: string;
+  lastOrder?: string;
   type?: string;
+  order?: string;
+  totalSpent?: string;
+  location?: string;
   invoice?: string;
   orderWith?: string;
   artist?: string;
