@@ -22,7 +22,7 @@ export default function EditCategoryForm({ id }: { id: number | string }) {
                 <Label className="block text-sm text-gray-black mb-1">
                   Main Category Name*
                 </Label>
-                <Input className="cmn-input" placeholder="Category Name" />
+                <Input className="cmn-input bg-white" placeholder="Category Name" />
               </div>
             </div>
             <div className="flex justify-end mt-6">
