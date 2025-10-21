@@ -137,7 +137,7 @@ export default function CustomerTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#1F274B] leading-[114%]">
-        {item?.location}
+        {item?.location} <br />
         <span className="text-[14px] leading-[100%] text-[#696E86]">
           {item?.state}
         </span>
@@ -190,7 +190,7 @@ export default function CustomerTable() {
                   <SelectContent>
                     <SelectItem value="allStatus">All Status</SelectItem>
                     <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="Inactive">Inactive</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -200,7 +200,7 @@ export default function CustomerTable() {
                     <SelectValue placeholder="All Segments" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="allSegments">All Status</SelectItem>
+                    <SelectItem value="allSegments">All Segments</SelectItem>
                     <SelectItem value="vip">VIP</SelectItem>
                     <SelectItem value="regularCustomer">
                       Regular Customer
