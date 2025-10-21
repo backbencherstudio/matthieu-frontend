@@ -30,6 +30,7 @@ interface Data {
   discipline: string;
   image: string;
   title: string;
+  link?:string;
 }
 
 export default function ArionAmabassadors() {
@@ -91,57 +92,65 @@ export default function ArionAmabassadors() {
       id: 1,
       nation: "usa",
       discipline: "show-jumping",
-      image: "/images/arion-1.png",
+      image: "/images/ambassadors/nick-dello-joio.jpg",
       title: "NICK DELLO JOIO",
+      link:"https://www.nickdellojoio.com/"
     },
     {
       id: 2,
       nation: "usa",
       discipline: "show-jumping",
-      image: "/images/arion-2.png",
+      image: "/images/ambassadors/taylor-cawley.jpg",
       title: "TAYLOR CAWLEY",
+      link:"https://www.instagram.com/taylor.cawley/"
     },
     {
       id: 3,
       nation: "france",
       discipline: "eventing",
-      image: "/images/arion-3.png",
+      image: "/images/ambassadors/molly-ashe-cawley.jpg",
       title: "MOLLY ASHE CAWLEY",
+      link:"https://www.instagram.com/taylor.cawley/"
     },
     {
       id: 4,
       nation: "new-zeland",
       discipline: "dressage",
-      image: "/images/arion-4.png",
+      image: "/images/ambassadors/emi-richard.png",
       title: "EMI RICHARD",
+      link:"https://www.instagram.com/emirichard09/"
     },
     {
       id: 5,
       nation: "canada",
       discipline: "equitation",
-      image: "/images/arion-5.png",
+      image: "/images/ambassadors/adriana_forte.png",
       title: "ADRIANA FORTE",
+      link:"https://www.instagram.com/adriana.m.forte/"
     },
     {
       id: 6,
       nation: "canada",
       discipline: "equitation",
-      image: "/images/arion-6.png",
+      image: "/images/ambassadors/parker-peacock.JPG",
       title: "PARKER PEACOCK",
+      link:"https://www.instagram.com/parkerlpeacock/"
     },
     {
       id: 7,
       nation: "canada",
       discipline: "equitation",
-      image: "/images/arion-7.png",
+      image: "/images/ambassadors/emma-hakim.png",
       title: "EMMA HAKIM",
+      link:"https://www.instagram.com/mariellebabington/"
     },
     {
       id: 8,
       nation: "canada",
       discipline: "equitation",
-      image: "/images/arion-8.png",
+      image: "/images/ambassadors/cristian_hacker.JPG",
       title: "CRISTIAN HACKER",
+      link:"https://www.instagram.com/cristianhacker/"
     },
     {
       id: 9,
@@ -149,7 +158,202 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/arion-9.png",
       title: "MONICA SPENCER",
+      link:"https://www.instagram.com/_quinnhunter_/"
     },
+         {
+      id: 10,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/Kenzie_Smith.JPEG",
+      title: "KENZIE SMITH",
+      link:"https://www.instagram.com/kenzie_smith_04/"
+    },
+       {
+      id: 11,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/Ryan_Helsden.png",
+      title: "RYAN HELSDEN",
+      link:"https://www.instagram.com/ryan_haselden/"
+    },
+       {
+      id: 12,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/elisa_wallace.jpg",
+      title: "ELISA WALLACE",
+      link:"https://wallaceeventing.com/"
+    },
+       {
+      id: 13,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/mae-mannis.png",
+      title: "MIA MANNIS",
+      link:"https://www.instagram.com/mia_mannis/"
+    },
+       {
+      id: 14,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/sophie-mitchell.jpg",
+      title: "SOPHIE MITCHELL",
+      link:"https://www.instagram.com/sophie.mitchell11/"
+    },
+       {
+      id: 15,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/hayley-mairano.jpeg",
+      title: "HAYLEY MAIRANO",
+      link:""
+    },
+       {
+      id: 16,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/quinn-hunter (2).png",
+      title: "QUINN HUNTER",
+      link:"https://www.instagram.com/_quinnhunter_/"
+    },
+       {
+      id: 17,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/cece-chatterjee.JPG",
+      title: "CECELIA CHATTERJEE",
+      link:"https://www.instagram.com/cece.chatterjee/"
+    },
+       {
+      id: 18,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/marielle-babington.png",
+      title: "MARIELLE BABBINGTON ",
+      link:"https://www.instagram.com/mariellebabington/"
+    },
+       {
+      id: 19,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/michel-feitosa.JPEG",
+      title: "MICHEL FEITOSA",
+      link:"https://www.instagram.com/michel_feitosaa/"
+    },
+       {
+      id: 20,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/lynn_symansky.jpg",
+      title: "LYNN SYMANSKY",
+      link:"https://www.symanskyequestrian.com/"
+    },
+       {
+      id: 21,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/james_leone.jpg",
+      title: "JAMES LEONE",
+      link:""
+    },
+       {
+      id: 22,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/caroline_mcleese.jpeg",
+      title: "CAROLINE MCLEESE",
+      link:"https://www.instagram.com/carolinemcleese/?hl=en"
+    },
+       {
+      id: 23,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/amira-kettaneh.jpeg",
+      title: "AMIRA KETTANEH",
+      link:"https://www.symanskyequestrian.com/"
+    },
+       {
+      id: 24,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/hugo-mcalpine.JPG",
+      title: "HUGO MCALPINE",
+      link:"https://www.instagram.com/hugomcalpine/"
+    },
+       {
+      id: 25,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/mae-mannis.png",
+      title: "MAE MANNIS",
+      link:"https://www.instagram.com/mia_mannis/"
+    },
+       {
+      id: 26,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/Addyson_Cord.JPG",
+      title: "ADDYSON CORD",
+      link:""
+    },
+       {
+      id: 27,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/connor-mcmahon.jpg",
+      title: "CONNOR MCMAHON",
+      link:"https://www.instagram.com/conor.mcmahon13/"
+    },
+       {
+      id: 28,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/emma_thomas.jpg",
+      title: "EMMA THOMAS",
+      link:"https://www.instagram.com/emma.thomas95/"
+    },
+       {
+      id: 29,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/bobby_meyerhoff.jpg",
+      title: "BOBBY MEYERHOFF",
+      link:"https://emdeventing.wixsite.com/meyerhoffshowhorses"
+    },
+       {
+      id: 30,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/danica_meyerhoff.jpg",
+      title: "DANICA MEYERHOFF",
+      link:"https://emdeventing.wixsite.com/meyerhoffshowhorses"
+    },
+       {
+      id: 31,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/hadden_frost.jpg",
+      title: "HADDEN FROST",
+      link:"https://www.facebook.com/hadden.frost.1"
+    },
+        {
+      id: 32,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/lia-screnci.jpg",
+      title: "LIA SCRENCI",
+      link:""
+    },
+        {
+      id: 33,
+      nation: "canada",
+      discipline: "equitation",
+      image: "/images/ambassadors/ronan-guckian.jpeg",
+      title: "RONAN GUCKIAN",
+      link:""
+    },
+       
+
   ];
 
   const filteredData = data
@@ -267,19 +471,19 @@ export default function ArionAmabassadors() {
           )}
 
           {filteredData.map((item, idx) => (
-            <div key={idx}>
+            <a href={item?.link} key={idx}>
               <Image
                 src={item.image}
                 alt={item.title}
                 width={1000}
                 height={1000}
                 unoptimized
-                className="h-auto xl:h-[450px] w-full object-cover"
+                className="h-[300px] md:h-[400px] lg:h-[450px] w-full object-cover"
               />
               <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 text-dark-primary text-center">
                 {item.title}
               </h1>
-            </div>
+            </a>
           ))}
         </div>
       </div>

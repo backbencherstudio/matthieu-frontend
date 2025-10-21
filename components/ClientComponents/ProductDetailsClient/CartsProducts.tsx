@@ -23,8 +23,8 @@ export default function CartsProducts() {
     return (
         <Drawer direction="right" >
             <DrawerTrigger className="cursor-pointer"> <CartsIcon /></DrawerTrigger>
-            <DrawerContent className="md:p-8 p-4 lg:min-w-[600px] md:min-w-[500px] min-w-[90%] ">
-                <DrawerHeader className="flex flex-row justify-between items-center p-0 ">
+            <DrawerContent className="p-8  lg:min-w-[600px] ">
+                <DrawerHeader className="flex flex-row justify-between items-center p-0 border border-red-500">
                     <DrawerTitle className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%]  ">Your Cart</DrawerTitle>
                     <DrawerClose className="cursor-pointer">
                         <CloseIcon />
