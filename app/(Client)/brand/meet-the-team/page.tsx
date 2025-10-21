@@ -6,22 +6,22 @@ export default function MeetTheTeam() {
     <div>
       <div className="maxContainer">
         {/* Banner */}
-        <div>
+        <div className="">
           <Image
             src="/images/meet-the-team/COVER PICTURE.jpg"
             alt="Team"
             width={1000}
             height={1000}
             unoptimized
-            className="w-full h-[200px] md:h-full max-h-[400px] object-cover object-top"
+            className="w-full h-[200px] md:h-full max-h-[400px] object-cover object-top "
           />
         </div>
 
         {/* Team */}
-        <div className="pt-10 xl:pt-16 pb-16 xl:pb-30">
+        <div className=" xl:pt-16 pb-16 xl:pb-30">
           {/* Header */}
           <div className="flex flex-col items-center gap-1 md:gap-4">
-            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
+            <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text mt-[48px]">
               MEET THE TEAM
             </h1>
             <p className="text-secondary-text text-center text-base md:text-lg max-w-[600px] w-full mx-auto">
@@ -42,7 +42,7 @@ export default function MeetTheTeam() {
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-md md:text-[22px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Sylvain Houry
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -60,7 +60,7 @@ export default function MeetTheTeam() {
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-md md:text-[21px] lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Hadrien Schenck
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -78,7 +78,7 @@ export default function MeetTheTeam() {
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Kirsten Rose
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -96,7 +96,7 @@ export default function MeetTheTeam() {
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Chloe Cazebon
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">
@@ -114,7 +114,7 @@ export default function MeetTheTeam() {
                 className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
               />
 
-              <h1 className="text-2xl lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
                 Gabrielle Fournier
               </h1>
               <p className="text-base text-secondary-text normal-case text-center">

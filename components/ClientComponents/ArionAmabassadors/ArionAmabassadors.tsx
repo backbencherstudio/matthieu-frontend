@@ -478,7 +478,7 @@ export default function ArionAmabassadors() {
                 width={1000}
                 height={1000}
                 unoptimized
-                className="h-auto xl:h-[450px] w-full object-cover"
+                className="h-[400px] md:h-[400px] lg:h-[450px] w-full object-cover"
               />
               <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 text-dark-primary text-center">
                 {item.title}
