@@ -24,7 +24,7 @@ export default function OurWorkShop() {
             <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
               OUR WORKSHOP
             </h1>
-            <p className="text-secondary-text text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto">
+            <p className="text-secondary-text text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto tracking-[160%]">
               Located in the beautiful southwest of France, in Basque county.
               Our workshop is filled with heritage and passion.
             </p>
@@ -73,7 +73,7 @@ export default function OurWorkShop() {
 
           {/* Description */}
           <div className="py-8 flex flex-col gap-4">
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case">
+            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
               At Arion Sellier, we showcase French saddlery expertise by
               crafting custom and semi-custom saddles in partnership with a
               renowned workshop in southwest France. With over 40 years of
@@ -84,7 +84,7 @@ export default function OurWorkShop() {
               control.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case">
+            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
               In this Basque workshop, skilled leatherworkers carefully select,
               cut, and assemble each piece. Advanced tools—such as digital
               cutting for precision, 3D printing for prototyping, and laser
@@ -98,7 +98,7 @@ export default function OurWorkShop() {
           </div>
 
           {/* Gallery */}
-          <div className="pb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="pb-8 grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="overflow-hidden cursor-pointer">
               <Image
                 src="/images/workshop/bottom_1.JPG"
@@ -106,7 +106,7 @@ export default function OurWorkShop() {
                 width={1000}
                 height={1000}
                 unoptimized
-                className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
+                className="w-full h-[250px] md:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
             <div className="overflow-hidden cursor-pointer">
@@ -116,7 +116,7 @@ export default function OurWorkShop() {
                 width={1000}
                 height={1000}
                 unoptimized
-                className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
+                className="w-full h-[250px] md:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
             <div className="overflow-hidden cursor-pointer">
@@ -126,7 +126,7 @@ export default function OurWorkShop() {
                 width={1000}
                 height={1000}
                 unoptimized
-                className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
+                className="w-full h-[250px] md:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
             <div className="overflow-hidden cursor-pointer">
@@ -136,21 +136,21 @@ export default function OurWorkShop() {
                 width={1000}
                 height={1000}
                 unoptimized
-                className="w-full h-auto xl:h-[385px] object-cover hover:scale-105 transition-all duration-300"
+                className="w-full h-[250px] md:h-[385px] object-cover hover:scale-105 transition-all duration-300"
               />
             </div>
           </div>
 
           {/* Description */}
           <div className="flex flex-col gap-4">
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case">
+            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
               Because we favor short supply circuits and companies committed to
               limiting their environmental impact, our leathers are sublimated
               in French tanneries that have a unique traditional know-how passed
               down from generation to generation.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case">
+            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
               Our grained leathers are treated with vegetable tanning based on
               chestnut or mimosa. This technique allows us to reduce our
               ecological footprint on the one hand. But also to obtain deeper
@@ -159,7 +159,7 @@ export default function OurWorkShop() {
               saddle's stability.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case">
+            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
               Our soft leathers, with a waxy touch, come from a family tannery.
               This leather is produced made-to- order and is used to supply the
               most beautiful luxury houses in France. As for the buffalo
