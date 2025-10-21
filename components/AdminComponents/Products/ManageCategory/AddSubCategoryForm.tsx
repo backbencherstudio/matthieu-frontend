@@ -18,14 +18,14 @@ export default function AddSubCategoryForm() {
             <Label className="block text-sm text-gray-black mb-1">
               Sub Category Name*
             </Label>
-            <Input className="cmn-input" placeholder="Sub Category Name" />
+            <Input className="cmn-input bg-white" placeholder="Sub Category Name" />
           </div>
           <div className="mb-4">
             <Label className="block text-sm text-gray-black mb-1">
               Select Main Category*
             </Label>
             <Select>
-              <SelectTrigger className="cmn-select w-full">
+              <SelectTrigger className="cmn-select bg-white w-full">
                 <SelectValue placeholder="Saddle" />
               </SelectTrigger>
               <SelectContent>
