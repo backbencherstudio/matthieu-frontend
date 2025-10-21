@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type PaymentCardType = {
+type HeaderCardType = {
   title: string;
   icon: any;
   number: string;
@@ -8,13 +8,13 @@ type PaymentCardType = {
   iconColor?: string;
 };
 
-const PaymentCard = ({
+const HeaderCard = ({
   title,
   icon,
   number,
   iconBgColor,
   iconColor,
-}: PaymentCardType) => {
+}: HeaderCardType) => {
   return (
     <div className="p-4 flex items-start justify-between rounded-[8px] bg-[#FFF] border border-[#F6F8FA]">
       <div>
@@ -37,4 +37,4 @@ const PaymentCard = ({
   );
 };
 
-export default PaymentCard;
+export default HeaderCard;

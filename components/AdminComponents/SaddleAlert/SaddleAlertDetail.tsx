@@ -1,12 +1,10 @@
 import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 
-interface JobApplicantDetailProps {
+interface SaddleAlertDetailProps {
   onClose?: () => void;
 }
 
-export default function SaddleAlertDetail({
-  onClose,
-}: JobApplicantDetailProps) {
+export default function SaddleAlertDetail({ onClose }: SaddleAlertDetailProps) {
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
       <div className="flex items-center justify-between mb-[35px]">

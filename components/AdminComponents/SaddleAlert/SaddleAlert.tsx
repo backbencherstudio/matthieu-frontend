@@ -134,7 +134,7 @@ export default function SaddleAlert() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-5 mt-4">
+      <div className="flex items-center justify-between mb-5">
         <h1 className="lg:text-2xl md:text-xl text-lg font-extrabold text-[#1F274B]">
           Used Saddle Alert Overview
         </h1>
