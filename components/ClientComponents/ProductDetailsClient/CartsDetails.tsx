@@ -75,7 +75,7 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
   };
 
   return (
-    <div className="flex flex-col gap-6 justify-between h-full">
+    <div className="flex flex-col gap-6 justify-between h-full normal-case">
 
       {/* product details section  */}
       <div className="flex flex-col gap-3">
@@ -111,8 +111,8 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
                   <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold  normal-case">{item.name}</h3>
                   <p className="text-sm  text-[#4C526F] font-normal leading-[100%]">SKU: {item.sku}</p>
                   <div className='flex  gap-4 '>
-                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>size: pony</span>
-                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] uppercase'>color: brawn</span>
+                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] normal-case'>Size: pony</span>
+                    <span className='text-sm  text-[#4C526F] font-normal leading-[100%] normal-case'>Color: brawn</span>
                   </div>
                 </div>
                 {/* Quantity Controls */}
@@ -199,7 +199,7 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
             {summaryItems.map((item, index) => (
               <div
                 key={index}
-                className={`flex justify-between md:text-base text-sm leading-[100%] font-normal text-[#4C526F] `}
+                className={`flex justify-between md:text-base  text-sm leading-[100%] font-extrabold text-[#4C526F] `}
               >
                 <span>{item.label}</span>
                 <span className={` ${item?.label === "Coupon Discount" && "text-[#F38B94]"}`}>
@@ -215,7 +215,7 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
             <span className="leading-[100%] font-extrabold">
               Total Amount
             </span>
-            <span className="leading-[100%] font-normal" >
+            <span className="leading-[100%] font-extrabold" >
               ${total.toFixed(2)}
             </span>
           </div>

@@ -77,18 +77,22 @@ export function PaymentDetails() {
                                 <input
                                     placeholder="4/30"
                                     {...register("expired")}
-                                    className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                                    className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                                 />
                             </div>
 
                             <div className="flex flex-col gap-2">
                                 <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
-                                   CVV
+                                    CVV
                                 </label>
                                 <input
                                     placeholder="345"
                                     {...register("cvv")}
-                                    className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                                    className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                                 />
                             </div>
 
@@ -117,7 +121,8 @@ export function PaymentDetails() {
                     </form>
                 </div>
 
-                <div className="border xl:w-[33%] md:w-full w-full px-6 py-6">
+                <div className="border xl:w-[33%] md:w-full w-full px-6 py-6 h-full">
+                    <div className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%] normal-case  mb-4">Your Cart</div>
                     <CartsDetails checkoutButton={false} />
                 </div>
             </div>

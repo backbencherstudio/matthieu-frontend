@@ -163,7 +163,9 @@ export function Billing() {
                 <input
                   placeholder="Paris"
                   {...register("city")}
-                  className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
               </div>
 
@@ -174,7 +176,9 @@ export function Billing() {
                 <input
                   placeholder="France"
                   {...register("state")}
-                  className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
               </div>
 
@@ -185,7 +189,9 @@ export function Billing() {
                 <input
                   placeholder="75001"
                   {...register("zipCode")}
-                  className="text-[#1D1F2C] py-[12px] px-4 h-[48px] text-[16px] font-bold leading-[150%] tracking-[0.08px] bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
+    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
               </div>
             </div>
