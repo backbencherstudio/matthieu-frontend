@@ -11,6 +11,8 @@ export interface TableRowItem extends TableItem {
   profileImage?: StaticImageData; // StaticImageData for the profile image
   serviceImage?: StaticImageData; // StaticImageData for the service image
   serviceType?: string;
+  trackingNumber?: string;
+  destination?: string;
   date?: string;
   daysLeft?: string;
   productName?: string;
