@@ -67,9 +67,9 @@ export default function ManageCategory() {
         </Dialog>
       </div>
       {/* Categories Table */}
-      <div className="mt-5 bg-white rounded-lg p-4">
+      <div className="mt-5 bg-white rounded-lg pt-4">
         <Tabs defaultValue="category">
-          <TabsList className="p-0 h-auto max-w-[350px] w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <TabsList className="p-0 mx-4 h-auto max-w-[250px] sm:max-w-[300px] w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             <TabsTrigger
               value="category"
               className="px-5 !py-3 outline-none shadow-none text-sm sm:text-base data-[state=active]:font-extrabold bg-[#ECEFF3] cursor-pointer focus-visible:ring-0 data-[state=active]:shadow-none data-[state=active]:bg-dark-bg data-[state=active]:text-white rounded-none rounded-tl-lg rounded-bl-lg"

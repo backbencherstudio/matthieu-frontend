@@ -1,7 +1,30 @@
 "use client";
 
 import { useState } from "react";
+
 import {
+  ColumnDef,
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+  VisibilityState,
+} from "@tanstack/react-table";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+/* import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
@@ -17,7 +40,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"; */
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -113,7 +136,7 @@ export function DataTable<TData, TValue>({
   const pageItems = getPageItems(current, totalPages, 1);
 
   return (
-    <div className="w-full">
+    <div>
       <div className="flex flex-wrap items-center justify-between gap-3 py-4">
         <h1 className="text-xl font-extrabold text-primary-text">{title}</h1>
 
@@ -131,9 +154,7 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      {/* xl:max-w-screen lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] */}
-
-      <div className="xl:max-w-screen lg:max-w-[calc(100vw-400px)] max-w-[calc(100vw-100px)] overflow-x-auto rounded border border-[#cccccc65]">
+      <div className="grid grid-cols-1 rounded border border-[#cccccc65]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
