@@ -45,16 +45,6 @@ export interface TableRowItem extends TableItem {
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
-<<<<<<< HEAD
-=======
-  publishDate?: string;
-  tags?: string[];
-  categories?: string[];
-  typeValue?: string;
-  deliveryFee?: string;
-  author?: string;
-  clicks?: number;
->>>>>>> 593e4ba9c143a0a72c0665fd0a5353dfabd3de83
   lastLogin?: string;
   ip?: string;
   country?: string;
@@ -81,6 +71,7 @@ export interface TableRowItem extends TableItem {
   purchaseDate?: string;
   warehouse?: string;
   taxRate?: string;
+  typeValue?: string;
   subject?: string;
   stage?: string;
   tasks?: string;
