@@ -3,6 +3,7 @@ import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
 import ShipmentIcon from "@/components/Icons/AdminIcon/ShipmentIcon";
 import ShoppingCardIcon from "@/components/Icons/MyAccoountIcon/ShoppingCardIcon";
 import SuccessIcon from "@/components/Icons/MyAccoountIcon/SuccessIcon";
+import Link from "next/link";
 import HeaderCard from "../reusable/HeaderCard";
 import OrderTable from "./OrderTable";
 
@@ -48,10 +49,13 @@ export default function Order() {
           Orders Management
         </h1>
         <div className="flex items-center space-x-4">
-          <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+          <Link
+            href="/admin/orders/track-shipment"
+            className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
+          >
             <ShipmentIcon className="h-4 w-4" />
             <span className="text-[14px] leading-[114%]">Track Shipment</span>
-          </button>
+          </Link>
           <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
             <RefreshIcon className="h-4 w-4" />
             <span className="text-[14px] leading-[114%]">Refresh</span>
