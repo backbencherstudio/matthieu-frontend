@@ -1,5 +1,5 @@
 "use client";
-import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
+import ArrowUpIcon from "@/components/Icons/AdminIcon/ArrowUpIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import {
@@ -12,102 +12,86 @@ import {
 import { useFilterPagination } from "@/hooks/useFilterHook";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
-import Link from "next/link";
 import { ReactNode } from "react";
+import CancelOrderModal from "./CancelOrderModal";
 
 export default function TrackShipmentTable() {
   const relevantData = [
     {
-      id: "ORD-1001",
-      productName: "Leather Riding Boots",
-      productStatus: "+2 more items",
+      id: "#ORD-1001",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Marcus Thompson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$320.00",
-      orderType: "Online",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "09 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Delivered",
     },
     {
-      id: "ORD-1002",
-      productName: "Jumping Saddle",
-      productStatus: "+2 more items",
+      id: "#ORD-1002",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Elon Musk",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$1,150.00",
-      orderType: "In-Store",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "11 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Pending",
     },
     {
-      id: "ORD-1003",
-      productName: "Equestrian Helmet",
-      productStatus: "+2 more items",
+      id: "#ORD-1003",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Donal Tramp",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$250.00",
-      orderType: "Online",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "13 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Cancelled",
     },
     {
-      id: "ORD-1004",
-      productName: "Show Jacket",
-      productStatus: "+2 more items",
+      id: "#ORD-1004",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Marcelo X",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$480.00",
-      orderType: "Online",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "15 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "In Process",
     },
     {
-      id: "ORD-1005",
-      productName: "Riding Gloves",
-      productStatus: "+2 more items",
+      id: "#ORD-1005",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Sophia Williams",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$90.00",
-      orderType: "Online",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "18 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Delivered",
     },
     {
-      id: "ORD-1006",
-      productName: "Dressage Whip",
-      productStatus: "+2 more items",
+      id: "#ORD-1006",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Emma Watson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$65.00",
-      orderType: "In-Store",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "20 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Delivered",
     },
     {
-      id: "ORD-1007",
-      productName: "Horse Blanket",
-      productStatus: "+2 more items",
+      id: "#ORD-1007",
+      trackingNumber: "1Z999AA1234S67890",
       customer: "Jack Johnson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$210.00",
-      orderType: "Online",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "22 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Pending",
     },
     {
-      id: "ORD-1008",
-      productName: "Stable Rug",
-      customer: "Liam Brown",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$185.00",
-      orderType: "In-Store",
+      id: "#ORD-1008",
+      trackingNumber: "1Z999AA1234S67890",
+      destination: "New York",
+      state: "United States",
       deliveryDate: "25 June, 2025",
       estimatedDelivery: "Estimated",
       deliveryStatus: "Processing",
@@ -132,28 +116,23 @@ export default function TrackShipmentTable() {
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#4A4C56] leading-[114%]">
-        {item?.id}
+        {item?.trackingNumber}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#1F274B] leading-[100%]">
-        {item?.productName} <br />
+        {item?.customer} <br />
         <span className="text-[12px] leading-[100%] text-[#696E86]">
-          {item?.productStatus}
+          {item?.id}
         </span>
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#1F274B] leading-[114%]">
-        {item?.customer} <br />
+        {item?.destination} <br />
         <span className="text-[12px] leading-[100%] text-[#696E86]">
-          {item?.email}
+          {item?.state}
         </span>
-      </span>
-    ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.totalPrice}
       </span>
     ),
     (item) => (
@@ -180,14 +159,17 @@ export default function TrackShipmentTable() {
       </span>
     ),
     (item) => (
-      <div>
+      <div className="flex items-center justify-end gap-2">
         <div>
-          <Link
-            href={`/admin/orders/${item?.id}`}
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-          >
-            <EyeIcon />
-          </Link>
+          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px] flex items-center space-x-2">
+            <ArrowUpIcon />
+            <span className="text-[#4C526F] text-[14px] leading-[124%]">
+              Track
+            </span>
+          </button>
+        </div>
+        <div>
+          <CancelOrderModal />
         </div>
       </div>
     ),

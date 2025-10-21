@@ -188,7 +188,7 @@ export default function OrderTable() {
     ),
     (item) => (
       <div>
-        <div>
+        <div className="flex justify-end">
           <Link
             href={`/admin/orders/${item?.id}`}
             className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
