@@ -42,7 +42,7 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
 
         {/* Tailwind dropdown */}
         <Select value={categories} onValueChange={setCategories}>
-          <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+          <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
             <SelectValue placeholder="All Status" />
           </SelectTrigger>
           <SelectContent>

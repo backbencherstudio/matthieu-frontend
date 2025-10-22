@@ -16,7 +16,7 @@ const DashboardCard = ({
   iconColor,
 }: DashBoardCardType) => {
   return (
-    <div className="p-2 md:p-4 bg-[#FFF] border border-[#DFE1E7] md:flex flex-col md:items-center space-x-3 mb-5 md:w-full">
+    <div className="p-2 md:p-4 bg-[#FFF] border border-[#DFE1E7] flex items-center space-x-3 mb-5 md:w-full">
       <div
         className={cn(
           "w-8 h-8 md:w-14 md:h-14 p-2.5 aspect-square rounded-[6px] flex items-center justify-center my-1.5 md:1.5"
