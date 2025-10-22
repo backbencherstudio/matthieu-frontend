@@ -65,7 +65,7 @@ export default function Order() {
           </Link>
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-4">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
         {CustomerStats.map((status) => (
           <HeaderCard
             key={status?.id}

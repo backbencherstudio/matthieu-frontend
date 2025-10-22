@@ -202,7 +202,7 @@ export default function OrderTable() {
 
   const isLoadings = false;
   return (
-    <div className="">
+    <div>
       <div className="overflow-auto">
         <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
           {/* search bar */}

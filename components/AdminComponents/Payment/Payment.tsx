@@ -43,10 +43,10 @@ export default function Payment() {
   ];
   return (
     <div>
-      <h1 className="lg:text-2xl md:text-xl text-lg font-extrabold text-[#1F274B] leading-[100%] mb-5">
+      <h1 className="text-2xl font-extrabold text-primary-text mb-5">
         Payment Overview
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-4">
         {paymentStats.map((status) => (
           <HeaderCard
             key={status?.id}

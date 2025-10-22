@@ -98,4 +98,11 @@ export interface TableRowItem extends TableItem {
   companyName?: string;
   workspaceName?: string;
   customDomain?: string;
+  author?: string;
+  clicks?: string;
+  publishDate?: string;
+  tags?: string[];
+  categories?: string[];
+  paymentMethod?: string;
+  deliveryFee?: string;
 }
