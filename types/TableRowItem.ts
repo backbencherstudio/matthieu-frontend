@@ -11,8 +11,17 @@ export interface TableRowItem extends TableItem {
   profileImage?: StaticImageData; // StaticImageData for the profile image
   serviceImage?: StaticImageData; // StaticImageData for the service image
   serviceType?: string;
+  trackingNumber?: string;
+  destination?: string;
   date?: string;
   daysLeft?: string;
+  productName?: string;
+  productStatus?: string;
+  totalPrice?: string;
+  orderType?: string;
+  deliveryDate?: string;
+  estimatedDelivery?: string;
+  deliveryStatus?: string;
   number?: string;
   productPrice?: string;
   orderId?: string;
@@ -36,18 +45,10 @@ export interface TableRowItem extends TableItem {
   requestId?: string;
   picture?: StaticImageData;
   email?: string;
-  publishDate?: string;
-  tags?: string[];
-  categories?: string[];
-  typeValue?: string;
-  deliveryFee?: string;
-  author?: string;
-  clicks?: number;
   lastLogin?: string;
   ip?: string;
   country?: string;
   device?: string;
-  paymentMethod?: string;
   os?: string;
   description?: string;
   permissions?: string[];
@@ -56,10 +57,8 @@ export interface TableRowItem extends TableItem {
   accountType?: string;
   rate?: string;
   account?: string;
-  priceRange?: string;
   issueDate?: string;
   dueDate?: string;
-  createdDate?: string;
   totalAmount?: string;
   sku?: string;
   salePrice?: string;
@@ -72,6 +71,7 @@ export interface TableRowItem extends TableItem {
   purchaseDate?: string;
   warehouse?: string;
   taxRate?: string;
+  typeValue?: string;
   subject?: string;
   stage?: string;
   tasks?: string;
@@ -83,14 +83,13 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
+
   code?: string;
   discount?: number;
   limit?: number;
   limitPerUse?: number;
   used?: number;
-  customer?: string;
   phone?: string;
-  preferences?: string;
   state?: string;
   action?: React.ReactNode;
   experience?: string;

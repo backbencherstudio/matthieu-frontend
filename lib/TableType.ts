@@ -8,4 +8,6 @@ export type Data = {
   stock?: number;
   status?: string;
   action?: React.ReactNode;
+  subCategory?: string;
+  product?:string;
 };

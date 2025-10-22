@@ -27,7 +27,7 @@ const HeaderCard = ({
       </div>
       <div
         className={cn(
-          "w-5 h-5 md:w-14 md:h-14 p-2.5 aspect-square rounded-[6px] flex items-center justify-center my-1.5 md:1.5"
+          "w-10 h-10 md:w-14 md:h-14 p-2.5 aspect-square rounded-[6px] flex items-center justify-center my-1.5 md:1.5"
         )}
         style={{ backgroundColor: iconBgColor, color: iconColor }}
       >

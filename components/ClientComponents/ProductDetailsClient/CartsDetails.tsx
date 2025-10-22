@@ -233,4 +233,3 @@ export default function CartsDetails({ checkoutButton = true }: { checkoutButton
   );
 }
 
-

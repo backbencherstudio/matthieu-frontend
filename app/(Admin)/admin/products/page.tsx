@@ -3,6 +3,7 @@ import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import ProductTable from "@/components/AdminComponents/Products/ProductTable";
 import Link from "next/link";
 import React from "react";
+import page from './../../../(Client)/brand/our-story/page';
 
 export default function ProductsPage() {
   const statisticCards = [
@@ -37,7 +38,7 @@ export default function ProductsPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
-            href="/admin/dashboard/manage-category"
+            href="/admin/products/manage-category"
           >
             <span>Manage Category</span>
           </Link>

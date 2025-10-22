@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // const blogs = [
 //   {
@@ -80,30 +81,30 @@ const BlogDetailPage = () => {
             </p>
           </div>
 
-          <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block">
-            <div className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
-              <p className="text-sm font-semibold normal-case">Saddles</p>
+          <div className="w-full lg:w-1/4 space-y-4 sm:hidden md:block text-[#4A4C56] text-4">
+            <Link href="/saddles" className="flex justify-between items-center bg-[#1F274B] text-white p-4 ">
+              <p className="text-sm font-semibold normal-case ">Saddles</p>
               <Image src="/blogDetails/sadeles.png" alt="saddles" width={24} height={24} />
-            </div>
+            </Link>
 
-            <div className="flex justify-between items-center border border-black p-4 ">
+            <Link href="/saddles/used-saddles" className="flex justify-between items-center border border-black p-4 hover:bg-[#1F274B] hover:text-white">
               <p className="text-sm font-semibold normal-case">Used Saddles</p>
               <Image src="/blogDetails/usedsadless.png" alt="used saddles" width={24} height={24} />
-            </div>
+            </Link>
 
-            <div className="flex justify-between items-center border border-black p-4 ">
+            <Link href="/tack" className="flex justify-between items-center border border-black p-4 hover:bg-[#1F274B] hover:text-white">
               <p className="text-sm font-semibold normal-case">Tack & Accessories</p>
               <Image src="/blogDetails/trac.png" alt="tack" width={24} height={24} />
-            </div>
+            </Link>
 
-            <div className="border border-black p-4  text-sm font-semibold normal-case">
+            <div className="border border-black p-4  text-sm font-semibold normal-case hover:bg-[#1F274B] hover:text-white">
               Follow Us
             </div>
           </div>
         </div>
 
         {/* children 1 section */}
-        <div className='w-[385px] md:w-[727px] lg:w-[983px] xl:w-[1032px] pb-[60px]'>
+        <div className='w-[385px] md:w-[727px] lg:w-[983px] xl:w-[1032px] pb-[60px] '>
 
           <div className="mt-[32px]">
             <p className="bg-[#1F274B] text-white text-center text-[16px] font-extrabold leading-[148%] tracking-[0.32px] py-[4px] normal-case">
