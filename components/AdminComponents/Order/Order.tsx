@@ -44,25 +44,28 @@ export default function Order() {
   ];
   return (
     <div>
-      <div className="flex items-center justify-between mb-5">
-        <h1 className="text-2xl font-extrabold leading-[100%] text-[#1F274B]">
+      <div className="flex flex-wrap justify-between gap-2">
+        <h1 className="text-2xl font-extrabold text-primary-text">
           Orders Management
         </h1>
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-wrap items-center gap-4">
           <Link
+            className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
             href="/admin/orders/track-shipment"
-            className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
           >
             <ShipmentIcon className="h-4 w-4" />
-            <span className="text-[14px] leading-[114%]">Track Shipment</span>
+            <span>Track Shipment</span>
           </Link>
-          <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+          <Link
+            className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
+            href="/admin/products/add"
+          >
             <RefreshIcon className="h-4 w-4" />
-            <span className="text-[14px] leading-[114%]">Refresh</span>
-          </button>
+            <span>Refresh</span>
+          </Link>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-4">
         {CustomerStats.map((status) => (
           <HeaderCard
             key={status?.id}
@@ -74,6 +77,7 @@ export default function Order() {
           />
         ))}
       </div>
+
       <OrderTable />
     </div>
   );

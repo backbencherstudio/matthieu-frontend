@@ -16,6 +16,7 @@ export interface TableRowItem extends TableItem {
   date?: string;
   daysLeft?: string;
   productName?: string;
+  customer?: string;
   productStatus?: string;
   totalPrice?: string;
   orderType?: string;
