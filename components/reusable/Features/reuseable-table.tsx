@@ -39,7 +39,7 @@ const ReuseAbleTable = <T extends TableItem>({
           isBg && "bg-white rounded-2xl  px-4 "
         } overflow-x-auto  w-full custom-scroll`}
       >
-        <div className=" lg:max-w-[calc(100vw-240px)] max-w-[calc(100vw-60px)] ">
+        <div className=" lg:max-w-[calc(100vw-320px)] max-w-[calc(100vw-60px)] ">
           {isLoadings ? (
             <div className="">
               {/* Loading skeleton for table header */}

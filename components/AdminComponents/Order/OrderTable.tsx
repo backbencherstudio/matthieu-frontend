@@ -206,7 +206,7 @@ export default function OrderTable() {
       <div className="overflow-auto">
         <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
           {/* search bar */}
-          <div className="flex flex-col justify-between md:flex-row md:items-center gap-2.5 mb-[23px]">
+          <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
             <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
               Recent Orders
             </h2>
@@ -223,7 +223,7 @@ export default function OrderTable() {
               </div>
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Typs" />
                   </SelectTrigger>
                   <SelectContent>
@@ -235,7 +235,7 @@ export default function OrderTable() {
               </div>
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
                   <SelectContent>

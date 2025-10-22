@@ -1,4 +1,5 @@
-import { PaymentDetails } from '@/components/Billing/PaymentDetails/PaymentDetails'
+
+import PaymentDetails from '@/components/Billing/PaymentDetails/PaymentDetails';
 import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
 import React from 'react'
 
