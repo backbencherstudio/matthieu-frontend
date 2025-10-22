@@ -1,13 +1,12 @@
-
+"use client";
 import PaymentDetails from '@/components/Billing/PaymentDetails/PaymentDetails';
 import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
-import { useStripe } from '@stripe/react-stripe-js';
 import React from 'react'
 
 
 export default function PaymentDetailsPage() {
 
-      const stripe = useStripe();
+
 
 
     const breadLink = [
@@ -31,7 +30,7 @@ export default function PaymentDetailsPage() {
     return (
         <div>
             <BreadCrumb breadLink={breadLink} />
-            <PaymentDetails stripe={stripe} />
+            <PaymentDetails />
         </div>
     )
 }

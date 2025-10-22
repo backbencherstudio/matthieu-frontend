@@ -2,7 +2,7 @@
 "use client";
  
 import React, { useState } from "react";
-import { CardNumberElement, CardExpiryElement, CardCvcElement, Elements } from "@stripe/react-stripe-js";
+
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe("pk_test_51SDMM6EbRBgxQBnKhhbdORl3dN1inJygwuDNSTGyxKfbv7ClnLoPBVzH7A859X5vPy8OINFnaLzUSXnCdrgJbwJu00EDdd4Nck");
@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2 } from "lucide-react";
+import { CardCvcElement, CardExpiryElement, CardNumberElement, Elements } from "@stripe/react-stripe-js";
  
 const PaymentForm = ({ stripe }: { stripe: any }) => {
   const [cardTitle, setCardTitle] = useState("");
@@ -136,7 +137,7 @@ const PaymentForm = ({ stripe }: { stripe: any }) => {
 // Main CheckoutForm component
 const PaymentDetails = ({ stripe }: { stripe: any }) => {
   return (
-    <div className="min-h-screen bg-white p-4">
+    <div className=" bg-white p-4">
       <div className="max-w-[1640px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-8 gap-8">
           <div className="bg-white p-8 rounded-xl col-span-8 lg:col-span-1 xl:col-span-6">
