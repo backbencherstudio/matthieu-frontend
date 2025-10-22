@@ -43,11 +43,11 @@ export default function Coupon() {
   ];
   return (
     <div>
-      <div className="flex items-center justify-between mb-5">
-        <h1 className="text-2xl font-extrabold leading-[100%] text-[#1F274B]">
+      <div className="flex flex-wrap justify-between gap-2">
+        <h1 className="text-2xl font-extrabold text-primary-text">
           Coupons & Discounts
         </h1>
-        <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+        <button className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap cursor-pointer mb-3">
           <PlusIcon className="h-4 w-4" />
           <span className="text-[14px] leading-[114%]">Create Coupon</span>
         </button>

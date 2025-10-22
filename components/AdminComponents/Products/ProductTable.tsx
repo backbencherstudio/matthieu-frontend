@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { ColumnDef } from "@tanstack/react-table";
-import { DataTable } from "../reusable/DataTable";
 import { Data } from "@/lib/TableType";
+import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
+import { DataTable } from "../reusable/DataTable";
 
+import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
+import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import {
   Select,
   SelectContent,
@@ -11,8 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import Link from "next/link";
 import DeleteDialog from "../reusable/DeleteDialog";
 

@@ -16,6 +16,7 @@ export interface TableRowItem extends TableItem {
   date?: string;
   daysLeft?: string;
   productName?: string;
+  customer?: string;
   productStatus?: string;
   totalPrice?: string;
   orderType?: string;
@@ -97,4 +98,11 @@ export interface TableRowItem extends TableItem {
   companyName?: string;
   workspaceName?: string;
   customDomain?: string;
+  author?: string;
+  clicks?: string;
+  publishDate?: string;
+  tags?: string[];
+  categories?: string[];
+  paymentMethod?: string;
+  deliveryFee?: string;
 }

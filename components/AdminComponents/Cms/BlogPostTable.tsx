@@ -125,17 +125,17 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#1F274B]">
-        {item?.tags?.map((tag, index) => (
+        {(item?.tags as string[])?.map((tag, index) => (
           <span key={index} className="text-[14px] text-[#1F274B] mr-2">
             {tag}
-            {index < item.tags.length - 1 && ", "}
+            {index < (item?.tags as string[]).length - 1 && ", "}
           </span>
         ))}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.categories?.map((category, index) => (
+        {(item?.categories as string[])?.map((category, index) => (
           <span
             key={index}
             className={`text-[14px] mr-2 ${
@@ -143,7 +143,7 @@ export default function BlogPostTable() {
             }`}
           >
             {category}
-            {index < item.tags.length - 1 && ", "}
+            {index < ((item?.categories as string[])?.length ?? 0) - 1 && ", "}
           </span>
         ))}
       </span>
@@ -197,11 +197,11 @@ export default function BlogPostTable() {
       <div className="overflow-auto">
         <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
           {/* search bar */}
-          <div className="flex flex-col justify-between md:flex-row md:items-center gap-2.5 mb-[23px]">
+          <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
             <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
               All Posts
             </h2>
-            <div className="flex xl:items-center flex-row space-x-3">
+            <div className="flex xl:items-center flex-wrap gap-3 space-x-3">
               <div className="relative">
                 <input
                   type="text"
@@ -214,7 +214,7 @@ export default function BlogPostTable() {
               </div>
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -226,7 +226,7 @@ export default function BlogPostTable() {
               </div>
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Dates" />
                   </SelectTrigger>
                   <SelectContent>
@@ -240,7 +240,7 @@ export default function BlogPostTable() {
               </div>
               <div>
                 <Select>
-                  <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Categories" />
                   </SelectTrigger>
                   <SelectContent>
