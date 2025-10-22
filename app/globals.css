@@ -388,7 +388,7 @@ body > .skiptranslate,
 }
 
 .cmn-textarea {
-  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 pb-10 rounded text-secondary-text;
+  @apply shadow-none outline-none focus-visible:ring-0 border border-[#DFE1E7] focus:outline-0 focus:border-[#1F274B] py-3 px-4 pb-10 rounded text-secondary-text h-[120px];
 }
 
 .cmn-select {
