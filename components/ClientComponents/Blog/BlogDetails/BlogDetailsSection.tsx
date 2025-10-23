@@ -58,8 +58,8 @@ const BlogDetailPage = () => {
       <div className="  bg-no-repeat bg-cover bg-center lg:py-[190px] md:py-[140px] py-[100px] w-full"
         style={{
           background: "linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), url('/images/blog-04.png') ",
-          backgroundRepeat:"no-repeat",
-          backgroundSize:"cover"
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
         }}
       >
         <div className='flex justify-center items-center h-full mx-auto text-center px-4 '>
@@ -97,8 +97,8 @@ const BlogDetailPage = () => {
               <Image src="/blogDetails/trac.png" alt="tack" width={24} height={24} />
             </Link>
 
-            <div className="border border-black p-4  text-sm font-semibold normal-case hover:bg-[#1F274B] hover:text-white">
-              Follow Us
+            <div className="">
+              <a href="https://www.instagram.com/arionsellier_usa_can" className='cursor-pointer border border-black p-4  text-sm font-semibold normal-case hover:bg-[#1F274B] hover:text-white w-full block'>Follow Us</a>
             </div>
           </div>
         </div>

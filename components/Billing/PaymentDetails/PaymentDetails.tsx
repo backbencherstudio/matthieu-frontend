@@ -87,8 +87,8 @@ const PaymentForm = ({ stripe }: { stripe: any }) => {
             <label className="text-[16px] leading-[160%] text-[#4A4C56] tracking-[0.08px] normal-case">
               Expire Date
             </label>
-            <div className="w-full px-4 py-3 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2">
-              <CardExpiryElement options={cardElementOptions} />
+            <div className=" mt-2">
+              <CardExpiryElement className="w-full border-transparent focus:outline-2 px-4 py-3.5 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] " options={cardElementOptions} />
             </div>
           </div>
 

@@ -52,7 +52,7 @@ export default function Coupon() {
           <span className="text-[14px] leading-[114%]">Create Coupon</span>
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-9">
+      <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-4 mb-9">
         {couponStats.map((status) => (
           <HeaderCard
             key={status?.id}
