@@ -1,9 +1,13 @@
 import React from "react";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import EditForm from "@/components/AdminComponents/Products/Edit/EditForm";
-export default function EditProduct({ params }: { params: any }) {
 
-  const id = params?.id;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function EditProduct({ params }: PageProps) {
+  const { id } = await params;
 
   const breadLink = [
     {

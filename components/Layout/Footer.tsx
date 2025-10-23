@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
 import Link from "next/link";
+import React from "react";
 import FacebookIcon from "../Icons/FacebookIcon";
 import InstagramIcon from "../Icons/InstagramIcon";
-import YoutubeIcon from "../Icons/YoutubeIcon";
-import TiktokIcon from "../Icons/TiktokIcon";
 import SeparatorIcon from "../Icons/SeparatorIcon";
+import TiktokIcon from "../Icons/TiktokIcon";
+import YoutubeIcon from "../Icons/YoutubeIcon";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 
 const Footer: React.FC = () => {
   const [checked, setChecked] = React.useState(false);
@@ -172,29 +172,29 @@ const footerData = [
       {
         name: "ARION",
         links: [
-          { name: "JUMPING", href: "#" },
-          { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" },
+          { name: "JUMPING", href: "/saddles/arion-saddles" },
+          { name: "DRESSAGE", href: "/saddles/arion-saddles" },
+          { name: "CROSS COUNTRY", href: "/saddles/arion-saddles" },
         ],
       },
       {
         name: "ATLAS",
         links: [
-          { name: "JUMPING", href: "#" },
-          { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" },
+          { name: "JUMPING", href: "/saddles/atlas-saddles" },
+          { name: "DRESSAGE", href: "/saddles/atlas-saddles" },
+          { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles" },
         ],
       },
       {
         name: "USED SADDLE",
-        links: [],
+        links: [{ name: "USED SADDLE", href: "/saddles/used-saddles" }],
       },
       {
         name: "ATHENA",
         links: [
-          { name: "JUMPING", href: "#" },
-          { name: "DRESSAGE", href: "#" },
-          { name: "CROSS COUNTRY", href: "#" },
+          { name: "JUMPING", href: "/saddles/athena-saddles" },
+          { name: "DRESSAGE", href: "/saddles/athena-saddles" },
+          { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
         ],
       },
     ],
@@ -221,7 +221,7 @@ const footerData = [
       { name: "WORKSHOP", href: "/brand/our-workshop" },
       { name: "AMBASSADORS", href: "/brand/arion-amabassadors" },
       { name: "BLOG", href: "/brand/blog" },
-      { name: "JOB OFFERS", href: "/brand/job-offers" },
+      { name: "JOB OFFERS", href: "/brand/job-offer" },
     ],
   },
   {

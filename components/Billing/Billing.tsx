@@ -1,13 +1,18 @@
-
 "use client";
 
-import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
-import ArrowDownIcon from "../Icons/ArrowDownIcon";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 import CartsDetails from "../ClientComponents/ProductDetailsClient/CartsDetails";
+import ArrowDownIcon from "../Icons/ArrowDownIcon";
 
 export function Billing() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -45,13 +50,17 @@ export function Billing() {
                 </label>
                 <input
                   placeholder="Yasir abid"
-                  {...register("firstName", { required: "First name is required" })}
+                  {...register("firstName", {
+                    required: "First name is required",
+                  })}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B] "
                 />
                 {errors.firstName && (
-                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.firstName.message}*</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.firstName.message}*
+                  </p>
                 )}
               </div>
 
@@ -67,7 +76,9 @@ export function Billing() {
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.lastName && (
-                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.lastName.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.lastName.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -89,7 +100,9 @@ export function Billing() {
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.email && (
-                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.email.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -105,14 +118,16 @@ export function Billing() {
                     required: "Phone is required",
                   })}
                   onChange={(e) => {
-                    e.target.value
+                    e.target.value;
                   }}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.phone && (
-                  <p className="text-red-400 text-xs font-light normal-case mt-1">{errors.phone.message}</p>
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.phone.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -152,7 +167,6 @@ export function Billing() {
     focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
             </div>
-
 
             {/* City, State, Zip */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
@@ -234,12 +248,13 @@ export function Billing() {
 
             {/* Submit */}
             <div className="flex justify-end md:mt-8 mt-6">
-              <button
+              <Link
+                href="/product-details/billing-details/payment-details"
                 type="submit"
                 className="bg-[#1F274B] cursor-pointer text-white md:px-8 px-6 md:py-4 py-3 rounded-none border-none shadow-none"
               >
                 Next
-              </button>
+              </Link>
             </div>
           </form>
         </div>
@@ -251,7 +266,6 @@ export function Billing() {
     </div>
   );
 }
-
 
 // "use client";
 
@@ -598,5 +612,3 @@ export function Billing() {
 //     </div>
 //   );
 // }
-
-

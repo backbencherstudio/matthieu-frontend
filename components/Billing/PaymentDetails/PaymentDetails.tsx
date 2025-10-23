@@ -65,7 +65,7 @@ const PaymentForm = ({ stripe }: { stripe: any }) => {
           type="text"
           value={cardTitle}
           onChange={(e) => setCardTitle(e.target.value)}
-          className="w-full px-4 py-3 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2"
+          className="w-full px-4 py-3 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2 focus:outline-none"
           placeholder="Yasir Abed Rabbu"
           required
         />
@@ -77,18 +77,21 @@ const PaymentForm = ({ stripe }: { stripe: any }) => {
           <label className="text-[16px] leading-[160%] text-[#4A4C56] tracking-[0.08px] normal-case">
             Card Number
           </label>
-          <div className="w-full px-4 py-3 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2">
-            <CardNumberElement options={cardElementOptions} />
+          <div>
+            <CardNumberElement
+              options={cardElementOptions}
+              className="w-full px-4 py-3.5 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2"
+            />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <label className="text-[16px] leading-[160%] text-[#4A4C56] tracking-[0.08px] normal-case">
               Expire Date
             </label>
-            <div className=" mt-2">
-              <CardExpiryElement className="w-full border-transparent focus:outline-2 px-4 py-3.5 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] " options={cardElementOptions} />
+            <div className="w-full px-4 py-3.5 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2">
+              <CardExpiryElement options={cardElementOptions} />
             </div>
           </div>
 
@@ -96,8 +99,11 @@ const PaymentForm = ({ stripe }: { stripe: any }) => {
             <label className="text-[16px] leading-[160%] text-[#4A4C56] tracking-[0.08px] normal-case">
               CVC
             </label>
-            <div className="w-full px-4 py-3 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2">
-              <CardCvcElement options={cardElementOptions} />
+            <div>
+              <CardCvcElement
+                options={cardElementOptions}
+                className="w-full px-4 py-3.5 bg-[#F8FAFB] placeholder:text-[16px] placeholder:text-[#1D1F2C] placeholder:leading-[160%] placeholder:font-extrabold placeholder:tracking-[0.08px] mt-2"
+              />
             </div>
           </div>
         </div>
@@ -150,16 +156,9 @@ const PaymentDetails = ({ stripe }: { stripe: any }) => {
     <div className="maxContainer lg:my-12 md:my-10 my-8">
       <div className="flex lg:flex-row flex-col xl:gap-8 lg:gap-6">
         <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-[65%] lg:w-full normal-case">
-          <div className="flex items-center justify-between">
-            <h2 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%] normal-case">
-              Payment Details
-            </h2>
-            <div className="border border-[#4C526F] px-4 py-2 cursor-pointer">
-              <button className="text-[16px] text-[#4C526F] leading-[100%] cursor-pointer">
-                Pay with Google Pay
-              </button>
-            </div>
-          </div>
+          <h2 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%] normal-case">
+            Payment Details
+          </h2>
 
           <div>
             {/* Stripe Elements Provider */}
@@ -168,7 +167,7 @@ const PaymentDetails = ({ stripe }: { stripe: any }) => {
             </Elements>
           </div>
         </div>
-        <div className="border xl:w-[33%] md:w-full w-full px-6 py-6 h-full">
+        <div className="border xl:w-[33%] md:w-full w-full px-6 py-6 h-full mt-4 lg:mt-0">
           <div className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%] normal-case  mb-4">
             Your Cart
           </div>
