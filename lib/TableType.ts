@@ -10,4 +10,10 @@ export type Data = {
   action?: React.ReactNode;
   subCategory?: string;
   product?:string;
+  productColor?:string;
+  productSize?:string;
+  productImages?:{
+    image:string;
+  }[];
+ 
 };

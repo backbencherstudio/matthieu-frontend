@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,11 +23,13 @@ interface ProductVariant {
   price?: string;
   stock?: string;
   images?: File[] | null;
+  serial?: number;
 }
 
 export default function EditForm() {
   const [images, setImages] = useState<File[]>([]);
   const [dynamicVariants, setDynamicVariants] = useState<ProductVariant[]>([]);
+  const [nextSerial, setNextSerial] = useState(3);
 
   const handleVariantImageChange = (
     variantId: string,
@@ -49,15 +51,16 @@ export default function EditForm() {
     const variantSerial = document.getElementById(
       "variant-serial"
     ) as HTMLInputElement;
-    const serial = parseInt(variantSerial.value) + 1;
-    variantSerial.value = serial.toString();
+    variantSerial.value = (nextSerial + 1).toString();
+    setNextSerial(nextSerial + 1);
     const newVariant: ProductVariant = {
-      id: `variant-${serial}`,
+      id: `variant-${nextSerial}`,
       color: "",
       size: "",
       price: "",
       stock: "",
       images: [],
+      serial: nextSerial,
     };
     setDynamicVariants((prev) => [...prev, newVariant]);
   };
@@ -67,6 +70,199 @@ export default function EditForm() {
       prev.filter((variant) => variant.id !== variantId)
     );
   };
+
+  const ProductVariantComponent = ({
+    variant,
+    index,
+  }: {
+    variant: ProductVariant;
+    index: number;
+  }) => {
+    return (
+      <div key={index} className="bg-[#F8FAFB] p-4 mt-4">
+        <div className="flex flex-wrap justify-between gap-3">
+          <h2 className="text-xl font-extrabold text-primary-text">
+            Product Variation {variant.serial}
+          </h2>
+          <div className="flex items-center gap-3">
+            <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
+              Save
+            </button>
+            <button
+              onClick={() => removeVariant(variant.id)}
+              type="button"
+              className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
+            >
+              <TrashIcon />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5 mt-4">
+          {/* Left */}
+          <div>
+            <div className="grid sm:grid-cols-2 gap-x-3">
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Color
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select bg-white">
+                    <SelectValue placeholder="Select Color" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Color">Select Color</SelectItem>
+                    <SelectItem value="Black">Black</SelectItem>
+                    <SelectItem value="Brown">Brown</SelectItem>
+                    <SelectItem value="Add Color">+ Add Color</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Size*
+                </Label>
+                <Select>
+                  <SelectTrigger className="w-full cmn-select bg-white">
+                    <SelectValue placeholder="Select Size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Select Size">Select Size</SelectItem>
+                    <SelectItem value="Pony">Pony</SelectItem>
+                    <SelectItem value="Cob">Cob</SelectItem>
+                    <SelectItem value="Full">Full</SelectItem>
+                    <SelectItem value="Oversize">Oversize</SelectItem>
+                    <SelectItem value="Add Size">+ Add Size</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Product Price ($)
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input bg-white"
+                  placeholder="Enter Price"
+                  defaultValue="580.00"
+                />
+              </div>
+              <div className="mb-3">
+                <Label className="text-sm text-secondary-text mb-1">
+                  Stock Quantity *
+                </Label>
+                <Input
+                  type="text"
+                  className="cmn-input bg-white"
+                  placeholder="Enter Stock Quantity"
+                  defaultValue="45"
+                />
+              </div>
+            </div>
+          </div>
+          {/* Right */}
+          <div>
+            <h4 className="text-sm font-extrabold text-[#4C526F] mb-3">
+              Product Images
+            </h4>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <label
+                htmlFor={`image-${variant.id}-1`}
+                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  id={`image-${variant.id}-1`}
+                  onChange={(e) => handleVariantImageChange(variant.id, e)}
+                />
+                <div className="text-center flex flex-col gap-1 items-center">
+                  <GalleryIcon className="size-8" />
+                  <p className="text-sm text-secondary-text">Add</p>
+                  {variant.images && variant.images.length > 0 && (
+                    <p>
+                      <span className="text-primary-text">
+                        {variant.images.map((img, i) => img.name).join(", ")}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </label>
+              <label
+                htmlFor={`image-${variant.id}-2`}
+                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  id={`image-${variant.id}-2`}
+                  onChange={(e) => handleVariantImageChange(variant.id, e)}
+                />
+                <div className="text-center flex flex-col gap-1 items-center">
+                  <GalleryIcon className="size-8" />
+                  <p className="text-sm text-secondary-text">Add</p>
+                  {variant.images && variant.images.length > 0 && (
+                    <p>
+                      <span className="text-primary-text">
+                        {variant.images.map((img, i) => img.name).join(", ")}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </label>
+              <label
+                htmlFor={`image-${variant.id}-3`}
+                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  id={`image-${variant.id}-3`}
+                  onChange={(e) => handleVariantImageChange(variant.id, e)}
+                />
+                <div className="text-center flex flex-col gap-1 items-center">
+                  <GalleryIcon className="size-8" />
+                  <p className="text-sm text-secondary-text">Add</p>
+                  {variant.images && variant.images.length > 0 && (
+                    <p>
+                      <span className="text-primary-text">
+                        {variant.images.map((img, i) => img.name).join(", ")}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </label>
+              <label
+                htmlFor={`image-${variant.id}-4`}
+                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
+              >
+                <input
+                  type="file"
+                  className="hidden"
+                  id={`image-${variant.id}-4`}
+                  onChange={(e) => handleVariantImageChange(variant.id, e)}
+                />
+                <div className="text-center flex flex-col gap-1 items-center">
+                  <GalleryIcon className="size-8" />
+                  <p className="text-sm text-secondary-text">Add</p>
+                  {variant.images && variant.images.length > 0 && (
+                    <p>
+                      <span className="text-primary-text">
+                        {variant.images.map((img, i) => img.name).join(", ")}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  
 
   return (
     <div className="bg-white p-4 rounded-[8px]">
@@ -138,22 +334,27 @@ export default function EditForm() {
         <div>
           {/* Product Variant from database */}
           <div className="bg-[#F8FAFB] p-4 mt-4">
-            <div className="flex justify-between gap-3">
+            <div className="flex flex-wrap justify-between gap-3">
               <h2 className="text-xl font-extrabold text-primary-text">
                 Product Variation 1
               </h2>
               <div className="flex items-center gap-3">
-                <button className="cmn-btn !px-4 !rounded-[6px]">Save</button>
-                <button className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text">
+                <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
+                >
                   <TrashIcon />
                 </button>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-5 mt-4">
               {/* Left */}
               <div>
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid sm:grid-cols-2 gap-x-3">
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Color
@@ -168,6 +369,7 @@ export default function EditForm() {
                         </SelectItem>
                         <SelectItem value="Black">Black</SelectItem>
                         <SelectItem value="Brown">Brown</SelectItem>
+                        <SelectItem value="Add Color">+ Add Color</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -185,6 +387,7 @@ export default function EditForm() {
                         <SelectItem value="Cob">Cob</SelectItem>
                         <SelectItem value="Full">Full</SelectItem>
                         <SelectItem value="Oversize">Oversize</SelectItem>
+                        <SelectItem value="Add Size">+ Add Size</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -218,7 +421,7 @@ export default function EditForm() {
                   Product Images
                 </h4>
 
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                   <label
                     htmlFor="image"
                     className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
@@ -294,22 +497,27 @@ export default function EditForm() {
 
           {/* Product Variant 2 */}
           <div className="bg-[#F8FAFB] p-4 mt-4">
-            <div className="flex justify-between gap-3">
+            <div className="flex flex-wrap justify-between gap-3">
               <h2 className="text-xl font-extrabold text-primary-text">
-                Product Variation 1
+                Product Variation 2
               </h2>
               <div className="flex items-center gap-3">
-                <button className="cmn-btn !px-4 !rounded-[6px]">Save</button>
-                <button className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text">
+                <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
+                >
                   <TrashIcon />
                 </button>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-5 mt-4">
               {/* Left */}
               <div>
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid sm:grid-cols-2 gap-x-3">
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Color
@@ -324,6 +532,7 @@ export default function EditForm() {
                         </SelectItem>
                         <SelectItem value="Black">Black</SelectItem>
                         <SelectItem value="Brown">Brown</SelectItem>
+                        <SelectItem value="Add Color">+ Add Color</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -341,6 +550,7 @@ export default function EditForm() {
                         <SelectItem value="Cob">Cob</SelectItem>
                         <SelectItem value="Full">Full</SelectItem>
                         <SelectItem value="Oversize">Oversize</SelectItem>
+                        <SelectItem value="Add Size">+ Add Size</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -374,7 +584,7 @@ export default function EditForm() {
                   Product Images
                 </h4>
 
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                   <label
                     htmlFor="image"
                     className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
@@ -454,130 +664,11 @@ export default function EditForm() {
           {/* Product Variant to be added */}
           <div className="product-variant-to-add">
             {dynamicVariants.map((variant, index) => (
-              <div key={variant.id} className="bg-[#F8FAFB] p-4 mt-4">
-                <div className="flex justify-between gap-3">
-                  <h2 className="text-xl font-extrabold text-primary-text">
-                    Product Variation {variant.id}
-                  </h2>
-                  <div className="flex items-center gap-3">
-                    <button
-                      type="button"
-                      className="cmn-btn !px-4 !rounded-[6px]"
-                    >
-                      Save
-                    </button>
-                    <button
-                      type="button"
-                      className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
-                      onClick={() => removeVariant(variant.id)}
-                    >
-                      <TrashIcon />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-5">
-                  {/* Left */}
-                  <div>
-                    <div className="grid grid-cols-2 gap-x-3">
-                      <div className="mb-3">
-                        <Label className="text-sm text-secondary-text mb-1">
-                          Product Color
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="w-full cmn-select bg-white">
-                            <SelectValue placeholder="Select Color" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Select Color">
-                              Select Color
-                            </SelectItem>
-                            <SelectItem value="Black">Black</SelectItem>
-                            <SelectItem value="Brown">Brown</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="mb-3">
-                        <Label className="text-sm text-secondary-text mb-1">
-                          Product Size*
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="w-full cmn-select bg-white">
-                            <SelectValue placeholder="Select Size" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Select Size">
-                              Select Size
-                            </SelectItem>
-                            <SelectItem value="Pony">Pony</SelectItem>
-                            <SelectItem value="Cob">Cob</SelectItem>
-                            <SelectItem value="Full">Full</SelectItem>
-                            <SelectItem value="Oversize">Oversize</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="mb-3">
-                        <Label className="text-sm text-secondary-text mb-1">
-                          Product Price ($)
-                        </Label>
-                        <Input
-                          type="text"
-                          className="cmn-input bg-white"
-                          placeholder="Enter Price"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <Label className="text-sm text-secondary-text mb-1">
-                          Stock Quantity *
-                        </Label>
-                        <Input
-                          type="text"
-                          className="cmn-input bg-white"
-                          placeholder="Enter Stock Quantity"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  {/* Right */}
-                  <div>
-                    <h4 className="text-sm font-extrabold text-[#4C526F] mb-3">
-                      Product Images
-                    </h4>
-
-                    <div className="grid grid-cols-4 gap-4">
-                      {[1, 2, 3, 4].map((imageIndex) => (
-                        <label
-                          key={imageIndex}
-                          htmlFor={`image-${variant.id}-${imageIndex}`}
-                          className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-                        >
-                          <input
-                            type="file"
-                            className="hidden"
-                            id={`image-${variant.id}-${imageIndex}`}
-                            onChange={(e) =>
-                              handleVariantImageChange(variant.id, e)
-                            }
-                          />
-                          <div className="text-center flex flex-col gap-1 items-center">
-                            <GalleryIcon className="size-8" />
-                            <p className="text-sm text-secondary-text">Add</p>
-                            {variant.images.length > 0 && (
-                              <p>
-                                <span className="text-primary-text">
-                                  {variant.images
-                                    .map((img, i) => img.name)
-                                    .join(", ")}
-                                </span>
-                              </p>
-                            )}
-                          </div>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProductVariantComponent
+                key={index}
+                variant={variant}
+                index={index}
+              />
             ))}
           </div>
         </div>
