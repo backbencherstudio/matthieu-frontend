@@ -187,7 +187,7 @@ const footerData = [
       },
       {
         name: "USED SADDLE",
-        links: [],
+        links: [{ name: "USED SADDLE", href: "/saddles/used-saddles" }],
       },
       {
         name: "ATHENA",

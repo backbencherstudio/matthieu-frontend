@@ -1,10 +1,10 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
 export default function BestSellerBottom() {
   return (
     <div className="flex md:flex-row flex-col gap-8">
-      <div className="relative ">
+      <Link href="/brand/job-offer" className="relative">
         <Image
           alt="carrers"
           src="/home/carerrs.png"
@@ -16,8 +16,8 @@ export default function BestSellerBottom() {
         <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white lg:text-[32px] md:text-[28px] text-2xl font-extrabold leading-[100%] ">
           Careers
         </p>
-      </div>
-      <div className="relative ">
+      </Link>
+      <Link href="/find-us" className="relative ">
         <Image
           alt="carrers"
           src="/home/findus.png"
@@ -29,7 +29,7 @@ export default function BestSellerBottom() {
         <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white lg:text-[32px] md:text-[28px] text-2xl font-extrabold leading-[100%] ">
           FIND US
         </p>
-      </div>
+      </Link>
     </div>
   );
 }

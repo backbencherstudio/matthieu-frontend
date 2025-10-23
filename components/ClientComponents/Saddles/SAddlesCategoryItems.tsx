@@ -1,7 +1,5 @@
-import SeparatorIcon from "@/components/Icons/SeparatorIcon";
 import { Separators } from "@/components/ui/separator";
 import Link from "next/link";
-import React from "react";
 
 interface SAddlesCategoryItemsProps {
   saddlesItems: {
@@ -62,7 +60,8 @@ export default function SAddlesCategoryItems({
       <div>
         <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 md:max-w-[952px]">
           {saddlesItems?.images?.map((product) => (
-            <div
+            <Link
+              href="/product-details/1"
               key={product.id}
               className=" flex flex-col gap-5 items-center justify-center "
             >
@@ -74,7 +73,7 @@ export default function SAddlesCategoryItems({
               <p className="text-[#4A4C56] text-center md:text-xl text-base leading-[124%]   md:pb-5 font-normal">
                 {product.name}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
