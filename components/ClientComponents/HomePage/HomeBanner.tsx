@@ -22,7 +22,7 @@ export default function HomeBanner() {
           muted
           loop
           className="md:h-[500px] w-full object-cover"
-          poster="/video/thumbnail.png"
+          poster="/bannerVideo/bannerThumbnail.png"
         >
           <source src="/bannerVideo/homeBanner.mp4" type="video/mp4" />
           Your browser does not support the video tag.
