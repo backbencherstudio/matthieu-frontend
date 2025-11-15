@@ -15,7 +15,7 @@ export default function SAddlesCategoryItems({
   saddlesItems,
 }: SAddlesCategoryItemsProps) {
   return (
-    <div className="flex gap-8">
+    <div className="lg:flex lg:justify-around">
       <div className="p-8 bg-[#1F274B] flex items-center justify-center">
         <div>
           <h1 className="lg:text-[32px] md:text-[30px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center text-[#FFF]">
@@ -30,17 +30,17 @@ export default function SAddlesCategoryItems({
         </div>
       </div>
       <div>
-        <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 md:max-w-[952px]">
+        <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 w-full">
           {saddlesItems?.images?.map((product) => (
             <Link
-              href="/product-details/1"
+              href="/saddles/jumping"
               key={product.id}
               className=" flex flex-col gap-5 items-center justify-center "
             >
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-cover "
+                className="w-[320px] h-[312px] object-cover "
               />
               <p className="text-[#4A4C56] text-center md:text-xl text-base leading-[124%]   md:pb-5 font-normal">
                 {product.name}
