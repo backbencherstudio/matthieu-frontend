@@ -1,4 +1,3 @@
-import { Separators } from "@/components/ui/separator";
 import Link from "next/link";
 
 interface SAddlesCategoryItemsProps {
@@ -16,46 +15,19 @@ export default function SAddlesCategoryItems({
   saddlesItems,
 }: SAddlesCategoryItemsProps) {
   return (
-    <div className="flex items-center justify-center flex-col ">
-      <h1 className="lg:text-[40px] md:text-[36px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center">
-        {saddlesItems?.label}
-      </h1>
-      <p className="text-[#4C526F] md:text-2xl text-lg font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3">
-        {saddlesItems?.subtitle}
-      </p>
-      <div className="flex md:mt-6 mt-4">
-        {saddlesItems?.items?.map((itm, index) => (
-          <div
-            key={index}
-            className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase "
-          >
-            <span
-              className="md:py-[4px] py-[2px] textPrimary lg:text-2xl md:text-lg text-base font-extrabold leading-[100%] tracking-[.48px]  "
-              key={index}
-            >
-              {itm}
-            </span>
-            {index !== saddlesItems.items.length - 1 && (
-              <Separators
-                className="md:mx-3 mx-1.5 textPrimary "
-                orientation="vertical"
-              />
-            )}
+    <div className="flex gap-8">
+      <div className="p-8 bg-[#1F274B] flex items-center justify-center">
+        <div>
+          <h1 className="lg:text-[32px] md:text-[30px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center text-[#FFF]">
+            {saddlesItems?.label}
+          </h1>
+          <p className="text-[#E9E9ED] md:text-2xl text-lg font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3 text-center">
+            {saddlesItems?.subtitle}
+          </p>
+          <div className="mt-10 flex items-center justify-center">
+            <button className="px-8 py-4 bg-[#FFF]">TRY A SADDLE</button>
           </div>
-        ))}
-      </div>
-      <div className="flex md:flex-row flex-col gap-4 md:my-12 my-8">
-        {saddlesItems?.btns?.map((btn, index) => (
-          <Link
-            href={btn?.href}
-            key={index}
-            className={` md:px-8 px-4 md:py-4 py-3  bg-[#1F274B] hover:bg-[#1F274B]/80 transition-colors  flex items-center justify-center `}
-          >
-            <span className="text-white md:text-base text-sm font-medium leading-[136%] ">
-              {btn?.title}
-            </span>
-          </Link>
-        ))}
+        </div>
       </div>
       <div>
         <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 md:max-w-[952px]">
