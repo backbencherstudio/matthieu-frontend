@@ -1,31 +1,57 @@
+import Image from "next/image";
 import Link from "next/link";
+
+const heroData = [
+  {
+    title: "CAREERS",
+    img: "/home/carerrs.png",
+    link: "/brand",
+  },
+  {
+    title: "FIND US",
+    img: "/home/findus.png",
+    link: "/saddles",
+  },
+  {
+    title: "BRAND",
+    img: "/home/brand.jpg",
+    link: "/brand",
+  },
+];
 
 export default function BestSellersSection() {
   return (
-    <div>
-      <h2 className="lg:text-[40px] md:text-[36px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center">
-        SHOP OUR BEST SELLERS
-      </h2>
-      <div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 lg:mt-10 mt-8">
-          {bestSellers.map((product) => (
-            <Link
-              href={product?.href}
-              key={product.id}
-              className=" flex flex-col gap-2 items-center justify-center "
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover "
-              />
-              <p className="text-[#4A4C56] text-center md:text-xl text-base leading-[124%]  md:p-3 md:pb-5 font-normal">
-                {product.name}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {heroData.map((item, index) => (
+        <Link
+          href={item?.link}
+          key={index}
+          className="relative group cursor-pointer overflow-hidden  transition-all duration-300"
+        >
+          {/* Background Image */}
+          <div className="relative h-[460px]">
+            <Image
+              src={item.img}
+              alt={item.title}
+              fill
+              unoptimized
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/50 group-hover:bg-opacity-50 transition-all duration-300"></div>
+          </div>
+
+          {/* Title Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h3 className="text-white  text-2xl  lg:text-[32px] font-extrabold leading-[100%] tracking-wider drop-shadow-lg">
+              {item.title}
+            </h3>
+          </div>
+
+          {/* Hover effect border */}
+          <div className="absolute inset-0 border-2 border-transparent  transition-all duration-300 "></div>
+        </Link>
+      ))}
     </div>
   );
 }
