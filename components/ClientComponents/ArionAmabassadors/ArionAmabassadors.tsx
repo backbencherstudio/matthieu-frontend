@@ -30,7 +30,8 @@ interface Data {
   discipline: string;
   image: string;
   title: string;
-  link?:string;
+  link?: string;
+  img: string;
 }
 
 export default function ArionAmabassadors() {
@@ -94,7 +95,8 @@ export default function ArionAmabassadors() {
       discipline: "show-jumping",
       image: "/images/ambassadors/nick-dello-joio.jpg",
       title: "NICK DELLO JOIO",
-      link:"https://www.nickdellojoio.com/"
+      link: "https://www.nickdellojoio.com/",
+      img: "/images/ambassadors/flag/usa1.png"
     },
     {
       id: 2,
@@ -102,7 +104,8 @@ export default function ArionAmabassadors() {
       discipline: "show-jumping",
       image: "/images/ambassadors/taylor-cawley.jpg",
       title: "TAYLOR CAWLEY",
-      link:"https://www.instagram.com/taylor.cawley/"
+      link: "https://www.instagram.com/taylor.cawley/",
+      img: "/images/ambassadors/flag/usa1.png"
     },
     {
       id: 3,
@@ -110,7 +113,8 @@ export default function ArionAmabassadors() {
       discipline: "eventing",
       image: "/images/ambassadors/molly-ashe-cawley.jpg",
       title: "MOLLY ASHE CAWLEY",
-      link:"https://www.instagram.com/taylor.cawley/"
+      link: "https://www.instagram.com/taylor.cawley/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
     {
       id: 4,
@@ -118,7 +122,8 @@ export default function ArionAmabassadors() {
       discipline: "dressage",
       image: "/images/ambassadors/emi-richard.png",
       title: "EMI RICHARD",
-      link:"https://www.instagram.com/emirichard09/"
+      link: "https://www.instagram.com/emirichard09/",
+      img: "/images/ambassadors/flag/newZiland.png"
     },
     {
       id: 5,
@@ -126,7 +131,8 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/ambassadors/adriana_forte.png",
       title: "ADRIANA FORTE",
-      link:"https://www.instagram.com/adriana.m.forte/"
+      link: "https://www.instagram.com/adriana.m.forte/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
     {
       id: 6,
@@ -134,7 +140,8 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/ambassadors/parker-peacock.JPG",
       title: "PARKER PEACOCK",
-      link:"https://www.instagram.com/parkerlpeacock/"
+      link: "https://www.instagram.com/parkerlpeacock/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
     {
       id: 7,
@@ -142,7 +149,8 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/ambassadors/emma-hakim.png",
       title: "EMMA HAKIM",
-      link:"https://www.instagram.com/mariellebabington/"
+      link: "https://www.instagram.com/mariellebabington/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
     {
       id: 8,
@@ -150,7 +158,8 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/ambassadors/cristian_hacker.JPG",
       title: "CRISTIAN HACKER",
-      link:"https://www.instagram.com/cristianhacker/"
+      link: "https://www.instagram.com/cristianhacker/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
     {
       id: 9,
@@ -158,201 +167,226 @@ export default function ArionAmabassadors() {
       discipline: "equitation",
       image: "/images/arion-9.png",
       title: "MONICA SPENCER",
-      link:"https://www.instagram.com/_quinnhunter_/"
+      link: "https://www.instagram.com/_quinnhunter_/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-         {
+    {
       id: 10,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/Kenzie_Smith.JPEG",
       title: "KENZIE SMITH",
-      link:"https://www.instagram.com/kenzie_smith_04/"
+      link: "https://www.instagram.com/kenzie_smith_04/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 11,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/Ryan_Helsden.png",
       title: "RYAN HELSDEN",
-      link:"https://www.instagram.com/ryan_haselden/"
+      link: "https://www.instagram.com/ryan_haselden/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 12,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/elisa_wallace.jpg",
       title: "ELISA WALLACE",
-      link:"https://wallaceeventing.com/"
+      link: "https://wallaceeventing.com/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 13,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/mae-mannis.png",
       title: "MIA MANNIS",
-      link:"https://www.instagram.com/mia_mannis/"
+      link: "https://www.instagram.com/mia_mannis/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 14,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/sophie-mitchell.jpg",
       title: "SOPHIE MITCHELL",
-      link:"https://www.instagram.com/sophie.mitchell11/"
+      link: "https://www.instagram.com/sophie.mitchell11/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 15,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/hayley-mairano.jpeg",
       title: "HAYLEY MAIRANO",
-      link:""
+      link: "",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 16,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/quinn-hunter (2).png",
       title: "QUINN HUNTER",
-      link:"https://www.instagram.com/_quinnhunter_/"
+      link: "https://www.instagram.com/_quinnhunter_/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 17,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/cece-chatterjee.JPG",
       title: "CECELIA CHATTERJEE",
-      link:"https://www.instagram.com/cece.chatterjee/"
+      link: "https://www.instagram.com/cece.chatterjee/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 18,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/marielle-babington.png",
       title: "MARIELLE BABBINGTON ",
-      link:"https://www.instagram.com/mariellebabington/"
+      link: "https://www.instagram.com/mariellebabington/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 19,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/michel-feitosa.JPEG",
       title: "MICHEL FEITOSA",
-      link:"https://www.instagram.com/michel_feitosaa/"
+      link: "https://www.instagram.com/michel_feitosaa/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 20,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/lynn_symansky.jpg",
       title: "LYNN SYMANSKY",
-      link:"https://www.symanskyequestrian.com/"
+      link: "https://www.symanskyequestrian.com/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 21,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/james_leone.jpg",
       title: "JAMES LEONE",
-      link:""
+      link: "",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 22,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/caroline_mcleese.jpeg",
       title: "CAROLINE MCLEESE",
-      link:"https://www.instagram.com/carolinemcleese/?hl=en"
+      link: "https://www.instagram.com/carolinemcleese/?hl=en",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 23,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/amira-kettaneh.jpeg",
       title: "AMIRA KETTANEH",
-      link:"https://www.symanskyequestrian.com/"
+      link: "https://www.symanskyequestrian.com/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 24,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/hugo-mcalpine.JPG",
       title: "HUGO MCALPINE",
-      link:"https://www.instagram.com/hugomcalpine/"
+      link: "https://www.instagram.com/hugomcalpine/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 25,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/mae-mannis.png",
       title: "MAE MANNIS",
-      link:"https://www.instagram.com/mia_mannis/"
+      link: "https://www.instagram.com/mia_mannis/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 26,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/Addyson_Cord.JPG",
       title: "ADDYSON CORD",
-      link:""
+      link: "",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 27,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/connor-mcmahon.jpg",
       title: "CONNOR MCMAHON",
-      link:"https://www.instagram.com/conor.mcmahon13/"
+      link: "https://www.instagram.com/conor.mcmahon13/",
+      img: ""
     },
-       {
+    {
       id: 28,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/emma_thomas.jpg",
       title: "EMMA THOMAS",
-      link:"https://www.instagram.com/emma.thomas95/"
+      link: "https://www.instagram.com/emma.thomas95/",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 29,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/bobby_meyerhoff.jpg",
       title: "BOBBY MEYERHOFF",
-      link:"https://emdeventing.wixsite.com/meyerhoffshowhorses"
+      link: "https://emdeventing.wixsite.com/meyerhoffshowhorses",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 30,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/danica_meyerhoff.jpg",
       title: "DANICA MEYERHOFF",
-      link:"https://emdeventing.wixsite.com/meyerhoffshowhorses"
+      link: "https://emdeventing.wixsite.com/meyerhoffshowhorses",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       {
+    {
       id: 31,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/hadden_frost.jpg",
       title: "HADDEN FROST",
-      link:"https://www.facebook.com/hadden.frost.1"
+      link: "https://www.facebook.com/hadden.frost.1",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-        {
+    {
       id: 32,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/lia-screnci.jpg",
       title: "LIA SCRENCI",
-      link:""
+      link: "",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-        {
+    {
       id: 33,
       nation: "canada",
       discipline: "equitation",
       image: "/images/ambassadors/ronan-guckian.jpeg",
       title: "RONAN GUCKIAN",
-      link:""
+      link: "",
+      img: "/images/ambassadors/flag/canada1.png"
     },
-       
+
 
   ];
 
@@ -446,7 +480,7 @@ export default function ArionAmabassadors() {
         </div>
 
         {/* Cards */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12">
           {filteredData.length === 0 && (
             <div className="col-span-full flex flex-col items-center justify-center py-12">
               <div className="text-center">
@@ -483,6 +517,9 @@ export default function ArionAmabassadors() {
               <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 text-dark-primary text-center">
                 {item.title}
               </h1>
+              <div className="flex justify-center items-center mx-auto mt-2">
+                <Image src={item.img} alt="falg" width={50} height={30} />
+              </div>
             </a>
           ))}
         </div>
