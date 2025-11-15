@@ -9,7 +9,7 @@ export default function TailorMAade() {
       </p>
 
       <div className="mt-10 flex items-center justify-center mb-12">
-        <button className="px-8 py-4 bg-[#1F274B] text-[#FFF]">
+        <button className="px-8 py-4 bg-[#1F274B] text-[#FFF] cursor-pointer">
           TRY A SADDLE
         </button>
       </div>
