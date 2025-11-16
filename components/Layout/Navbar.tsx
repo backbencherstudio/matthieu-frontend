@@ -93,7 +93,7 @@ const Header = () => {
         { category: "job offer", href: "/brand/job-offer" },
       ],
     },
-    { label: "TRY A SADDLE", href: "#" },
+    { label: "TRY A SADDLE", href: "/saddles/saddlery-expert" },
     { label: "FIND US", href: "/find-us" },
   ];
 

@@ -25,7 +25,12 @@ export default function SAddlesCategoryItems({
             {saddlesItems?.subtitle}
           </p>
           <div className="mt-10 flex items-center justify-center">
-            <button className="px-8 py-4 bg-[#FFF] cursor-pointer">TRY A SADDLE</button>
+            <Link
+              href={"/saddles/saddlery-expert"}
+              className="px-8 py-4 bg-[#FFF] cursor-pointer"
+            >
+              TRY A SADDLE
+            </Link>
           </div>
         </div>
       </div>
