@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function ShopAccessories() {
   const cards = [1, 2, 3, 4];
   return (
@@ -8,7 +10,7 @@ function ShopAccessories() {
 
       <div className="grid grid-cols-4 gap-4 mt-10">
         {cards.map((item, index) => (
-          <div key={index}>
+          <Link href={"/product-details/1"} key={index}>
             <div className="p-3 bg-[#F8F9FB]">
               <div className="w-full bg-white overflow-hidden">
                 <img src="/home/bridles.png" alt="bridles" />
@@ -26,7 +28,7 @@ function ShopAccessories() {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

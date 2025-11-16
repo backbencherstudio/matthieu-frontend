@@ -4,7 +4,6 @@ import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export default function JumpingPage() {
   const breadLink = [
@@ -29,7 +28,6 @@ export default function JumpingPage() {
   ];
 
   const [selectedColor, setSelectedColor] = useState("BLACK");
-  const [selectedSize, setSelectedSize] = useState("FULL");
 
   const colors = [
     { name: "BLACK", code: "bg-[#070707]" },
@@ -52,48 +50,6 @@ export default function JumpingPage() {
     { name: "Red-3", code: "bg-[#CC007E]" },
     { name: "######", code: "bg-[#FFD9C2]" },
   ];
-
-  const sizes = [
-    { id: "Calf", label: "CALF" },
-    { id: "GrainedCalf", label: "GRAINED CALF" },
-    { id: "Buffalo", label: "BUFFALO" },
-  ];
-
-  const benefits = [
-    "Relieves pressure on corners of the mouth",
-    "Foam padded headpiece and crown piece",
-    "Minimize jaw shifting and stabilize the bit with the lower strap",
-  ];
-
-  const handleCart = () => {
-    const productName = "horseDoubleBand2";
-
-    const cartData = {
-      productName,
-      color: selectedColor,
-      size: selectedSize,
-      SKU: "BR7D2NS",
-    };
-
-    // get existing cart array
-
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const alreadyExists = existingCart.some(
-      (item) => item.productName === productName
-    );
-
-    if (alreadyExists) {
-      toast.warning(`${productName} already exists in the cart.`);
-      return;
-    }
-
-    existingCart.push(cartData);
-
-    localStorage.setItem("cart", JSON.stringify(existingCart));
-
-    console.log(`Saved for ${productName}:`, cartData);
-  };
 
   return (
     <>
@@ -220,6 +176,18 @@ export default function JumpingPage() {
                       </p>
                       <button className="underline text-base leading-[100%] tracking-[.32px] text-[#4C526F] cursor-pointer underline-offset-2 hover:no-underline">
                         Learn More
+                      </button>
+                    </div>
+
+                    <div className="space-x-6">
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                        Calf
+                      </button>
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                        BUFFALO
+                      </button>
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                        Grained Calf
                       </button>
                     </div>
                   </div>

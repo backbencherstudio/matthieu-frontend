@@ -10,7 +10,7 @@ const heroData = [
   {
     title: "FIND US",
     img: "/home/findus.png",
-    link: "/saddles",
+    link: "/find-us",
   },
   {
     title: "BRAND",

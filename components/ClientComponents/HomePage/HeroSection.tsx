@@ -1,15 +1,21 @@
+import Link from "next/link";
+
 const heroTitle = [
   {
     title: "BRAND",
+    href: "/brand/our-story",
   },
   {
     title: "SADDLES",
+    href: "/saddles",
   },
   {
     title: "TACK",
+    href: "/tack",
   },
   {
     title: "FIND US",
+    href: "/find-us",
   },
 ];
 
@@ -30,7 +36,7 @@ export default function HeroSection() {
         </div>
 
         {heroTitle.slice(1).map((item, index) => (
-          <div key={index}>
+          <Link href={"/product-details/1"} key={index}>
             <div className=" p-3 bg-[#F8F9FB]">
               <div className=" w-full  bg-white overflow-hidden">
                 <img src="/home/bridles.png" alt="bridles" className=" " />
@@ -47,17 +53,21 @@ export default function HeroSection() {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {heroTitle.map((item, index) => (
-          <div key={index} className="text-center px-9 py-[18px] bg-[#1F274B]">
-            <h1 className="text-xl font-extrabold leading-[100%] uppercase text-[#FFF]">
+          <Link
+            href={item?.href}
+            key={index}
+            className="text-center px-9 py-[18px] bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer"
+          >
+            <button className="text-xl font-extrabold leading-[100%] uppercase text-[#FFF] cursor-pointer">
               {item?.title}
-            </h1>
-          </div>
+            </button>
+          </Link>
         ))}
       </div>
     </div>
