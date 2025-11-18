@@ -40,22 +40,23 @@ const Header = () => {
             {
               label: "Atlas Saddles",
               subtitle: "SEMI CUSTOM",
-              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY"],
               href: "/saddles/atlas-saddles",
             },
             {
               label: "Athena Saddles",
               subtitle: "TAILOR MADE",
-              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              items: [],
               href: "/saddles/athena-saddles",
             },
           ],
         },
         {
-          category: "USED SADDLES",
+          category: "LEADLINE SADDLE",
           items: [],
           hasLink: true,
-          href: "/saddles/used-saddles",
+          href: "/saddles/leadline-saddle",
         },
         {
           category: "ALL SADDLES",
@@ -93,7 +94,7 @@ const Header = () => {
         { category: "job offer", href: "/brand/job-offer" },
       ],
     },
-    { label: "TRY A SADDLE", href: "/saddles/saddlery-expert" },
+    { label: "USE SADDLES", href: "/saddles/used-saddles" },
     { label: "FIND US", href: "/find-us" },
   ];
 
