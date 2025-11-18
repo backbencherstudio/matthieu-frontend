@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function TailorMAade() {
   return (
     <div>
@@ -9,9 +11,12 @@ export default function TailorMAade() {
       </p>
 
       <div className="mt-10 flex items-center justify-center mb-12">
-        <button className="px-8 py-4 bg-[#1F274B] text-[#FFF] cursor-pointer">
+        <Link
+          href="/saddles/saddlery-expert"
+          className="px-8 py-4 bg-[#1F274B] text-[#FFF] cursor-pointer"
+        >
           TRY A SADDLE
-        </button>
+        </Link>
       </div>
 
       <video

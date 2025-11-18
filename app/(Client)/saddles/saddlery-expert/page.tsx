@@ -58,13 +58,13 @@ const SaddleryExpertPage = () => {
       <BreadCrumb breadLink={breadLink} />
       <div className="my-8 px-16">
         <h4 className="text-[15px] text-[#a7a7a7] text-center leading-[1.8em] uppercase">
-          SADDLERY EXPERT
+          SADDLE EXPERT
         </h4>
-        <p className="text-[45px] text-center text-wrap normal-case leading-[100%] text-[#000000] mt-3">
+        <p className="text-[50px] text-center text-wrap normal-case leading-[100%] text-[#1f274b] mt-3">
           Get in touch with our experts to create the saddle of your dreams.
         </p>
 
-        <p className="text-[16px] text-[#1F274B] text-center text-wrap normal-case leading-[100%] mt-7">
+        <p className="text-[16px] text-[#1f274b] text-center text-wrap normal-case leading-[100%] mt-7">
           Complete this form to be contacted by one of our experts!
         </p>
 
@@ -215,7 +215,7 @@ const SaddleryExpertPage = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 bg-gray-700 text-white font-semibold hover:bg-gray-800 cursor-pointer"
+              className="px-6 py-3 bg-[#1f274b] text-white font-semibold hover:bg-[#1f274b]/90 cursor-pointer"
             >
               Submit
             </button>
