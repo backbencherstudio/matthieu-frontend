@@ -24,7 +24,7 @@ export default function MyAddressPage() {
               2972 Westheimer Rd. Santa Ana, Illinois 85486
             </p>
           </div>
-          <Button className="px-8 py-4 !h-auto rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 text-[16px] text-[#FFF] leading-[100%]">
+          <Button className="px-8 py-4 !h-auto rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 text-[16px] text-[#FFF] leading-[100%] cursor-pointer">
             Edit
           </Button>
         </div>
