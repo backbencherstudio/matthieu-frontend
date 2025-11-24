@@ -110,4 +110,6 @@ export interface TableRowItem extends TableItem {
   image?: string;
   joiningDate?: string;
   link?: string;
+  competition?: string;
+  discipline?: string;
 }

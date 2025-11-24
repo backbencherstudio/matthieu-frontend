@@ -4,11 +4,13 @@ import ArionAmbassadorTab from "@/components/AdminComponents/Cms/ArionAmbassador
 import ArionTeamTab from "@/components/AdminComponents/Cms/ArionTeamTab";
 import BlogPostTable from "@/components/AdminComponents/Cms/BlogPostTable";
 import CmsTabs from "@/components/AdminComponents/Cms/CmsTabs";
+import CompetitionCalendarTab from "@/components/AdminComponents/Cms/CompetitionCalendar";
 import ContactTab from "@/components/AdminComponents/Cms/ContactTab";
 import { TabContent } from "@/components/AdminComponents/Settings/SettingsTab";
 import BlogIcon from "@/components/Icons/AdminIcon/BlogIcon";
 import ContactIcon from "@/components/Icons/AdminIcon/ContactIcon";
 import UsersIcon from "@/components/Icons/AdminIcon/UsersIcon";
+import CalenderIcon from "@/components/Icons/CalenderIcon";
 import UserIcon from "@/components/Icons/UserIcon";
 import { useState } from "react";
 
@@ -30,6 +32,11 @@ export default function CmsPage() {
       label: "Arion Ambassador",
       icon: <UserIcon />,
     },
+    {
+      value: "competition-calendar",
+      label: "Competition Calendar",
+      icon: <CalenderIcon />,
+    },
     { value: "contact", label: "Contact Info", icon: <ContactIcon /> },
   ];
 
@@ -47,6 +54,9 @@ export default function CmsPage() {
         </TabContent>
         <TabContent value="arion-ambassador" activeTab={activeTab}>
           <ArionAmbassadorTab />
+        </TabContent>
+        <TabContent value="competition-calendar" activeTab={activeTab}>
+          <CompetitionCalendarTab />
         </TabContent>
         <TabContent value="contact" activeTab={activeTab}>
           <ContactTab />
