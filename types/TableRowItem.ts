@@ -109,4 +109,5 @@ export interface TableRowItem extends TableItem {
   position?: string;
   image?: string;
   joiningDate?: string;
+  link?: string;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import ArionAmbassadorTab from "@/components/AdminComponents/Cms/ArionAmbassador";
 import ArionTeamTab from "@/components/AdminComponents/Cms/ArionTeamTab";
 import BlogPostTable from "@/components/AdminComponents/Cms/BlogPostTable";
 import CmsTabs from "@/components/AdminComponents/Cms/CmsTabs";
@@ -8,6 +9,7 @@ import { TabContent } from "@/components/AdminComponents/Settings/SettingsTab";
 import BlogIcon from "@/components/Icons/AdminIcon/BlogIcon";
 import ContactIcon from "@/components/Icons/AdminIcon/ContactIcon";
 import UsersIcon from "@/components/Icons/AdminIcon/UsersIcon";
+import UserIcon from "@/components/Icons/UserIcon";
 import { useState } from "react";
 
 export default function CmsPage() {
@@ -23,6 +25,11 @@ export default function CmsPage() {
       label: "Arion Team",
       icon: <UsersIcon />,
     },
+    {
+      value: "arion-ambassador",
+      label: "Arion Ambassador",
+      icon: <UserIcon />,
+    },
     { value: "contact", label: "Contact Info", icon: <ContactIcon /> },
   ];
 
@@ -37,6 +44,9 @@ export default function CmsPage() {
         </TabContent>
         <TabContent value="arion-team" activeTab={activeTab}>
           <ArionTeamTab />
+        </TabContent>
+        <TabContent value="arion-ambassador" activeTab={activeTab}>
+          <ArionAmbassadorTab />
         </TabContent>
         <TabContent value="contact" activeTab={activeTab}>
           <ContactTab />
