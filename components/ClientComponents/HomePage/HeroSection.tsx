@@ -22,8 +22,8 @@ const heroTitle = [
 export default function HeroSection() {
   return (
     <div className="maxContainer mb-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-9">
-        <div className="p-8 bg-[#1F274B] flex items-center justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-9">
+        <div className="p-8 bg-[#1F274B] flex items-center justify-center md:md:col-span-4 lg:col-span-1">
           <div>
             <h1 className="text-[32px] leading-[1.24] tracking-[0.64px] font-extrabold text-[#FFF]">
               SHOP OUR BEST SELLERS
@@ -37,7 +37,7 @@ export default function HeroSection() {
 
         {heroTitle.slice(1).map((item, index) => (
           <Link href={"/product-details/1"} key={index}>
-            <div className=" p-3 bg-[#F8F9FB]">
+            <div className="p-3 bg-[#F8F9FB]">
               <div className=" w-full  bg-white overflow-hidden">
                 <img src="/home/bridles.png" alt="bridles" className=" " />
               </div>
@@ -57,14 +57,14 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {heroTitle.map((item, index) => (
           <Link
             href={item?.href}
             key={index}
             className="text-center px-9 py-[18px] bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer"
           >
-            <button className="text-xl font-extrabold leading-[100%] uppercase text-[#FFF] cursor-pointer">
+            <button className="lg:text-xl md:text-lg font-extrabold leading-[100%] uppercase text-[#FFF] cursor-pointer">
               {item?.title}
             </button>
           </Link>
