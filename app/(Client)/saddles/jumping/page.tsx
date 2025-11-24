@@ -65,7 +65,7 @@ export default function JumpingPage() {
         </p>
       </div>
 
-      <div className=" lg:py-12 md:py-10 py-8 maxContainer ">
+      <div className="lg:py-12 md:py-10 py-8 maxContainer">
         <div className="flex xl:flex-row flex-col gap-6">
           {/* image div */}
           <div className="xl:block hidden">
