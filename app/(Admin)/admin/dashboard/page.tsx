@@ -134,7 +134,7 @@ export default function DashboardPage() {
           </Link>
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center"
-            href="/admin/dashboard/add-product"
+            href="admin/products/add"
           >
             <PlusIcon className="h-4 w-4" />
             <span>Add Product</span>

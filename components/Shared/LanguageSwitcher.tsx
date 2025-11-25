@@ -23,7 +23,7 @@ const Language = () => {
 
   const languages = [
     { label: "ENGLISH", code: "en" },
-    { label: "POLISH",  code: "pl" },
+    { label: "FRENCH",  code: "fr" },
   ];
 
   useEffect(() => {
@@ -49,8 +49,8 @@ const Language = () => {
           setIsLoaded(true);
           
           // Only apply translation if saved language is Polish
-          if (savedLang === "PL") {
-            changeLanguage("pl");
+          if (savedLang === "FR") {
+            changeLanguage("fr");
           }
           // If English (or default), do nothing - site is already in English
         }, 500);
