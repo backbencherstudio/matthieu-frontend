@@ -47,7 +47,8 @@ const Header = () => {
               label: "Athena Saddles",
               subtitle: "TAILOR MADE",
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-              items: [],
+              items: ["Comming Soon"],
+              // items: [],
               href: "/saddles/athena-saddles",
             },
           ],
@@ -94,7 +95,7 @@ const Header = () => {
         { category: "job offer", href: "/brand/job-offer" },
       ],
     },
-    { label: "USE SADDLES", href: "/saddles/used-saddles" },
+    { label: "USED SADDLES", href: "/saddles/used-saddles" },
     { label: "FIND US", href: "/find-us" },
   ];
 

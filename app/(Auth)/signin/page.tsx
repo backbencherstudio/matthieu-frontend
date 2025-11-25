@@ -7,7 +7,7 @@ const SignInpage = () => {
   return (
     <>
       <Header />
-      <AuthHero title="Welcome Back" heroImage="/auth/auth-hero.jpg" />
+      <AuthHero title="Your Account" heroImage="/auth/auth-hero.jpg" />
       <SignInForm />
       <Footer />
     </>

@@ -18,8 +18,8 @@ export default function TailorMAade() {
           TRY A SADDLE
         </Link>
       </div>
-
-      <video
+    <h3 className="text-center lg:text-[42px] md:text-[36px] text-[28px] font-medium ">Comming Soon</h3>
+      {/* <video
         autoPlay
         muted
         loop
@@ -28,7 +28,7 @@ export default function TailorMAade() {
       >
         <source src="/bannerVideo/homeBanner.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
     </div>
   );
 }
