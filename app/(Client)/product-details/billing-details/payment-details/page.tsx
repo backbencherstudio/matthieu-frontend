@@ -22,7 +22,7 @@ export default function PaymentDetailsPage() {
   return (
     <div>
       <BreadCrumb breadLink={breadLink} />
-      <PaymentDetails />
+      <PaymentDetails stripe={undefined} />
     </div>
   );
 }

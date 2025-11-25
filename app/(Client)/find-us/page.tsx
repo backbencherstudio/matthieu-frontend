@@ -1,5 +1,3 @@
-import React from "react";
-import HandShake from "@/components/Icons/HandShake";
 import MapMarker from "@/components/Icons/MapMarker";
 import Image from "next/image";
 
@@ -10,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 interface Country {
   label: string;
@@ -168,7 +167,12 @@ export default function FindUs() {
                   </Select>
                 </div>
 
-                <button className="find-us-button">Calendar</button>
+                <Link
+                  href={"/find-us/calendar"}
+                  className="find-us-button flex items-center justify-center"
+                >
+                  Calendar
+                </Link>
               </div>
             </div>
           </div>

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { AppConfig } from "@/config/app.config";
+import type { Metadata } from "next";
 import Script from "next/script";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="avenir">
         <div id="google_translate_element" className="hidden"></div>
         {children}
-        <Toaster position="top-right" richColors/>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
