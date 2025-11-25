@@ -95,8 +95,8 @@ const AddMember = () => {
               </div>
             </div>
           </div>
-          <div>
-            <button className="px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF]">
+          <div className="flex items-end justify-end">
+            <button className="px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] cursor-pointer">
               Save
             </button>
           </div>
