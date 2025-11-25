@@ -23,7 +23,7 @@ export default function AvgUsageRateIcon({
         stroke="#008000"
         strokeWidth="1.25"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

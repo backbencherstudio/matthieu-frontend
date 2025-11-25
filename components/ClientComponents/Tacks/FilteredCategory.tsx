@@ -1,10 +1,9 @@
 "use client";
-import DropdownFilter from '@/components/ClientComponents/Tacks/DropdownFilter';
-import FilterIcon from '@/components/Icons/FilterIcon';
-import React, { useState } from 'react';
-import TrackProductList from '@/components/ClientComponents/Tacks/TrackProductList';
-import { colors, priceRanges, sizes } from './DropdownSelectList';
-
+import DropdownFilter from "@/components/ClientComponents/Tacks/DropdownFilter";
+import FilterIcon from "@/components/Icons/FilterIcon";
+import React, { useState } from "react";
+import TrackProductList from "@/components/ClientComponents/Tacks/TrackProductList";
+import { colors, priceRanges, sizes } from "./DropdownSelectList";
 
 interface Product {
   id: number;
@@ -21,7 +20,10 @@ interface CategoryProps {
   title: string;
 }
 
-export default function FilteredCategory({ categoryData, title }: CategoryProps) {
+export default function FilteredCategory({
+  categoryData,
+  title,
+}: CategoryProps) {
   const [priceRange, setPriceRange] = useState<string>("");
   const [color, setColor] = useState<string>("");
   const [size, setSize] = useState<string>("");
@@ -31,10 +33,12 @@ export default function FilteredCategory({ categoryData, title }: CategoryProps)
     let filtered = categoryData;
 
     if (priceRange) {
-      const [min, max] = priceRange.split('-').map(Number) || [0, Infinity];
+      const [min, max] = priceRange.split("-").map(Number) || [0, Infinity];
       filtered = filtered.filter((product) => {
-        const productPrice = parseFloat(product.price.replace('$', ''));
-        return max === Infinity ? productPrice >= min : productPrice >= min && productPrice < max;
+        const productPrice = parseFloat(product.price.replace("$", ""));
+        return max === Infinity
+          ? productPrice >= min
+          : productPrice >= min && productPrice < max;
       });
     }
 
@@ -75,7 +79,9 @@ export default function FilteredCategory({ categoryData, title }: CategoryProps)
       </div>
       <div>
         {filterProducts().length === 0 ? (
-          <p className="mt-12 text-center text-secondary-text">No products found.</p>
+          <p className="mt-12 text-center text-secondary-text">
+            No products found.
+          </p>
         ) : (
           <div className="mt-12">
             <TrackProductList items={filterProducts()} title={title} />

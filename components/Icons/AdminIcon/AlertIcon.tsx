@@ -13,21 +13,21 @@ export default function AlertIcon({ className }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="1.5625"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10 14.1663V10.4163"
         stroke="currentColor"
         strokeWidth="1.5625"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M10 7.49857V7.49023"
         stroke="currentColor"
         strokeWidth="1.875"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

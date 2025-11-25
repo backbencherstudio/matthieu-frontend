@@ -33,7 +33,7 @@ export default function CmsTabs({
       <h1 className="text-2xl font-extrabold leading-[100%] text-[#1F274B] mb-6">
         Content Management System (CMS)
       </h1>
-      <div className="p-2 bg-[#FFF] rounded-[8px] w-[325px]">
+      <div className="p-2 bg-[#FFF] rounded-[8px]">
         <div className="flex items-center w-full">
           {tabs.map((tab) => (
             <button
