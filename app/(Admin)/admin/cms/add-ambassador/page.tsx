@@ -3,14 +3,14 @@ import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
 import { useRef, useState } from "react";
 
-const AddMember = () => {
+const AddAmbassador = () => {
   const breadLink = [
     {
-      label: "Arion Team",
+      label: "Arion Ambassador",
       href: "/admin/cms",
     },
     {
-      label: "Add New Member",
+      label: "Add New Ambassador",
     },
   ];
 
@@ -39,13 +39,13 @@ const AddMember = () => {
       <BreadCrumb breadLink={breadLink} />
       <div className="p-4 bg-[#FFF] rounded-xl mt-5">
         <h1 className="text-[20px] leading-[138%] tracking-[0.01px] font-extrabold">
-          Add New Member
+          Add New Ambassador
         </h1>
         <form className="mt-4">
           <div className="flex justify-between gap-6">
             <div
               onClick={triggerFileInput}
-              className="cursor-pointer border  border-dashed border-[#1F274B] rounded-[6px] bg-[#F8F9FB] m-auto h-[260px] min-w-[260px] flex items-center justify-center"
+              className="cursor-pointer border border-dashed border-[#1F274B] rounded-[6px] bg-[#F8F9FB] m-auto h-[260px] min-w-[260px] flex items-center justify-center"
             >
               <div>
                 {image ? (
@@ -80,17 +80,17 @@ const AddMember = () => {
                 <input
                   type="text"
                   className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
-                  placeholder="Sylvain Houry"
+                  placeholder="Nick Dello Joio"
                 />
               </div>
               <div className="mt-4">
                 <label className="text-[12px] leading-[100%] text-[#696E86]">
-                  Position
+                  Social Links
                 </label>
                 <input
                   type="text"
                   className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
-                  placeholder="Founder & CEO"
+                  placeholder="http://www.instagram.com/taylor.cawley/"
                 />
               </div>
             </div>
@@ -106,4 +106,4 @@ const AddMember = () => {
   );
 };
 
-export default AddMember;
+export default AddAmbassador;
