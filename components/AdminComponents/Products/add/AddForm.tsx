@@ -11,262 +11,252 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Image from "next/image";
-import { X } from "lucide-react";
+import { Trash2, X } from "lucide-react";
 import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
-import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  SubmitHandler,
+  useForm,
+  useFieldArray,
+  Controller,
+} from "react-hook-form";
 
-interface ProductVariant {
-  id: string;
-  color?: string;
-  size?: string;
-  price?: string;
-  stock?: string;
-  images?: File[] | null;
-  serial?: number;
-}
+type Inputs = {
+  name: string;
+  description: string;
+  benefits: string;
+  guide: string;
+  variants: {
+    color: string;
+    size: string;
+    price: string;
+    stock_qty: number | string;
+  }[];
+};
 
 export default function AddForm() {
-  const [images, setImages] = useState<File[]>([]);
-  const [dynamicVariants, setDynamicVariants] = useState<ProductVariant[]>([]);
-  const [nextSerial, setNextSerial] = useState(2);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm<Inputs>({
+    defaultValues: {
+      variants: [
+        {
+          color: "",
+          size: "",
+          price: "",
+          stock_qty: "",
+        },
+      ],
+    },
+  });
 
-  const handleVariantImageChange = (
-    variantId: string,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = e.target.files;
-    if (files) {
-      setDynamicVariants((prev) =>
-        prev.map((variant) =>
-          variant.id === variantId
-            ? { ...variant, images: Array.from(files) }
-            : variant
-        )
-      );
-    }
+  const {
+    fields: variantFields,
+    append: appendVariant,
+    remove: removeVariant,
+  } = useFieldArray({
+    control,
+    name: "variants",
+  });
+
+  const handleRemoveVariant = (index) => {
+    removeVariant(index);
+
+    setImagePreviews((prev) => {
+      const updated = [...prev];
+      updated.splice(index, 1);
+      return updated;
+    });
   };
 
-  const addVariant = () => {
-    const variantSerial = document.getElementById(
-      "variant-serial"
-    ) as HTMLInputElement;
-    variantSerial.value = (nextSerial + 1).toString();
-    setNextSerial(nextSerial + 1);
-    const newVariant: ProductVariant = {
-      id: `variant-${nextSerial}`,
-      color: "",
-      size: "",
-      price: "",
-      stock: "",
-      images: [],
-      serial: nextSerial,
-    };
-    setDynamicVariants((prev) => [...prev, newVariant]);
+  // Show Image Preview
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [imageFiles, setImageFiles] = useState<(File | null)[][]>([]);
+
+  useEffect(() => {
+    setImagePreviews((prev) => {
+      if (prev.length < variantFields.length) {
+        const newPreviews = [...prev];
+
+        for (let i = prev.length; i < variantFields.length; i++) {
+          newPreviews.push([null, null, null, null]);
+        }
+
+        return newPreviews;
+      }
+
+      return prev;
+    });
+  }, [variantFields.length]);
+
+  const showImagePreview = (e, variantIndex, imgIndex) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+
+    setImagePreviews((prev) => {
+      const updated = [...prev];
+      updated[variantIndex][imgIndex] = url;
+      return updated;
+    });
+
+    // Store actual file for submission
+    setImageFiles((prev) => {
+      const updated = [...prev];
+      if (!updated[variantIndex])
+        updated[variantIndex] = [null, null, null, null];
+      updated[variantIndex][imgIndex] = file;
+      return updated;
+    });
   };
 
-  const removeVariant = (variantId: string) => {
-    setDynamicVariants((prev) =>
-      prev.filter((variant) => variant.id !== variantId)
-    );
+  const removeImage = (variantIndex, imgIndex) => {
+    setImagePreviews((prev) => {
+      const updated = [...prev];
+      updated[variantIndex][imgIndex] = null;
+      return updated;
+    });
   };
 
-  const ProductVariantComponent = ({
-    variant,
-    index,
-  }: {
-    variant: ProductVariant;
-    index: number;
-  }) => {
-    return (
-      <div key={index} className="bg-[#F8FAFB] p-4 mt-4">
-        <div className="flex flex-wrap justify-between gap-3">
-          <h2 className="text-xl font-extrabold text-primary-text">
-            Product Variation {variant.serial}
-          </h2>
-          <div className="flex items-center gap-3">
-            <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
-              Save
-            </button>
-            <button
-              onClick={() => removeVariant(variant.id)}
-              type="button"
-              className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
-            >
-              <TrashIcon />
-            </button>
-          </div>
-        </div>
+  // Handle New Color
+  const [colorDialogOpen, setColorDialogOpen] = useState<boolean[]>([]);
+  const [newColor, setNewColor] = useState("");
+  const [colorOptions, setColorOptions] = useState(["Black", "Brown"]);
 
-        <div className="grid md:grid-cols-2 gap-5 mt-4">
-          {/* Left */}
-          <div>
-            <div className="grid sm:grid-cols-2 gap-x-3">
-              <div className="mb-3">
-                <Label className="text-sm text-secondary-text mb-1">
-                  Product Color
-                </Label>
-                <Select>
-                  <SelectTrigger className="w-full cmn-select bg-white">
-                    <SelectValue placeholder="Select Color" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Select Color">Select Color</SelectItem>
-                    <SelectItem value="Black">Black</SelectItem>
-                    <SelectItem value="Brown">Brown</SelectItem>
-                    <SelectItem value="Add Color">+ Add Color</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="mb-3">
-                <Label className="text-sm text-secondary-text mb-1">
-                  Product Size*
-                </Label>
-                <Select>
-                  <SelectTrigger className="w-full cmn-select bg-white">
-                    <SelectValue placeholder="Select Size" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Select Size">Select Size</SelectItem>
-                    <SelectItem value="Pony">Pony</SelectItem>
-                    <SelectItem value="Cob">Cob</SelectItem>
-                    <SelectItem value="Full">Full</SelectItem>
-                    <SelectItem value="Oversize">Oversize</SelectItem>
-                    <SelectItem value="Add Size">+ Add Size</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="mb-3">
-                <Label className="text-sm text-secondary-text mb-1">
-                  Product Price ($)
-                </Label>
-                <Input
-                  type="text"
-                  className="cmn-input bg-white"
-                  placeholder="Enter Price"
-                  defaultValue="580.00"
-                />
-              </div>
-              <div className="mb-3">
-                <Label className="text-sm text-secondary-text mb-1">
-                  Stock Quantity *
-                </Label>
-                <Input
-                  type="text"
-                  className="cmn-input bg-white"
-                  placeholder="Enter Stock Quantity"
-                  defaultValue="45"
-                />
-              </div>
-            </div>
-          </div>
-          {/* Right */}
-          <div>
-            <h4 className="text-sm font-extrabold text-[#4C526F] mb-3">
-              Product Images
-            </h4>
+  useEffect(() => {
+    setColorDialogOpen(variantFields.map(() => false));
+  }, [variantFields]);
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <label
-                htmlFor={`image-${variant.id}-1`}
-                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  id={`image-${variant.id}-1`}
-                  onChange={(e) => handleVariantImageChange(variant.id, e)}
-                />
-                <div className="text-center flex flex-col gap-1 items-center">
-                  <GalleryIcon className="size-8" />
-                  <p className="text-sm text-secondary-text">Add</p>
-                  {variant.images && variant.images.length > 0 && (
-                    <p>
-                      <span className="text-primary-text">
-                        {variant.images.map((img, i) => img.name).join(", ")}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </label>
-              <label
-                htmlFor={`image-${variant.id}-2`}
-                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  id={`image-${variant.id}-2`}
-                  onChange={(e) => handleVariantImageChange(variant.id, e)}
-                />
-                <div className="text-center flex flex-col gap-1 items-center">
-                  <GalleryIcon className="size-8" />
-                  <p className="text-sm text-secondary-text">Add</p>
-                  {variant.images && variant.images.length > 0 && (
-                    <p>
-                      <span className="text-primary-text">
-                        {variant.images.map((img, i) => img.name).join(", ")}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </label>
-              <label
-                htmlFor={`image-${variant.id}-3`}
-                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  id={`image-${variant.id}-3`}
-                  onChange={(e) => handleVariantImageChange(variant.id, e)}
-                />
-                <div className="text-center flex flex-col gap-1 items-center">
-                  <GalleryIcon className="size-8" />
-                  <p className="text-sm text-secondary-text">Add</p>
-                  {variant.images && variant.images.length > 0 && (
-                    <p>
-                      <span className="text-primary-text">
-                        {variant.images.map((img, i) => img.name).join(", ")}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </label>
-              <label
-                htmlFor={`image-${variant.id}-4`}
-                className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-              >
-                <input
-                  type="file"
-                  className="hidden"
-                  id={`image-${variant.id}-4`}
-                  onChange={(e) => handleVariantImageChange(variant.id, e)}
-                />
-                <div className="text-center flex flex-col gap-1 items-center">
-                  <GalleryIcon className="size-8" />
-                  <p className="text-sm text-secondary-text">Add</p>
-                  {variant.images && variant.images.length > 0 && (
-                    <p>
-                      <span className="text-primary-text">
-                        {variant.images.map((img, i) => img.name).join(", ")}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const openColorDialog = (variantIndex: number) => {
+    setColorDialogOpen((prev) => {
+      const updated = [...prev];
+      updated[variantIndex] = true;
+      return updated;
+    });
   };
 
-  
+  const closeColorDialog = (variantIndex: number) => {
+    setColorDialogOpen((prev) => {
+      const updated = [...prev];
+      updated[variantIndex] = false;
+      return updated;
+    });
+  };
+
+  const addColor = (variantIndex) => {
+    const trimmed = newColor.trim();
+    if (!trimmed) return;
+
+    setColorOptions((prev) => {
+      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+
+      Promise.resolve().then(() => {
+        setValue(`variants.${variantIndex}.color`, trimmed, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      });
+
+      return updated;
+    });
+
+    closeColorDialog(variantIndex);
+    setNewColor("");
+  };
+
+  // Handle New Size
+  const [sizeDialogOpen, setSizeDialogOpen] = useState<boolean[]>([]);
+  const [newSize, setNewSize] = useState("");
+  const [sizeOptions, setSizeOptions] = useState([
+    "Pony",
+    "Cob",
+    "Full",
+    "Oversize",
+  ]);
+
+  useEffect(() => {
+    setSizeDialogOpen(variantFields.map(() => false));
+  }, [variantFields]);
+
+  const openSizeDialog = (variantIndex: number) => {
+    setSizeDialogOpen((prev) => {
+      const updated = [...prev];
+      updated[variantIndex] = true;
+      return updated;
+    });
+  };
+
+  const closeSizeDialog = (variantIndex: number) => {
+    setSizeDialogOpen((prev) => {
+      const updated = [...prev];
+      updated[variantIndex] = false;
+      return updated;
+    });
+  };
+
+  const addSize = (variantIndex) => {
+    const trimmed = newSize.trim();
+    if (!trimmed) return;
+
+    setSizeOptions((prev) => {
+      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+
+      Promise.resolve().then(() => {
+        setValue(`variants.${variantIndex}.size`, trimmed, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      });
+
+      return updated;
+    });
+
+    closeSizeDialog(variantIndex);
+    setNewSize("");
+  };
+
+  // Form Submit
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    // console.log("Full Data - ", data);
+
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      if (key !== "variants") {
+        formData.append(key, data[key]);
+      }
+    });
+
+    data.variants.forEach((item: any, i: number) => {
+      formData.append(`variants[${i}][color]`, item.color);
+      formData.append(`variants[${i}][size]`, item.size);
+      formData.append(`variants[${i}][price]`, item.price);
+      formData.append(`variants[${i}][stock_qty]`, item.stock_qty);
+      imageFiles[i]?.forEach((file, imgIndex) => {
+        if (file) {
+          formData.append(`variants[${i}][images][${imgIndex}]`, file);
+        }
+      });
+    });
+
+    // Printing Form Data
+    /* for (let [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        console.log(key, value); // Full File object
+      } else {
+        console.log(key, value); // Normal string
+      }
+    } */
+  };
 
   return (
     <div className="bg-white p-4 rounded-[8px]">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* Header */}
         <div className="flex flex-wrap gap-2 justify-between items-center">
           <h1 className="text-2xl font-extrabold text-primary-text">
@@ -274,6 +264,7 @@ export default function AddForm() {
           </h1>
           <button className="cmn-btn">Add Product</button>
         </div>
+
         {/* Product Detail Inputs */}
         <div className="mt-4">
           <h1 className="text-xl font-extrabold text-primary-text mb-4">
@@ -288,16 +279,22 @@ export default function AddForm() {
               type="text"
               className="cmn-input"
               placeholder="Enter Product Name"
+              {...register(`name`, {
+                required: "Product name is required",
+              })}
             />
+            {errors.name && <p className="error-msg">{errors.name.message}</p>}
           </div>
 
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
               Description
             </Label>
-            <Textarea className="cmn-textarea" placeholder="Enter Description">
-           
-            </Textarea>
+            <Textarea
+              className="cmn-textarea"
+              placeholder="Enter Description"
+              {...register(`description`)}
+            ></Textarea>
           </div>
 
           <div className="grid md:grid-cols-2 gap-y-3 gap-x-5">
@@ -305,9 +302,11 @@ export default function AddForm() {
               <Label className="text-sm text-secondary-text mb-1">
                 Benefits
               </Label>
-              <Textarea className="cmn-textarea" placeholder="Enter Benefits">
-               
-              </Textarea>
+              <Textarea
+                className="cmn-textarea"
+                placeholder="Enter Benefits"
+                {...register(`benefits`)}
+              ></Textarea>
             </div>
             <div>
               <Label className="text-sm text-secondary-text mb-1">
@@ -316,32 +315,20 @@ export default function AddForm() {
               <Textarea
                 className="cmn-textarea"
                 placeholder="Enter Leather Care Guide"
-              >
-              
-              </Textarea>
+                {...register(`guide`)}
+              ></Textarea>
             </div>
           </div>
         </div>
 
         {/* Product Variations Wrapper */}
-        <div>
-          {/* Product Variant from database */}
-          <div className="bg-[#F8FAFB] p-4 mt-4">
+        {variantFields.map((item, index) => (
+          <div className="bg-[#F8FAFB] p-4 mt-4 relative" key={item.id}>
             <div className="flex flex-wrap justify-between gap-3">
               <h2 className="text-xl font-extrabold text-primary-text">
-                Product Variation 1
+                Product Variation {index + 1}
               </h2>
-              <div className="flex items-center gap-3">
-                <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
-                  Save
-                </button>
-                <button
-                  type="button"
-                  className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
-                >
-                  <TrashIcon />
-                </button>
-              </div>
+              <div className="flex items-center gap-3"></div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-5 mt-4">
@@ -350,40 +337,175 @@ export default function AddForm() {
                 <div className="grid sm:grid-cols-2 gap-x-3">
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
-                      Product Color
+                      Product Color*
                     </Label>
-                    <Select>
-                      <SelectTrigger className="w-full cmn-select bg-white">
-                        <SelectValue placeholder="Select Color" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Select Color">
-                          Select Color
-                        </SelectItem>
-                        <SelectItem value="Black">Black</SelectItem>
-                        <SelectItem value="Brown">Brown</SelectItem>
-                        <SelectItem value="Add Color">+ Add Color</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Controller
+                      name={`variants.${index}.color`}
+                      control={control}
+                      rules={{
+                        validate: (value) => value !== "" || "Select color",
+                      }}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          onValueChange={(val) => {
+                            if (val === "Add Color") {
+                              openColorDialog(index);
+                            } else {
+                              field.onChange(val);
+                            }
+                          }}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full cmn-select bg-white">
+                            <SelectValue placeholder="Select Color" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {colorOptions.map((opt) => (
+                              <SelectItem key={opt} value={opt}>
+                                {opt}
+                              </SelectItem>
+                            ))}
+                            <SelectItem
+                              className="cursor-pointer"
+                              value="Add Color"
+                            >
+                              + Add Color
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {errors?.variants?.[index]?.color && (
+                      <p className="error-msg">
+                        {errors.variants[index].color?.message as string}
+                      </p>
+                    )}
                   </div>
+                  {colorDialogOpen[index] && (
+                    <Dialog
+                      open={true}
+                      onOpenChange={() => closeColorDialog(index)}
+                    >
+                      <DialogContent
+                        style={{ maxWidth: "600px", width: "96%" }}
+                      >
+                        <h2 className="text-xl font-extrabold">Add Color</h2>
+
+                        <hr />
+
+                        <div className="p-3 rounded-[6px] bg-[#F6F8FA]">
+                          <div className="mb-4">
+                            <Label className="block text-sm text-gray-black mb-1">
+                              New Color Name
+                            </Label>
+                            <Input
+                              className="cmn-input bg-white"
+                              placeholder="Color Name"
+                              value={newColor}
+                              onChange={(e) => setNewColor(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-end mt-6">
+                          <button
+                            type="button"
+                            className="cmn-btn"
+                            onClick={() => addColor(index)}
+                          >
+                            Add Color
+                          </button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  )}
+
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Size*
                     </Label>
-                    <Select>
-                      <SelectTrigger className="w-full cmn-select bg-white">
-                        <SelectValue placeholder="Select Size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Select Size">Select Size</SelectItem>
-                        <SelectItem value="Pony">Pony</SelectItem>
-                        <SelectItem value="Cob">Cob</SelectItem>
-                        <SelectItem value="Full">Full</SelectItem>
-                        <SelectItem value="Oversize">Oversize</SelectItem>
-                        <SelectItem value="Add Size">+ Add Size</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Controller
+                      name={`variants.${index}.size`}
+                      control={control}
+                      rules={{
+                        validate: (value) => value !== "" || "Select size",
+                      }}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          onValueChange={(val) => {
+                            if (val === "Add Size") {
+                              openSizeDialog(index);
+                            } else {
+                              field.onChange(val);
+                            }
+                          }}
+                          value={field.value}
+                        >
+                          <SelectTrigger className="w-full cmn-select bg-white">
+                            <SelectValue placeholder="Select Size" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {sizeOptions.map((opt) => (
+                              <SelectItem key={opt} value={opt}>
+                                {opt}
+                              </SelectItem>
+                            ))}
+                            <SelectItem
+                              className="cursor-pointer"
+                              value="Add Size"
+                            >
+                              + Add Size
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {errors?.variants?.[index]?.size && (
+                      <p className="error-msg">
+                        {errors.variants[index].size?.message as string}
+                      </p>
+                    )}
                   </div>
+
+                  {sizeDialogOpen[index] && (
+                    <Dialog
+                      open={true}
+                      onOpenChange={() => closeSizeDialog(index)}
+                    >
+                      <DialogContent
+                        style={{ maxWidth: "600px", width: "96%" }}
+                      >
+                        <h2 className="text-xl font-extrabold">Add Size</h2>
+
+                        <hr />
+
+                        <div className="p-3 rounded-[6px] bg-[#F6F8FA]">
+                          <div className="mb-4">
+                            <Label className="block text-sm text-gray-black mb-1">
+                              New Size
+                            </Label>
+                            <Input
+                              className="cmn-input bg-white"
+                              placeholder="Size Name"
+                              value={newSize}
+                              onChange={(e) => setNewSize(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-end mt-6">
+                          <button
+                            type="button"
+                            className="cmn-btn"
+                            onClick={() => addSize(index)}
+                          >
+                            Add Size
+                          </button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  )}
+
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Price ($)
@@ -392,8 +514,15 @@ export default function AddForm() {
                       type="text"
                       className="cmn-input bg-white"
                       placeholder="Enter Price"
-                      defaultValue="580.00"
+                      {...register(`variants.${index}.price`, {
+                        required: "Price is required",
+                      })}
                     />
+                    {errors?.variants?.[index]?.price && (
+                      <p className="error-msg">
+                        {errors.variants[index].price?.message as string}
+                      </p>
+                    )}
                   </div>
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
@@ -403,8 +532,15 @@ export default function AddForm() {
                       type="text"
                       className="cmn-input bg-white"
                       placeholder="Enter Stock Quantity"
-                      defaultValue="45"
+                      {...register(`variants.${index}.stock_qty`, {
+                        required: "Stock is required",
+                      })}
                     />
+                    {errors?.variants?.[index]?.stock_qty && (
+                      <p className="error-msg">
+                        {errors.variants[index].stock_qty?.message as string}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -414,98 +550,78 @@ export default function AddForm() {
                   Product Images
                 </h4>
 
-                <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  <label
-                    htmlFor="image"
-                    className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-                  >
-                    <input type="file" className="hidden" id="image" />
-                    <div className="text-center flex flex-col gap-1 items-center">
-                      <GalleryIcon className="size-8" />
-                      <p className="text-sm text-secondary-text">Add</p>
-                      {images.length > 0 && (
-                        <p>
-                          <span className="text-primary-text">
-                            {images.map((img, i) => img.name).join(", ")}
-                          </span>
-                        </p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[0, 1, 2, 3].map((imgIndex) => (
+                    <div key={imgIndex} className="relative">
+                      {imagePreviews[index]?.[imgIndex] ? (
+                        <label htmlFor={`v-${index}-img-${imgIndex}`}>
+                          <img
+                            src={imagePreviews[index][imgIndex]}
+                            className="w-full h-28 object-cover rounded cursor-pointer border"
+                          />
+
+                          {/* Cancel Icon */}
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              removeImage(index, imgIndex);
+                            }}
+                            className="absolute top-2 right-2 w-6 h-6 bg-error-bg text-error-text rounded-full flex items-center justify-center cursor-pointer"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </label>
+                      ) : (
+                        <label
+                          htmlFor={`v-${index}-img-${imgIndex}`}
+                          className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
+                        >
+                          <div className="text-center flex flex-col gap-1 items-center">
+                            <GalleryIcon className="size-8" />
+                            <p className="text-sm text-secondary-text">Add</p>
+                          </div>
+                        </label>
                       )}
+
+                      {/* Hidden file input */}
+                      <input
+                        id={`v-${index}-img-${imgIndex}`}
+                        type="file"
+                        className="hidden"
+                        onChange={(e) => showImagePreview(e, index, imgIndex)}
+                      />
                     </div>
-                  </label>
-                  <label
-                    htmlFor="image"
-                    className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-                  >
-                    <input type="file" className="hidden" id="image" />
-                    <div className="text-center flex flex-col gap-1 items-center">
-                      <GalleryIcon className="size-8" />
-                      <p className="text-sm text-secondary-text">Add</p>
-                      {images.length > 0 && (
-                        <p>
-                          <span className="text-primary-text">
-                            {images.map((img, i) => img.name).join(", ")}
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </label>
-                  <label
-                    htmlFor="image"
-                    className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-                  >
-                    <input type="file" className="hidden" id="image" />
-                    <div className="text-center flex flex-col gap-1 items-center">
-                      <GalleryIcon className="size-8" />
-                      <p className="text-sm text-secondary-text">Add</p>
-                      {images.length > 0 && (
-                        <p>
-                          <span className="text-primary-text">
-                            {images.map((img, i) => img.name).join(", ")}
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </label>
-                  <label
-                    htmlFor="image"
-                    className="flex items-center justify-center cursor-pointer w-full bg-[#fff] rounded border border-dashed border-secondary-text p-6"
-                  >
-                    <input type="file" className="hidden" id="image" />
-                    <div className="text-center flex flex-col gap-1 items-center">
-                      <GalleryIcon className="size-8" />
-                      <p className="text-sm text-secondary-text">Add</p>
-                      {images.length > 0 && (
-                        <p>
-                          <span className="text-primary-text">
-                            {images.map((img, i) => img.name).join(", ")}
-                          </span>
-                        </p>
-                      )}
-                    </div>
-                  </label>
+                  ))}
                 </div>
               </div>
             </div>
+
+            {index > 0 && (
+              <button
+                type="button"
+                className="absolute top-2 right-2 cursor-pointer bg-error-bg text-error-text w-8 h-8 flex items-center justify-center rounded-sm"
+                onClick={() => handleRemoveVariant(index)}
+              >
+                <Trash2 className="w-5 h-5" />
+              </button>
+            )}
           </div>
+        ))}
 
-          {/* Dynamic Input to count what will be next variant serial */}
-          <input type="hidden" defaultValue="1" id="variant-serial" />
-
-          {/* Product Variant to be added */}
-          <div className="product-variant-to-add">
-            {dynamicVariants.map((variant, index) => (
-              <ProductVariantComponent
-                key={index}
-                variant={variant}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Add Product Variation */}
         <div className="px-4">
-          <button type="button" className="cmn-btn" onClick={addVariant}>
+          <button
+            type="button"
+            className="cmn-btn"
+            onClick={() =>
+              appendVariant({
+                color: "",
+                size: "",
+                price: "",
+                stock_qty: "",
+              })
+            }
+          >
             Add Variation
           </button>
         </div>
