@@ -10,10 +10,11 @@ import CartIcon from "../Icons/AdminIcon/CartIcon";
 import CMSIcon from "../Icons/AdminIcon/CMSIcon";
 import CouponIcon from "../Icons/AdminIcon/CouponIcon";
 import DashboardIcon from "../Icons/AdminIcon/DashboardIcon";
-import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import ProductIcon from "../Icons/AdminIcon/ProductIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import UsersIcon from "../Icons/AdminIcon/UsersIcon";
+import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
+import JobIcon from "../Icons/AdminIcon/JobIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -60,7 +61,7 @@ const menuItems = [
   {
     label: "Job Applicants",
     href: "/admin/job-applicants",
-    icon: AlertIcon,
+    icon: JobIcon,
   },
   {
     label: "Settings",
