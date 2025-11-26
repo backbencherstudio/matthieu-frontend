@@ -48,10 +48,10 @@ export default function HeroSection() {
                 <h3 className="textSecondary leading-[124%] lg:text-xl md:text-lg  text-base">
                   Anatomical double noseband bridle
                 </h3>
-                <p className="textSecondary font-extrabold leading-[136%] lg:text-xl md:text-lg text-base ">
+                <p className="  font-extrabold leading-[136%] lg:text-xl md:text-lg text-base textSecondary">
                   $370.00
                 </p>
-              </div>
+              </div> 
             </div>
           </Link>
         ))}
