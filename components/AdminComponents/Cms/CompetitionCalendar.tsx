@@ -19,21 +19,21 @@ const CompetitionCalendarTab = () => {
       competition: "Hits Vermont",
       location: "Manchester, VT",
       discipline: "Hunter/Jumper",
-      date: "8/1–8/5",
+      date: "Sep 5, 2024",
     },
     {
       id: 2,
       competition: "Silo Ridge Masters",
       location: "Amenia, NY",
       discipline: "Hunter/Jumper",
-      date: "9/1–9/10",
+      date: "9Sep 5, 2024",
     },
     {
       id: 3,
       competition: "Wellington International",
       location: "Wellington, FL",
       discipline: "Hunter/Jumper",
-      date: "12/2–12/28",
+      date: "Sep 5, 2024",
     },
   ];
 
