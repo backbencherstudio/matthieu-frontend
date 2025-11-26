@@ -1,19 +1,19 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MdClose } from "react-icons/md";
-import DashboardIcon from "../Icons/AdminIcon/DashboardIcon";
+import AlertIcon from "../Icons/AdminIcon/AlertIcon";
 import AnalyticsIcon from "../Icons/AdminIcon/AnalyticsIcon";
-import ProductIcon from "../Icons/AdminIcon/ProductIcon";
+import CardIcon from "../Icons/AdminIcon/CardIcon";
 import CartIcon from "../Icons/AdminIcon/CartIcon";
-import UsersIcon from "../Icons/AdminIcon/UsersIcon";
 import CMSIcon from "../Icons/AdminIcon/CMSIcon";
 import CouponIcon from "../Icons/AdminIcon/CouponIcon";
-import CardIcon from "../Icons/AdminIcon/CardIcon";
-import AlertIcon from "../Icons/AdminIcon/AlertIcon";
-import SettingIcon from "../Icons/AdminIcon/SettingIcon";
+import DashboardIcon from "../Icons/AdminIcon/DashboardIcon";
 import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
+import ProductIcon from "../Icons/AdminIcon/ProductIcon";
+import SettingIcon from "../Icons/AdminIcon/SettingIcon";
+import UsersIcon from "../Icons/AdminIcon/UsersIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -72,7 +72,7 @@ const menuItems = [
 const bottomMenu = [
   {
     label: "Logout",
-    href: "/admin/logout",
+    href: "/signin",
     icon: LogoutIcon,
   },
 ];

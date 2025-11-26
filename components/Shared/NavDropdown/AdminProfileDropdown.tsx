@@ -1,9 +1,6 @@
 import LogoutIcon from "@/components/Icons/AdminIcon/LogoutIcon";
-import SettingsIcon from "@/components/Icons/DashboardIcons/SettingsIcon";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
-import SwitchIcon from "@/components/Icons/SwitchIcon";
 import Link from "next/link";
-import React from "react";
 
 // Import icons from react-icons
 
@@ -13,21 +10,14 @@ const AdminProfileDropdown = () => {
       {/* Logout */}
       <div className="flex flex-col">
         <Link
-          href=""
+          href="admin/settings"
           className="flex items-center gap-3 p-3 rounded-[10px]  hover:bg-red-50 transition-colors duration-150  cursor-pointer"
         >
           <ProfileIcon className="size-5" />
           <span>Profile</span>
         </Link>
         <Link
-          href=""
-          className="flex items-center gap-3 p-3 rounded-[10px]  hover:bg-red-50 transition-colors duration-150  cursor-pointer"
-        >
-          <SettingsIcon className="size-5" />
-          <span>Settings</span>
-        </Link>
-        <Link
-          href=""
+          href="/signin"
           className="flex items-center gap-3 p-3 rounded-[10px] text-error-text  hover:bg-red-50 transition-colors duration-150  cursor-pointer"
         >
           <LogoutIcon className="w-5 h-5" />
