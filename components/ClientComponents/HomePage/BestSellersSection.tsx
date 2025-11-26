@@ -4,17 +4,17 @@ import Link from "next/link";
 const heroData = [
   {
     title: "CAREERS",
-    img: "/home/carerrs.png",
+    img: "/home/carerrs-1.png",
     link: "/brand",
   },
   {
     title: "FIND US",
-    img: "/home/findus.png",
+    img: "/home/findus-1.png",
     link: "/find-us",
   },
   {
     title: "BRAND",
-    img: "/home/brand.jpg",
+    img: "/home/brand-1.png",
     link: "/brand",
   },
 ];
