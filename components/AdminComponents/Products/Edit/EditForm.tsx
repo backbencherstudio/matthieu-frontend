@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Trash2, X } from "lucide-react";
+import { X } from "lucide-react";
 import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
@@ -21,6 +21,7 @@ import {
   Controller,
 } from "react-hook-form";
 import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
+import DeleteProduct from "../DeleteProduct";
 
 type Inputs = {
   name: string;
@@ -42,14 +43,14 @@ export default function EditForm() {
       size: "Pony",
       price: "22",
       stock_qty: "20",
-      image: "/images/blog-04.png",
+      imagePreviews: ["/images/blog-04.png", "/images/blog-04.png", null, null],
     },
     {
       color: "Brown",
       size: "Cob",
       price: "12",
       stock_qty: "10",
-      image: "/images/blog-04.png",
+      imagePreviews: ["/images/blog-04.png", null, null, null],
     },
   ];
 
@@ -62,14 +63,7 @@ export default function EditForm() {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      variants: [
-        {
-          color: "",
-          size: "",
-          price: "",
-          stock_qty: "",
-        },
-      ],
+      variants: productVariant,
     },
   });
 
@@ -95,6 +89,18 @@ export default function EditForm() {
   // Show Image Preview
   const [imagePreviews, setImagePreviews] = useState([]);
   const [imageFiles, setImageFiles] = useState<(File | null)[][]>([]);
+
+  // Loading Initial Image from Database
+  useEffect(() => {
+    if (!productVariant || productVariant.length === 0) return;
+
+    const previews = productVariant.map((v) => {
+      return [...(v.imagePreviews || []), null, null, null].slice(0, 4);
+    });
+
+    setImagePreviews(previews);
+    setImageFiles(previews.map((group) => group.map(() => null)));
+  }, []);
 
   useEffect(() => {
     setImagePreviews((prev) => {
@@ -356,14 +362,12 @@ export default function EditForm() {
               <h2 className="text-xl font-extrabold text-primary-text">
                 Product Variation {index + 1}
               </h2>
-              {index > 0 && (
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    className="cmn-btn !px-4 !rounded-[6px]"
-                  >
-                    Save
-                  </button>
+
+              <div className="flex items-center gap-3">
+                <button type="button" className="cmn-btn !px-4 !rounded-[6px]">
+                  Save
+                </button>
+                {index > productVariant.length - 1 ? (
                   <button
                     type="button"
                     className="cmn-btn !px-4 !rounded-[6px] !bg-error-bg !text-error-text"
@@ -371,8 +375,13 @@ export default function EditForm() {
                   >
                     <TrashIcon />
                   </button>
-                </div>
-              )}
+                ) : (
+                  <DeleteProduct
+                    id={`${item.id}`}
+                    title={`Product Variation ${index + 1}`}
+                  />
+                )}
+              </div>
             </div>
             <div className="grid md:grid-cols-2 gap-5 mt-4">
               {/* Left */}
