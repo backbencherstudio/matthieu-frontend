@@ -15,12 +15,12 @@ export default function SAddlesCategoryItems({
   saddlesItems,
 }: SAddlesCategoryItemsProps) {
   return (
-    <div className="lg:flex lg:justify-around">
-      <div className="p-8 bg-[#1F274B] flex items-center justify-center ">
+    <div className="lg:flex gap-x-8 justify-center">
+      <div className="p-8 bg-[#1F274B] flex items-center justify-center lg:w-[374px]">
         <div>
-          <h1 className="lg:text-[32px] md:text-[30px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center text-[#FFF]">
+          <p className="lg:text-[32px] md:text-[30px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center text-[#FFF]">
             {saddlesItems?.label}
-          </h1>
+          </p>
           <p className="text-[#E9E9ED] md:text-2xl text-lg font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3 text-center">
             {saddlesItems?.subtitle}
           </p>
@@ -29,7 +29,9 @@ export default function SAddlesCategoryItems({
               href={"/saddles/saddlery-expert"}
               className="px-8 py-4 bg-[#FFF] cursor-pointer"
             >
-              TRY A SADDLE
+              <span className="text-[16px] text-[#1F274B] leading-[136%] font-extrabold">
+                TRY A SADDLE
+              </span>
             </Link>
           </div>
         </div>
