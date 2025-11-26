@@ -127,7 +127,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-4">
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center"
-            href="/admin/dashboard/create-coupon"
+            href="/admin/coupons"
           >
             <CouponIcon className="h-4 w-4" />
             <span>Create Coupon</span>

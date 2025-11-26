@@ -42,7 +42,7 @@ const AddAmbassador = () => {
           Add New Ambassador
         </h1>
         <form className="mt-4">
-          <div className="flex justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:justify-between gap-6">
             <div
               onClick={triggerFileInput}
               className="cursor-pointer border border-dashed border-[#1F274B] rounded-[6px] bg-[#F8F9FB] m-auto h-[260px] min-w-[260px] flex items-center justify-center"
@@ -52,7 +52,7 @@ const AddAmbassador = () => {
                   <img
                     src={image}
                     alt="Uploaded"
-                    className="object-cover rounded-[6px]"
+                    className="object-cover rounded-[6px] h-[260px] w-[260px]"
                     draggable={false}
                   />
                 ) : (

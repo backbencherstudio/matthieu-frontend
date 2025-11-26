@@ -34,7 +34,7 @@ export default function CmsTabs({
         Content Management System (CMS)
       </h1>
       <div className="p-2 bg-[#FFF] rounded-[8px]">
-        <div className="flex items-center w-full">
+        <div className="flex items-center w-max md:w-full md:flex-wrap gap-3">
           {tabs.map((tab) => (
             <button
               key={tab.value}
