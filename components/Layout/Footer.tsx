@@ -172,7 +172,7 @@ const footerData = [
       {
         name: "ARION",
         links: [
-          { name: "JUMPING", href: "/saddles/arion-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/arion-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/arion-saddles" },
         ],
@@ -180,7 +180,7 @@ const footerData = [
       {
         name: "ATLAS",
         links: [
-          { name: "JUMPING", href: "/saddles/atlas-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/atlas-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles" },
         ],
@@ -192,7 +192,7 @@ const footerData = [
       {
         name: "ATHENA",
         links: [
-          { name: "JUMPING", href: "/saddles/athena-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/athena-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
         ],
