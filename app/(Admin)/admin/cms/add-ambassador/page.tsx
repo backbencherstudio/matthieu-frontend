@@ -52,7 +52,7 @@ const AddAmbassador = () => {
                   <img
                     src={image}
                     alt="Uploaded"
-                    className="object-cover rounded-[6px]"
+                    className="object-cover rounded-[6px] h-[260px] w-[260px]"
                     draggable={false}
                   />
                 ) : (
