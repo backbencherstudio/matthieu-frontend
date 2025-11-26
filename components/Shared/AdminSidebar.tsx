@@ -14,6 +14,7 @@ import CardIcon from "../Icons/AdminIcon/CardIcon";
 import AlertIcon from "../Icons/AdminIcon/AlertIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
+import JobIcon from "../Icons/AdminIcon/JobIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -60,7 +61,7 @@ const menuItems = [
   {
     label: "Job Applicants",
     href: "/admin/job-applicants",
-    icon: AlertIcon,
+    icon: JobIcon,
   },
   {
     label: "Settings",
