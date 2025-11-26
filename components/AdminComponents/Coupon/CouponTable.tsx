@@ -1,4 +1,5 @@
 "use client";
+import CreateIcon from "@/components/Icons/AdminIcon/CreateIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import {
@@ -13,7 +14,6 @@ import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import { ReactNode } from "react";
 import CouponDeleteModal from "./CouponDeleteModal";
-import CreateCouponModal from "./CreateCouponModal";
 import EditCouponModal from "./EditCouponModal";
 
 export default function CouponTable() {
@@ -162,7 +162,7 @@ export default function CouponTable() {
       <div className="flex items-center justify-end gap-2">
         <div>
           <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <CreateCouponModal />
+            <CreateIcon />
           </button>
         </div>
         <div>
