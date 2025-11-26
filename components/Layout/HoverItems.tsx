@@ -9,12 +9,12 @@ import Link from "next/link";
 import { Separators } from "../ui/separator";
 
 export default function HoverItems({ items }) {
-  console.log(items);
+  console.log(items, "itemnshfjk fksdajf ");
 
   return (
     <div>
       <div>
-        {items?.dropdownContent?.map((item:any, index:number) => (
+        {items?.dropdownContent?.map((item: any, index: number) => (
           <div key={index} className="flex flex-col relative">
             {/* Main Category Item wrapped with HoverCard */}
             <HoverCard openDelay={200}>
@@ -51,9 +51,9 @@ export default function HoverItems({ items }) {
                             <div className="flex ">
                               {subItem?.items?.map((itm, index) => (
                                 <div key={index} className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white">
-                                  <span className="py-[3px]" key={index}>
-                                    {itm}
-                                  </span>
+                                  <Link href={itm.href || "#"} className={`py-[3px] ${itm.label === "comming soon" ? "hover:no-underline" :"hover:underline" }  `} key={index}>
+                                    {itm.label}
+                                  </Link>
                                   {index !== subItem.items.length - 1 && (
                                     <Separators
                                       className="mx-3  h-5 "
@@ -62,6 +62,22 @@ export default function HoverItems({ items }) {
                                   )}
                                 </div>
                               ))}
+{/* 
+                              {subItem?.items?.map((itm, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white"
+                                >
+                                  <Link href={itm.href || "#"} className="py-[3px] hover:underline">
+                                    {itm.label}
+                                  </Link>
+
+                                  {index !== subItem.items.length - 1 && (
+                                    <Separators className="mx-3 h-5" orientation="vertical" />
+                                  )}
+                                </div>
+                              ))} */}
+
                             </div>
                           </div>
                         </Link>

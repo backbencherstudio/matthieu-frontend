@@ -34,20 +34,33 @@ const Header = () => {
             {
               label: "Arion Saddles",
               subtitle: "FULL CUSTOM",
-              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
+              items: [
+                { label: "JUMPING", href: "/saddles/jumping" },
+                { label: "DRESSAGE", href: "/saddles/jumping" },
+                { label: "CROSS-COUNTRY", href: "/saddles/jumping" },
+                { label: "KIDS", href: "/saddles/jumping" },
+              ],
               href: "/saddles/arion-saddles",
             },
             {
               label: "Atlas Saddles",
               subtitle: "SEMI CUSTOM",
-              items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY"],
+              // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY"],
+              items: [
+                { label: "JUMPING", href: "/saddles/jumping" },
+                { label: "DRESSAGE", href: "/saddles/jumping" },
+                { label: "CROSS-COUNTRY", href: "/saddles/jumping" },
+              ],
               href: "/saddles/atlas-saddles",
             },
             {
               label: "Athena Saddles",
               subtitle: "TAILOR MADE",
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-              items: ["Comming Soon"],
+              items: [
+                { label: "comming soon", href: "#"},
+              ],
               // items: [],
               href: "/saddles/athena-saddles",
             },
@@ -137,9 +150,8 @@ const Header = () => {
                   <HoverCardTrigger asChild>
                     <Link
                       href={link.href}
-                      className={`${
-                        isActive ? "font-semibold" : "font-normal"
-                      }  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                      className={`${isActive ? "font-semibold" : "font-normal"
+                        }  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
                     >
                       {link.label}
                     </Link>
