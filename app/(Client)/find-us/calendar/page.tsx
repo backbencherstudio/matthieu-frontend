@@ -41,10 +41,8 @@ const COMPETITIONS: Competition[] = [
 ];
 
 const CalendarPage = () => {
-  const [selectedCountry, setSelectedCountry] = useState("All");
   const [selectedDiscipline, setSelectedDiscipline] = useState("All");
   const [countryOpen, setCountryOpen] = useState(false);
-  const [disciplineOpen, setDisciplineOpen] = useState(false);
 
   const filteredCompetitions = useMemo(() => {
     return COMPETITIONS.filter((comp) => {
@@ -74,7 +72,7 @@ const CalendarPage = () => {
             onClick={() => setCountryOpen(!countryOpen)}
             className="flex items-center gap-2 cursor-pointer"
           >
-            <SlidersHorizontalIcon />
+            <SlidersHorizontalIcon className="h-6 w-6" />
           </button>
           <Select>
             <SelectTrigger className="text-[#4C526F] text-[16px] leading-[100%] border-none shadow-none focus-visible:ring-0 focus-visible:border-0">
@@ -100,7 +98,7 @@ const CalendarPage = () => {
         </div>
 
         {/* Table */}
-        <div className="border border-[#DFE1E7]">
+        <div className="border border-[#DFE1E7] overflow-x-auto">
           <table className="w-full">
             {/* Table Header */}
             <thead>
