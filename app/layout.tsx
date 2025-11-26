@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import "./globals.css";
+import TranslatePatchProvider from "@/components/Shared/TranslatePatchProvider";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -35,10 +36,11 @@ export default function RootLayout({
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
         />
+
       </head>
       <body className="avenir">
         <div id="google_translate_element" className="hidden"></div>
-        {children}
+          <TranslatePatchProvider>{children}</TranslatePatchProvider>
         <Toaster position="top-right" richColors />
       </body>
     </html>

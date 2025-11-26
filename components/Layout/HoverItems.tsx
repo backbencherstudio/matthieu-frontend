@@ -9,7 +9,6 @@ import Link from "next/link";
 import { Separators } from "../ui/separator";
 
 export default function HoverItems({ items }) {
-  console.log(items, "itemnshfjk fksdajf ");
 
   return (
     <div>
