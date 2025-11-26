@@ -1,6 +1,4 @@
-"use client";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
-import { useRef, useState } from "react";
 
 const AddCompetition = () => {
   const breadLink = [
@@ -12,26 +10,6 @@ const AddCompetition = () => {
       label: "Add New Ambassador",
     },
   ];
-
-  const [image, setImage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const triggerFileInput = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   return (
     <>
