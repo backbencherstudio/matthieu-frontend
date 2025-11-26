@@ -62,11 +62,9 @@ export default function HeroSection() {
           <Link
             href={item?.href}
             key={index}
-            className="text-center px-9 py-[18px] bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer"
+            className="text-center px-9 py-[18px] bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer lg:text-xl md:text-lg font-extrabold leading-[100%] uppercase text-[#FFF]"
           >
-            <button className="lg:text-xl md:text-lg font-extrabold leading-[100%] uppercase text-[#FFF] cursor-pointer">
-              {item?.title}
-            </button>
+            {item?.title}
           </Link>
         ))}
       </div>

@@ -16,7 +16,7 @@ export default function SAddlesCategoryItems({
 }: SAddlesCategoryItemsProps) {
   return (
     <div className="lg:flex lg:justify-around">
-      <div className="p-8 bg-[#1F274B] flex items-center justify-center">
+      <div className="p-8 bg-[#1F274B] flex items-center justify-center ">
         <div>
           <h1 className="lg:text-[32px] md:text-[30px] text-[28px] font-extrabold md:leading-[100%] leading-[130%] textSecondary tracking-[.8px] text-center text-[#FFF]">
             {saddlesItems?.label}
@@ -34,7 +34,7 @@ export default function SAddlesCategoryItems({
           </div>
         </div>
       </div>
-      <div>
+      <div className="max-w-[680px]">
         <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 w-full">
           {saddlesItems?.images?.map((product) => (
             <Link

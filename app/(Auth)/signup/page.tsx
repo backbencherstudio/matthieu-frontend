@@ -7,7 +7,7 @@ const SignUpPage = () => {
   return (
     <>
       <Header />
-      <AuthHero title="Create your account" heroImage="/auth/auth-hero.jpg" />
+      <AuthHero title="Create An Account" heroImage="/auth/auth-hero.jpg" />
       <SignUpForm />
       <Footer />
     </>

@@ -32,6 +32,8 @@
 
 body {
   font-family: "Avenir", sans-serif;
+  top: 0px !important;
+  position: unset !important;
 }
 
 /* body {
@@ -81,6 +83,10 @@ body > .skiptranslate,
   height: 0 !important;
   width: 0 !important;
   border: none !important;
+}
+
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf{
+  display: none !important;
 }
 
 .notranslate {
