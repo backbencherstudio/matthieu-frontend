@@ -10,7 +10,7 @@ const AdminProfileDropdown = () => {
       {/* Logout */}
       <div className="flex flex-col">
         <Link
-          href="admin/settings"
+          href="/admin/settings"
           className="flex items-center gap-3 p-3 rounded-[10px]  hover:bg-red-50 transition-colors duration-150  cursor-pointer"
         >
           <ProfileIcon className="size-5" />

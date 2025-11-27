@@ -1,10 +1,11 @@
+"use client";
 import AvgUsageRateIcon from "@/components/Icons/AdminIcon/AvgUsageRateIcon";
 import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
-import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import TotalCouponIcon from "@/components/Icons/AdminIcon/TotalCouponIcon";
 import TotalUsageIcon from "@/components/Icons/AdminIcon/TotalUsageIcon";
 import HeaderCard from "../reusable/HeaderCard";
 import CouponTable from "./CouponTable";
+import CreateCouponModal from "./CreateCouponModal";
 
 export default function Coupon() {
   const couponStats = [
@@ -43,13 +44,12 @@ export default function Coupon() {
   ];
   return (
     <div>
-      <div className="flex flex-wrap justify-between gap-2">
+      <div className="flex flex-wrap justify-between gap-2 mb-5">
         <h1 className="text-2xl font-extrabold text-primary-text">
           Coupons & Discounts
         </h1>
-        <button className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap cursor-pointer mb-3">
-          <PlusIcon className="h-4 w-4" />
-          <span className="text-[14px] leading-[114%]">Create Coupon</span>
+        <button className="bg-primary-bg text-white rounded py-2.5 px-3  whitespace-nowrap cursor-pointer">
+          <CreateCouponModal />
         </button>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-4 mb-9">
@@ -64,6 +64,7 @@ export default function Coupon() {
           />
         ))}
       </div>
+
       <CouponTable />
     </div>
   );

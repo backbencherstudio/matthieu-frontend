@@ -3,42 +3,37 @@ import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useFilterPagination } from "@/hooks/useFilterHook";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import BlogDeleteModal from "./BlogDeleteModal";
 
 const CompetitionCalendarTab = () => {
+  const router = useRouter();
   const relevantData = [
     {
       id: 1,
       competition: "Hits Vermont",
       location: "Manchester, VT",
       discipline: "Hunter/Jumper",
-      date: "8/1–8/5",
+      date: "Sep 5, 2024",
     },
     {
       id: 2,
       competition: "Silo Ridge Masters",
       location: "Amenia, NY",
       discipline: "Hunter/Jumper",
-      date: "9/1–9/10",
+      date: "9Sep 5, 2024",
     },
     {
       id: 3,
       competition: "Wellington International",
       location: "Wellington, FL",
       discipline: "Hunter/Jumper",
-      date: "12/2–12/28",
+      date: "Sep 5, 2024",
     },
   ];
 
@@ -80,7 +75,10 @@ const CompetitionCalendarTab = () => {
     (item) => (
       <div className="flex items-center justify-end gap-2">
         <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <button
+            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
+            onClick={() => router.push("/admin/cms/add-competition")}
+          >
             <EditIcon />
           </button>
         </div>
@@ -113,18 +111,7 @@ const CompetitionCalendarTab = () => {
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
             </div>
-            <div>
-              <Select>
-                <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
-                  <SelectValue placeholder="All Dats" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="allStatus">All Dats</SelectItem>
-                  <SelectItem value="published">Published</SelectItem>
-                  <SelectItem value="draft">Draft</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+
             <div>
               <Link
                 href="/admin/cms/add-competition"

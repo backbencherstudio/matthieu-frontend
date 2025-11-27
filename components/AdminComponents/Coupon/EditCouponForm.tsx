@@ -61,7 +61,7 @@ export function EditCouponForm() {
               {...register("couponCode", {
                 required: "Coupon code is required",
               })}
-              className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
+              className="p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
               placeholder="SAVE20"
             />
             {/* <div className="absolute inset-y-0 left-0 m-1 flex items-center p-[6px] bg-[#F6F8FA] rounded-[6px]">
@@ -80,7 +80,7 @@ export function EditCouponForm() {
           </label>
           <div>
             <Select>
-              <SelectTrigger className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full">
+              <SelectTrigger className="p-[22px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full">
                 <SelectValue placeholder="Percentage Discount" />
               </SelectTrigger>
               <SelectContent>
@@ -123,7 +123,7 @@ export function EditCouponForm() {
               {...register("description", {
                 required: "Description is required",
               })}
-              className="w-full px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2"
+              className="w-full p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2"
               placeholder="Brief description of the coupon"
             />
           </div>
@@ -141,7 +141,7 @@ export function EditCouponForm() {
               {...register("percentage", {
                 required: "Percentage is required",
               })}
-              className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
+              className="p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
               placeholder="0%"
             />
           </div>
@@ -161,7 +161,7 @@ export function EditCouponForm() {
               {...register("maxDiscount", {
                 required: "Max Discount is required",
               })}
-              className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
+              className="p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
               placeholder="$0.00"
             />
           </div>
@@ -181,7 +181,7 @@ export function EditCouponForm() {
           <div>
             <input
               type="date"
-              className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
+              className="p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
               placeholder="dd-mm-yy"
             />
           </div>
@@ -193,7 +193,7 @@ export function EditCouponForm() {
           <div>
             <input
               type="date"
-              className="px-3 py-[7px] rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
+              className="p-3 rounded-[4px] bg-[#FFF] text-[14px] text-[#4C526F] leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
               placeholder="dd-mm-yy"
             />
           </div>
@@ -204,7 +204,7 @@ export function EditCouponForm() {
       <div className="col-span-2 flex justify-end pt-4">
         <button
           type="submit"
-          className="flex items-center text-[#FFF] transition text-[14px] leading-[117%] px-3 py-[10px] rounded-[4px] bg-[#1F274B] hover:bg-[#1F274B]/90 space-x-[8px]"
+          className="flex items-center text-[#FFF] transition text-[14px] leading-[117%] px-3 py-[10px] rounded-[4px] bg-[#1F274B] hover:bg-[#1F274B]/90 space-x-[8px] cursor-pointer"
         >
           <TotalCouponIcon className="text-[#FFF]" />
           <span>Update Coupon</span>

@@ -26,7 +26,7 @@ export default function ContactTab() {
   };
 
   return (
-    <div className="p-4 bg-[#FFF] rounded-[8px] mt-5">
+    <div className="p-4 bg-[#FFF] rounded-[8px] border border-[#DFE1E7]">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Header */}
         <div className="flex flex-wrap gap-2 justify-between items-center">
@@ -51,7 +51,7 @@ export default function ContactTab() {
               <label className="text-[12px] leading-[100%] text-[#696E86]">
                 Social Media Links
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
                 <input
                   type="text"
                   className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"

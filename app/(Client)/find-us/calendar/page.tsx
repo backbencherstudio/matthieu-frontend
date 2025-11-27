@@ -2,7 +2,13 @@
 
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import SlidersHorizontalIcon from "@/components/Icons/SlidersHorizontalIcon";
-import { ChevronDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
+import { SelectValue } from "@radix-ui/react-select";
 
 import { useMemo, useState } from "react";
 
@@ -15,33 +21,28 @@ interface Competition {
 
 const COMPETITIONS: Competition[] = [
   {
-    date: "8/1-8/5",
+    date: "Sep 5, 2025",
     competition: "HITS VERMONT",
     location: "MANCHESTER, VT",
     discipline: "HUNTER/JUMPER",
   },
   {
-    date: "9/1-9/10",
+    date: "Sep 5, 2025",
     competition: "SILO RIDGE MASTERS",
     location: "AMENIA, NY",
     discipline: "HUNTER/JUMPER",
   },
   {
-    date: "12/2-12/28",
+    date: "Sep 5, 2024",
     competition: "WELLINGTON INTERNATIONAL",
     location: "WELLINGTON, FL",
     discipline: "HUNTER/JUMPER",
   },
 ];
 
-const COUNTRIES = ["All", "United States", "Canada", "International"];
-const DISCIPLINES = ["All", "Hunter/Jumper", "Dressage", "Eventing"];
-
 const CalendarPage = () => {
-  const [selectedCountry, setSelectedCountry] = useState("All");
   const [selectedDiscipline, setSelectedDiscipline] = useState("All");
   const [countryOpen, setCountryOpen] = useState(false);
-  const [disciplineOpen, setDisciplineOpen] = useState(false);
 
   const filteredCompetitions = useMemo(() => {
     return COMPETITIONS.filter((comp) => {
@@ -71,30 +72,33 @@ const CalendarPage = () => {
             onClick={() => setCountryOpen(!countryOpen)}
             className="flex items-center gap-2 cursor-pointer"
           >
-            <SlidersHorizontalIcon />
+            <SlidersHorizontalIcon className="h-6 w-6" />
           </button>
-          <button
-            onClick={() => setCountryOpen(!countryOpen)}
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <span className="text-[16px] leading-[100%] text-[#4C526F]">
-              COUNTRY
-            </span>
-            <ChevronDown />
-          </button>
-          <button
-            onClick={() => setCountryOpen(!countryOpen)}
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <span className="text-[16px] leading-[100%] text-[#4C526F]">
-              DISCPLINE
-            </span>
-            <ChevronDown />
-          </button>
+          <Select>
+            <SelectTrigger className="text-[#4C526F] text-[16px] leading-[100%] border-none shadow-none focus-visible:ring-0 focus-visible:border-0">
+              <SelectValue placeholder="COUNTRY" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="usa">USA</SelectItem>
+              <SelectItem value="france">FRANCE</SelectItem>
+              <SelectItem value="poland">POLAND</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger className="text-[#4C526F] text-[16px] leading-[100%] border-none shadow-none focus-visible:ring-0 focus-visible:border-0">
+              <SelectValue placeholder="DISCPLINE" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="jumper">HUNTER/JUMPER</SelectItem>
+              <SelectItem value="eventing">EVENTING</SelectItem>
+              <SelectItem value="dressage">DRESSAGE</SelectItem>
+              <SelectItem value="other">OTHER</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Table */}
-        <div className="border border-[#DFE1E7]">
+        <div className="border border-[#DFE1E7] overflow-x-auto">
           <table className="w-full">
             {/* Table Header */}
             <thead>

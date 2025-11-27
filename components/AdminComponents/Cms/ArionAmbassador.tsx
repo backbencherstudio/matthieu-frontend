@@ -2,21 +2,16 @@ import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useFilterPagination } from "@/hooks/useFilterHook";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 import BlogDeleteModal from "./BlogDeleteModal";
 
 const ArionAmbassadorTab = () => {
+  const router = useRouter();
   const relevantData = [
     {
       id: 1,
@@ -117,7 +112,10 @@ const ArionAmbassadorTab = () => {
     (item) => (
       <div className="flex items-center justify-end gap-2">
         <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <button
+            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
+            onClick={() => router.push("/admin/cms/add-ambassador")}
+          >
             <EditIcon />
           </button>
         </div>
@@ -150,18 +148,7 @@ const ArionAmbassadorTab = () => {
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
             </div>
-            <div>
-              <Select>
-                <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
-                  <SelectValue placeholder="All Dats" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="allStatus">All Dats</SelectItem>
-                  <SelectItem value="published">Published</SelectItem>
-                  <SelectItem value="draft">Draft</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+
             <div>
               <Link
                 href="/admin/cms/add-ambassador"

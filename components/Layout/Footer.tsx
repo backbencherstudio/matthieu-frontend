@@ -172,7 +172,7 @@ const footerData = [
       {
         name: "ARION",
         links: [
-          { name: "JUMPING", href: "/saddles/arion-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/arion-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/arion-saddles" },
         ],
@@ -180,7 +180,7 @@ const footerData = [
       {
         name: "ATLAS",
         links: [
-          { name: "JUMPING", href: "/saddles/atlas-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/atlas-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles" },
         ],
@@ -192,7 +192,7 @@ const footerData = [
       {
         name: "ATHENA",
         links: [
-          { name: "JUMPING", href: "/saddles/athena-saddles" },
+          { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/athena-saddles" },
           { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
         ],
@@ -227,11 +227,11 @@ const footerData = [
   {
     title: "CUSTOMER RELATIONS",
     links: [
-      { name: "CONTACT US", href: "/find-us" },
-      { name: "HELP/FAQ", href: "#" },
-      { name: "SIZE GUIDE", href: "#" },
-      { name: "CARE INSTRUCTIONS", href: "#" },
-      { name: "SHIPPING AND RETURNS", href: "#" },
+      { name: "CONTACT US", href: "/contact-us" },
+      { name: "HELP/FAQ", href: "/help-faq" },
+      { name: "SIZE GUIDE", href: "/help-faq" },
+      { name: "CARE INSTRUCTIONS", href: "/help-faq" },
+      { name: "SHIPPING AND RETURNS", href: "/help-faq" },
     ],
   },
 ];

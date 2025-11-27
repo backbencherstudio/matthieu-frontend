@@ -1,6 +1,4 @@
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import Link from "next/link";
-import React from "react";
 import {
   Select,
   SelectContent,
@@ -9,8 +7,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import StatisticCard from "../reusable/StatisticCard";
-import SalesChart from "./SalesChart";
 import ProfitChart from "./ProfitChart";
+import SalesChart from "./SalesChart";
 
 export default function Analytics() {
   const statisticCards = [
@@ -64,13 +62,10 @@ export default function Analytics() {
               <SelectItem value="last-year">Last year</SelectItem>
             </SelectContent>
           </Select>
-          <Link
-            className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
-            href="/admin/dashboard/add-product"
-          >
+          <button className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap">
             <PlusIcon className="h-4 w-4" />
             <span>Export Analysis</span>
-          </Link>
+          </button>
         </div>
       </div>
       {/* Statistics Card */}

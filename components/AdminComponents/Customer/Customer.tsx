@@ -52,11 +52,11 @@ export default function Customer() {
         <div className="flex flex-wrap items-center gap-4">
           <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
             <LetterIcon className="h-4 w-4" />
-            <span className="text-[14px] leading-[114%]">Send Campaign</span>
+            <span>Send Campaign</span>
           </button>
           <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
             <PlusIcon className="h-4 w-4" />
-            <span className="text-[14px] leading-[114%]">Add Customer</span>
+            <span>Add Customer</span>
           </button>
         </div>
       </div>
