@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import TrackProductList from './TrackProductList';
-import FilterIcon from '@/components/Icons/FilterIcon';
-import DropdownFilter from './DropdownFilter';
+import React, { useState } from "react";
+import TrackProductList from "./TrackProductList";
+import FilterIcon from "@/components/Icons/FilterIcon";
+import DropdownFilter from "./DropdownFilter";
 
 interface Product {
   id: number;
@@ -23,65 +23,369 @@ interface Category {
 const allProducts: Product[] = [
   // Bridles
   ...[
-    { id: 1, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Black", size: "Full" },
-    { id: 2, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Brown", size: "Cob" },
-    { id: 3, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Black", size: "Pony" },
-    { id: 4, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Brown", size: "Full" },
-    { id: 5, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Black", size: "Cob" },
-    { id: 6, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Brown", size: "Pony" },
-    { id: 7, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Black", size: "Full" },
-    { id: 8, name: "Anatomical Double Noseband Bridle", category: "Bridles", image: "/home/bridles.png", price: "$370.00", color: "Brown", size: "Cob" },
+    {
+      id: 1,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Full",
+    },
+    {
+      id: 2,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Cob",
+    },
+    {
+      id: 3,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Pony",
+    },
+    {
+      id: 4,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Full",
+    },
+    {
+      id: 5,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Cob",
+    },
+    {
+      id: 6,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Pony",
+    },
+    {
+      id: 7,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Full",
+    },
+    {
+      id: 8,
+      name: "Anatomical Double Noseband Bridle",
+      category: "Bridles",
+      image: "/home/bridles.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Cob",
+    },
   ],
   // Reins
   ...[
-    { id: 1, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack1.png", price: "$370.00", color: "Black", size: "Standard" },
-    { id: 2, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack2.png", price: "$370.00", color: "Brown", size: "Standard" },
-    { id: 3, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack3.png", price: "$370.00", color: "Black", size: "Long" },
-    { id: 4, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack4.png", price: "$370.00", color: "Brown", size: "Long" },
-    { id: 5, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack1.png", price: "$370.00", color: "Black", size: "Standard" },
-    { id: 6, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack2.png", price: "$370.00", color: "Brown", size: "Standard" },
-    { id: 7, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack3.png", price: "$370.00", color: "Black", size: "Long" },
-    { id: 8, name: "Reins with handles", category: "Reins", image: "/images/tacks/tack4.png", price: "$370.00", color: "Brown", size: "Long" },
+    {
+      id: 1,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack1.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Standard",
+    },
+    {
+      id: 2,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack2.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Standard",
+    },
+    {
+      id: 3,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack3.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Long",
+    },
+    {
+      id: 4,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack4.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Long",
+    },
+    {
+      id: 5,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack1.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Standard",
+    },
+    {
+      id: 6,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack2.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Standard",
+    },
+    {
+      id: 7,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack3.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Long",
+    },
+    {
+      id: 8,
+      name: "Reins with handles",
+      category: "Reins",
+      image: "/images/tacks/tack4.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Long",
+    },
   ],
   // Girths
   ...[
-    { id: 1, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Black", size: "24inch" },
-    { id: 2, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Brown", size: "26inch" },
-    { id: 3, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Black", size: "28inch" },
-    { id: 4, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Brown", size: "24inch" },
-    { id: 5, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Black", size: "26inch" },
-    { id: 6, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Brown", size: "28inch" },
-    { id: 7, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Black", size: "24inch" },
-    { id: 8, name: "Short dressage girth", category: "Girths", image: "/home/grith.png", price: "$370.00", color: "Brown", size: "26inch" },
+    {
+      id: 1,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Black",
+      size: "24inch",
+    },
+    {
+      id: 2,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "26inch",
+    },
+    {
+      id: 3,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Black",
+      size: "28inch",
+    },
+    {
+      id: 4,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "24inch",
+    },
+    {
+      id: 5,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Black",
+      size: "26inch",
+    },
+    {
+      id: 6,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "28inch",
+    },
+    {
+      id: 7,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Black",
+      size: "24inch",
+    },
+    {
+      id: 8,
+      name: "Short dressage girth",
+      category: "Girths",
+      image: "/home/grith.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "26inch",
+    },
   ],
   // Breastplates
   ...[
-    { id: 1, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates.png", price: "$370.00", color: "Black", size: "Standard" },
-    { id: 2, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates2.png", price: "$370.00", color: "Brown", size: "Standard" },
-    { id: 3, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates3.png", price: "$370.00", color: "Black", size: "Large" },
-    { id: 4, name: "Short dressage girth", category: "BREASTPLATES", image: "/images/tacks/breastPlates4.png", price: "$370.00", color: "Brown", size: "Large" },
+    {
+      id: 1,
+      name: "Short dressage girth",
+      category: "BREASTPLATES",
+      image: "/images/tacks/breastPlates.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Standard",
+    },
+    {
+      id: 2,
+      name: "Short dressage girth",
+      category: "BREASTPLATES",
+      image: "/images/tacks/breastPlates2.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Standard",
+    },
+    {
+      id: 3,
+      name: "Short dressage girth",
+      category: "BREASTPLATES",
+      image: "/images/tacks/breastPlates3.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Large",
+    },
+    {
+      id: 4,
+      name: "Short dressage girth",
+      category: "BREASTPLATES",
+      image: "/images/tacks/breastPlates4.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Large",
+    },
   ],
   // Halters
   ...[
-    { id: 1, name: "Halter lead rope", category: "HALTERS & ROPES", image: "/images/tacks/halter.jpg", price: "$370.00", color: "Black", size: "Standard" },
+    {
+      id: 1,
+      name: "Halter lead rope",
+      category: "HALTERS & ROPES",
+      image: "/images/tacks/halter.jpg",
+      price: "$370.00",
+      color: "Black",
+      size: "Standard",
+    },
   ],
   // Boots
   ...[
-    { id: 1, name: "Front Show Jumping Boots", category: "BOOTS", image: "/images/tacks/boots1.png", price: "$370.00", color: "Black", size: "Medium" },
-    { id: 2, name: "Hind Show Jumping Boots", category: "BOOTS", image: "/images/tacks/boots2.png", price: "$370.00", color: "Brown", size: "Medium" },
-    { id: 3, name: "Front Training Boots", category: "BOOTS", image: "/images/tacks/boots3.png", price: "$370.00", color: "Black", size: "Large" },
-    { id: 4, name: "Hind Training Boots", category: "BOOTS", image: "/images/tacks/boots4.jpg", price: "$370.00", color: "Brown", size: "Large" },
+    {
+      id: 1,
+      name: "Front Show Jumping Boots",
+      category: "BOOTS",
+      image: "/images/tacks/boots1.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Medium",
+    },
+    {
+      id: 2,
+      name: "Hind Show Jumping Boots",
+      category: "BOOTS",
+      image: "/images/tacks/boots2.png",
+      price: "$370.00",
+      color: "Brown",
+      size: "Medium",
+    },
+    {
+      id: 3,
+      name: "Front Training Boots",
+      category: "BOOTS",
+      image: "/images/tacks/boots3.png",
+      price: "$370.00",
+      color: "Black",
+      size: "Large",
+    },
+    {
+      id: 4,
+      name: "Hind Training Boots",
+      category: "BOOTS",
+      image: "/images/tacks/boots4.jpg",
+      price: "$370.00",
+      color: "Brown",
+      size: "Large",
+    },
   ],
   // Leather Care
   ...[
-    { id: 1, name: "Leather Soap", category: "Leather Care", image: "/images/tacks/leather-care.jpg", price: "$370.00", color: "N/A", size: "N/A" },
-    { id: 2, name: "Leather Grease", category: "Leather Care", image: "/images/tacks/leather-care2.jpg", price: "$370.00", color: "N/A", size: "N/A" },
-    { id: 3, name: "Cleaning Kit", category: "Leather Care", image: "/images/tacks/leather-care3.jpg", price: "$370.00", color: "N/A", size: "N/A" },
+    {
+      id: 1,
+      name: "Leather Soap",
+      category: "Leather Care",
+      image: "/images/tacks/leather-care.jpg",
+      price: "$370.00",
+      color: "N/A",
+      size: "N/A",
+    },
+    {
+      id: 2,
+      name: "Leather Grease",
+      category: "Leather Care",
+      image: "/images/tacks/leather-care2.jpg",
+      price: "$370.00",
+      color: "N/A",
+      size: "N/A",
+    },
+    {
+      id: 3,
+      name: "Cleaning Kit",
+      category: "Leather Care",
+      image: "/images/tacks/leather-care3.jpg",
+      price: "$370.00",
+      color: "N/A",
+      size: "N/A",
+    },
   ],
   // Accessories
   ...[
-    { id: 1, name: "3-point hunting collar", category: "Accessories", image: "/images/tacks/accessories.jpg", price: "$370.00", color: "Black", size: "Standard" },
-    { id: 2, name: "Classic Martingale", category: "Accessories", image: "/images/tacks/accessories2.jpg", price: "$370.00", color: "Brown", size: "Standard" },
+    {
+      id: 1,
+      name: "3-point hunting collar",
+      category: "Accessories",
+      image: "/images/tacks/accessories.jpg",
+      price: "$370.00",
+      color: "Black",
+      size: "Standard",
+    },
+    {
+      id: 2,
+      name: "Classic Martingale",
+      category: "Accessories",
+      image: "/images/tacks/accessories2.jpg",
+      price: "$370.00",
+      color: "Brown",
+      size: "Standard",
+    },
   ],
 ];
 
@@ -98,33 +402,48 @@ const categories: Category[] = [
 ];
 
 const priceRanges: Category[] = [
-  { label: "All Prices", value: "all" },
+  { label: "All Prices", value: "" },
   { label: "Under $100", value: "0-100" },
-  { label: "$100 - $200", value: "100-200" },
-  { label: "$200 - $300", value: "200-300" },
-  { label: "$300 and above", value: "300+" },
+  { label: "$100 - $300", value: "100-300" },
+  { label: "$300 - $500", value: "300-500" },
+  { label: "Over $500", value: "500+" },
 ];
 
 const colors: Category[] = [
   { label: "All Colors", value: "all" },
   { label: "Black", value: "Black" },
   { label: "Brown", value: "Brown" },
-  { label: "N/A", value: "N/A" },
 ];
 
 const sizes: Category[] = [
   { label: "All Sizes", value: "all" },
+  { label: "Pony", value: "Pony" },
   { label: "Full", value: "Full" },
   { label: "Cob", value: "Cob" },
-  { label: "Pony", value: "Pony" },
-  { label: "Standard", value: "Standard" },
-  { label: "Long", value: "Long" },
-  { label: "24inch", value: "24inch" },
-  { label: "26inch", value: "26inch" },
-  { label: "28inch", value: "28inch" },
-  { label: "Medium", value: "Medium" },
-  { label: "Large", value: "Large" },
-  { label: "N/A", value: "N/A" },
+  { label: "Oversize", value: "Oversize" },
+  { label: "24”", value: "24inch" },
+  { label: "26”", value: "26inch" },
+  { label: "28”", value: "28inch" },
+  { label: "30”", value: "30inch" },
+  { label: "32”", value: "32inch" },
+  { label: "34”", value: "34inch" },
+  { label: "36”", value: "36inch" },
+  { label: "38”", value: "38inch" },
+  { label: "40”", value: "40inch" },
+  { label: "42”", value: "42inch" },
+  { label: "44”", value: "44inch" },
+  { label: "46”", value: "46inch" },
+  { label: "48”", value: "48inch" },
+  { label: "50”", value: "50inch" },
+  { label: "52”", value: "52inch" },
+  { label: "54”", value: "54inch" },
+  { label: "56”", value: "56inch" },
+  { label: "58”", value: "58inch" },
+  { label: "XS", value: "XS" },
+  { label: "S", value: "S" },
+  { label: "M", value: "M" },
+  { label: "L", value: "L" },
+  { label: "XL", value: "XL" },
 ];
 
 export default function TackMainSections() {
@@ -141,11 +460,13 @@ export default function TackMainSections() {
     }
 
     if (priceRange) {
-      const [min, max] = priceRange.split('-').map(Number) || [0, Infinity];
-      const price = parseFloat(filtered[0]?.price.replace('$', '') || "0");
+      const [min, max] = priceRange.split("-").map(Number) || [0, Infinity];
+      const price = parseFloat(filtered[0]?.price.replace("$", "") || "0");
       filtered = filtered.filter((product) => {
-        const productPrice = parseFloat(product.price.replace('$', ''));
-        return max === Infinity ? productPrice >= min : productPrice >= min && productPrice < max;
+        const productPrice = parseFloat(product.price.replace("$", ""));
+        return max === Infinity
+          ? productPrice >= min
+          : productPrice >= min && productPrice < max;
       });
     }
 
@@ -165,28 +486,60 @@ export default function TackMainSections() {
       return (
         <>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "Bridles")} title="Bridles" />
+            <TrackProductList
+              items={filterProducts().filter((p) => p.category === "Bridles")}
+              title="Bridles"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "Reins")} title="Reins" />
+            <TrackProductList
+              items={filterProducts().filter((p) => p.category === "Reins")}
+              title="Reins"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "BREASTPLATES")} title="BREASTPLATES" />
+            <TrackProductList
+              items={filterProducts().filter(
+                (p) => p.category === "BREASTPLATES"
+              )}
+              title="BREASTPLATES"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "Girths")} title="Girths" />
+            <TrackProductList
+              items={filterProducts().filter((p) => p.category === "Girths")}
+              title="Girths"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "HALTERS & ROPES")} title="HALTERS & ROPES" />
+            <TrackProductList
+              items={filterProducts().filter(
+                (p) => p.category === "HALTERS & ROPES"
+              )}
+              title="HALTERS & ROPES"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "BOOTS")} title="BOOTS" />
+            <TrackProductList
+              items={filterProducts().filter((p) => p.category === "BOOTS")}
+              title="BOOTS"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "Leather Care")} title="Leather Care" />
+            <TrackProductList
+              items={filterProducts().filter(
+                (p) => p.category === "Leather Care"
+              )}
+              title="Leather Care"
+            />
           </div>
           <div className="lg:my-12 my-8">
-            <TrackProductList items={filterProducts().filter(p => p.category === "Accessories")} title="Accessories" />
+            <TrackProductList
+              items={filterProducts().filter(
+                (p) => p.category === "Accessories"
+              )}
+              title="Accessories"
+            />
           </div>
         </>
       );
@@ -234,7 +587,6 @@ export default function TackMainSections() {
   );
 }
 
-
 // "use client"
 
 // import React, { useState } from 'react'
@@ -248,16 +600,11 @@ export default function TackMainSections() {
 
 // export default function TackMainSections() {
 
-
-
-
 //     return (
 //         <>
 //             <div className='mt-12'>
 //                 <FilterIcon className="h-8 w-8" />
 //             </div>
-
-            
 
 //             <div className='lg:my-12 my-8'>
 //                 <TrackProductList items={bridleasItems} title="Bridles" />
@@ -286,7 +633,6 @@ export default function TackMainSections() {
 //         </>
 //     )
 // }
-
 
 // const bridleasItems = [
 //     {
@@ -345,7 +691,6 @@ export default function TackMainSections() {
 //         image: "/home/bridles.png", // Replace with actual image path
 //         price: "$370.00",
 //     },
-
 
 // ];
 // const reinsItems = [
@@ -406,7 +751,6 @@ export default function TackMainSections() {
 //         price: "$370.00",
 //     },
 
-
 // ];
 // const girthItems = [
 //     {
@@ -465,7 +809,6 @@ export default function TackMainSections() {
 //         image: "/home/grith.png", // Replace with actual image path
 //         price: "$370.00",
 //     },
-
 
 // ];
 // const breatsPlatesItems = [

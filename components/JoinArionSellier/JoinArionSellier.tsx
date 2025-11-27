@@ -6,14 +6,14 @@ const JoinArionSellier = () => {
       <p className="text-[#1F274B] text-center text-[35px] md:text-[40px] lg:text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[40px] md:pt-[50px] lg:pt-[60px] pb-[40px] md:pb-[48px] normal-case">
         Join Arion Sellier
       </p>
-      <Image
+      {/* <Image
         src="/joinarion/horse2.png"
         alt="horse"
         width={100}
         height={100}
         className="object-cover md:object-contain w-full min-h-[160px] border md:h-full"
         unoptimized
-      ></Image>
+      ></Image> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[35px] md:gap-[64px]">
         <div className="w-6/6">
