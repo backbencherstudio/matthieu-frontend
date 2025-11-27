@@ -14,29 +14,29 @@ export default function JobIcon({ className }: { className?: string }) {
         d="M7.08203 5.41667C7.08203 4.24628 7.08203 3.66109 7.36291 3.24072C7.48451 3.05873 7.64076 2.90248 7.82275 2.78088C8.24311 2.5 8.82831 2.5 9.99872 2.5C11.1691 2.5 11.7543 2.5 12.1746 2.78088C12.3566 2.90248 12.5129 3.05873 12.6345 3.24072C12.9154 3.66109 12.9154 4.24628 12.9154 5.41667"
         stroke="currentColor"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.33203 10.417V11.2503C8.33203 11.6378 8.33203 11.8316 8.37464 11.9905C8.49022 12.4219 8.82714 12.7588 9.25847 12.8744C9.41747 12.917 9.61122 12.917 9.99872 12.917C10.3862 12.917 10.5799 12.917 10.7389 12.8744C11.1702 12.7588 11.5072 12.4219 11.6228 11.9905C11.6654 11.8316 11.6654 11.6378 11.6654 11.2503V10.417"
         stroke="currentColor"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M1.66765 7.08301L1.66585 11.6638C1.66477 14.4146 1.66423 15.79 2.51855 16.6447C3.37287 17.4993 4.74826 17.4993 7.49905 17.4994L12.4999 17.4995C15.2494 17.4996 16.6241 17.4997 17.4783 16.6456C18.3326 15.7915 18.3329 14.4168 18.3334 11.6673L18.3343 7.08301"
         stroke="currentColor"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.665 5.41713L3.33235 5.41699C2.41198 5.41705 1.66561 6.16339 1.66553 7.08377C1.66561 8.92458 3.15835 10.4173 4.99915 10.4175H14.9981C16.839 10.4174 18.3316 8.92474 18.3317 7.08391C18.3316 6.16351 17.5853 5.41718 16.665 5.41713Z"
         stroke="currentColor"
         strokeWidth="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
