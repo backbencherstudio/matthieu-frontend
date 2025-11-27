@@ -1,4 +1,4 @@
-import ContactForm from "@/components/ContactUs/ContactForm";
+import ContactForm from "@/components/ClientComponents/ContactUs/ContactForm";
 import { Briefcase, HelpCircle, MapPin } from "lucide-react";
 
 const ContactUsPage = () => {
