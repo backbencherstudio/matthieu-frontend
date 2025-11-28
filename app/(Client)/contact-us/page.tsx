@@ -1,5 +1,6 @@
-import ContactForm from "@/components/ClientComponents/ContactUs/ContactForm";
+import { ContactUsForm } from "@/components/ClientComponents/ContactUs/ContactForm";
 import { Briefcase, HelpCircle, MapPin } from "lucide-react";
+import Link from "next/link";
 
 const ContactUsPage = () => {
   return (
@@ -13,21 +14,27 @@ const ContactUsPage = () => {
         </p>
       </div>
       <div className="mt-8">
-        <ContactForm />
+        <ContactUsForm />
       </div>
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Help/FAQ Section */}
-          <div className="flex flex-col items-center text-center">
+          <Link
+            href={"/help-faq"}
+            className="flex flex-col items-center text-center"
+          >
             <div className="p-3">
               <HelpCircle className="w-6 h-6 text-[#1f274b]" />
             </div>
             <h3 className="text-[#1f274b] mb-1">Help/ FAQ</h3>
             <p className="text-sm text-[#1f274b]">Size Guide</p>
-          </div>
+          </Link>
 
           {/* Location Section */}
-          <div className="flex flex-col items-center text-center">
+          <Link
+            href={"/saddles/arion-saddles"}
+            className="flex flex-col items-center text-center"
+          >
             <div className="p-3">
               <MapPin className="w-6 h-6 text-[#1f274b]" />
             </div>
@@ -37,16 +44,19 @@ const ContactUsPage = () => {
               <br />
               Wellington, FL 33414
             </p>
-          </div>
+          </Link>
 
           {/* Join Us Section */}
-          <div className="flex flex-col items-center text-center">
+          <Link
+            href={"/brand/job-offer"}
+            className="flex flex-col items-center text-center"
+          >
             <div className="p-3">
               <Briefcase className="w-6 h-6 text-[#1f274b]" />
             </div>
             <h3 className="text-[#1f274b] mb-1">Join Us!</h3>
             <p className="text-sm text-[#1f274b]">Job Offers</p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
