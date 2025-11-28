@@ -3,6 +3,7 @@ import FilteredCategory from '@/components/ClientComponents/Tacks/FilteredCatego
 import React from 'react'
 
 export default function GirthsPage() {
+return null;
 
   const breadLink = [
     {
