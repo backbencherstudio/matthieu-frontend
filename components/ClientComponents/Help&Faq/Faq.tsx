@@ -234,7 +234,6 @@
 import { useRef } from "react";
 
 import ShipmentIcon from "@/components/Icons/AdminIcon/ShipmentIcon";
-import CareIcon from "@/components/Icons/CareIcon";
 import ShoppingCardIcon from "@/components/Icons/MyAccoountIcon/ShoppingCardIcon";
 import RularIcon from "@/components/Icons/RularIcon";
 
@@ -257,20 +256,20 @@ const faqCategories = [
         id: "q1",
         question: "How can I create an account?",
         answer:
-          "Click “My Account” in the top right hand corner. Enter your email and click “Register”. Complete the steps and your account will be created.",
+          "Click My Account in the top right hand corner in the blue top banner with the Arion Sellier logo. Enter your e-mail and click Register. Finish setting up your account by clicking on Account Details. Complete the form and voilå, your account is created!",
       },
       {
         id: "q2",
         question: "Can I cancel my order?",
         answer:
-          "For tack and accessory orders, email ballo@arionh.com with your order number ASAP. You cannot cancel a new saddle order once the order form has been signed.",
+          "For tack and accessory orders, please send an email to II m ith your order number ASAP. You cannot cancel a new saddle order after our form has been signed.",
       },
       {
         id: "q3",
         question:
-          "I did not receive the right product, or the product is damaged. What do I do?",
+          "I did not receive the right product. / There is a problem with the size. / The product is damaged. What do I do?",
         answer:
-          "You have 14 days from the date of delivery to email hello@arionh.com with your order number and reason for return. If the product is defective, we will issue a return label. After receiving the product, you will receive a refund.",
+          "Ou w. ayS romt e ate 0 e 'very to sen an em a' to Our team at helloaarion•hst com. Please explain the reason for returning the product(s). If the product is defective, we will ask you to attach photos to your email. You will then receive a return form in order to send us back your products and get a refund.",
       },
     ],
   },
@@ -355,38 +354,24 @@ const faqCategories = [
           { size: "XL", measurement: "Tall Adult Woman/Tall Average Man" },
         ],
       },
-    ],
-  },
-
-  {
-    id: "care",
-    label: "Care Instructions",
-    icon: CareIcon,
-    questions: [
       {
-        id: "q8",
-        question: "How should I care for my product?",
-        answer:
-          "Use appropriate leather care products depending on the type of equipment. Clean regularly and store properly.",
-      },
-      {
-        id: "q9",
-        question: "How do I clean my saddle?",
-        answer:
-          "Use a saddle-safe leather cleaner and conditioner. Avoid excessive water and keep away from heat.",
+        title: "Pro-Stabil.ty (SL2A)",
+        rows: [
+          { size: "S", measurement: "Child" },
+          { size: "M", measurement: "Tall Child/Small Adult" },
+          { size: "L", measurement: "Average Adult Woman" },
+          { size: "XL", measurement: "Tall Adult Woman/Tall Average Man" },
+        ],
       },
     ],
   },
 ];
-
-// ====================== COMPONENT ======================
 
 export default function FAQ() {
   const sectionRefs = useRef({});
 
   return (
     <div className="space-y-16">
-      {/* ================= TABS ================= */}
       <div className="bg-[#1f274b]">
         <div className="flex flex-col sm:flex-row items-stretch">
           {faqCategories.map((cat, index) => {
@@ -417,7 +402,6 @@ export default function FAQ() {
         </div>
       </div>
 
-      {/* ================= CONTENT SECTIONS (ALL VISIBLE) ================= */}
       {faqCategories.map((category) => {
         const Icon = category.icon;
 
@@ -471,13 +455,13 @@ export default function FAQ() {
               </div>
             ) : (
               /* ACCORDION */
-              <Accordion type="single" collapsible className="space-y-2">
+              <Accordion type="single" collapsible className="space-y-2 ">
                 {category.questions.map((q) => (
                   <AccordionItem key={q.id} value={q.id}>
-                    <AccordionTrigger className="text-left text-lg font-semibold text-[#1f274b]">
+                    <AccordionTrigger className="text-left text-lg font-semibold text-[#1f274b] cursor-pointer">
                       {q.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#1f274b] text-lg normal-case">
+                    <AccordionContent className="text-[#1f274b] text-lg normal-case ">
                       {q.answer}
                     </AccordionContent>
                   </AccordionItem>
