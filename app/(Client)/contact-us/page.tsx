@@ -5,10 +5,10 @@ const ContactUsPage = () => {
   return (
     <div className="lg:py-12 md:py-10 py-8 maxContainer">
       <div className="mt-5 text-center">
-        <h1 className="text-4xl font-bold tracking-[.8%] leading-[120%] text-primary-text">
+        <h1 className="text-4xl font-bold tracking-[.8%] leading-[120%] text-[#1f274b]">
           CONTACT US
         </h1>
-        <p className="text-2xl text-primary-text italic normal-case mt-2 tracking-[.8%]">
+        <p className="text-2xl text-[#1f274b] italic normal-case mt-2 tracking-[.8%]">
           Can't wait to meet you!
         </p>
       </div>
@@ -20,19 +20,19 @@ const ContactUsPage = () => {
           {/* Help/FAQ Section */}
           <div className="flex flex-col items-center text-center">
             <div className="p-3">
-              <HelpCircle className="w-6 h-6 text-primary-text" />
+              <HelpCircle className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-primary-text mb-1">Help/ FAQ</h3>
-            <p className="text-sm text-primary-text">Size Guide</p>
+            <h3 className="text-[#1f274b] mb-1">Help/ FAQ</h3>
+            <p className="text-sm text-[#1f274b]">Size Guide</p>
           </div>
 
           {/* Location Section */}
           <div className="flex flex-col items-center text-center">
             <div className="p-3">
-              <MapPin className="w-6 h-6 text-primary-text" />
+              <MapPin className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-primary-text mb-1">Arion Sellier USA</h3>
-            <p className="text-sm text-primary-text">
+            <h3 className="text-[#1f274b] mb-1">Arion Sellier USA</h3>
+            <p className="text-sm text-[#1f274b]">
               3080 Fairlane Farms Rd Ste 2
               <br />
               Wellington, FL 33414
@@ -42,10 +42,10 @@ const ContactUsPage = () => {
           {/* Join Us Section */}
           <div className="flex flex-col items-center text-center">
             <div className="p-3">
-              <Briefcase className="w-6 h-6 text-primary-text" />
+              <Briefcase className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-primary-text mb-1">Join Us!</h3>
-            <p className="text-sm text-primary-text">Job Offers</p>
+            <h3 className="text-[#1f274b] mb-1">Join Us!</h3>
+            <p className="text-sm text-[#1f274b]">Job Offers</p>
           </div>
         </div>
       </div>
