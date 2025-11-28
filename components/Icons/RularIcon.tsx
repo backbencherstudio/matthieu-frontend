@@ -8,7 +8,7 @@ const RularIcon = ({ className }: { className?: string }) => {
       x="0"
       y="0"
       viewBox="0 0 1707 1707"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       className={className}
     >
       <g>

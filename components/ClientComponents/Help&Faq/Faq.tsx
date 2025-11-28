@@ -440,7 +440,7 @@ export default function FAQ() {
 
             {/* TABLE */}
             {category.isTable ? (
-              <div className="space-y-10">
+              <div className="space-y-10 maw-w-[50%] border border-red-500">
                 {category.content.map((section, idx) => (
                   <div key={idx}>
                     <h3 className="text-lg font-semibold text-[#1f274b] mb-4">
