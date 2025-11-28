@@ -253,12 +253,24 @@ const faqCategories = [
     label: "Orders & Returns",
     icon: ShoppingCardIcon,
     questions: [
-      { id: "q1", question: "How can I create an account?", answer: "..." },
-      { id: "q2", question: "Can I cancel my order?", answer: "..." },
+      {
+        id: "q1",
+        question: "How can I create an account?",
+        answer:
+          "Click “My Account” in the top right hand corner. Enter your email and click “Register”. Complete the steps and your account will be created.",
+      },
+      {
+        id: "q2",
+        question: "Can I cancel my order?",
+        answer:
+          "For tack and accessory orders, email ballo@arionh.com with your order number ASAP. You cannot cancel a new saddle order once the order form has been signed.",
+      },
       {
         id: "q3",
-        question: "I did not receive the right product...",
-        answer: "...",
+        question:
+          "I did not receive the right product, or the product is damaged. What do I do?",
+        answer:
+          "You have 14 days from the date of delivery to email hello@arionh.com with your order number and reason for return. If the product is defective, we will issue a return label. After receiving the product, you will receive a refund.",
       },
     ],
   },
@@ -268,9 +280,24 @@ const faqCategories = [
     label: "Shipping & Delivery",
     icon: ShipmentIcon,
     questions: [
-      { id: "q4", question: "When will I receive my order?", answer: "..." },
-      { id: "q5", question: "How do I track my order?", answer: "..." },
-      { id: "q6", question: "How are the products shipped?", answer: "..." },
+      {
+        id: "q4",
+        question: "When will I receive my order?",
+        answer:
+          "Once your order has been placed on our website, please allow 2–7 business days to receive your order.",
+      },
+      {
+        id: "q5",
+        question: "How do I track my order?",
+        answer:
+          "Once your order is ready to be shipped, you will receive an email with your tracking number.",
+      },
+      {
+        id: "q6",
+        question: "How are the products shipped?",
+        answer:
+          "Our products are shipped within the United States and Canada via UPS.",
+      },
     ],
   },
 
@@ -281,10 +308,51 @@ const faqCategories = [
     isTable: true,
     content: [
       {
-        title: "Bodice",
+        title: "Bridles",
         rows: [
-          { size: "XS", measurement: "Upper Armhole (1.5 inches)" },
-          { size: "S", measurement: "Upper Armhole (2 inches)" },
+          { size: "PONY", measurement: "Under 14 hands" },
+          { size: "COB", measurement: "14 to 15 hands" },
+          { size: "FULL", measurement: "15 to 16.3 hands" },
+          { size: "OVERSIZE", measurement: "Over 16.3 hands" },
+        ],
+      },
+      {
+        title: "Jumping Girths",
+        rows: [
+          { size: '50"', measurement: "Under 14 hands" },
+          { size: '52"', measurement: "14–15 hands" },
+          { size: '54"', measurement: "15–16 hands" },
+          { size: '56"', measurement: "17–18 hands" },
+          { size: '58"', measurement: "18+ hands" },
+          { size: '60"+', measurement: "Oversize" },
+        ],
+      },
+      {
+        title: "Dressage Girths",
+        rows: [
+          { size: '18"', measurement: "14–15 hands" },
+          { size: '20"', measurement: "15–16 hands" },
+          { size: '22"', measurement: "17 hands" },
+          { size: '24"', measurement: "17–18 hands" },
+          { size: '26"+', measurement: "Oversize" },
+        ],
+      },
+      {
+        title: "Stirrup Leathers (SL1C)",
+        rows: [
+          { size: '54"', measurement: "Tall Child/Small Adult" },
+          { size: '56"', measurement: "Average Adult Woman" },
+          { size: '58"', measurement: "Average Adult Woman/Man" },
+          { size: '60"+', measurement: "Tall Adult Woman/Man" },
+        ],
+      },
+      {
+        title: "Dressage (SL3D)",
+        rows: [
+          { size: "S", measurement: "Child" },
+          { size: "M", measurement: "Tall Child/Small Adult" },
+          { size: "L", measurement: "Average Adult Woman" },
+          { size: "XL", measurement: "Tall Adult Woman/Tall Average Man" },
         ],
       },
     ],
@@ -298,9 +366,15 @@ const faqCategories = [
       {
         id: "q8",
         question: "How should I care for my product?",
-        answer: "...",
+        answer:
+          "Use appropriate leather care products depending on the type of equipment. Clean regularly and store properly.",
       },
-      { id: "q9", question: "How do I clean my saddle?", answer: "..." },
+      {
+        id: "q9",
+        question: "How do I clean my saddle?",
+        answer:
+          "Use a saddle-safe leather cleaner and conditioner. Avoid excessive water and keep away from heat.",
+      },
     ],
   },
 ];
@@ -313,7 +387,7 @@ export default function FAQ() {
   return (
     <div className="space-y-16">
       {/* ================= TABS ================= */}
-      <div className="bg-primary-bg">
+      <div className="bg-[#1f274b]">
         <div className="flex flex-col sm:flex-row items-stretch">
           {faqCategories.map((cat, index) => {
             const Icon = cat.icon;
@@ -327,7 +401,7 @@ export default function FAQ() {
                     block: "start",
                   });
                 }}
-                className={`flex-1 px-6 py-6 border-primary-text ${
+                className={`flex-1 px-6 py-6 border-[#1f274b] cursor-pointer ${
                   index !== 0 ? "border-l" : ""
                 }`}
               >
@@ -359,7 +433,7 @@ export default function FAQ() {
           >
             {/* Title */}
             <div className="flex flex-col items-center gap-3">
-              <h2 className="text-3xl font-bold text-primary-text">
+              <h2 className="text-3xl font-bold text-[#1f274b]">
                 {category.label.toUpperCase()}
               </h2>
             </div>
@@ -369,13 +443,13 @@ export default function FAQ() {
               <div className="space-y-10">
                 {category.content.map((section, idx) => (
                   <div key={idx}>
-                    <h3 className="text-lg font-semibold text-primary-text mb-4">
+                    <h3 className="text-lg font-semibold text-[#1f274b] mb-4">
                       {section.title}
                     </h3>
 
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-primary-text">
+                        <tr className="border-b border-[#1f274b]">
                           <th className="py-2 px-3 text-left">Size</th>
                           <th className="py-2 px-3 text-left">Measurement</th>
                         </tr>
@@ -384,7 +458,7 @@ export default function FAQ() {
                         {section.rows.map((row, rowIdx) => (
                           <tr
                             key={rowIdx}
-                            className="border-b border-primary-text/40"
+                            className="border-b border-[#1f274b]"
                           >
                             <td className="py-3 px-3">{row.size}</td>
                             <td className="py-3 px-3">{row.measurement}</td>
@@ -400,10 +474,10 @@ export default function FAQ() {
               <Accordion type="single" collapsible className="space-y-2">
                 {category.questions.map((q) => (
                   <AccordionItem key={q.id} value={q.id}>
-                    <AccordionTrigger className="text-left text-lg font-semibold text-primary-text">
+                    <AccordionTrigger className="text-left text-lg font-semibold text-[#1f274b]">
                       {q.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-primary-text text-lg">
+                    <AccordionContent className="text-[#1f274b] text-lg normal-case">
                       {q.answer}
                     </AccordionContent>
                   </AccordionItem>
