@@ -7,19 +7,19 @@ import TrialIcon from "@/components/Icons/TrialIcon";
 
 const iconsItems = [
   {
-    label: "Contact our team for more information",
+    label: "Contact Us",
     icon: (
       <ContactTeamIcon className="lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />
     ),
   },
   {
-    label: "Explore our trial options",
+    label: "Trial Options",
     icon: (
       <TrialIcon className="lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />
     ),
   },
   {
-    label: "Fast and secure shipping",
+    label: "Fast & Secure Shipping",
     icon: (
       <ShippingIcon className="lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[32px] h-[32px]" />
     ),

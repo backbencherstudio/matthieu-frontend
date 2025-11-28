@@ -1,9 +1,8 @@
-import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
-import TackMainSections from '@/components/ClientComponents/Tacks/TackMainSections'
-import React from 'react'
+import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
+import TackMainSections from "@/components/ClientComponents/Tacks/TackMainSections";
+import React from "react";
 
 export default function TackPage() {
-
   const breadLink = [
     {
       label: "TACK",
@@ -14,9 +13,9 @@ export default function TackPage() {
   return (
     <div>
       <BreadCrumb breadLink={breadLink} />
-      <div className='maxContainer'>
+      <div className="maxContainer">
         <TackMainSections />
       </div>
     </div>
-  )
+  );
 }

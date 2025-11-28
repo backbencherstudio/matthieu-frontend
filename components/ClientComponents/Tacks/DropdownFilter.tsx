@@ -1,8 +1,13 @@
-import React from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { ChevronDown } from 'lucide-react';
+import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { ChevronDown } from "lucide-react";
 
 interface FilterItem {
   label: string;
@@ -16,11 +21,19 @@ interface DropdownFilterProps {
   onValueChange: (value: string) => void;
 }
 
-const DropdownFilter: React.FC<DropdownFilterProps> = ({ title, items, selectedValue, onValueChange }) => {
+const DropdownFilter: React.FC<DropdownFilterProps> = ({
+  title,
+  items,
+  selectedValue,
+  onValueChange,
+}) => {
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="text-secondary-text text-base flex items-center gap-2 cursor-pointer focus-visible:border-none">
-        <span className='uppercase'>{`${selectedValue ? selectedValue : title}`}</span> <ChevronDown />
+        <span className="uppercase">{`${
+          selectedValue ? selectedValue : title
+        }`}</span>{" "}
+        <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#F4F5F7] rounded-none">
         {items.map((item, idx) => (
@@ -54,5 +67,3 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({ title, items, selectedV
 };
 
 export default DropdownFilter;
-
-
