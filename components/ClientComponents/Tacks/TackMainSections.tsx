@@ -220,6 +220,15 @@ export default function TackMainSections() {
           <div className="lg:my-12 my-8" id="girths" ref={girthsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Girths")} title="Girths" />
           </div>
+          <div className="lg:my-12 my-8" id="stirrupLeathers" ref={girthsRef}>
+            <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Stirrup Leathers" />
+          </div>
+          <div className="lg:my-12 my-8" id="pads" ref={girthsRef}>
+            <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Pads" />
+          </div>
+          <div className="lg:my-12 my-8" id="riderApparel" ref={girthsRef}>
+            <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Rider Apparel" />
+          </div>
           <div className="lg:my-12 my-8" id="halterRopes"  ref={halterRopesRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "HALTERS & ROPES")} title="HALTERS & ROPES" />
           </div>
