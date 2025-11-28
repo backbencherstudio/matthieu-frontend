@@ -2,6 +2,8 @@ import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import FilteredCategory from "@/components/ClientComponents/Tacks/FilteredCategory";
 
 export default function BridlesPage() {
+return null;
+
   const breadLink = [
     {
       label: "TACK",
