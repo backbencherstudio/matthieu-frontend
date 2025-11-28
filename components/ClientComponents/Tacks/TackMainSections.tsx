@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TrackProductList from './TrackProductList';
 import FilterIcon from '@/components/Icons/FilterIcon';
 import DropdownFilter from './DropdownFilter';
@@ -133,6 +133,47 @@ export default function TackMainSections() {
   const [color, setColor] = useState<string>("");
   const [size, setSize] = useState<string>("");
 
+
+    const bridlesRef = useRef<HTMLDivElement | null>(null);
+  const reinsRef = useRef<HTMLDivElement | null>(null);
+  const breastplatesRef = useRef<HTMLDivElement | null>(null);
+  const girthsRef = useRef<HTMLDivElement | null>(null);
+  const halterRopesRef = useRef<HTMLDivElement | null>(null);
+  const bootsRef = useRef<HTMLDivElement | null>(null);
+  const leatherCareRef = useRef<HTMLDivElement | null>(null);
+  const accessoriesRef = useRef<HTMLDivElement | null>(null);
+
+  // Smooth scroll to section on page load if hash exists
+  useEffect(() => {
+    const scrollToElement = (hash) => {
+      const element = document.getElementById(hash);
+      if (!element) return;
+
+      const offset = 30; // Header height offset
+      const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+
+    const handleClick = (e) => {
+      const link = e.target.closest('a[href*="#"]');
+      const hash = link?.getAttribute('href')?.split('#')[1];
+      
+      if (hash) {
+        e.preventDefault();
+        scrollToElement(hash);
+        window.history.pushState(null, '', `#${hash}`);
+      }
+    };
+
+    const hash = window.location.hash.replace('#', '');
+    if (hash) setTimeout(() => scrollToElement(hash), 100);
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+
   const filterProducts = (): Product[] => {
     let filtered = allProducts;
 
@@ -160,32 +201,35 @@ export default function TackMainSections() {
     return filtered;
   };
 
+
+
+
   const renderProductLists = () => {
     if (!category) {
       return (
         <>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="bridles" ref={bridlesRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Bridles")} title="Bridles" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="reins" ref={reinsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Reins")} title="Reins" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="breastplates" ref={breastplatesRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "BREASTPLATES")} title="BREASTPLATES" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="girths" ref={girthsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Girths")} title="Girths" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="halterRopes"  ref={halterRopesRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "HALTERS & ROPES")} title="HALTERS & ROPES" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="boots" ref={bootsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "BOOTS")} title="BOOTS" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id="leatherCare"    ref={leatherCareRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Leather Care")} title="Leather Care" />
           </div>
-          <div className="lg:my-12 my-8">
+          <div className="lg:my-12 my-8" id='accessories'   ref={accessoriesRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Accessories")} title="Accessories" />
           </div>
         </>
