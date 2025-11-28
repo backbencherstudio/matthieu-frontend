@@ -1,6 +1,5 @@
+import ApplyNowForm from "@/components/JoinArionSellier/ApplyNowFrom";
 import JoinArionSellier from "@/components/JoinArionSellier/JoinArionSellier";
-import React from "react";
-import { ApplyNowForm } from "@/components/JoinArionSellier/ApplyNowFrom";
 
 const JoinArrionSeller = () => {
   return (
