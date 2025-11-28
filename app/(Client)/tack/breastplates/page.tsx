@@ -3,7 +3,7 @@ import FilteredCategory from '@/components/ClientComponents/Tacks/FilteredCatego
 import React from 'react'
 
 export default function BreastPlatesPage() {
-
+return null;
   const breadLink = [
     {
       label: "TACK",
