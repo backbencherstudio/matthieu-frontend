@@ -45,7 +45,7 @@ const ContactForm = () => {
             placeholder="First Name"
             value={formData.firstName}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
         <div>
@@ -55,7 +55,7 @@ const ContactForm = () => {
             placeholder="Last Name"
             value={formData.lastName}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
       </div>
@@ -69,7 +69,7 @@ const ContactForm = () => {
             placeholder="E-mail"
             value={formData.email}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
         <div>
@@ -79,7 +79,7 @@ const ContactForm = () => {
             placeholder="Phone Number"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
       </div>
@@ -92,7 +92,7 @@ const ContactForm = () => {
           placeholder="Address 1"
           value={formData.address1}
           onChange={handleChange}
-          className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+          className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
         />
       </div>
 
@@ -104,7 +104,7 @@ const ContactForm = () => {
           placeholder="Address 2"
           value={formData.address2}
           onChange={handleChange}
-          className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+          className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
         />
       </div>
 
@@ -117,7 +117,7 @@ const ContactForm = () => {
             placeholder="City"
             value={formData.city}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
         <div>
@@ -127,7 +127,7 @@ const ContactForm = () => {
             placeholder="State"
             value={formData.state}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
         <div>
@@ -137,7 +137,7 @@ const ContactForm = () => {
             placeholder="Zip Code"
             value={formData.zipCode}
             onChange={handleChange}
-            className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
           />
         </div>
       </div>
@@ -150,7 +150,7 @@ const ContactForm = () => {
           placeholder="Subject"
           value={formData.subject}
           onChange={handleChange}
-          className="w-full bg-transparent border-b-2 border-primary-text pb-2 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors"
+          className="w-full bg-transparent border-b-2 border-[#1f274b] pb-2 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors"
         />
       </div>
 
@@ -162,7 +162,7 @@ const ContactForm = () => {
           value={formData.message}
           onChange={handleChange}
           rows={8}
-          className="w-full bg-transparent border-2 border-primary-text p-4 placeholder-primary text-primary-text focus:outline-none focus:border-primary transition-colors resize-none"
+          className="w-full bg-transparent border-2 border-[#1f274b] p-4 placeholder-primary text-[#1f274b] focus:outline-none focus:border-primary transition-colors resize-none"
         />
       </div>
 
@@ -170,7 +170,7 @@ const ContactForm = () => {
       <div className="flex justify-end pt-4">
         <button
           type="submit"
-          className="px-8 py-3 bg-primary text-white font-semibold cursor-pointer"
+          className="px-8 py-3 bg-[#1F274B] text-[#FFF] font-semibold cursor-pointer "
         >
           Send Message
         </button>
