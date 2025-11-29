@@ -488,7 +488,7 @@ export default function ArionAmabassadors() {
         </div>
 
         {/* Cards */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 space-y-4 mt-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 space-y-4 mt-12">
           {filteredData.length === 0 && (
             <div className="col-span-full flex flex-col items-center justify-center py-12">
               <div className="text-center">
