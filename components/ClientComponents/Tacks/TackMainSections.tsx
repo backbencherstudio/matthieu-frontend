@@ -463,34 +463,70 @@ export default function TackMainSections() {
   const accessoriesRef = useRef<HTMLDivElement | null>(null);
 
   // Smooth scroll to section on page load if hash exists
+  // useEffect(() => {
+  //   const scrollToElement = (hash) => {
+  //     const element = document.getElementById(hash);
+  //     if (!element) return;
+
+  //     const offset = 30; // Header height offset
+  //     const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      
+  //     window.scrollTo({ top, behavior: 'smooth' });
+  //   };
+
+  //   const handleClick = (e) => {
+  //     const link = e.target.closest('a[href*="#"]');
+  //     const hash = link?.getAttribute('href')?.split('#')[1];
+      
+  //     if (hash) {
+  //       e.preventDefault();
+  //       scrollToElement(hash);
+  //       window.history.pushState(null, '', `#${hash}`);
+  //     }
+  //   };
+
+  //   const hash = window.location.hash.replace('#', '');
+  //   if (hash) setTimeout(() => scrollToElement(hash), 100);
+
+  //   document.addEventListener('click', handleClick);
+  //   return () => document.removeEventListener('click', handleClick);
+  // }, []);
+
   useEffect(() => {
-    const scrollToElement = (hash) => {
-      const element = document.getElementById(hash);
-      if (!element) return;
+  if (typeof window === "undefined") return;
 
-      const offset = 30; // Header height offset
-      const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
-      
-      window.scrollTo({ top, behavior: 'smooth' });
-    };
+  const scrollToWhenReady = (hash, retries = 20) => {
+    const el = document.getElementById(hash);
+    if (!el) {
+      if (retries > 0) setTimeout(() => scrollToWhenReady(hash, retries - 1), 50);
+      return;
+    }
+    const offset = 30;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
-    const handleClick = (e) => {
-      const link = e.target.closest('a[href*="#"]');
-      const hash = link?.getAttribute('href')?.split('#')[1];
-      
-      if (hash) {
-        e.preventDefault();
-        scrollToElement(hash);
-        window.history.pushState(null, '', `#${hash}`);
-      }
-    };
+  const onClick = (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
 
-    const hash = window.location.hash.replace('#', '');
-    if (hash) setTimeout(() => scrollToElement(hash), 100);
+    const href = link.getAttribute("href");
+    if (!href || !href.includes("#")) return;
 
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, []);
+    const hash = href.split("#")[1];
+    e.preventDefault();
+    scrollToWhenReady(hash);
+    window.history.pushState(null, "", `#${hash}`);
+  };
+
+  // For page load
+  const initialHash = window.location.hash.replace("#", "");
+  if (initialHash) scrollToWhenReady(initialHash);
+
+  document.addEventListener("click", onClick);
+  return () => document.removeEventListener("click", onClick);
+}, []);
+
 
 
   const filterProducts = (): Product[] => {
