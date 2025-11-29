@@ -119,7 +119,7 @@ const LeadlineSaddlePage = () => {
                     </button>
                   </div>
                   <div>
-                    <h4 className="text-2xl font-extrabold leading-[148%] tracking-[0.48px] text-[#1D1F2C]">
+                    <h4 className="text-2xl font-extrabold leading-[148%] tracking-[0.48px] textSecondary">
                       Don't Forget the Accessories!
                     </h4>
                     <div className="mt-6 flex items-center space-x-4">

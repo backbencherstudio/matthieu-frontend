@@ -54,13 +54,13 @@ const SaddleryExpertPage = () => {
   };
 
   return (
-    <>
+    <div>
       <BreadCrumb breadLink={breadLink} />
-      <div className="my-8 px-16">
-        <h4 className="text-[15px] text-[#a7a7a7] text-center leading-[1.8em] uppercase">
+      <div className="my-8  maxContainer">
+        <h4 className="text-[15px] textSecondary text-center leading-[1.8em] uppercase">
           SADDLE EXPERT
         </h4>
-        <p className="text-[50px] text-center text-wrap normal-case leading-[100%] text-[#1f274b] mt-3">
+        <p className="text-[50px] text-center text-wrap  leading-[130%] text-[#1f274b] mt-3">
           Get in touch with our experts to create the saddle of your dreams.
         </p>
 
@@ -222,7 +222,7 @@ const SaddleryExpertPage = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -12,7 +12,7 @@
 } */
 
  html {
-  /* scroll-behavior: smooth; */
+  scroll-behavior: smooth;
 }
 
 @font-face {
@@ -60,6 +60,8 @@ body {
 .bgPrimary {
   background: #1f274b;
 }
+
+
 
 .textPrimary {
   color: #262626;

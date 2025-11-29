@@ -138,7 +138,7 @@ const Header = () => {
               <span className="">
                 <UsdIcon />{" "}
               </span>
-              <span className="textPrimary text-xs leading-[100%]">USD</span>
+              <span className="textSecondary text-xs leading-[100%]">USD</span>
             </div>
             <div className="flex items-center gap-1.5">
               <LanguageSwitcher />
@@ -155,7 +155,7 @@ const Header = () => {
                     <Link
                       href={link.href}
                       className={`${isActive ? "font-semibold" : "font-normal"
-                        }  textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                        }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
                     >
                       {link.label}
                     </Link>
@@ -180,7 +180,7 @@ const Header = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="textPrimary hover:font-semibold leading-[100%] xl:text-base text-sm font-normal"
+                className="textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm font-normal"
               >
                 {link.label}
               </Link>
@@ -206,7 +206,7 @@ const Header = () => {
 
           {/* Right side - Search and User icons */}
           <div className="flex items-center md:space-x-4 space-x-2">
-            <div className="relative">
+            <div className="relative hidden md:block">
               <input className="inputStyle w-[132px] h-[32px] rounded-full transition-colors pl-7" />
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>

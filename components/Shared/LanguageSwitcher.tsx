@@ -160,7 +160,7 @@ const Language = () => {
           />
         )} */}
         <span><LanguageGlobalIcon /> </span>
-        <span className="notranslate ">{selectedLang}</span>
+        <span className="notranslate textSecondary">{selectedLang}</span>
         {!isLoaded && (
           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         )}
@@ -189,7 +189,7 @@ const Language = () => {
                 height={24}
                 className="rounded-full w-6 h-6"
               /> */}
-              <span>{lang.label}</span>
+              <span >{lang.label}</span>
             </button>
           ))}
         </div>
