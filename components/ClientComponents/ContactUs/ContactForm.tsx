@@ -423,7 +423,7 @@ export function ContactUsForm() {
         className="maxContainer py-[48px]"
       >
         {/* Row 1: First & Last Name */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-[16px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
           <Input
             {...register("firstName", { required: true })}
             placeholder="First Name"
