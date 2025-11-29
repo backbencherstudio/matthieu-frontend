@@ -18,7 +18,7 @@ export default function HoverItems({ items }) {
             {/* Main Category Item wrapped with HoverCard */}
             <HoverCard openDelay={200}>
               <HoverCardTrigger asChild>
-                <Link href={item?.href || "#"} className="px-6 py-3 bg-[#1F274B] hover:bg-[#454F7B94] text-white text-sm leading-[100%] cursor-pointer uppercase">
+                <Link   scroll={false} href={item?.href || "#"} className="px-6 py-3 bg-[#1F274B] hover:bg-[#454F7B94] text-white text-sm leading-[100%] cursor-pointer uppercase">
                   {item?.category}
                 </Link>
               </HoverCardTrigger>
@@ -35,6 +35,7 @@ export default function HoverItems({ items }) {
                       <div key={subIndex} className="bg-[#1F274B] ">
                         {/* If subItems have links, show them */}
                         <Link
+                         
                           href={subItem.href || "#"} // Set the correct link if href is present
                           className="block  hover:bg-[#454F7B94]"
                         >

@@ -465,103 +465,36 @@ const bootsRef = useRef<HTMLDivElement | null>(null);
 const leatherCareRef = useRef<HTMLDivElement | null>(null);
 const accessoriesRef = useRef<HTMLDivElement | null>(null);
   // Smooth scroll to section on page load if hash exists
-  // useEffect(() => {
-  //   const scrollToElement = (hash) => {
-  //     const element = document.getElementById(hash);
-  //     if (!element) return;
+  useEffect(() => {
+    const scrollToElement = (hash) => {
+      const element = document.getElementById(hash);
+      if (!element) return;
 
-  //     const offset = 30; // Header height offset
-  //     const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      const offset = 30; // Header height offset
+      const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
       
-      // window.scrollTo({ top, behavior: 'smooth' });
-  //   };
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
 
-  //   const handleClick = (e) => {
-  //     const link = e.target.closest('a[href*="#"]');
-  //     const hash = link?.getAttribute('href')?.split('#')[1];
+    const handleClick = (e) => {
+      const link = e.target.closest('a[href*="#"]');
+      const hash = link?.getAttribute('href')?.split('#')[1];
       
-  //     if (hash) {
-  //       e.preventDefault();
-  //       scrollToElement(hash);
-  //       window.history.pushState(null, '', `#${hash}`);
-  //     }
-  //   };
-
-  //   const hash = window.location.hash.replace('#', '');
-  //   if (hash) setTimeout(() => scrollToElement(hash), 100);
-
-  //   document.addEventListener('click', handleClick);
-  //   return () => document.removeEventListener('click', handleClick);
-  // }, []);
-
- useEffect(() => {
-  if (typeof window === "undefined") return;
-
-  const scrollToElement = (hash: string) => {
-    const el = document.getElementById(hash);
-    if (!el) return false;
-
-    const offset = 30; // Increased offset for header + filters
-    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top, behavior: "smooth" });
-    return true;
-  };
-
-  const scrollToWhenReady = (hash: string, maxWait = 5000) => {
-    const startTime = Date.now();
-    
-    const attempt = () => {
-      if (scrollToElement(hash)) return;
-      
-      if (Date.now() - startTime < maxWait) {
-        requestAnimationFrame(attempt);
+      if (hash) {
+        e.preventDefault();
+        scrollToElement(hash);
+        window.history.pushState(null, '', `#${hash}`);
       }
     };
-    
-    attempt();
-  };
 
-  const onClick = (e: MouseEvent) => {
-    const link = (e.target as HTMLElement).closest("a");
-    if (!link) return;
+    const hash = window.location.hash.replace('#', '');
+    if (hash) setTimeout(() => scrollToElement(hash), 100);
 
-    const href = link.getAttribute("href");
-    if (!href || !href.includes("#")) return;
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
 
-    const hash = href.split("#")[1];
-    e.preventDefault();
-    
-    // IMPORTANT: Clear category filter to ensure all sections are visible
-    setCategory("");
-    
-    // Wait for re-render and dropdown animation
-    setTimeout(() => {
-      scrollToWhenReady(hash);
-    }, 150);
-    
-    window.history.pushState(null, "", `#${hash}`);
-  };
 
-  // Handle initial load
-  const initialHash = window.location.hash.replace("#", "");
-  if (initialHash) {
-    // Clear filters to show all sections
-    setCategory("");
-    
-    const scrollWhenLoaded = () => {
-      setTimeout(() => scrollToWhenReady(initialHash), 300);
-    };
-
-    if (document.readyState === "complete") {
-      scrollWhenLoaded();
-    } else {
-      window.addEventListener("load", scrollWhenLoaded);
-    }
-  }
-
-  document.addEventListener("click", onClick);
-  return () => document.removeEventListener("click", onClick);
-}, []); // Empty dependency array
 
 
   const filterProducts = (): Product[] => {
