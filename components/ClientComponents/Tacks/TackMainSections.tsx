@@ -453,15 +453,17 @@ export default function TackMainSections() {
   const [size, setSize] = useState<string>("");
 
 
-    const bridlesRef = useRef<HTMLDivElement | null>(null);
-  const reinsRef = useRef<HTMLDivElement | null>(null);
-  const breastplatesRef = useRef<HTMLDivElement | null>(null);
-  const girthsRef = useRef<HTMLDivElement | null>(null);
-  const halterRopesRef = useRef<HTMLDivElement | null>(null);
-  const bootsRef = useRef<HTMLDivElement | null>(null);
-  const leatherCareRef = useRef<HTMLDivElement | null>(null);
-  const accessoriesRef = useRef<HTMLDivElement | null>(null);
-
+const bridlesRef = useRef<HTMLDivElement | null>(null);
+const reinsRef = useRef<HTMLDivElement | null>(null);
+const breastplatesRef = useRef<HTMLDivElement | null>(null);
+const girthsRef = useRef<HTMLDivElement | null>(null);
+const stirrupLeathersRef = useRef<HTMLDivElement | null>(null); // Add this
+const padsRef = useRef<HTMLDivElement | null>(null); // Add this
+const riderApparelRef = useRef<HTMLDivElement | null>(null); // Add this
+const halterRopesRef = useRef<HTMLDivElement | null>(null);
+const bootsRef = useRef<HTMLDivElement | null>(null);
+const leatherCareRef = useRef<HTMLDivElement | null>(null);
+const accessoriesRef = useRef<HTMLDivElement | null>(null);
   // Smooth scroll to section on page load if hash exists
   // useEffect(() => {
   //   const scrollToElement = (hash) => {
@@ -471,7 +473,7 @@ export default function TackMainSections() {
   //     const offset = 30; // Header height offset
   //     const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
       
-  //     window.scrollTo({ top, behavior: 'smooth' });
+      // window.scrollTo({ top, behavior: 'smooth' });
   //   };
 
   //   const handleClick = (e) => {
@@ -492,22 +494,35 @@ export default function TackMainSections() {
   //   return () => document.removeEventListener('click', handleClick);
   // }, []);
 
-  useEffect(() => {
+ useEffect(() => {
   if (typeof window === "undefined") return;
 
-  const scrollToWhenReady = (hash, retries = 20) => {
+  const scrollToElement = (hash: string) => {
     const el = document.getElementById(hash);
-    if (!el) {
-      if (retries > 0) setTimeout(() => scrollToWhenReady(hash, retries - 1), 50);
-      return;
-    }
-    const offset = 30;
+    if (!el) return false;
+
+    const offset = 30; // Increased offset for header + filters
     const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({ top, behavior: "smooth" });
+    return true;
   };
 
-  const onClick = (e) => {
-    const link = e.target.closest("a");
+  const scrollToWhenReady = (hash: string, maxWait = 5000) => {
+    const startTime = Date.now();
+    
+    const attempt = () => {
+      if (scrollToElement(hash)) return;
+      
+      if (Date.now() - startTime < maxWait) {
+        requestAnimationFrame(attempt);
+      }
+    };
+    
+    attempt();
+  };
+
+  const onClick = (e: MouseEvent) => {
+    const link = (e.target as HTMLElement).closest("a");
     if (!link) return;
 
     const href = link.getAttribute("href");
@@ -515,18 +530,38 @@ export default function TackMainSections() {
 
     const hash = href.split("#")[1];
     e.preventDefault();
-    scrollToWhenReady(hash);
+    
+    // IMPORTANT: Clear category filter to ensure all sections are visible
+    setCategory("");
+    
+    // Wait for re-render and dropdown animation
+    setTimeout(() => {
+      scrollToWhenReady(hash);
+    }, 150);
+    
     window.history.pushState(null, "", `#${hash}`);
   };
 
-  // For page load
+  // Handle initial load
   const initialHash = window.location.hash.replace("#", "");
-  if (initialHash) scrollToWhenReady(initialHash);
+  if (initialHash) {
+    // Clear filters to show all sections
+    setCategory("");
+    
+    const scrollWhenLoaded = () => {
+      setTimeout(() => scrollToWhenReady(initialHash), 300);
+    };
+
+    if (document.readyState === "complete") {
+      scrollWhenLoaded();
+    } else {
+      window.addEventListener("load", scrollWhenLoaded);
+    }
+  }
 
   document.addEventListener("click", onClick);
   return () => document.removeEventListener("click", onClick);
-}, []);
-
+}, []); // Empty dependency array
 
 
   const filterProducts = (): Product[] => {
@@ -577,13 +612,13 @@ export default function TackMainSections() {
           <div className="lg:my-12 my-8" id="girths" ref={girthsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "Girths")} title="Girths" />
           </div>
-          <div className="lg:my-12 my-8" id="stirrupLeathers" ref={girthsRef}>
+          <div className="lg:my-12 my-8" id="stirrupLeathers" ref={stirrupLeathersRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Stirrup Leathers" />
           </div>
-          <div className="lg:my-12 my-8" id="pads" ref={girthsRef}>
+          <div className="lg:my-12 my-8" id="pads" ref={padsRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Pads" />
           </div>
-          <div className="lg:my-12 my-8" id="riderApparel" ref={girthsRef}>
+          <div className="lg:my-12 my-8" id="riderApparel" ref={riderApparelRef}>
             <TrackProductList items={filterProducts().filter(p => p.category === "")} title="Rider Apparel" />
           </div>
           <div className="lg:my-12 my-8" id="halterRopes"  ref={halterRopesRef}>

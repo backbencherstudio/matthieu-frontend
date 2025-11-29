@@ -11,6 +11,10 @@
     src: url("@/public/fonts/Avenir Heavy/Avenir Heavy.ttf");
 } */
 
+ html {
+  /* scroll-behavior: smooth; */
+}
+
 @font-face {
   font-family: "Avenir";
   src: url("/fonts/Avenir Heavy/Avenir Heavy.ttf") format("truetype");
