@@ -6,7 +6,7 @@ interface SAddlesCategoryItemsProps {
     subtitle: string;
     items?: string[];
     btns?: { title: string; href: string }[];
-    images?: { id: number; name: string; image: string }[];
+    images?: { id: number; slug?: string; name: string; image: string }[];
     video?: string;
   };
 }
@@ -40,7 +40,7 @@ export default function SAddlesCategoryItems({
         <div className="grid  md:grid-cols-2 grid-cols-1 gap-8 w-full">
           {saddlesItems?.images?.map((product) => (
             <Link
-              href="/saddles/jumping"
+              href={`/saddles/atlas-saddles/${product.slug}`}
               key={product.id}
               className=" flex flex-col gap-5 items-center justify-center "
             >

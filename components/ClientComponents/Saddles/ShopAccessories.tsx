@@ -8,7 +8,7 @@ function ShopAccessories() {
         SHOP ACCESSORIES
       </h1>
 
-      <div className="grid grid-cols-4 gap-4 mt-10">
+      <div className="grid grid-cols-2  md:grid-cols-4 gap-4 mt-10">
         {cards.map((item, index) => (
           <Link href={"/product-details/1"} key={index}>
             <div className="p-3 bg-[#F8F9FB]">

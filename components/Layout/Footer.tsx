@@ -238,9 +238,13 @@ const footerData = [
 
 const footerLinks = [
   { text: "DATA PROTECTION", href: "#", id: "data-protection" },
-  { text: "SALES TEAMS & CONDITIONS", href: "#", id: "sales-conditions" },
-  { text: "LEGAL INFORMATION", href: "#", id: "legal-info" },
-  { text: "TERMS OF USA", href: "#", id: "terms-usa" },
+  {
+    text: "TERMS AND CONDITIONS OF SALE",
+    href: "terms-and-conditions",
+    id: "terms-and-conditions",
+  },
+  { text: "PRIVACY POLICY", href: "privacy-policy", id: "privacy-policy" },
+  { text: "LEGAL INFORMATION", href: "legal-information", id: "legal-information" },
 ];
 
 const socialIcons = [
