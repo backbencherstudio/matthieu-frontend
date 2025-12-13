@@ -131,7 +131,7 @@ export default function FindUs() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 items-center w-full mb-8">
+                  {/* <div className="grid grid-cols-2 items-center w-full mb-8">
                     <p className="text-lg">Region</p>
                     <div className=" flex justify-end">
                       <Select defaultValue="CT">
@@ -151,7 +151,7 @@ export default function FindUs() {
                         </SelectContent>
                       </Select>
                     </div>
-                  </div>
+                  </div> */}
 
                   <button
                     onClick={handleSearch}
@@ -242,11 +242,12 @@ export default function FindUs() {
                     />
                   </div>
                   <div className="bgPrimary self-stretch w-[1px] hidden md:block"></div>
-                  <div className="flex flex-col gap-2">
-                    <div className="text-center space-y-5">
+                  <div className="flex flex-col gap-4">
+                    <div className="text-center  space-y-1.5">
                       <h2 className="text-2xl font-extrabold uppercase text-primary-text">
                         VICTORIA BRILL
                       </h2>
+                      <p className="text-base text-secondary-text">Region : CT</p>
                       <p className="text-base text-secondary-text">
                         (203) 598-8691
                       </p>

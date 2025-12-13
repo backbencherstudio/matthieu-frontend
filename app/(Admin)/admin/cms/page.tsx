@@ -6,6 +6,7 @@ import BlogPostTable from "@/components/AdminComponents/Cms/BlogPostTable";
 import CmsTabs from "@/components/AdminComponents/Cms/CmsTabs";
 import CompetitionCalendarTab from "@/components/AdminComponents/Cms/CompetitionCalendar";
 import ContactTab from "@/components/AdminComponents/Cms/ContactTab";
+import ExpertsList from "@/components/AdminComponents/Cms/ExpertsList";
 import { TabContent } from "@/components/AdminComponents/Settings/SettingsTab";
 import BlogIcon from "@/components/Icons/AdminIcon/BlogIcon";
 import ContactIcon from "@/components/Icons/AdminIcon/ContactIcon";
@@ -37,6 +38,11 @@ export default function CmsPage() {
       label: "Competition Calendar",
       icon: <CalenderIcon />,
     },
+    {
+      value: "experts-list",
+      label: "Experts List",
+      icon: <UsersIcon />,
+    },
     { value: "contact", label: "Contact Info", icon: <ContactIcon /> },
   ];
 
@@ -57,6 +63,9 @@ export default function CmsPage() {
         </TabContent>
         <TabContent value="competition-calendar" activeTab={activeTab}>
           <CompetitionCalendarTab />
+        </TabContent>
+        <TabContent value="experts-list" activeTab={activeTab}>
+          <ExpertsList />
         </TabContent>
         <TabContent value="contact" activeTab={activeTab}>
           <ContactTab />

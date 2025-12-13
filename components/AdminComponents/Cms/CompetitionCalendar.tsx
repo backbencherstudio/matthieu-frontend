@@ -115,7 +115,7 @@ const CompetitionCalendarTab = () => {
             <div>
               <Link
                 href="/admin/cms/add-competition"
-                className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
+                className="flex items-center justify-center px-3 py-[13px] bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
               >
                 <PlusIcon className="h-4 w-4" />
                 <span className="text-[14px] leading-[114%]">
