@@ -59,7 +59,7 @@ const Header = () => {
               subtitle: "TAILOR MADE",
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
               items: [
-                { label: "comming soon", href: "#"},
+                { label: "coming soon", href: "#"},
               ],
               // items: [],
               href: "/saddles/athena-saddles",

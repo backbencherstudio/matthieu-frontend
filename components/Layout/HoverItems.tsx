@@ -53,7 +53,7 @@ export default function HoverItems({ items }) {
                                 <div key={index} className="flex items-center font-normal text-sm leading-[100%] tracking-[.28px] uppercase text-white">
                                   <Link href={itm.href || "#"} 
                                   scroll={false}
-                                  className={`py-[3px] ${itm.label === "comming soon" ? "hover:no-underline" :"hover:underline" }  `} key={index}>
+                                  className={`py-[3px] ${itm.label === "coming soon" ? "hover:no-underline" :"hover:underline" }  `} key={index}>
                                     {itm.label}
                                   </Link>
                                   {index !== subItem.items.length - 1 && (

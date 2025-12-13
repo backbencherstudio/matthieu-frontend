@@ -18,7 +18,7 @@ export default function TailorMAade() {
           TRY A SADDLE
         </Link>
       </div>
-    <h3 className="text-center lg:text-[42px] md:text-[36px] text-[28px] font-medium ">Comming Soon</h3>
+    <h3 className="text-center lg:text-[42px] md:text-[36px] text-[28px] font-medium ">Coming Soon</h3>
       {/* <video
         autoPlay
         muted
