@@ -30,7 +30,7 @@ export default function AllSaddlesPage() {
 
 const saddlesItemsArion = {
   label: "Arion Saddles",
-  subtitle: "full CUSTOM",
+  subtitle: "Fully Customizable",
   items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
   btns: [
     { title: "Connect with a saddle expert", href: "" },
@@ -41,24 +41,37 @@ const saddlesItemsArion = {
       id: 1,
       name: "JUMPING SADDLES",
       image: "/images/saddles/jumping.png",
+      startFrom: "$5,000",
+      link: "/saddles",
+      slug: "jumping",
     },
     {
       id: 2,
       name: "CROSS COUNTRY SADDLES",
       image: "/images/saddles/cross.png",
+      startFrom: "$5,000",
+      link: "/saddles",
+      slug: "cross-country",
     },
     {
       id: 3,
       name: "DRESSAGE SADDLES",
       image: "/images/saddles/dressage.png",
+      startFrom: "$5,000",
+      link: "/saddles",
+      slug: "dressage",
     },
     {
       id: 4,
       name: "KIDS SADDLES",
       image: "/images/saddles/kids.png",
+      startFrom: "$5,000",
+      link: "/saddles",
+      slug: "kids",
     },
   ],
 };
+
 const saddlesItemsAtlas = {
   label: "ATLAS SADDLES",
   subtitle: "Semi CUSTOM",
@@ -69,21 +82,25 @@ const saddlesItemsAtlas = {
       id: 1,
       name: "JUMPING SADDLES",
       image: "/images/saddles/atlas-jumping.png",
+      startFrom: "$5,000",
+      link: "/saddles/atlas-saddles",
+      slug: "jumping",
     },
     {
       id: 2,
       name: "CROSS COUNTRY SADDLES",
       image: "/images/saddles/atlas-cross.png",
+      startFrom: "$5,000",
+      link: "/saddles/atlas-saddles",
+      slug: "cross-country",
     },
     {
       id: 3,
       name: "DRESSAGE SADDLES",
       image: "/images/saddles/atlas-dressage.png",
-    },
-    {
-      id: 4,
-      name: "KIDS SADDLES",
-      image: "/images/saddles/atlas-kids.png",
+      startFrom: "$5,000",
+      link: "/saddles/atlas-saddles",
+      slug: "dressage",
     },
   ],
 };

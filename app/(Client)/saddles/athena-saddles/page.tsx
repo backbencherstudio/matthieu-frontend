@@ -24,9 +24,11 @@ export default function AthenaSaddlesPage() {
   return (
     <>
       <BreadCrumb breadLink={breadLink} />
-      <div className="maxContainer lg:py-[80px] py-[60px] flex items-start">
-        <SAddlesCategoryItems saddlesItems={saddlesItems} />
-        <h1 className="text-4xl font-bold">Coming Soon</h1>
+      <div className="maxContainer lg:py-[80px] py-[60px]">
+        <div className=" flex flex-col items-center justify-center">
+          <SAddlesCategoryItems saddlesItems={saddlesItems} />
+          <h1 className="text-4xl font-bold text-center">Coming Soon</h1>
+        </div>
       </div>
     </>
   );

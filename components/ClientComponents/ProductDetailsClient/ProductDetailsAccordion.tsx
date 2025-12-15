@@ -21,8 +21,8 @@ const answerQuestion = [
 const productDetails = [
   {
     id: "item-1",
-    title: "DESCRIPTION:",
-    content: (
+    title: "MORE DETAILS:",
+    /* content: (
       <p className="leading-[160%] tracking-[.32px] md:text-base text-sm font-medium">
         Arion's Double Noseband Bridle combines the effect of a regular noseband
         and a drop noseband. The lateral strap is designed to minimize jaw
@@ -36,12 +36,50 @@ const productDetails = [
           Reins are not included.
         </span>
       </p>
+    ), */
+    content: (
+      <div className="space-y-4">
+        <div>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Made in France
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">3 Seat Options:</strong> Flat,
+              Semi-Deep, or deep
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Tree:</strong>
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Flap:</strong>
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Panel:</strong>
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Customizations:</strong>
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Leather Type:</strong> Buffalo,
+              Grained Calf, or Calf
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Additions:{" "}
+              <strong className="font-bold underline">
+                Shoulder-Free Technology, Pro Panel Reinforcement,
+              </strong>{" "}
+              or nameplate
+            </li>
+          </ul>
+        </div>
+      </div>
     ),
   },
   {
     id: "item-2",
-    title: "LEATHER CARE GUIDE:",
-    content: (
+    title: "LEATHER TYPE:",
+    /* content: (
       <p>
         Grab your{" "}
         <Link
@@ -62,6 +100,40 @@ const productDetails = [
         , wipe your bridle down with a clean towel and store in a dry area.
         Clean after every use for best results."
       </p>
+    ), */
+    content: (
+      <div className="space-y-4">
+        <div>
+          <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
+            Arion Offers only premium, high-quality leather. Discover more about
+            our three leather options.
+          </p>
+        </div>
+        <div>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Buffalo:</strong> a "brushed"
+              leather that gives the rider more grip.
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Grained Calf:</strong> a resistant
+              and solid feel.
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <strong className="font-bold">Calf:</strong> smooth and durable
+              leather.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
+            Learn more about how to maintain your leather{" "}
+            <Link href="#" className="underline">
+              here.
+            </Link>
+          </p>
+        </div>
+      </div>
     ),
   },
   {
@@ -104,12 +176,19 @@ const productDetails = [
           <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
             Returns:
           </h4>
-          <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
-            Return tack or accessories within 14 days of purchase. The product
-            must be new, with labels attached. Once the product is received at
-            our Wellington office and is as described above, you will be fully
-            reimbursed.
-          </p>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Return tack or accessories within 14 days of purchase. The product
+              must be new, with labels attached. Once the product is received at
+              our Wellington office and is as described above, you will be fully
+              reimbursed.
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <Link href="#" className="underline">
+                Read More
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     ),

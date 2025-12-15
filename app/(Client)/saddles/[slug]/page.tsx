@@ -75,7 +75,7 @@ export default function JumpingPage() {
                   key={index}
                   src={img?.imgLink}
                   alt=""
-                  className="object-contain w-full h-full "
+                  className="object-contain w-full h-[200px] "
                 />
               ))}
             </div>
@@ -89,7 +89,7 @@ export default function JumpingPage() {
                     <img
                       src="/images/saddles/kids.png"
                       alt="Double Noseband Bridle"
-                      className="w-full h-full object-cover "
+                      className="max-w-[500px] w-full h-full object-cover "
                     />
                   </div>
                   <div className="block xl:hidden">
@@ -172,7 +172,7 @@ export default function JumpingPage() {
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <div className="flex justify-between items-center">
                       <p className="text-[#262626] leading-[100%] tracking-[.4px] xl:text-xl md:text-lg text-base ">
-                        Size:
+                        Leather Type:
                       </p>
                       <button className="underline text-base leading-[100%] tracking-[.32px] text-[#4C526F] cursor-pointer underline-offset-2 hover:no-underline">
                         Learn More
@@ -180,13 +180,13 @@ export default function JumpingPage() {
                     </div>
 
                     <div className="space-x-6">
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center">
                         Calf
                       </button>
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center">
                         BUFFALO
                       </button>
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#FFF] py-3 px-6 bg-[#1F274B] text-center hover:bg-[#1F274B]/90 cursor-pointer">
+                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center ">
                         Grained Calf
                       </button>
                     </div>
@@ -206,7 +206,7 @@ export default function JumpingPage() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="mt-12">
           <ShopAccessories />
         </div>
       </div>
