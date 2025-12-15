@@ -10,21 +10,24 @@ const saddlesItems = {
   images: [
     {
       id: 1,
-      slug: "jumping-saddles",
       name: "JUMPING SADDLES",
       image: "/images/saddles/atlas-jumping.png",
+      slug: "jumping",
+      link: "/saddles/atlas-saddles",
     },
     {
       id: 2,
-      slug: "cross-country-saddles",
       name: "CROSS COUNTRY SADDLES",
       image: "/images/saddles/atlas-cross.png",
+      slug: "cross-country",
+      link: "/saddles/atlas-saddles",
     },
     {
       id: 3,
-      slug: "dressage-saddles",
       name: "DRESSAGE SADDLES",
       image: "/images/saddles/atlas-dressage.png",
+      slug: "dressage",
+      link: "/saddles/atlas-saddles",
     },
   ],
 };
