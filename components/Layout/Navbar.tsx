@@ -37,9 +37,9 @@ const Header = () => {
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
               items: [
                 { label: "JUMPING", href: "/saddles/jumping" },
-                { label: "DRESSAGE", href: "/saddles/jumping" },
-                { label: "CROSS-COUNTRY", href: "/saddles/jumping" },
-                { label: "KIDS", href: "/saddles/jumping" },
+                { label: "DRESSAGE", href: "/saddles/dressage" },
+                { label: "CROSS-COUNTRY", href: "/saddles/cross-country" },
+                { label: "KIDS", href: "/saddles/kids" },
               ],
               href: "/saddles/arion-saddles",
             },
@@ -48,9 +48,18 @@ const Header = () => {
               subtitle: "SEMI CUSTOM",
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY"],
               items: [
-                { label: "JUMPING", href: "/saddles/jumping" },
-                { label: "DRESSAGE", href: "/saddles/jumping" },
-                { label: "CROSS-COUNTRY", href: "/saddles/jumping" },
+                {
+                  label: "JUMPING",
+                  href: "/saddles/atlas-saddles/jumping",
+                },
+                {
+                  label: "DRESSAGE",
+                  href: "/saddles/atlas-saddles/dressage",
+                },
+                {
+                  label: "CROSS-COUNTRY",
+                  href: "/saddles/atlas-saddles/cross-country",
+                },
               ],
               href: "/saddles/atlas-saddles",
             },
@@ -58,9 +67,7 @@ const Header = () => {
               label: "Athena Saddles",
               subtitle: "TAILOR MADE",
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-              items: [
-                { label: "coming soon", href: "#"},
-              ],
+              items: [{ label: "coming soon", href: "#" }],
               // items: [],
               href: "/saddles/athena-saddles",
             },
@@ -154,8 +161,9 @@ const Header = () => {
                   <HoverCardTrigger asChild>
                     <Link
                       href={link.href}
-                      className={`${isActive ? "font-semibold" : "font-normal"
-                        }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                      className={`${
+                        isActive ? "font-semibold" : "font-normal"
+                      }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
                     >
                       {link.label}
                     </Link>

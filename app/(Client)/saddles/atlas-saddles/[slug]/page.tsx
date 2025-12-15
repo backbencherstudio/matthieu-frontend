@@ -284,7 +284,7 @@ export default function AtlasSaddleDetailsPage() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="mt-12">
           <ShopAccessories />
         </div>
       </div>
