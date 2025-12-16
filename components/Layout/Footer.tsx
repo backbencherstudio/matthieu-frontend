@@ -71,6 +71,7 @@ const Footer: React.FC = () => {
                   <div className="space-y-6">
                     {section.subcategories.map((subcategory, subIndex) => (
                       <div key={subIndex}>
+                      <Link href={subcategory?.href ? subcategory?.href : "#"} >
                         {/* Subcategory Title */}
                         <h4 className="text-[#FFFFFFCC] lg:text-xl text-base underline-offset-1  leading-[100%] underline mb-4">
                           {subcategory.name}
@@ -79,15 +80,16 @@ const Footer: React.FC = () => {
                         <ul className="space-y-4">
                           {subcategory.links.map((link, linkIndex) => (
                             <li className="p-0 leading-[100%]" key={linkIndex}>
-                              <Link
+                              <a
                                 href={link.href}
                                 className="text-[#FFFFFFCC] hover:text-white font-normal  md:text-base text-sm leading-[100%]  transition-colors duration-200 "
                               >
                                 {link.name}
-                              </Link>
+                              </a>
                             </li>
                           ))}
                         </ul>
+                      </Link>
                       </div>
                     ))}
                   </div>
@@ -171,30 +173,35 @@ const footerData = [
     subcategories: [
       {
         name: "ARION",
+        href:"/saddles/arion-saddles",
         links: [
           { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/arion-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/arion-saddles" },
+          { name: "DRESSAGE", href: "/saddles/dressage" },
+          { name: "CROSS COUNTRY", href: "/saddles/cross-country" },
+          { name: "kids", href: "/saddles/kids" },
         ],
       },
       {
         name: "ATLAS",
+        href:"/saddles/atlas-saddles",
         links: [
-          { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/atlas-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles" },
+          { name: "JUMPING", href: "/saddles/atlas-saddles/jumping"},
+          { name: "DRESSAGE", href: "/saddles/atlas-saddles/dressage" },
+          { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles/cross-country" },
         ],
       },
       {
         name: "USED SADDLE",
+        href:"/used-saddles",
         links: [{ name: "USED SADDLE", href: "/saddles/used-saddles" }],
       },
       {
         name: "ATHENA",
+        href:"/saddles/athena-saddles",
         links: [
-          { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/athena-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
+          // { name: "JUMPING", href: "/saddles/jumping" },
+          // { name: "DRESSAGE", href: "/saddles/athena-saddles" },
+          // { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
         ],
       },
     ],
@@ -240,11 +247,11 @@ const footerLinks = [
   { text: "DATA PROTECTION", href: "#", id: "data-protection" },
   {
     text: "TERMS AND CONDITIONS OF SALE",
-    href: "terms-and-conditions",
+    href: "/terms-and-conditions",
     id: "terms-and-conditions",
   },
-  { text: "PRIVACY POLICY", href: "privacy-policy", id: "privacy-policy" },
-  { text: "LEGAL INFORMATION", href: "legal-information", id: "legal-information" },
+  { text: "PRIVACY POLICY", href: "/privacy-policy", id: "privacy-policy" },
+  { text: "LEGAL INFORMATION", href: "/legal-information", id: "legal-information" },
 ];
 
 const socialIcons = [

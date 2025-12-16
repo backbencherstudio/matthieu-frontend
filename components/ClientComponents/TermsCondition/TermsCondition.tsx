@@ -4,7 +4,7 @@ export default function TermsCondition() {
   return (
     <section className="py-10 capitalize">
       <div className="maxContainer">
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-5">
           <h2 className="textSecondary lg:text-[40px] md:text-[36px] text-[28px] font-bold leading-[100%] tracking-[.8px]">
             TERMS AND CONDITIONS OF SALE
           </h2>
