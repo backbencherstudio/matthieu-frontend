@@ -150,7 +150,7 @@ const productDetails = [
               USA: 5-7 work days | Canada: 7-10 business days
             </li>
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-              Free delivery with purchases over $1,000
+              Free delivery with purchases over $2,000
             </li>
           </ul>
         </div>
@@ -168,7 +168,7 @@ const productDetails = [
               Florida
             </li>
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-              USA: $20 | Canada: $25
+              USA: $50 | Canada: $100
             </li>
           </ul>
         </div>
@@ -178,11 +178,14 @@ const productDetails = [
           </h4>
           <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-              Return tack or accessories within 14 days of purchase. The product
+              Return tack or accessories within 7 days of purchase. The product
               must be new, with labels attached. Once the product is received at
               our Wellington office and is as described above, you will be fully
               reimbursed.
             </li>
+              <li className="font-black">
+                No returns are accepted for items purchased during sales or discount periods.
+             </li>
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
               <Link href="#" className="underline">
                 Read More

@@ -118,7 +118,7 @@ const LeadlineSaddlePage = () => {
                       ADD TO CART
                     </button>
                   </div>
-                  <div>
+                  {/* <div>
                     <h4 className="text-2xl font-extrabold leading-[148%] tracking-[0.48px] textSecondary">
                       Don't Forget the Accessories!
                     </h4>
@@ -150,7 +150,7 @@ const LeadlineSaddlePage = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

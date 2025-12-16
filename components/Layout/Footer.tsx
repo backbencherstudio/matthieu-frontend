@@ -71,6 +71,7 @@ const Footer: React.FC = () => {
                   <div className="space-y-6">
                     {section.subcategories.map((subcategory, subIndex) => (
                       <div key={subIndex}>
+                      <Link href={subcategory?.href ? subcategory?.href : "#"} >
                         {/* Subcategory Title */}
                         <h4 className="text-[#FFFFFFCC] lg:text-xl text-base underline-offset-1  leading-[100%] underline mb-4">
                           {subcategory.name}
@@ -79,15 +80,16 @@ const Footer: React.FC = () => {
                         <ul className="space-y-4">
                           {subcategory.links.map((link, linkIndex) => (
                             <li className="p-0 leading-[100%]" key={linkIndex}>
-                              <Link
+                              <a
                                 href={link.href}
                                 className="text-[#FFFFFFCC] hover:text-white font-normal  md:text-base text-sm leading-[100%]  transition-colors duration-200 "
                               >
                                 {link.name}
-                              </Link>
+                              </a>
                             </li>
                           ))}
                         </ul>
+                      </Link>
                       </div>
                     ))}
                   </div>
@@ -171,6 +173,7 @@ const footerData = [
     subcategories: [
       {
         name: "ARION",
+        href:"/saddles/arion-saddles",
         links: [
           { name: "JUMPING", href: "/saddles/jumping" },
           { name: "DRESSAGE", href: "/saddles/dressage" },
@@ -180,6 +183,7 @@ const footerData = [
       },
       {
         name: "ATLAS",
+        href:"/saddles/atlas-saddles",
         links: [
           { name: "JUMPING", href: "/saddles/atlas-saddles/jumping"},
           { name: "DRESSAGE", href: "/saddles/atlas-saddles/dressage" },
@@ -188,10 +192,12 @@ const footerData = [
       },
       {
         name: "USED SADDLE",
+        href:"/used-saddles",
         links: [{ name: "USED SADDLE", href: "/saddles/used-saddles" }],
       },
       {
         name: "ATHENA",
+        href:"/saddles/athena-saddles",
         links: [
           // { name: "JUMPING", href: "/saddles/jumping" },
           // { name: "DRESSAGE", href: "/saddles/athena-saddles" },

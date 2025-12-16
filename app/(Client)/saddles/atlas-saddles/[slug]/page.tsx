@@ -65,7 +65,7 @@ export default function AtlasSaddleDetailsPage() {
                 USA: 5-7 work days | Canada: 7-10 business days
               </li>
               <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery with purchases over $1,000
+                Free delivery with purchases over $2,000
               </li>
             </ul>
           </div>
@@ -83,7 +83,7 @@ export default function AtlasSaddleDetailsPage() {
                 Florida
               </li>
               <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                USA: $20 | Canada: $25
+                USA: $50 | Canada: $100
               </li>
             </ul>
           </div>
@@ -92,10 +92,15 @@ export default function AtlasSaddleDetailsPage() {
               Returns:
             </h4>
             <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
-              Return tack or accessories within 14 days of purchase. The product
+              Return tack or accessories within 7 days of purchase. The product
               must be new, with labels attached. Once the product is received at
               our Wellington office and is as described above, you will be fully
               reimbursed.
+              <br />
+              <span className="mt-2 block font-black">
+              No returns are accepted for items purchased during sales or discount periods.
+              </span>
+
             </p>
           </div>
         </div>
