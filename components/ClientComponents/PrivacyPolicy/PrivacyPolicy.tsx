@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
   return (
     <section className="py-10 capitalize">
       <div className="maxContainer">
-        <div className="text-center space-y-3 uppercase">
+        <div className="text-center space-y-5 uppercase">
           <h2 className="textSecondary lg:text-[40px] md:text-[36px] text-[28px] font-bold leading-[100%] tracking-[.8px]">
             Privacy Policy
           </h2>

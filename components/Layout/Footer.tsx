@@ -173,16 +173,17 @@ const footerData = [
         name: "ARION",
         links: [
           { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/arion-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/arion-saddles" },
+          { name: "DRESSAGE", href: "/saddles/dressage" },
+          { name: "CROSS COUNTRY", href: "/saddles/cross-country" },
+          { name: "kids", href: "/saddles/kids" },
         ],
       },
       {
         name: "ATLAS",
         links: [
-          { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/atlas-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles" },
+          { name: "JUMPING", href: "/saddles/atlas-saddles/jumping"},
+          { name: "DRESSAGE", href: "/saddles/atlas-saddles/dressage" },
+          { name: "CROSS COUNTRY", href: "/saddles/atlas-saddles/cross-country" },
         ],
       },
       {
@@ -192,9 +193,9 @@ const footerData = [
       {
         name: "ATHENA",
         links: [
-          { name: "JUMPING", href: "/saddles/jumping" },
-          { name: "DRESSAGE", href: "/saddles/athena-saddles" },
-          { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
+          // { name: "JUMPING", href: "/saddles/jumping" },
+          // { name: "DRESSAGE", href: "/saddles/athena-saddles" },
+          // { name: "CROSS COUNTRY", href: "/saddles/athena-saddles" },
         ],
       },
     ],
@@ -240,11 +241,11 @@ const footerLinks = [
   { text: "DATA PROTECTION", href: "#", id: "data-protection" },
   {
     text: "TERMS AND CONDITIONS OF SALE",
-    href: "terms-and-conditions",
+    href: "/terms-and-conditions",
     id: "terms-and-conditions",
   },
-  { text: "PRIVACY POLICY", href: "privacy-policy", id: "privacy-policy" },
-  { text: "LEGAL INFORMATION", href: "legal-information", id: "legal-information" },
+  { text: "PRIVACY POLICY", href: "/privacy-policy", id: "privacy-policy" },
+  { text: "LEGAL INFORMATION", href: "/legal-information", id: "legal-information" },
 ];
 
 const socialIcons = [
