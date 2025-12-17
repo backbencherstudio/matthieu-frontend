@@ -11,6 +11,7 @@ import Link from "next/link";
 import WhatsAppIcon from "@/components/Icons/WhatsAppIcon";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import CallingIcon from "@/components/Icons/CallingIcon";
+import { usePathname } from "next/navigation";
 
 const answerQuestion = [
   { icon: <WhatsAppIcon />, title: "WhatsApp" },
@@ -21,8 +22,9 @@ const answerQuestion = [
 const productDetails = [
   {
     id: "item-1",
-    title: "MORE DETAILS:",
-    /* content: (
+    titleSaddle: "MORE DETAILS:",
+    titleProduct:"MORE DETAILS:",
+    productContent: (
       <p className="leading-[160%] tracking-[.32px] md:text-base text-sm font-medium">
         Arion's Double Noseband Bridle combines the effect of a regular noseband
         and a drop noseband. The lateral strap is designed to minimize jaw
@@ -36,8 +38,8 @@ const productDetails = [
           Reins are not included.
         </span>
       </p>
-    ), */
-    content: (
+    ), 
+    saddleContent: (
       <div className="space-y-4">
         <div>
           <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
@@ -78,8 +80,9 @@ const productDetails = [
   },
   {
     id: "item-2",
-    title: "LEATHER TYPE:",
-    /* content: (
+    titleSaddle: "LEATHER TYPE:",
+    titleProduct:"LEATHER CARE GUIDE:",
+    productContent: (
       <p>
         Grab your{" "}
         <Link
@@ -100,8 +103,8 @@ const productDetails = [
         , wipe your bridle down with a clean towel and store in a dry area.
         Clean after every use for best results."
       </p>
-    ), */
-    content: (
+    ), 
+    saddleContent: (
       <div className="space-y-4">
         <div>
           <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
@@ -138,8 +141,65 @@ const productDetails = [
   },
   {
     id: "item-3",
-    title: "SHIPPING AND RETURNS",
-    content: (
+    titleSaddle: "SHIPPING AND RETURNS",
+    titleProduct:"SHIPPING AND RETURNS",
+    saddleContent: (
+      <div className="space-y-4">
+        <div>
+          <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+            Delivery time:
+          </h4>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              USA: 5-7 work days | Canada: 7-10 business days
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Free delivery with purchases over $2,000
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+            Shipping costs:
+          </h4>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Free delivery if you pick up at our booth in Wellington, Florida
+              January March
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Free delivery if you pick up from our office in Wellington,
+              Florida
+            </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              USA: $50 | Canada: $100
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+            Returns:
+          </h4>
+          <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              Return tack or accessories within 7 days of purchase. The product
+              must be new, with labels attached. Once the product is received at
+              our Wellington office and is as described above, you will be fully
+              reimbursed.
+            </li>
+              <li className="font-black">
+                No returns are accepted for items purchased during sales or discount periods.
+             </li>
+            <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+              <Link href="#" className="underline">
+                Read More
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    ),
+    productContent: (
       <div className="space-y-4">
         <div>
           <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
@@ -198,8 +258,35 @@ const productDetails = [
   },
   {
     id: "item-4",
-    title: "NEED HELP?",
-    content: (
+     titleSaddle:  "NEED HELP?",
+    titleProduct: "NEED HELP?",
+    saddleContent: (
+      <div className="flex gap-4">
+        <div className="w-[79px] h-[86px] ">
+          <img
+            src="/images/products-details/need help.png"
+            alt=""
+            className="w-full h-full object-cover "
+          />
+        </div>
+        <div>
+          <p className="text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal">
+            Gabrielle will answer your questions!
+          </p>
+          <div className="flex items-center gap-6 md:mt-4 mt-3">
+            {answerQuestion?.map((item, index) => (
+              <Link href={""} className="flex items-center gap-3" key={index}>
+                <span className="text-[#000000]">{item?.icon}</span>
+                <span className="text-[#4C526F] leading-[100%] text-base">
+                  {item?.title}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    ),
+    productContent: (
       <div className="flex gap-4">
         <div className="w-[79px] h-[86px] ">
           <img
@@ -229,6 +316,11 @@ const productDetails = [
 ];
 
 export default function ProductDetailsAccordion() {
+
+  const path = usePathname()
+  const isSaddlePage = path.includes("saddles")
+
+
   return (
     <div className="mt-8">
       <Accordion
@@ -243,10 +335,10 @@ export default function ProductDetailsAccordion() {
             className="bg-[#F6F8FA] px-4 border-b-0"
           >
             <AccordionTrigger className="text-[#1F274B] lg:text-2xl md:text-xl text-lg font-extrabold  tracking-[.48px]  hover:no-underline cursor-pointer">
-              {item.title}
+              {isSaddlePage ? item.titleSaddle : item.titleProduct}
             </AccordionTrigger>
             <AccordionContent className="text-[#4C526F] leading-[160%] tracking-[.32px] md:text-base text-sm normal-case font-light">
-              {item.content}
+             {isSaddlePage ? item.saddleContent : item?.productContent}
             </AccordionContent>
           </AccordionItem>
         ))}

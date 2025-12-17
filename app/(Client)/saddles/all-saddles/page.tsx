@@ -39,7 +39,7 @@ const saddlesItemsArion = {
   images: [
     {
       id: 1,
-      name: "JUMPING SADDLES",
+      name: "JUMPING",
       image: "/images/saddles/jumping.png",
       startFrom: "$5,000",
       link: "/saddles",
@@ -47,7 +47,7 @@ const saddlesItemsArion = {
     },
     {
       id: 2,
-      name: "CROSS COUNTRY SADDLES",
+      name: "CROSS-COUNTRY",
       image: "/images/saddles/cross.png",
       startFrom: "$5,000",
       link: "/saddles",
@@ -55,7 +55,7 @@ const saddlesItemsArion = {
     },
     {
       id: 3,
-      name: "DRESSAGE SADDLES",
+      name: "DRESSAGE",
       image: "/images/saddles/dressage.png",
       startFrom: "$5,000",
       link: "/saddles",
@@ -63,7 +63,7 @@ const saddlesItemsArion = {
     },
     {
       id: 4,
-      name: "KIDS SADDLES",
+      name: "KIDS",
       image: "/images/saddles/kids.png",
       startFrom: "$5,000",
       link: "/saddles",
@@ -80,7 +80,7 @@ const saddlesItemsAtlas = {
   images: [
     {
       id: 1,
-      name: "JUMPING SADDLES",
+      name: "JUMPING",
       image: "/images/saddles/atlas-jumping.png",
       startFrom: "$5,000",
       link: "/saddles/atlas-saddles",
@@ -88,7 +88,7 @@ const saddlesItemsAtlas = {
     },
     {
       id: 2,
-      name: "CROSS COUNTRY SADDLES",
+      name: "CROSS-COUNTRY",
       image: "/images/saddles/atlas-cross.png",
       startFrom: "$5,000",
       link: "/saddles/atlas-saddles",
@@ -96,7 +96,7 @@ const saddlesItemsAtlas = {
     },
     {
       id: 3,
-      name: "DRESSAGE SADDLES",
+      name: "DRESSAGE",
       image: "/images/saddles/atlas-dressage.png",
       startFrom: "$5,000",
       link: "/saddles/atlas-saddles",

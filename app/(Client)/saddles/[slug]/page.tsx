@@ -60,7 +60,7 @@ export default function JumpingPage() {
           ARION CUSTOM SADDLES
         </h1>
         <p className="text-center text-[20px] leading-[160%] text-[#4C526F] tracking-[0.04px] normal-case text-wrap mt-4">
-          Perdonalize your saddle: add a pop of color , Customize your
+          Personalize your saddle: add a pop of color , Customize your
           nameplate, & <br /> moral We want to make your dream saddle.
         </p>
       </div>
