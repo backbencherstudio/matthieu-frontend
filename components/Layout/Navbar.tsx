@@ -107,7 +107,7 @@ const Header = () => {
     },
     {
       label: "BRAND",
-      href: "/brand/our-story",
+      href: "#",
       hasDropdown: true,
       dropdownContent: [
         { category: "Our Story", href: "/brand/our-story" },
