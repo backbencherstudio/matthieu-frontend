@@ -14,7 +14,7 @@ const heroData = [
   },
   {
     title: "BRAND",
-    img: "/home/brand-1.png",
+    img: "/home/brands-3.jpeg",
     link: "/brand",
   },
 ];
