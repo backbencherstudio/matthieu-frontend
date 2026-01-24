@@ -1,6 +1,7 @@
 "use client";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
+import { useShowAllMemberQuery } from "@/src/redux/admin/cms/arionTeam/arionTeamApi";
 import { useRef, useState } from "react";
 
 const AddMember = () => {
@@ -22,6 +23,9 @@ const AddMember = () => {
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
+
+  const { data } = useShowAllMemberQuery("");
+  console.log("data", data);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
