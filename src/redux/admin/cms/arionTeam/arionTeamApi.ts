@@ -2,6 +2,14 @@ import baseApi from "../../../api/baseApi";
 
 const arionTeamApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    create: builder.mutation({
+      query: (data) => ({
+        url: "/team",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     showAllMember: builder.query({
       query: ({ search }) => ({
         url: "/team",
@@ -9,6 +17,14 @@ const arionTeamApi = baseApi.injectEndpoints({
         params: {
           search,
         },
+      }),
+    }),
+
+    updateArionMember: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/team/${id}`,
+        method: "PATCH",
+        body: data,
       }),
     }),
 
@@ -21,7 +37,10 @@ const arionTeamApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useShowAllMemberQuery, useDeleteArionMemberMutation } =
-  arionTeamApi;
+export const {
+  useShowAllMemberQuery,
+  useDeleteArionMemberMutation,
+  useCreateMutation,
+} = arionTeamApi;
 
 export default arionTeamApi;
