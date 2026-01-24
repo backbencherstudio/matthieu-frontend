@@ -193,7 +193,7 @@ const footerData = [
       {
         name: "USED SADDLE",
         href:"/used-saddles",
-        links: [{ name: "USED SADDLE", href: "/saddles/used-saddles" }],
+        links: [{ name: "", href: "/saddles/used-saddles" }],
       },
       {
         name: "ATHENA",
