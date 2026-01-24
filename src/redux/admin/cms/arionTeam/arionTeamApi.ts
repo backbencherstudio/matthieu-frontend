@@ -41,6 +41,7 @@ export const {
   useShowAllMemberQuery,
   useDeleteArionMemberMutation,
   useCreateMutation,
+  useUpdateArionMemberMutation
 } = arionTeamApi;
 
 export default arionTeamApi;

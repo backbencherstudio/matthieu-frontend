@@ -19,7 +19,6 @@ export default function DeleteArionTeamModal({
   const [deleteArionMember, { isLoading }] = useDeleteArionMemberMutation();
   const handelDelete = async () => {
     try {
-        console.log(id)
       const response = await deleteArionMember(id);
       if (response?.data?.success) {
         refetch();

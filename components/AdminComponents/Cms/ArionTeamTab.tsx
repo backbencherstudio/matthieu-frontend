@@ -1,5 +1,4 @@
 "use client";
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/PlusIcon";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
@@ -12,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteArionTeamModal from "./DeleteArionTeam";
+import EditArionTeamModal from "./EditArionTeamModal";
 
 const ArionTeamTab = () => {
   const router = useRouter();
@@ -71,13 +71,8 @@ const ArionTeamTab = () => {
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div>
-          <button
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-            onClick={() => router.push("/admin/cms/add-member")}
-          >
-            <EditIcon />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <EditArionTeamModal id={String(item?.id)} refetch={refetch} />
         </div>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
           <DeleteArionTeamModal id={String(item?.id)} refetch={refetch} />
