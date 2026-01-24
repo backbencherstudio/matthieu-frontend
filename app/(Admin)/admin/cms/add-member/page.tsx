@@ -55,7 +55,7 @@ const AddMember = () => {
 
       if (response?.data?.success) {
         reset();
-        toast.success("Member added successfully");
+        toast.success(response?.data?.message);
       }
     } catch (error) {
       console.error("Create failed", error);

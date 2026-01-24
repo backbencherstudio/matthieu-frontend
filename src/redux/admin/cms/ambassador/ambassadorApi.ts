@@ -2,7 +2,7 @@ import baseApi from "../../../api/baseApi";
 
 const ambassadorApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    create: builder.mutation({
+    createAmbassador: builder.mutation({
       query: (data) => ({
         url: "/ambassador",
         method: "POST",
@@ -37,6 +37,10 @@ const ambassadorApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllQuery, useDeleteAmbassadorMutation } = ambassadorApi;
+export const {
+  useCreateAmbassadorMutation,
+  useGetAllQuery,
+  useDeleteAmbassadorMutation,
+} = ambassadorApi;
 
 export default ambassadorApi;
