@@ -1,4 +1,3 @@
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
@@ -11,11 +10,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteAmbassador from "./DeleteAmbassador";
+import EditAmbassadorModal from "./EditAmbassadorModal";
 
 const ArionAmbassadorTab = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
+
   const { data, isLoading, refetch } = useGetAllQuery({
     search: debouncedSearch,
   });
@@ -71,13 +72,8 @@ const ArionAmbassadorTab = () => {
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div>
-          <button
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-            onClick={() => router.push("/admin/cms/add-ambassador")}
-          >
-            <EditIcon />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <EditAmbassadorModal id={String(item?.id)} refetch={refetch} />
         </div>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
           <DeleteAmbassador id={String(item?.id)} refetch={refetch} />

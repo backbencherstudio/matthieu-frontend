@@ -20,7 +20,7 @@ const ambassadorApi = baseApi.injectEndpoints({
       }),
     }),
 
-    update: builder.mutation({
+    updateAmbassador: builder.mutation({
       query: ({ id, data }) => ({
         url: `/ambassador/${id}`,
         method: "PATCH",
@@ -40,6 +40,7 @@ const ambassadorApi = baseApi.injectEndpoints({
 export const {
   useCreateAmbassadorMutation,
   useGetAllQuery,
+  useUpdateAmbassadorMutation,
   useDeleteAmbassadorMutation,
 } = ambassadorApi;
 
