@@ -1,112 +1,72 @@
 import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllQuery } from "@/src/redux/admin/cms/ambassador/ambassadorApi";
 import { TableRowItem } from "@/types/TableRowItem";
-import { Search } from "lucide-react";
+import { format } from "date-fns";
+import { Search, User2Icon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
-import BlogDeleteModal from "./BlogDeleteModal";
+import { ReactNode, useState } from "react";
+import DeleteAmbassador from "./DeleteAmbassador";
 
 const ArionAmbassadorTab = () => {
   const router = useRouter();
-  const relevantData = [
-    {
-      id: 1,
-      fullName: "Nick Dello Joio",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 2,
-      fullName: "Emi Richard",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 3,
-      fullName: "Emma Hakim",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 4,
-      fullName: "Taylor Cawley",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 5,
-      fullName: "Adiana Forte",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 6,
-      fullName: "Cristian Hacker",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 7,
-      fullName: "Molly Ashe Cawley",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 8,
-      fullName: "Parker Peacock",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 9,
-      fullName: "Monica Spencer",
-      link: "http://www.instagram.com/taylor.cawley/",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-  ];
-
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useGetAllQuery({
+    search: debouncedSearch,
+  });
+  const relevantData = data?.data;
+  const currentItems = relevantData ?? [];
 
   const tableHeader = [
     "Full Name",
     "Social Links",
     "Profile Image",
+    "Country",
     "Joining Date",
     "Actions",
   ];
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%] text-wrap">
-        {item?.fullName}
+        {item?.name}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.link}
+        {item?.social_links}
       </span>
     ),
-    (item) => <img src={item?.image} alt="image" className="h-8 w-8" />,
+    (item) =>
+      item?.image ? (
+        <Image
+          src={item.image}
+          alt="image"
+          height={400}
+          width={400}
+          className="h-8 w-8 rounded-full"
+        />
+      ) : (
+        <User2Icon className="h-8 w-8 text-gray-400" />
+      ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.joiningDate}
+        {item?.country}
+      </span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#14191F] leading-[114%]">
+        {item?.created_at
+          ? format(new Date(item.created_at), "MMM d, yyyy")
+          : ""}
       </span>
     ),
     (item) => (
@@ -119,16 +79,13 @@ const ArionAmbassadorTab = () => {
             <EditIcon />
           </button>
         </div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <DeleteAmbassador id={String(item?.id)} refetch={refetch} />
         </div>
       </div>
     ),
   ];
 
-  const isLoadings = false;
   return (
     <div className="overflow-auto">
       <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
@@ -143,6 +100,9 @@ const ArionAmbassadorTab = () => {
                 type="text"
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search ambassador..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -167,7 +127,7 @@ const ArionAmbassadorTab = () => {
         <div className="mt-4 overflow-x-auto">
           <ReuseAbleTable
             allClientDataList={relevantData}
-            isLoadings={isLoadings}
+            isLoadings={isLoading}
             currentItems={currentItems}
             tableHeader={tableHeader}
             tableRowDataRenderers={tableRowDataRenderers}
@@ -176,7 +136,7 @@ const ArionAmbassadorTab = () => {
         </div>
 
         {/* pagination */}
-        {!isLoadings && (
+        {/* {!isLoadings && (
           <div
             className={`flex justify-center pt-12 pb-4 ${
               relevantData?.length >= 5 ? "block" : "hidden"
@@ -188,7 +148,7 @@ const ArionAmbassadorTab = () => {
               onPageChange={setCurrentPage}
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

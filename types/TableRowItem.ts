@@ -110,7 +110,7 @@ export interface TableRowItem extends TableItem {
   position?: string;
   image?: string;
   joiningDate?: string;
-  link?: string;
+  social_links?: string;
   competition?: string;
   discipline?: string;
   created_at?: string;
