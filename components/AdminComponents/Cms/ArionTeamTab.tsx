@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
-import BlogDeleteModal from "./BlogDeleteModal";
+import DeleteArionTeamModal from "./DeleteArionTeam";
 
 const ArionTeamTab = () => {
   const router = useRouter();
@@ -20,7 +20,7 @@ const ArionTeamTab = () => {
   const [search, setSearch] = useState("");
 
   const debouncedSearch = useDebounce(search, 500);
-  const { data, isLoading } = useShowAllMemberQuery({
+  const { data, isLoading, refetch } = useShowAllMemberQuery({
     search: debouncedSearch,
   });
 
@@ -79,10 +79,8 @@ const ArionTeamTab = () => {
             <EditIcon />
           </button>
         </div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <DeleteArionTeamModal id={String(item?.id)} refetch={refetch} />
         </div>
       </div>
     ),

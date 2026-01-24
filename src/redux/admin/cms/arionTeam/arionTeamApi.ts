@@ -11,9 +11,17 @@ const arionTeamApi = baseApi.injectEndpoints({
         },
       }),
     }),
+
+    deleteArionMember: builder.mutation({
+      query: (id) => ({
+        url: `/team/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useShowAllMemberQuery } = arionTeamApi;
+export const { useShowAllMemberQuery, useDeleteArionMemberMutation } =
+  arionTeamApi;
 
 export default arionTeamApi;
