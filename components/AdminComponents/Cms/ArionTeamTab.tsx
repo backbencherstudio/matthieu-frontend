@@ -1,58 +1,32 @@
 "use client";
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/PlusIcon";
-import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useShowAllMemberQuery } from "@/src/redux/admin/cms/arionTeam/arionTeamApi";
 import { TableRowItem } from "@/types/TableRowItem";
-import { Search } from "lucide-react";
+import { format } from "date-fns";
+import { Search, User2Icon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
-import BlogDeleteModal from "./BlogDeleteModal";
+import { ReactNode, useState } from "react";
+import DeleteArionTeamModal from "./DeleteArionTeam";
+import EditArionTeamModal from "./EditArionTeamModal";
 
 const ArionTeamTab = () => {
   const router = useRouter();
-  const relevantData = [
-    {
-      id: 1,
-      fullName: "Sylvain Houry",
-      position: "Founder & CEO",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 2,
-      fullName: "Hadrien Schenck",
-      position: "As general manager",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 3,
-      fullName: "Kirsten Rose",
-      position: "US Sales Manager",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 4,
-      fullName: "Chloe Cazebon",
-      position: "Europe Marketing and Communication Manager",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-    {
-      id: 5,
-      fullName: "Gabrielle Fournier",
-      position: "US & Canada Marketing Communications Manager",
-      image: "/myAccount/profile.jpg",
-      joiningDate: "Sep 5, 2024",
-    },
-  ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(8);
+  const [search, setSearch] = useState("");
 
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useShowAllMemberQuery({
+    search: debouncedSearch,
+  });
+
+  const relevantData = data?.data;
+
+  const currentItems = relevantData ?? [];
 
   const tableHeader = [
     "Full Name",
@@ -64,44 +38,49 @@ const ArionTeamTab = () => {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%] text-wrap">
-        {item?.fullName}
+        {item?.name}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.position}
+        {item?.designation}
       </span>
     ),
-    (item) => <img src={item?.image} alt="image" className="h-8 w-8" />,
+    (item) =>
+      item?.image ? (
+        <Image
+          src={item.image}
+          alt="image"
+          height={400}
+          width={400}
+          className="h-8 w-8 rounded-full"
+        />
+      ) : (
+        <User2Icon className="h-8 w-8 text-gray-400" />
+      ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.joiningDate}
+        {item?.created_at
+          ? format(new Date(item.created_at), "MMM d, yyyy")
+          : ""}
       </span>
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div>
-          <button
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-            onClick={() => router.push("/admin/cms/add-member")}
-          >
-            <EditIcon />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <EditArionTeamModal id={String(item?.id)} refetch={refetch} />
         </div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <DeleteArionTeamModal id={String(item?.id)} refetch={refetch} />
         </div>
       </div>
     ),
   ];
 
-  const isLoadings = false;
   return (
     <div className="overflow-auto">
       <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
@@ -116,6 +95,10 @@ const ArionTeamTab = () => {
                 type="text"
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search team member..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -138,7 +121,7 @@ const ArionTeamTab = () => {
         <div className="mt-4 overflow-x-auto">
           <ReuseAbleTable
             allClientDataList={relevantData}
-            isLoadings={isLoadings}
+            isLoadings={isLoading}
             currentItems={currentItems}
             tableHeader={tableHeader}
             tableRowDataRenderers={tableRowDataRenderers}
@@ -147,7 +130,7 @@ const ArionTeamTab = () => {
         </div>
 
         {/* pagination */}
-        {!isLoadings && (
+        {/* {!isLoadings && (
           <div
             className={`flex justify-center pt-12 pb-4 ${
               relevantData?.length >= 5 ? "block" : "hidden"
@@ -159,7 +142,7 @@ const ArionTeamTab = () => {
               onPageChange={setCurrentPage}
             />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

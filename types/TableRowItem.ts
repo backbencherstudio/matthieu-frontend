@@ -3,6 +3,7 @@ import { StaticImageData } from "next/image";
 
 export interface TableRowItem extends TableItem {
   name?: string;
+  designation?: string;
   title?: string;
   service?: string;
   price?: string;
@@ -109,7 +110,8 @@ export interface TableRowItem extends TableItem {
   position?: string;
   image?: string;
   joiningDate?: string;
-  link?: string;
+  social_links?: string;
   competition?: string;
   discipline?: string;
+  created_at?: string;
 }

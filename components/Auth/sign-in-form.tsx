@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useLoginMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type SignInFormData = {
   email: string;
@@ -16,6 +18,7 @@ export function SignInForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SignInFormData>({
     defaultValues: {
@@ -24,9 +27,22 @@ export function SignInForm() {
       rememberMe: false,
     },
   });
+  const [signup] = useLoginMutation();
+  const onSubmit = async (data: SignInFormData) => {
+    try {
+      const response = await signup(data);
 
-  const onSubmit = (data: SignInFormData) => {
-    console.log("Form submitted:", data);
+      if (response?.data?.success) {
+        localStorage.setItem("token", response?.data?.authorization?.token);
+
+        toast.success(response?.data?.message);
+        reset();
+      } else {
+        toast.error("Login fail please check your email or password");
+      }
+    } catch (error: any) {
+      toast.error("Login fail please check your email or password");
+    }
   };
 
   return (
