@@ -1,11 +1,37 @@
 "use client";
+
 import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import CustomDialog from "@/components/reusable/Features/Dialog";
+import { useDeleteJobApplicantMutation } from "@/src/redux/admin/jobApplicant/jobApplicantApi";
 import { useState } from "react";
+import { toast } from "sonner";
 
-export default function ApplicantsDeleteModal() {
+interface DeleteJobApplicantProps {
+  id: string;
+  refetch: () => void;
+}
+
+export default function DeleteJobApplicant({
+  id,
+  refetch,
+}: DeleteJobApplicantProps) {
   const [open, setOpen] = useState(false);
+  const [deleteJobApplicant, { isLoading }] = useDeleteJobApplicantMutation();
 
+  const handelDelete = async () => {
+    try {
+      const response = await deleteJobApplicant(id);
+      console.log(response);
+      if (response?.data?.success) {
+        refetch();
+        setOpen(false);
+        toast.success(response?.data?.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete ambassador");
+      console.error(error);
+    }
+  };
   return (
     <div>
       <button
@@ -26,7 +52,7 @@ export default function ApplicantsDeleteModal() {
           </div>
 
           <h2 className="text-xl font-extrabold leading-[130%] tracking-[0.1px] text-[#101010] mt-4 text-center">
-            Delete Applicants
+            Delete Arion Ambassador
           </h2>
 
           <div className="mt-9 flex items-center justify-center space-x-4 w-full">
@@ -37,8 +63,11 @@ export default function ApplicantsDeleteModal() {
               No
             </button>
 
-            <button className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full">
-              Yes, Delete
+            <button
+              onClick={handelDelete}
+              className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full"
+            >
+              {isLoading ? "Deleting..." : "Yes, Delete"}
             </button>
           </div>
         </div>

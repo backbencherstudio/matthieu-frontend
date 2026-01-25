@@ -46,7 +46,7 @@ export default function CmsPage() {
     {
       value: "contact",
       label: "Contact Info",
-      icon: <ContactIcon className="text-white" />,
+      icon: <ContactIcon />,
     },
   ];
 
