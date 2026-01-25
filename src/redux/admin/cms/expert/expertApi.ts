@@ -11,11 +11,12 @@ const expertApi = baseApi.injectEndpoints({
     }),
 
     getAllExperts: builder.query({
-      query: ({ search }) => ({
+      query: ({ search, page }) => ({
         url: "/experts",
         method: "GET",
         params: {
           search,
+          page,
         },
       }),
     }),

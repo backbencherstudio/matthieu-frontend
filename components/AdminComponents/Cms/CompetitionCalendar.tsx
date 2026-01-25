@@ -1,5 +1,6 @@
 "use client";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useGetAllCalendarQuery } from "@/src/redux/admin/cms/calendar/calendarApi";
@@ -10,7 +11,6 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import DeleteCalendar from "./DeleteCalendar";
 import EditCalendarModal from "./EditCalendarModal";
-import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 
 const CompetitionCalendarTab = () => {
   const [search, setSearch] = useState("");
@@ -118,11 +118,7 @@ const CompetitionCalendarTab = () => {
         </div>
 
         {/* pagination */}
-        <div
-          className={`flex justify-center pt-12 pb-4 ${
-            relevantData?.length >= 5 ? "block" : "hidden"
-          }`}
-        >
+        <div className={`flex justify-center pt-12 pb-4`}>
           <PaginationComponent
             currentPage={meta?.page}
             totalPages={meta?.totalPages}

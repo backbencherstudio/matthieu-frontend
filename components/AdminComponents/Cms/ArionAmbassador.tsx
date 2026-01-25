@@ -134,11 +134,7 @@ const ArionAmbassadorTab = () => {
         </div>
 
         {/* pagination */}
-        <div
-          className={`flex justify-center pt-12 pb-4 ${
-            relevantData?.length >= 5 ? "block" : "hidden"
-          }`}
-        >
+        <div className={`flex justify-center pt-12 pb-4`}>
           <PaginationComponent
             currentPage={meta?.page}
             totalPages={meta?.totalPages}
