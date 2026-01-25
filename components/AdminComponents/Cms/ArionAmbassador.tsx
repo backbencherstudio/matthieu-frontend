@@ -7,13 +7,11 @@ import { format } from "date-fns";
 import { Search, User2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteAmbassador from "./DeleteAmbassador";
 import EditAmbassadorModal from "./EditAmbassadorModal";
 
 const ArionAmbassadorTab = () => {
-  const router = useRouter();
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
 
