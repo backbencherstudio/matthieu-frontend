@@ -43,7 +43,11 @@ export default function CmsPage() {
       label: "Experts List",
       icon: <UsersIcon />,
     },
-    { value: "contact", label: "Contact Info", icon: <ContactIcon /> },
+    {
+      value: "contact",
+      label: "Contact Info",
+      icon: <ContactIcon className="text-white" />,
+    },
   ];
 
   return (
