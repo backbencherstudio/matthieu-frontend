@@ -7,13 +7,11 @@ import { TableRowItem } from "@/types/TableRowItem";
 import { format } from "date-fns";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteCalendar from "./DeleteCalendar";
 import EditCalendarModal from "./EditCalendarModal";
 
 const CompetitionCalendarTab = () => {
-  const router = useRouter();
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading, refetch } = useGetAllCalendarQuery({
@@ -60,7 +58,7 @@ const CompetitionCalendarTab = () => {
     (item) => (
       <div className="flex items-center justify-end gap-2">
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-          <EditCalendarModal id={String(item?.id)} refetch={refetch}   />
+          <EditCalendarModal id={String(item?.id)} refetch={refetch} />
         </div>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
           <DeleteCalendar id={String(item?.id)} refetch={refetch} />

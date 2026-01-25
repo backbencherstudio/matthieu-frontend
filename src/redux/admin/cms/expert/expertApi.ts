@@ -37,6 +37,6 @@ const expertApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateExpertsMutation } = expertApi;
+export const { useCreateExpertsMutation, useGetAllExpertsQuery } = expertApi;
 
 export default expertApi;
