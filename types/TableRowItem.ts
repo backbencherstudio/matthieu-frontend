@@ -114,4 +114,8 @@ export interface TableRowItem extends TableItem {
   competition?: string;
   discipline?: string;
   created_at?: string;
+  alert_id?: string;
+  price_range?: string;
+  preferences?: string;
+  created_date?: string;
 }
