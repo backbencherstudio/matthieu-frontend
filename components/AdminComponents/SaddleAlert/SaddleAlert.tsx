@@ -60,9 +60,9 @@ export default function SaddleAlert() {
     (item) => (
       <div>
         <div className="flex items-center justify-end gap-2">
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <SaddleAlertDetailModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <SaddleAlertDetailModal id={String(item?.id)}/>
+          </div>
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <SaddleDeleteModal id={String(item?.id)} refetch={refetch} />
           </div>

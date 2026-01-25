@@ -13,6 +13,13 @@ const saddleAlertApi = baseApi.injectEndpoints({
       }),
     }),
 
+    getSingleSaddleAlert: builder.query({
+      query: (id) => ({
+        url: `/saddle-alert/${id}`,
+        method: "GET",
+      }),
+    }),
+
     deleteSaddleAlert: builder.mutation({
       query: (id) => ({
         url: `/saddle-alert/${id}`,
@@ -22,7 +29,10 @@ const saddleAlertApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllSaddleAlertQuery, useDeleteSaddleAlertMutation } =
-  saddleAlertApi;
+export const {
+  useGetAllSaddleAlertQuery,
+  useGetSingleSaddleAlertQuery,
+  useDeleteSaddleAlertMutation,
+} = saddleAlertApi;
 
 export default saddleAlertApi;

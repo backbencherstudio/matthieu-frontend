@@ -2,7 +2,7 @@ import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import ModalWrapper from "../reusable/ModalWrapper";
 import SaddleAlertDetail from "./SaddleAlertDetail";
 
-export default function SaddleAlertDetailModal() {
+export default function SaddleAlertDetailModal({id}) {
   return (
     <ModalWrapper
       trigger={
@@ -11,7 +11,7 @@ export default function SaddleAlertDetailModal() {
         </span>
       }
     >
-      <SaddleAlertDetail />
+      <SaddleAlertDetail id={id}/>
     </ModalWrapper>
   );
 }
