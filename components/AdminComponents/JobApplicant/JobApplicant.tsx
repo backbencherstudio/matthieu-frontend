@@ -1,62 +1,28 @@
-
 "use client";
 
 import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllJobApplicantQuery } from "@/src/redux/admin/jobApplicant/jobApplicantApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
-import { ReactNode } from "react";
-import ApplicantsDeleteModal from "./ApplicantsDeleteModal";
+import { ReactNode, useState } from "react";
 import ApplicantsDetailsModal from "./ApplicantsDetailsModal";
+import DeleteJobApplicant from "./DeleteJobApplicant";
 
 export default function JobApplicant() {
-  const relevantData = [
-    {
-      id: 1,
-      name: "Emma Taylor",
-      email: "emma.taylor@gmail.com",
-      phone: "+1 234 567 890",
-      state: "California",
-      experience: "6 Years",
-    },
-    {
-      id: 2,
-      name: "David Moore",
-      email: "davidm@saddles.com",
-      phone: "+1 345 234 998",
-      state: "Texas",
-      experience: "2 Years",
-    },
-    {
-      id: 3,
-      name: "Sophia Brown",
-      email: "sophia.brown@gmail.com",
-      phone: "+1 987 654 321",
-      state: "Florida",
-      experience: "1 Year",
-    },
-    {
-      id: 4,
-      name: "Liam Johnson",
-      email: "liam.johnson@gmail.com",
-      phone: "+1 555 123 789",
-      state: "New York",
-      experience: "5 Years",
-    },
-    {
-      id: 5,
-      name: "Olivia Davis",
-      email: "olivia.davis@gmail.com",
-      phone: "+1 345 2334 998",
-      state: "Texas",
-      experience: "8 Years",
-    },
-  ];
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useGetAllJobApplicantQuery({
+    search: debouncedSearch,
+    page: currentPage,
+  });
 
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const relevantData = data?.data;
+  const currentItems = relevantData || [];
+  const meta = data?.meta;
 
   const tableHeader = [
     "Name",
@@ -69,9 +35,13 @@ export default function JobApplicant() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
-    (item) => <span className="text-[14px] text-[#1F274B]">{item?.name}</span>,
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">
+        {`${item?.firstName || ""} ${item?.lastName || ""}`}
+      </span>
+    ),
     (item) => <span className="text-[14px] text-[#1F274B]">{item?.email}</span>,
     (item) => <span className="text-[14px] text-[#1F274B]">{item?.phone}</span>,
     (item) => <span className="text-[14px] text-[#1F274B]">{item?.state}</span>,
@@ -85,15 +55,13 @@ export default function JobApplicant() {
           <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
             <ApplicantsDetailsModal />
           </button>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <ApplicantsDeleteModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <DeleteJobApplicant id={String(item?.id)} refetch={refetch} />
+          </div>
         </div>
       </div>
     ),
   ];
-
-  const isLoadings = false;
 
   return (
     <div>
@@ -119,6 +87,9 @@ export default function JobApplicant() {
                 type="text"
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search candidates..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -130,7 +101,7 @@ export default function JobApplicant() {
           <div className="mt-4 overflow-x-auto">
             <ReuseAbleTable
               allClientDataList={relevantData}
-              isLoadings={isLoadings}
+              isLoadings={isLoading}
               currentItems={currentItems}
               tableHeader={tableHeader}
               tableRowDataRenderers={tableRowDataRenderers}
@@ -139,19 +110,13 @@ export default function JobApplicant() {
           </div>
 
           {/* pagination */}
-          {!isLoadings && (
-            <div
-              className={`flex justify-center pt-12 pb-4 ${
-                relevantData?.length >= 5 ? "block" : "hidden"
-              }`}
-            >
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
-          )}
+          <div className={`flex justify-center pt-12 pb-4`}>
+            <PaginationComponent
+              currentPage={meta?.page}
+              totalPages={meta?.totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </div>
       </div>
     </div>

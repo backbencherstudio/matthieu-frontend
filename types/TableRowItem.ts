@@ -85,7 +85,7 @@ export interface TableRowItem extends TableItem {
   assignedTo?: string;
   createdBy?: string;
   created?: string;
-
+  region?: string;
   code?: string;
   discount?: number;
   limit?: number;
@@ -99,9 +99,9 @@ export interface TableRowItem extends TableItem {
   companyName?: string;
   workspaceName?: string;
   customDomain?: string;
-  author?: string;
+  authorName?: string;
   clicks?: number;
-  publishDate?: string;
+  publishedAt?: string;
   tags?: string[];
   categories?: string[];
   paymentMethod?: string;
@@ -114,4 +114,8 @@ export interface TableRowItem extends TableItem {
   competition?: string;
   discipline?: string;
   created_at?: string;
+  alert_id?: string;
+  price_range?: string;
+  preferences?: string;
+  created_date?: string;
 }

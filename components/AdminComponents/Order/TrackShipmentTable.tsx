@@ -112,7 +112,7 @@ export default function TrackShipmentTable() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#4A4C56] leading-[114%]">
@@ -149,10 +149,10 @@ export default function TrackShipmentTable() {
           item.deliveryStatus === "Delivered"
             ? "bg-[#E9FAF5] text-[#20C997]"
             : item.deliveryStatus === "In Process"
-            ? "bg-[#FFFAE8] text-[#FFA600]"
-            : item.deliveryStatus === "Cancelled"
-            ? "bg-[#FFECEC] text-[#D32F2F]"
-            : "bg-[#E6EEFF] text-[#1F3BB3]"
+              ? "bg-[#FFFAE8] text-[#FFA600]"
+              : item.deliveryStatus === "Cancelled"
+                ? "bg-[#FFECEC] text-[#D32F2F]"
+                : "bg-[#E6EEFF] text-[#1F3BB3]"
         }`}
       >
         {item?.deliveryStatus}

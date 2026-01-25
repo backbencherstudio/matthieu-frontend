@@ -1,11 +1,34 @@
 "use client";
+
 import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import CustomDialog from "@/components/reusable/Features/Dialog";
+import { useDeleteCalendarMutation } from "@/src/redux/admin/cms/calendar/calendarApi";
 import { useState } from "react";
+import { toast } from "sonner";
 
-export default function ApplicantsDeleteModal() {
+interface DeleteCalendarProps {
+  id: string;
+  refetch: () => void;
+}
+
+export default function DeleteCalendar({ id, refetch }: DeleteCalendarProps) {
   const [open, setOpen] = useState(false);
+  const [deleteCalendar, { isLoading }] = useDeleteCalendarMutation();
 
+  const handelDelete = async () => {
+    try {
+      const response = await deleteCalendar(id);
+      console.log(response);
+      if (response?.data?.success) {
+        refetch();
+        setOpen(false);
+        toast.success(response?.data?.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete ambassador");
+      console.error(error);
+    }
+  };
   return (
     <div>
       <button
@@ -26,7 +49,7 @@ export default function ApplicantsDeleteModal() {
           </div>
 
           <h2 className="text-xl font-extrabold leading-[130%] tracking-[0.1px] text-[#101010] mt-4 text-center">
-            Delete Applicants
+            Delete Competition Calendar
           </h2>
 
           <div className="mt-9 flex items-center justify-center space-x-4 w-full">
@@ -37,8 +60,11 @@ export default function ApplicantsDeleteModal() {
               No
             </button>
 
-            <button className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full">
-              Yes, Delete
+            <button
+              onClick={handelDelete}
+              className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full"
+            >
+              {isLoading ? "Deleting..." : "Yes, Delete"}
             </button>
           </div>
         </div>

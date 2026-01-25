@@ -114,7 +114,7 @@ export default function CouponTable() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">

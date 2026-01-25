@@ -30,6 +30,7 @@ export default function DeleteArionTeamModal({
       console.error(error);
     }
   };
+  
   return (
     <div>
       <button

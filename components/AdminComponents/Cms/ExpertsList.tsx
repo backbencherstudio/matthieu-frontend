@@ -3,79 +3,57 @@ import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllExpertsQuery } from "@/src/redux/admin/cms/expert/expertApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import BlogDeleteModal from "./BlogDeleteModal";
 
 const ExpertsList = () => {
   const router = useRouter();
-  const relevantData = [
-    {
-      id: 1,
-      competition: "Hits Vermont",
-      location: "Manchester, VT",
-      discipline: "Hunter/Jumper",
-      date: "Sep 5, 2024",
-    },
-    {
-      id: 2,
-      competition: "Silo Ridge Masters",
-      location: "Amenia, NY",
-      discipline: "Hunter/Jumper",
-      date: "9Sep 5, 2024",
-    },
-    {
-      id: 3,
-      competition: "Wellington International",
-      location: "Wellington, FL",
-      discipline: "Hunter/Jumper",
-      date: "Sep 5, 2024",
-    },
-  ];
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading } = useGetAllExpertsQuery({
+    search: debouncedSearch,
+    page: currentPage,
+  });
+  const relevantData = data?.data;
+  const currentItems = relevantData ?? [];
+  const meta = data?.meta;
 
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
-
-  const tableHeader = [
-    "Name",
-    "Email",
-    "Phone",
-    "Region",
-    "Country",
-    "Action"
-  ];
+  const tableHeader = ["Name", "Email", "Phone", "Region", "Country", "Action"];
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%] text-wrap">
-        {item?.competition}
+        {item?.name}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.location}
+        {item?.email}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.discipline}
+        {item?.phone}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.date}
+        {item?.region}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.date}
+        {item?.country}
       </span>
     ),
     (item) => (
@@ -97,14 +75,13 @@ const ExpertsList = () => {
     ),
   ];
 
-  const isLoadings = false;
   return (
     <div className="overflow-auto">
       <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
         {/* search bar */}
         <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
           <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
-           Experts List
+            Experts List
           </h2>
           <div className="flex xl:items-center flex-wrap gap-3 space-x-3">
             <div className="relative">
@@ -112,6 +89,9 @@ const ExpertsList = () => {
                 type="text"
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search Experts..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -124,9 +104,7 @@ const ExpertsList = () => {
                 className="flex items-center justify-center px-3 py-[13px] bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
               >
                 <PlusIcon className="h-4 w-4" />
-                <span className="text-[14px] leading-[114%]">
-                  Add Experts
-                </span>
+                <span className="text-[14px] leading-[114%]">Add Experts</span>
               </Link>
             </div>
           </div>
@@ -136,7 +114,7 @@ const ExpertsList = () => {
         <div className="mt-4 overflow-x-auto">
           <ReuseAbleTable
             allClientDataList={relevantData}
-            isLoadings={isLoadings}
+            isLoadings={isLoading}
             currentItems={currentItems}
             tableHeader={tableHeader}
             tableRowDataRenderers={tableRowDataRenderers}
@@ -145,19 +123,13 @@ const ExpertsList = () => {
         </div>
 
         {/* pagination */}
-        {!isLoadings && (
-          <div
-            className={`flex justify-center pt-12 pb-4 ${
-              relevantData?.length >= 5 ? "block" : "hidden"
-            }`}
-          >
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )}
+        <div className={`flex justify-center pt-12 pb-4`}>
+          <PaginationComponent
+            currentPage={meta?.page}
+            totalPages={meta?.totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );

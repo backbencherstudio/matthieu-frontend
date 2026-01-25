@@ -21,7 +21,6 @@ export default function DeleteAmbassador({
   const handelDelete = async () => {
     try {
       const response = await deleteAmbassador(id);
-      console.log(response);
       if (response?.data?.success) {
         refetch();
         setOpen(false);

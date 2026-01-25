@@ -11,11 +11,12 @@ const arionTeamApi = baseApi.injectEndpoints({
     }),
 
     showAllMember: builder.query({
-      query: ({ search }) => ({
+      query: ({ search, page }) => ({
         url: "/team",
         method: "GET",
         params: {
           search,
+          page,
         },
       }),
     }),
@@ -41,7 +42,7 @@ export const {
   useShowAllMemberQuery,
   useDeleteArionMemberMutation,
   useCreateMutation,
-  useUpdateArionMemberMutation
+  useUpdateArionMemberMutation,
 } = arionTeamApi;
 
 export default arionTeamApi;

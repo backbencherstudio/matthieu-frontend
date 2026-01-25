@@ -1,73 +1,140 @@
+"use client";
+
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
+import { useCreateCalendarMutation } from "@/src/redux/admin/cms/calendar/calendarApi";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+interface AddCompetitionFormValues {
+  name: string;
+  discipline: string;
+  location: string;
+  date: string;
+}
 
 const AddCompetition = () => {
   const breadLink = [
-    {
-      label: "Arion Ambassador",
-      href: "/admin/cms",
-    },
-    {
-      label: "Add New Ambassador",
-    },
+    { label: "Competition Calendar", href: "/admin/cms" },
+    { label: "Add New Competition" },
   ];
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AddCompetitionFormValues>();
+
+  const [createCalendar, { isLoading }] = useCreateCalendarMutation();
+
+  const onSubmit = async (data: AddCompetitionFormValues) => {
+    try {
+      const response = await createCalendar(data);
+      if (response?.data?.success) {
+        toast.success(response?.data?.message);
+        reset();
+      }
+    } catch (error) {
+      console.error("Create failed", error);
+      toast.error("Failed to add competition calendar");
+    }
+  };
 
   return (
     <>
       <BreadCrumb breadLink={breadLink} />
+
       <div className="p-4 bg-[#FFF] rounded-xl mt-5">
         <h1 className="text-[20px] leading-[138%] tracking-[0.01px] font-extrabold">
           Add New Competition
         </h1>
-        <form className="mt-4">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
           <div className="flex justify-between gap-6">
+            {/* LEFT */}
             <div className="w-full">
+              {/* Competition Name */}
               <div>
-                <label className="text-[12px] leading-[100%] text-[#696E86]">
+                <label className="text-[12px] text-[#696E86]">
                   Competition Name
                 </label>
                 <input
-                  type="text"
-                  className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
+                  {...register("name", {
+                    required: "Competition name is required",
+                  })}
+                  className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
                   placeholder="Hits Vermont"
                 />
+                {errors.name && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
+
+              {/* Discipline */}
               <div className="mt-4">
-                <label className="text-[12px] leading-[100%] text-[#696E86]">
-                  Discpline
-                </label>
+                <label className="text-[12px] text-[#696E86]">Discipline</label>
                 <input
-                  type="text"
-                  className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
+                  {...register("discipline", {
+                    required: "Discipline is required",
+                  })}
+                  className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
                   placeholder="Hunter/Jumper"
                 />
+                {errors.discipline && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.discipline.message}
+                  </p>
+                )}
               </div>
             </div>
+
+            {/* RIGHT */}
             <div className="w-full">
+              {/* Location */}
               <div>
-                <label className="text-[12px] leading-[100%] text-[#696E86]">
-                  Location
-                </label>
+                <label className="text-[12px] text-[#696E86]">Location</label>
                 <input
-                  type="text"
-                  className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
+                  {...register("location", {
+                    required: "Location is required",
+                  })}
+                  className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
                   placeholder="Manchester, VT"
                 />
+                {errors.location && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.location.message}
+                  </p>
+                )}
               </div>
+
+              {/* Date */}
               <div className="mt-4">
-                <label className="text-[12px] leading-[100%] text-[#696E86]">
-                  Date
-                </label>
+                <label className="text-[12px] text-[#696E86]">Date</label>
                 <input
-                  type="text"
-                  className="p-3 border border-[#ECEFF3] ronunded-[4px] w-full rounded-[4px]"
-                  placeholder="8/1-8/5"
+                  {...register("date", {
+                    required: "Date is required",
+                  })}
+                  className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
+                  placeholder="01/12/25"
                 />
+                {errors.date && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.date.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
+
+          {/* SAVE */}
           <div className="flex items-end justify-end mt-6">
-            <button className="px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] cursor-pointer">
-              Save
+            <button
+              type="submit"
+              className="px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] cursor-pointer"
+            >
+              {isLoading ? "Creating..." : "Create"}
             </button>
           </div>
         </form>

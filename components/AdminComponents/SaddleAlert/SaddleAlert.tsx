@@ -3,91 +3,26 @@
 import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllSaddleAlertQuery } from "@/src/redux/admin/saddleAlert/saddleAlertApi";
 import { TableRowItem } from "@/types/TableRowItem";
+import { format } from "date-fns";
 import { Search } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import SaddleAlertDetailModal from "./SaddleAlertDetailModal";
 import SaddleDeleteModal from "./SaddleDeleteModal";
 
 export default function SaddleAlert() {
-  const relevantData = [
-    {
-      id: "ALT-00154258",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Marcelo X",
-      email: "marcuso@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Elon Mask",
-      email: "elon@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Donal Tramp",
-      email: "donal@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Elon Mask",
-      email: "elon@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Donal Tramp",
-      email: "donal@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-    {
-      id: "ALT-00154258",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      preferences: "Jumping, Cross Country",
-      sizes: "17', 17.5''",
-      priceRange: "€2,000 - €4,000",
-      createdDate: "09 June, 2025",
-    },
-  ];
-
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useGetAllSaddleAlertQuery({
+    search: debouncedSearch,
+    page: currentPage,
+  });
+  const relevantData = data?.data;
+  const currentItems = relevantData || [];
+  const meta = data?.meta;
 
   const tableHeader = [
     "Alert ID",
@@ -100,9 +35,11 @@ export default function SaddleAlert() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
-    (item) => <span className="text-[14px] text-[#1F274B]">{item?.id}</span>,
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">{item?.alert_id}</span>
+    ),
     (item) => (
       <span className="text-[14px] text-[#1F274B]">{item?.customer}</span>
     ),
@@ -110,27 +47,29 @@ export default function SaddleAlert() {
       <span className="text-[14px] text-[#1F274B]">{item?.preferences}</span>
     ),
     (item) => (
-      <span className="text-[14px] text-[#1F274B]">{item?.priceRange}</span>
+      <span className="text-[14px] text-[#1F274B]">{item?.price_range}</span>
     ),
     (item) => (
-      <span className="text-[14px] text-[#1F274B]">{item?.createdDate}</span>
+      <span className="text-[14px] text-[#1F274B]">
+        {item?.created_date
+          ? format(new Date(item.created_date), "MMM d, yyyy")
+          : ""}
+      </span>
     ),
 
     (item) => (
       <div>
         <div className="flex items-center justify-end gap-2">
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <SaddleAlertDetailModal />
-          </button>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <SaddleDeleteModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <SaddleAlertDetailModal id={String(item?.id)}/>
+          </div>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <SaddleDeleteModal id={String(item?.id)} refetch={refetch} />
+          </div>
         </div>
       </div>
     ),
   ];
-
-  const isLoadings = false;
 
   return (
     <div>
@@ -156,6 +95,9 @@ export default function SaddleAlert() {
                 type="text"
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search by customer name, email, or brand..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -167,7 +109,7 @@ export default function SaddleAlert() {
           <div className="mt-4 overflow-x-auto">
             <ReuseAbleTable
               allClientDataList={relevantData}
-              isLoadings={isLoadings}
+              isLoadings={isLoading}
               currentItems={currentItems}
               tableHeader={tableHeader}
               tableRowDataRenderers={tableRowDataRenderers}
@@ -176,19 +118,13 @@ export default function SaddleAlert() {
           </div>
 
           {/* pagination */}
-          {!isLoadings && (
-            <div
-              className={`flex justify-center pt-12 pb-4 ${
-                relevantData?.length >= 5 ? "block" : "hidden"
-              }`}
-            >
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
-          )}
+          <div className={`flex justify-center pt-12 pb-4`}>
+            <PaginationComponent
+              currentPage={meta?.page}
+              totalPages={meta?.totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </div>
       </div>
     </div>

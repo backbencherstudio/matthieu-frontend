@@ -1,83 +1,115 @@
 "use client";
+import { useUpdateContactMutation } from "@/src/redux/admin/cms/contact/contactApi";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-interface FormData {
+interface ContactFormData {
   address: string;
-  author: string;
-  description: string;
+  fb_link: string;
+  instagram_link: string;
+  tiktok_link: string;
+  youtube_link: string;
 }
 
 export default function ContactTab() {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<ContactFormData>({
     defaultValues: {
       address: "",
-      author: "",
-      description: "",
+      fb_link: "",
+      instagram_link: "",
+      tiktok_link: "",
+      youtube_link: "",
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form submitted:", data);
+  const [updateContact, { isLoading }] = useUpdateContactMutation();
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const response = await updateContact(data);
+      if (response?.data?.id) {
+        toast.success("Contact info updated");
+        reset();
+      }
+    } catch (error) {
+      console.error("Create failed", error);
+      toast.error("Failed to update");
+    }
   };
 
   return (
     <div className="p-4 bg-[#FFF] rounded-[8px] border border-[#DFE1E7]">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Header */}
-        <div className="flex flex-wrap gap-2 justify-between items-center">
-          <h1 className="text-2xl font-extrabold text-primary-text">
-            Update Contact Information
-          </h1>
-        </div>
+        <h1 className="text-2xl font-extrabold text-primary-text">
+          Update Contact Information
+        </h1>
+
         {/* Body */}
         <div className="mt-4">
-          <div className="w-full">
-            <div>
-              <label className="text-[12px] leading-[100%] text-[#696E86]">
-                Address
-              </label>
+          {/* Address */}
+          <div>
+            <label className="text-[12px] text-[#696E86]">Address</label>
+            <input
+              {...register("address", {
+                required: "Address is required",
+              })}
+              type="text"
+              className="p-3 mt-2 w-full rounded-[4px] border border-[#ECEFF3]"
+              placeholder="3080 Fairlane Farms Rd. Suite 2, Wellington, FL 33414"
+            />
+            {errors.address && (
+              <p className="text-xs text-red-500 mt-1">
+                {errors.address.message}
+              </p>
+            )}
+          </div>
+
+          {/* Social Links */}
+          <div className="mt-4">
+            <label className="text-[12px] text-[#696E86]">
+              Social Media Links
+            </label>
+
+            <div className="grid md:grid-cols-2 gap-2">
               <input
-                type="text"
-                className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
-                placeholder="3080 Fairlane Farms Rd. Suite 2, Wellington, FL 33414"
+                {...register("instagram_link")}
+                className="p-3 mt-2 rounded-[4px] border border-[#ECEFF3]"
+                placeholder="https://www.instagram.com/arion_saddle"
+              />
+
+              <input
+                {...register("fb_link")}
+                className="p-3 mt-2 rounded-[4px] border border-[#ECEFF3]"
+                placeholder="https://www.facebook.com/arion_saddle"
+              />
+
+              <input
+                {...register("tiktok_link")}
+                className="p-3 mt-2 rounded-[4px] border border-[#ECEFF3]"
+                placeholder="https://www.tiktok.com/arion_saddle"
+              />
+
+              <input
+                {...register("youtube_link")}
+                className="p-3 mt-2 rounded-[4px] border border-[#ECEFF3]"
+                placeholder="https://www.youtube.com/arion_saddle"
               />
             </div>
-            <div className="mt-4">
-              <label className="text-[12px] leading-[100%] text-[#696E86]">
-                Social Media Links
-              </label>
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
-                <input
-                  type="text"
-                  className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
-                  placeholder="https://www.instagram.com/arion_saddle"
-                />
-                <input
-                  type="text"
-                  className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
-                  placeholder="https://www.facebook.com/arion_saddle"
-                />
-                <input
-                  type="text"
-                  className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
-                  placeholder="https://www.tiktok.com/arion_saddle"
-                />
-                <input
-                  type="text"
-                  className="p-3 rounded-[4px] border border-[#ECEFF3] placeholder:text-[14px] placeholder:text-[#4C526F] placeholder:leading-[100%] focus:outline-none focus:ring-0 mt-2 w-full"
-                  placeholder="https://www.Youtube.com/arion_saddle"
-                />
-              </div>
-            </div>
           </div>
-          <div className="flex items-end justify-end">
-            <button className="px-3 py-2.5 rounded-[4px] bg-[#1F274B] text-[#FFF] text-[14px] leading-[117%] mt-6 cursor-pointer">
-              Save
+
+          {/* Save */}
+          <div className="flex justify-end mt-6">
+            <button
+              type="submit"
+              className="px-3 py-2.5 rounded-[4px] bg-[#1F274B] text-white cursor-pointer"
+            >
+              {isLoading ? "Updating..." : "Update"}
             </button>
           </div>
         </div>

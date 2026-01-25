@@ -1,5 +1,6 @@
 "use client";
 import PlusIcon from "@/components/Icons/PlusIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useShowAllMemberQuery } from "@/src/redux/admin/cms/arionTeam/arionTeamApi";
@@ -8,25 +9,24 @@ import { format } from "date-fns";
 import { Search, User2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteArionTeamModal from "./DeleteArionTeam";
 import EditArionTeamModal from "./EditArionTeamModal";
 
 const ArionTeamTab = () => {
-  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8);
   const [search, setSearch] = useState("");
 
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading, refetch } = useShowAllMemberQuery({
     search: debouncedSearch,
+    page: currentPage,
   });
 
   const relevantData = data?.data;
 
   const currentItems = relevantData ?? [];
+  const meta = data?.meta;
 
   const tableHeader = [
     "Full Name",
@@ -130,19 +130,13 @@ const ArionTeamTab = () => {
         </div>
 
         {/* pagination */}
-        {/* {!isLoadings && (
-          <div
-            className={`flex justify-center pt-12 pb-4 ${
-              relevantData?.length >= 5 ? "block" : "hidden"
-            }`}
-          >
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )} */}
+        <div className={`flex justify-center pt-12 pb-4`}>
+          <PaginationComponent
+            currentPage={meta?.page}
+            totalPages={meta?.totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );
