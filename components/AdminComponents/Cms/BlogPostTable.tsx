@@ -9,100 +9,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllBlogsQuery } from "@/src/redux/admin/cms/blog/blogApi";
 import { TableRowItem } from "@/types/TableRowItem";
+import { format } from "date-fns";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import BlogDeleteModal from "./BlogDeleteModal";
 
 export default function BlogPostTable() {
-  const relevantData = [
-    {
-      id: 1,
-      title: "The Art of Saddle Craftsmanship: A Legacy of Excellence",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion", "Saddle"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-    {
-      id: 2,
-      title: "Choosing the Right Saddle for Your Discipline",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-    {
-      id: 3,
-      title: "The Art of Saddle Craftsmanship: A Legacy of Excellence",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion", "Saddle"],
-      status: "Draft",
-      author: "G_fournier",
-      clicks: null,
-      publishDate: null,
-    },
-    {
-      id: 4,
-      title: "Choosing the Right Saddle for Your Discipline",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-    {
-      id: 5,
-      title: "The Art of Saddle Craftsmanship: A Legacy of Excellence",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion", "Saddle"],
-      status: "Draft",
-      author: "G_fournier",
-      clicks: null,
-      publishDate: null,
-    },
-    {
-      id: 6,
-      title: "Choosing the Right Saddle for Your Discipline",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-    {
-      id: 7,
-      title: "The Art of Saddle Craftsmanship: A Legacy of Excellence",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion", "Saddle"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-    {
-      id: 8,
-      title: "Choosing the Right Saddle for Your Discipline",
-      tags: ["NAYC", "rider results", "Team Arion"],
-      categories: ["Arion"],
-      status: "Published",
-      author: "G_fournier",
-      clicks: 12,
-      publishDate: "Sep 5, 2024",
-    },
-  ];
-
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
-
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [status, setStatus] = useState<string | undefined>(undefined);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useGetAllBlogsQuery({
+    search: debouncedSearch,
+    page: currentPage,
+    status,
+  });
+  const relevantData = data?.data;
+  const currentItems = relevantData ?? [];
+  const meta = data?.meta;
   const tableHeader = [
     "Blog Title",
     "Tags",
@@ -135,24 +63,16 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {(item?.categories as string[])?.map((category, index) => (
-          <span
-            key={index}
-            className={`text-[14px] mr-2 ${
-              item?.status === "Published" ? "text-[#B1244C]" : "text-[#379C43]"
-            }`}
-          >
-            {category}
-            {index < ((item?.categories as string[])?.length ?? 0) - 1 && ", "}
-          </span>
-        ))}
+        {typeof item?.category === "string"
+          ? item?.category
+          : (item?.category as { name: string })?.name}
       </span>
     ),
     (item) => (
       <span
         className={`text-[14px] leading-[114%] px-2 py-1 rounded-md 
     ${
-      item?.status === "Published"
+      item?.status === "PUBLISHED"
         ? "text-[#0C5FCD] bg-[#EBEBFE]"
         : "text-[#F99F0E] bg-[#FFFAE7]"
     }`}
@@ -162,7 +82,7 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.author}
+        {item?.authorName}
       </span>
     ),
     (item) => (
@@ -172,7 +92,9 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.publishDate}
+        {item?.publishedAt
+          ? format(new Date(item.publishedAt), "MMM d, yyyy")
+          : "N/A"}
       </span>
     ),
     (item) => (
@@ -191,7 +113,6 @@ export default function BlogPostTable() {
     ),
   ];
 
-  const isLoadings = false;
   return (
     <div>
       <div className="overflow-auto">
@@ -207,20 +128,30 @@ export default function BlogPostTable() {
                   type="text"
                   className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                   placeholder="Search blog posts..."
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
               <div>
-                <Select>
+                <Select
+                  value={status ?? "all"}
+                  onValueChange={(value) => {
+                    setStatus(value === "all" ? undefined : value);
+                    setCurrentPage(1); 
+                  }}
+                >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
+
                   <SelectContent>
-                    <SelectItem value="allStatus">All Status</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                    <SelectItem value="draft">Draft</SelectItem>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="PUBLISHED">Published</SelectItem>
+                    <SelectItem value="DRAFT">Draft</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -266,7 +197,7 @@ export default function BlogPostTable() {
           <div className="mt-4 overflow-x-auto">
             <ReuseAbleTable
               allClientDataList={relevantData}
-              isLoadings={isLoadings}
+              isLoadings={isLoading}
               currentItems={currentItems}
               tableHeader={tableHeader}
               tableRowDataRenderers={tableRowDataRenderers}
@@ -275,19 +206,13 @@ export default function BlogPostTable() {
           </div>
 
           {/* pagination */}
-          {!isLoadings && (
-            <div
-              className={`flex justify-center pt-12 pb-4 ${
-                relevantData?.length >= 5 ? "block" : "hidden"
-              }`}
-            >
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
-          )}
+          <div className={`flex justify-center pt-12 pb-4`}>
+            <PaginationComponent
+              currentPage={meta?.page}
+              totalPages={meta?.totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -99,9 +99,9 @@ export interface TableRowItem extends TableItem {
   companyName?: string;
   workspaceName?: string;
   customDomain?: string;
-  author?: string;
+  authorName?: string;
   clicks?: number;
-  publishDate?: string;
+  publishedAt?: string;
   tags?: string[];
   categories?: string[];
   paymentMethod?: string;
