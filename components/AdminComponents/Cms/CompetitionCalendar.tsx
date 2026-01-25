@@ -1,5 +1,4 @@
 "use client";
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
@@ -11,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import DeleteCalendar from "./DeleteCalendar";
+import EditCalendarModal from "./EditCalendarModal";
 
 const CompetitionCalendarTab = () => {
   const router = useRouter();
@@ -59,13 +59,8 @@ const CompetitionCalendarTab = () => {
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div>
-          <button
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-            onClick={() => router.push("/admin/cms/add-competition")}
-          >
-            <EditIcon />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <EditCalendarModal id={String(item?.id)} refetch={refetch}   />
         </div>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
           <DeleteCalendar id={String(item?.id)} refetch={refetch} />

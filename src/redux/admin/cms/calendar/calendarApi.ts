@@ -40,6 +40,7 @@ const calendarApi = baseApi.injectEndpoints({
 export const {
   useCreateCalendarMutation,
   useGetAllCalendarQuery,
+  useUpdateCalendarMutation,
   useDeleteCalendarMutation,
 } = calendarApi;
 
