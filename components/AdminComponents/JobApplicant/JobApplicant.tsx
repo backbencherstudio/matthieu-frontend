@@ -1,4 +1,3 @@
-
 "use client";
 
 import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
@@ -69,7 +68,7 @@ export default function JobApplicant() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => <span className="text-[14px] text-[#1F274B]">{item?.name}</span>,
     (item) => <span className="text-[14px] text-[#1F274B]">{item?.email}</span>,

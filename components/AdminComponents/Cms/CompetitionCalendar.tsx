@@ -10,18 +10,19 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import DeleteCalendar from "./DeleteCalendar";
 import EditCalendarModal from "./EditCalendarModal";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 
 const CompetitionCalendarTab = () => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading, refetch } = useGetAllCalendarQuery({
     search: debouncedSearch,
+    page: currentPage,
   });
   const relevantData = data?.data;
   const currentItems = relevantData ?? [];
-
-  // const { currentItems, currentPage, totalPages, setCurrentPage } =
-  //   useFilterPagination(relevantData, 6);
+  const meta = data?.meta;
 
   const tableHeader = [
     "Competition",
@@ -117,19 +118,17 @@ const CompetitionCalendarTab = () => {
         </div>
 
         {/* pagination */}
-        {/* {!isLoadings && (
-          <div
-            className={`flex justify-center pt-12 pb-4 ${
-              relevantData?.length >= 5 ? "block" : "hidden"
-            }`}
-          >
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )} */}
+        <div
+          className={`flex justify-center pt-12 pb-4 ${
+            relevantData?.length >= 5 ? "block" : "hidden"
+          }`}
+        >
+          <PaginationComponent
+            currentPage={meta?.page}
+            totalPages={meta?.totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useGetAllQuery } from "@/src/redux/admin/cms/ambassador/ambassadorApi";
@@ -13,13 +14,16 @@ import EditAmbassadorModal from "./EditAmbassadorModal";
 
 const ArionAmbassadorTab = () => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 500);
 
   const { data, isLoading, refetch } = useGetAllQuery({
     search: debouncedSearch,
+    page: currentPage,
   });
   const relevantData = data?.data;
   const currentItems = relevantData ?? [];
+  const meta = data?.meta;
 
   const tableHeader = [
     "Full Name",
@@ -130,19 +134,17 @@ const ArionAmbassadorTab = () => {
         </div>
 
         {/* pagination */}
-        {/* {!isLoadings && (
-          <div
-            className={`flex justify-center pt-12 pb-4 ${
-              relevantData?.length >= 5 ? "block" : "hidden"
-            }`}
-          >
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )} */}
+        <div
+          className={`flex justify-center pt-12 pb-4 ${
+            relevantData?.length >= 5 ? "block" : "hidden"
+          }`}
+        >
+          <PaginationComponent
+            currentPage={meta?.page}
+            totalPages={meta?.totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );

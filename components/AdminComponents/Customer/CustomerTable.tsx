@@ -120,7 +120,7 @@ export default function CustomerTable() {
 
   const tableRowDataRenderers: ((
     item: TableRowItem,
-    index: number
+    index: number,
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#4A4C56] leading-[114%]">

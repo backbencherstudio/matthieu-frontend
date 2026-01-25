@@ -11,11 +11,12 @@ const ambassadorApi = baseApi.injectEndpoints({
     }),
 
     getAll: builder.query({
-      query: ({ search }) => ({
+      query: ({ search, page }) => ({
         url: "/ambassador",
         method: "GET",
         params: {
           search,
+          page,
         },
       }),
     }),

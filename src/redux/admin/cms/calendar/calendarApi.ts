@@ -11,11 +11,12 @@ const calendarApi = baseApi.injectEndpoints({
     }),
 
     getAllCalendar: builder.query({
-      query: ({ search }) => ({
+      query: ({ search, page }) => ({
         url: "/competitions",
         method: "GET",
         params: {
           search,
+          page,
         },
       }),
     }),

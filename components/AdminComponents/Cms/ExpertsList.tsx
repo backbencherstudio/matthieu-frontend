@@ -1,6 +1,7 @@
 "use client";
 import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useGetAllExpertsQuery } from "@/src/redux/admin/cms/expert/expertApi";
@@ -14,14 +15,15 @@ import BlogDeleteModal from "./BlogDeleteModal";
 const ExpertsList = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading } = useGetAllExpertsQuery({
     search: debouncedSearch,
+    page: currentPage,
   });
   const relevantData = data?.data;
   const currentItems = relevantData ?? [];
-  // const { currentItems, currentPage, totalPages, setCurrentPage } =
-  //   useFilterPagination(relevantData, 6);
+  const meta = data?.meta;
 
   const tableHeader = ["Name", "Email", "Phone", "Region", "Country", "Action"];
 
@@ -121,19 +123,17 @@ const ExpertsList = () => {
         </div>
 
         {/* pagination */}
-        {/* {!isLoadings && (
-          <div
-            className={`flex justify-center pt-12 pb-4 ${
-              relevantData?.length >= 5 ? "block" : "hidden"
-            }`}
-          >
-            <PaginationComponent
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </div>
-        )} */}
+        <div
+          className={`flex justify-center pt-12 pb-4 ${
+            relevantData?.length >= 5 ? "block" : "hidden"
+          }`}
+        >
+          <PaginationComponent
+            currentPage={meta?.page}
+            totalPages={meta?.totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );
