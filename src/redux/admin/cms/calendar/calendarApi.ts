@@ -37,7 +37,10 @@ const calendarApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllCalendarQuery, useDeleteCalendarMutation } =
-  calendarApi;
+export const {
+  useCreateCalendarMutation,
+  useGetAllCalendarQuery,
+  useDeleteCalendarMutation,
+} = calendarApi;
 
 export default calendarApi;
