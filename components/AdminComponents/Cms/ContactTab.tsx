@@ -1,5 +1,9 @@
 "use client";
-import { useUpdateContactMutation } from "@/src/redux/admin/cms/contact/contactApi";
+import {
+  useGetSingleContactQuery,
+  useUpdateContactMutation,
+} from "@/src/redux/admin/cms/contact/contactApi";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,7 +30,19 @@ export default function ContactTab() {
       youtube_link: "",
     },
   });
-
+  const { data } = useGetSingleContactQuery("");
+  const contact = data;
+  useEffect(() => {
+    if (contact) {
+      reset({
+        address: contact.address,
+        fb_link: contact.fb_link,
+        instagram_link: contact.instagram_link,
+        tiktok_link: contact.tiktok_link,
+        youtube_link: contact.youtube_link,
+      });
+    }
+  }, [contact, reset]);
   const [updateContact, { isLoading }] = useUpdateContactMutation();
 
   const onSubmit = async (data: ContactFormData) => {

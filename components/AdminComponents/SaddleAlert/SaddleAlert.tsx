@@ -20,9 +20,10 @@ export default function SaddleAlert() {
     search: debouncedSearch,
     page: currentPage,
   });
-  const relevantData = data?.data;
+  console.log(data);
+  const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
-  const meta = data?.meta;
+  const meta = data?.data?.pagination;
 
   const tableHeader = [
     "Alert ID",
@@ -47,7 +48,7 @@ export default function SaddleAlert() {
       <span className="text-[14px] text-[#1F274B]">{item?.preferences}</span>
     ),
     (item) => (
-      <span className="text-[14px] text-[#1F274B]">{item?.price_range}</span>
+      <span className="text-[14px] text-[#1F274B]">${item?.price_range}</span>
     ),
     (item) => (
       <span className="text-[14px] text-[#1F274B]">
@@ -61,7 +62,7 @@ export default function SaddleAlert() {
       <div>
         <div className="flex items-center justify-end gap-2">
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <SaddleAlertDetailModal id={String(item?.id)}/>
+            <SaddleAlertDetailModal id={String(item?.id)} />
           </div>
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <SaddleDeleteModal id={String(item?.id)} refetch={refetch} />

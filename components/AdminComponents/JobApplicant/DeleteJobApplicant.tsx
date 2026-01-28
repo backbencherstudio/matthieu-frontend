@@ -21,7 +21,7 @@ export default function DeleteJobApplicant({
   const handelDelete = async () => {
     try {
       const response = await deleteJobApplicant(id);
-      console.log(response);
+
       if (response?.data?.success) {
         refetch();
         setOpen(false);
@@ -52,7 +52,7 @@ export default function DeleteJobApplicant({
           </div>
 
           <h2 className="text-xl font-extrabold leading-[130%] tracking-[0.1px] text-[#101010] mt-4 text-center">
-            Delete Arion Ambassador
+            Delete Job Applicant
           </h2>
 
           <div className="mt-9 flex items-center justify-center space-x-4 w-full">

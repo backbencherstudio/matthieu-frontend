@@ -21,7 +21,8 @@ const ExpertsList = () => {
     search: debouncedSearch,
     page: currentPage,
   });
-  const relevantData = data?.data;
+
+  const relevantData = data?.data?.data;
   const currentItems = relevantData ?? [];
   const meta = data?.meta;
 

@@ -31,8 +31,8 @@ const AddExpertsPage = () => {
   const onSubmit = async (data: AddExpertFormValues) => {
     try {
       const response = await createExperts(data);
-      if (response?.data?.id) {
-        toast.success("Expert added successfully");
+      if (response?.data?.success) {
+        toast.success(response?.data?.message);
         reset();
       }
     } catch (error) {

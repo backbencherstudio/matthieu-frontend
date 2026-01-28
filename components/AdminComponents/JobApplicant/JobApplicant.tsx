@@ -20,9 +20,11 @@ export default function JobApplicant() {
     page: currentPage,
   });
 
-  const relevantData = data?.data;
+  console.log(data);
+
+  const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
-  const meta = data?.meta;
+  const meta = data?.data?.meta;
 
   const tableHeader = [
     "Name",

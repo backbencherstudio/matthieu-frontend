@@ -2,13 +2,10 @@ import baseApi from "../../../api/baseApi";
 
 const contactApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllContact: builder.query({
-      query: ({ search }) => ({
-        url: "/contact-infos",
+    getSingleContact: builder.query({
+      query: () => ({
+        url: `/contact-infos`,
         method: "GET",
-        params: {
-          search,
-        },
       }),
     }),
 
@@ -22,6 +19,7 @@ const contactApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUpdateContactMutation } = contactApi;
+export const { useUpdateContactMutation, useGetSingleContactQuery } =
+  contactApi;
 
 export default contactApi;
