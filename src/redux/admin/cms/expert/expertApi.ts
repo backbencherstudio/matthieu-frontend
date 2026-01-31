@@ -21,6 +21,13 @@ const expertApi = baseApi.injectEndpoints({
       }),
     }),
 
+    getSingleExpert: builder.query({
+      query: (id) => ({
+        url: `/experts/${id}`,
+        method: "GET",
+      }),
+    }),
+
     updateExperts: builder.mutation({
       query: ({ id, data }) => ({
         url: `/experts/${id}`,
@@ -38,6 +45,12 @@ const expertApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateExpertsMutation, useGetAllExpertsQuery } = expertApi;
+export const {
+  useCreateExpertsMutation,
+  useGetAllExpertsQuery,
+  useGetSingleExpertQuery,
+  useUpdateExpertsMutation,
+  useDeleteExpertsMutation,
+} = expertApi;
 
 export default expertApi;
