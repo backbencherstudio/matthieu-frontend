@@ -20,8 +20,6 @@ export default function JobApplicant() {
     page: currentPage,
   });
 
-  console.log(data);
-
   const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
   const meta = data?.data?.meta;
@@ -54,9 +52,9 @@ export default function JobApplicant() {
     (item) => (
       <div>
         <div className="flex items-center justify-end gap-2">
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <ApplicantsDetailsModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <ApplicantsDetailsModal id={String(item?.id)} />
+          </div>
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <DeleteJobApplicant id={String(item?.id)} refetch={refetch} />
           </div>

@@ -15,7 +15,6 @@ export default function SaddleAlertDetail({
   onClose,
 }: SaddleAlertDetailProps) {
   const { data, isLoading } = useGetSingleSaddleAlertQuery(id);
-  console.log(data);
 
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
