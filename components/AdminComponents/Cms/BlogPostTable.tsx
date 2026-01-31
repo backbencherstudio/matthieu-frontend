@@ -99,15 +99,11 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <EditIcon />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <EditIcon />
         </div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
-          </button>
+        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+          <BlogDeleteModal id={String(item?.id)} refetch={refetch} />
         </div>
       </div>
     ),
@@ -141,7 +137,7 @@ export default function BlogPostTable() {
                   value={status ?? "all"}
                   onValueChange={(value) => {
                     setStatus(value === "all" ? undefined : value);
-                    setCurrentPage(1); 
+                    setCurrentPage(1);
                   }}
                 >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
