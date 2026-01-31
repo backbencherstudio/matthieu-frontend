@@ -8,7 +8,7 @@ import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
-import BlogDeleteModal from "./BlogDeleteModal";
+import DeleteExpertModal from "./DeleteExpertModal";
 import EditExpertModal from "./EditExpertModal";
 
 const ExpertsList = () => {
@@ -22,7 +22,7 @@ const ExpertsList = () => {
 
   const relevantData = data?.data?.data;
   const currentItems = relevantData ?? [];
-  const meta = data?.meta;
+  const meta = data?.data?.meta;
 
   const tableHeader = ["Name", "Email", "Phone", "Region", "Country", "Action"];
 
@@ -64,7 +64,7 @@ const ExpertsList = () => {
         </div>
         <div>
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
+            <DeleteExpertModal id={String(item?.id)} refetch={refetch} />
           </div>
         </div>
       </div>

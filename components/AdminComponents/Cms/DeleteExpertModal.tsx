@@ -1,0 +1,76 @@
+"use client";
+
+import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
+import CustomDialog from "@/components/reusable/Features/Dialog";
+import { useDeleteExpertsMutation } from "@/src/redux/admin/cms/expert/expertApi";
+import { useState } from "react";
+import { toast } from "sonner";
+
+interface DeleteExpertModalProps {
+  id: string;
+  refetch: () => void;
+}
+
+export default function DeleteExpertModal({
+  id,
+  refetch,
+}: DeleteExpertModalProps) {
+  const [open, setOpen] = useState(false);
+  const [deleteExperts, { isLoading }] = useDeleteExpertsMutation();
+  const handelDelete = async () => {
+    try {
+      const response = await deleteExperts(id);
+      if (response?.data?.success) {
+        refetch();
+        setOpen(false);
+        toast.success(response?.data?.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete member");
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(true)}
+        className="p-[7px] bg-[#F8FAFB] rounded-[6px]"
+      >
+        <span className="cursor-pointer">
+          <DeleteIcon />
+        </span>
+      </button>
+
+      <CustomDialog open={open} setOpen={setOpen}>
+        <div className="p-8 rounded-[8px] bg-[#FFF] md:w-[417px] w-full">
+          <div className="flex items-center justify-center">
+            <button className="cursor-pointer p-3 border-[6px] border-[#FBD8DB] bg-[#FEECEE] rounded-full">
+              <DeleteIcon />
+            </button>
+          </div>
+
+          <h2 className="text-xl font-extrabold leading-[130%] tracking-[0.1px] text-[#101010] mt-4 text-center">
+            Delete Expert
+          </h2>
+
+          <div className="mt-9 flex items-center justify-center space-x-4 w-full">
+            <button
+              onClick={() => setOpen(false)}
+              className="px-4 py-3 rounded-[8px] bg-[#E9E9ED] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#777980] w-full"
+            >
+              No
+            </button>
+
+            <button
+              onClick={handelDelete}
+              className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full"
+            >
+              {isLoading ? "Deleting..." : "Yes, Delete"}
+            </button>
+          </div>
+        </div>
+      </CustomDialog>
+    </div>
+  );
+}
