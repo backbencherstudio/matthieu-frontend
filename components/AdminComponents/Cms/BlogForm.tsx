@@ -1,9 +1,17 @@
 "use client";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useCreateBlogMutation } from "@/src/redux/admin/cms/blog/blogApi";
 import { Upload } from "lucide-react";
 import { useRef, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface BlogFormData {
   thumbnail: FileList | null;
@@ -11,6 +19,7 @@ interface BlogFormData {
   author: string;
   description: string;
   category: string;
+  status: string;
   tags: string[];
 
   contentSections: {
@@ -25,8 +34,19 @@ interface BlogFormData {
   }[];
 }
 
+enum CategoryEnum {
+  RIDER_SPOTLIGHTS = "RIDER_SPOTLIGHTS",
+  SPORT_HIGHLIGHTS = "SPORT_HIGHLIGHTS",
+  ON_THE_ROAD = "ON_THE_ROAD",
+  ARION_WORLD = "ARION_WORLD",
+}
+enum StatusEnum {
+  DRAFT = "DRAFT",
+  PUBLISHED = "PUBLISHED",
+}
+
 export function BlogForm() {
-  const { control, register, handleSubmit, setValue, watch } =
+  const { control, register, handleSubmit, setValue, watch, reset } =
     useForm<BlogFormData>({
       defaultValues: {
         thumbnail: null,
@@ -34,6 +54,7 @@ export function BlogForm() {
         author: "",
         description: "",
         category: "",
+        status: "",
         tags: [],
         contentSections: [],
         imageSections: [],
@@ -83,48 +104,47 @@ export function BlogForm() {
 
   const [createBlog] = useCreateBlogMutation();
   const onSubmit = async (data: BlogFormData) => {
-    console.log(data);
     try {
       const formData = new FormData();
 
-      // 🔹 BASIC FIELDS
+      // BASIC FIELDS
       formData.append("title", data.title);
       formData.append("authorName", data.author);
       formData.append("descriptions", data.description);
       formData.append("category", data.category);
-      formData.append("status", "DRAFT");
+      formData.append("status", data.status);
 
-      // 🔹 TAGS (MULTIPLE)
       data.tags.forEach((tag) => {
         formData.append("tags", tag);
       });
 
-      // 🔹 THUMBNAIL
+      // THUMBNAIL
       if (data.thumbnail?.[0]) {
         formData.append("thumbnail", data.thumbnail[0]);
       }
 
-      // 🔹 CONTENT IMAGES (MULTIPLE FILES)
       data.imageSections.forEach((section) => {
         if (section.image) {
           formData.append("contentImages", section.image);
         }
       });
 
-      // 🔹 CONTENT IMAGES META (FULL + CORRECT)
       const contentImagesMeta = data.imageSections.map((section) => ({
         imageTitle: section.imageTitle,
-        imageDetail: section.imageTitle, // 👈 REQUIRED by backend
+        imageDetail: section.imageTitle,
         imageDescription: section.imageContent,
       }));
 
       formData.append("contentImagesMeta", JSON.stringify(contentImagesMeta));
 
-      const response = await createBlog(formData).unwrap();
-
-      console.log("BLOG CREATED:", response);
+      const response = await createBlog(formData);
+      if (response?.data?.message) {
+        toast.success(response?.data?.message);
+        reset()
+      }
     } catch (error) {
       console.error("CREATE BLOG FAILED:", error);
+      toast.error("Failed to add blog");
     }
   };
 
@@ -360,18 +380,55 @@ export function BlogForm() {
           })}
 
           {/* CATEGORY */}
-          <label
-            htmlFor="category"
-            className="mb-1 block text-[#696E86] text-[12px]"
-          >
+          <label className="mb-1 block text-[#696E86] text-[12px]">
             Category *
           </label>
-          <input
-            {...register("category", {
-              required: true,
-            })}
-            placeholder="Category"
-            className="w-full p-3 border rounded-lg"
+
+          <Controller
+            name="category"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="w-full py-6">
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  {Object.values(CategoryEnum).map((item) => (
+                    <SelectItem key={item} value={item}>
+                      {item.replace(/_/g, " ")}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+
+          {/* status */}
+          <label className="mb-1 block text-[#696E86] text-[12px]">
+            Status *
+          </label>
+
+          <Controller
+            name="status"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="w-full py-6">
+                  <SelectValue placeholder="Select status" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  {Object.values(StatusEnum).map((item) => (
+                    <SelectItem key={item} value={item}>
+                      {item.replace(/_/g, " ")}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
 
           {/* TAGS */}
