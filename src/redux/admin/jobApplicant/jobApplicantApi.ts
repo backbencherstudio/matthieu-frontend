@@ -13,6 +13,13 @@ const jobApplicantApi = baseApi.injectEndpoints({
       }),
     }),
 
+    getSingleJobApplicant: builder.query({
+      query: (id) => ({
+        url: `/job-portal/${id}`,
+        method: "GET",
+      }),
+    }),
+
     deleteJobApplicant: builder.mutation({
       query: (id) => ({
         url: `/job-portal/${id}`,
@@ -22,7 +29,10 @@ const jobApplicantApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllJobApplicantQuery, useDeleteJobApplicantMutation } =
-  jobApplicantApi;
+export const {
+  useGetSingleJobApplicantQuery,
+  useGetAllJobApplicantQuery,
+  useDeleteJobApplicantMutation,
+} = jobApplicantApi;
 
 export default jobApplicantApi;

@@ -57,19 +57,21 @@ export default function SaddleAlertDetail({
                   Customer Name
                 </label>
                 <p className="text-[16px] text-[#1F274B]">
-                  {data?.customer_name}
+                  {data?.data?.customer_name}
                 </p>
               </div>
 
               <div>
                 <label className="text-[14px] text-[#696E86]">Email</label>
-                <p className="text-[16px] text-[#1F274B]">{data?.Email}</p>
+                <p className="text-[16px] text-[#1F274B]">
+                  {data?.data?.Email}
+                </p>
               </div>
 
               <div>
                 <label className="text-[14px] text-[#696E86]">Phone</label>
                 <p className="text-[16px] text-[#1F274B]">
-                  {data?.phone_number}
+                  {data?.data?.phone_number}
                 </p>
               </div>
 
@@ -78,13 +80,15 @@ export default function SaddleAlertDetail({
                   Price Range
                 </label>
                 <p className="text-[16px] text-[#1F274B]">
-                  €{data?.Price_range}
+                  €{data?.data?.Price_range}
                 </p>
               </div>
 
               <div>
                 <label className="text-[14px] text-[#696E86]">Seat Sizes</label>
-                <p className="text-[16px] text-[#1F274B]">{data?.Seat_Sizes}</p>
+                <p className="text-[16px] text-[#1F274B]">
+                  {data?.data?.Seat_Sizes}
+                </p>
               </div>
 
               <div>
@@ -92,13 +96,15 @@ export default function SaddleAlertDetail({
                   Preferences
                 </label>
                 <p className="text-[16px] text-[#1F274B]">
-                  {data?.Preferences}
+                  {data?.data?.Preferences}
                 </p>
               </div>
 
               <div>
                 <label className="text-[14px] text-[#696E86]">Colors</label>
-                <p className="text-[16px] text-[#1F274B]">{data?.Color}</p>
+                <p className="text-[16px] text-[#1F274B]">
+                  {data?.data?.Color}
+                </p>
               </div>
 
               <div>
@@ -106,7 +112,7 @@ export default function SaddleAlertDetail({
                   Town, State
                 </label>
                 <p className="text-[16px] text-[#1F274B]">
-                  {data?.state}, {data?.town}
+                  {data?.data?.state}, {data?.data?.town}
                 </p>
               </div>
             </div>
@@ -116,7 +122,7 @@ export default function SaddleAlertDetail({
                 Additional Notes
               </label>
               <p className="text-[16px] text-[#1F274B]">
-                {data?.Additional_notes}
+                {data?.data?.Additional_notes}
               </p>
             </div>
           </>

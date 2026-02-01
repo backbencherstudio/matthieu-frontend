@@ -1,4 +1,4 @@
-import TinyEditor from "@/components/AdminComponents/Cms/TinyEditor";
+import { BlogForm } from "@/components/AdminComponents/Cms/BlogForm";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 
 export default function CreateBlogPage() {
@@ -16,7 +16,7 @@ export default function CreateBlogPage() {
     <div>
       <BreadCrumb breadLink={breadLink} />
       <div className="pt-5">
-        <TinyEditor />
+        <BlogForm />
       </div>
     </div>
   );

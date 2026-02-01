@@ -2,7 +2,12 @@ import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import ModalWrapper from "../reusable/ModalWrapper";
 import JobApplicantDetail from "./JobApplicantDetail";
 
-export default function ApplicantsDetailsModal() {
+interface DetailProps {
+  id: string;
+  onClose?: () => void;
+}
+
+export default function ApplicantsDetailsModal({ id, onClose }: DetailProps) {
   return (
     <ModalWrapper
       trigger={
@@ -11,9 +16,7 @@ export default function ApplicantsDetailsModal() {
         </span>
       }
     >
-      <JobApplicantDetail onClose={function (): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <JobApplicantDetail id={id} />
     </ModalWrapper>
   );
 }

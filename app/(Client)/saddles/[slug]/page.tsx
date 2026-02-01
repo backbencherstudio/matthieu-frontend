@@ -1,4 +1,5 @@
 "use client";
+
 import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion";
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
@@ -7,26 +8,19 @@ import { useState } from "react";
 
 export default function JumpingPage() {
   const breadLink = [
-    {
-      label: "SADDLES",
-      href: "/saddles",
-    },
-    {
-      label: "ARION",
-      href: "/saddles/arion-saddles",
-    },
-    {
-      label: "JUMPING",
-      href: "/saddles/jumping",
-    },
+    { label: "SADDLES", href: "/saddles" },
+    { label: "ARION", href: "/saddles/arion-saddles" },
+    { label: "JUMPING", href: "/saddles/jumping" },
   ];
 
   const productImages = [
     { imgLink: "/images/saddles/kids.png" },
     { imgLink: "/images/saddles/kids.png" },
     { imgLink: "/images/saddles/kids.png" },
+    { imgLink: "/images/saddles/kids.png" },
   ];
 
+  const [selectedImage, setSelectedImage] = useState(productImages[0].imgLink);
   const [selectedColor, setSelectedColor] = useState("BLACK");
 
   const colors = [
@@ -34,6 +28,7 @@ export default function JumpingPage() {
     { name: "BROWN", code: "bg-[#371506]" },
     { name: "BROWN", code: "bg-[#8F5D46]" },
   ];
+
   const pipingcolors = [
     { name: "Red", code: "bg-[#EB2D3A]" },
     { name: "Green", code: "bg-[#00BF63]" },
@@ -54,158 +49,131 @@ export default function JumpingPage() {
   return (
     <>
       <BreadCrumb breadLink={breadLink} />
+
       {/* Heading */}
       <div className="mt-16">
-        <h1 className="text-[32px] leading-[100%] tracking-[0.64px] font-extrabold text-[#1F274B] text-center">
+        <h1 className="text-[32px] font-extrabold text-[#1F274B] text-center">
           ARION CUSTOM SADDLES
         </h1>
-        <p className="text-center text-[20px] leading-[160%] text-[#4C526F] tracking-[0.04px] normal-case text-wrap mt-4">
-          Personalize your saddle: add a pop of color , Customize your
-          nameplate, & <br /> moral We want to make your dream saddle.
+        <p className="text-center text-[20px] text-[#4C526F] mt-4">
+          Personalize your saddle: add a pop of color, customize your nameplate,
+          & moral. We want to make your dream saddle.
         </p>
       </div>
 
-      <div className="lg:py-12 md:py-10 py-8 maxContainer">
-        <div className="flex xl:flex-row flex-col gap-6">
-          {/* image div */}
-          <div className="xl:block hidden">
-            <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
-              {productImages?.map((img, index) => (
+      <div className="lg:py-12 py-8 maxContainer">
+        <div className="grid xl:grid-cols-2 gap-8">
+          {/* ================= IMAGE SECTION ================= */}
+          <div className="flex flex-col gap-4">
+            {/* Big Image */}
+            <div className="flex justify-center items-center bg-white">
+              <img
+                src={selectedImage}
+                alt="Jumping Saddle"
+                className="max-w-[500px] w-full object-contain"
+              />
+            </div>
+
+            {/* Thumbnails BELOW big image */}
+            <div className="grid grid-cols-4 gap-4">
+              {productImages.map((img, index) => (
                 <img
                   key={index}
-                  src={img?.imgLink}
+                  src={img.imgLink}
                   alt=""
-                  className="object-contain w-full h-[200px] "
+                  onClick={() => setSelectedImage(img.imgLink)}
+                  className={`cursor-pointer object-contain w-full h-[120px]
+                    ${
+                      selectedImage === img.imgLink
+                        ? "border-[#1F274B]"
+                        : "border-[#DFE1E7]"
+                    }`}
                 />
               ))}
             </div>
           </div>
-          <div className="w-full">
-            <div className="bg-white ">
-              <div className="grid md:grid-cols-2 xl:gap-8 lg:gap-6 gap-4">
-                {/* Image Section */}
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center justify-center  ">
-                    <img
-                      src="/images/saddles/kids.png"
-                      alt="Double Noseband Bridle"
-                      className="max-w-[500px] w-full h-full object-cover "
-                    />
-                  </div>
-                  <div className="block xl:hidden">
-                    <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
-                      {productImages?.map((img, index) => (
-                        <img
-                          key={index}
-                          src={img?.imgLink}
-                          alt=""
-                          className="object-contain w-full h-full "
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
 
-                {/* Product Details Section */}
-                <div className="flex flex-col xl:gap-8 lg:gap-6 gap-4">
-                  {/* Header */}
-                  <div className="flex flex-col xl:gap-4 gap-3">
-                    <div className="flex justify-between items-center">
-                      <h1 className="xl:text-[32px] text-2xl font-extrabold leading-[100%] tracking-[0.64px] text-[#1F274B] ">
-                        JUMPING SADDLES
-                      </h1>
-                      <button className="">
-                        <LoveIcon className="xl:size-12 size-8" />
-                      </button>
-                    </div>
-                    <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] text-[#4C526F]">
-                      SKU: AU00100
-                    </p>
-                  </div>
+          {/* ================= PRODUCT DETAILS ================= */}
+          <div className="flex flex-col gap-6">
+            {/* Header */}
+            <div className="flex justify-between items-center">
+              <h1 className="text-[32px] font-extrabold text-[#1F274B]">
+                JUMPING SADDLES
+              </h1>
+              <button className="cursor-pointer">
+                <LoveIcon className="size-10" />
+              </button>
+            </div>
 
-                  <div className="h-[1px] bg-[#DFE1E7] w-full "></div>
-                  <p className="xl:text-[32px]  text-2xl tracking-[.64px] text-[#1F274B] leading-[100%]">
-                    STARTING AT $6,500
-                  </p>
-                  {/* Color Selection */}
-                  <div className="flex flex-col xl:gap-4 gap-3">
-                    <p className="text-[#262626] xl:text-[20px]  text-base tracking-[.40px] leading-[100%]">
-                      Leather COLOR
-                    </p>
-                    <div className="flex  gap-4">
-                      {colors.map((color, index) => (
-                        <div
-                          key={index}
-                          className="flex flex-col justify-between items-center gap-2"
-                        >
-                          <button
-                            onClick={() => setSelectedColor(color.name)}
-                            className={`xl:w-8 xl:h-8 w-6 h-6 cursor-pointer rounded-full ${color?.code}`}
-                          ></button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Piping color */}
-                  <div className="flex flex-col xl:gap-4 gap-3">
-                    <p className="text-[#262626] xl:text-[20px] text-base tracking-[.40px] leading-[100%]">
-                      Piping color customization:
-                    </p>
+            <p className="text-xl text-[#4C526F]">SKU: AU00100</p>
 
-                    {/* 7 dots per row */}
-                    <div className="grid grid-cols-7 gap-4">
-                      {pipingcolors.map((color, index) => (
-                        <div
-                          key={index}
-                          className="flex flex-col justify-between items-center gap-2"
-                        >
-                          <button
-                            onClick={() => setSelectedColor(color.name)}
-                            className={`w-6 h-6 cursor-pointer rounded-full ${color?.code}`}
-                          ></button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+            <div className="h-[1px] bg-[#DFE1E7]" />
 
-                  {/* Size Selection */}
-                  <div className="flex flex-col xl:gap-4 gap-3">
-                    <div className="flex justify-between items-center">
-                      <p className="text-[#262626] leading-[100%] tracking-[.4px] xl:text-xl md:text-lg text-base ">
-                        Leather Type:
-                      </p>
-                      <button className="underline text-base leading-[100%] tracking-[.32px] text-[#4C526F] cursor-pointer underline-offset-2 hover:no-underline">
-                        Learn More
-                      </button>
-                    </div>
+            <p className="text-[32px] text-[#1F274B]">STARTING AT $6,500</p>
 
-                    <div className="space-x-6">
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center">
-                        Calf
-                      </button>
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center">
-                        BUFFALO
-                      </button>
-                      <button className="uppercase leading-[100%] text-[16px] font-extrabold tracking-[0.32px] text-[#1F274B] py-3 px-6 bg-[#fff] border-2 border-[#1F274B] text-center ">
-                        Grained Calf
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Buttons Section */}
-                  <div>
-                    <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
-                      Connect with our team
-                    </button>
-                  </div>
-                </div>
+            {/* Leather Color */}
+            <div>
+              <p className="text-xl text-[#262626] mb-3">Leather Color</p>
+              <div className="flex gap-4">
+                {colors.map((color, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedColor(color.name)}
+                    className={`w-8 h-8 rounded-full ${color.code} ${
+                      selectedColor === color.name
+                        ? "ring-2 ring-[#1F274B]"
+                        : ""
+                    }`}
+                  />
+                ))}
               </div>
             </div>
+
+            {/* Piping Colors */}
             <div>
-              <ProductDetailsAccordion />
+              <p className="text-xl text-[#262626] mb-3">
+                Piping color customization
+              </p>
+              <div className="grid grid-cols-7 gap-4">
+                {pipingcolors.map((color, index) => (
+                  <button
+                    key={index}
+                    className={`w-6 h-6 rounded-full ${color.code}`}
+                  />
+                ))}
+              </div>
             </div>
+
+            {/* Leather Type */}
+            <div>
+              <div className="flex justify-between mb-3">
+                <p className="text-xl text-[#262626]">Leather Type</p>
+                <button className="underline text-[#4C526F] cursor-pointer">
+                  Learn More
+                </button>
+              </div>
+
+              <div className="flex gap-4 flex-wrap">
+                {["Calf", "Buffalo", "Grained Calf"].map((type) => (
+                  <button
+                    key={type}
+                    className="uppercase font-extrabold px-6 py-3 border-2 border-[#1F274B] cursor-pointer"
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <button className="w-full bg-[#1F274B] text-white py-4 uppercase text-lg cursor-pointer">
+              Connect with our team
+            </button>
           </div>
         </div>
+
+        <ProductDetailsAccordion />
+
         <div className="mt-12">
           <ShopAccessories />
         </div>

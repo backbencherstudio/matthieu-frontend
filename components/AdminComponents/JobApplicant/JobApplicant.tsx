@@ -20,9 +20,9 @@ export default function JobApplicant() {
     page: currentPage,
   });
 
-  const relevantData = data?.data;
+  const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
-  const meta = data?.meta;
+  const meta = data?.data?.meta;
 
   const tableHeader = [
     "Name",
@@ -52,9 +52,9 @@ export default function JobApplicant() {
     (item) => (
       <div>
         <div className="flex items-center justify-end gap-2">
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px]">
-            <ApplicantsDetailsModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <ApplicantsDetailsModal id={String(item?.id)} />
+          </div>
           <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <DeleteJobApplicant id={String(item?.id)} refetch={refetch} />
           </div>

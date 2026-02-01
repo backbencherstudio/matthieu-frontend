@@ -1,5 +1,4 @@
 "use client";
-import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
@@ -8,22 +7,22 @@ import { useGetAllExpertsQuery } from "@/src/redux/admin/cms/expert/expertApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
-import BlogDeleteModal from "./BlogDeleteModal";
+import DeleteExpertModal from "./DeleteExpertModal";
+import EditExpertModal from "./EditExpertModal";
 
 const ExpertsList = () => {
-  const router = useRouter();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 500);
-  const { data, isLoading } = useGetAllExpertsQuery({
+  const { data, isLoading, refetch } = useGetAllExpertsQuery({
     search: debouncedSearch,
     page: currentPage,
   });
-  const relevantData = data?.data;
+
+  const relevantData = data?.data?.data;
   const currentItems = relevantData ?? [];
-  const meta = data?.meta;
+  const meta = data?.data?.meta;
 
   const tableHeader = ["Name", "Email", "Phone", "Region", "Country", "Action"];
 
@@ -59,17 +58,14 @@ const ExpertsList = () => {
     (item) => (
       <div className="flex items-center justify-end gap-2">
         <div>
-          <button
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-            onClick={() => router.push("/admin/cms/add-competition")}
-          >
-            <EditIcon />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <EditExpertModal id={String(item?.id)} refetch={refetch} />
+          </div>
         </div>
         <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <BlogDeleteModal />
-          </button>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            <DeleteExpertModal id={String(item?.id)} refetch={refetch} />
+          </div>
         </div>
       </div>
     ),

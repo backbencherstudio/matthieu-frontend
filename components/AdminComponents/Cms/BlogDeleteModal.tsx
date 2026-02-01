@@ -2,16 +2,39 @@
 
 import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import CustomDialog from "@/components/reusable/Features/Dialog";
+import { useDeleteBlogMutation } from "@/src/redux/admin/cms/blog/blogApi";
 import { useState } from "react";
+import { toast } from "sonner";
 
-export default function BlogDeleteModal() {
+interface DeleteBlogModalProps {
+  id: string;
+  refetch: () => void;
+}
+
+export default function BlogDeleteModal({ id, refetch }: DeleteBlogModalProps) {
   const [open, setOpen] = useState(false);
+  const [deleteBlog, { isLoading }] = useDeleteBlogMutation();
+
+  const handelDelete = async () => {
+    try {
+      const response = await deleteBlog(id);
+      console.log(response);
+      if (response?.data) {
+        refetch();
+        setOpen(false);
+        toast.success(response?.data?.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete member");
+      console.error(error);
+    }
+  };
 
   return (
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="p-[7px] bg-[#F8FAFB] rounded-[6px]"
+        className="p-[7px] bg-[#F8FAFB] rounded-[6px] cursor-pointer"
       >
         <span className="cursor-pointer">
           <DeleteIcon />
@@ -38,8 +61,11 @@ export default function BlogDeleteModal() {
               No
             </button>
 
-            <button className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full">
-              Yes, Delete
+            <button
+              onClick={handelDelete}
+              className="px-4 py-3 rounded-[8px] bg-[#1F274B] text-[16px] leading-[160%] tracking-[0.01px] cursor-pointer text-[#FFF] w-full"
+            >
+              {isLoading ? "Deleting..." : "Yes, Delete"}
             </button>
           </div>
         </div>
