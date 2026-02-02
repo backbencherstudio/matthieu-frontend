@@ -24,7 +24,7 @@ export default function UsedSaddlesProductList() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:mt-12 mt-8">
         {items.map((item, index) => (
           <Link
-            href="/product-details/1"
+            href="/saddles/used-saddles/1"
             key={index}
             className=" p-3 bg-[#F8F9FB] shadow-none hover:shadow-lg transition-shadow duration-200 cursor-pointer"
           >

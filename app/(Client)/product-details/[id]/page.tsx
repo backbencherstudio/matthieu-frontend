@@ -1,10 +1,9 @@
-import SaddlesDetails from "@/components/ClientComponents/Saddles/UsedSaddles/SaddlesDetails";
+import ProductDetailsClient from "@/components/ClientComponents/ProductDetailsClient/ProductDetails";
 
 export default function ProductDetailsPage() {
   return (
     <div>
-      {/* <ProductDetailsClient/> */}
-      <SaddlesDetails />
+      <ProductDetailsClient />
     </div>
   );
 }
