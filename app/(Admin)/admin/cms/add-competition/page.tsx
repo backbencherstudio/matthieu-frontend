@@ -30,6 +30,7 @@ const AddCompetition = () => {
   const onSubmit = async (data: AddCompetitionFormValues) => {
     try {
       const response = await createCalendar(data);
+      console.log(response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         reset();

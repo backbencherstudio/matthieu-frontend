@@ -22,15 +22,16 @@ export default function BlogPostTable() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [status, setStatus] = useState<string | undefined>(undefined);
+  const [category, setCategory] = useState<string | undefined>(undefined);
   const debouncedSearch = useDebounce(search, 500);
   const { data, isLoading, refetch } = useGetAllBlogsQuery({
     search: debouncedSearch,
     page: currentPage,
     status,
   });
-  const relevantData = data?.data;
+  const relevantData = data?.data?.data;
   const currentItems = relevantData ?? [];
-  const meta = data?.meta;
+  const meta = data?.data?.meta;
   const tableHeader = [
     "Blog Title",
     "Tags",
@@ -99,9 +100,12 @@ export default function BlogPostTable() {
     ),
     (item) => (
       <div className="flex items-center justify-end gap-2">
-        <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-          <EditIcon />
-        </div>
+        <Link
+          href={`/admin/cms/${item?.id}/edit`}
+          className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[14px]"
+        >
+          <EditIcon className="size-5" />
+        </Link>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
           <BlogDeleteModal id={String(item?.id)} refetch={refetch} />
         </div>
@@ -132,6 +136,7 @@ export default function BlogPostTable() {
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
+              {/* status */}
               <div>
                 <Select
                   value={status ?? "all"}
@@ -151,6 +156,7 @@ export default function BlogPostTable() {
                   </SelectContent>
                 </Select>
               </div>
+              {/* date */}
               <div>
                 <Select>
                   <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
@@ -165,18 +171,30 @@ export default function BlogPostTable() {
                   </SelectContent>
                 </Select>
               </div>
-              <div>
-                <Select>
-                  <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
-                    <SelectValue placeholder="All Categories" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="categories">All Categories</SelectItem>
-                    <SelectItem value="saddle">Saddle</SelectItem>
-                    <SelectItem value="arion">arion</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              {/* Category */}
+              <Select
+                value={category ?? "all"}
+                onValueChange={(value) => {
+                  setCategory(value === "all" ? undefined : value);
+                  setCurrentPage(1);
+                }}
+              >
+                <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
+                  <SelectValue placeholder="All Category" />
+                </SelectTrigger>
+
+                <SelectContent>
+                  <SelectItem value="all">All Category</SelectItem>
+                  <SelectItem value="RIDER_SPOTLIGHTS">
+                    RIDER_SPOTLIGHTS
+                  </SelectItem>
+                  <SelectItem value="SPORT_HIGHLIGHTS">
+                    SPORT_HIGHLIGHTS
+                  </SelectItem>
+                  <SelectItem value="ON_THE_ROAD">ON_THE_ROAD</SelectItem>
+                  <SelectItem value="ARION_WORLD">ARION_WORLD</SelectItem>
+                </SelectContent>
+              </Select>
               <div>
                 <Link
                   href="/admin/cms/add"
