@@ -1,5 +1,6 @@
-import BlogDetailPage from "@/components/ClientComponents/Blog/BlogDetails/BlogDetailsSection";
+import React from "react";
 import BreadCrumbDetails from "@/components/ClientComponents/reuseable/BreadCrumbDetails";
+import BlogDetailPage from "@/components/ClientComponents/Blog/BlogDetails/BlogDetailsSection";
 
 interface PageProps {
   params: {
