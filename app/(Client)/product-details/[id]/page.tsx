@@ -1,10 +1,10 @@
-import ProductDetailsClient from '@/components/ClientComponents/ProductDetailsClient/ProductDetails'
-import React from 'react'
+import SaddlesDetails from "@/components/ClientComponents/Saddles/UsedSaddles/SaddlesDetails";
 
 export default function ProductDetailsPage() {
   return (
     <div>
-        <ProductDetailsClient/>
+      {/* <ProductDetailsClient/> */}
+      <SaddlesDetails />
     </div>
-  )
+  );
 }
