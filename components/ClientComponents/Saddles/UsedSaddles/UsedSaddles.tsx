@@ -1,13 +1,11 @@
 "use client";
 
 import FilterIcon from "@/components/Icons/FilterIcon";
-import React, { useState } from "react";
-import DropdownFilter from "../../Tacks/DropdownFilter";
-import PriceRangeFilter from "./PriceRange";
-import UsedSaddlesProductList from "./SaddlesCard";
-import Link from "next/link";
 import CustomDialog from "@/components/reusable/Features/Dialog";
+import { useState } from "react";
+import DropdownFilter from "../../Tacks/DropdownFilter";
 import AlertProduct from "./AlertProduct";
+import UsedSaddlesProductList from "./SaddlesCard";
 
 export default function UsedSaddles() {
   const [open, setOpen] = useState(false);

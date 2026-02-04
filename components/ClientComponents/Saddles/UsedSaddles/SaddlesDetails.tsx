@@ -26,6 +26,14 @@ export default function SaddlesDetails() {
     { imgLink: "/images/saddles/kids.png" },
   ];
 
+  const additionalInfo = [
+    { label: "BRAND", value: "ANTARES" },
+    { label: "COLOR", value: "Brown" },
+    { label: "DISCIPLINE", value: "Cross Country" },
+    { label: "SADDLE YEAR", value: "2023" },
+    { label: "SEAT SIZE", value: "17" },
+  ];
+
   const [selectedImage, setSelectedImage] = useState(productImages[0].imgLink);
 
   return (
@@ -171,18 +179,47 @@ export default function SaddlesDetails() {
           <h1 className="text-4xl text-primary-text">
             Why Choose Phase II Saddlery
           </h1>
-          <p className="mt-4 text-lg">
+          <p className="mt-4 text-lg normal-case">
             Our saddles receive careful scrutiny from our team of expert
-            saddlers before hitting the shelves. Plus, many come with a range of
-            guarantees and customizable options. Reach out to us for additional
-            information and personalized fitting advice.
+            saddlers before hitting the shelves. Plus, many come with a range{" "}
+            <br /> of guarantees and customizable options. Reach out to us for
+            additional information and personalized fitting advice.
           </p>
         </div>
-        {/* <ProductDetailsAccordion /> */}
+        <div className="mt-10">
+          {/* Header */}
+          <div className="bg-gray-200 px-4 py-2 mb-0">
+            <h3 className="text-sm font-semibold text-gray-700">
+              Additional information
+            </h3>
+          </div>
 
-        {/* <div className="mt-12">
-          <ShopAccessories />
-        </div> */}
+          {/* Main Section */}
+          <div className="bg-white border border-gray-200 p-8">
+            <h2 className="text-2xl font-light text-gray-700 mb-8 tracking-wide">
+              ADDITIONAL INFORMATION
+            </h2>
+
+            {/* Table */}
+            <div className="space-y-0">
+              {additionalInfo.map((item, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-4 py-4 border-b border-gray-200 last:border-b-0"
+                >
+                  <div className="w-1/3">
+                    <p className="font-semibold text-gray-800 text-sm">
+                      {item.label}
+                    </p>
+                  </div>
+                  <div className="w-2/3">
+                    <p className="text-gray-600 italic">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
