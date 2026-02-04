@@ -12,6 +12,7 @@ import {
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useGetAllAmbassadorsQuery } from "@/src/redux/client/ambassador/ambassadorApi";
 import { ChevronDown } from "lucide-react";
 
 interface Country {
@@ -401,8 +402,12 @@ export default function ArionAmabassadors() {
   const filteredData = data
     .filter((item) => nationType === "" || nationType === item.nation)
     .filter(
-      (item) => disciplineType === "" || disciplineType === item.discipline
+      (item) => disciplineType === "" || disciplineType === item.discipline,
     );
+
+  const { data: ambassadorData } = useGetAllAmbassadorsQuery({});
+
+  console.log(ambassadorData);
 
   return (
     <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
@@ -512,27 +517,32 @@ export default function ArionAmabassadors() {
             </div>
           )}
 
-          {filteredData.map((item, idx) => (
+          {ambassadorData?.data?.map((item, idx) => (
             <a href={item?.link} key={idx}>
               <Image
-                src={item.image}
-                alt={item.title}
+                src={item?.image}
+                alt={item?.name}
                 width={1000}
                 height={1000}
                 unoptimized
                 className="h-[300px] md:h-[400px] lg:h-[450px] w-full object-cover"
               />
               <h1 className="text-xl lg:text-2xl font-extrabold uppercase mt-6 text-dark-primary text-center">
-                {item.title}
+                {item.name}
               </h1>
               <h1 className="uppercase mt-1 text-dark-primary text-center">
                 {item.discipline}
               </h1>
               <div className="flex justify-center items-center mx-auto mt-2 gap-3">
                 <div>
-                  <span>{item.nation}</span>
+                  <span>{item.country}</span>
                 </div>
-                <Image src={item.img} alt="falg" width={50} height={30} />
+                <Image
+                  src={item.flag_image}
+                  alt="falg"
+                  width={50}
+                  height={30}
+                />
               </div>
             </a>
           ))}
