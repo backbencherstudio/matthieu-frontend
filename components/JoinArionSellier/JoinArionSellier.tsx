@@ -1,9 +1,7 @@
-import Image from "next/image";
-
 const JoinArionSellier = () => {
   return (
     <div className="maxContainer">
-      <p className="text-[#1F274B] text-center text-[35px] md:text-[40px] lg:text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[40px] md:pt-[50px] lg:pt-[60px] pb-[40px] md:pb-[48px] normal-case">
+      <p className="text-[#1f274b] text-center text-[35px] md:text-[40px] lg:text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[40px] md:pt-[50px] lg:pt-[60px] pb-[40px] md:pb-[48px] normal-case">
         Join Arion Sellier
       </p>
       {/* <Image
@@ -17,21 +15,21 @@ const JoinArionSellier = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[35px] md:gap-[64px]">
         <div className="w-6/6">
-          <p className="normal-case text-[#4A4C56] pt-[48px]">
+          <p className="normal-case text-[#1f274b] pt-[48px]">
             Join Arion Sellier as a… {" "}
             <span className="text-4 text-base font-extrabold">
               Saddle Fitting Expert
             </span>
           </p>
-          <p className="text-[#4A4C56]  text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case">
+          <p className="text-[#1f274b]  text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case">
             As we continue to grow, we are actively recruiting sales
             professionals in several areas of the United States to join our
             team!
           </p>
-          <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pt-[20px] pb-[16px]">
+          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pt-[20px] pb-[16px]">
             Most Needed Areas:
           </p>
-          <div className="normal-case pl-4 text-[#4A4C56]">
+          <div className="normal-case pl-4 text-[#1f274b]">
             <li>Kentucky</li>
             <li>Texas</li>
             <li>Alabama/Tennesse</li>
@@ -44,10 +42,10 @@ const JoinArionSellier = () => {
               you are located.
             </li>
           </div>
-          <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] pt-[20px]">
+          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] pt-[20px]">
             Why Arion Sellier?
           </p>
-          <p className="text-[#4A4C56]  md:text-[18px] font-[400px] leading-[148%] tracking-[0.36px] normal-case">
+          <p className="text-[#1f274b]  md:text-[18px] font-[400px] leading-[148%] tracking-[0.36px] normal-case">
             Arion Sellier is a company built with the sole desire to offer
             top-of-the-range saddles that are completely made in France through
             our leathers and workmanship. As one of the most customizable
@@ -61,10 +59,10 @@ const JoinArionSellier = () => {
             another and work together as a team to grow our knowledge in sales,
             saddle fitting, leather, horse biomechanics, and more!
           </p>
-          <p className="text-[#4A4C56] mt-[20px] mb-4  text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case ">
+          <p className="text-[#1f274b] mt-[20px] mb-4  text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case ">
             What we are looking for…
           </p>
-          <p className="normal-case text-[#4A4C56] text-[18px] font-[400px] leading-[148%] tracking-[0.36px] pb-0 md:pb-[60px]">
+          <p className="normal-case text-[#1f274b] text-[18px] font-[400px] leading-[148%] tracking-[0.36px] pb-0 md:pb-[60px]">
             Arion Sellier is looking for an independent candidate who is
             fascinated by the world of horses at all levels and sport. This
             candidate is self-motivated and hardworking. They are organized and
@@ -74,10 +72,10 @@ const JoinArionSellier = () => {
           </p>
         </div>
         <div className="w-6/6">
-          <p className="text-[#4A4C56] mt-0 md:pt-[48px] pb-[16px] text-[18px] font-extrabold leading-[148%] tracking-[0.36px]">
+          <p className="text-[#1f274b] mt-0 md:pt-[48px] pb-[16px] text-[18px] font-extrabold leading-[148%] tracking-[0.36px]">
             Responsibilities:
           </p>
-          <div className="normal-case pl-4  text-[#4A4C56]">
+          <div className="normal-case pl-4  text-[#1f274b]">
             <li>Represent and promote Arion Sellier within your territory.</li>
             <li>
               Develop relationships with barn owners, trainers, and professional
@@ -97,10 +95,10 @@ const JoinArionSellier = () => {
               company car in a responsible and organized manner.
             </li>
           </div>
-          <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] mt-[20px]">
+          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] mt-[20px]">
             Ideal Candidate's Profile:
           </p>
-          <div className="normal-case pl-4 mb-[20px] text-[#4A4C56]">
+          <div className="normal-case pl-4 mb-[20px] text-[#1f274b]">
             <li>
               Sales and/or customer service experience (ideally2 or more years).
             </li>
@@ -112,10 +110,10 @@ const JoinArionSellier = () => {
             <li>Autonomous, independent, and dynamic.</li>
             <li>Self-motivated and driven.</li>
           </div>
-          <p className="text-[#4A4C56] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case mb-[16px] ">
+          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case mb-[16px] ">
             Benefits:
           </p>
-          <div className="normal-case pl-4 pb-[20px] text-[#4A4C56]">
+          <div className="normal-case pl-4 pb-[20px] text-[#1f274b]">
             <li>Supportive team and leadership.</li>
             <li>
               Training in horse biomechanics, saddle fitting, leather, and

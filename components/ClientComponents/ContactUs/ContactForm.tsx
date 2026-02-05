@@ -360,60 +360,37 @@
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useContactMutation } from "@/src/redux/client/contact-us/cotactApi";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type ContactFormValues = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phoneNumber: string;
-  address1: string;
-  address2: string;
+  phone: string;
+  address: string;
   state: string;
   city: string;
-  zipCode: string;
+  zip_code: string;
   message: string;
 };
 
 export function ContactUsForm() {
   const { register, handleSubmit, reset } = useForm<ContactFormValues>();
-
-  // File upload state
-  const [files, setFiles] = useState<File[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-
-  // Drag & Drop handlers
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    setFiles((prev) => [...prev, ...droppedFiles].slice(0, 2));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
-    setFiles((prev) => [...prev, ...selectedFiles].slice(0, 2));
-  };
-
+  const [contact, { isLoading }] = useContactMutation();
   // Form submit handler
-  const onSubmit = (data: ContactFormValues) => {
-    console.log("Form Data: ", data);
-    console.log("Files: ", files);
-
-    reset();
-    setFiles([]);
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      const response = await contact(data);
+      if (response?.data?.success) {
+        reset();
+        toast.success(response?.data?.message)
+      }
+    } catch (error) {
+      console.error(error);
+      toast.success("Fail to create contact");
+    }
   };
 
   return (
@@ -425,13 +402,13 @@ export function ContactUsForm() {
         {/* Row 1: First & Last Name */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-[16px]">
           <Input
-            {...register("firstName", { required: true })}
+            {...register("first_name", { required: true })}
             placeholder="First Name"
             className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
           />
 
           <Input
-            {...register("lastName", { required: true })}
+            {...register("last_name", { required: true })}
             placeholder="Last Name"
             className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
           />
@@ -447,7 +424,7 @@ export function ContactUsForm() {
           />
 
           <Input
-            {...register("phoneNumber", { required: true })}
+            {...register("phone", { required: true })}
             placeholder="Phone Number"
             onChange={(e) => {
               const onlyNums = e.target.value.replace(/\D/g, "");
@@ -459,14 +436,8 @@ export function ContactUsForm() {
 
         <div className="space-y-4">
           <Input
-            {...register("address1", { required: true })}
-            placeholder="Address1"
-            className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
-          />
-
-          <Input
-            {...register("address2", { required: true })}
-            placeholder="Address2"
+            {...register("address", { required: true })}
+            placeholder="Address"
             className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
           />
         </div>
@@ -483,7 +454,7 @@ export function ContactUsForm() {
             className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
           />
           <Input
-            {...register("zipCode", { required: true })}
+            {...register("zip_code", { required: true })}
             placeholder="Zip Code"
             className="bg-[#F8FAFB] focus:border-0 focus-visible:ring-[1px] text-sm py-3.5 rounded-none px-4 h-[50px]"
           />
