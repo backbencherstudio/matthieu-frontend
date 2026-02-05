@@ -1,9 +1,7 @@
 "use client";
 
-import MapMarker from "@/components/Icons/MapMarker";
-import Image from "next/image";
-import jsPDF from "jspdf";
 import HandShakeIcon from "@/components/Icons/HandhsakeIcon";
+import MapMarker from "@/components/Icons/MapMarker";
 import {
   Select,
   SelectContent,
@@ -11,10 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useGetCompetitionsQuery } from "@/src/redux/client/competition/competitionApi";
 import {
   useGetExpertByCountryQuery,
   useGetExpertsQuery,
 } from "@/src/redux/client/expert/expertApi";
+import jsPDF from "jspdf";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -36,31 +37,31 @@ interface Discipline {
 export default function FindUs() {
   const [showResult, setShowResult] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-
-  const discipline: Discipline[] = [
-    {
-      label: "HUNTER/JUMPER",
-      value: "HUNTER/JUMPER",
-    },
-    {
-      label: "EVENTING",
-      value: "EVENTING",
-    },
-    {
-      label: "DRESSAGE",
-      value: "DRESSAGE",
-    },
-    {
-      label: "OTHER",
-      value: "OTHER",
-    },
-  ];
+  const [selectedLocation, setSelectedLocation] = useState<string>("");
+  const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
 
   const { data } = useGetExpertByCountryQuery(selectedCountry);
   const { data: countryData } = useGetExpertsQuery({});
+  const { data: competitionsData } = useGetCompetitionsQuery({
+    location: selectedLocation,
+    discipline: selectedDiscipline,
+  });
+
+  const uniqueDiscipline = Array.from(
+    new Set(
+      competitionsData?.data?.map((item) => item?.discipline).filter(Boolean),
+    ),
+  ) as string[];
+
+  const uniqueLocations = Array.from(
+    new Set(
+      competitionsData?.data?.map((item) => item?.location).filter(Boolean),
+    ),
+  ) as string[];
+
   const uniqueCountries = Array.from(
     new Set(
-      countryData?.data?.data?.map((item) => item.country).filter(Boolean),
+      countryData?.data?.data?.map((item) => item?.country).filter(Boolean),
     ),
   ) as string[];
 
@@ -161,18 +162,20 @@ export default function FindUs() {
                 <div className="grid grid-cols-2 items-center gap-4 justify-between w-full mb-6">
                   <p className="text-lg ">DISCIPLINE</p>
                   <div className=" flex justify-end">
-                    <Select defaultValue="EVENTING">
+                    <Select
+                      onValueChange={(value) => setSelectedDiscipline(value)}
+                    >
                       <SelectTrigger className="find-us-custom-select">
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#F4F5F7] rounded-none">
-                        {discipline.map((item, idx) => (
+                        {uniqueDiscipline.map((item, idx) => (
                           <SelectItem
                             key={idx}
-                            value={item.value}
+                            value={item}
                             className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
                           >
-                            {item.label}
+                            {item}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -183,13 +186,15 @@ export default function FindUs() {
                 <div className="grid grid-cols-2 items-center gap-4 justify-between w-full mb-6">
                   <p className="text-lg">COUNTRY</p>
                   <div className=" flex justify-end">
-                    <Select>
+                    <Select
+                      onValueChange={(value) => setSelectedLocation(value)}
+                    >
                       <SelectTrigger className="find-us-custom-select">
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
 
                       <SelectContent className="bg-[#F4F5F7] rounded-none">
-                        {uniqueCountries.map((country) => (
+                        {uniqueLocations?.map((country) => (
                           <SelectItem
                             key={country}
                             value={country}
