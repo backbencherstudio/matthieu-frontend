@@ -26,7 +26,7 @@ const ContactUsPage = () => {
             <div className="p-3">
               <HelpCircle className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-[#1f274b] mb-1">Help/ FAQ</h3>
+            <h3 className="text-[#1f274b] mb-1 font-bold">Help/ FAQ</h3>
             <p className="text-sm text-[#1f274b]">Size Guide</p>
           </Link>
 
@@ -38,7 +38,7 @@ const ContactUsPage = () => {
             <div className="p-3">
               <MapPin className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-[#1f274b] mb-1">Arion Sellier USA</h3>
+            <h3 className="text-[#1f274b] mb-1 font-bold">Arion Sellier USA</h3>
             <p className="text-sm text-[#1f274b]">
               3080 Fairlane Farms Rd Ste 2
               <br />
@@ -54,7 +54,7 @@ const ContactUsPage = () => {
             <div className="p-3">
               <Briefcase className="w-6 h-6 text-[#1f274b]" />
             </div>
-            <h3 className="text-[#1f274b] mb-1">Join Us!</h3>
+            <h3 className="text-[#1f274b] mb-1 font-bold">Join Us!</h3>
             <p className="text-sm text-[#1f274b]">Job Offers</p>
           </Link>
         </div>
