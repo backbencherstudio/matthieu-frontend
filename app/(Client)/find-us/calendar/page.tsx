@@ -8,9 +8,10 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import { useGetCompetitionsQuery } from "@/src/redux/client/competition/competitionApi";
 import { SelectValue } from "@radix-ui/react-select";
-
-import { useMemo, useState } from "react";
+import { format } from "date-fns";
+import { useState } from "react";
 
 interface Competition {
   date: string;
@@ -41,17 +42,25 @@ const COMPETITIONS: Competition[] = [
 ];
 
 const CalendarPage = () => {
-  const [selectedDiscipline, setSelectedDiscipline] = useState("All");
+  const [selectedDiscipline, setSelectedDiscipline] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [countryOpen, setCountryOpen] = useState(false);
 
-  const filteredCompetitions = useMemo(() => {
-    return COMPETITIONS.filter((comp) => {
-      const matchesDiscipline =
-        selectedDiscipline === "All" ||
-        comp.discipline === selectedDiscipline.toUpperCase();
-      return matchesDiscipline;
-    });
-  }, [selectedDiscipline]);
+  const { data: competitionsData } = useGetCompetitionsQuery({
+    location: selectedCountry,
+    discipline: selectedDiscipline,
+  });
+  const uniqueLocations = Array.from(
+    new Set(
+      competitionsData?.data?.map((item) => item?.location).filter(Boolean),
+    ),
+  ) as string[];
+
+  const uniqueDiscipline = Array.from(
+    new Set(
+      competitionsData?.data?.map((item) => item?.discipline).filter(Boolean),
+    ),
+  ) as string[];
   const breadLink = [
     {
       label: "FIND US",
@@ -74,25 +83,37 @@ const CalendarPage = () => {
           >
             <SlidersHorizontalIcon className="h-6 w-6" />
           </button>
-          <Select>
+          <Select onValueChange={(value) => setSelectedCountry(value)}>
             <SelectTrigger className="text-[#4C526F] text-[16px] leading-[100%] border-none shadow-none focus-visible:ring-0 focus-visible:border-0">
               <SelectValue placeholder="COUNTRY" />
             </SelectTrigger>
+
             <SelectContent>
-              <SelectItem value="usa">USA</SelectItem>
-              <SelectItem value="france">FRANCE</SelectItem>
-              <SelectItem value="poland">POLAND</SelectItem>
+              {uniqueLocations?.map((country) => (
+                <SelectItem
+                  key={country}
+                  value={country}
+                  className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
+                >
+                  {country}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
-          <Select>
+          <Select onValueChange={(value) => setSelectedDiscipline(value)}>
             <SelectTrigger className="text-[#4C526F] text-[16px] leading-[100%] border-none shadow-none focus-visible:ring-0 focus-visible:border-0">
               <SelectValue placeholder="DISCPLINE" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="jumper">HUNTER/JUMPER</SelectItem>
-              <SelectItem value="eventing">EVENTING</SelectItem>
-              <SelectItem value="dressage">DRESSAGE</SelectItem>
-              <SelectItem value="other">OTHER</SelectItem>
+              {uniqueDiscipline?.map((disc) => (
+                <SelectItem
+                  key={disc}
+                  value={disc}
+                  className="data-[state=checked]:bg-select-active-bg data-[state=checked]:text-white rounded-none"
+                >
+                  {disc}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
@@ -119,7 +140,7 @@ const CalendarPage = () => {
             </thead>
             {/* Table Body */}
             <tbody>
-              {filteredCompetitions.map((comp, idx) => (
+              {competitionsData?.data?.map((comp, idx) => (
                 <tr
                   key={idx}
                   className={`border-t border-border ${
@@ -127,16 +148,18 @@ const CalendarPage = () => {
                   }`}
                 >
                   <td className="text-[16px] tracking-[0.08px] text-[#4A4C56] leading-[124%] border border-l px-4 py-5">
-                    {comp.date}
+                    {comp?.date
+                      ? format(new Date(comp.date), "MMM d, yyyy")
+                      : ""}
                   </td>
                   <td className="text-[16px] tracking-[0.08px] text-[#4A4C56] leading-[124%] border border-l px-4 py-5">
-                    {comp.competition}
+                    {comp?.name}
                   </td>
                   <td className="text-[16px] tracking-[0.08px] text-[#4A4C56] leading-[124%] border border-l px-4 py-5">
-                    {comp.location}
+                    {comp?.location}
                   </td>
                   <td className="text-[16px] tracking-[0.08px] text-[#4A4C56] leading-[124%] border border-l px-4 py-5">
-                    {comp.discipline}
+                    {comp?.discipline}
                   </td>
                 </tr>
               ))}
@@ -144,7 +167,7 @@ const CalendarPage = () => {
           </table>
         </div>
 
-        {filteredCompetitions.length === 0 && (
+        {competitionsData?.data?.length === 0 && (
           <div className="text-center py-8 text-muted-foreground">
             No competitions found matching your filters.
           </div>
