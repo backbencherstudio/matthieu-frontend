@@ -1,7 +1,10 @@
+"use client";
+import { useGetAllTeamsQuery } from "@/src/redux/client/teams/teamsApi";
 import Image from "next/image";
-import React from "react";
 
 export default function MeetTheTeam() {
+  const { data, isLoading } = useGetAllTeamsQuery("");
+
   return (
     <div>
       <div className="maxContainer">
@@ -31,99 +34,45 @@ export default function MeetTheTeam() {
           </div>
 
           {/* Team List */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-8 mt-12">
-            <div className="md:col-span-2 md:col-start-1">
-              <Image
-                src="/images/meet-the-team/sylvain-houry-fondateur-arionhst.jpg"
-                alt="Team"
-                width={1000}
-                height={1000}
-                unoptimized
-                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
-              />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 mt-12">
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, idx) => (
+                  <TeamCardSkeleton key={idx} />
+                ))
+              : data?.data?.map((item) => (
+                  <div key={item.id}>
+                    <Image
+                      src={item.image}
+                      alt="Team"
+                      width={1000}
+                      height={1000}
+                      unoptimized
+                      className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
+                    />
 
-              <h1 className="text-md md:text-[22px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
-                Sylvain Houry
-              </h1>
-              <p className="text-base text-secondary-text normal-case text-center">
-                Founder & CEO
-              </p>
-            </div>
+                    <h1 className="text-md md:text-[22px] lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
+                      {item.name}
+                    </h1>
 
-            <div className="md:col-span-2 md:col-start-3">
-              <Image
-                src="/images/meet-the-team/hadrien-schenck-responsable-ventes-arionhst.jpg"
-                alt="Team"
-                width={1000}
-                height={1000}
-                unoptimized
-                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
-              />
-
-              <h1 className="text-md md:text-[21px] lg:text-[28px] font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
-                Hadrien Schenck
-              </h1>
-              <p className="text-base text-secondary-text normal-case text-center">
-                As general manager
-              </p>
-            </div>
-
-            <div className="md:col-span-2 md:col-start-5">
-              <Image
-                src="/images/meet-the-team/kristen-rose-arion.jpeg"
-                alt="Team"
-                width={1000}
-                height={1000}
-                unoptimized
-                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
-              />
-
-              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
-                Kirsten Rose
-              </h1>
-              <p className="text-base text-secondary-text normal-case text-center">
-                US Sales Manager
-              </p>
-            </div>
-
-            <div className="md:col-span-2 md:col-start-2 ">
-              <Image
-                src="/images/meet-the-team/CHLOE.png"
-                alt="Team"
-                width={1000}
-                height={1000}
-                unoptimized
-                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
-              />
-
-              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
-                Chloe Cazebon
-              </h1>
-              <p className="text-base text-secondary-text normal-case text-center">
-                Europe Marketing and Communication Manager
-              </p>
-            </div>
-
-            <div className="md:col-span-2 md:col-start-4 ">
-              <Image
-                src="/images/meet-the-team/GABRIELLE.png"
-                alt="Team"
-                width={1000}
-                height={1000}
-                unoptimized
-                className="w-full h-[300px] sm:h-[350px] lg:h-[450px] object-cover object-top"
-              />
-
-              <h1 className="text-md md:text-[21px] lg:text-[28px]  font-extrabold uppercase mt-6 mb-4 text-dark-primary text-center">
-                Gabrielle Fournier
-              </h1>
-              <p className="text-base text-secondary-text normal-case text-center">
-                US & Canada Marketing Communications Manager
-              </p>
-            </div>
+                    <p className="text-base text-secondary-text text-center">
+                      {item.designation}
+                    </p>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+const TeamCardSkeleton = () => {
+  return (
+    <div className="animate-pulse">
+      <div className="w-full h-[300px] sm:h-[350px] lg:h-[450px] bg-gray-200" />
+
+      <div className="h-6 bg-gray-200 rounded mt-6 mx-auto w-3/4"></div>
+      <div className="h-4 bg-gray-200 rounded mt-3 mx-auto w-1/2"></div>
+    </div>
+  );
+};
