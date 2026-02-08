@@ -10,11 +10,12 @@ import CartIcon from "../Icons/AdminIcon/CartIcon";
 import CMSIcon from "../Icons/AdminIcon/CMSIcon";
 import CouponIcon from "../Icons/AdminIcon/CouponIcon";
 import DashboardIcon from "../Icons/AdminIcon/DashboardIcon";
+import JobIcon from "../Icons/AdminIcon/JobIcon";
+import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import ProductIcon from "../Icons/AdminIcon/ProductIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import UsersIcon from "../Icons/AdminIcon/UsersIcon";
-import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
-import JobIcon from "../Icons/AdminIcon/JobIcon";
+import SaddlesIcon from "../Icons/SaddlesIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -27,6 +28,11 @@ const menuItems = [
     label: "Products",
     href: "/admin/products",
     icon: ProductIcon,
+  },
+  {
+    label: "Use Saddles",
+    href: "/admin/use-saddles",
+    icon: SaddlesIcon,
   },
   {
     label: "Orders",

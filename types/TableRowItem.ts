@@ -118,4 +118,6 @@ export interface TableRowItem extends TableItem {
   price_range?: string;
   preferences?: string;
   created_date?: string;
+  basePrice?: string;
+  usedsaddlecategory?: string;
 }
