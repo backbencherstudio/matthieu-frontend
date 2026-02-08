@@ -1,10 +1,9 @@
-import JobApplicant from '@/components/AdminComponents/JobApplicant/JobApplicant'
-import React from 'react'
+import JobApplicant from "@/components/AdminComponents/JobApplicant/JobApplicant";
 
 export default function JobApplicantPage() {
   return (
     <div>
-        <JobApplicant/>
+      <JobApplicant />
     </div>
-  )
+  );
 }
