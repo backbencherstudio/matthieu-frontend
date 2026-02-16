@@ -6,7 +6,7 @@ export default function OurWorkShop() {
     <div>
       <div className="maxContainer">
         {/* Banner */}
-        <div>
+        {/* <div>
           <Image
             src="/images/workshop/top.JPG"
             alt="our-workshop-banner"
@@ -15,7 +15,7 @@ export default function OurWorkShop() {
             unoptimized
             className="w-full h-[200px] md:h-full max-h-[400px] object-cover object-top"
           />
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
