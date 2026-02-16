@@ -66,10 +66,12 @@ export default function page() {
             <h1 className="uppercase text-3xl md:text-[40px] font-extrabold ">
               OUR STORY
             </h1>
-            <h4 className="font-semibold mt-1">The Name: Arion</h4>
           </div>
 
           <div className="space-y-3 normal-case text-secondary-text  text-base md:text-lg border-b md:pb-8 pb-5">
+              <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
+            <h5 className="font-semibold pt-2">The Name: Arion</h5>
+          </div>
             <p>
               The origin of Arion begins with our name. Inspired by passion and purpose, we chose <strong>Arion</strong> for
               its simplicity and resonance across all languages
@@ -81,27 +83,27 @@ export default function page() {
               this legendary figure reflects the values at the heart of our brand
             </p>
           </div>
-            <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
-              <h5 className="font-semibold pt-2">From Vision to Reality</h5>
-            </div>
-            <div className="space-y-3 normal-case text-secondary-text  text-base md:text-lg ">
-              <p> Arion’s journey began in <strong>2018</strong>, when French entrepreneur and equestrian <strong>Sylvain Houry</strong>
-                founded Arion <strong>Horse Sport Tack</strong> in the United States. The brand initially focused on premium
-                tack and accessories, partnering with a French saddler to bring refined craftsmanship to the
-                American market.</p>
-              <p>
-                By <strong>2020</strong>, Sylvain envisioned expanding into saddlery. Alongside his longtime friend and fellow
-                competitor, <strong>Hadrien Schenck</strong>, he took the bold step of launching a new venture during a global
-                crisis. United by years of friendship, professional riding careers in <strong>show jumping and eventing</strong>,
-                and a shared dedication to horse and rider, they set out to redefine what modern saddlery could
-                be.
-              </p>
-              <p>
-                With this vision, <strong>Arion Sellier</strong> was born in <strong>June 2020</strong>—a brand rooted in French craftsmanship
-                and driven by innovation, precision, and performance.
-              </p>
-            </div>
-          
+          <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
+            <h5 className="font-semibold pt-2">From Vision to Reality</h5>
+          </div>
+          <div className="space-y-3 normal-case text-secondary-text  text-base md:text-lg ">
+            <p> Arion’s journey began in <strong>2018</strong>, when French entrepreneur and equestrian <strong>Sylvain Houry</strong>
+              founded Arion <strong>Horse Sport Tack</strong> in the United States. The brand initially focused on premium
+              tack and accessories, partnering with a French saddler to bring refined craftsmanship to the
+              American market.</p>
+            <p>
+              By <strong>2020</strong>, Sylvain envisioned expanding into saddlery. Alongside his longtime friend and fellow
+              competitor, <strong>Hadrien Schenck</strong>, he took the bold step of launching a new venture during a global
+              crisis. United by years of friendship, professional riding careers in <strong>show jumping and eventing</strong>,
+              and a shared dedication to horse and rider, they set out to redefine what modern saddlery could
+              be.
+            </p>
+            <p>
+              With this vision, <strong>Arion Sellier</strong> was born in <strong>June 2020</strong>—a brand rooted in French craftsmanship
+              and driven by innovation, precision, and performance.
+            </p>
+          </div>
+
 
           <Gallery gallery={storyGallery} />
         </div>
@@ -112,36 +114,49 @@ export default function page() {
             OUR MISSION
           </h1>
 
-          <div className="space-y-3 normal-case text-secondary-text text-base md:text-lg">
-           <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
+          <div className="space-y-3 normal-case text-secondary-text text-base md:text-lg border-b md:pb-8 pb-5">
+            <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
               <h5 className="font-semibold ">Designed for Horse & Rider</h5>
             </div>
             <p>
-              Arion exists to reveal the true potential of every horse. 
+              Arion exists to reveal the true potential of every horse.
             </p>
             <p>
-            No matter your discipline or level, our mission is to provide riders with high-end, innovative saddles, tack, and accessories that deliver exceptional comfort while prioritizing the horse’s well-being. Every design decision is guided by balance, biomechanics, and performance.
-            </p>
-
-            <p>
-              Our ambition is simple: to create saddles that bring harmony,
-              ease, and precision to your sport. Every Arion saddle is handmade
-              in France, at the foot Of the Pyrenees, where a rich heritage Of
-              craftsmanship meets modern innovation. By combining traditional
-              artistry with advanced manufacturing tools, our partner workshop
-              delivers products that embody both authenticity and performance.
-              This balance of audacity and tradition results in an unparalleled
-              riding experience—one where excellence is felt in every detail.
-            </p>
-
-            <p>
-              At the heart of Arion is a dedicated team of experts. Specially
-              trained to understand your needs, take precise measurements, and
-              answer your most specific requests, they guide you through the
-              journey of creating your dream saddle—crafted exclusively for you
-              and your horse.
+              No matter your discipline or level, our mission is to provide riders with high-end, innovative saddles, tack, and accessories that deliver exceptional comfort while prioritizing the horse’s well-being. Every design decision is guided by balance, biomechanics, and performance.
             </p>
           </div>
+
+
+          <div className="space-y-3 normal-case text-secondary-text text-base md:text-lg border-b md:pb-8 pb-5">
+            <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
+              <h5 className="font-semibold pt-2">Made in France</h5>
+            </div>
+            <div className="space-y-3 normal-case text-secondary-text  text-base md:text-lg ">
+              <p>Every Arion saddle is <strong>handmade in France,</strong> at the foot of the <strong>Pyrenees</strong>, where generations of
+                craftsmanship meet modern innovation.</p>
+              <p>
+                We carefully select the finest French leathers and combine traditional artistry with advanced
+                manufacturing tools. This approach allows our partner workshop to create saddles that embody
+                authenticity, durability, and precision—resulting in an unparalleled riding experience.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3 normal-case text-secondary-text text-base md:text-lg ">
+            <div className="my-3 normal-case text-secondary-text  text-lg md:text-xl ">
+              <h5 className="font-semibold pt-2">Expertise You Can Trust</h5>
+            </div>
+            <div className="space-y-3 normal-case text-secondary-text  text-base md:text-lg ">
+              <p>At the heart of Arion is a dedicated team of experts.</p>
+              <p>
+                Specially trained to understand your needs, take precise measurements, and respond to even the
+                most specific requests, our team guides you through every step of creating your dream saddle—
+                crafted exclusively for you and your horse.
+              </p>
+            </div>
+          </div>
+
+
 
           <Gallery gallery={missionGallery} />
         </div>
