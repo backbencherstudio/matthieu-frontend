@@ -1,6 +1,8 @@
 const JoinArionSellier = () => {
   return (
-    <div className="maxContainer">
+    <div className="maxContainer ">
+      <div className="lg:px-12 md:px-6">
+
       <p className="text-[#1f274b] text-center text-[35px] md:text-[40px] lg:text-[48px] font-extrabold leading-[100%] tracking-[0.96px] pt-[40px] md:pt-[50px] lg:pt-[60px] pb-[40px] md:pb-[48px] normal-case">
         Join Arion Sellier
       </p>
@@ -21,12 +23,12 @@ const JoinArionSellier = () => {
               Saddle Fitting Expert
             </span>
           </p>
-          <p className="text-[#1f274b]  text-[18px] font-normal leading-[148%] tracking-[0.36px] normal-case">
+          <p className="text-[#1f274b]  lg:text-[18px] text-base font-normal leading-[148%] tracking-[0.36px] normal-case">
             As we continue to grow, we are actively recruiting sales
             professionals in several areas of the United States to join our
             team!
           </p>
-          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pt-[20px] pb-[16px]">
+          <p className="text-[#1f274b] font-avenir lg:text-[18px] text-base font-extrabold leading-[148%] tracking-[0.36px] normal-case pt-[20px] pb-[16px]">
             Most Needed Areas:
           </p>
           <div className="normal-case pl-4 text-[#1f274b]">
@@ -42,10 +44,10 @@ const JoinArionSellier = () => {
               you are located.
             </li>
           </div>
-          <p className="text-[#1f274b] font-avenir text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] pt-[20px]">
+          <p className="text-[#1f274b] font-avenir lg:text-[18px] text-base font-extrabold leading-[148%] tracking-[0.36px] normal-case pb-[16px] pt-[20px]">
             Why Arion Sellier?
           </p>
-          <p className="text-[#1f274b]  md:text-[18px] font-[400px] leading-[148%] tracking-[0.36px] normal-case">
+          <p className="text-[#1f274b]  lg:text-[18px] text-base font-[400px] leading-[148%] tracking-[0.36px] normal-case">
             Arion Sellier is a company built with the sole desire to offer
             top-of-the-range saddles that are completely made in France through
             our leathers and workmanship. As one of the most customizable
@@ -59,10 +61,10 @@ const JoinArionSellier = () => {
             another and work together as a team to grow our knowledge in sales,
             saddle fitting, leather, horse biomechanics, and more!
           </p>
-          <p className="text-[#1f274b] mt-[20px] mb-4  text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case ">
+          <p className="text-[#1f274b] mt-[20px] mb-4  lg:text-[18px] font-extrabold leading-[148%] tracking-[0.36px] normal-case ">
             What we are looking for…
           </p>
-          <p className="normal-case text-[#1f274b] text-[18px] font-[400px] leading-[148%] tracking-[0.36px] pb-0 md:pb-[60px]">
+          <p className="normal-case text-[#1f274b] lg:text-[18px] text-base font-[400px] leading-[148%] tracking-[0.36px] pb-0 md:pb-[60px]">
             Arion Sellier is looking for an independent candidate who is
             fascinated by the world of horses at all levels and sport. This
             candidate is self-motivated and hardworking. They are organized and
@@ -129,6 +131,7 @@ const JoinArionSellier = () => {
             <li>Objective bonuses with a growing company!</li>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
