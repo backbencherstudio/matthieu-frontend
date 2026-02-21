@@ -14,7 +14,7 @@ interface ContactFormData {
   state: string;
   zipCode: string;
   country: string;
-  saddle: string;
+  saddle: string[];
   comments: string;
 }
 
@@ -46,7 +46,7 @@ const SaddleryExpertPage = () => {
       state: "",
       zipCode: "",
       country: "",
-      saddle: "",
+      saddle: [],
       comments: "",
     },
   });
@@ -193,7 +193,7 @@ const SaddleryExpertPage = () => {
             />
           </div>
 
-          {/* Saddle Interest */}
+          {/* Saddle Interest
           <div>
             <select
               {...register("saddle")}
@@ -206,13 +206,31 @@ const SaddleryExpertPage = () => {
               <option value="jumping">Jumping</option>
               <option value="trail">Trail</option>
             </select>
+          </div> */}
+
+          {/* Discipline */}
+          <div>
+            <p className="text-[#1f274b]  font-semibold mb-3">Discipline</p>
+            <div className="flex lg:gap-10 md:gap-6 gap-4 flex-wrap ">
+              {["Hunter", "Jumper", "Equitation", "Cross-Country", "Dressage", "Other"].map((discipline) => (
+                <label key={discipline} className="flex items-center md:gap-3 gap-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    value={discipline}
+                    {...register("saddle")}
+                    className="w-4 h-4 accent-[#1f274b] cursor-pointer"
+                  />
+                  <span className="text-[#1f274b] md:text-base text-sm">{discipline}</span>
+                </label>
+              ))}
+            </div>
           </div>
 
           {/* Comments */}
           <div>
             <textarea
               {...register("comments")}
-              placeholder="Any Comments?"
+              placeholder="Message"
               rows={6}
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 resize-none"
             />
