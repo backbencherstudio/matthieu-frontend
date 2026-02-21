@@ -8,7 +8,8 @@ interface ContactFormData {
   lastName: string;
   email: string;
   phone: string;
-  address: string;
+  address1: string;
+  address2: string;
   city: string;
   state: string;
   zipCode: string;
@@ -39,7 +40,8 @@ const SaddleryExpertPage = () => {
       lastName: "",
       email: "",
       phone: "",
-      address: "",
+      address1: "",
+      address2: "",
       city: "",
       state: "",
       zipCode: "",
@@ -99,10 +101,15 @@ const SaddleryExpertPage = () => {
           </div>
 
           {/* Address */}
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
-              {...register("address")}
-              placeholder="Address"
+              {...register("address1")}
+              placeholder="Address 1"
+              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
+            />
+            <input
+              {...register("address2")}
+              placeholder="Address 2"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
           </div>
