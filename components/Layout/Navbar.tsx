@@ -115,7 +115,7 @@ const Header = () => {
         { category: "Workshop", href: "/brand/our-workshop" },
         { category: "Ambassadors", href: "/brand/arion-amabassadors" },
         { category: "Blog", href: "/brand/blog" },
-        { category: "job offer", href: "/brand/job-offer" },
+        { category: "job offers", href: "/brand/job-offer" },
         { category: "contact us", href: "/contact-us" },
       ],
     },

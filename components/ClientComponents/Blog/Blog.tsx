@@ -31,21 +31,21 @@ export default function Blog() {
       value: "rider-spotlights",
     },
     {
-      label: "COMPETITION HIGHLIGHTS",
-      value: "competition-highlights",
+      label: "SPORT HIGHLIGHTS",
+      value: "sport-highlights",
     },
     {
-      label: "ARION ON THE ROAD",
-      value: "arion-on-the-road",
+      label: "ON THE ROAD",
+      value: "on-the-road",
     },
-    {
-      label: "SADDLES",
-      value: "saddles",
-    },
-    {
-      label: " TACK & ACCESSORIES",
-      value: "tack-accessories",
-    },
+    // {
+    //   label: "SADDLES",
+    //   value: "saddles",
+    // },
+    // {
+    //   label: " TACK & ACCESSORIES",
+    //   value: "tack-accessories",
+    // },
     {
       label: "ARION WORLD",
       value: "arion-world",
@@ -123,7 +123,7 @@ export default function Blog() {
             Blog
           </h1>
 
-          <div className="flex items-center gap-6 max-w-full w-fit overflow-x-auto filter-custom-scrollbar">
+          <div className="flex items-center gap-6 max-w-full w-fit overflow-x-auto md:overflow-hidden overflow-y-hidden filter-custom-scrollbar">
             {filterButton.map((item, idx) => (
               <button
                 key={idx}
