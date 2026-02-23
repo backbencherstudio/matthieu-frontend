@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-
 import {
   Select,
   SelectContent,
@@ -11,15 +10,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Trash2, X } from "lucide-react";
-import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import {
-  SubmitHandler,
-  useForm,
-  useFieldArray,
+  useAddColorMutation,
+  useAddSizeMutation,
+  useColorsListQuery,
+  useSizeListQuery,
+} from "@/src/redux/admin/tackProduct/tackProduct";
+import { Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
   Controller,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
 } from "react-hook-form";
+import { toast } from "sonner";
 
 type Inputs = {
   name: string;
@@ -63,6 +69,88 @@ export default function AddForm() {
     control,
     name: "variants",
   });
+
+  // api end poin
+  const [addColor, { isLoading }] = useAddColorMutation();
+  const [addSize, { isLoading: sizeLoading }] = useAddSizeMutation();
+  const { data: colors } = useColorsListQuery("");
+  const { data: sizes } = useSizeListQuery("");
+
+  useEffect(() => {
+    if (colors && Array.isArray(colors)) {
+      const formattedColors = colors.map((color: any) => color.name);
+
+      setColorOptions(formattedColors);
+    }
+  }, [colors]);
+
+  useEffect(() => {
+    if (sizes && Array.isArray(sizes)) {
+      const formattedSizes = sizes.map((size: any) => size.name);
+
+      setColorOptions(formattedSizes);
+    }
+  }, [sizes]);
+
+  const addColorHandler = async (variantIndex: number) => {
+    const trimmed = newColor.trim();
+    if (!trimmed) return;
+
+    try {
+      const response = await addColor({ name: trimmed }).unwrap();
+      if (response?.id) {
+        toast?.success("Color created successfully!");
+      }
+      const createdColor = response?.name || trimmed;
+
+      // Add to select options
+      setColorOptions((prev) =>
+        prev.includes(createdColor) ? prev : [...prev, createdColor],
+      );
+
+      // Set selected value in form
+      setValue(`variants.${variantIndex}.color`, createdColor, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+
+      // Reset dialog
+      setNewColor("");
+      closeColorDialog(variantIndex);
+    } catch (error) {
+      console.error("Failed to add color:", error);
+    }
+  };
+
+  const addSizeHandler = async (variantIndex: number) => {
+    const trimmed = newSize.trim();
+    if (!trimmed) return;
+
+    try {
+      const response = await addSize({ name: trimmed }).unwrap();
+
+      if (response?.id) {
+        toast.success("Size created successfully!");
+      }
+
+      const createdSize = response?.name || trimmed;
+
+      setSizeOptions((prev) =>
+        prev.includes(createdSize) ? prev : [...prev, createdSize],
+      );
+
+      setValue(`variants.${variantIndex}.size`, createdSize, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+
+      setNewSize("");
+      closeSizeDialog(variantIndex);
+    } catch (error) {
+      console.error("Failed to add size:", error);
+      toast.error("Failed to add size");
+    }
+  };
 
   const handleRemoveVariant = (index) => {
     removeVariant(index);
@@ -127,7 +215,7 @@ export default function AddForm() {
   // Handle New Color
   const [colorDialogOpen, setColorDialogOpen] = useState<boolean[]>([]);
   const [newColor, setNewColor] = useState("");
-  const [colorOptions, setColorOptions] = useState(["Black", "Brown"]);
+  const [colorOptions, setColorOptions] = useState([]);
 
   useEffect(() => {
     setColorDialogOpen(variantFields.map(() => false));
@@ -149,36 +237,10 @@ export default function AddForm() {
     });
   };
 
-  const addColor = (variantIndex) => {
-    const trimmed = newColor.trim();
-    if (!trimmed) return;
-
-    setColorOptions((prev) => {
-      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
-
-      Promise.resolve().then(() => {
-        setValue(`variants.${variantIndex}.color`, trimmed, {
-          shouldDirty: true,
-          shouldValidate: true,
-        });
-      });
-
-      return updated;
-    });
-
-    closeColorDialog(variantIndex);
-    setNewColor("");
-  };
-
   // Handle New Size
   const [sizeDialogOpen, setSizeDialogOpen] = useState<boolean[]>([]);
   const [newSize, setNewSize] = useState("");
-  const [sizeOptions, setSizeOptions] = useState([
-    "Pony",
-    "Cob",
-    "Full",
-    "Oversize",
-  ]);
+  const [sizeOptions, setSizeOptions] = useState([]);
 
   useEffect(() => {
     setSizeDialogOpen(variantFields.map(() => false));
@@ -200,31 +262,29 @@ export default function AddForm() {
     });
   };
 
-  const addSize = (variantIndex) => {
-    const trimmed = newSize.trim();
-    if (!trimmed) return;
+  // const addSize = (variantIndex) => {
+  //   const trimmed = newSize.trim();
+  //   if (!trimmed) return;
 
-    setSizeOptions((prev) => {
-      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+  //   setSizeOptions((prev) => {
+  //     const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
 
-      Promise.resolve().then(() => {
-        setValue(`variants.${variantIndex}.size`, trimmed, {
-          shouldDirty: true,
-          shouldValidate: true,
-        });
-      });
+  //     Promise.resolve().then(() => {
+  //       setValue(`variants.${variantIndex}.size`, trimmed, {
+  //         shouldDirty: true,
+  //         shouldValidate: true,
+  //       });
+  //     });
 
-      return updated;
-    });
+  //     return updated;
+  //   });
 
-    closeSizeDialog(variantIndex);
-    setNewSize("");
-  };
+  //   closeSizeDialog(variantIndex);
+  //   setNewSize("");
+  // };
 
   // Form Submit
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // console.log("Full Data - ", data);
-
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       if (key !== "variants") {
@@ -411,9 +471,10 @@ export default function AddForm() {
                           <button
                             type="button"
                             className="cmn-btn"
-                            onClick={() => addColor(index)}
+                            disabled={isLoading}
+                            onClick={() => addColorHandler(index)}
                           >
-                            Add Color
+                            {isLoading ? "Adding..." : "Add Color"}
                           </button>
                         </div>
                       </DialogContent>
@@ -497,9 +558,10 @@ export default function AddForm() {
                           <button
                             type="button"
                             className="cmn-btn"
-                            onClick={() => addSize(index)}
+                            disabled={sizeLoading}
+                            onClick={() => addSizeHandler(index)}
                           >
-                            Add Size
+                            {sizeLoading ? "Adding..." : "Add Size"}
                           </button>
                         </div>
                       </DialogContent>
