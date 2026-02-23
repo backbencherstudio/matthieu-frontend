@@ -31,7 +31,9 @@ type Inputs = {
   name: string;
   description: string;
   benefits: string;
-  guide: string;
+  leatherCareGuide: string;
+  subcategory: string;
+  category: string;
   variants: {
     color: string;
     size: string;
@@ -39,6 +41,25 @@ type Inputs = {
     stock_qty: number | string;
   }[];
 };
+
+export enum ProductCategory {
+  SADDLES = "SADDLES",
+  TACK = "TACK",
+  LEADLINE = "LEADLINE",
+  USED = "USED",
+}
+
+enum tackSubcategory {
+  BRIDLES = "BRIDLES",
+  REINS = "REINS",
+  MARTINGALES = "MARTINGALES",
+  GRITHSF = "GRITHSF",
+  STIRRUP_LEATHERS = "STIRRUP_LEATHERS",
+  PADS = "PADS",
+  RIDER_APPAREL = "RIDER_APPAREL",
+  BOOTS = "BOOTS",
+  ACCESSORIES = "ACCESSORIES",
+}
 
 export default function AddForm() {
   const {
@@ -375,8 +396,79 @@ export default function AddForm() {
               <Textarea
                 className="cmn-textarea"
                 placeholder="Enter Leather Care Guide"
-                {...register(`guide`)}
+                {...register(`leatherCareGuide`)}
               ></Textarea>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Category*
+              </Label>
+
+              <Controller
+                name="category"
+                control={control}
+                rules={{ required: "Category is required" }}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full py-5">
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(ProductCategory).map((item) => (
+                        <SelectItem key={item} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+
+              {errors.category && (
+                <p className="text-red-500 text-sm">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Used Saddle Category*
+              </Label>
+
+              <Controller
+                name="subcategory"
+                control={control}
+                rules={{ required: "Saddle Category is required" }}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full py-5">
+                      <SelectValue placeholder="Select Sub Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(tackSubcategory).map((item) => (
+                        <SelectItem key={item} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+
+              {errors.subcategory && (
+                <p className="text-red-500 text-sm">
+                  {errors.subcategory.message}
+                </p>
+              )}
             </div>
           </div>
         </div>
