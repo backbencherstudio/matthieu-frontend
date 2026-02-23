@@ -30,7 +30,7 @@ const menuItems = [
     icon: ProductIcon,
   },
   {
-    label: "Use Saddles",
+    label: "Used Saddles",
     href: "/admin/use-saddles",
     icon: SaddlesIcon,
   },

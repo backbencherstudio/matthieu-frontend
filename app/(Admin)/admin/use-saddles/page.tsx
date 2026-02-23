@@ -12,7 +12,7 @@ const UseSaddlesPage = () => {
         <div className="flex flex-wrap items-center gap-4">
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
-            href="/"
+            href="/admin/use-saddles/add"
           >
             <PlusIcon className="h-4 w-4 text-white" />
             <span>Add Saddles</span>

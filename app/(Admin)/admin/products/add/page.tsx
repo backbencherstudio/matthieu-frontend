@@ -1,6 +1,5 @@
 import AddForm from "@/components/AdminComponents/Products/add/AddForm";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
-import React from "react";
 
 export default function AddProduct() {
   const breadLink = [
