@@ -5,7 +5,7 @@ const AddUseSaddles = () => {
   const breadLink = [
     {
       label: "Saddle Management",
-      href: "/admin/use-saddle",
+      href: "/admin/use-saddles",
     },
     {
       label: "Add Use Saddle",

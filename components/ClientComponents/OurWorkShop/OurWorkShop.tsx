@@ -6,7 +6,7 @@ export default function OurWorkShop() {
     <div>
       <div className="maxContainer">
         {/* Banner */}
-        <div>
+        {/* <div>
           <Image
             src="/images/workshop/top.JPG"
             alt="our-workshop-banner"
@@ -15,7 +15,7 @@ export default function OurWorkShop() {
             unoptimized
             className="w-full h-[200px] md:h-full max-h-[400px] object-cover object-top"
           />
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="pt-10 xl:pt-12 pb-16 xl:pb-30">
@@ -24,7 +24,7 @@ export default function OurWorkShop() {
             <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
               OUR WORKSHOP
             </h1>
-            <p className="text-secondary-text text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto tracking-[160%]">
+            <p className="textSecondary text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto tracking-[160%]">
               Located in the beautiful southwest of France, in Basque county.
               Our workshop is filled with heritage and passion.
             </p>
@@ -72,8 +72,8 @@ export default function OurWorkShop() {
           </div>
 
           {/* Description */}
-          <div className="py-8 flex flex-col gap-4">
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
+          <div className="py-8 flex flex-col gap-4 text-center">
+            <p className="text-base md:text-lg textSecondary normal-case leading-[148%] tracking-[0.36px]">
               At Arion Sellier, we showcase French saddlery expertise by
               crafting custom and semi-custom saddles in partnership with a
               renowned workshop in southwest France. With over 40 years of
@@ -84,7 +84,7 @@ export default function OurWorkShop() {
               control.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
+            <p className="text-base md:text-lg textSecondary normal-case leading-[148%] tracking-[0.36px]">
               In this Basque workshop, skilled leatherworkers carefully select,
               cut, and assemble each piece. Advanced tools—such as digital
               cutting for precision, 3D printing for prototyping, and laser
@@ -142,15 +142,15 @@ export default function OurWorkShop() {
           </div>
 
           {/* Description */}
-          <div className="flex flex-col gap-4">
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
+          <div className="flex flex-col gap-4 text-center">
+            <p className="text-base md:text-lg textSecondary normal-case leading-[148%] tracking-[0.36px]">
               Because we favor short supply circuits and companies committed to
               limiting their environmental impact, our leathers are sublimated
               in French tanneries that have a unique traditional know-how passed
               down from generation to generation.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
+            <p className="text-base md:text-lg textSecondary normal-case leading-[148%] tracking-[0.36px]">
               Our grained leathers are treated with vegetable tanning based on
               chestnut or mimosa. This technique allows us to reduce our
               ecological footprint on the one hand. But also to obtain deeper
@@ -159,7 +159,7 @@ export default function OurWorkShop() {
               saddle's stability.
             </p>
 
-            <p className="text-base md:text-lg text-[#4A4C56] normal-case leading-[148%] tracking-[0.36px]">
+            <p className="text-base md:text-lg textSecondary normal-case leading-[148%] tracking-[0.36px]">
               Our soft leathers, with a waxy touch, come from a family tannery.
               This leather is produced made-to- order and is used to supply the
               most beautiful luxury houses in France. As for the buffalo

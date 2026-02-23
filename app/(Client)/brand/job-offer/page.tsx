@@ -3,7 +3,7 @@ import JoinArionSellier from "@/components/JoinArionSellier/JoinArionSellier";
 
 const JoinArrionSeller = () => {
   return (
-    <div>
+    <div >
       <JoinArionSellier />
       <ApplyNowForm />
     </div>
