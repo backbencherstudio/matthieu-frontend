@@ -39,6 +39,13 @@ const tackProductApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    tackLists: builder.query({
+      query: () => ({
+        url: "/tackproduct/list",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -48,6 +55,7 @@ export const {
   useAddSizeMutation,
   useSizeListQuery,
   useCreateTackProductMutation,
+  useTackListsQuery,
 } = tackProductApi;
 
 export default tackProductApi;

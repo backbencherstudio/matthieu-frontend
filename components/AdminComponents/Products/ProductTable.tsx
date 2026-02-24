@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTackListsQuery } from "@/src/redux/admin/tackProduct/tackProduct";
 import Link from "next/link";
 import DeleteDialog from "../reusable/DeleteDialog";
 
@@ -97,108 +98,30 @@ export const columns: ColumnDef<Data>[] = [
 ];
 
 export default function ProductTable() {
-  const data: Data[] = [
-    {
-      id: 1,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 2,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Tack & Accessories > Bridles",
-      categoryName: "Tack & Accessories",
-      price: "$260.00",
-      stock: 45,
-      status: "Low Stock",
-    },
-    {
-      id: 3,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "Low Stock",
-    },
-    {
-      id: 4,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "Out of Stock",
-    },
-    {
-      id: 5,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 6,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Tack & Accessories > Bridles",
-      categoryName: "Tack & Accessories",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 7,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 8,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 9,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-    {
-      id: 10,
-      productId: "SKU: BR7D2NS",
-      productName: "Double Noseband Bridle",
-      category: "Saddles > Bridles",
-      categoryName: "Saddles",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-    },
-  ];
+  const { data, isLoading } = useTackListsQuery({});
+  const formattedData =
+    data?.data?.map((item, index) => {
+      const defaultVariant =
+        item.variants.find((v) => v.isDefault) || item.variants[0];
+
+      const stockQty = defaultVariant?.stockQuantity ?? 0;
+      const price = defaultVariant?.price ?? 0;
+      let status = "Out of Stock";
+      if (stockQty > 20) status = "In Stock";
+      else if (stockQty > 0) status = "Low Stock";
+      const categoryName = item.category?.split("→")[0]?.trim() ?? "";
+
+      return {
+        id: item.id,
+        productId: `SKU: ${item.sku}`,
+        productName: item.name,
+        category: item.category.replace("→", ">"),
+        categoryName,
+        price: `$${price.toFixed(2)}`,
+        stock: stockQty,
+        status,
+      };
+    }) ?? [];
 
   const [categories, setCategories] = useState("all");
 
@@ -218,19 +141,13 @@ export default function ProductTable() {
     </>
   );
 
-  // Filtered Data
-  const filteredData = data.filter((item) => {
-    if (categories === "all") return true;
-    return item.categoryName === categories;
-  });
-
   return (
     <div className="pt-6">
       <div className="bg-white p-4 rounded-[8px]">
         <DataTable
           title="All Product"
           columns={columns}
-          data={filteredData}
+          data={formattedData}
           customFilters={dropFilters}
         />
       </div>
