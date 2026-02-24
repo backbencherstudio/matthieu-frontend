@@ -16,6 +16,7 @@ const tackProductApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["TackProduct"],
     }),
 
     addSize: builder.mutation({
@@ -45,12 +46,23 @@ const tackProductApi = baseApi.injectEndpoints({
         url: "/tackproduct/list",
         method: "GET",
       }),
+      providesTags: ["TackProduct"],
     }),
+
     getSingleTack: builder.query({
       query: (id) => ({
         url: `/tackproduct/oneproduct/${id}`,
         method: "GET",
       }),
+      providesTags: ["TackProduct"],
+    }),
+
+    deleteTack: builder.mutation({
+      query: (id) => ({
+        url: `/tackproduct/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["TackProduct"],
     }),
   }),
 });
@@ -63,6 +75,7 @@ export const {
   useCreateTackProductMutation,
   useTackListsQuery,
   useGetSingleTackQuery,
+  useDeleteTackMutation,
 } = tackProductApi;
 
 export default tackProductApi;
