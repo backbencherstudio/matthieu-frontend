@@ -26,7 +26,14 @@ const baseQueryWithAutoTokenUpdate = async (
 const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithAutoTokenUpdate,
-  tagTypes: ["WagePolicies", "bookmark", "User", "queries", "TackProduct"],
+  tagTypes: [
+    "WagePolicies",
+    "bookmark",
+    "User",
+    "queries",
+    "TackProduct",
+    "SaddleProduct",
+  ],
   endpoints: () => ({}),
 });
 
