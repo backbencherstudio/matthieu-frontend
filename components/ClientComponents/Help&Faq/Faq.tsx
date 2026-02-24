@@ -436,12 +436,13 @@ export default function FAQ() {
         return (
           <section
             key={category.id}
+            id={category.id}
             ref={(el) => {
               if (el) {
                 sectionRefs.current[category.id] = el;
               }
             }}
-            className="space-y-6 scroll-mt-32"
+            className="space-y-6 scroll-mt-12"
           >
             {/* Title */}
             <div className="flex flex-col items-center gap-3">
