@@ -19,6 +19,15 @@ const tackProductApi = baseApi.injectEndpoints({
       invalidatesTags: ["TackProduct"],
     }),
 
+    updateTackProduct: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/tackproduct/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["TackProduct"],
+    }),
+
     addSize: builder.mutation({
       query: (data) => ({
         url: "/add/size",
@@ -76,6 +85,7 @@ export const {
   useTackListsQuery,
   useGetSingleTackQuery,
   useDeleteTackMutation,
+  useUpdateTackProductMutation,
 } = tackProductApi;
 
 export default tackProductApi;

@@ -1,9 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useEffect, useState } from "react";
 
+import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
+import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
@@ -12,15 +15,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { X } from "lucide-react";
-import GalleryIcon from "@/components/Icons/AdminIcon/GalleryIcon";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
-  SubmitHandler,
-  useForm,
-  useFieldArray,
   Controller,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
 } from "react-hook-form";
-import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
 import DeleteProduct from "../DeleteProduct";
 
 type Inputs = {
