@@ -1,9 +1,7 @@
+import ProductTable from "@/components/AdminComponents/Products/ProductTable";
 import StatisticCard from "@/components/AdminComponents/reusable/StatisticCard";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import ProductTable from "@/components/AdminComponents/Products/ProductTable";
 import Link from "next/link";
-import React from "react";
-import page from './../../../(Client)/brand/our-story/page';
 
 export default function ProductsPage() {
   const statisticCards = [

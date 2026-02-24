@@ -54,6 +54,7 @@ export interface TableRowItem extends TableItem {
   os?: string;
   description?: string;
   permissions?: string[];
+  variants?: number[];
   contact?: string;
   balance?: number;
   accountType?: string;

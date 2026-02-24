@@ -4,15 +4,11 @@ import { useState } from "react";
 
 import {
   ColumnDef,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
   useReactTable,
-  VisibilityState,
 } from "@tanstack/react-table";
 
 import {
@@ -169,7 +165,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -191,7 +187,7 @@ export function DataTable<TData, TValue>({
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -239,7 +235,7 @@ export function DataTable<TData, TValue>({
               >
                 {it}
               </Button>
-            )
+            ),
           )}
 
           <Button

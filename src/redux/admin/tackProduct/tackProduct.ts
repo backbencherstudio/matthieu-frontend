@@ -10,6 +10,14 @@ const tackProductApi = baseApi.injectEndpoints({
       }),
     }),
 
+    createTackProduct: builder.mutation({
+      query: (data) => ({
+        url: "/tackproduct/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     addSize: builder.mutation({
       query: (data) => ({
         url: "/add/size",
@@ -31,6 +39,13 @@ const tackProductApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    tackLists: builder.query({
+      query: () => ({
+        url: "/tackproduct/list",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -39,6 +54,8 @@ export const {
   useColorsListQuery,
   useAddSizeMutation,
   useSizeListQuery,
+  useCreateTackProductMutation,
+  useTackListsQuery,
 } = tackProductApi;
 
 export default tackProductApi;

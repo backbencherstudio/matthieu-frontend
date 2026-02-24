@@ -15,6 +15,7 @@ import {
   useAddColorMutation,
   useAddSizeMutation,
   useColorsListQuery,
+  useCreateTackProductMutation,
   useSizeListQuery,
 } from "@/src/redux/admin/tackProduct/tackProduct";
 import { Trash2, X } from "lucide-react";
@@ -34,6 +35,7 @@ type Inputs = {
   leatherCareGuide: string;
   subcategory: string;
   category: string;
+  thumbnail: File | null;
   variants: {
     color: string;
     size: string;
@@ -62,12 +64,15 @@ enum tackSubcategory {
 }
 
 export default function AddForm() {
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const {
     register,
     handleSubmit,
     setValue,
     watch,
     control,
+    reset,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -96,20 +101,18 @@ export default function AddForm() {
   const [addSize, { isLoading: sizeLoading }] = useAddSizeMutation();
   const { data: colors } = useColorsListQuery("");
   const { data: sizes } = useSizeListQuery("");
+  const [createTackProduct, { isLoading: tackLoading }] =
+    useCreateTackProductMutation();
 
   useEffect(() => {
     if (colors && Array.isArray(colors)) {
-      const formattedColors = colors.map((color: any) => color.name);
-
-      setColorOptions(formattedColors);
+      setColorOptions(colors);
     }
   }, [colors]);
 
   useEffect(() => {
     if (sizes && Array.isArray(sizes)) {
-      const formattedSizes = sizes.map((size: any) => size.name);
-
-      setColorOptions(formattedSizes);
+      setSizeOptions(sizes);
     }
   }, [sizes]);
 
@@ -155,7 +158,6 @@ export default function AddForm() {
       }
 
       const createdSize = response?.name || trimmed;
-
       setSizeOptions((prev) =>
         prev.includes(createdSize) ? prev : [...prev, createdSize],
       );
@@ -236,7 +238,9 @@ export default function AddForm() {
   // Handle New Color
   const [colorDialogOpen, setColorDialogOpen] = useState<boolean[]>([]);
   const [newColor, setNewColor] = useState("");
-  const [colorOptions, setColorOptions] = useState([]);
+  const [colorOptions, setColorOptions] = useState<
+    { id: string; name: string }[]
+  >([]);
 
   useEffect(() => {
     setColorDialogOpen(variantFields.map(() => false));
@@ -261,7 +265,9 @@ export default function AddForm() {
   // Handle New Size
   const [sizeDialogOpen, setSizeDialogOpen] = useState<boolean[]>([]);
   const [newSize, setNewSize] = useState("");
-  const [sizeOptions, setSizeOptions] = useState([]);
+  const [sizeOptions, setSizeOptions] = useState<
+    { id: string; name: string }[]
+  >([]);
 
   useEffect(() => {
     setSizeDialogOpen(variantFields.map(() => false));
@@ -283,56 +289,67 @@ export default function AddForm() {
     });
   };
 
-  // const addSize = (variantIndex) => {
-  //   const trimmed = newSize.trim();
-  //   if (!trimmed) return;
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  //   setSizeOptions((prev) => {
-  //     const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+    const previewUrl = URL.createObjectURL(file);
 
-  //     Promise.resolve().then(() => {
-  //       setValue(`variants.${variantIndex}.size`, trimmed, {
-  //         shouldDirty: true,
-  //         shouldValidate: true,
-  //       });
-  //     });
+    setThumbnailPreview(previewUrl);
+    setThumbnailFile(file);
 
-  //     return updated;
-  //   });
-
-  //   closeSizeDialog(variantIndex);
-  //   setNewSize("");
-  // };
+    setValue("thumbnail", file, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
 
   // Form Submit
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (key !== "variants") {
-        formData.append(key, data[key]);
-      }
-    });
 
-    data.variants.forEach((item: any, i: number) => {
-      formData.append(`variants[${i}][color]`, item.color);
-      formData.append(`variants[${i}][size]`, item.size);
-      formData.append(`variants[${i}][price]`, item.price);
-      formData.append(`variants[${i}][stock_qty]`, item.stock_qty);
-      imageFiles[i]?.forEach((file, imgIndex) => {
+    formData.append("name", data.name);
+    formData.append("description", data.description || "");
+    formData.append("benefits", data.benefits || "");
+    formData.append("leatherCareGuide", data.leatherCareGuide || "");
+    formData.append("category", data.category);
+    formData.append("subcategory", data.subcategory);
+
+    if (thumbnailFile) {
+      formData.append("thumbnail", thumbnailFile);
+    }
+
+    // ✅ Build variants array properly
+    const formattedVariants = data.variants.map((item, index) => ({
+      colorId: item.color,
+      sizeId: item.size,
+      price: Number(item.price),
+      stockQuantity: Number(item.stock_qty),
+      isDefault: index === 0,
+    }));
+
+    // ✅ Send variants as JSON string
+    formData.append("variants", JSON.stringify(formattedVariants));
+
+    // ✅ Send images separately
+    imageFiles.forEach((variantImages, variantIndex) => {
+      variantImages?.forEach((file) => {
         if (file) {
-          formData.append(`variants[${i}][images][${imgIndex}]`, file);
+          formData.append(`variantImages_${variantIndex}`, file);
         }
       });
     });
 
-    // Printing Form Data
-    /* for (let [key, value] of formData.entries()) {
-      if (value instanceof File) {
-        console.log(key, value); // Full File object
-      } else {
-        console.log(key, value); // Normal string
+    try {
+      const response = await createTackProduct(formData);
+      if (response?.data?.id) {
+        toast.success("Product Created Successfully!");
+        reset();
       }
-    } */
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast.error(error?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -343,7 +360,9 @@ export default function AddForm() {
           <h1 className="text-2xl font-extrabold text-primary-text">
             Add New Product
           </h1>
-          <button className="cmn-btn">Add Product</button>
+          <button className="cmn-btn" disabled={tackLoading}>
+            {tackLoading ? "Creating..." : "Add Product"}
+          </button>
         </div>
 
         {/* Product Detail Inputs */}
@@ -471,6 +490,60 @@ export default function AddForm() {
               )}
             </div>
           </div>
+
+          <div className="mb-3">
+            <Label className="text-sm text-secondary-text mb-1">
+              Thumbnail *
+            </Label>
+
+            <div className="w-full h-40 relative">
+              {thumbnailPreview ? (
+                <label htmlFor="thumbnail-upload">
+                  <img
+                    src={thumbnailPreview}
+                    className="w-full h-full object-cover rounded border cursor-pointer"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setThumbnailPreview(null);
+                      setThumbnailFile(null);
+                      setValue("thumbnail", null);
+                    }}
+                    className="absolute top-2 right-2 w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </label>
+              ) : (
+                <label
+                  htmlFor="thumbnail-upload"
+                  className="flex items-center justify-center cursor-pointer w-full h-full bg-white rounded border border-dashed border-secondary-text"
+                >
+                  <div className="text-center flex flex-col gap-1 items-center">
+                    <GalleryIcon className="size-8" />
+                    <p className="text-sm text-secondary-text">Add Thumbnail</p>
+                  </div>
+                </label>
+              )}
+
+              <input
+                id="thumbnail-upload"
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={handleThumbnailChange}
+              />
+            </div>
+
+            {errors.thumbnail && (
+              <p className="text-red-500 text-sm">
+                {errors.thumbnail.message as string}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Product Variations Wrapper */}
@@ -513,9 +586,9 @@ export default function AddForm() {
                             <SelectValue placeholder="Select Color" />
                           </SelectTrigger>
                           <SelectContent>
-                            {colorOptions.map((opt) => (
-                              <SelectItem key={opt} value={opt}>
-                                {opt}
+                            {colorOptions.map((color) => (
+                              <SelectItem key={color?.id} value={color?.id}>
+                                {color?.name}
                               </SelectItem>
                             ))}
                             <SelectItem
@@ -600,8 +673,8 @@ export default function AddForm() {
                           </SelectTrigger>
                           <SelectContent>
                             {sizeOptions.map((opt) => (
-                              <SelectItem key={opt} value={opt}>
-                                {opt}
+                              <SelectItem key={opt?.id} value={opt?.id}>
+                                {opt?.name}
                               </SelectItem>
                             ))}
                             <SelectItem
