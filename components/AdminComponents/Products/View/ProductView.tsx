@@ -1,9 +1,11 @@
 "use client";
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
-import { DataTable } from "../../reusable/DataTable";
 import { Data } from "@/lib/TableType";
+import { useGetSingleTackQuery } from "@/src/redux/admin/tackProduct/tackProduct";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { DataTable } from "../../reusable/DataTable";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -69,8 +71,10 @@ export const columns: ColumnDef<Data>[] = [
   },
 ];
 
-export default async function ProductView({ params }: PageProps) {
-  const { id } = await params;
+export default function ProductView() {
+  const { id } = useParams();
+  const { data: Product } = useGetSingleTackQuery(id);
+  console.log(Product);
   const breadLink = [
     {
       label: "Products Management",
@@ -81,74 +85,27 @@ export default async function ProductView({ params }: PageProps) {
     },
   ];
 
-  const data: Data[] = [
-    {
-      id: 1,
-      productColor: "Black",
-      productSize: "Pony",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-      productImages: [
-        {
-          image: "/images/products-details/Rectangle 6602.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6603.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6604.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6605.png",
-        },
-      ],
-    },
-    {
-      id: 2,
-      productColor: "Black",
-      productSize: "Pony",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-      productImages: [
-        {
-          image: "/images/products-details/Rectangle 6602.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6603.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6604.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6605.png",
-        },
-      ],
-    },
-    {
-      id: 3,
-      productColor: "Black",
-      productSize: "Pony",
-      price: "$260.00",
-      stock: 45,
-      status: "In Stock",
-      productImages: [
-        {
-          image: "/images/products-details/Rectangle 6602.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6603.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6604.png",
-        },
-        {
-          image: "/images/products-details/Rectangle 6605.png",
-        },
-      ],
-    },
-  ];
+  const formattedVariants: Data[] =
+    Product?.variants?.map((variant) => {
+      const stockQty = variant.stockQuantity ?? 0;
+
+      let status = "Out of Stock";
+      if (stockQty > 20) status = "In Stock";
+      else if (stockQty > 0) status = "Low Stock";
+
+      return {
+        id: variant.id,
+        productColor: variant.color,
+        productSize: variant.size,
+        price: `$${variant.price.toFixed(2)}`,
+        stock: stockQty,
+        status,
+        productImages:
+          variant.images?.map((img) => ({
+            image: img.url,
+          })) ?? [],
+      };
+    }) ?? [];
 
   // Dropdown filters
   const dropFilters = <></>;
@@ -175,16 +132,16 @@ export default async function ProductView({ params }: PageProps) {
               <h3 className="text-base font-extrabold text-secondary-text">
                 Product Name
               </h3>
-              <p className="text-base text-secondary-text">
-                Double Noseband Bridle
-              </p>
+              <p className="text-base text-secondary-text">{Product?.name}</p>
             </div>
 
             <div className="flex flex-col gap-4 mb-3">
               <h3 className="text-base font-extrabold text-secondary-text">
                 Product ID
               </h3>
-              <p className="text-base text-secondary-text">SKU: BR7D2NS</p>
+              <p className="text-base text-secondary-text">
+                SKU: {Product?.sku}
+              </p>
             </div>
 
             <div className="flex flex-col gap-4 mb-3">
@@ -192,7 +149,7 @@ export default async function ProductView({ params }: PageProps) {
                 Category
               </h3>
               <p className="text-base text-secondary-text">
-                {"Saddles > Bridles"}
+                {Product?.category}
               </p>
             </div>
           </div>
@@ -203,10 +160,7 @@ export default async function ProductView({ params }: PageProps) {
                 Description
               </h1>
               <p className="text-base text-secondary-text">
-                Arion's Double Noseband Bridle combines the effect of a regular
-                noseband and a drop noseband. The lateral strap is designed to
-                minimize jaw shifting and stabilize the bit without pressing on
-                the corners of the mouth
+                {Product?.description}
               </p>
             </div>
 
@@ -215,11 +169,7 @@ export default async function ProductView({ params }: PageProps) {
                 Leather Care Guide
               </h1>
               <p className="text-base text-secondary-text">
-                Grab your The Cleaning Kit product and let's get to work! Begin
-                by removing all of the dust from your bridle. Then, clean every
-                piece of your bridle with the Leather Soap, wipe your bridle
-                down with a clean towel and store in a dry area. Clean after
-                every use for best results.
+                {Product?.leatherCareGuide}
               </p>
             </div>
 
@@ -248,7 +198,7 @@ export default async function ProductView({ params }: PageProps) {
         <DataTable
           title="Product Detail"
           columns={columns}
-          data={data}
+          data={formattedVariants}
           customFilters={dropFilters}
         />
       </div>

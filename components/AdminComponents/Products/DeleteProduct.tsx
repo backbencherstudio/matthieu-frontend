@@ -1,14 +1,14 @@
-import React from "react";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
 import TrashIcon from "@/components/Icons/AdminIcon/TrashIcon";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useDeleteTackMutation } from "@/src/redux/admin/tackProduct/tackProduct";
+import { toast } from "sonner";
 
 export default function DeleteProduct({
   id,
@@ -17,9 +17,23 @@ export default function DeleteProduct({
   id: string;
   title: string;
 }) {
+  const [deleteTack, { isLoading }] = useDeleteTackMutation();
+
+  const handleDelete = async () => {
+    try {
+      const response = await deleteTack(id);
+      if (response?.data?.data?.id) {
+        toast.success("Product deleted successfully");
+      }
+    } catch (error) {
+      toast.error("Failed to delete product");
+      console.error(error);
+    }
+  };
+
   return (
     <Dialog>
-      <DialogTrigger className="cmn-action-btn delete !bg-error-bg !px-4 !py-3">
+      <DialogTrigger className="cmn-action-btn delete !bg-error-bg">
         <TrashIcon />
       </DialogTrigger>
       <DialogContent>
@@ -41,9 +55,10 @@ export default function DeleteProduct({
           </DialogClose>
           <Button
             type="submit"
+            onClick={handleDelete}
             className="bg-primary-bg text-white shrink cursor-pointer block w-full h-12 rounded"
           >
-            Yes, Delete
+            {isLoading ? "Deleting.." : " Yes, Delete"}
           </Button>
         </DialogFooter>
       </DialogContent>

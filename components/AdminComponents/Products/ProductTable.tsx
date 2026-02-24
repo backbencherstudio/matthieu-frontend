@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { useTackListsQuery } from "@/src/redux/admin/tackProduct/tackProduct";
 import Link from "next/link";
-import DeleteDialog from "../reusable/DeleteDialog";
+import DeleteProduct from "./DeleteProduct";
 
 export const columns: ColumnDef<Data>[] = [
   {
@@ -90,7 +90,7 @@ export const columns: ColumnDef<Data>[] = [
           >
             <EditIcon />
           </Link>
-          <DeleteDialog id={`${row.original.id}`} title="Product" />
+          <DeleteProduct id={`${row.original.id}`} title="Product" />
         </div>
       );
     },
