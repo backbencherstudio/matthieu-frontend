@@ -27,6 +27,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { toast } from "sonner";
+import { MultiSelect } from "../../reusable/MultiSelect";
 
 type Inputs = {
   name: string;
@@ -35,6 +36,8 @@ type Inputs = {
   leatherCareGuide: string;
   subcategory: string;
   category: string;
+  availableColor: string[];
+  availableSize: string[];
   thumbnail: File | null;
   variants: {
     color: string;
@@ -63,6 +66,19 @@ enum tackSubcategory {
   ACCESSORIES = "ACCESSORIES",
 }
 
+const availableColor = [
+  { id: "1", name: "Red" },
+  { id: "2", name: "Yellow" },
+  { id: "3", name: "Green" },
+  { id: "4", name: "Brown" },
+];
+const availableSize = [
+  { id: "1", name: "12" },
+  { id: "2", name: "11" },
+  { id: "3", name: "13" },
+  { id: "4", name: "15" },
+];
+
 export default function AddForm() {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
@@ -76,6 +92,8 @@ export default function AddForm() {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
+      availableColor: [],
+      availableSize: [],
       variants: [
         {
           color: "",
@@ -486,6 +504,62 @@ export default function AddForm() {
               {errors.subcategory && (
                 <p className="text-red-500 text-sm">
                   {errors.subcategory.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Available Color
+              </Label>
+
+              <Controller
+                name="availableColor"
+                control={control}
+                rules={{ required: "Select at least one county" }}
+                render={({ field }) => (
+                  <MultiSelect
+                    options={availableColor}
+                    value={field.value}
+                    onChange={field.onChange}
+                    max={3}
+                    placeholder="Select Colors"
+                  />
+                )}
+              />
+
+              {errors.availableColor && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.availableColor.message}
+                </p>
+              )}
+            </div>
+
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Available Size
+              </Label>
+
+              <Controller
+                name="availableSize"
+                control={control}
+                rules={{ required: "Select at least one county" }}
+                render={({ field }) => (
+                  <MultiSelect
+                    options={availableSize}
+                    value={field.value}
+                    onChange={field.onChange}
+                    max={3}
+                    placeholder="Select Size"
+                  />
+                )}
+              />
+
+              {errors.availableSize && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.availableSize.message}
                 </p>
               )}
             </div>
