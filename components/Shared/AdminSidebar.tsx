@@ -35,6 +35,11 @@ const menuItems = [
     icon: SaddlesIcon,
   },
   {
+    label: "Saddle Product",
+    href: "/admin/saddle-product",
+    icon: SaddlesIcon,
+  },
+  {
     label: "Orders",
     href: "/admin/orders",
     icon: CartIcon,
