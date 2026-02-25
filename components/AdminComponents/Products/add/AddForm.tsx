@@ -524,7 +524,6 @@ export default function AddForm() {
                     options={availableColor}
                     value={field.value}
                     onChange={field.onChange}
-                    max={3}
                     placeholder="Select Colors"
                   />
                 )}
@@ -551,7 +550,6 @@ export default function AddForm() {
                     options={availableSize}
                     value={field.value}
                     onChange={field.onChange}
-                    max={3}
                     placeholder="Select Size"
                   />
                 )}
