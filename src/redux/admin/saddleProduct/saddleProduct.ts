@@ -9,9 +9,18 @@ const SaddleProductApi = baseApi.injectEndpoints({
       }),
       providesTags: ["SaddleProduct"],
     }),
+
+    deleteSaddleProduct: builder.mutation({
+      query: (id) => ({
+        url: `/sadlles/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["SaddleProduct"],
+    }),
   }),
 });
 
-export const { useGetSaddleProductsQuery } = SaddleProductApi;
+export const { useGetSaddleProductsQuery, useDeleteSaddleProductMutation } =
+  SaddleProductApi;
 
 export default SaddleProductApi;
