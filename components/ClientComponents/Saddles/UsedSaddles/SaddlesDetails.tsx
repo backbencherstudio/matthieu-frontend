@@ -10,21 +10,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useGetSingleUseSaddleQuery } from "@/src/redux/client/saddle/useSaddleApi";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SaddlesDetails() {
+  const { id } = useParams();
   const breadLink = [
     { label: "SADDLES", href: "/saddles" },
     { label: "ARION", href: "/saddles/arion-saddles" },
     { label: "JUMPING", href: "/saddles/jumping" },
   ];
 
-  const productImages = [
-    { imgLink: "/images/saddles/kids.png" },
-    { imgLink: "/images/saddles/kids.png" },
-    { imgLink: "/images/saddles/kids.png" },
-    { imgLink: "/images/saddles/kids.png" },
-  ];
+  const { data } = useGetSingleUseSaddleQuery(id);
+  console.log(data);
 
   const additionalInfo = [
     { label: "BRAND", value: "ANTARES" },
@@ -34,7 +33,18 @@ export default function SaddlesDetails() {
     { label: "SEAT SIZE", value: "17" },
   ];
 
-  const [selectedImage, setSelectedImage] = useState(productImages[0].imgLink);
+  const productImages =
+    data?.data?.images?.map((img) => ({
+      imgLink: img.url,
+    })) || [];
+
+  const [selectedImage, setSelectedImage] = useState("");
+
+  useEffect(() => {
+    if (productImages.length > 0) {
+      setSelectedImage(productImages[0].imgLink);
+    }
+  }, [data]);
 
   return (
     <>
@@ -53,7 +63,6 @@ export default function SaddlesDetails() {
 
       <div className="lg:py-12 py-8 maxContainer">
         <div className="grid xl:grid-cols-2 gap-8">
-          {/* ================= IMAGE SECTION ================= */}
           <div className="flex flex-col gap-4">
             {/* Big Image */}
             <div className="flex justify-center items-center bg-white">
@@ -88,44 +97,34 @@ export default function SaddlesDetails() {
             {/* Header */}
             <div className="flex justify-between items-center">
               <h1 className="text-[32px] font-extrabold text-[#1F274B]">
-                Antares 17.0″ 2A
+                {data?.data?.title}
               </h1>
               {/* <button className="cursor-pointer">
                 <LoveIcon className="size-10" />
               </button> */}
             </div>
 
-            <p className="text-xl text-[#4C526F]">$4,150.00 – $4,450.00</p>
+            <p className="text-xl text-[#4C526F]">
+              ${data?.data?.priceRange?.min} - ${data?.data?.priceRange?.max}
+            </p>
 
             {/* <div className="h-[1px] bg-[#DFE1E7]" /> */}
 
             {/* <p className="text-[32px] text-[#1F274B]">STARTING AT $6,500</p> */}
 
             <div className="max-w-lg">
-              <p className="normal-case text-lg">
-                This is the <span className="font-bold">2023</span> Antarès
-                Comfort 2 mono-flap saddle. <br />
-                <span className="font-bold">Antarès Comfort 2</span> models
-                offer stablitiy and comfort.{" "}
-                <span className="font-bold">17.0″</span> seat with a{" "}
-                <span className="font-bold">2A</span>
-                flap. <br /> The panel configuration is{" "}
-                <span className="font-bold">+2 +2.</span> <br /> Made with{" "}
-                <span className="font-bold">calf</span> leather. <br /> The dot
-                to dot measurement is approximately{" "}
-                <span className="font-bold">5 inches.</span> <br />{" "}
-                <span className="font-bold">Great</span> condition.
-              </p>
+              <p className="normal-case text-lg">{data?.data?.description}</p>
             </div>
 
             <div className="flex items-center gap-x-3.5">
               <p className="text-xl text-[#4C526F]">
-                SKU: <span className="font-bold text-black">AU0099</span>
+                SKU:{" "}
+                <span className="font-bold text-black">{data?.data?.sku}</span>
               </p>
               <p className="text-xl text-[#4C526F]">
                 Category:{" "}
                 <a href="#" className="font-bold text-black hover:underline">
-                  CROSS COUNTRY SADDLES
+                  {data?.data?.category}
                 </a>
               </p>
             </div>
