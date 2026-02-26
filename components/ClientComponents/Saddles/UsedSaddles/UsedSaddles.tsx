@@ -29,12 +29,6 @@ export default function UsedSaddles() {
           <div className="flex items-center gap-4 flex-wrap">
             <FilterIcon className="md:h-8 md:w-8 h-6 w-6" />
 
-            {/* <PriceRangeFilter
-              title="PRICE"
-              minPrice={1000}
-              maxPrice={10000}
-              onPriceChange={handlePriceChange}
-            /> */}
             <DropdownFilter
               title="DISCPLINE"
               items={discplines}
