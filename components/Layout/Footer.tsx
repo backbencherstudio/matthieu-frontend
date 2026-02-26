@@ -236,7 +236,7 @@ const footerData = [
     links: [
       { name: "CONTACT US", href: "/contact-us" },
       { name: "HELP/FAQ", href: "/help-faq" },
-      { name: "SIZE GUIDE", href: "/help-faq" },
+      { name: "SIZE GUIDE", href: "/help-faq#size" },
       { name: "CARE INSTRUCTIONS", href: "/help-faq" },
       { name: "SHIPPING AND RETURNS", href: "/help-faq" },
     ],

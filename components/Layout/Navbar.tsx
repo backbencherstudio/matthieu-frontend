@@ -1,11 +1,12 @@
 "use client";
 import { Menu, SearchIcon, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
 import UsdIcon from "../Icons/UsdIcon";
 import UserIcon from "../Icons/UserIcon";
 import HoverItems from "./HoverItems";
+
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -15,11 +16,21 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
+import CartsProducts from "../ClientComponents/ProductDetailsClient/CartsProducts";
+
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [position, setPosition] = useState("bottom");
   const pathName = usePathname();
+
+  const [cartCount, setCartCount] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const c = typeof window === 'undefined' ? 0 : (JSON.parse(localStorage.getItem('cart') || '[]') || []).length;
+    setCartCount(c);
+  }, []);
 
   const navigationLinks = [
     {
@@ -161,9 +172,8 @@ const Header = () => {
                   <HoverCardTrigger asChild>
                     <Link
                       href={link.href}
-                      className={`${
-                        isActive ? "font-semibold" : "font-normal"
-                      }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                      className={`${isActive ? "font-semibold" : "font-normal"
+                        }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
                     >
                       {link.label}
                     </Link>
@@ -232,6 +242,25 @@ const Header = () => {
                 </Link>
               </button>
             )}
+            <div>
+              <div className="relative ml-auto flex items-center gap-3">
+
+                {/* Cart icon as relative anchor */}
+                <div className="textSecondary relative flex">
+                  <CartsProducts />
+
+                  {/* Badge inside the cart wrapper */}
+                  {cartCount > 0 && (
+                    <span
+                      className="absolute -top-2 -right-2 min-w-[1.5rem] h-6 rounded-full  bg-red-500 border-2 border-white flex items-center justify-center  text-white text-xs font-bold px-1.5 shadow-md"
+                    >
+                      {cartCount}
+                    </span>
+                  )}
+                </div>
+
+              </div>
+            </div>
 
             {/* Mobile menu button */}
             <button

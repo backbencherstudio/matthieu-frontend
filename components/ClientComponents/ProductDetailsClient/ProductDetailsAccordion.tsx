@@ -337,7 +337,7 @@ export default function ProductDetailsAccordion() {
             <AccordionTrigger className="text-[#1F274B] lg:text-2xl md:text-xl text-lg font-extrabold  tracking-[.48px]  hover:no-underline cursor-pointer">
               {isSaddlePage ? item.titleSaddle : item.titleProduct}
             </AccordionTrigger>
-            <AccordionContent className="text-[#4C526F] leading-[160%] tracking-[.32px] md:text-base text-sm normal-case font-light">
+            <AccordionContent className="textSecondary leading-[160%] tracking-[.32px] md:text-base text-sm normal-case font-light">
              {isSaddlePage ? item.saddleContent : item?.productContent}
             </AccordionContent>
           </AccordionItem>

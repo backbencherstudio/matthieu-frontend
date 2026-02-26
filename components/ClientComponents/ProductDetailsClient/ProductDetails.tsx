@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import BreadCrumbDetails from "../reuseable/BreadCrumbDetails";
 import ProductDetailsAccordion from "./ProductDetailsAccordion";
 import RelatedProduts from "./RelatedProduts";
+import Link from "next/link";
 
 const productImages = [
   { imgLink: "/images/products-details/Rectangle 6602.png" },
@@ -20,8 +21,8 @@ export default function ProductDetailsClient() {
   const [selectedSize, setSelectedSize] = useState("FULL");
 
   const colors = [
-    { name: "BLACK", code: "bg-[#070707]" },
-    { name: "BROWN", code: "bg-[#6E412A]" },
+    { name: "BLACK", code: "bg-[#070707]" , colorCode:"#070707" },
+    { name: "BROWN", code: "bg-[#6E412A]", colorCode:"#6E412A" },
   ];
 
   const sizes = [
@@ -76,8 +77,8 @@ export default function ProductDetailsClient() {
 
   return (
     <div>
-      <BreadCrumbDetails breadLink={breadLink} cart={true} />
-      <div className=" lg:py-12 md:py-10 py-8 maxContainer ">
+      {/* <BreadCrumbDetails breadLink={breadLink} cart={true} /> */}
+      <div className=" lg:pb-12 md:pb-10 py-8 maxContainer ">
         <div className="flex xl:flex-row flex-col gap-6">
           {/* image div */}
           <div className="xl:block hidden">
@@ -130,7 +131,7 @@ export default function ProductDetailsClient() {
                         <LoveIcon className="xl:size-12 size-8" />
                       </button>
                     </div>
-                    <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] text-[#4C526F]">
+                    <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] textSecondary">
                       SKU: BR7D2NS
                     </p>
                   </div>
@@ -141,8 +142,8 @@ export default function ProductDetailsClient() {
                   </p>
                   {/* Color Selection */}
                   <div className="flex flex-col xl:gap-4 gap-3">
-                    <p className="text-[#262626] xl:text-[20px]  text-base tracking-[.40px] leading-[100%]">
-                      Color:
+                    <p className="textSecondary xl:text-[20px]  text-base tracking-[.40px] leading-[100%]">
+                      Color: <span className="capitalize">{selectedColor}</span> 
                     </p>
                     <div className="flex  gap-4">
                       {colors.map((color, index) => (
@@ -152,14 +153,14 @@ export default function ProductDetailsClient() {
                         >
                           <button
                             onClick={() => setSelectedColor(color.name)}
-                            className={`xl:w-8 xl:h-8 w-6 h-6 cursor-pointer ${color?.code}`}
+                            className={`xl:w-8 xl:h-8 rounded-full w-6 h-6 cursor-pointer  ${color?.code} ${selectedColor === color?.name ? `outline-4` : "outline-0"}`}
                           ></button>
-                          <span
+                          {/* <span
                             key={color.name}
-                            className={`text-[#4C526F] xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light ${selectedColor === color?.name ? `underline ` : "no-underline"}`}
+                            className={`textSecondary xl:text-base text-sm leading-[100%] tracking-[.32px] transition-all font-light ${selectedColor === color?.name ? `underline ` : "no-underline"}`}
                           >
                             {color.name}
-                          </span>
+                          </span> */}
                         </div>
                       ))}
                     </div>
@@ -168,12 +169,15 @@ export default function ProductDetailsClient() {
                   {/* Size Selection */}
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <div className="flex justify-between items-center">
-                      <p className="text-[#262626] leading-[100%] tracking-[.4px] xl:text-xl md:text-lg text-base ">
+                      <p className="textSecondary leading-[100%] tracking-[.4px] xl:text-xl md:text-lg text-base ">
                         Size:
                       </p>
-                      <button className="underline text-base leading-[100%] tracking-[.32px] text-[#4C526F] cursor-pointer underline-offset-2 hover:no-underline">
+                      {/* <button className="underline text-base leading-[100%] tracking-[.32px] textSecondary cursor-pointer underline-offset-2 hover:no-underline">
                         See Size Guide
-                      </button>
+                      </button> */}
+                       <Link href="/help-faq#size" className="underline text-base leading-[100%] tracking-[.32px] textSecondary cursor-pointer underline-offset-2 hover:no-underline">
+                        See Size Guide
+                      </Link>
                     </div>
                     <div className="grid md:grid-cols-4 grid-cols-2 md:gap-3 gap-2">
                       {sizes.map((size) => (
@@ -194,14 +198,14 @@ export default function ProductDetailsClient() {
 
                   {/* Benefits Section */}
                   <div className="flex flex-col xl:gap-4 gap-3">
-                    <p className="lg:text-xl  text-base text-[#262626] leading-[100%] tracking-[.4px]">
+                    <p className="lg:text-xl  text-base textSecondary leading-[100%] tracking-[.4px]">
                       Benefits:
                     </p>
                     <ul className="xl:space-y-3 space-y-2">
                       {benefits.map((benefit, index) => (
                         <li
                           key={index}
-                          className="flex gap-2.5 xl:text-base text-sm tracking-[.08px] leading-[120%] text-[#4C526F]"
+                          className="flex gap-2.5 xl:text-base text-sm tracking-[.08px] leading-[120%] textSecondary"
                         >
                           <span className="  font-bold ">•</span>
                           <span className="normal-case">{benefit}</span>
@@ -210,7 +214,7 @@ export default function ProductDetailsClient() {
                     </ul>
                   </div>
 
-                  <button className="text-[#262626] xl:text-lg text-start text-base underline underline-offset-2">
+                  <button className="textSecondary xl:text-lg text-start text-base underline underline-offset-2">
                     More details
                   </button>
                   {/* Buttons Section */}
@@ -231,7 +235,7 @@ export default function ProductDetailsClient() {
                       </button>
                     </div>
 
-                    <button className="text-[#262626] xl:text-lg text-start text-base underline underline-offset-2">
+                    <button className="textSecondary xl:text-lg text-start text-base underline underline-offset-2">
                       More payment options
                     </button>
                   </div>
