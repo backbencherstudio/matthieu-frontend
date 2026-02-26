@@ -62,9 +62,9 @@ export default function SAddlesCategoryItems({
                 <h2 className="text-[#1F274B] text-xl font-semibold">
                   {product.name}
                 </h2>
-                <p className="text-[#4A4C56]  md:text-xl text-base leading-[124%] font-normal">
+                {/* <p className="text-[#4A4C56]  md:text-xl text-base leading-[124%] font-normal">
                   From {product.startFrom}
-                </p>
+                </p> */}
               </div>
             </Link>
           ))}
