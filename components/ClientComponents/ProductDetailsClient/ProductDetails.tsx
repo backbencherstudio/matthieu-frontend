@@ -235,9 +235,9 @@ export default function ProductDetailsClient() {
                       </button>
                     </div>
 
-                    <button className="textSecondary xl:text-lg text-start text-base underline underline-offset-2">
+                    {/* <button className="textSecondary xl:text-lg text-start text-base underline underline-offset-2">
                       More payment options
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

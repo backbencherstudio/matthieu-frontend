@@ -10,13 +10,13 @@ export default function TailorMAade() {
         TAILOR MADE
       </p>
 
-      <div className="mt-10 flex items-center justify-center mb-12">
-        <Link
+      <div className="mt-6 flex items-center justify-center mb-12">
+        {/* <Link
           href="/saddles/saddlery-expert"
           className="px-8 py-4 bg-[#1F274B] text-[#FFF] cursor-pointer"
         >
           TRY A SADDLE
-        </Link>
+        </Link> */}
       </div>
     <h3 className="text-center lg:text-[42px] md:text-[36px] text-[28px] font-medium ">Coming Soon</h3>
       {/* <video
