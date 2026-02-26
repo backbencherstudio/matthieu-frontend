@@ -22,8 +22,8 @@ const answerQuestion = [
 const productDetails = [
   {
     id: "item-1",
-    titleSaddle: "MORE DETAILS:",
-    titleProduct:"MORE DETAILS:",
+    titleSaddle: "MORE DETAILS",
+    titleProduct: "MORE DETAILS",
     productContent: (
       <p className="leading-[160%] tracking-[.32px] md:text-base text-sm font-medium">
         Arion's Double Noseband Bridle combines the effect of a regular noseband
@@ -38,7 +38,7 @@ const productDetails = [
           Reins are not included.
         </span>
       </p>
-    ), 
+    ),
     saddleContent: (
       <div className="space-y-4">
         <div>
@@ -80,8 +80,8 @@ const productDetails = [
   },
   {
     id: "item-2",
-    titleSaddle: "LEATHER TYPE:",
-    titleProduct:"LEATHER CARE GUIDE:",
+    titleSaddle: "LEATHER TYPE",
+    titleProduct: "LEATHER CARE GUIDE",
     productContent: (
       <p>
         Grab your{" "}
@@ -103,7 +103,7 @@ const productDetails = [
         , wipe your bridle down with a clean towel and store in a dry area.
         Clean after every use for best results."
       </p>
-    ), 
+    ),
     saddleContent: (
       <div className="space-y-4">
         <div>
@@ -142,7 +142,7 @@ const productDetails = [
   {
     id: "item-3",
     titleSaddle: "SHIPPING AND RETURNS",
-    titleProduct:"SHIPPING AND RETURNS",
+    titleProduct: "SHIPPING AND RETURNS",
     saddleContent: (
       <div className="space-y-4">
         <div>
@@ -187,9 +187,9 @@ const productDetails = [
               our Wellington office and is as described above, you will be fully
               reimbursed.
             </li>
-              <li className="font-black">
-                No returns are accepted for items purchased during sales or discount periods.
-             </li>
+            <li className="font-black">
+              No returns are accepted for items purchased during sales or discount periods.
+            </li>
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
               <Link href="#" className="underline">
                 Read More
@@ -243,11 +243,11 @@ const productDetails = [
               our Wellington office and is as described above, you will be fully
               reimbursed.
             </li>
-              <li className="font-black">
-                No returns are accepted for items purchased during sales or discount periods.
-             </li>
+            <li className="font-black">
+              No returns are accepted for items purchased during sales or discount periods.
+            </li>
             <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-              <Link href="#" className="underline">
+              <Link href="/help-faq" className="underline">
                 Read More
               </Link>
             </li>
@@ -258,60 +258,176 @@ const productDetails = [
   },
   {
     id: "item-4",
-     titleSaddle:  "NEED HELP?",
+    titleSaddle: "NEED HELP?",
     titleProduct: "NEED HELP?",
     saddleContent: (
       <div className="flex gap-4">
-        <div className="w-[79px] h-[86px] ">
+        <div className="w-[79px] h-[86px] flex-shrink-0">
           <img
             src="/images/products-details/need help.png"
-            alt=""
-            className="w-full h-full object-cover "
+            alt="Customer support - Gabrielle"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div>
+
+        <div className="flex-1">
           <p className="text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal">
             Gabrielle will answer your questions!
           </p>
-          <div className="flex items-center gap-6 md:mt-4 mt-3">
-            {answerQuestion?.map((item, index) => (
-              <Link href={""} className="flex items-center gap-3" key={index}>
-                <span className="text-[#000000]">{item?.icon}</span>
-                <span className="text-[#4C526F] leading-[100%] text-base">
-                  {item?.title}
-                </span>
-              </Link>
-            ))}
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 md:mt-4 mt-3">
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/12035988691?text=Hello%2C%20I%20have%20a%20question%20about%20my%20saddle..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]"><WhatsAppIcon /></span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">WhatsApp</span>
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:hello@arion-hst.com?subject=Question%20about%20saddle"
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]"><EmailIcon /></span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">E-Mail</span>
+            </a>
+
+            {/* Call or Text */}
+            <a
+              href="tel:+12035988691"
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]"><CallingIcon /></span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">Call or Text</span>
+            </a>
           </div>
         </div>
       </div>
     ),
+
     productContent: (
       <div className="flex gap-4">
-        <div className="w-[79px] h-[86px] ">
+        <div className="w-[79px] h-[86px] flex-shrink-0">
           <img
             src="/images/products-details/need help.png"
-            alt=""
-            className="w-full h-full object-cover "
+            alt="Customer support - Gabrielle"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div>
+
+        <div className="flex-1">
           <p className="text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal">
             Gabrielle will answer your questions!
           </p>
-          <div className="flex items-center gap-6 md:mt-4 mt-3">
-            {answerQuestion?.map((item, index) => (
-              <Link href={""} className="flex items-center gap-3" key={index}>
-                <span className="text-[#000000]">{item?.icon}</span>
-                <span className="text-[#4C526F] leading-[100%] text-base">
-                  {item?.title}
-                </span>
-              </Link>
-            ))}
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 md:mt-4 mt-3">
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/12035988691?text=Hello%2C%20I%20have%20a%20question%20about%20a%20product..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]">
+                <WhatsAppIcon />
+              </span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">
+                WhatsApp
+              </span>
+            </a>
+
+            {/* Email - main one (hello@) */}
+            <a
+              href="mailto:hello@arion-hst.com?subject=Question%20about%20product&body=Hi%20Gabrielle%2C%0A%0AI%20would%20like%20to%20ask%20about..."
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]">
+                <EmailIcon />
+              </span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">
+                E-Mail
+              </span>
+            </a>
+
+            {/* Call or Text */}
+            <a
+              href="tel:+12035988691"
+              className="flex items-center gap-3 hover:opacity-80 active:opacity-70 transition-opacity"
+            >
+              <span className="text-[#000000]">
+                <CallingIcon />
+              </span>
+              <span className="text-[#4C526F] leading-[100%] text-base font-medium">
+                Call or Text
+              </span>
+            </a>
           </div>
+
+          {/* Optional: smaller secondary email if you really want both */}
+          {/* <p className="mt-2 text-sm text-[#4C526F]">
+        Alternative: <a href="mailto:g.fournier@arion-hst.com" className="underline">g.fournier@arion-hst.com</a>
+      </p> */}
         </div>
       </div>
     ),
+
+    // saddleContent: (
+    //   <div className="flex gap-4">
+    //     <div className="w-[79px] h-[86px] ">
+    //       <img
+    //         src="/images/products-details/need help.png"
+    //         alt=""
+    //         className="w-full h-full object-cover "
+    //       />
+    //     </div>
+    //     <div>
+    //       <p className="text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal">
+    //         Gabrielle will answer your questions!
+    //       </p>
+    //       <div className="flex items-center gap-6 md:mt-4 mt-3">
+    //         {answerQuestion?.map((item, index) => (
+    //           <Link href={""} className="flex items-center gap-3" key={index}>
+    //             <span className="text-[#000000]">{item?.icon}</span>
+    //             <span className="text-[#4C526F] leading-[100%] text-base">
+    //               {item?.title}
+    //             </span>
+    //           </Link>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    // ),
+
+    // productContent: (
+    //   <div className="flex gap-4">
+    //     <div className="w-[79px] h-[86px] ">
+    //       <img
+    //         src="/images/products-details/need help.png"
+    //         alt=""
+    //         className="w-full h-full object-cover "
+    //       />
+    //     </div>
+    //     <div>
+    //       <p className="text-[#000] tracking-[.4px] leading-[100%] lg:text-xl text-lg font-normal">
+    //         Gabrielle will answer your questions!
+    //       </p>
+    //       <div className="flex items-center gap-6 md:mt-4 mt-3">
+    //         {answerQuestion?.map((item, index) => (
+    //           <Link href={""} className="flex items-center gap-3" key={index}>
+    //             <span className="text-[#000000]">{item?.icon}</span>
+    //             <span className="text-[#4C526F] leading-[100%] text-base">
+    //               {item?.title}
+    //             </span>
+    //           </Link>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    // ),
   },
 ];
 
@@ -338,7 +454,7 @@ export default function ProductDetailsAccordion() {
               {isSaddlePage ? item.titleSaddle : item.titleProduct}
             </AccordionTrigger>
             <AccordionContent className="textSecondary leading-[160%] tracking-[.32px] md:text-base text-sm normal-case font-light">
-             {isSaddlePage ? item.saddleContent : item?.productContent}
+              {isSaddlePage ? item.saddleContent : item?.productContent}
             </AccordionContent>
           </AccordionItem>
         ))}
