@@ -27,7 +27,6 @@ import {
   useForm,
 } from "react-hook-form";
 import { toast } from "sonner";
-import { MultiSelect } from "../../reusable/MultiSelect";
 
 type Inputs = {
   name: string;
@@ -509,7 +508,7 @@ export default function AddForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-3">
+          {/* <div className="grid grid-cols-2 gap-3 mt-3">
             <div className="mb-3">
               <Label className="text-sm text-secondary-text mb-1">
                 Available Color
@@ -561,7 +560,7 @@ export default function AddForm() {
                 </p>
               )}
             </div>
-          </div>
+          </div> */}
 
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
