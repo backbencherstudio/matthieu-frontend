@@ -1,4 +1,3 @@
-import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 import { useGetSingleUseSadlesQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
 import Image from "next/image";
 
@@ -22,12 +21,6 @@ export default function UseSaddlesDetails({ id, onClose }: DetailProps) {
         <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
           Use Saddles Details
         </h1>
-        <button
-          onClick={onClose}
-          className="cursor-pointer px-3 py-2.5 border border-[#989CAC] rounded-[4px]"
-        >
-          <CancelIcon />
-        </button>
       </div>
 
       <div className="p-4 border border-[#ECEFF3] rounded-[6px]">

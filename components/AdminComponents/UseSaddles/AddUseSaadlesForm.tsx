@@ -31,7 +31,8 @@ type Inputs = {
   name: string;
   description: string;
   seatSize: number;
-  basePrice: number;
+  basePrice_usd: number;
+  basePrice_eur: number;
   stockQuantity: number;
   category: ProductCategory;
   usedsaddlecategory: SubProductCategory;
@@ -75,7 +76,8 @@ const AddUseSaadlesForm = () => {
       formData.append("title", data.name);
       formData.append("description", data.description || "");
       formData.append("seatSize", String(data.seatSize));
-      formData.append("basePrice", String(data.basePrice));
+      formData.append("basePrice_usd", String(data.basePrice_usd));
+      formData.append("basePrice_eur", String(data.basePrice_eur));
       formData.append("category", data.category);
       formData.append("usedsaddlecategory", data.usedsaddlecategory);
       formData.append("stockQuantity", String(data.stockQuantity));
@@ -200,6 +202,64 @@ const AddUseSaadlesForm = () => {
         <div className="grid grid-cols-2 gap-3">
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
+              USD Price
+            </Label>
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Price "
+              {...register("basePrice_usd", {
+                required: "Price is required",
+              })}
+            />
+            {errors.basePrice_usd && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.basePrice_usd.message}
+              </p>
+            )}
+          </div>
+          <div className="mb-3">
+            <Label className="text-sm text-secondary-text mb-1">
+              EUR Price
+            </Label>
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Price "
+              {...register("basePrice_eur", {
+                required: "Price is required",
+              })}
+            />
+            {errors.basePrice_eur && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.basePrice_eur.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {/* Stock Quantity */}
+          <div className="mb-3">
+            <Label className="text-sm text-secondary-text mb-1">
+              Stock Quantity*
+            </Label>
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Stock Quantity"
+              {...register("stockQuantity", {
+                required: "Stock Quantity is required",
+              })}
+            />
+            {errors.stockQuantity && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.stockQuantity.message}
+              </p>
+            )}
+          </div>
+          <div className="mb-3">
+            <Label className="text-sm text-secondary-text mb-1">
               Seat Size
             </Label>
             <Input
@@ -214,40 +274,6 @@ const AddUseSaadlesForm = () => {
               </p>
             )}
           </div>
-          <div className="mb-3">
-            <Label className="text-sm text-secondary-text mb-1">Price</Label>
-            <Input
-              type="text"
-              className="cmn-input"
-              placeholder="Enter Price "
-              {...register("basePrice", { required: "Price is required" })}
-            />
-            {errors.basePrice && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.basePrice.message}
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Stock Quantity */}
-        <div className="mb-3">
-          <Label className="text-sm text-secondary-text mb-1">
-            Stock Quantity*
-          </Label>
-          <Input
-            type="text"
-            className="cmn-input"
-            placeholder="Enter Stock Quantity"
-            {...register("stockQuantity", {
-              required: "Stock Quantity is required",
-            })}
-          />
-          {errors.stockQuantity && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.stockQuantity.message}
-            </p>
-          )}
         </div>
 
         <div className="mb-4">
@@ -289,7 +315,7 @@ const AddUseSaadlesForm = () => {
         {/* Submit Button */}
         <div>
           <button type="submit" className="cmn-btn">
-            {isLoading ? "Creating.." : "Add Saddle"}
+            {isLoading ? "Creating.." : "Publish"}
           </button>
         </div>
       </form>
