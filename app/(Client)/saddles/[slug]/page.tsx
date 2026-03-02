@@ -51,13 +51,18 @@ export default function JumpingPage() {
       <BreadCrumb breadLink={breadLink} />
 
       {/* Heading */}
-      <div className="mt-16">
+      <div className="mt-16 px-5 ">
         <h1 className="text-[32px] font-extrabold text-[#1F274B] text-center">
-          ARION CUSTOM SADDLES
+          ARION
         </h1>
-        <p className="text-center text-[20px] text-[#4C526F] mt-4">
-          Personalize your saddle: add a pop of color, customize your nameplate,
-          & moral. We want to make your dream saddle.
+        <div className="text-center">
+          <span className="md:text-2xl text-lg! font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3 text-center capitalize textSecondary">
+            CUSTOM SADDLES
+          </span>
+        </div>
+        <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4">
+          Personalize your saddle! Add a pop of color, customize your
+          nameplate, & much more. Let’s create the saddle of your dreams!
         </p>
       </div>
 
@@ -83,10 +88,9 @@ export default function JumpingPage() {
                   alt=""
                   onClick={() => setSelectedImage(img.imgLink)}
                   className={`cursor-pointer object-contain w-full h-[120px]
-                    ${
-                      selectedImage === img.imgLink
-                        ? "border-[#1F274B]"
-                        : "border-[#DFE1E7]"
+                    ${selectedImage === img.imgLink
+                      ? "border-[#1F274B]"
+                      : "border-[#DFE1E7]"
                     }`}
                 />
               ))}
@@ -119,11 +123,10 @@ export default function JumpingPage() {
                   <button
                     key={index}
                     onClick={() => setSelectedColor(color.name)}
-                    className={`w-8 h-8 rounded-full ${color.code} ${
-                      selectedColor === color.name
-                        ? "ring-2 ring-[#1F274B]"
-                        : ""
-                    }`}
+                    className={`w-8 h-8 rounded-full ${color.code} ${selectedColor === color.name
+                      ? "ring-2 ring-[#1F274B]"
+                      : ""
+                      }`}
                   />
                 ))}
               </div>
