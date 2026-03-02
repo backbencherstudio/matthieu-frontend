@@ -105,7 +105,8 @@ export default function SaddlesDetails() {
             </div>
 
             <p className="text-xl text-[#4C526F]">
-              ${data?.data?.priceRange?.min} - ${data?.data?.priceRange?.max}
+              ${data?.data?.priceRange_eur?.min} - $
+              {data?.data?.priceRange_eur?.max}
             </p>
 
             {/* <div className="h-[1px] bg-[#DFE1E7]" /> */}
