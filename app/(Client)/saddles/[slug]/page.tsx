@@ -4,6 +4,7 @@ import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetail
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function JumpingPage() {
@@ -151,9 +152,9 @@ export default function JumpingPage() {
             <div>
               <div className="flex justify-between mb-3">
                 <p className="text-xl text-[#262626]">Leather Type</p>
-                <button className="underline text-[#4C526F] cursor-pointer">
+                <a href="#leather-type" className="underline text-[#4C526F] cursor-pointer">
                   Learn More
-                </button>
+                </a>
               </div>
 
               <div className="flex gap-4 flex-wrap">
@@ -169,9 +170,9 @@ export default function JumpingPage() {
             </div>
 
             {/* CTA */}
-            <button className="w-full bg-[#1F274B] text-white py-4 uppercase text-lg cursor-pointer">
+            <Link href={"/saddles/saddlery-expert"} className="w-full bg-[#1F274B] text-white py-4 uppercase text-lg cursor-pointer text-center">
               Connect with our team
-            </button>
+            </Link>
           </div>
         </div>
 

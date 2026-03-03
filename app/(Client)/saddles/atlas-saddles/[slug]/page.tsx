@@ -51,61 +51,61 @@ export default function AtlasSaddleDetailsPage() {
   ];
 
   const productDetails = [
-    {
-      id: "item-3",
-      title: "SHIPPING AND RETURNS",
-      content: (
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Delivery time:
-            </h4>
-            <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                USA: 5-7 work days | Canada: 7-10 business days
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery with purchases over $2,000
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Shipping costs:
-            </h4>
-            <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery if you pick up at our booth in Wellington, Florida
-                January March
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery if you pick up from our office in Wellington,
-                Florida
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                USA: $50 | Canada: $100
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Returns:
-            </h4>
-            <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
-              Return tack or accessories within 7 days of purchase. The product
-              must be new, with labels attached. Once the product is received at
-              our Wellington office and is as described above, you will be fully
-              reimbursed.
-              <br />
-              <span className="mt-2 block font-black">
-              No returns are accepted for items purchased during sales or discount periods.
-              </span>
+    // {
+    //   id: "item-3",
+    //   title: "SHIPPING AND RETURNS",
+    //   content: (
+    //     <div className="space-y-4">
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Delivery time:
+    //         </h4>
+    //         <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             USA: 5-7 work days | Canada: 7-10 business days
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery with purchases over $2,000
+    //           </li>
+    //         </ul>
+    //       </div>
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Shipping costs:
+    //         </h4>
+    //         <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery if you pick up at our booth in Wellington, Florida
+    //             January March
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery if you pick up from our office in Wellington,
+    //             Florida
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             USA: $50 | Canada: $100
+    //           </li>
+    //         </ul>
+    //       </div>
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Returns:
+    //         </h4>
+    //         <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
+    //           Return tack or accessories within 7 days of purchase. The product
+    //           must be new, with labels attached. Once the product is received at
+    //           our Wellington office and is as described above, you will be fully
+    //           reimbursed.
+    //           <br />
+    //           <span className="mt-2 block font-black">
+    //           No returns are accepted for items purchased during sales or discount periods.
+    //           </span>
 
-            </p>
-          </div>
-        </div>
-      ),
-    },
+    //         </p>
+    //       </div>
+    //     </div>
+    //   ),
+    // },
     {
       id: "item-4",
       title: "NEED HELP?",
@@ -257,9 +257,9 @@ export default function AtlasSaddleDetailsPage() {
 
                   {/* Buttons Section */}
                   <div>
-                    <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
+                    <Link href={"/saddles/saddlery-expert"} className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] block text-center cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
                       Connect with our team
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
