@@ -22,6 +22,16 @@ export default function UsedSaddlesProductList() {
     return <p>Loading...</p>;
   }
 
+  const getCookie = (name) => {
+    const cookies = document.cookie.split("; ");
+    const cookie = cookies.find((row) => row.startsWith(name + "="));
+    return cookie ? cookie.split("=")[1] : null;
+  };
+
+  const region = getCookie("x-region");
+  const isAmerica = region === "america";
+  const icon = isAmerica ? "$" : "€";
+
   return (
     <div>
       {/* <h2 className='textSecondary lg:text-[36px] md-text-[32px] text-[28px] font-extrabold leading-[100%] tracking-[.72px] '></h2> */}
@@ -34,9 +44,9 @@ export default function UsedSaddlesProductList() {
           >
             <div className=" w-full h-[307px] bg-white overflow-hidden">
               <img
-                src={item?.image}
+                src={item?.images[0]?.url}
                 alt={item?.name}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="mt-5 flex flex-col gap-[12px]">
@@ -45,7 +55,11 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-                  ${item?.priceRange_eur?.min}- ${item?.priceRange_eur?.max}
+                  {icon }
+                  {isAmerica ? item?.priceRange_usd?.min : item?.priceRange_eur?.min}
+                 {" "} -
+                  {" "}{icon}
+                  {isAmerica ? item?.priceRange_usd?.max : item?.priceRange_eur?.max}
                 </p>
               </div>
               {/* <p className="textSecondary md:text-base text-sm leading-[124%] ">
