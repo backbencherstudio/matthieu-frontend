@@ -13,19 +13,28 @@ import Link from "next/link";
 import WhatsAppIcon from "@/components/Icons/WhatsAppIcon";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import CallingIcon from "@/components/Icons/CallingIcon";
+import { usePathname } from "next/navigation";
 
 export default function AtlasSaddleDetailsPage() {
+
+  const path = usePathname()
+  const isJumping = path.includes("jumping")
+  const isCross = path.includes("cross")
+  const isDresseges = path.includes("dressage") 
+ 
+  const lab = isJumping ? "JUMPING" : isCross ? "CROSS-COUNTRY" : isDresseges ? "DRESSAGE" : ""
+
   const breadLink = [
     {
       label: "SADDLES",
       href: "/saddles",
     },
     {
-      label: "ARION",
-      href: "/saddles/arion-saddles",
+      label: "ATLAS",
+      href: "/saddles/atlas-saddles",
     },
     {
-      label: "JUMPING",
+      label: lab,
       href: "/saddles/jumping",
     },
   ];
@@ -51,61 +60,61 @@ export default function AtlasSaddleDetailsPage() {
   ];
 
   const productDetails = [
-    {
-      id: "item-3",
-      title: "SHIPPING AND RETURNS",
-      content: (
-        <div className="space-y-4">
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Delivery time:
-            </h4>
-            <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                USA: 5-7 work days | Canada: 7-10 business days
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery with purchases over $2,000
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Shipping costs:
-            </h4>
-            <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery if you pick up at our booth in Wellington, Florida
-                January March
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                Free delivery if you pick up from our office in Wellington,
-                Florida
-              </li>
-              <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
-                USA: $50 | Canada: $100
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
-              Returns:
-            </h4>
-            <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
-              Return tack or accessories within 7 days of purchase. The product
-              must be new, with labels attached. Once the product is received at
-              our Wellington office and is as described above, you will be fully
-              reimbursed.
-              <br />
-              <span className="mt-2 block font-black">
-              No returns are accepted for items purchased during sales or discount periods.
-              </span>
+    // {
+    //   id: "item-3",
+    //   title: "SHIPPING AND RETURNS",
+    //   content: (
+    //     <div className="space-y-4">
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Delivery time:
+    //         </h4>
+    //         <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             USA: 5-7 work days | Canada: 7-10 business days
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery with purchases over $2,000
+    //           </li>
+    //         </ul>
+    //       </div>
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Shipping costs:
+    //         </h4>
+    //         <ul className="list-disc list-inside md:space-y-3 space-y-2  text-[#4C526F]">
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery if you pick up at our booth in Wellington, Florida
+    //             January March
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             Free delivery if you pick up from our office in Wellington,
+    //             Florida
+    //           </li>
+    //           <li className="md:text-base text-sm leading-[120%] tracking-[.08px]">
+    //             USA: $50 | Canada: $100
+    //           </li>
+    //         </ul>
+    //       </div>
+    //       <div>
+    //         <h4 className="font-normal leading-[100%] tracking-[.4px] text-[#262626] lg:text-xl text-lg mb-4">
+    //           Returns:
+    //         </h4>
+    //         <p className="md:text-base text-sm leading-[160%] tracking-[.08px]  text-[#4C526F] ">
+    //           Return tack or accessories within 7 days of purchase. The product
+    //           must be new, with labels attached. Once the product is received at
+    //           our Wellington office and is as described above, you will be fully
+    //           reimbursed.
+    //           <br />
+    //           <span className="mt-2 block font-black">
+    //           No returns are accepted for items purchased during sales or discount periods.
+    //           </span>
 
-            </p>
-          </div>
-        </div>
-      ),
-    },
+    //         </p>
+    //       </div>
+    //     </div>
+    //   ),
+    // },
     {
       id: "item-4",
       title: "NEED HELP?",
@@ -142,15 +151,19 @@ export default function AtlasSaddleDetailsPage() {
     <>
       <BreadCrumb breadLink={breadLink} />
       {/* Heading */}
-      <div className="mt-16">
+      <div className="mt-16 px-5">
         <h1 className="text-[32px] leading-[100%] tracking-[0.64px] font-extrabold text-[#1F274B] text-center">
-          ATLAS SEMI - CUSTOM SADDLES
+          ATLAS
         </h1>
-        <p className="text-center text-[20px] leading-[160%] text-[#4C526F] tracking-[0.04px] normal-case text-wrap mt-4 max-w-[1000px] w-full mx-auto">
-          Atlas offers you a brand new semi-custom saddle at a competitive
-          price. Choose your seat size, flap size, and color. Using only premium
-          French leather and craftsmanship, you will receive a brand new
-          semi-custom saddle.
+        <div className="text-center">
+          <span className="md:text-2xl text-lg! font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3 text-center capitalize textSecondary block">
+            SEMI - CUSTOM SADDLES
+          </span>
+        </div>
+        <p className=" text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
+          Same luxury at a competitive price. Choose your seat size, flap size,
+          and leather color. Using our premium French leather and craftsmanship, we will
+          create a new semi-custom, long-lasting saddle for you and your horse.
         </p>
       </div>
 
@@ -257,9 +270,9 @@ export default function AtlasSaddleDetailsPage() {
 
                   {/* Buttons Section */}
                   <div>
-                    <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
+                    <Link href={"/saddles/saddlery-expert"} className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] block text-center cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
                       Connect with our team
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

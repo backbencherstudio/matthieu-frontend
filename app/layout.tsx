@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Toaster } from "sonner";
 import "./globals.css";
+import GeoInitializer from "@/components/Geolocation/GeoInitializer";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -40,6 +41,7 @@ export default function RootLayout({
       </head>
       <body className="avenir">
         <div id="google_translate_element" className="hidden"></div>
+        <GeoInitializer />
         <Providers>
           <TranslatePatchProvider>{children}</TranslatePatchProvider>
         </Providers>

@@ -4,13 +4,24 @@ import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetail
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function JumpingPage() {
+
+  const path = usePathname()
+  const isJumping = path.includes("jumping") 
+  const isCross = path.includes("cross")
+  const isDresseges = path.includes("dressage")
+  const isKids = path.includes("kids")
+
+  const lab = isJumping ? "JUMPING" : isCross ? "CROSS-COUNTRY" : isDresseges ? "DRESSAGE" : isKids ? "KIDS" : ""
+
   const breadLink = [
     { label: "SADDLES", href: "/saddles" },
     { label: "ARION", href: "/saddles/arion-saddles" },
-    { label: "JUMPING", href: "/saddles/jumping" },
+    { label: lab, href: "/saddles/jumping" },
   ];
 
   const productImages = [
@@ -60,7 +71,7 @@ export default function JumpingPage() {
             CUSTOM SADDLES
           </span>
         </div>
-        <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4">
+        <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
           Personalize your saddle! Add a pop of color, customize your
           nameplate, & much more. Let’s create the saddle of your dreams!
         </p>
@@ -151,9 +162,9 @@ export default function JumpingPage() {
             <div>
               <div className="flex justify-between mb-3">
                 <p className="text-xl text-[#262626]">Leather Type</p>
-                <button className="underline text-[#4C526F] cursor-pointer">
+                <a href="#leather-type" className="underline text-[#4C526F] cursor-pointer">
                   Learn More
-                </button>
+                </a>
               </div>
 
               <div className="flex gap-4 flex-wrap">
@@ -169,9 +180,9 @@ export default function JumpingPage() {
             </div>
 
             {/* CTA */}
-            <button className="w-full bg-[#1F274B] text-white py-4 uppercase text-lg cursor-pointer">
+            <Link href={"/saddles/saddlery-expert"} className="w-full bg-[#1F274B] text-white py-4 uppercase text-lg cursor-pointer text-center">
               Connect with our team
-            </button>
+            </Link>
           </div>
         </div>
 

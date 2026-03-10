@@ -82,6 +82,7 @@ const productDetails = [
     id: "item-2",
     titleSaddle: "LEATHER TYPE",
     titleProduct: "LEATHER CARE GUIDE",
+    sectionId: "leather-type",
     productContent: (
       <p>
         Grab your{" "}
@@ -436,6 +437,14 @@ export default function ProductDetailsAccordion() {
   const path = usePathname()
   const isSaddlePage = path.includes("saddles")
 
+  // Filter out shipping & returns only on saddle pages
+  const filteredDetails = productDetails.filter((item) => {
+    if (isSaddlePage) {
+      return item.titleSaddle !== "SHIPPING AND RETURNS";
+    }
+    return true; // keep everything on product pages
+  });
+
 
   return (
     <div className="mt-8">
@@ -444,12 +453,14 @@ export default function ProductDetailsAccordion() {
         collapsible
         className="w-full lg:space-y-6 space-y-4"
       >
-        {productDetails.map((item) => (
+        {filteredDetails.map((item) => (
           <AccordionItem
             key={item.id}
             value={item.id}
+            id={item.sectionId}
             className="bg-[#F6F8FA] px-4 border-b-0"
           >
+            {/* {item?.titleSaddle === "SHIPPING AND RETURNS" ? "" : } */}
             <AccordionTrigger className="text-[#1F274B] lg:text-2xl md:text-xl text-lg font-extrabold  tracking-[.48px]  hover:no-underline cursor-pointer">
               {isSaddlePage ? item.titleSaddle : item.titleProduct}
             </AccordionTrigger>
