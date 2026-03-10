@@ -8,7 +8,7 @@ interface TrackProductListProps {
     code: string;
     category: string;
     image: string;
-    price: string;
+    priceRange_eur: string;
     material: string;
     year: string;
   }[];
@@ -17,7 +17,7 @@ interface TrackProductListProps {
 
 export default function UsedSaddlesProductList() {
   const { data, isLoading } = useGetAllUseSaddlesQuery("");
-
+  console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -35,7 +35,7 @@ export default function UsedSaddlesProductList() {
             <div className=" w-full h-[307px] bg-white overflow-hidden">
               <img
                 src={item?.image}
-                alt={item.name}
+                alt={item?.name}
                 className="w-full h-full object-contain"
               />
             </div>
@@ -45,7 +45,7 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-                  ${item?.priceRange?.min}- ${item?.priceRange?.max}
+                  ${item?.priceRange_eur?.min}- ${item?.priceRange_eur?.max}
                 </p>
               </div>
               {/* <p className="textSecondary md:text-base text-sm leading-[124%] ">
