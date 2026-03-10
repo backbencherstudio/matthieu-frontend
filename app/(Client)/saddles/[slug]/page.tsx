@@ -5,13 +5,23 @@ import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function JumpingPage() {
+
+  const path = usePathname()
+  const isJumping = path.includes("jumping") 
+  const isCross = path.includes("cross")
+  const isDresseges = path.includes("dressage")
+  const isKids = path.includes("kids")
+
+  const lab = isJumping ? "JUMPING" : isCross ? "CROSS-COUNTRY" : isDresseges ? "DRESSAGE" : isKids ? "KIDS" : ""
+
   const breadLink = [
     { label: "SADDLES", href: "/saddles" },
     { label: "ARION", href: "/saddles/arion-saddles" },
-    { label: "JUMPING", href: "/saddles/jumping" },
+    { label: lab, href: "/saddles/jumping" },
   ];
 
   const productImages = [
@@ -61,7 +71,7 @@ export default function JumpingPage() {
             CUSTOM SADDLES
           </span>
         </div>
-        <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4">
+        <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
           Personalize your saddle! Add a pop of color, customize your
           nameplate, & much more. Let’s create the saddle of your dreams!
         </p>

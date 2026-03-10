@@ -8,6 +8,11 @@ const rawBaseQuery = fetchBaseQuery({
     if (typeof window !== "undefined") {
       const token = localStorage?.getItem("token");
       if (token) headers.set("Authorization", `Bearer ${token}`);
+
+      // Comment out until backend is fixed
+    const match = document.cookie.match(/x-region=([^;]+)/);
+    const region = match ? match[1] : 'other';
+    headers.set('x-country', region);
     }
     return headers;
   },

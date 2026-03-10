@@ -13,19 +13,28 @@ import Link from "next/link";
 import WhatsAppIcon from "@/components/Icons/WhatsAppIcon";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import CallingIcon from "@/components/Icons/CallingIcon";
+import { usePathname } from "next/navigation";
 
 export default function AtlasSaddleDetailsPage() {
+
+  const path = usePathname()
+  const isJumping = path.includes("jumping")
+  const isCross = path.includes("cross")
+  const isDresseges = path.includes("dressage") 
+ 
+  const lab = isJumping ? "JUMPING" : isCross ? "CROSS-COUNTRY" : isDresseges ? "DRESSAGE" : ""
+
   const breadLink = [
     {
       label: "SADDLES",
       href: "/saddles",
     },
     {
-      label: "ARION",
-      href: "/saddles/arion-saddles",
+      label: "ATLAS",
+      href: "/saddles/atlas-saddles",
     },
     {
-      label: "JUMPING",
+      label: lab,
       href: "/saddles/jumping",
     },
   ];
@@ -142,15 +151,19 @@ export default function AtlasSaddleDetailsPage() {
     <>
       <BreadCrumb breadLink={breadLink} />
       {/* Heading */}
-      <div className="mt-16">
+      <div className="mt-16 px-5">
         <h1 className="text-[32px] leading-[100%] tracking-[0.64px] font-extrabold text-[#1F274B] text-center">
-          ATLAS SEMI - CUSTOM SADDLES
+          ATLAS
         </h1>
-        <p className="text-center text-[20px] leading-[160%] text-[#4C526F] tracking-[0.04px] normal-case text-wrap mt-4 max-w-[1000px] w-full mx-auto">
-          Atlas offers you a brand new semi-custom saddle at a competitive
-          price. Choose your seat size, flap size, and color. Using only premium
-          French leather and craftsmanship, you will receive a brand new
-          semi-custom saddle.
+        <div className="text-center">
+          <span className="md:text-2xl text-lg! font-normal leading-[100%] tracking-[.48px] md:mt-4 mt-3 text-center capitalize textSecondary block">
+            SEMI - CUSTOM SADDLES
+          </span>
+        </div>
+        <p className=" text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
+          Same luxury at a competitive price. Choose your seat size, flap size,
+          and leather color. Using our premium French leather and craftsmanship, we will
+          create a new semi-custom, long-lasting saddle for you and your horse.
         </p>
       </div>
 
