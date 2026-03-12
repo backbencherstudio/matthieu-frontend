@@ -1,7 +1,7 @@
 "use client";
 import { BadgeEuro, EuroIcon, Menu, SearchIcon, X } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
 import UsdIcon from "../Icons/UsdIcon";
 import UserIcon from "../Icons/UserIcon";
@@ -18,15 +18,17 @@ import {
 } from "../ui/hover-card";
 import CartsProducts from "../ClientComponents/ProductDetailsClient/CartsProducts";
 import { getCookie } from "@/helper/RegionCookies";
+import UserMenu from "./UserMenu";
 
 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [position, setPosition] = useState("bottom");
   const pathName = usePathname();
 
   const [cartCount, setCartCount] = React.useState<number>(0);
+    const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const c = typeof window === 'undefined' ? 0 : (JSON.parse(localStorage.getItem('cart') || '[]') || []).length;
@@ -151,6 +153,30 @@ const Header = () => {
     const isAmerica = region === "america";
     const icon = isAmerica ? "$" : "€";
 
+  
+
+  // Simple login check (runs once on mount)
+  const isLoggedIn = typeof window !== 'undefined' && !!localStorage.getItem('token');
+
+  // Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    // Only add listener when menu is open
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
@@ -234,7 +260,7 @@ const Header = () => {
               <SearchIcon className="absolute top-1/2 w-[18px] h-[18px] left-[8px] transform -translate-y-1/2 cursor-pointer" />
             </div>
 
-            {isLogInUers ? (
+            {/* {isLogInUers ? (
               <button className="cursor-pointer p-3 rounded-full bg-[#F6F8FA]">
                 <Link href="/my-account/dashboard">
                   <UserIcon className="size-[18px]" />
@@ -246,7 +272,8 @@ const Header = () => {
                   <UserIcon className="size-[18px]" />
                 </Link>
               </button>
-            )}
+            )} */}
+            <UserMenu/>
             <div>
               <div className="relative ml-auto flex items-center gap-3">
 
