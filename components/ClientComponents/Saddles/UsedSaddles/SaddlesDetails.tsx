@@ -13,6 +13,7 @@ import {
 import { useGetSingleUseSaddleQuery } from "@/src/redux/client/saddle/useSaddleApi";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ZoomImage } from "./ZoomedImage";
 
 export default function SaddlesDetails() {
   const { id } = useParams();
@@ -65,13 +66,15 @@ export default function SaddlesDetails() {
         <div className="grid xl:grid-cols-2 gap-8">
           <div className="flex flex-col gap-4">
             {/* Big Image */}
-            <div className="w-full max-h-[350px] flex justify-center items-center bg-white">
+            {/* <div className="w-full max-h-[350px] flex justify-center items-center bg-white">
               <img
                 src={selectedImage}
                 alt="Jumping Saddle"
                 className=" w-full h-full object-cover"
               />
-            </div>
+            </div> */}
+
+            <ZoomImage src={selectedImage} alt="Jumping Saddle" zoomLevel={2} />
 
             {/* Thumbnails BELOW big image */}
             <div className="grid grid-cols-4 gap-4">
@@ -81,7 +84,7 @@ export default function SaddlesDetails() {
                   src={img.imgLink}
                   alt=""
                   onClick={() => setSelectedImage(img.imgLink)}
-                  className={`cursor-pointer object-cover w-full h-[120px]
+                  className={`cursor-pointer object-contain w-full h-[100px]
                     ${
                       selectedImage === img.imgLink
                         ? "border-[#1F274B]"

@@ -1,5 +1,5 @@
 "use client";
-import { Menu, SearchIcon, X } from "lucide-react";
+import { BadgeEuro, EuroIcon, Menu, SearchIcon, X } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
@@ -17,6 +17,7 @@ import {
   HoverCardTrigger,
 } from "../ui/hover-card";
 import CartsProducts from "../ClientComponents/ProductDetailsClient/CartsProducts";
+import { getCookie } from "@/helper/RegionCookies";
 
 
 
@@ -146,17 +147,21 @@ const Header = () => {
 
   const isLogInUers = false;
 
+    const region = getCookie("x-region");
+    const isAmerica = region === "america";
+    const icon = isAmerica ? "$" : "€";
+
   return (
     <nav className="bg-white lg:py-6 py-4">
       <div className="maxContainer uppercase">
         <div className="flex justify-between lg:gap-6 gap-0 items-center ">
           {/* Left side - Language and currency */}
           <div className="hidden md:flex items-center xl:gap-6 gap-4">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               <span className="">
-                <UsdIcon />{" "}
+                {isAmerica ? <UsdIcon/> :  <BadgeEuro className="size-4"/> }
               </span>
-              <span className="textSecondary text-xs leading-[100%]">USD</span>
+              <span className="textSecondary text-xs leading-[100%]">{isAmerica ? "USD" :"EUR"}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <LanguageSwitcher />

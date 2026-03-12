@@ -1,3 +1,4 @@
+import { getCookie } from "@/helper/RegionCookies";
 import { useGetAllUseSaddlesQuery } from "@/src/redux/client/saddle/useSaddleApi";
 import Link from "next/link";
 
@@ -22,11 +23,7 @@ export default function UsedSaddlesProductList() {
     return <p>Loading...</p>;
   }
 
-  const getCookie = (name) => {
-    const cookies = document.cookie.split("; ");
-    const cookie = cookies.find((row) => row.startsWith(name + "="));
-    return cookie ? cookie.split("=")[1] : null;
-  };
+
 
   const region = getCookie("x-region");
   const isAmerica = region === "america";
@@ -44,7 +41,8 @@ export default function UsedSaddlesProductList() {
           >
             <div className=" w-full h-[307px] bg-white overflow-hidden">
               <img
-                src={item?.images[0]?.url}
+                // src={item?.images[0]?.url}
+                src={item?.image}
                 alt={item?.name}
                 className="w-full h-full object-cover"
               />
@@ -56,10 +54,10 @@ export default function UsedSaddlesProductList() {
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
                   {icon }
-                  {isAmerica ? item?.priceRange_usd?.min : item?.priceRange_eur?.min}
+                  {item?.priceRange?.min}
                  {" "} -
                   {" "}{icon}
-                  {isAmerica ? item?.priceRange_usd?.max : item?.priceRange_eur?.max}
+                  {item?.priceRange?.max}
                 </p>
               </div>
               {/* <p className="textSecondary md:text-base text-sm leading-[124%] ">
