@@ -12,7 +12,7 @@ const useSaddlesApi = baseApi.injectEndpoints({
 
     getAllUseSadles: builder.query({
       query: () => ({
-        url: "/used-saddles",
+        url: "/used-saddles/admin/all",
         method: "GET",
       }),
     }),
