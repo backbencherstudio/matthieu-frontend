@@ -17,9 +17,10 @@ export default function CartsProducts() {
   const [cartOpen, setCartOpen] = useState(false);
 
   const handleCart = () => setCartOpen((prev) => !prev);
+  const closeCart = () => setCartOpen(false);
 
   return (
-    <Drawer direction="right">
+    <Drawer open={cartOpen} onOpenChange={setCartOpen} direction="right">
       <DrawerTrigger className="cursor-pointer">
         {" "}
         <CartsIcon />
@@ -35,7 +36,7 @@ export default function CartsProducts() {
         </DrawerHeader>
         <div className="md:mt-8 mt-4 h-full ">
           <div className="md:h-full h-[92vh] overflow-y-auto custom-scroll">
-            <CartsDetails />
+            <CartsDetails onCheckout={closeCart} />
           </div>
         </div>
       </DrawerContent>
