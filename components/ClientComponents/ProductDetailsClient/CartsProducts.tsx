@@ -23,7 +23,7 @@ export default function CartsProducts() {
     <Drawer open={cartOpen} onOpenChange={setCartOpen} direction="right">
       <DrawerTrigger className="cursor-pointer">
         {" "}
-        <CartsIcon />
+        <CartsIcon className="size-6 md:size-8 lg:size-10"/>
       </DrawerTrigger>
       <DrawerContent className="p-8  lg:min-w-[600px] ">
         <DrawerHeader className="flex flex-row justify-between items-center p-0">
