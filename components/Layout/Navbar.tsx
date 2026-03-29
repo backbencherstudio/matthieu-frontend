@@ -1,5 +1,6 @@
 "use client";
 import { ArrowUp, BadgeEuro, EuroIcon, Menu, SearchIcon, X } from "lucide-react";
+import { AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
@@ -289,7 +290,7 @@ const Header = () => {
               className="lg:hidden hover:bg-gray-100 rounded-full transition-colors"
             >
               {isMenuOpen ? (
-                <X className="size-6 md:size-8 lg:size-10 text-red-600" />
+                <AiOutlineClose className="size-6 md:size-8 lg:size-10 text-red-600" />
               ) : (
                 <Menu className="size-6 md:size-8 lg:size-10 text-gray-600" />
               )}
@@ -298,7 +299,7 @@ const Header = () => {
         </div>
 
         {/* Mobile menu */}
-
+ 
 
         {/* Mobile menu */}
         {isMenuOpen && (
@@ -322,103 +323,6 @@ const Header = () => {
 export default Header;
 
 
-// function MobileNavLink({ link }: { link: any }) {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   // Simple links (no dropdown)
-//   if (!link.hasDropdown) {
-//     return (
-//       <Link
-//         href={link.href}
-//         className="textPrimary hover:font-semibold leading-[100%] text-base font-medium py-2 block"
-//       >
-//         {link.label}
-//       </Link>
-//     );
-//   }
-
-//   // Links with dropdown (mainly SADDLES)
-//   return (
-//     <div className="flex flex-col">
-//       <button
-//         onClick={() => setIsOpen(!isOpen)}
-//         className="flex items-center justify-between textPrimary hover:font-semibold leading-[100%] text-base font-medium py-2 text-left"
-//       >
-//         {link.label}
-//         <span className={`transition-transform ${isOpen ? "rotate-180" : ""}`}>
-//           ▼
-//         </span>
-//       </button>
-
-//      {isOpen && (
-//   <div className="pl-5 mt-1 relative">
-//     {/* Vertical rail line */}
-//     <div className="absolute left-[10px] top-0 bottom-4 w-[2px] bg-gray-200 rounded-full" />
-
-//     {link.dropdownContent?.map((category: any, idx: number) => (
-//       <div key={idx} className="flex flex-col relative">
-//         {/* Category Title with L-shaped connector */}
-//         <div className="relative pl-8">
-//           {/* Horizontal connector line — forms the L with the vertical rail */}
-//           <div className="absolute left-[10px] top-1/2 w-5 h-[2px] bg-gray-200 -translate-y-1/2" />
-//           <Link
-//             href={category.href || "#"}
-//             className="block font-semibold text-[#1F274B] py-2 hover:text-[#FE5000] transition-colors"
-//           >
-//             {category.category}
-//           </Link>
-//         </div>
-
-//         {/* Sub Items */}
-//         {category.items && category.items.length > 0 && (
-//           <div className="pl-8 flex flex-col space-y-0.5 relative">
-//             {/* Inner vertical rail for sub-items */}
-//             <div className="absolute left-[10px] top-0 bottom-4 w-[2px] bg-gray-100 rounded-full" />
-
-//             {category.items.map((sub: any, subIdx: number) => (
-//               <div key={subIdx} className="relative pl-8">
-//                 {/* L-shaped horizontal connector for each sub-item */}
-//                 <div className="absolute left-[10px] top-1/2 w-5 h-[2px] bg-gray-100 -translate-y-1/2" />
-
-//                 <Link
-//                   href={sub.href || "#"}
-//                   className="block py-1.5 text-sm text-gray-600 hover:text-[#1F274B] transition-colors"
-//                 >
-//                   {sub.label}
-//                   {sub.subtitle && (
-//                     <span className="text-xs text-gray-400 ml-1">({sub.subtitle})</span>
-//                   )}
-//                 </Link>
-
-//                 {/* Sub-sub items (JUMPING, DRESSAGE, etc.) */}
-//                 {sub.items && sub.items.length > 0 && (
-//                   <div className="pl-6 relative flex flex-col space-y-0.5">
-//                     <div className="absolute left-[10px] top-0 bottom-4 w-[2px] bg-gray-100 rounded-full" />
-//                     {sub.items.map((subSub: any, i: number) => (
-//                       <div key={i} className="relative pl-8">
-//                         <div className="absolute left-[10px] top-1/2 w-5 h-[2px] bg-gray-100 -translate-y-1/2" />
-//                         <Link
-//                           href={subSub.href || "#"}
-//                           className="block text-gray-500 hover:text-[#1F274B] py-0.5 text-xs transition-colors"
-//                         >
-//                           {subSub.label}
-//                         </Link>
-//                       </div>
-//                     ))}
-//                   </div>
-//                 )}
-//               </div>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-//     ))}
-//   </div>
-// )}
-//     </div>
-//   );
-// }
-
 function MobileNavLink({ link }: { link: any }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -426,7 +330,7 @@ function MobileNavLink({ link }: { link: any }) {
     return (
       <Link
         href={link.href}
-        className="flex items-center py-3.5 text-[13px] font-semibold tracking-widest text-[#1F274B] hover:text-[#FE5000] transition-colors uppercase"
+        className="flex items-center py-3.5 text-base font-semibold tracking-widest text-[#1F274B] hover:text-[#FE5000] transition-colors uppercase border-t border-gray-100 first:border-t-0"
       >
         {link.label}
       </Link>
@@ -440,7 +344,7 @@ function MobileNavLink({ link }: { link: any }) {
         className="flex items-center justify-between w-full py-3.5 text-base font-semibold tracking-widest text-[#1F274B] hover:text-[#FE5000] transition-colors uppercase"
       >
         <span>{link.label}</span>
-        <span className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}><IoIosArrowUp className="size-5" /></span>
+        <span className={`transition-transform duration-300 ${isOpen ? "" : "rotate-180"}`}><IoIosArrowUp className="md:size-5 size-4" /></span>
       </button>
 
       {isOpen && (
@@ -466,7 +370,7 @@ function MobileNavLink({ link }: { link: any }) {
               {category.items && category.items.length > 0 && (
                 <div className="relative pl-[10px]">
                   {/* L2 vertical rail */}
-                  <div className="absolute left-0 top-0 bottom-2.5 w-[1.5px] bg-[#dde0ea] rounded-full" />
+                  <div className="absolute left-0 top-0 bottom-0 w-[1.5px] bg-[#dde0ea] rounded-full" />
 
                   {category.items.map((sub: any, subIdx: number) => (
                     <div key={subIdx} className="relative pl-5">
@@ -489,7 +393,7 @@ function MobileNavLink({ link }: { link: any }) {
                       {sub.items && sub.items.length > 0 && (
                         <div className="relative pl-[10px]">
                           {/* L3 vertical rail */}
-                          <div className="absolute left-0 top-0 bottom-2 w-[1.5px] bg-[#eaecf4] rounded-full" />
+                          <div className="absolute left-0 top-0 bottom-0 w-[1.5px] bg-[#eaecf4] rounded-full" />
 
                           {sub.items.map((subSub: any, i: number) => (
                             <div key={i} className="relative pl-5">
