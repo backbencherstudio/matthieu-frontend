@@ -46,7 +46,11 @@ export function SignInForm() {
         toast.success(response?.data?.message);
         reset();
 
-        router.push("/");
+        router.push(
+          response?.data?.type === "admin"
+            ? "/admin"
+            : "/my-account/dashboard"
+        );
 
       } else {
         toast.error("Login fail please check your email or password");
