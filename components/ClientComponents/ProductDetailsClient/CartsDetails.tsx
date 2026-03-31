@@ -1,7 +1,7 @@
 import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import MinusIcon from "@/components/Icons/MinusIcon";
 import PlusIcon from "@/components/Icons/PlusIcon";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface CartItem {
@@ -13,11 +13,17 @@ interface CartItem {
   image: string;
 }
 
+interface CartsDetailsProps {
+  checkoutButton?: boolean;
+  onCheckout?: () => void;        // ← New prop
+}
+
 export default function CartsDetails({
   checkoutButton = true,
-}: {
-  checkoutButton?: Boolean;
-}) {
+  onCheckout,
+}:
+  CartsDetailsProps
+) {
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: "1",
@@ -41,6 +47,7 @@ export default function CartsDetails({
 
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState("");
+  const router = useRouter();
 
   const subtotal = 590.0;
   const shipping = 15.0;
@@ -76,6 +83,12 @@ export default function CartsDetails({
 
   const removeItem = (id: string) => {
     setCartItems((items) => items.filter((item) => item.id !== id));
+  };
+
+  const handleCheckout = () => {
+    onCheckout?.();           // Close the drawer
+    console.log("dddd")
+    router.push("/product-details/billing-details");   // Navigate
   };
 
   return (
@@ -229,9 +242,8 @@ export default function CartsDetails({
               >
                 <span>{item.label}</span>
                 <span
-                  className={` ${
-                    item?.label === "Coupon Discount" && "text-[#F38B94]"
-                  }`}
+                  className={` ${item?.label === "Coupon Discount" && "text-[#F38B94]"
+                    }`}
                 >
                   ${(item?.value).toFixed(2)}
                 </span>
@@ -251,7 +263,7 @@ export default function CartsDetails({
           {checkoutButton && (
             <button
               className="w-full bg-[#1F274B] text-white py-4  hover:bg-[#1F274B]/90 transition-colors md:text-lg font-normal leading-[132%] cursor-pointer text-base md:mt-8 mt-6"
-              onClick={() => redirect("/product-details/billing-details")}
+              onClick={handleCheckout}
             >
               Checkout Now
             </button>

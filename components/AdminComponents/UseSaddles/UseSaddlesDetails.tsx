@@ -1,4 +1,4 @@
-import { useGetSingleUseSadlesQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
+import { useGetSingleUseSadlesAdminQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
 import Image from "next/image";
 
 interface DetailProps {
@@ -11,7 +11,7 @@ const Skeleton = ({ className = "" }: { className?: string }) => (
 );
 
 export default function UseSaddlesDetails({ id, onClose }: DetailProps) {
-  const { data, isLoading } = useGetSingleUseSadlesQuery(id);
+  const { data, isLoading } = useGetSingleUseSadlesAdminQuery(id);
 
   const applicant = data?.data;
 

@@ -1,4 +1,5 @@
-import { useGetAllUseSaddlesQuery } from "@/src/redux/client/saddle/useSaddleApi";
+import { getCookie } from "@/helper/RegionCookies";
+import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/saddle/useSaddleUserApi";
 import Link from "next/link";
 
 interface TrackProductListProps {
@@ -16,11 +17,17 @@ interface TrackProductListProps {
 }
 
 export default function UsedSaddlesProductList() {
-  const { data, isLoading } = useGetAllUseSaddlesQuery("");
+  const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
   console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
+
+
+  const region = getCookie("x-region");
+  const isAmerica = region === "america" || "usa";
+  const icon = isAmerica ? "$" : "€";
 
   return (
     <div>
@@ -34,9 +41,10 @@ export default function UsedSaddlesProductList() {
           >
             <div className=" w-full h-[307px] bg-white overflow-hidden">
               <img
+                // src={item?.images[0]?.url}
                 src={item?.image}
                 alt={item?.name}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="mt-5 flex flex-col gap-[12px]">
@@ -45,7 +53,11 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-                  ${item?.priceRange_eur?.min}- ${item?.priceRange_eur?.max}
+                  {icon }
+                  {item?.priceRange?.min}
+                 {" "} -
+                  {" "}{icon}
+                  {item?.priceRange?.max}
                 </p>
               </div>
               {/* <p className="textSecondary md:text-base text-sm leading-[124%] ">

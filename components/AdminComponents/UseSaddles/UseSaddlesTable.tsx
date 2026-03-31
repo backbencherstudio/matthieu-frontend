@@ -1,7 +1,7 @@
 "use client";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import { useGetAllUseSadlesQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
+import { useGetAllUseSadlesAdminQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { ReactNode, useState } from "react";
 import DeleteAmbassador from "../Cms/DeleteAmbassador";
@@ -9,7 +9,7 @@ import UseSaddlesDetailsModal from "./UseSaddlesDetailsModal";
 
 const UseSaddlesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading, refetch } = useGetAllUseSadlesQuery({});
+  const { data, isLoading, refetch } = useGetAllUseSadlesAdminQuery({});
   const relevantData = data?.data;
   const currentItems = relevantData ?? [];
   const meta = data?.meta;

@@ -1,26 +1,26 @@
 import baseApi from "../../api/baseApi";
 
-const useSaddleApi = baseApi.injectEndpoints({
+const useSaddleUserApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUseSaddles: builder.query({
+    getAllUseSaddlesUser: builder.query({
       query: () => ({
-        url: `/used-saddles`,
+        url: `/used-saddles/public`,
         method: "GET",
       }),
     }),
-    getSingleUseSaddle: builder.query({
+    getSingleUseSaddleUser: builder.query({
       query: (id) => ({
-        url: `/used-saddles/${id}`,
+        url: `/used-saddles/public/${id}`,
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useGetAllUseSaddlesQuery, useGetSingleUseSaddleQuery } =
-  useSaddleApi;
+export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery } =
+  useSaddleUserApi;
 
-export default useSaddleApi;
+export default useSaddleUserApi;
 
 
 // import baseApi from "../../api/baseApi";

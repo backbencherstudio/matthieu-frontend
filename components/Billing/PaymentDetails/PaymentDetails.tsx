@@ -155,7 +155,7 @@ const PaymentDetails = ({ stripe }: { stripe: any }) => {
   return (
     <div className="maxContainer lg:my-12 md:my-10 my-8">
       <div className="flex lg:flex-row flex-col xl:gap-8 lg:gap-6">
-        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-[65%] lg:w-full normal-case">
+        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-------[65%] lg:w-full normal-case">
           <h2 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%] normal-case">
             Payment Details
           </h2>
@@ -167,12 +167,12 @@ const PaymentDetails = ({ stripe }: { stripe: any }) => {
             </Elements>
           </div>
         </div>
-        <div className="border xl:w-[33%] md:w-full w-full px-6 py-6 h-full mt-4 lg:mt-0">
+        {/* <div className="border xl:w-[33%] md:w-full w-full px-6 py-6 h-full mt-4 lg:mt-0">
           <div className="text-[#1F274B] lg:text-[32px] md:text-[28px] text-2xl font-bold leading-[100%] normal-case  mb-4">
             Your Cart
           </div>
           <CartsDetails checkoutButton={false} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

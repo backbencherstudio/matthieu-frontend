@@ -5,8 +5,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useLoginMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { IoEye } from "react-icons/io5";
+import { IoMdEyeOff } from "react-icons/io";
+
 
 type SignInFormData = {
   email: string;
@@ -28,15 +33,25 @@ export function SignInForm() {
     },
   });
   const [signup] = useLoginMutation();
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
   const onSubmit = async (data: SignInFormData) => {
     try {
       const response = await signup(data);
-
+      console.log(response, "response")
       if (response?.data?.success) {
         localStorage.setItem("token", response?.data?.authorization?.token);
 
         toast.success(response?.data?.message);
         reset();
+
+        router.push(
+          response?.data?.type === "admin"
+            ? "/admin"
+            : "/my-account/dashboard"
+        );
+
       } else {
         toast.error("Login fail please check your email or password");
       }
@@ -82,7 +97,7 @@ export function SignInForm() {
               )}
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label
                 htmlFor="password"
                 className="text-[16px] font-normal text-[#4A4C56]"
@@ -107,6 +122,44 @@ export function SignInForm() {
                   {errors.password.message}
                 </p>
               )}
+            </div> */}
+
+            {/* Password with eye icon */}
+            <div className="space-y-2">
+              <Label
+                htmlFor="password"
+                className="text-[16px] font-normal text-[#4A4C56]"
+              >
+                Password
+              </Label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••••"
+                  className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full rounded-md pr-10"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 cursor-pointer right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <IoMdEyeOff className="h-5 w-5" />
+                  ) : (
+                    <IoEye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center justify-between">
@@ -155,7 +208,7 @@ export function SignInForm() {
             <button
               type="button"
               className="w-full bg-[#FFF] rounded-none !h-auto leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer text-[16px]"
-              onClick={() => console.log("Continue as guest")}
+              onClick={() => router.push("/")}
             >
               Continue as Guest
             </button>

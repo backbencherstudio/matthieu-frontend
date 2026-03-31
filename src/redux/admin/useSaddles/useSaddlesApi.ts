@@ -1,8 +1,8 @@
 import baseApi from "../../api/baseApi";
 
-const useSaddlesApi = baseApi.injectEndpoints({
+const useSaddlesAdminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createUseSadles: builder.mutation({
+    createUseSadlesAdmin: builder.mutation({
       query: (formData) => ({
         url: "/used-saddles",
         method: "POST",
@@ -10,16 +10,16 @@ const useSaddlesApi = baseApi.injectEndpoints({
       }),
     }),
 
-    getAllUseSadles: builder.query({
+    getAllUseSadlesAdmin: builder.query({
       query: () => ({
-        url: "/used-saddles",
+        url: "/used-saddles/admin/all",
         method: "GET",
       }),
     }),
 
-    getSingleUseSadles: builder.query({
+    getSingleUseSadlesAdmin: builder.query({
       query: (id) => ({
-        url: `/used-saddles/${id}`,
+        url: `/used-saddles/admin/${id}`,
         method: "GET",
       }),
     }),
@@ -27,9 +27,9 @@ const useSaddlesApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useCreateUseSadlesMutation,
-  useGetAllUseSadlesQuery,
-  useGetSingleUseSadlesQuery,
-} = useSaddlesApi;
+  useCreateUseSadlesAdminMutation,
+  useGetAllUseSadlesAdminQuery,
+  useGetSingleUseSadlesAdminQuery,
+} = useSaddlesAdminApi;
 
-export default useSaddlesApi;
+export default useSaddlesAdminApi;

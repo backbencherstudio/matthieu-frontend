@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/select";
 import { useCreateBlogMutation } from "@/src/redux/admin/cms/blog/blogApi";
 import { Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -46,7 +47,7 @@ enum StatusEnum {
 }
 
 export function BlogForm() {
-  const { control, register, handleSubmit, setValue, watch, reset } =
+  const { control, register, handleSubmit, setValue, watch, reset, getValues, formState: { errors } } =
     useForm<BlogFormData>({
       defaultValues: {
         thumbnail: null,
@@ -83,7 +84,32 @@ export function BlogForm() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [tagInput, setTagInput] = useState("");
+  const router = useRouter()
   const tags = watch("tags");
+
+
+
+  const handleAddTag = () => {
+    const trimmed = tagInput.trim();
+    if (!trimmed) return;
+    const currentTags = getValues("tags");
+    setValue("tags", [...currentTags, trimmed], { shouldValidate: true });
+    setTagInput("");
+  };
+
+  const handleRemoveTag = (indexToRemove: number) => {
+    const currentTags = getValues("tags");
+    setValue("tags", currentTags.filter((_, i) => i !== indexToRemove), { shouldValidate: true });
+  };
+
+  const handleTagKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddTag();
+    }
+  };
+
+
 
   const previewThumbnail = (file: File) => {
     const reader = new FileReader();
@@ -102,7 +128,8 @@ export function BlogForm() {
     reader.readAsDataURL(file);
   };
 
-  const [createBlog] = useCreateBlogMutation();
+  const [createBlog, { isLoading }] = useCreateBlogMutation();
+
   const onSubmit = async (data: BlogFormData) => {
     try {
       const formData = new FormData();
@@ -114,7 +141,7 @@ export function BlogForm() {
       formData.append("category", data.category);
       formData.append("status", data.status);
 
-      data.tags.forEach((tag) => {
+      data?.tags?.forEach((tag) => {
         formData.append("tags", tag);
       });
 
@@ -136,15 +163,17 @@ export function BlogForm() {
       }));
 
       formData.append("contentImagesMeta", JSON.stringify(contentImagesMeta));
-
-      const response = await createBlog(formData);
-      if (response?.data?.message) {
-        toast.success(response?.data?.message);
+      const response = await createBlog(formData).unwrap();
+      console.log(response)
+      if (response?.statusCode === 201) {
+        toast.success(response?.message);
         reset()
+
+        router.push("/admin/cms")
       }
     } catch (error) {
       console.error("CREATE BLOG FAILED:", error);
-      toast.error("Failed to add blog");
+      toast.error(error?.data?.message?.message);
     }
   };
 
@@ -431,44 +460,106 @@ export function BlogForm() {
             )}
           />
 
-          {/* TAGS */}
-          <label
-            htmlFor="tags"
-            className="mb-1 block text-[#696E86] text-[12px]"
-          >
-            Tags *
-          </label>
-          <input
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && tagInput.trim()) {
-                e.preventDefault();
-                setValue("tags", [...tags, tagInput.trim()]);
-                setTagInput("");
-              }
-            }}
-            placeholder="Add tag and press Enter"
-            className="w-full p-3 border rounded-lg"
-          />
+          <div className="space-y-2">
+            <label className="block text-[#696E86] text-[12px]">
+              Tags *
+            </label>
 
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag, i) => (
-              <span
-                key={i}
-                className="bg-gray-200 px-3 py-1 rounded-full text-sm"
+            {/* Hidden input for RHF validation */}
+            <input
+              type="hidden"
+              {...register("tags", {
+                validate: (value) =>
+                  value.length > 0 || "At least one tag is required",
+              })}
+            />
+
+            {/* Tag input + Add button */}
+            <div className="relative">
+              <input
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyDown={handleTagKeyDown}
+                placeholder="Type a tag and press Enter or click Add"
+                className="w-full p-3 border rounded-lg"
+              />
+              <button
+                type="button"
+                onClick={handleAddTag}
+                className="absolute cursor-pointer right-0 top-1/2 h-full px-4 rounded-r-lg -translate-y-1/2 bg-[#1F274B] text-white  text-sm whitespace-nowrap"
               >
-                {tag}
-              </span>
-            ))}
+                + Add
+              </button>
+            </div>
+
+            {/* Error message */}
+            {errors.tags && (
+              <p className="text-red-500 text-sm">{errors.tags.message as string}</p>
+            )}
+
+            {/* Tag pills */}
+            {tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="flex items-center gap-1 bg-gray-100 border border-gray-300 px-3 py-1 rounded-full text-sm"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveTag(i)}
+                      className="text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className=" flex items-end justify-end">
+          {/* <div className=" flex items-end justify-end">
             <button
               type="submit"
               className="bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer text-white px-4 py-2 rounded-[4px]"
             >
               Publish
+            </button>
+          </div> */}
+          <div className="flex items-end justify-end mt-10">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#1F274B] hover:bg-[#1F274B]/90 cursor-pointer text-white px-4 py-2 rounded-[4px] flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <svg
+                    className="animate-spin h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
+                  </svg>
+                  Publishing...
+                </>
+              ) : (
+                "Publish Blogs"
+              )}
             </button>
           </div>
         </div>

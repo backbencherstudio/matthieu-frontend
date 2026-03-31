@@ -17,12 +17,13 @@ export default function CartsProducts() {
   const [cartOpen, setCartOpen] = useState(false);
 
   const handleCart = () => setCartOpen((prev) => !prev);
+  const closeCart = () => setCartOpen(false);
 
   return (
-    <Drawer direction="right">
+    <Drawer open={cartOpen} onOpenChange={setCartOpen} direction="right">
       <DrawerTrigger className="cursor-pointer">
         {" "}
-        <CartsIcon />
+        <CartsIcon className="size-6 md:size-8 lg:size-10"/>
       </DrawerTrigger>
       <DrawerContent className="p-8  lg:min-w-[600px] ">
         <DrawerHeader className="flex flex-row justify-between items-center p-0">
@@ -35,7 +36,7 @@ export default function CartsProducts() {
         </DrawerHeader>
         <div className="md:mt-8 mt-4 h-full ">
           <div className="md:h-full h-[92vh] overflow-y-auto custom-scroll">
-            <CartsDetails />
+            <CartsDetails onCheckout={closeCart} />
           </div>
         </div>
       </DrawerContent>
