@@ -1,6 +1,19 @@
+"use client";
+
+
 import { Button } from "@/components/ui/button";
+import { useGetContactInfoQuery } from "@/src/redux/client/contact-us/cotactApi";
 
 export default function MyAddressPage() {
+
+
+    const { data, isLoading, isError } = useGetContactInfoQuery();
+
+  const address = data?.data?.address;
+  const phone = data?.data?.phone_number;
+
+
+
   return (
     <div>
       <h1 className="uppercase text-2xl font-extrabold leading-[100%] text-[#1F274B] mb-5">
@@ -21,7 +34,7 @@ export default function MyAddressPage() {
               className="leading-[150%] text-[#1D1F2C] text-[16px]"
               style={{ letterSpacing: "0.08px" }}
             >
-              2972 Westheimer Rd. Santa Ana, Illinois 85486
+               {isLoading ? "Loading..." : address || "No address added"}
             </p>
           </div>
           <Button className="px-8 py-4 !h-auto rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 text-[16px] text-[#FFF] leading-[100%] cursor-pointer">
@@ -35,7 +48,7 @@ export default function MyAddressPage() {
             PHONE
           </h4>
           <p className="text-[16px] leading-[150%] text-[#1D1F2C]">
-            +330 612-345-678
+             {isLoading ? "Loading..." : phone || "No phone number"}
           </p>
         </div>
       </div>
