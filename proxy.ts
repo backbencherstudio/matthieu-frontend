@@ -15,6 +15,10 @@ export function proxy(request: NextRequest) {
     const redirectPath = userType === 'admin' ? '/admin' : '/';
     return NextResponse.redirect(new URL(redirectPath, request.url));
   }
+  // NEW: Admin can't access "/"
+   if (token && userType === 'admin' && pathname === '/') {
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
 
   // 2. Protect /admin – only admins allowed
   if (pathname.startsWith('/admin')) {
@@ -36,6 +40,7 @@ export function proxy(request: NextRequest) {
 // Optional but recommended: limit when middleware runs
 export const config = {
   matcher: [
+    '/',
     '/signin',
     '/signup',
     '/admin/:path*',

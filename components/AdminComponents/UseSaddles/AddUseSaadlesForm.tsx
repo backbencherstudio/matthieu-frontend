@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateUseSadlesMutation } from "@/src/redux/admin/useSaddles/useSaddlesApi";
+import { useCreateUseSadlesAdminMutation } from "@/src/redux/admin/useSaddles/useSaddlesApi";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -27,6 +27,11 @@ export enum SubProductCategory {
   ATHENA = "ATHENA",
 }
 
+export enum Country {
+  AMERICA = "USA",
+  EUROPE = "EUROPE",
+}
+
 type Inputs = {
   name: string;
   description: string;
@@ -36,6 +41,7 @@ type Inputs = {
   stockQuantity: number;
   category: ProductCategory;
   usedsaddlecategory: SubProductCategory;
+  country: Country;
 };
 
 const AddUseSaadlesForm = () => {
@@ -67,9 +73,10 @@ const AddUseSaadlesForm = () => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const [createUseSadles, { isLoading }] = useCreateUseSadlesMutation();
+  const [createUseSadles, { isLoading }] = useCreateUseSadlesAdminMutation();
 
   const onSubmit = async (data: Inputs) => {
+    console.log(data,"dddd")
     try {
       const formData = new FormData();
 
@@ -81,6 +88,7 @@ const AddUseSaadlesForm = () => {
       formData.append("category", data.category);
       formData.append("usedsaddlecategory", data.usedsaddlecategory);
       formData.append("stockQuantity", String(data.stockQuantity));
+      formData.append("country", data.country);
 
       // Append multiple images
       images.forEach((image) => {
@@ -103,8 +111,9 @@ const AddUseSaadlesForm = () => {
           Add Saddles
         </h1>
 
+        <div className="flex flex-col lg:gap-6 gap-4">
         {/* Title */}
-        <div className="mb-3">
+        <div className="">
           <Label className="text-sm text-secondary-text mb-1">Title*</Label>
           <Input
             type="text"
@@ -132,7 +141,7 @@ const AddUseSaadlesForm = () => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-full py-5">
+                  <SelectTrigger className="w-full rounded-[4px] py-[23px]">
                     <SelectValue placeholder="Select Category" />
                   </SelectTrigger>
                   <SelectContent>
@@ -164,7 +173,7 @@ const AddUseSaadlesForm = () => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-full py-5">
+                  <SelectTrigger className="w-full rounded-[4px] py-[23px]">
                     <SelectValue placeholder="Select Category" />
                   </SelectTrigger>
                   <SelectContent>
@@ -187,7 +196,7 @@ const AddUseSaadlesForm = () => {
         </div>
 
         {/* Description */}
-        <div className="mb-3">
+        <div className="">
           <Label className="text-sm text-secondary-text mb-1">
             Description
           </Label>
@@ -199,7 +208,7 @@ const AddUseSaadlesForm = () => {
         </div>
 
         {/* seatSize */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
               USD Price
@@ -236,10 +245,33 @@ const AddUseSaadlesForm = () => {
               </p>
             )}
           </div>
+          {/* Country Select - New Column */}
+        <div className="mb-3">
+          <Label className="text-sm text-secondary-text mb-1">Country</Label>
+          <Controller
+            name="country"
+            control={control}
+            rules={{ required: "Country is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
+                  <SelectValue placeholder="Select Country" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={Country.AMERICA}>USA</SelectItem>
+                  <SelectItem value={Country.EUROPE}>EUROPE</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.country && (
+            <p className="text-red-500 text-sm mt-1">{errors.country.message}</p>
+          )}
+        </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
           {/* Stock Quantity */}
+        <div className="grid grid-cols-2 gap-3">
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
               Stock Quantity*
@@ -276,6 +308,7 @@ const AddUseSaadlesForm = () => {
           </div>
         </div>
 
+          {/* img upload  */}
         <div className="mb-4">
           <Label className="text-sm text-secondary-text mb-2 block">
             Upload Images
@@ -310,6 +343,7 @@ const AddUseSaadlesForm = () => {
               />
             </label>
           </div>
+        </div>
         </div>
 
         {/* Submit Button */}

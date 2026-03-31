@@ -1,5 +1,5 @@
 import { getCookie } from "@/helper/RegionCookies";
-import { useGetAllUseSaddlesQuery } from "@/src/redux/client/saddle/useSaddleApi";
+import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/saddle/useSaddleUserApi";
 import Link from "next/link";
 
 interface TrackProductListProps {
@@ -17,7 +17,7 @@ interface TrackProductListProps {
 }
 
 export default function UsedSaddlesProductList() {
-  const { data, isLoading } = useGetAllUseSaddlesQuery("");
+  const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
   console.log(data);
   if (isLoading) {
     return <p>Loading...</p>;
@@ -26,7 +26,7 @@ export default function UsedSaddlesProductList() {
 
 
   const region = getCookie("x-region");
-  const isAmerica = region === "america";
+  const isAmerica = region === "america" || "usa";
   const icon = isAmerica ? "$" : "€";
 
   return (

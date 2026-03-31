@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetSingleUseSaddleQuery } from "@/src/redux/client/saddle/useSaddleApi";
+import { useGetSingleUseSaddleUserQuery } from "@/src/redux/client/saddle/useSaddleUserApi";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
@@ -23,7 +23,7 @@ export default function SaddlesDetails() {
     { label: "JUMPING", href: "/saddles/jumping" },
   ];
 
-  const { data } = useGetSingleUseSaddleQuery(id);
+  const { data } = useGetSingleUseSaddleUserQuery(id);
   console.log(data);
 
   const additionalInfo = [
