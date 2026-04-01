@@ -54,7 +54,7 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 w-full">
               {saddlesItems?.images?.map((product) => (
                 <Link
-                  href={product.id ? `/saddles/${product.id}` : "#"}
+                  href={product.id ? `saddles/${product.id}` : "#"}
                   key={product.id}
                   className="flex flex-col gap-5 items-center sm:items-start justify-center p-5 max-w-[400px] w-full mx-auto bg-[#F8F9FB]"
                 >
@@ -68,12 +68,6 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
                     <h2 className="text-[#1F274B] text-xl font-semibold">
                       {product.name}
                     </h2>
-
-                    {product.startFrom && (
-                      <p className="text-[#4A4C56] md:text-xl text-base leading-[124%] font-normal">
-                        From {product.startFrom}
-                      </p>
-                    )}
                   </div>
                 </Link>
               ))}

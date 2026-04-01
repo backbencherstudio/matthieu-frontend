@@ -23,7 +23,8 @@ export default function AllSaddlesPage() {
         <div className="lg:pt-[80px] lg:pb-[60px] pt-[60px] pb-[50px]">
           <SAddlesCategoryItems
             saddlesItems={{
-              name: "ARION",
+              name: "ARION SADDLES",
+              subtitle: "Fully Customizable",
               images: saddlesItemsArion,
             }}
           />
@@ -31,7 +32,8 @@ export default function AllSaddlesPage() {
         <div className="lg:py-[60px] py-[50px]">
           <SAddlesCategoryItems
             saddlesItems={{
-              name: "ATLAS",
+              name: "ATLAS SADDLES",
+              subtitle: "Semi CUSTOM",
               images: saddlesItemsAtlas,
             }}
           />
