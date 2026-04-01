@@ -2,7 +2,9 @@
 
 import { useCreateProductMutation } from "@/src/redux/admin/saddleProduct/saddleProduct";
 import { Label } from "@radix-ui/react-label";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SketchPicker } from "react-color";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
@@ -55,11 +57,11 @@ export default function SaddleProductForm() {
 
   const [leatherInput, setLeatherInput] = useState("");
   const [leatherTags, setLeatherTags] = useState<string[]>([]);
-
   const [colorInput, setColorInput] = useState("");
+  const [pipingColorInput, setPipingColorInput] = useState("");
   const [colorTags, setColorTags] = useState<string[]>([]);
-
-  const [pipingInput, setPipingInput] = useState("");
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showPipingColorPicker, setShowPipingColorPicker] = useState(false);
   const [pipingTags, setPipingTags] = useState<string[]>([]);
 
   const [images, setImages] = useState<File[]>([]);
@@ -86,10 +88,21 @@ export default function SaddleProductForm() {
     setTags((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleColorChange = (color: any) => {
+    setColorInput(color.hex);
+  };
+
+  const handlePipingColorChange = (color: any) => {
+    setPipingColorInput(color.hex);
+  };
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     setImages(files);
   };
+
+  const router = useRouter();
+
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const onSubmit = async (data: Inputs) => {
     try {
@@ -104,17 +117,14 @@ export default function SaddleProductForm() {
       formData.append("category", data.category);
       formData.append("subcategory", data.subcategory);
       formData.append("country", data.country);
-
+      leatherTags.forEach((item) => {
+        formData.append("leather_type", item);
+      });
       colorTags.forEach((item) => {
         formData.append("colors", item);
       });
-
       pipingTags.forEach((item) => {
         formData.append("piping_color", item);
-      });
-
-      leatherTags.forEach((item) => {
-        formData.append("leather_type", item);
       });
 
       images.forEach((file) => {
@@ -124,6 +134,7 @@ export default function SaddleProductForm() {
       const result = await createProduct(formData);
       if (result?.data?.success) {
         toast.success(result?.data?.message);
+        router.push("/admin/saddle-product");
         reset();
         setLeatherTags([]);
         setColorTags([]);
@@ -286,6 +297,7 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
+        {/* Color Section */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">Colors</Label>
           <div className="flex gap-2">
@@ -305,6 +317,26 @@ export default function SaddleProductForm() {
             </button>
           </div>
 
+          {/* Toggle color picker button */}
+          <button
+            type="button"
+            onClick={() => setShowColorPicker(!showColorPicker)}
+            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+          >
+            {showColorPicker ? "Close Color Picker" : "Pick a Color"}
+          </button>
+
+          {/* Color Picker */}
+          {showColorPicker && (
+            <div className="mt-2">
+              <SketchPicker
+                color={colorInput}
+                onChangeComplete={handleColorChange}
+              />
+            </div>
+          )}
+
+          {/* Display Color Tags */}
           <div className="flex flex-wrap gap-2 mt-3">
             {colorTags.map((tag, index) => (
               <div
@@ -324,6 +356,7 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
+        {/* Piping Color Section */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Piping Color
@@ -333,18 +366,42 @@ export default function SaddleProductForm() {
               type="text"
               className="cmn-input"
               placeholder="Enter Piping Color"
-              value={pipingInput}
-              onChange={(e) => setPipingInput(e.target.value)}
+              value={pipingColorInput}
+              onChange={(e) => setPipingColorInput(e.target.value)}
             />
             <button
               type="button"
-              onClick={() => addTag(pipingInput, setPipingInput, setPipingTags)}
+              onClick={() =>
+                addTag(pipingColorInput, setPipingColorInput, setPipingTags)
+              }
               className="px-4 bg-[#111927] text-white rounded-md cursor-pointer"
             >
               Add
             </button>
           </div>
 
+          {/* Toggle piping color picker */}
+          <button
+            type="button"
+            onClick={() => setShowPipingColorPicker(!showPipingColorPicker)}
+            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+          >
+            {showPipingColorPicker
+              ? "Close Piping Color Picker"
+              : "Pick a Piping Color"}
+          </button>
+
+          {/* Piping Color Picker */}
+          {showPipingColorPicker && (
+            <div className="mt-2">
+              <SketchPicker
+                color={pipingColorInput}
+                onChangeComplete={handlePipingColorChange}
+              />
+            </div>
+          )}
+
+          {/* Display Piping Color Tags */}
           <div className="flex flex-wrap gap-2 mt-3">
             {pipingTags.map((tag, index) => (
               <div
