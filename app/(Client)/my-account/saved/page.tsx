@@ -100,7 +100,7 @@ import { useGetSavedProductsQuery } from "@/src/redux/client/savedProduct/savedP
 const Saved: React.FC = () => {
   const { data, isLoading, isError } = useGetSavedProductsQuery();
 
-  const products = data?.data || []; // adjust based on your API
+  const products = data || [];
 
   if (isLoading) {
     return <p className="text-center">Loading...</p>;
@@ -117,7 +117,7 @@ const Saved: React.FC = () => {
           <div className="bg-[#F8FAFB] shadow-sm hover:shadow-md transition-all duration-200 p-[12px]">
             
             <Image
-              src={item?.img || "/saved/saved.png"}
+             src={item?.product?.image || "/saved/saved.png"}
               alt={item?.title || "product"}
               width={100}
               height={100}
@@ -127,11 +127,11 @@ const Saved: React.FC = () => {
 
             <div>
               <h2 className="text-[#1F274B] text-[14px] md:text-[18px] lg:text-[20px] uppercase">
-                {item?.title || "No title"}
+                {item?.product?.name || "No title"}
               </h2>
 
               <p className="text-[#1F274B] text-[20px] font-extrabold pt-[12px]">
-                {item?.price || "$0"}
+                {item?.product?.price}
               </p>
 
               <div className="flex flex-col md:flex-row gap-[12px] pt-[16px]">

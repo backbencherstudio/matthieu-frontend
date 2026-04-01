@@ -9,9 +9,19 @@ const contactApi = baseApi.injectEndpoints({
         url: "/auth/contact-info",
         method: "GET",
       }),
+       providesTags: ["Contact"],
     }),
 
 
+
+        updateAddress: builder.mutation({
+      query: (data) => ({
+        url: "/auth/update-address",
+        method: "PATCH", 
+        body: data,
+      }),
+     invalidatesTags: ["Contact"],
+    }),
 
     contact: builder.mutation({
       query: (data) => ({
@@ -23,6 +33,6 @@ const contactApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useContactMutation , useGetContactInfoQuery} = contactApi;
+export const {useContactMutation , useUpdateAddressMutation, useGetContactInfoQuery} = contactApi;
 
 export default contactApi;

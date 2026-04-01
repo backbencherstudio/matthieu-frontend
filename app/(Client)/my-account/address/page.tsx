@@ -4,15 +4,43 @@
 import { Button } from "@/components/ui/button";
 import { useGetContactInfoQuery } from "@/src/redux/client/contact-us/cotactApi";
 
+import { useState } from "react";
+import { useUpdateAddressMutation } from "@/src/redux/client/contact-us/cotactApi";
+
 export default function MyAddressPage() {
 
 
-    const { data, isLoading, isError } = useGetContactInfoQuery();
-
+  const { data, isLoading, isError } = useGetContactInfoQuery();
   const address = data?.data?.address;
   const phone = data?.data?.phone_number;
 
 
+const [isOpen, setIsOpen] = useState(false);
+const [formData, setFormData] = useState({
+  address: "",
+  phone_number: "",
+});
+
+const [updateAddress, { isLoading: isUpdating }] = useUpdateAddressMutation();
+
+
+
+const handleChange = (e: any) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+
+const handleSubmit = async () => {
+  try {
+    await updateAddress(formData).unwrap();
+    setIsOpen(false);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <div>
@@ -37,9 +65,18 @@ export default function MyAddressPage() {
                {isLoading ? "Loading..." : address || "No address added"}
             </p>
           </div>
-          <Button className="px-8 py-4 !h-auto rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 text-[16px] text-[#FFF] leading-[100%] cursor-pointer">
-            Edit
-          </Button>
+            <Button
+              onClick={() => {
+                setFormData({
+                  address: address || "",
+                  phone_number: phone || "",
+                });
+                setIsOpen(true);
+              }}
+              className="px-8 py-4 !h-auto rounded-none bg-[#1F274B] hover:bg-[#1F274B]/100 text-[16px] text-[#FFF] leading-[100%] cursor-pointer"
+            >
+              Edit
+            </Button>
         </div>
 
         {/* Phone Section */}
@@ -52,6 +89,52 @@ export default function MyAddressPage() {
           </p>
         </div>
       </div>
+
+
+      {isOpen && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white p-6 w-[400px]">
+      <h2 className="text-xl font-bold mb-4">Edit Address</h2>
+
+      <input
+        type="text"
+        name="address"
+        value={formData.address}
+        onChange={handleChange}
+        placeholder="Address"
+        className="w-full border p-2 mb-3"
+      />
+
+      <input
+        type="text"
+        name="phone_number"
+        value={formData.phone_number}
+        onChange={handleChange}
+        placeholder="Phone Number"
+        className="w-full border p-2 mb-4"
+      />
+
+      <div className="flex justify-end gap-2">
+        <button
+          onClick={() => setIsOpen(false)}
+          className="px-4 py-2 border"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={handleSubmit}
+          disabled={isUpdating}
+          className="px-4 py-2 bg-[#1F274B] text-white"
+        >
+          {isUpdating ? "Saving..." : "Save"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 }

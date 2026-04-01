@@ -137,6 +137,7 @@ const baseApi = createApi({
     "queries",
     "TackProduct",
     "SaddleProduct",
+    "Contact",
   ],
   endpoints: () => ({}),
 });
