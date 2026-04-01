@@ -1,5 +1,5 @@
 import { getCookie } from "@/helper/RegionCookies";
-import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/saddle/useSaddleUserApi";
+import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import Link from "next/link";
 
 interface TrackProductListProps {
@@ -22,8 +22,6 @@ export default function UsedSaddlesProductList() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
-
 
   const region = getCookie("x-region");
   const isAmerica = region === "america" || "usa";
@@ -53,10 +51,8 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-                  {icon }
-                  {item?.priceRange?.min}
-                 {" "} -
-                  {" "}{icon}
+                  {icon}
+                  {item?.priceRange?.min} - {icon}
                   {item?.priceRange?.max}
                 </p>
               </div>
