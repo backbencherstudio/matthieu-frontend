@@ -4,7 +4,7 @@ import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import { useGetAllUseSadlesAdminQuery } from "@/src/redux/admin/useSaddles/useSaddlesApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { ReactNode, useState } from "react";
-import DeleteAmbassador from "../Cms/DeleteAmbassador";
+import DeleteUseSaddle from "./DeleteUseSaddle";
 import UseSaddlesDetailsModal from "./UseSaddlesDetailsModal";
 
 const UseSaddlesTable = () => {
@@ -63,7 +63,7 @@ const UseSaddlesTable = () => {
           <UseSaddlesDetailsModal id={String(item?.id)} />
         </div>
         <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-          <DeleteAmbassador id={String(item?.id)} refetch={refetch} />
+          <DeleteUseSaddle id={String(item?.id)} refetch={refetch} />
         </div>
       </div>
     ),

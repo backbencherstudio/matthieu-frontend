@@ -8,9 +8,15 @@ const useSaddleApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getSingleSaddle: builder.query({
+      query: ({ id }) => ({
+        url: `/sadlles/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllSaddlesQuery } = useSaddleApi;
+export const { useGetAllSaddlesQuery, useGetSingleSaddleQuery } = useSaddleApi;
 
 export default useSaddleApi;

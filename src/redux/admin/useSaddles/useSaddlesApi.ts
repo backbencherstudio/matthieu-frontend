@@ -8,6 +8,7 @@ const useSaddlesAdminApi = baseApi.injectEndpoints({
         method: "POST",
         body: formData,
       }),
+      invalidatesTags: ["UseSaddle"],
     }),
 
     getAllUseSadlesAdmin: builder.query({
@@ -15,12 +16,20 @@ const useSaddlesAdminApi = baseApi.injectEndpoints({
         url: "/used-saddles/admin/all",
         method: "GET",
       }),
+      providesTags: ["UseSaddle"],
     }),
 
     getSingleUseSadlesAdmin: builder.query({
       query: (id) => ({
         url: `/used-saddles/admin/${id}`,
         method: "GET",
+      }),
+    }),
+
+    deleteUseSaddle: builder.mutation({
+      query: (id) => ({
+        url: `/used-saddles/${id}`,
+        method: "DELETE",
       }),
     }),
   }),
@@ -30,6 +39,7 @@ export const {
   useCreateUseSadlesAdminMutation,
   useGetAllUseSadlesAdminQuery,
   useGetSingleUseSadlesAdminQuery,
+  useDeleteUseSaddleMutation,
 } = useSaddlesAdminApi;
 
 export default useSaddlesAdminApi;
