@@ -12,9 +12,17 @@ export default function AllSaddlesPage() {
     },
   ];
 
-  const { data } = useGetAllSaddlesQuery("");
+  const { data, isLoading } = useGetAllSaddlesQuery("");
   const saddlesItemsArion = data?.data?.ARION;
   const saddlesItemsAtlas = data?.data?.ATLAS;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[300px]">
+        <p className="text-xl font-semibold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -25,7 +33,7 @@ export default function AllSaddlesPage() {
             saddlesItems={{
               name: "ARION SADDLES",
               subtitle: "Fully Customizable",
-              images: saddlesItemsArion,
+              products: saddlesItemsArion,
             }}
           />
         </div>
@@ -34,7 +42,7 @@ export default function AllSaddlesPage() {
             saddlesItems={{
               name: "ATLAS SADDLES",
               subtitle: "Semi CUSTOM",
-              images: saddlesItemsAtlas,
+              products: saddlesItemsAtlas,
             }}
           />
         </div>

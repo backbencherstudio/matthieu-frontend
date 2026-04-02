@@ -1,24 +1,9 @@
 import Link from "next/link";
 
-interface SaddleImageItem {
-  id: string;
-  slug?: string;
-  name: string;
-  image: string;
-  startFrom?: string;
-  link?: string;
-}
-
-interface SaddleImageItem {
-  id: string;
-  slug?: string;
-  name: string;
-  image: string;
-  startFrom?: string;
-  link?: string;
-}
-
 export default function SAddlesCategoryItems({ saddlesItems }) {
+  const products = Array.isArray(saddlesItems?.products)
+    ? saddlesItems.products
+    : Object.values(saddlesItems?.products || {});
   return (
     <div>
       <div className="flex flex-col items-center gap-x-8 justify-center">
@@ -52,9 +37,9 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
             </div>
           ) : (
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 w-full">
-              {saddlesItems?.images?.map((product) => (
+              {products?.map((product) => (
                 <Link
-                  href={product.id ? `saddles/${product.id}` : "#"}
+                  href={`/saddles/${product.id}`}
                   key={product.id}
                   className="flex flex-col gap-5 items-center sm:items-start justify-center p-5 max-w-[400px] w-full mx-auto bg-[#F8F9FB]"
                 >
