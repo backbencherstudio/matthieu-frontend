@@ -19,7 +19,6 @@ interface SaddleImageItem {
 }
 
 export default function SAddlesCategoryItems({ saddlesItems }) {
-  console.log("saddlesItems", saddlesItems?.products);
   const products = Array.isArray(saddlesItems?.products)
     ? saddlesItems.products
     : Object.values(saddlesItems?.products || {});
