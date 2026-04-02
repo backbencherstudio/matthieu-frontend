@@ -1,23 +1,5 @@
 import Link from "next/link";
 
-interface SaddleImageItem {
-  id: string;
-  slug?: string;
-  name: string;
-  image: string;
-  startFrom?: string;
-  link?: string;
-}
-
-interface SaddleImageItem {
-  id: string;
-  slug?: string;
-  name: string;
-  image: string;
-  startFrom?: string;
-  link?: string;
-}
-
 export default function SAddlesCategoryItems({ saddlesItems }) {
   const products = Array.isArray(saddlesItems?.products)
     ? saddlesItems.products
