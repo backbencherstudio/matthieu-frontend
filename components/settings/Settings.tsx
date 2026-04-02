@@ -57,7 +57,6 @@ export default function Settings() {
   const [changePassword, { isLoading: passLoading }] =
     useChangePasswordMutation();
 
-  // ✅ Populate data
   useEffect(() => {
     if (userData?.success) {
       const name = userData.data.name || "";
@@ -77,19 +76,15 @@ export default function Settings() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      // 👉 PROFILE UPDATE (Placeholder logic for now)
       if (actionType === "profile") {
         const payload = {
           name: `${values.firstName} ${values.lastName || ""}`,
           email: values.email,
           phone_number: values.phone,
         };
-
-        // Here you can just log the result for now (replace with your API call when ready)
-        console.log("Profile updated with payload: ", payload);
+        console.log("Profile updated:", payload);
       }
 
-      // 👉 PASSWORD UPDATE
       if (actionType === "password") {
         if (values.newPassword !== values.confirmPassword) {
           form.setError("confirmPassword", {
@@ -110,8 +105,6 @@ export default function Settings() {
         form.setValue("currentPassword", "");
         form.setValue("newPassword", "");
         form.setValue("confirmPassword", "");
-
-        console.log("Password updated ✅");
       }
     } catch (error) {
       console.error(error);
@@ -132,17 +125,22 @@ export default function Settings() {
         <CardContent className="normal-case px-0">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              
-              {/* ================= PROFILE ================= */}
-              <div className="grid grid-cols-2 gap-4 mt-4">
+
+              {/* PROFILE */}
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
                 <FormField
                   control={form.control}
                   name="firstName"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
-                        <Input {...field} />
+                    <FormItem className="mt-[24px]">
+                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal">
+                        First Name
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none focus-visible:ring-[1px] focus-visible:ring-ring/50">
+                        <Input
+                          {...field}
+                          className="text-[#1D1F2C] py-[12px] px-[16px] text-[16px]"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -153,25 +151,35 @@ export default function Settings() {
                   control={form.control}
                   name="lastName"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
-                        <Input {...field} />
+                    <FormItem className="mt-3 md:mt-6">
+                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal">
+                        Last Name
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none">
+                        <Input
+                          {...field}
+                          className="text-[#1D1F2C] py-[12px] px-[16px] text-[16px]"
+                        />
                       </FormControl>
                     </FormItem>
                   )}
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
-                        <Input {...field} />
+                    <FormItem className="mt-[16px]">
+                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal">
+                        Email
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none">
+                        <Input
+                          {...field}
+                          className="text-[#1D1F2C] py-[12px] px-[16px] text-[16px]"
+                        />
                       </FormControl>
                     </FormItem>
                   )}
@@ -181,14 +189,17 @@ export default function Settings() {
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
+                    <FormItem className="mt-3 md:mt-[16px]">
+                      <FormLabel className="text-[#4A4C56] text-[16px] font-normal">
+                        Phone
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none">
                         <Input
                           {...field}
                           onChange={(e) =>
                             field.onChange(e.target.value.replace(/\D/g, ""))
                           }
+                          className="text-[#1D1F2C] py-[12px] px-[16px] text-[16px]"
                         />
                       </FormControl>
                     </FormItem>
@@ -196,19 +207,18 @@ export default function Settings() {
                 />
               </div>
 
-              {/* ✅ PROFILE BUTTON */}
-              <div className="flex justify-end mt-6">
+              {/* PROFILE BUTTON */}
+              <div className="flex justify-end mt-[40px]">
                 <Button
                   type="submit"
                   onClick={() => setActionType("profile")}
-                  disabled={false}
                   className="bg-[#1F274B] text-white px-4 md:px-[32px] rounded-none py-[20px]"
                 >
                   Save Profile Changes
                 </Button>
               </div>
 
-              {/* ================= PASSWORD ================= */}
+              {/* PASSWORD */}
               <h2 className="text-[#1F274B] text-[20px] md:text-[24px] font-extrabold uppercase mt-[32px] mb-[24px]">
                 Change Password
               </h2>
@@ -218,23 +228,37 @@ export default function Settings() {
                 name="currentPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Current Password</FormLabel>
-                    <FormControl className="bg-[#F8FAFB]">
-                      <Input type="password" {...field} />
+                    <FormLabel className="text-[#4A4C56] text-[16px]">
+                      Current Password
+                    </FormLabel>
+                    <FormControl className="bg-[#F8FAFB] border-none rounded-none">
+                      <Input
+                        type="password"
+                        {...field}
+                        className="py-[12px] px-[16px]"
+                        placeholder="Enter Current Password"
+                      />
                     </FormControl>
                   </FormItem>
                 )}
               />
 
-              <div className="grid grid-cols-2 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="newPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>New Password</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
-                        <Input type="password" {...field} />
+                      <FormLabel className="text-[#4A4C56] text-[16px] mt-[16px]">
+                        New Password
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none">
+                        <Input
+                          type="password"
+                          {...field}
+                          className="py-[12px] px-[16px]"
+                          placeholder="Enter New Password"
+                        />
                       </FormControl>
                     </FormItem>
                   )}
@@ -245,9 +269,16 @@ export default function Settings() {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
-                      <FormControl className="bg-[#F8FAFB]">
-                        <Input type="password" {...field} />
+                      <FormLabel className="text-[#4A4C56] text-[16px] mt-[16px]">
+                        Confirm Password
+                      </FormLabel>
+                      <FormControl className="bg-[#F8FAFB] border-none rounded-none">
+                        <Input
+                          type="password"
+                          {...field}
+                          className="py-[12px] px-[16px]"
+                          placeholder="Enter New Password Again"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -255,8 +286,8 @@ export default function Settings() {
                 />
               </div>
 
-              {/* ✅ PASSWORD BUTTON */}
-              <div className="flex justify-end mt-6">
+              {/* PASSWORD BUTTON */}
+              <div className="flex justify-end mt-[40px]">
                 <Button
                   type="submit"
                   onClick={() => setActionType("password")}
@@ -274,8 +305,6 @@ export default function Settings() {
     </div>
   );
 }
-
-
 
 
 

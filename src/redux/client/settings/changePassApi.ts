@@ -1,6 +1,7 @@
 import baseApi from "../../api/baseApi";
 
 const changePassApi = baseApi.injectEndpoints({
+   overrideExisting: true,
   endpoints: (builder) => ({
 
     changePassword: builder.mutation({
