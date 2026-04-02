@@ -35,13 +35,15 @@ type Inputs = {
   leatherCareGuide: string;
   subcategory: string;
   category: string;
+  country: string;
   availableColor: string[];
   availableSize: string[];
   thumbnail: File | null;
   variants: {
     color: string;
     size: string;
-    price: string;
+    price_eur: number;
+    price_usd: number;
     stock_qty: number | string;
   }[];
 };
@@ -51,6 +53,10 @@ export enum ProductCategory {
   TACK = "TACK",
   LEADLINE = "LEADLINE",
   USED = "USED",
+}
+enum countryItem {
+  USA = "USA",
+  EUROPE = "EUROPE",
 }
 
 enum tackSubcategory {
@@ -64,19 +70,6 @@ enum tackSubcategory {
   BOOTS = "BOOTS",
   ACCESSORIES = "ACCESSORIES",
 }
-
-const availableColor = [
-  { id: "1", name: "Red" },
-  { id: "2", name: "Yellow" },
-  { id: "3", name: "Green" },
-  { id: "4", name: "Brown" },
-];
-const availableSize = [
-  { id: "1", name: "12" },
-  { id: "2", name: "11" },
-  { id: "3", name: "13" },
-  { id: "4", name: "15" },
-];
 
 export default function AddForm() {
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
@@ -97,7 +90,8 @@ export default function AddForm() {
         {
           color: "",
           size: "",
-          price: "",
+          price_usd: null,
+          price_eur: null,
           stock_qty: "",
         },
       ],
@@ -331,34 +325,34 @@ export default function AddForm() {
     formData.append("leatherCareGuide", data.leatherCareGuide || "");
     formData.append("category", data.category);
     formData.append("subcategory", data.subcategory);
+    formData.append("country", data.country);
 
     if (thumbnailFile) {
       formData.append("thumbnail", thumbnailFile);
     }
 
-    // ✅ Build variants array properly
     const formattedVariants = data.variants.map((item, index) => ({
       colorId: item.color,
       sizeId: item.size,
-      price: Number(item.price),
+      price_usd: Number(item.price_usd),
+      price_eur: Number(item.price_eur),
       stockQuantity: Number(item.stock_qty),
       isDefault: index === 0,
     }));
 
-    // ✅ Send variants as JSON string
     formData.append("variants", JSON.stringify(formattedVariants));
 
-    // ✅ Send images separately
     imageFiles.forEach((variantImages, variantIndex) => {
       variantImages?.forEach((file) => {
         if (file) {
-          formData.append(`variantImages_${variantIndex}`, file);
+          formData.append(`variants[${variantIndex}].images`, file);
         }
       });
     });
 
     try {
       const response = await createTackProduct(formData);
+      console.log(response);
       if (response?.data?.id) {
         toast.success("Product Created Successfully!");
         reset();
@@ -452,7 +446,7 @@ export default function AddForm() {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-full py-5">
+                    <SelectTrigger className="w-full py-6">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -486,7 +480,7 @@ export default function AddForm() {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-full py-5">
+                    <SelectTrigger className="w-full py-6">
                       <SelectValue placeholder="Select Sub Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -508,59 +502,34 @@ export default function AddForm() {
             </div>
           </div>
 
-          {/* <div className="grid grid-cols-2 gap-3 mt-3">
-            <div className="mb-3">
-              <Label className="text-sm text-secondary-text mb-1">
-                Available Color
-              </Label>
-
-              <Controller
-                name="availableColor"
-                control={control}
-                rules={{ required: "Select at least one county" }}
-                render={({ field }) => (
-                  <MultiSelect
-                    options={availableColor}
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Select Colors"
-                  />
-                )}
-              />
-
-              {errors.availableColor && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.availableColor.message}
-                </p>
+          <div className="mb-3">
+            <Label className="text-sm text-secondary-text mb-1">Country</Label>
+            <Controller
+              name={`country`}
+              control={control}
+              rules={{ required: "Country is required" }}
+              render={({ field }) => (
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger className="w-full py-6">
+                    <SelectValue placeholder="Select Country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.values(countryItem).map((item) => (
+                      <SelectItem key={item} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               )}
-            </div>
-
-            <div className="mb-3">
-              <Label className="text-sm text-secondary-text mb-1">
-                Available Size
-              </Label>
-
-              <Controller
-                name="availableSize"
-                control={control}
-                rules={{ required: "Select at least one county" }}
-                render={({ field }) => (
-                  <MultiSelect
-                    options={availableSize}
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Select Size"
-                  />
-                )}
-              />
-
-              {errors.availableSize && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.availableSize.message}
-                </p>
-              )}
-            </div>
-          </div> */}
+            />
+            {errors?.country && (
+              <p className="error-msg">{errors.country?.message as string}</p>
+            )}
+          </div>
 
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
@@ -806,19 +775,37 @@ export default function AddForm() {
 
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
-                      Product Price ($)
+                      Product Price USA
                     </Label>
                     <Input
                       type="text"
                       className="cmn-input bg-white"
                       placeholder="Enter Price"
-                      {...register(`variants.${index}.price`, {
+                      {...register(`variants.${index}.price_usd`, {
                         required: "Price is required",
                       })}
                     />
-                    {errors?.variants?.[index]?.price && (
+                    {errors?.variants?.[index]?.price_usd && (
                       <p className="error-msg">
-                        {errors.variants[index].price?.message as string}
+                        {errors.variants[index].price_usd?.message as string}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <Label className="text-sm text-secondary-text mb-1">
+                      Product Price EUR
+                    </Label>
+                    <Input
+                      type="text"
+                      className="cmn-input bg-white"
+                      placeholder="Enter Price EUR"
+                      {...register(`variants.${index}.price_eur`, {
+                        required: "Price is required",
+                      })}
+                    />
+                    {errors?.variants?.[index]?.price_eur && (
+                      <p className="error-msg">
+                        {errors.variants[index].price_eur?.message as string}
                       </p>
                     )}
                   </div>
@@ -915,7 +902,8 @@ export default function AddForm() {
               appendVariant({
                 color: "",
                 size: "",
-                price: "",
+                price_usd: null,
+                price_eur: null,
                 stock_qty: "",
               })
             }

@@ -11,9 +11,7 @@ export default function SaddleProductTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, refetch } = useGetSaddleProductsQuery("");
   const relevantData = data?.data?.ARION;
-  const currentItems = Array.isArray(relevantData)
-  ? relevantData
-  : [];
+  const currentItems = Array.isArray(relevantData) ? relevantData : [];
   const meta = data?.meta;
   const tableHeader = ["Name", "price", "Image", "Action"];
   const tableRowDataRenderers: ((
