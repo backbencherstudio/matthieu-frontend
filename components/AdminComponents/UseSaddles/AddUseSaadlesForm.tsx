@@ -17,9 +17,6 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export enum ProductCategory {
-  SADDLES = "SADDLES",
-  TACK = "TACK",
-  LEADLINE = "LEADLINE",
   USED = "USED",
 }
 export enum SubProductCategory {
@@ -75,8 +72,7 @@ const AddUseSaadlesForm = () => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const [createUseSadles, { isLoading }] =
-    useCreateUseSadlesAdminMutation();
+  const [createUseSadles, { isLoading }] = useCreateUseSadlesAdminMutation();
 
   const onSubmit = async (data: Inputs) => {
     try {
