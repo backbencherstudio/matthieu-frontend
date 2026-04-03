@@ -39,7 +39,11 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 w-full">
               {products?.map((product) => (
                 <Link
-                  href={`/saddles/${product.id}`}
+                  href={
+                    saddlesItems?.name === "ARION SADDLES"
+                      ? `/saddles/${product.id}`
+                      : `/saddles/atlas-saddles/${product.id}`
+                  }
                   key={product.id}
                   className="flex flex-col gap-5 items-center sm:items-start justify-center p-5 max-w-[400px] w-full mx-auto bg-[#F8F9FB]"
                 >

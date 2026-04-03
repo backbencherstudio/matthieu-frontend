@@ -18,7 +18,7 @@ export default function DeleteUseSaddle({ id, refetch }: DeleteUseSaddleProps) {
   const handelDelete = async () => {
     try {
       const response = await deleteUseSaddle(id);
-      if (response?.data?.statusCode===200) {
+      if (response?.data?.statusCode === 200) {
         refetch();
         setOpen(false);
         toast.success(response?.data?.message);
@@ -48,7 +48,7 @@ export default function DeleteUseSaddle({ id, refetch }: DeleteUseSaddleProps) {
           </div>
 
           <h2 className="text-xl font-extrabold leading-[130%] tracking-[0.1px] text-[#101010] mt-4 text-center">
-            Delete Arion Ambassador
+            Delete Used Saddles
           </h2>
 
           <div className="mt-9 flex items-center justify-center space-x-4 w-full">

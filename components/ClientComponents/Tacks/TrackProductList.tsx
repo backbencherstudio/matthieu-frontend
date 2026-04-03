@@ -1,53 +1,61 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
 
-
-interface TrackProductListProps {
-    items: {
-        id: number;
-        name: string;
-        category: string;
-        image: string;
-        price: string;
-    }[];
-    title?: string;
+interface Product {
+  id: string;
+  name: string;
+  subcategory: string;
+  thumbnailImage: string;
+  price: number;
+  currency: string;
+  color?: string;
+  size?: string;
 }
 
-export default function TrackProductList({ items, title }: TrackProductListProps) {
-    return (
-        <div>
-            <h2 className='textSecondary lg:text-[36px] md-text-[32px] text-[28px] font-extrabold leading-[100%] tracking-[.72px] '>{title}</h2>
-            {items.length === 0 ? <p className='text-center lg:text-lg text-base py-3 textSecondary'>No products available.</p> : (
-                <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:mt-12 mt-8">
-                        {items.map((item, index) => (
-                            <Link href={"/product-details/1"}
-                                key={index}
-                                className=" p-3 bg-[#F8F9FB] shadow-none hover:shadow-lg transition-shadow duration-200 cursor-pointer"
-                            >
-                                <div className=" w-full  bg-white overflow-hidden">
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        className=" "
+interface TrackProductListProps {
+  items: Product[];
+  title?: string;
+}
 
-                                    />
-                                </div>
-                                <div className="mt-5 flex flex-col gap-[14px]">
-                                    {/* <p className="lg:text-xl md:text-lg font-extrabold leading-[124%] text-[#4C526F] text-base">{item.category}</p> */}
-                                    <h3 className="textSecondary leading-[124%] lg:text-xl md:text-lg  text-base">{item.name}</h3>
-                                    <p className="textSecondary font-extrabold leading-[136%] lg:text-xl md:text-lg text-base ">{item.price}</p>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                </>
-            )
-
-
-            }
-
+export default function TrackProductList({
+  items,
+  title,
+}: TrackProductListProps) {
+  return (
+    <div>
+      <h2 className="textSecondary lg:text-[36px] md:text-[32px] text-[28px] font-extrabold leading-[100%] tracking-[.72px]">
+        {title}
+      </h2>
+      {items.length === 0 ? (
+        <p className="text-center lg:text-lg text-base py-3 textSecondary">
+          No products available.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:mt-12 mt-8">
+          {items.map((item) => (
+            <Link
+              href={`/product-details/${item.id}`}
+              key={item.id}
+              className="p-3 bg-[#F8F9FB] shadow-none hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+            >
+              <div className="w-full bg-white overflow-hidden">
+                <img
+                  src={item.thumbnailImage}
+                  alt={item.name}
+                  className="w-full h-48 object-contain"
+                />
+              </div>
+              <div className="mt-5 flex flex-col gap-[14px]">
+                <h3 className="textSecondary leading-[124%] lg:text-xl md:text-lg text-base">
+                  {item.name}
+                </h3>
+                <p className="textSecondary font-extrabold leading-[136%] lg:text-xl md:text-lg text-base">
+                  {item.currency} {item.price.toFixed(2)}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
-    )
+      )}
+    </div>
+  );
 }

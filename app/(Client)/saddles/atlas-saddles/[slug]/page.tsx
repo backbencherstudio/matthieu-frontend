@@ -3,26 +3,39 @@ import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import { useState } from "react";
 
+import CallingIcon from "@/components/Icons/CallingIcon";
+import EmailIcon from "@/components/Icons/EmailIcon";
+import WhatsAppIcon from "@/components/Icons/WhatsAppIcon";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useGetSingleSaddleQuery } from "@/src/redux/client/saddle/saddleApi";
 import Link from "next/link";
-import WhatsAppIcon from "@/components/Icons/WhatsAppIcon";
-import EmailIcon from "@/components/Icons/EmailIcon";
-import CallingIcon from "@/components/Icons/CallingIcon";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function AtlasSaddleDetailsPage() {
+  const path = usePathname();
+  const isJumping = path.includes("jumping");
+  const isCross = path.includes("cross");
+  const isDresseges = path.includes("dressage");
+  const params = useParams();
 
-  const path = usePathname()
-  const isJumping = path.includes("jumping")
-  const isCross = path.includes("cross")
-  const isDresseges = path.includes("dressage") 
- 
-  const lab = isJumping ? "JUMPING" : isCross ? "CROSS-COUNTRY" : isDresseges ? "DRESSAGE" : ""
+  const id = params?.slug;
+  const { data } = useGetSingleSaddleQuery({ id: id });
+  const atlasSaddleDetails = data?.data;
+  const [selectedImage, setSelectedImage] = useState(
+    atlasSaddleDetails?.images[0].url,
+  );
+  const lab = isJumping
+    ? "JUMPING"
+    : isCross
+      ? "CROSS-COUNTRY"
+      : isDresseges
+        ? "DRESSAGE"
+        : "";
 
   const breadLink = [
     {
@@ -39,18 +52,18 @@ export default function AtlasSaddleDetailsPage() {
     },
   ];
 
-  const productImages = [
-    { imgLink: "/images/saddles/kids.png" },
-    { imgLink: "/images/saddles/kids.png" },
-    { imgLink: "/images/saddles/kids.png" },
-  ];
+  // const productImages = [
+  //   { imgLink: "/images/saddles/kids.png" },
+  //   { imgLink: "/images/saddles/kids.png" },
+  //   { imgLink: "/images/saddles/kids.png" },
+  // ];
 
   const [selectedColor, setSelectedColor] = useState("BLACK");
 
-  const colors = [
-    { name: "BLACK", code: "bg-[#070707]" },
-    { name: "BROWN", code: "bg-[#371506]" },
-  ];
+  // const colors = [
+  //   { name: "BLACK", code: "bg-[#070707]" },
+  //   { name: "BROWN", code: "bg-[#371506]" },
+  // ];
 
   // Accordion
   const answerQuestion = [
@@ -160,10 +173,11 @@ export default function AtlasSaddleDetailsPage() {
             SEMI - CUSTOM SADDLES
           </span>
         </div>
-        <p className=" text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
+        <p className=" text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case max-w-7xl mx-auto">
           Same luxury at a competitive price. Choose your seat size, flap size,
-          and leather color. Using our premium French leather and craftsmanship, we will
-          create a new semi-custom, long-lasting saddle for you and your horse.
+          and leather color. Using our premium French leather and craftsmanship,
+          we will create a new semi-custom, long-lasting saddle for you and your
+          horse.
         </p>
       </div>
 
@@ -172,10 +186,10 @@ export default function AtlasSaddleDetailsPage() {
           {/* image div */}
           <div className="xl:block hidden">
             <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
-              {productImages?.map((img, index) => (
+              {atlasSaddleDetails?.images?.map((img, index) => (
                 <img
                   key={index}
-                  src={img?.imgLink}
+                  src={img?.url}
                   alt=""
                   className="object-contain w-full h-[200px] "
                 />
@@ -189,17 +203,18 @@ export default function AtlasSaddleDetailsPage() {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center  ">
                     <img
-                      src="/images/saddles/kids.png"
+                      src={selectedImage}
                       alt="Double Noseband Bridle"
                       className="max-w-[500px] w-full h-full object-cover "
                     />
                   </div>
                   <div className="block xl:hidden">
                     <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
-                      {productImages?.map((img, index) => (
+                      {atlasSaddleDetails?.images?.map((img, index) => (
                         <img
                           key={index}
-                          src={img?.imgLink}
+                          src={img?.url}
+                          onClick={() => setSelectedImage(img.url)}
                           alt="Product Image"
                           className="object-contain w-full h-full "
                         />
@@ -219,30 +234,33 @@ export default function AtlasSaddleDetailsPage() {
                     </div>
 
                     <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] text-[#4C526F]">
-                      SKU: AU00100
+                      SKU: {atlasSaddleDetails?.sku}
                     </p>
                   </div>
 
                   <div className="h-[1px] bg-[#DFE1E7] w-full "></div>
                   <p className="xl:text-[32px]  text-2xl tracking-[.64px] text-[#1F274B] leading-[100%]">
-                    STARTING AT $6,500
+                    STARTING AT ${atlasSaddleDetails?.price}
                   </p>
                   {/* Color Selection */}
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <p className="text-[#262626] xl:text-[20px]  text-base tracking-[.40px] leading-[100%]">
                       Leather COLOR
                     </p>
-                    <div className="flex  gap-4">
-                      {colors.map((color, index) => (
-                        <div
+                    <div className="flex gap-4">
+                      {atlasSaddleDetails?.colors?.map((color, index) => (
+                        <button
                           key={index}
-                          className="flex flex-col justify-between items-center gap-2"
-                        >
-                          <button
-                            onClick={() => setSelectedColor(color.name)}
-                            className={`xl:w-8 xl:h-8 w-6 h-6 cursor-pointer rounded-full ${color?.code}`}
-                          ></button>
-                        </div>
+                          onClick={() => setSelectedColor(color)}
+                          style={{
+                            backgroundColor: color.replace(",", "").trim(),
+                          }}
+                          className={`w-8 h-8 rounded-full border border-gray-200 ${
+                            selectedColor === color
+                              ? "ring-2 ring-[#1F274B]"
+                              : ""
+                          }`}
+                        />
                       ))}
                     </div>
                   </div>
@@ -270,7 +288,10 @@ export default function AtlasSaddleDetailsPage() {
 
                   {/* Buttons Section */}
                   <div>
-                    <Link href={"/saddles/saddlery-expert"} className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] block text-center cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8">
+                    <Link
+                      href={"/saddles/saddlery-expert"}
+                      className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-[#FFF] block text-center cursor-pointer text-[18px] py-4 uppercase leading-[136%] px-8"
+                    >
                       Connect with our team
                     </Link>
                   </div>
