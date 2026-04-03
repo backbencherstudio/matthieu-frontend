@@ -22,12 +22,6 @@ export default function JobApplicantDetail({ id, onClose }: DetailProps) {
         <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
           Job Applicants Details
         </h1>
-        <button
-          onClick={onClose}
-          className="cursor-pointer px-3 py-2.5 border border-[#989CAC] rounded-[4px]"
-        >
-          <CancelIcon />
-        </button>
       </div>
 
       <div className="p-4 border border-[#ECEFF3] rounded-[6px]">
