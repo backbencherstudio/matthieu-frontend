@@ -53,15 +53,10 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-<<<<<<< HEAD
                   {item?.currency === "USD" ? "$" : "€"}
                   {item?.priceRange?.min}
                  {" "} -
                   {" "}{item?.currency === "USD" ? "$" : "€"}
-=======
-                  {icon}
-                  {item?.priceRange?.min} - {icon}
->>>>>>> 03f16334b5ea74aadedceef1fd48bfd09e07f2b1
                   {item?.priceRange?.max}
                 </p>
               </div>
