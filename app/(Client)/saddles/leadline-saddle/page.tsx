@@ -1,9 +1,16 @@
+"use client";
 import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion";
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
+import { useGetLeadLineSaddleQuery } from "@/src/redux/client/saddle/saddleApi";
+import { useState } from "react";
 
 const LeadlineSaddlePage = () => {
+  const { data, isLoading } = useGetLeadLineSaddleQuery({});
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    data?.data?.images[0]?.url,
+  );
   const breadLink = [
     {
       label: "SADDLES",
@@ -26,6 +33,8 @@ const LeadlineSaddlePage = () => {
     { imgLink: "/leadline/leadline-4.png" },
   ];
 
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <>
       <BreadCrumb breadLink={breadLink} />
@@ -34,10 +43,11 @@ const LeadlineSaddlePage = () => {
           {/* image div */}
           <div className="xl:block hidden">
             <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
-              {productImages?.map((img, index) => (
+              {data?.data?.images?.map((img, index) => (
                 <img
                   key={index}
-                  src={img?.imgLink}
+                  onClick={() => setSelectedImage(img.url)}
+                  src={img?.url}
                   alt=""
                   className="object-contain w-[220px] h-[220px] "
                 />
@@ -51,7 +61,7 @@ const LeadlineSaddlePage = () => {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center  ">
                     <img
-                      src="/leadline/leadline-saddle.png"
+                      src={selectedImage}
                       alt="Double Noseband Bridle"
                       className="w-[586px] h-[628px] object-cover "
                     />
@@ -76,20 +86,20 @@ const LeadlineSaddlePage = () => {
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <div className="flex justify-between items-center">
                       <h1 className="xl:text-[32px] text-2xl font-extrabold leading-[100%] tracking-[0.64px] text-[#1F274B]">
-                        Leadline SADDLES
+                        {data?.data?.name || "Leadline Saddle"}
                       </h1>
                       <button className="">
                         <LoveIcon className="xl:size-12 size-8" />
                       </button>
                     </div>
-                    <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] text-[#4C526F]">
+                    {/* <p className="xl:text-2xl md:text-xl text-lg leading-[100%] trtacking-[.48px] text-[#4C526F]">
                       SKU: AU00100
-                    </p>
+                    </p> */}
                   </div>
 
                   <div className="h-[1px] bg-[#DFE1E7] w-full "></div>
                   <p className="xl:text-[32px]  text-2xl tracking-[.64px] text-[#1F274B] leading-[100%] font-extrabold">
-                    $6,500
+                    ${data?.data?.price || "0.00"}
                   </p>
 
                   {/* Size Selection */}
@@ -99,12 +109,14 @@ const LeadlineSaddlePage = () => {
                         Size:
                       </p>
                       <div className="space-x-3">
-                        <button className="px-6 py-3 bg-[#4C526F] text-base leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer">
-                          12.5
-                        </button>
-                        <button className="px-6 py-3 text-base leading-[100%] tracking-[.32px] text-[#4C526F] bg-[#E9E9ED] cursor-pointer">
-                          14.5
-                        </button>
+                        {data?.data?.size?.map((size, index) => (
+                          <button
+                            key={index}
+                            className="px-6 py-3 bg-[#4C526F] text-base leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer"
+                          >
+                            {size}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -118,39 +130,6 @@ const LeadlineSaddlePage = () => {
                       ADD TO CART
                     </button>
                   </div>
-                  {/* <div>
-                    <h4 className="text-2xl font-extrabold leading-[148%] tracking-[0.48px] textSecondary">
-                      Don't Forget the Accessories!
-                    </h4>
-                    <div className="mt-6 flex items-center space-x-4">
-                      <div className="p-3 border boredr-[#262626]">
-                        <p className="text-lg leading-[136%] text-[#4A4C56] tracking-[.36px] normal-case text-nowrap">
-                          Leadline Stirrup Leathers
-                        </p>
-                        <div className="mt-8 flex items-center space-x-3">
-                          <p className="text-[#1D1F2C] text-lg leading-[136%] tracking-[.36px] font-extrabold">
-                            $50.00
-                          </p>
-                          <button className="w-full block px-6 py-3 text-[16px] leading-[100%] tracking-[.32px] bg-[#4C526F] cursor-pointer text-[#FFF] font-extrabold normal-case text-nowrap">
-                            Select Options
-                          </button>
-                        </div>
-                      </div>
-                      <div className="p-3 border boredr-[#262626]">
-                        <p className="text-lg leading-[136%] text-[#4A4C56] tracking-[.36px] normal-case text-nowrap">
-                          Leadline Stirrup Leathers
-                        </p>
-                        <div className="mt-8 flex items-center space-x-3">
-                          <p className="text-[#1D1F2C] text-lg leading-[136%] tracking-[.36px] font-extrabold">
-                            $100.00
-                          </p>
-                          <button className="w-full block px-6 py-3 text-[16px] leading-[100%] tracking-[.32px] bg-[#4C526F] cursor-pointer text-[#FFF] font-extrabold normal-case text-nowrap">
-                            Select Options
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>
