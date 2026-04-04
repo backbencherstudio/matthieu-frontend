@@ -3,38 +3,58 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useSignupMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type SignUpFormData = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  subscribe: boolean;
-  conditions: boolean;
+  confirm_password: string;
+  // subscribe: boolean;
+  // conditions: boolean;
 };
 
+
 export function SignUpForm() {
+  const [signup, { isLoading }] = useSignupMutation()
+  const router = useRouter()
   const {
     register,
     handleSubmit,
+    reset,
+    watch,
     formState: { errors },
   } = useForm<SignUpFormData>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
-      confirmPassword: "",
-      subscribe: false,
-      conditions: false,
+      confirm_password: "",
+      // subscribe: false,
+      // conditions: false,
     },
   });
 
-  const onSubmit = (data: SignUpFormData) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (data: SignUpFormData) => {
+    try {
+      const response = await signup(data);
+      if (response?.data?.success) {
+        toast.success(response?.data?.message)
+        reset()
+        router.push("/signin")
+      } else {
+        toast.error(response?.data?.message)
+      }
+    } catch (error) {
+      // console.error(error, "error")
+      toast.error("Something went wrong")
+    }
   };
 
   return (
@@ -50,45 +70,45 @@ export function SignUpForm() {
             <div className="flex items-center gap-[19px] self-stretch w-full md:justify-between">
               <div className="flex flex-col gap-2">
                 <Label
-                  htmlFor="firstName"
+                  htmlFor="first_name"
                   className="text-[16px] font-normal text-[#4A4C56]"
                 >
                   Fist Name
                 </Label>
                 <input
-                  id="firstName"
+                  id="first_name"
                   type="text"
                   placeholder="Yasir Abed"
                   className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
-                  {...register("firstName", {
+                  {...register("first_name", {
                     required: "First Name is required",
                   })}
                 />
-                {errors.firstName && (
+                {errors.first_name && (
                   <p className="text-sm text-destructive">
-                    {errors.firstName.message}
+                    {errors.first_name.message}
                   </p>
                 )}
               </div>
               <div className="flex flex-col gap-2">
                 <Label
-                  htmlFor="lastName"
+                  htmlFor="last_name"
                   className="text-[16px] font-normal text-[#4A4C56]"
                 >
                   Last Name
                 </Label>
                 <input
-                  id="lastName"
+                  id="last_name"
                   type="text"
                   placeholder="Rabbu"
                   className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
-                  {...register("lastName", {
+                  {...register("last_name", {
                     required: "Last Name is required",
                   })}
                 />
-                {errors.lastName && (
+                {errors.last_name && (
                   <p className="text-sm text-destructive">
-                    {errors.lastName.message}
+                    {errors.last_name.message}
                   </p>
                 )}
               </div>
@@ -130,6 +150,7 @@ export function SignUpForm() {
               <input
                 id="password"
                 type="password"
+                value={watch("password")}
                 placeholder="• • • • • • • • • •"
                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("password", {
@@ -148,17 +169,18 @@ export function SignUpForm() {
             </div>
             <div className="space-y-2">
               <Label
-                htmlFor="confirmPassword"
+                htmlFor="confirm_password"
                 className="text-[16px] font-normal text-[#4A4C56]"
               >
                 Confirm Password
               </Label>
               <input
-                id="confirmPassword"
+                id="confirm_password"
                 type="password"
+                value={watch("confirm_password")}
                 placeholder="• • • • • • • • • •"
                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
-                {...register("confirmPassword", {
+                {...register("confirm_password", {
                   required: "Confirm Password is required",
                   minLength: {
                     value: 6,
@@ -166,14 +188,14 @@ export function SignUpForm() {
                   },
                 })}
               />
-              {errors.confirmPassword && (
+              {errors.confirm_password && (
                 <p className="text-sm text-destructive">
-                  {errors.confirmPassword.message}
+                  {errors.confirm_password.message}
                 </p>
               )}
             </div>
 
-            <div className="mb-0">
+            {/* <div className="mb-0">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="subscribe"
@@ -200,7 +222,7 @@ export function SignUpForm() {
                   I agree to the Terms & Conditions
                 </Label>
               </div>
-            </div>
+            </div> */}
 
             <Button
               type="submit"
