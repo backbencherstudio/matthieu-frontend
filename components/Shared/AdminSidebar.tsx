@@ -102,8 +102,6 @@ export default function AdminSidebar({
   const router = useRouter();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    // localStorage.removeItem('userType');
-
     document.cookie =
       "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
     document.cookie =
