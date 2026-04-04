@@ -49,7 +49,7 @@ export function Billing() {
                   First Name
                 </label>
                 <input
-                  placeholder="Yasir abid"
+                  placeholder="write your first name"
                   {...register("firstName", {
                     required: "First name is required",
                   })}
@@ -69,7 +69,7 @@ export function Billing() {
                   Last Name
                 </label>
                 <input
-                  placeholder="Rabbu"
+                  placeholder="write your last name"
                   {...register("lastName")}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
@@ -91,7 +91,7 @@ export function Billing() {
                 </label>
                 <input
                   type="email"
-                  placeholder="arionadmin@gmail.com"
+                  placeholder="write your email"
                   {...register("email", {
                     required: "Email is required",
                   })}
@@ -113,7 +113,7 @@ export function Billing() {
                 <input
                   type="tel"
                   inputMode="numeric"
-                  placeholder="+330 612-345-678"
+                  placeholder="write your phone number"
                   {...register("phone", {
                     required: "Phone is required",
                   })}
@@ -175,7 +175,7 @@ export function Billing() {
                   Town / City
                 </label>
                 <input
-                  placeholder="Paris"
+                  placeholder="Enter your city"
                   {...register("city")}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
@@ -188,7 +188,7 @@ export function Billing() {
                   State
                 </label>
                 <input
-                  placeholder="France"
+                  placeholder="Enter your state"
                   {...register("state")}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
@@ -201,7 +201,7 @@ export function Billing() {
                   Zip code
                 </label>
                 <input
-                  placeholder="75001"
+                  placeholder="Enter your zip code"
                   {...register("zipCode")}
                   className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
     bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
