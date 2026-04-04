@@ -44,7 +44,7 @@ const UseSaddlesTable = () => {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.basePrice}
+        ${item?.basePrice_usd}
       </span>
     ),
     (item) => (

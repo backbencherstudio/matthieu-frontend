@@ -48,7 +48,7 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed lg:static top-0 left-0 h-full lg:h-[740px] w-1/2 md:w-[40%] lg:w-full border border-[#DFE1E7] bg-[#F6F8FA] p-3 z-50 transition-transform duration-300 ease-in-out",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
         {/* Mobile Close Button (top-right corner) */}
@@ -76,7 +76,7 @@ export function Sidebar() {
 
             <div className="items-center mt-5 text-center">
               <h2 className="text-[20px] font-extrabold uppercase leading-[100%] text-[#1F274B]">
-                YASIR ABED RABBU
+                PARVEZ RAHMAN
               </h2>
               <p className="text-[16px] text-[#4C526F] leading-[100%] normal-case mt-2">
                 arionadmin@gmail.com
@@ -100,7 +100,7 @@ export function Sidebar() {
                     className={cn(
                       "w-full justify-start bg-[#F6F8FA] text-[#4A4C56] hover:bg-[#F6F8FA]/90 text-[16px] uppercase cursor-pointer rounded-none py-3.5 px-4 my-1.5 !h-auto",
                       isActive &&
-                        "w-full justify-start bg-[#1F274B] text-[#FFF] hover:bg-[#1F274B]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer my-1.5"
+                        "w-full justify-start bg-[#1F274B] text-[#FFF] hover:bg-[#1F274B]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer my-1.5",
                     )}
                   >
                     <div className="flex items-center w-full h-full gap-2">
