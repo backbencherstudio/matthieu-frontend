@@ -41,12 +41,12 @@ export default function UsedSaddles() {
               selectedValue={brand}
               onValueChange={setBrand}
             />
-            <DropdownFilter
+            {/* <DropdownFilter
               title="COLOR"
               items={colors}
               selectedValue={color}
               onValueChange={setColor}
-            />
+            /> */}
             <DropdownFilter
               title="SEAT SIZE"
               items={sizes}
