@@ -7,6 +7,10 @@ import { useGetLeadLineSaddleQuery } from "@/src/redux/client/saddle/saddleApi";
 import { useState } from "react";
 
 const LeadlineSaddlePage = () => {
+  const { data, isLoading } = useGetLeadLineSaddleQuery({});
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    data?.data?.images[0]?.url,
+  );
   const breadLink = [
     {
       label: "SADDLES",
@@ -29,9 +33,7 @@ const LeadlineSaddlePage = () => {
     { imgLink: "/leadline/leadline-4.png" },
   ];
 
-  const { data, isLoading } = useGetLeadLineSaddleQuery({});
   if (isLoading) return <p>Loading...</p>;
-  const [selectedImage, setSelectedImage] = useState(data?.data?.images[0].url);
 
   return (
     <>
