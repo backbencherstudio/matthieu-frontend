@@ -25,8 +25,6 @@
 // ) => {
 //   const result = await rawBaseQuery(args, api, extraOptions);
 
-
-
 //   return result;
 // };
 
@@ -76,13 +74,15 @@ const baseQueryWithAutoTokenUpdate = async (
   const result = await rawBaseQuery(args, api, extraOptions);
 
   // ── Extract and save token + type when present ──
-  const responseData = result?.data as {
-    authorization?: {
-      token?: string;
-      type?: string;
-    };
-    type?: string;           // fallback if type is at root level
-  } | undefined;
+  const responseData = result?.data as
+    | {
+        authorization?: {
+          token?: string;
+          type?: string;
+        };
+        type?: string; // fallback if type is at root level
+      }
+    | undefined;
 
   try {
     const newToken = responseData?.authorization?.token;
@@ -116,8 +116,10 @@ const baseQueryWithAutoTokenUpdate = async (
       localStorage.removeItem("userType");
 
       // Clear cookies
-      document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
-      document.cookie = "userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+      document.cookie =
+        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+      document.cookie =
+        "userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
 
       // Optional: redirect
       window.location.href = "/signin";
@@ -137,6 +139,7 @@ const baseApi = createApi({
     "queries",
     "TackProduct",
     "SaddleProduct",
+    "UseSaddle",
   ],
   endpoints: () => ({}),
 });

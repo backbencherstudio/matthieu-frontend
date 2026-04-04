@@ -4,7 +4,6 @@ import { Data } from "@/lib/TableType";
 import { useGetSingleTackQuery } from "@/src/redux/admin/tackProduct/tackProduct";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { DataTable } from "../../reusable/DataTable";
 
 interface PageProps {
@@ -71,8 +70,7 @@ export const columns: ColumnDef<Data>[] = [
   },
 ];
 
-export default function ProductView() {
-  const { id } = useParams();
+export default function ProductView({ id }) {
   const { data: Product } = useGetSingleTackQuery(id);
   console.log(Product);
   const breadLink = [
@@ -97,7 +95,7 @@ export default function ProductView() {
         id: variant.id,
         productColor: variant.color,
         productSize: variant.size,
-        price: `$${variant.price.toFixed(2)}`,
+        price: `$${variant.price_usd.toFixed(2)}`,
         stock: stockQty,
         status,
         productImages:

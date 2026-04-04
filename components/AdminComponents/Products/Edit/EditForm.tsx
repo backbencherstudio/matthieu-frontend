@@ -14,6 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  useGetSingleTackQuery,
+  useUpdateTackProductMutation,
+} from "@/src/redux/admin/tackProduct/tackProduct";
 import { X } from "lucide-react";
 import {
   Controller,
@@ -21,6 +25,7 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+import { toast } from "sonner";
 import DeleteProduct from "../DeleteProduct";
 
 type Inputs = {
@@ -36,34 +41,32 @@ type Inputs = {
   }[];
 };
 
-export default function EditForm() {
-  const productVariant = [
-    {
-      color: "Black",
-      size: "Pony",
-      price: "22",
-      stock_qty: "20",
-      imagePreviews: ["/images/blog-04.png", "/images/blog-04.png", null, null],
-    },
-    {
-      color: "Brown",
-      size: "Cob",
-      price: "12",
-      stock_qty: "10",
-      imagePreviews: ["/images/blog-04.png", null, null, null],
-    },
-  ];
+interface EditFormProps {
+  id: string;
+}
+
+export default function EditForm({ id }: EditFormProps) {
+  const [updateTackProduct, { isLoading: updateLoading }] =
+    useUpdateTackProductMutation();
+  const { data: productData, isLoading: dataLoading } =
+    useGetSingleTackQuery(id);
+
+  const productVariant = productData?.variants ?? [];
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     control,
+    reset,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      variants: productVariant,
+      name: "",
+      description: "",
+      benefits: "",
+      guide: "",
+      variants: [],
     },
   });
 
@@ -76,63 +79,99 @@ export default function EditForm() {
     name: "variants",
   });
 
-  const handleRemoveVariant = (index) => {
-    removeVariant(index);
+  // ✅ Populate form when data loads
+  useEffect(() => {
+    if (!productData) return;
 
+    reset({
+      name: productData.name || "",
+      description: productData.description || "",
+      benefits: productData.benefits || "",
+      guide: productData.leatherCareGuide || "",
+      variants:
+        productData.variants?.map((v: any) => ({
+          color: v.colorId || v.color || "",
+          size: v.sizeId || v.size || "",
+          price: String(v.price_usd || v.price || ""),
+          stock_qty: String(v.stockQuantity || v.stock_qty || ""),
+        })) ?? [],
+    });
+
+    // Populate image previews from existing variant images
+    if (productData.variants?.length > 0) {
+      const previews = productData.variants.map((v: any) => {
+        const imgs = v.images?.map((img: any) => img.url || img) ?? [];
+        return [...imgs, null, null, null, null].slice(0, 4);
+      });
+
+      setImagePreviews(previews);
+      setImageFiles(previews.map((group: any) => group.map(() => null)));
+    }
+  }, [productData]);
+
+  const handleRemoveVariant = (index: number) => {
+    removeVariant(index);
     setImagePreviews((prev) => {
+      const updated = [...prev];
+      updated.splice(index, 1);
+      return updated;
+    });
+    setImageFiles((prev) => {
       const updated = [...prev];
       updated.splice(index, 1);
       return updated;
     });
   };
 
-  // Show Image Preview
-  const [imagePreviews, setImagePreviews] = useState([]);
+  // Image Preview State
+  const [imagePreviews, setImagePreviews] = useState<(string | null)[][]>([]);
   const [imageFiles, setImageFiles] = useState<(File | null)[][]>([]);
 
-  // Loading Initial Image from Database
-  useEffect(() => {
-    if (!productVariant || productVariant.length === 0) return;
-
-    const previews = productVariant.map((v) => {
-      return [...(v.imagePreviews || []), null, null, null].slice(0, 4);
-    });
-
-    setImagePreviews(previews);
-    setImageFiles(previews.map((group) => group.map(() => null)));
-  }, []);
-
+  // Sync previews when new variant is added
   useEffect(() => {
     setImagePreviews((prev) => {
       if (prev.length < variantFields.length) {
         const newPreviews = [...prev];
-
         for (let i = prev.length; i < variantFields.length; i++) {
           newPreviews.push([null, null, null, null]);
         }
-
         return newPreviews;
       }
+      return prev;
+    });
 
+    setImageFiles((prev) => {
+      if (prev.length < variantFields.length) {
+        const newFiles = [...prev];
+        for (let i = prev.length; i < variantFields.length; i++) {
+          newFiles.push([null, null, null, null]);
+        }
+        return newFiles;
+      }
       return prev;
     });
   }, [variantFields.length]);
 
-  const showImagePreview = (e, variantIndex, imgIndex) => {
+  const showImagePreview = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    variantIndex: number,
+    imgIndex: number,
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     const url = URL.createObjectURL(file);
 
     setImagePreviews((prev) => {
-      const updated = [...prev];
+      const updated = prev.map((row) => [...row]);
+      if (!updated[variantIndex])
+        updated[variantIndex] = [null, null, null, null];
       updated[variantIndex][imgIndex] = url;
       return updated;
     });
 
-    // Store actual file for submission
     setImageFiles((prev) => {
-      const updated = [...prev];
+      const updated = prev.map((row) => [...row]);
       if (!updated[variantIndex])
         updated[variantIndex] = [null, null, null, null];
       updated[variantIndex][imgIndex] = file;
@@ -140,18 +179,37 @@ export default function EditForm() {
     });
   };
 
-  const removeImage = (variantIndex, imgIndex) => {
+  const removeImage = (variantIndex: number, imgIndex: number) => {
     setImagePreviews((prev) => {
-      const updated = [...prev];
+      const updated = prev.map((row) => [...row]);
+      updated[variantIndex][imgIndex] = null;
+      return updated;
+    });
+
+    setImageFiles((prev) => {
+      const updated = prev.map((row) => [...row]);
       updated[variantIndex][imgIndex] = null;
       return updated;
     });
   };
 
-  // Handle New Color
+  // Color Dialog
   const [colorDialogOpen, setColorDialogOpen] = useState<boolean[]>([]);
   const [newColor, setNewColor] = useState("");
-  const [colorOptions, setColorOptions] = useState(["Black", "Brown"]);
+  const [colorOptions, setColorOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (productData?.variants) {
+      const existingColors = productData.variants.map(
+        (v: any) => v.color?.name || v.color || "",
+      );
+      setColorOptions((prev) => {
+        const merged = [...prev, ...existingColors];
+        const unique = Array.from(new Set(merged));
+        return unique.filter(Boolean);
+      });
+    }
+  }, [productData]);
 
   useEffect(() => {
     setColorDialogOpen(variantFields.map(() => false));
@@ -173,36 +231,40 @@ export default function EditForm() {
     });
   };
 
-  const addColor = (variantIndex) => {
+  const addColor = (variantIndex: number) => {
     const trimmed = newColor.trim();
     if (!trimmed) return;
 
-    setColorOptions((prev) => {
-      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+    setColorOptions((prev) =>
+      prev.includes(trimmed) ? prev : [...prev, trimmed],
+    );
 
-      Promise.resolve().then(() => {
-        setValue(`variants.${variantIndex}.color`, trimmed, {
-          shouldDirty: true,
-          shouldValidate: true,
-        });
-      });
-
-      return updated;
+    setValue(`variants.${variantIndex}.color`, trimmed, {
+      shouldDirty: true,
+      shouldValidate: true,
     });
 
     closeColorDialog(variantIndex);
     setNewColor("");
   };
 
-  // Handle New Size
+  // Size Dialog
   const [sizeDialogOpen, setSizeDialogOpen] = useState<boolean[]>([]);
   const [newSize, setNewSize] = useState("");
-  const [sizeOptions, setSizeOptions] = useState([
-    "Pony",
-    "Cob",
-    "Full",
-    "Oversize",
-  ]);
+  const [sizeOptions, setSizeOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (productData?.variants) {
+      const existingSizes = productData.variants.map(
+        (v: any) => v.size?.name || v.size || "",
+      );
+      setSizeOptions((prev) => {
+        const merged = [...prev, ...existingSizes];
+        const unique = Array.from(new Set(merged));
+        return unique.filter(Boolean);
+      });
+    }
+  }, [productData]);
 
   useEffect(() => {
     setSizeDialogOpen(variantFields.map(() => false));
@@ -224,21 +286,17 @@ export default function EditForm() {
     });
   };
 
-  const addSize = (variantIndex) => {
+  const addSize = (variantIndex: number) => {
     const trimmed = newSize.trim();
     if (!trimmed) return;
 
-    setSizeOptions((prev) => {
-      const updated = prev.includes(trimmed) ? prev : [...prev, trimmed];
+    setSizeOptions((prev) =>
+      prev.includes(trimmed) ? prev : [...prev, trimmed],
+    );
 
-      Promise.resolve().then(() => {
-        setValue(`variants.${variantIndex}.size`, trimmed, {
-          shouldDirty: true,
-          shouldValidate: true,
-        });
-      });
-
-      return updated;
+    setValue(`variants.${variantIndex}.size`, trimmed, {
+      shouldDirty: true,
+      shouldValidate: true,
     });
 
     closeSizeDialog(variantIndex);
@@ -246,37 +304,65 @@ export default function EditForm() {
   };
 
   // Form Submit
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // console.log("Full Data - ", data);
-
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (key !== "variants") {
-        formData.append(key, data[key]);
-      }
-    });
 
-    data.variants.forEach((item: any, i: number) => {
-      formData.append(`variants[${i}][color]`, item.color);
-      formData.append(`variants[${i}][size]`, item.size);
-      formData.append(`variants[${i}][price]`, item.price);
-      formData.append(`variants[${i}][stock_qty]`, item.stock_qty);
-      imageFiles[i]?.forEach((file, imgIndex) => {
+    formData.append("name", data.name);
+    formData.append("description", data.description || "");
+    formData.append("benefits", data.benefits || "");
+    formData.append("leatherCareGuide", data.guide || "");
+
+    // Separate existing vs new variants
+    const existingVariants = data.variants.slice(0, productVariant.length);
+    const newVariants = data.variants.slice(productVariant.length);
+
+    // Existing variants — only send updated images
+    existingVariants.forEach((_, i) => {
+      imageFiles[i]?.forEach((file) => {
         if (file) {
-          formData.append(`variants[${i}][images][${imgIndex}]`, file);
+          formData.append(`variants[${i}].images`, file);
         }
       });
     });
 
-    // Printing Form Data
-    /* for (let [key, value] of formData.entries()) {
-      if (value instanceof File) {
-        console.log(key, value); // Full File object
-      } else {
-        console.log(key, value); // Normal string
+    // New variants — send as JSON + images
+    if (newVariants.length > 0) {
+      const formattedNewVariants = newVariants.map((item) => ({
+        colorId: item.color,
+        sizeId: item.size,
+        price: item.price,
+        stockQuantity: Number(item.stock_qty),
+      }));
+
+      formData.append("variantsCreate", JSON.stringify(formattedNewVariants));
+
+      newVariants.forEach((_, i) => {
+        const actualIndex = productVariant.length + i;
+        imageFiles[actualIndex]?.forEach((file) => {
+          if (file) {
+            formData.append(`variantsCreate[${i}].images`, file);
+          }
+        });
+      });
+    }
+
+    try {
+      const response = await updateTackProduct({ data: formData, id });
+      if (response?.data?.id) {
+        toast.success("Product Updated Successfully!");
       }
-    } */
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Something went wrong");
+    }
   };
+
+  if (dataLoading) {
+    return (
+      <div className="bg-white p-4 rounded-[8px] flex items-center justify-center h-60">
+        <p className="text-secondary-text">Loading product data...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white p-4 rounded-[8px]">
@@ -286,7 +372,9 @@ export default function EditForm() {
           <h1 className="text-2xl font-extrabold text-primary-text">
             Edit Product
           </h1>
-          <button className="cmn-btn">Update Product</button>
+          <button className="cmn-btn" disabled={updateLoading}>
+            {updateLoading ? "Updating..." : "Update Product"}
+          </button>
         </div>
 
         {/* Product Detail Inputs */}
@@ -303,8 +391,7 @@ export default function EditForm() {
               type="text"
               className="cmn-input"
               placeholder="Enter Product Name"
-              defaultValue="Arion's Double Noseband Bridle"
-              {...register(`name`, {
+              {...register("name", {
                 required: "Product name is required",
               })}
             />
@@ -318,11 +405,8 @@ export default function EditForm() {
             <Textarea
               className="cmn-textarea"
               placeholder="Enter Description"
-              {...register(`description`)}
-            >
-              Arion's Double Noseband Bridle combines the effect of a regular
-              noseband and a drop noseband.
-            </Textarea>
+              {...register("description")}
+            />
           </div>
 
           <div className="grid md:grid-cols-2 gap-y-3 gap-x-5">
@@ -333,11 +417,8 @@ export default function EditForm() {
               <Textarea
                 className="cmn-textarea"
                 placeholder="Enter Benefits"
-                {...register(`benefits`)}
-              >
-                Arion's Double Noseband Bridle combines the effect of a regular
-                noseband and a drop noseband.
-              </Textarea>
+                {...register("benefits")}
+              />
             </div>
             <div>
               <Label className="text-sm text-secondary-text mb-1">
@@ -346,16 +427,13 @@ export default function EditForm() {
               <Textarea
                 className="cmn-textarea"
                 placeholder="Enter Leather Care Guide"
-                {...register(`guide`)}
-              >
-                Arion's Double Noseband Bridle combines the effect of a regular
-                noseband and a drop noseband.
-              </Textarea>
+                {...register("guide")}
+              />
             </div>
           </div>
         </div>
 
-        {/* Product Variations Wrapper */}
+        {/* Product Variations */}
         {variantFields.map((item, index) => (
           <div className="bg-[#F8FAFB] p-4 mt-4 relative" key={item.id}>
             <div className="flex flex-wrap justify-between gap-3">
@@ -383,10 +461,12 @@ export default function EditForm() {
                 )}
               </div>
             </div>
+
             <div className="grid md:grid-cols-2 gap-5 mt-4">
               {/* Left */}
               <div>
                 <div className="grid sm:grid-cols-2 gap-x-3">
+                  {/* Color */}
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Color*
@@ -419,8 +499,8 @@ export default function EditForm() {
                               </SelectItem>
                             ))}
                             <SelectItem
-                              className="cursor-pointer"
                               value="Add Color"
+                              className="cursor-pointer"
                             >
                               + Add Color
                             </SelectItem>
@@ -434,6 +514,7 @@ export default function EditForm() {
                       </p>
                     )}
                   </div>
+
                   {colorDialogOpen[index] && (
                     <Dialog
                       open={true}
@@ -443,12 +524,10 @@ export default function EditForm() {
                         style={{ maxWidth: "600px", width: "96%" }}
                       >
                         <h2 className="text-xl font-extrabold">Add Color</h2>
-
                         <hr />
-
                         <div className="p-3 rounded-[6px] bg-[#F6F8FA]">
                           <div className="mb-4">
-                            <Label className="block text-sm text-gray-black mb-1">
+                            <Label className="block text-sm mb-1">
                               New Color Name
                             </Label>
                             <Input
@@ -472,6 +551,7 @@ export default function EditForm() {
                     </Dialog>
                   )}
 
+                  {/* Size */}
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Size*
@@ -504,8 +584,8 @@ export default function EditForm() {
                               </SelectItem>
                             ))}
                             <SelectItem
-                              className="cursor-pointer"
                               value="Add Size"
+                              className="cursor-pointer"
                             >
                               + Add Size
                             </SelectItem>
@@ -529,12 +609,10 @@ export default function EditForm() {
                         style={{ maxWidth: "600px", width: "96%" }}
                       >
                         <h2 className="text-xl font-extrabold">Add Size</h2>
-
                         <hr />
-
                         <div className="p-3 rounded-[6px] bg-[#F6F8FA]">
                           <div className="mb-4">
-                            <Label className="block text-sm text-gray-black mb-1">
+                            <Label className="block text-sm mb-1">
                               New Size
                             </Label>
                             <Input
@@ -558,6 +636,7 @@ export default function EditForm() {
                     </Dialog>
                   )}
 
+                  {/* Price */}
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
                       Product Price ($)
@@ -576,9 +655,11 @@ export default function EditForm() {
                       </p>
                     )}
                   </div>
+
+                  {/* Stock */}
                   <div className="mb-3">
                     <Label className="text-sm text-secondary-text mb-1">
-                      Stock Quantity *
+                      Stock Quantity*
                     </Label>
                     <Input
                       type="text"
@@ -596,23 +677,21 @@ export default function EditForm() {
                   </div>
                 </div>
               </div>
-              {/* Right */}
+
+              {/* Right - Images */}
               <div>
                 <h4 className="text-sm font-extrabold text-[#4C526F] mb-3">
                   Product Images
                 </h4>
-
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {[0, 1, 2, 3].map((imgIndex) => (
                     <div key={imgIndex} className="relative">
                       {imagePreviews[index]?.[imgIndex] ? (
                         <label htmlFor={`v-${index}-img-${imgIndex}`}>
                           <img
-                            src={imagePreviews[index][imgIndex]}
+                            src={imagePreviews[index][imgIndex]!}
                             className="w-full h-28 object-cover rounded cursor-pointer border"
                           />
-
-                          {/* Cancel Icon */}
                           <button
                             type="button"
                             onClick={(e) => {
@@ -635,11 +714,10 @@ export default function EditForm() {
                           </div>
                         </label>
                       )}
-
-                      {/* Hidden file input */}
                       <input
                         id={`v-${index}-img-${imgIndex}`}
                         type="file"
+                        accept="image/*"
                         className="hidden"
                         onChange={(e) => showImagePreview(e, index, imgIndex)}
                       />
@@ -651,7 +729,7 @@ export default function EditForm() {
           </div>
         ))}
 
-        <div className="px-4">
+        <div className="px-4 mt-4">
           <button
             type="button"
             className="cmn-btn"

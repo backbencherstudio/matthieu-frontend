@@ -1,6 +1,5 @@
-import React from "react";
-import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import EditForm from "@/components/AdminComponents/Products/Edit/EditForm";
+import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -24,7 +23,7 @@ export default async function EditProduct({ params }: PageProps) {
       <BreadCrumb breadLink={breadLink} />
       {/* Edit Form */}
       <div className="pt-5">
-        <EditForm />
+        <EditForm id={id} />
       </div>
     </div>
   );
