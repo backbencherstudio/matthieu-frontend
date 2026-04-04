@@ -14,9 +14,19 @@ const useSaddleApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getLeadLineSaddle: builder.query({
+      query: () => ({
+        url: `/sadlles/leadline/product`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllSaddlesQuery, useGetSingleSaddleQuery } = useSaddleApi;
+export const {
+  useGetAllSaddlesQuery,
+  useGetSingleSaddleQuery,
+  useGetLeadLineSaddleQuery,
+} = useSaddleApi;
 
 export default useSaddleApi;
