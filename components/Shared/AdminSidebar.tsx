@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { MdClose } from "react-icons/md";
 import AlertIcon from "../Icons/AdminIcon/AlertIcon";
 import AnalyticsIcon from "../Icons/AdminIcon/AnalyticsIcon";
@@ -99,6 +99,16 @@ export default function AdminSidebar({
   toggleSidebar,
 }: AdminSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    document.cookie =
+      "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+    document.cookie =
+      "userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+
+    router.replace("/signin");
+  };
 
   return (
     <>
@@ -167,9 +177,9 @@ export default function AdminSidebar({
             const isActive = pathname === item.href;
             return (
               <div className="mb-2" key={index}>
-                <Link
-                  href={item.href}
-                  className={`flex items-center md:text-base text-sm py-3 pl-3 pr-2 duration-300 rounded-[4px] gap-3 text-error-text ${
+                <button
+                  onClick={handleLogout}
+                  className={`flex items-center md:text-base text-sm py-3 pl-3 pr-2 duration-300 rounded-[4px] gap-3 text-error-text w-full ${
                     isActive
                       ? "bg-error-text text-white"
                       : "bg-transparent hover:bg-error-text cursor-pointer hover:text-white"
@@ -177,7 +187,7 @@ export default function AdminSidebar({
                 >
                   <item.icon />
                   {item.label}
-                </Link>
+                </button>
               </div>
             );
           })}

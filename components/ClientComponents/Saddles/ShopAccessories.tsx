@@ -1,3 +1,4 @@
+"use client";
 import { useGetAllTackProductsQuery } from "@/src/redux/client/tack-product/tackProduct";
 import Link from "next/link";
 
@@ -8,8 +9,6 @@ function ShopAccessories() {
   );
 
   const products = leatherCare?.products;
-
-  console.log(products);
   return (
     <div>
       <h1 className="text-[32px] font-extrabold leading-[100%] text-center text-[#1F274B]">

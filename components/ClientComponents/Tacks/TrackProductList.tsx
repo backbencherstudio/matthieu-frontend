@@ -49,7 +49,7 @@ export default function TrackProductList({
                   {item.name}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-xl md:text-lg text-base">
-                  {item.currency} {item.price.toFixed(2)}
+                  {item.currency} {item?.price?.toFixed(2)}
                 </p>
               </div>
             </Link>
