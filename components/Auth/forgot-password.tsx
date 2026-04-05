@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useLoginMutation } from "@/src/redux/auth/authApi";
+import { useForgotPasswordMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -12,8 +11,6 @@ import { toast } from "sonner";
 
 type ForgotPasswordData = {
     email: string;
-    //   password: string;
-    //   rememberMe: boolean;
 };
 
 export function ForgotPassword() {
@@ -25,34 +22,30 @@ export function ForgotPassword() {
     } = useForm<ForgotPasswordData>({
         defaultValues: {
             email: "",
-            //   password: "",
-            //   rememberMe: false,
         },
     });
-    const [signup] = useLoginMutation();
+
+    const [forgotPassword] = useForgotPasswordMutation();
+
     const router = useRouter();
 
     const onSubmit = async (data: ForgotPasswordData) => {
         try {
-            const response = await signup(data);
-            console.log(response, "response")
-            if (response?.data?.success) {
-                localStorage.setItem("token", response?.data?.authorization?.token);
+            const response = await forgotPassword({
+                email: data.email,
+            }).unwrap();
 
-                toast.success(response?.data?.message);
+            if (response?.success) {
+                toast.success(response?.message);
                 reset();
 
-                router.push(
-                    response?.data?.type === "admin"
-                        ? "/admin"
-                        : "/my-account/dashboard"
-                );
+                router.push(`/otp?email=${data.email}`);
 
             } else {
-                toast.error("Login fail please check your email or password");
+                toast.error(response?.message);
             }
         } catch (error: any) {
-            toast.error("Login fail please check your email or password");
+            toast.error("Failed to send otp");
         }
     };
 
@@ -76,7 +69,7 @@ export function ForgotPassword() {
                             <input
                                 id="email"
                                 type="email"
-                                placeholder="arionadmin@gmail.com"
+                                placeholder="Enter your email"
                                 className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
                                 {...register("email", {
                                     required: "Email is required",
@@ -93,32 +86,6 @@ export function ForgotPassword() {
                             )}
                         </div>
 
-                        {/* <div className="space-y-2">
-              <Label
-                htmlFor="password"
-                className="text-[16px] font-normal text-[#4A4C56]"
-              >
-                Password
-              </Label>
-              <input
-                id="password"
-                type="password"
-                placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className="text-sm text-destructive">
-                  {errors.password.message}
-                </p>
-              )}
-            </div> */}
 
                         <Button
                             type="submit"
