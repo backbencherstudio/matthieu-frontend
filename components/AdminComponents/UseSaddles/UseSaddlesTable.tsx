@@ -16,7 +16,7 @@ const UseSaddlesTable = () => {
   const tableHeader = [
     "Saddle Id",
     "Title",
-    "Description",
+    "Discipline",
     "Base Price",
     "Saddle Category",
     "Category",
@@ -39,7 +39,7 @@ const UseSaddlesTable = () => {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.description}
+        {item?.discipline}
       </span>
     ),
     (item) => (
