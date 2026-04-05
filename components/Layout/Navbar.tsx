@@ -21,6 +21,7 @@ import CartsProducts from "../ClientComponents/ProductDetailsClient/CartsProduct
 import { getCookie } from "@/helper/RegionCookies";
 import UserMenu from "./UserMenu";
 import { IoIosArrowUp } from "react-icons/io";
+import { useGetCartQuery } from "@/src/redux/client/add-to-cart/cartApi";
 
 
 
@@ -28,14 +29,17 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname();
 
-  const [cartCount, setCartCount] = React.useState<number>(0);
+  
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const c = typeof window === 'undefined' ? 0 : (JSON.parse(localStorage.getItem('cart') || '[]') || []).length;
-    setCartCount(c);
-  }, []);
+  const { data: cartResponse } = useGetCartQuery(undefined);
+
+  const cartCount =
+    cartResponse?.data?.items?.reduce(
+      (total, item) => total + item.quantity,
+      0,
+    ) ?? 0;
 
   const navigationLinks = [
     {
@@ -223,6 +227,7 @@ const Header = () => {
               <div className="w-[156px] h-[56px]">
                 <Link href="/">
                   <img src="/matheiu-logo.png" alt="Logo" />
+                  
                 </Link>
               </div>
             </div>
@@ -268,7 +273,7 @@ const Header = () => {
               <div className="relative ml-auto flex items-center gap-3">
 
                 {/* Cart icon as relative anchor */}
-                <div className="textSecondary relative flex">
+                <div className="textSecondary relative flex ">
                   <CartsProducts />
 
                   {/* Badge inside the cart wrapper */}
