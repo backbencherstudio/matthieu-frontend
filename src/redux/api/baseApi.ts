@@ -120,7 +120,7 @@ const baseQueryWithAutoTokenUpdate = async (
       document.cookie = "userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
 
       // Optional: redirect
-      window.location.href = "/signin";
+      // window.location.href = "/signin";
     }
   }
 

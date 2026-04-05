@@ -1,48 +1,172 @@
-"use client";
+'use client';
 
-import { Checkbox } from "@/components/ui/checkbox";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import CartsDetails from "../ClientComponents/ProductDetailsClient/CartsDetails";
-import ArrowDownIcon from "../Icons/ArrowDownIcon";
+import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { Country, State, City } from 'country-state-city';
+
+import CartsDetails from '../ClientComponents/ProductDetailsClient/CartsDetails';
+import ArrowDownIcon from '../Icons/ArrowDownIcon';
+import { useCreateCheckoutAddressMutation } from '@/src/redux/client/add-to-cart/checkoutAddressApi';
+
+
+type BillingFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  streetAddress: string;
+  apartment: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+};
 
 export function Billing() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm({
+    setValue,
+  } = useForm<BillingFormValues>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      company: "",
-      streetAddress: "",
-      apartment: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      streetAddress: '',
+      apartment: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: '',
     },
   });
 
-  const onSubmit = (values) => {
-    console.log("✅ Submitted:", values);
-    reset();
+  const [createCheckoutAddress, { isLoading }] =
+    useCreateCheckoutAddressMutation();
+
+  const [selectedCountryCode, setSelectedCountryCode] = useState('');
+  const [selectedStateCode, setSelectedStateCode] = useState('');
+  const [selectedCityName, setSelectedCityName] = useState('');
+
+  const countries = useMemo(() => Country.getAllCountries(), []);
+  const states = useMemo(() => {
+    return selectedCountryCode
+      ? State.getStatesOfCountry(selectedCountryCode)
+      : [];
+  }, [selectedCountryCode]);
+
+  const cities = useMemo(() => {
+    if (!selectedCountryCode) return [];
+
+    if (selectedStateCode) {
+      return City.getCitiesOfState(selectedCountryCode, selectedStateCode);
+    }
+
+    return [];
+  }, [selectedCountryCode, selectedStateCode]);
+
+  const handleCountryChange = (countryCode: string) => {
+    setSelectedCountryCode(countryCode);
+    setSelectedStateCode('');
+    setSelectedCityName('');
+
+    const selectedCountry = countries.find(
+      country => country.isoCode === countryCode,
+    );
+
+    setValue('country', selectedCountry?.name || '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue('state', '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue('city', '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
+  const handleStateChange = (stateCode: string) => {
+    setSelectedStateCode(stateCode);
+    setSelectedCityName('');
+
+    const selectedState = states.find(state => state.isoCode === stateCode);
+
+    setValue('state', selectedState?.name || '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    setValue('city', '', {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
+  const handleCityChange = (cityName: string) => {
+    setSelectedCityName(cityName);
+
+    setValue('city', cityName, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
+  const onSubmit = async (values: BillingFormValues) => {
+    try {
+      await createCheckoutAddress({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        phone: values.phone,
+        companyName: values.company || '',
+        streetAddress: values.streetAddress,
+        apartment: values.apartment || '',
+        city: values.city,
+        state: values.state,
+        zipCode: values.zipCode,
+        country: values.country,
+      }).unwrap();
+
+      router.push('/product-details/billing-details/payment-details');
+    } catch (error) {
+      console.error('Failed to create checkout address', error);
+    }
   };
 
   return (
     <div className="maxContainer lg:my-12 md:my-10 my-8">
       <div className="flex lg:flex-row flex-col xl:gap-8 lg:gap-6">
         <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-[65%] lg:w-full normal-case">
-          <h2 className="text-[#1F274B]  text-[24px] md:text-[28px] lg:text-[32px]  not-italic font-extrabold leading-[100%] md:pb-[32px] pb-6">
+          <h2 className="text-[#1F274B] text-[24px] md:text-[28px] lg:text-[32px] not-italic font-extrabold leading-[100%] md:pb-[32px] pb-6">
             Billing Details
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* First + Last Name */}
+            <input
+              type="hidden"
+              {...register('country', { required: 'Country is required' })}
+            />
+            <input
+              type="hidden"
+              {...register('state', { required: 'State is required' })}
+            />
+            <input
+              type="hidden"
+              {...register('city', { required: 'City is required' })}
+            />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
@@ -50,16 +174,14 @@ export function Billing() {
                 </label>
                 <input
                   placeholder="write your first name"
-                  {...register("firstName", {
-                    required: "First name is required",
+                  {...register('firstName', {
+                    required: 'First name is required',
                   })}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B] "
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.firstName && (
                   <p className="text-red-400 text-xs font-light normal-case mt-1">
-                    {errors.firstName.message}*
+                    {errors.firstName.message}
                   </p>
                 )}
               </div>
@@ -70,10 +192,10 @@ export function Billing() {
                 </label>
                 <input
                   placeholder="write your last name"
-                  {...register("lastName")}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                  {...register('lastName', {
+                    required: 'Last name is required',
+                  })}
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.lastName && (
                   <p className="text-red-400 text-xs font-light normal-case mt-1">
@@ -83,7 +205,6 @@ export function Billing() {
               </div>
             </div>
 
-            {/* Email + Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
                 <label className="!text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
@@ -92,12 +213,10 @@ export function Billing() {
                 <input
                   type="email"
                   placeholder="write your email"
-                  {...register("email", {
-                    required: "Email is required",
+                  {...register('email', {
+                    required: 'Email is required',
                   })}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.email && (
                   <p className="text-red-400 text-xs font-light normal-case mt-1">
@@ -114,15 +233,10 @@ export function Billing() {
                   type="tel"
                   inputMode="numeric"
                   placeholder="write your phone number"
-                  {...register("phone", {
-                    required: "Phone is required",
+                  {...register('phone', {
+                    required: 'Phone is required',
                   })}
-                  onChange={(e) => {
-                    e.target.value;
-                  }}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
                 />
                 {errors.phone && (
                   <p className="text-red-400 text-xs font-light normal-case mt-1">
@@ -132,129 +246,154 @@ export function Billing() {
               </div>
             </div>
 
-            {/* Company */}
             <div className="flex flex-col gap-2">
-              <label className="text-[#4A4C56] font-avenir text-[16px] leading-[150%] tracking-[0.08px]">
+              <label className="text-[#4A4C56] text-[16px] leading-[150%] tracking-[0.08px]">
                 Company name (optional)
               </label>
               <input
-                {...register("company")}
-                placeholder=""
-                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                {...register('company')}
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
             </div>
 
-            {/* Street Address */}
             <div className="flex flex-col gap-2">
-              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
+              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                 Street address
               </label>
               <input
                 placeholder="House number and street name"
-                {...register("streetAddress")}
-                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                {...register('streetAddress', {
+                  required: 'Street address is required',
+                })}
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
-              {/* Apartment */}
               <input
                 placeholder="Apartment, suite, unit, etc. (optional)"
-                {...register("apartment")}
-                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                {...register('apartment')}
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
               />
             </div>
 
-            {/* City, State, Zip */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px]">
               <div className="flex flex-col gap-2">
-                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
-                  Town / City
+                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
+                  Country / Region
                 </label>
-                <input
-                  placeholder="Enter your city"
-                  {...register("city")}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
-                />
+                <div className="relative">
+                  <select
+                    value={selectedCountryCode}
+                    onChange={e => handleCountryChange(e.target.value)}
+                    className="appearance-none w-full text-[#1D1F2C] py-[12px] pl-[16px] pr-[40px] text-[16px] font-bold leading-[150%] tracking-[0.08px] border-none rounded-none bg-[#F8FAFB] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+                  >
+                    <option value="">Select a country</option>
+                    {countries.map(country => (
+                      <option key={country.isoCode} value={country.isoCode}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ArrowDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1F274B]" />
+                </div>
+                {errors.country && (
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.country.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-2">
                 <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
                   State
                 </label>
-                <input
-                  placeholder="Enter your state"
-                  {...register("state")}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
-                />
+                <div className="relative">
+                  <select
+                    value={selectedStateCode}
+                    onChange={e => handleStateChange(e.target.value)}
+                    disabled={!selectedCountryCode || states.length === 0}
+                    className="appearance-none w-full text-[#1D1F2C] py-[12px] pl-[16px] pr-[40px] text-[16px] font-bold leading-[150%] tracking-[0.08px] border-none rounded-none bg-[#F8FAFB] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B] disabled:cursor-not-allowed"
+                  >
+                    <option value="">
+                      {selectedCountryCode
+                        ? states.length > 0
+                          ? 'Select a state'
+                          : 'No states available'
+                        : 'Select a state'}
+                    </option>
+                    {states.map(state => (
+                      <option key={state.isoCode} value={state.isoCode}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ArrowDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1F274B]" />
+                </div>
+                {errors.state && (
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.state.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] ">
-                  Zip code
+                <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
+                  Town / City
                 </label>
-                <input
-                  placeholder="Enter your zip code"
-                  {...register("zipCode")}
-                  className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3  
-    bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
-                />
+                <div className="relative">
+                  <select
+                    value={selectedCityName}
+                    onChange={e => handleCityChange(e.target.value)}
+                    disabled={!selectedStateCode || cities.length === 0}
+                    className="appearance-none w-full text-[#1D1F2C] py-[12px] pl-[16px] pr-[40px] text-[16px] font-bold leading-[150%] tracking-[0.08px] border-none rounded-none bg-[#F8FAFB] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B] disabled:cursor-not-allowed"
+                  >
+                    <option value="">
+                      {selectedStateCode
+                        ? cities.length > 0
+                          ? 'Select a city'
+                          : 'No cities available'
+                        : 'Select a city'}
+                    </option>
+                    {cities.map((city, index) => (
+                      <option key={`${city.name}-${index}`} value={city.name}>
+                        {city.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ArrowDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1F274B]" />
+                </div>
+                {errors.city && (
+                  <p className="text-red-400 text-xs font-light normal-case mt-1">
+                    {errors.city.message}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Country */}
-            <div>
-              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px] pb-[8px]">
-                Country / Region
+            <div className="flex flex-col gap-2">
+              <label className="text-[#4A4C56] text-[16px] font-normal leading-[160%] tracking-[0.08px]">
+                Zip code
               </label>
-
-              <div className="relative">
-                <select
-                  {...register("country")}
-                  className="appearance-none w-full text-[#1D1F2C] py-[12px] pl-[16px] pr-[40px] text-[16px] font-bold leading-[150%] tracking-[0.08px] border-none rounded-none bg-[#F8FAFB] cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
-                >
-                  <option value="">Select a country</option>
-                  <option value="us">United States</option>
-                  <option value="ca">Canada</option>
-                  <option value="uk">United Kingdom</option>
-                </select>
-                <ArrowDownIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1F274B]" />
-              </div>
+              <input
+                placeholder="Enter your zip code"
+                {...register('zipCode', {
+                  required: 'Zip code is required',
+                })}
+                className="!text-[#1D1F2C] text-[16px] !leading-[150%] tracking-[0.08px] md:py-[12px] py-2.5 md:px-4 px-3 bg-[#F8FAFB] border-none rounded-none h-auto font-extrabold focus:outline-none focus-visible:ring-1 focus-visible:ring-[#1F274B]"
+              />
+              {errors.zipCode && (
+                <p className="text-red-400 text-xs font-light normal-case mt-1">
+                  {errors.zipCode.message}
+                </p>
+              )}
             </div>
 
-            {/* Checkboxes */}
-            <div className="space-y-[8px] mb-0">
-              <div className="flex gap-[8px] items-start">
-                <Checkbox className="border-[1px] border-solid border-[#DFE1E7] rounded-[3px]" />
-                <p className="text-[#4A4C56] text-[14px] leading-[160%]">
-                  Sign me up to receive email updates and news (optional)
-                </p>
-              </div>
-              <div className="flex gap-[8px] items-start">
-                <Checkbox className="border-[1px] border-solid border-[#DFE1E7] rounded-[3px]" />
-                <p className="text-[#4A4C56] text-[14px] leading-[160%]">
-                  Sign me up to receive SMS updates and news (optional)
-                </p>
-              </div>
-            </div>
-
-            {/* Submit */}
             <div className="flex justify-end md:mt-8 mt-6">
-              <Link
-                href="/product-details/billing-details/payment-details"
+              <button
                 type="submit"
-                className="bg-[#1F274B] cursor-pointer text-white md:px-8 px-6 md:py-4 py-3 rounded-none border-none shadow-none"
+                disabled={isLoading}
+                className="bg-[#1F274B] cursor-pointer text-white md:px-8 px-6 md:py-4 py-3 rounded-none border-none shadow-none disabled:opacity-70"
               >
-                Next
-              </Link>
+                {isLoading ? 'Submitting...' : 'Next'}
+              </button>
             </div>
           </form>
         </div>
