@@ -2,9 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useLoginMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
@@ -12,6 +11,8 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
+import { useState } from "react";
+import { useVerifyOtpMutation } from "@/src/redux/auth/authApi";
 
 export function OTP() {
     const {
@@ -24,30 +25,45 @@ export function OTP() {
             otp: "",
         },
     });
-    const [signup] = useLoginMutation();
+
+    const [otp, setOtp] = useState("");
+
+    const searchParams = useSearchParams();
+    const email = searchParams.get("email");
+
+
+    const [verifyOtp] = useVerifyOtpMutation();
     const router = useRouter();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
+
+
+        if (!email) {
+            toast.error("Email missing");
+            return;
+        }
+
+        if (!otp || otp.length < 6) {
+            toast.error("Please enter valid OTP");
+            return;
+        }
+
         try {
-            const response = await signup(data);
-            console.log(response, "response")
-            if (response?.data?.success) {
-                localStorage.setItem("token", response?.data?.authorization?.token);
+            const response = await verifyOtp({
+                email: email,
+                token: otp
+            }).unwrap();
 
-                toast.success(response?.data?.message);
+            if (response?.success) {
+                toast.success(response?.message);
                 reset();
-
-                router.push(
-                    response?.data?.type === "admin"
-                        ? "/admin"
-                        : "/my-account/dashboard"
-                );
+                router.push(`/new-password?email=${email}&token=${otp}`);
 
             } else {
-                toast.error("Login fail please check your email or password");
+                toast.error(response?.message);
             }
         } catch (error: any) {
-            toast.error("Login fail please check your email or password");
+            toast.error("Failed to verify otp");
         }
     };
 
@@ -69,14 +85,25 @@ export function OTP() {
                                 OTP
                             </Label>
 
-                            <InputOTP id="otp" maxLength={6} defaultValue="" containerClassName="gap-10 w-full">
-                                <InputOTPGroup className="w-full justify-between">
-                                    <InputOTPSlot className="h-12 flex-1 " index={0} {...register("otp", { required: "OTP is required" })} />
-                                    <InputOTPSlot className="h-12 flex-1 " index={1} {...register("otp", { required: "OTP is required" })} />
-                                    <InputOTPSlot className="h-12 flex-1 " index={2} {...register("otp", { required: "OTP is required" })} />
-                                    <InputOTPSlot className="h-12 flex-1 " index={3} {...register("otp", { required: "OTP is required" })} />
-                                    <InputOTPSlot className="h-12 flex-1 " index={4} {...register("otp", { required: "OTP is required" })} />
-                                    <InputOTPSlot className="h-12 flex-1 " index={5} {...register("otp", { required: "OTP is required" })} />
+                            <InputOTP
+                                maxLength={6}
+                                value={otp}
+                                onChange={(value) => setOtp(value)}
+                            >
+                                <InputOTPGroup className="w-full flex justify-between gap-2 md:gap-4">
+                                    {[...Array(6)].map((_, i) => (
+                                        <InputOTPSlot
+                                            key={i}
+                                            index={i}
+                                            className="
+          w-[40px] h-[50px] md:w-[50px] md:h-[60px]
+          text-center text-lg md:text-xl font-medium
+          border-2 border-gray-300 rounded-lg
+          focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+          transition-all duration-200
+        "
+                                        />
+                                    ))}
                                 </InputOTPGroup>
                             </InputOTP>
 
@@ -92,7 +119,7 @@ export function OTP() {
                             type="submit"
                             className="w-full bg-[#1F274B] cursor-pointer hover:bg-[#1F274B]/90 rounded-none !h-auto !leading-[100%]  lg:py-4 py-3 text-[#FFF] self-stretch text-[16px]"
                         >
-                            Send OTP
+                            Verify OTP
                         </Button>
 
                         <div className="text-center lg:text-[18px] text-[16px] leading-[100%]">

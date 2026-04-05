@@ -80,7 +80,7 @@ export function SignInForm() {
               <input
                 id="email"
                 type="email"
-                placeholder="arionadmin@gmail.com"
+                placeholder="Enter your email"
                 className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
                 {...register("email", {
                   required: "Email is required",
@@ -97,33 +97,6 @@ export function SignInForm() {
               )}
             </div>
 
-            {/* <div className="space-y-2">
-              <Label
-                htmlFor="password"
-                className="text-[16px] font-normal text-[#4A4C56]"
-              >
-                Password
-              </Label>
-              <input
-                id="password"
-                type="password"
-                placeholder="• • • • • • • • • •"
-                className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className="text-sm text-destructive">
-                  {errors.password.message}
-                </p>
-              )}
-            </div> */}
-
             {/* Password with eye icon */}
             <div className="space-y-2">
               <Label
@@ -136,7 +109,7 @@ export function SignInForm() {
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="••••••••••"
+                  placeholder="Enter your password"
                   className="bg-[#E9E9ED80] border-0 outline-1 outline-[#DFE1E7] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full rounded-md pr-10"
                   {...register("password", {
                     required: "Password is required",
