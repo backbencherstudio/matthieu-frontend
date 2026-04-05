@@ -3,9 +3,10 @@ import baseApi from "../../api/baseApi";
 const useSaddleUserApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllUseSaddlesUser: builder.query({
-      query: () => ({
+      query: (params = {}) => ({
         url: `/used-saddles/public`,
         method: "GET",
+        params,   
       }),
     }),
     getSingleUseSaddleUser: builder.query({

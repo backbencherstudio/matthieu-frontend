@@ -2,6 +2,10 @@ import { getCookie } from "@/helper/RegionCookies";
 import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import Link from "next/link";
 
+interface UsedSaddlesProductListProps {
+  query?: string;   // ← Accept query string
+}
+
 interface TrackProductListProps {
   items?: {
     id: number;
@@ -16,9 +20,10 @@ interface TrackProductListProps {
   title?: string;
 }
 
-export default function UsedSaddlesProductList() {
-  const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
-  console.log(data);
+export default function UsedSaddlesProductList({ query = "" }: UsedSaddlesProductListProps) {
+  // const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
+  const { data, isLoading, error } = useGetAllUseSaddlesUserQuery(query);
+ 
   if (isLoading) {
     return <p>Loading...</p>;
   }
