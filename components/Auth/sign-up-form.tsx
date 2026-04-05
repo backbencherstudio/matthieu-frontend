@@ -78,7 +78,7 @@ export function SignUpForm() {
                 <input
                   id="first_name"
                   type="text"
-                  placeholder="Yasir Abed"
+                  placeholder="Enter your first name"
                   className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                   {...register("first_name", {
                     required: "First Name is required",
@@ -100,7 +100,7 @@ export function SignUpForm() {
                 <input
                   id="last_name"
                   type="text"
-                  placeholder="Rabbu"
+                  placeholder="Enter your last name"
                   className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                   {...register("last_name", {
                     required: "Last Name is required",
@@ -123,7 +123,7 @@ export function SignUpForm() {
               <input
                 id="email"
                 type="email"
-                placeholder="arionadmin@gmail.com"
+                placeholder="Enter your email"
                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("email", {
                   required: "Email is required",
@@ -151,7 +151,7 @@ export function SignUpForm() {
                 id="password"
                 type="password"
                 value={watch("password")}
-                placeholder="• • • • • • • • • •"
+                placeholder="Enter your password"
                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("password", {
                   required: "Password is required",
@@ -178,7 +178,7 @@ export function SignUpForm() {
                 id="confirm_password"
                 type="password"
                 value={watch("confirm_password")}
-                placeholder="• • • • • • • • • •"
+                placeholder="Enter your confirm password"
                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                 {...register("confirm_password", {
                   required: "Confirm Password is required",
