@@ -15,10 +15,19 @@ const useSaddleUserApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    createSaddleAlert: builder.mutation({
+      query: (body) => ({
+        url: "/saddle-alert",
+        method: "POST",
+        body,
+      }),
+    }),
+
   }),
 });
 
-export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery } =
+export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation } =
   useSaddleUserApi;
 
 export default useSaddleUserApi;
