@@ -24,6 +24,34 @@ export enum SubProductCategory {
   ARION = "ARION",
   ATHENA = "ATHENA",
 }
+enum Discipline {
+  JUMPING = "JUMPING",
+  DRESSAGE = "DRESSAGE",
+  CROSS_COUNTRY = "CROSS_COUNTRY",
+}
+
+enum seatSize {
+  SIZE_16_5 = "16.5",
+  SIZE_17 = "17.5",
+  SIZE_17_5 = "17",
+  SIZE_18 = "18",
+  SIZE_18_5 = "18.5"
+}
+
+export enum Brand {
+  AMERIGO = "AMERIGO",
+  ANTARES ="ANTARES",
+  ARION ="ARION",
+  BUTET ="BUTET",
+  CWD ="CWD",
+  DEVOUCOUX ="DEVOUCOUX",
+  ERREPLUS ="ERREPLUS",
+  FORSTIER ="FORSTIER",
+  HERMES ="HERMES",
+  MEYER ="MEYER",
+  N2_SADDLERY ="N2_SADDLERY",
+  VOLTAIRE ="VOLTAIRE"
+}
 
 export enum Country {
   AMERICA = "USA",
@@ -33,7 +61,9 @@ export enum Country {
 type Inputs = {
   name: string;
   description: string;
-  seatSize: number;
+  discipline: Discipline;
+  brand: Brand;
+  seatSize: seatSize;
   basePrice_usd: number;
   basePrice_eur: number;
   stockQuantity: number;
@@ -75,11 +105,14 @@ const AddUseSaadlesForm = () => {
   const [createUseSadles, { isLoading }] = useCreateUseSadlesAdminMutation();
 
   const onSubmit = async (data: Inputs) => {
+
     try {
       const formData = new FormData();
 
       formData.append("title", data.name);
       formData.append("description", data.description || "");
+      formData.append("brand", data.brand || "");
+      formData.append("discipline", data.discipline || "");
       formData.append("seatSize", String(data.seatSize));
       formData.append("basePrice_usd", String(data.basePrice_usd));
       formData.append("basePrice_eur", String(data.basePrice_eur));
@@ -125,6 +158,80 @@ const AddUseSaadlesForm = () => {
             )}
           </div>
 
+          {/* brand and discipline  */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1">
+                Brand*
+              </Label>
+
+              <Controller
+                name="brand"
+                control={control}
+                rules={{ required: "Brand is required" }}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
+                      <SelectValue placeholder="Select Brand" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(Brand).map((item) => (
+                        <SelectItem key={item} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+
+              {errors.category && (
+                <p className="text-red-500 text-sm">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <Label className="text-sm text-secondary-text mb-1 normal-case">
+                DISCIPLINE*
+              </Label>
+
+              <Controller
+                name="discipline"
+                control={control}
+                rules={{ required: "Discipline is required" }}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
+                      <SelectValue placeholder="Select Discipline" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(Discipline).map((item) => (
+                        <SelectItem key={item} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+
+              {errors.usedsaddlecategory && (
+                <p className="text-red-500 text-sm">
+                  {errors.usedsaddlecategory.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* category and used category */}
+
           <div className="grid grid-cols-2 gap-3">
             <div className="mb-3">
               <Label className="text-sm text-secondary-text mb-1">
@@ -140,7 +247,7 @@ const AddUseSaadlesForm = () => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-full rounded-[4px] py-[23px]">
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -174,7 +281,7 @@ const AddUseSaadlesForm = () => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-full rounded-[4px] py-[23px]">
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -195,6 +302,7 @@ const AddUseSaadlesForm = () => {
               )}
             </div>
           </div>
+          
 
           {/* Description */}
           <div className="">
@@ -215,7 +323,7 @@ const AddUseSaadlesForm = () => {
                 USD Price
               </Label>
               <Input
-                type="text"
+                type="number"
                 className="cmn-input"
                 placeholder="Enter Price "
                 {...register("basePrice_usd", {
@@ -233,7 +341,7 @@ const AddUseSaadlesForm = () => {
                 EUR Price
               </Label>
               <Input
-                type="text"
+                type="number"
                 className="cmn-input"
                 placeholder="Enter Price "
                 {...register("basePrice_eur", {
@@ -285,7 +393,7 @@ const AddUseSaadlesForm = () => {
                 Stock Quantity*
               </Label>
               <Input
-                type="text"
+                type="number"
                 className="cmn-input"
                 placeholder="Enter Stock Quantity"
                 {...register("stockQuantity", {
@@ -298,19 +406,39 @@ const AddUseSaadlesForm = () => {
                 </p>
               )}
             </div>
+           
+           {/* seat sizee  */}
             <div className="mb-3">
               <Label className="text-sm text-secondary-text mb-1">
-                Seat Size
+                Seat Size*
               </Label>
-              <Input
-                type="text"
-                className="cmn-input"
-                placeholder="Enter Size "
-                {...register("seatSize", { required: "Size is required" })}
+
+              <Controller
+                name="seatSize"
+                control={control}
+                rules={{ required: "seatSize is required" }}
+                render={({ field }) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
+                      <SelectValue placeholder="Select Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.values(seatSize).map((item) => (
+                        <SelectItem key={item} value={item}>
+                          {item}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               />
-              {errors.seatSize && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.seatSize.message}
+
+              {errors.category && (
+                <p className="text-red-500 text-sm">
+                  {errors.category.message}
                 </p>
               )}
             </div>

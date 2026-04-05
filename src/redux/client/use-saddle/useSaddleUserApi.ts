@@ -3,9 +3,10 @@ import baseApi from "../../api/baseApi";
 const useSaddleUserApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllUseSaddlesUser: builder.query({
-      query: () => ({
+      query: (params = {}) => ({
         url: `/used-saddles/public`,
         method: "GET",
+        params,   
       }),
     }),
     getSingleUseSaddleUser: builder.query({
@@ -14,10 +15,19 @@ const useSaddleUserApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    createSaddleAlert: builder.mutation({
+      query: (body) => ({
+        url: "/saddle-alert",
+        method: "POST",
+        body,
+      }),
+    }),
+
   }),
 });
 
-export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery } =
+export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation } =
   useSaddleUserApi;
 
 export default useSaddleUserApi;
