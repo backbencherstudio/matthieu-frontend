@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useSignupMutation } from "@/src/redux/auth/authApi";
+import { useResetPasswordMutation, useSignupMutation } from "@/src/redux/auth/authApi";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -31,20 +31,42 @@ export function SetNewPassword() {
         },
     });
 
+    const [resetPassword] = useResetPasswordMutation()
+
+    const searchParams = useSearchParams();
+    const email = searchParams.get("email");
+    const token = searchParams.get("token");
+
     const onSubmit = async (data: newPasswordData) => {
-        // try {
-        //     const response = await signup(data);
-        //     if (response?.data?.success) {
-        //         toast.success(response?.data?.message)
-        //         reset()
-        //         router.push("/signin")
-        //     } else {
-        //         toast.error(response?.data?.message)
-        //     }
-        // } catch (error) {
-        //     // console.error(error, "error")
-        //     toast.error("Something went wrong")
-        // }
+
+        if (!email) {
+            toast.error("Email missing");
+            return;
+        }
+
+        if (!token) {
+            toast.error("Token missing");
+            return;
+        }
+
+        try {
+            const response = await resetPassword({
+                email: email,
+                token: token,
+                password: data.password,
+            }).unwrap();
+
+            if (response?.success) {
+                toast.success(response?.message);
+                reset();
+                router.push(`/signin`);
+
+            } else {
+                toast.error(response?.message);
+            }
+        } catch (error: any) {
+            toast.error("Failed to reset password");
+        }
     };
 
     return (
@@ -68,7 +90,7 @@ export function SetNewPassword() {
                                 id="password"
                                 type="password"
                                 value={watch("password")}
-                                placeholder="• • • • • • • • • •"
+                                placeholder="Enter your password"
                                 className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
                                 {...register("password", {
                                     required: "Password is required",
@@ -95,14 +117,16 @@ export function SetNewPassword() {
                                 id="confirm_password"
                                 type="password"
                                 value={watch("confirm_password")}
-                                placeholder="• • • • • • • • • •"
-                                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full  border-0 outline-1 outline-[#DFE1E7]"
+                                placeholder="Enter your confirm password"
+                                className="bg-[#E9E9ED80] leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full border-0 outline-1 outline-[#DFE1E7]"
                                 {...register("confirm_password", {
                                     required: "Confirm Password is required",
                                     minLength: {
                                         value: 6,
                                         message: "Confirm Password must be at least 6 characters",
                                     },
+                                    validate: (value) =>
+                                        value === watch("password") || "Passwords do not match",
                                 })}
                             />
                             {errors.confirm_password && (
