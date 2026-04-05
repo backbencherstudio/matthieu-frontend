@@ -49,11 +49,11 @@ useEffect(() => {
             <ViewCouponModal couponId={item.id} />
           </button>
         </div>
-        <div>
+        {/* <div>
           <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <EditCouponModal coupon={item} />
           </button>
-        </div>
+        </div> */}
         <div>
           <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
             <CouponDeleteModal refetch={refetch} coupon={item} onDeleteSuccess={handleDeleteSuccess} />
@@ -80,7 +80,7 @@ useEffect(() => {
             <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
               Coupon List
             </h2>
-            <div className="flex items-center space-x-3">
+            {/* <div className="flex items-center space-x-3">
               <div className="relative">
                 <input
                   type="text"
@@ -103,7 +103,7 @@ useEffect(() => {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Table */}

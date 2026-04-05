@@ -95,7 +95,9 @@ const handleSubmit = async () => {
   <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
     <div className="bg-white p-6 w-[400px]">
       <h2 className="text-xl font-bold mb-4">Edit Address</h2>
-
+         <label className="text-[12px] leading-[100%] text-[#696E86]">
+            Address
+          </label>
       <input
         type="text"
         name="address"
@@ -105,6 +107,11 @@ const handleSubmit = async () => {
         className="w-full border p-2 mb-3"
       />
 
+   
+
+       <label className="text-[12px] leading-[100%] text-[#696E86]">
+           Phone Number
+          </label>
       <input
         type="text"
         name="phone_number"

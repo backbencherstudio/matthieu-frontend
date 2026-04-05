@@ -15,6 +15,7 @@ import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import CameraIcon from "../Icons/MyAccoountIcon/CameraIcon";
 import ImageUploader from "./imageUploader";
+import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 
 const menuItems = [
   {
@@ -31,6 +32,11 @@ const menuItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data, isLoading } = useGetUserQuery();
+  const user = data?.data;
+  
+  
 
   return (
     <>
@@ -76,10 +82,10 @@ export function Sidebar() {
 
             <div className="items-center mt-5 text-center">
               <h2 className="text-[20px] font-extrabold uppercase leading-[100%] text-[#1F274B]">
-                YASIR ABED RABBU
+                {user?.name}
               </h2>
               <p className="text-[16px] text-[#4C526F] leading-[100%] normal-case mt-2">
-                arionadmin@gmail.com
+                {user?.email}
               </p>
             </div>
           </div>

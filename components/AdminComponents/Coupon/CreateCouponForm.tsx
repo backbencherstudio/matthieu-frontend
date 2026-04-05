@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { useCreateCouponMutation } from "@/src/redux/admin/coupon/couponApi";
-import { toast } from "sonner"; // ✅ added
+import { toast } from "sonner"; //  added
 import { log } from "console";
 import { CloudCog } from "lucide-react";
 
@@ -23,7 +23,7 @@ interface CreateCouponFormData {
 }
 
 interface CreateCouponFormProps {
-  onClose?: () => void; // ✅ added onClose prop
+  onClose?: () => void; //  added onClose prop
   refetch?: () => void;
 }
 
@@ -114,8 +114,8 @@ export function CreateCouponForm({ onClose, refetch }: CreateCouponFormProps) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="today">Percentage Discount</SelectItem>
-              <SelectItem value="lat7day">Fixed Cart Discount</SelectItem>
-              <SelectItem value="lat30day">Fixed Product Discount</SelectItem>
+              {/* <SelectItem value="lat7day">Fixed Cart Discount</SelectItem>
+              <SelectItem value="lat30day">Fixed Product Discount</SelectItem> */}
             </SelectContent>
           </Select>
         </div>
