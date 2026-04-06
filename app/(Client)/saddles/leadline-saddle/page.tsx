@@ -33,6 +33,12 @@ const LeadlineSaddlePage = () => {
     { imgLink: "/leadline/leadline-4.png" },
   ];
 
+  const sizes = data?.data?.size
+    ? Array.isArray(data.data.size)
+      ? data.data.size
+      : [data.data.size]
+    : [];
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -109,7 +115,7 @@ const LeadlineSaddlePage = () => {
                         Size:
                       </p>
                       <div className="space-x-3">
-                        {data?.data?.size?.map((size, index) => (
+                        {sizes.map((size, index) => (
                           <button
                             key={index}
                             className="px-6 py-3 bg-[#4C526F] text-base leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer"
