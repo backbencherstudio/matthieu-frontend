@@ -15,6 +15,9 @@ import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import CameraIcon from "../Icons/MyAccoountIcon/CameraIcon";
 import ImageUploader from "./imageUploader";
+import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
+import { toast } from "sonner";
+import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 
 const menuItems = [
   {
@@ -31,6 +34,28 @@ const menuItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data, isLoading , refetch } = useGetUserQuery();
+  const user = data?.data;
+  const [updateProfile] = useUpdateProfileMutation();
+
+
+
+  const handleImageUpload = async (file: File) => {
+  try {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    await updateProfile(formData).unwrap();
+    toast.success("Profile image updated successfully");
+    refetch();
+  } catch (error: any) {
+    console.error(error);
+    toast.error(error?.data?.message?.message || "Image update failed");
+  }
+};
+  
+  
 
   return (
     <>
@@ -65,7 +90,7 @@ export function Sidebar() {
           {/* Profile Section */}
           <div className="flex flex-col p-4 mb-12">
             <div className="relative w-20 h-20 mx-auto">
-              <ImageUploader />
+             <ImageUploader onImageUpload={handleImageUpload} />
               <label
                 htmlFor="avatarUploader"
                 className="absolute top-0 right-0 bg-[#1F274B] rounded-full p-1 border border-white cursor-pointer"
@@ -76,10 +101,10 @@ export function Sidebar() {
 
             <div className="items-center mt-5 text-center">
               <h2 className="text-[20px] font-extrabold uppercase leading-[100%] text-[#1F274B]">
-                PARVEZ RAHMAN
+                {user?.name}
               </h2>
               <p className="text-[16px] text-[#4C526F] leading-[100%] normal-case mt-2">
-                arionadmin@gmail.com
+                {user?.email}
               </p>
             </div>
           </div>

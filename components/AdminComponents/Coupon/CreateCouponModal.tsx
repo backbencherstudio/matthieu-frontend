@@ -2,7 +2,8 @@ import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import ModalWrapper from "../reusable/ModalWrapper";
 import CreateCouponModalDetail from "./CreateCuponModalDetail";
 
-export default function CreateCouponModal() {
+export default function CreateCouponModal({refetch}) {
+
   return (
     <ModalWrapper
       trigger={
@@ -12,7 +13,8 @@ export default function CreateCouponModal() {
         </span>
       }
     >
-      <CreateCouponModalDetail />
+      <CreateCouponModalDetail refetch={refetch}  onClose={() => console.log("Modal closed")} />
     </ModalWrapper>
   );
 }
+

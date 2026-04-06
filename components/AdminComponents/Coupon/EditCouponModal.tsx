@@ -2,7 +2,11 @@ import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import ModalWrapper from "../reusable/ModalWrapper";
 import EditCouponModalDetail from "./EditCouponModalDetail";
 
-export default function EditCouponModal() {
+type Props = {
+  coupon: any; // you can replace 'any' with your Coupon type if you have one
+};
+
+export default function EditCouponModal({ coupon }: Props) {
   return (
     <ModalWrapper
       trigger={

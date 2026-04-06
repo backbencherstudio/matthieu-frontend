@@ -3,11 +3,10 @@ import { CreateCouponForm } from "./CreateCouponForm";
 
 interface CreateCouponModalDetailProps {
   onClose?: () => void;
+  refetch?: () => void;
 }
 
-export default function CreateCouponModalDetail({
-  onClose,
-}: CreateCouponModalDetailProps) {
+export default function CreateCouponModalDetail({ onClose ,refetch }: CreateCouponModalDetailProps) {
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full z-50">
       <div>
@@ -26,8 +25,11 @@ export default function CreateCouponModalDetail({
       </div>
 
       <div className="p-3 bg-[#ECEFF3] rounded-[6px] mt-4">
-        <CreateCouponForm />
+         <CreateCouponForm refetch={refetch} onClose={onClose} />
       </div>
     </div>
   );
 }
+
+
+
