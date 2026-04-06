@@ -33,6 +33,7 @@ const categories: Category[] = [
   { label: "BOOTS", value: "BOOTS" },
   { label: "LEATHER CARE", value: "LEATHER_CARE" },
   { label: "ACCESSORIES", value: "ACCESSORIES" },
+  { label: "MARTINGALES", value: "MARTINGALES" },
 ];
 
 const priceRanges: Category[] = [
@@ -216,6 +217,12 @@ export default function TackMainSections() {
             <TrackProductList
               items={filtered.filter((p) => p.subcategory === "ACCESSORIES")}
               title="Accessories"
+            />
+          </div>
+          <div className="lg:my-12 my-8" id="accessories" ref={accessoriesRef}>
+            <TrackProductList
+              items={filtered.filter((p) => p.subcategory === "MARTINGALES")}
+              title="MARTINGALES"
             />
           </div>
         </>
