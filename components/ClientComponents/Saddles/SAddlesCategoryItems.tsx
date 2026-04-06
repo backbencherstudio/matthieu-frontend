@@ -3,7 +3,8 @@ import Link from "next/link";
 export default function SAddlesCategoryItems({ saddlesItems }) {
   const products = Array.isArray(saddlesItems?.products)
     ? saddlesItems.products
-    : Object.values(saddlesItems?.products || {});
+    : [];
+  console.log(products);
   return (
     <div>
       <div className="flex flex-col items-center gap-x-8 justify-center">
@@ -29,40 +30,45 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
             </div>
           </div>
         </div>
+        {products?.length === 0 ? (
+          <div className="text-center text-black text-xl font-semibold">
+            Comming Soon
+          </div>
+        ) : (
+          <div className="sm:max-w-[90%] w-full">
+            {saddlesItems?.statusText ? (
+              <div className="text-center text-white text-xl font-semibold">
+                {saddlesItems.statusText}
+              </div>
+            ) : (
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 w-full">
+                {products?.map((product) => (
+                  <Link
+                    href={
+                      saddlesItems?.name === "ARION SADDLES"
+                        ? `/saddles/${product.id}`
+                        : `/saddles/atlas-saddles/${product.id}`
+                    }
+                    key={product.id}
+                    className="flex flex-col gap-5 items-center sm:items-start justify-center p-5 max-w-[400px] w-full mx-auto bg-[#F8F9FB]"
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full block mx-auto"
+                    />
 
-        <div className="sm:max-w-[90%] w-full">
-          {saddlesItems?.statusText ? (
-            <div className="text-center text-white text-xl font-semibold">
-              {saddlesItems.statusText}
-            </div>
-          ) : (
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 w-full">
-              {products?.map((product) => (
-                <Link
-                  href={
-                    saddlesItems?.name === "ARION SADDLES"
-                      ? `/saddles/${product.id}`
-                      : `/saddles/atlas-saddles/${product.id}`
-                  }
-                  key={product.id}
-                  className="flex flex-col gap-5 items-center sm:items-start justify-center p-5 max-w-[400px] w-full mx-auto bg-[#F8F9FB]"
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full block mx-auto"
-                  />
-
-                  <div className="space-y-3 text-center sm:text-left">
-                    <h2 className="text-[#1F274B] text-xl font-semibold">
-                      {product.name}
-                    </h2>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+                    <div className="space-y-3 text-center sm:text-left">
+                      <h2 className="text-[#1F274B] text-xl font-semibold">
+                        {product.name}
+                      </h2>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
