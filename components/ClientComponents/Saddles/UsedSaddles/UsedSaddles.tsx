@@ -8,19 +8,24 @@ import AlertProduct from "./AlertProduct";
 import UsedSaddlesProductList from "./SaddlesCard";
 
 export default function UsedSaddles() {
+
   const [open, setOpen] = useState(false);
-  const [priceRange, setPriceRange] = useState<string>("");
-  const [discpline, setDiscpline] = useState<string>("");
+
+  // Filter States
+  const [discipline, setDiscipline] = useState<string>("");
   const [brand, setBrand] = useState<string>("");
-  const [color, setColor] = useState<string>("");
   const [seatSize, setSeatSize] = useState<string>("");
-  const [flapSize, setFlapSize] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("");
 
-  const handlePriceChange = (min: number, max: number) => {
-    console.log("Price range changed:", min, max);
-    // Update your state or make API call here
-  };
+  // Build query string
+  const queryParams = new URLSearchParams();
+
+  if (discipline) queryParams.append("discipline", discipline);
+  if (brand) queryParams.append("brand", brand);
+  if (seatSize) queryParams.append("seatSize", seatSize);
+  if (sortBy) queryParams.append("sortBy", sortBy);
+
+  const queryString = queryParams.toString() ? `?${queryParams.toString()}` : "";
 
   return (
     <div>
@@ -30,10 +35,10 @@ export default function UsedSaddles() {
             <FilterIcon className="md:h-8 md:w-8 h-6 w-6" />
 
             <DropdownFilter
-              title="DISCPLINE"
+              title="DISCIPLINE"
               items={discplines}
-              selectedValue={discpline}
-              onValueChange={setDiscpline}
+              selectedValue={discipline}
+              onValueChange={setDiscipline}
             />
             <DropdownFilter
               title="BRAND"
@@ -41,27 +46,27 @@ export default function UsedSaddles() {
               selectedValue={brand}
               onValueChange={setBrand}
             />
-            <DropdownFilter
+            {/* <DropdownFilter
               title="COLOR"
               items={colors}
               selectedValue={color}
               onValueChange={setColor}
-            />
+            /> */}
             <DropdownFilter
-              title="SEAT SIZE"
+             title="SEAT SIZE"
               items={sizes}
               selectedValue={seatSize}
               onValueChange={setSeatSize}
             />
           </div>
-          <div>
+          {/* <div>
             <DropdownFilter
               title="SHORT BY"
               items={shortBys}
               selectedValue={sortBy}
               onValueChange={setSortBy}
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -81,7 +86,7 @@ export default function UsedSaddles() {
       <CustomDialog open={open} setOpen={setOpen}>
         <AlertProduct />
       </CustomDialog>
-      <UsedSaddlesProductList />
+      <UsedSaddlesProductList query={queryString}/>
     </div>
   );
 }
@@ -92,25 +97,23 @@ interface Category {
 }
 
 const discplines: Category[] = [
-  { label: "JUMPING", value: "Jumping" },
-  { label: "CROSS-COUNTRY", value: "Cross country" },
-  { label: "DRESSAGE", value: "Dressage" },
+  { label: "JUMPING", value: "JUMPING" },
+  { label: "CROSS-COUNTRY", value: "CROSS_COUNTRY" },
+  { label: "DRESSAGE", value: "DRESSAGE" },
 ];
 const brands: Category[] = [
-  { label: "ARION", value: "Arion" },
-  { label: "DEVOUCOUX", value: "Devoucoux" },
+  { label: "AMERIGO", value: "AMERIGO" },
+  { label: "ANTARES", value: "ANTARES" },
+  { label: "ARION", value: "ARION" },
+  { label: "BUTET", value: "BUTET" },
   { label: "CWD", value: "CWD" },
-  { label: "ANTARÉS", value: "Antarés" },
-  { label: "HERMÉS", value: "Hermés" },
-  { label: "BRUNO DELGRANGE", value: "Bruno Delgrange" },
-  { label: "ERREPLUS", value: "Erreplus" },
-  { label: "VOLTAIRE", value: "Voltaire" },
-  { label: "FORESTIER", value: "Forestier" },
-  { label: "PRESTIGE", value: "Prestige" },
-  { label: "RENAISSANCE", value: "Renaissance" },
-  { label: "ÉQUIPE", value: "Équipe" },
-  { label: "BUTET", value: "Butet" },
-  { label: "CHILDÉRIC", value: "Childéric" },
+  { label: "DEVOUCOUX", value: "DEVOUCOUX" },
+  { label: "ERREPLUS", value: "ERREPLUS" },
+  { label: "FORSTIER", value: "FORSTIER" },
+  { label: "HERMES", value: "HERMES" },
+  { label: "MEYER", value: "MEYER" },
+  { label: "N2_SADDLERY", value: "N2_SADDLERY" },
+  { label: "VOLTAIRE", value: "VOLTAIRE" },
 ];
 const colors: Category[] = [
   { label: "BROWN", value: "Brown" },
@@ -125,17 +128,16 @@ const priceRanges: Category[] = [
 ];
 
 const sizes: Category[] = [
-  { label: "14”", value: "14inch" },
-  { label: "14.5”", value: "14.5inch" },
-  { label: "15”", value: "15inch" },
-  { label: "15.5”", value: "15.5inch" },
-  { label: "16”", value: "16inch" },
-  { label: "16.5”", value: "16.5inch" },
-  { label: "17”", value: "17inch" },
-  { label: "17.5”", value: "17.5inch" },
-  { label: "18”", value: "18inch" },
-  { label: "18.5”", value: "18.5inch" },
-  { label: "19”", value: "19inch" },
+  // { label: "14”", value: "14inch" },
+  // { label: "14.5”", value: "14.5inch" },
+  // { label: "15”", value: "15inch" },
+  // { label: "15.5”", value: "15.5inch" },
+  // { label: "16”", value: "16inch" },
+  { label: "16.5”", value: "16.5" },
+  { label: "17”", value: "17" },
+  { label: "17.5”", value: "17.5" },
+  { label: "18”", value: "18" },
+  { label: "18.5”", value: "18.5" },
 ];
 
 const shortBys: Category[] = [

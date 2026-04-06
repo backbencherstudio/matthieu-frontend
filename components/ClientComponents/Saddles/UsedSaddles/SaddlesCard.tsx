@@ -2,6 +2,10 @@ import { getCookie } from "@/helper/RegionCookies";
 import { useGetAllUseSaddlesUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import Link from "next/link";
 
+interface UsedSaddlesProductListProps {
+  query?: string;   // ← Accept query string
+}
+
 interface TrackProductListProps {
   items?: {
     id: number;
@@ -16,16 +20,19 @@ interface TrackProductListProps {
   title?: string;
 }
 
-export default function UsedSaddlesProductList() {
-  const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
-  console.log(data);
+export default function UsedSaddlesProductList({ query = "" }: UsedSaddlesProductListProps) {
+  // const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
+  const { data, isLoading, error } = useGetAllUseSaddlesUserQuery(query);
+ 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  const region = getCookie("x-region");
-  const isAmerica = region === "america" || "usa";
-  const icon = isAmerica ? "$" : "€";
+
+
+  // const region = getCookie("x-region");
+  // const isAmerica = region === "america" || "usa";
+  // const icon = isAmerica ? "$" : "€";
 
   return (
     <div>
@@ -51,8 +58,10 @@ export default function UsedSaddlesProductList() {
                   {item?.title}
                 </h3>
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-2xl md:text-xl text-lg ">
-                  {icon}
-                  {item?.priceRange?.min} - {icon}
+                  {item?.currency === "USD" ? "$" : "€"}
+                  {item?.priceRange?.min}
+                 {" "} -
+                  {" "}{item?.currency === "USD" ? "$" : "€"}
                   {item?.priceRange?.max}
                 </p>
               </div>

@@ -1,17 +1,23 @@
 "use client";
 
 import LoveIcon from "@/components/Icons/LoveIcon";
-import { useGetSingleTackProductQuery } from "@/src/redux/client/tack-product/tackProduct";
+import {
+  useAddToCardMutation,
+  useGetSingleTackProductQuery,
+} from "@/src/redux/client/tack-product/tackProduct";
+import { Minus, Plus } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import ProductDetailsAccordion from "./ProductDetailsAccordion";
 import RelatedProduts from "./RelatedProduts";
 
 export default function ProductDetailsClient() {
   const id = useParams().id;
+  const [quantity, setQuantity] = useState(1);
   const { data: productData, isLoading } = useGetSingleTackProductQuery(id);
+  const [addToCard] = useAddToCardMutation();
 
   // Get default variant on load
   const defaultVariant =
@@ -81,37 +87,34 @@ export default function ProductDetailsClient() {
     "Minimize jaw shifting and stabilize the bit with the lower strap",
   ];
 
-  const handleCart = () => {
+  const handleCart = async () => {
     if (!selectedVariant) return;
 
-    const cartData = {
-      productId: productData.id,
-      productName: productData.name,
-      variantId: selectedVariant.id,
-      color: selectedVariant.color,
-      size: selectedVariant.size,
-      price: selectedVariant.price,
-      currency: selectedVariant.currency,
-      SKU: productData.sku,
-      image: variantImages[0] || null,
-    };
+    try {
+      const cartData = {
+        tackProductId: productData.id,
+        variantId: selectedVariant.id,
+        quantity: quantity,
+      };
 
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const alreadyExists = existingCart.some(
-      (item) => item.variantId === selectedVariant.id,
-    );
-
-    if (alreadyExists) {
-      toast.warning(`This variant already exists in the cart.`);
-      return;
+      const response = await addToCard(cartData);
+      console.log(response);
+      if (response?.data?.success) {
+        toast.success("Added to cart!");
+      }
+      if (response?.error || !response) {
+        toast.error("Failed to add to cart. Please try again.");
+        return;
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error("Something went wrong. Please try again.");
     }
-
-    existingCart.push(cartData);
-    localStorage.setItem("cart", JSON.stringify(existingCart));
-    toast.success("Added to cart!");
   };
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [selectedVariant?.id]);
   if (isLoading) return <div className="maxContainer py-8">Loading...</div>;
 
   return (
@@ -251,7 +254,7 @@ export default function ProductDetailsClient() {
                             onClick={() => setSelectedSize(size.id)}
                             className={`md:py-3 py-2 w-full md:text-base text-sm transition-all leading-[100%] cursor-pointer ${
                               activeSize === size.id
-                                ? "bg-[#4C526F] text-white font-extrabold"
+                                ? "bg-[#222842] text-white font-extrabold"
                                 : "bg-[#696E86] text-white"
                             }`}
                           >
@@ -261,7 +264,40 @@ export default function ProductDetailsClient() {
                       </div>
                     </div>
                   )}
-
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
+                      disabled={
+                        !selectedVariant ||
+                        selectedVariant.stockQuantity === 0 ||
+                        quantity <= 1
+                      }
+                      className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      <Minus size={16} />
+                    </button>
+                    <span className="min-w-[24px] text-center">{quantity}</span>
+                    <button
+                      onClick={() =>
+                        setQuantity((prev) =>
+                          Math.min(
+                            selectedVariant?.stockQuantity ?? 1,
+                            prev + 1,
+                          ),
+                        )
+                      }
+                      disabled={
+                        !selectedVariant ||
+                        selectedVariant.stockQuantity === 0 ||
+                        quantity >= selectedVariant?.stockQuantity
+                      }
+                      className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      <Plus size={16} />
+                    </button>
+                  </div>
                   {/* Benefits */}
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <p className="lg:text-xl text-base textSecondary leading-[100%] tracking-[.4px]">
@@ -293,6 +329,7 @@ export default function ProductDetailsClient() {
                           <AppleIcon className="lg:size-[54px] size-12" />
                         </span>
                       </button> */}
+
                       <button
                         onClick={handleCart}
                         disabled={

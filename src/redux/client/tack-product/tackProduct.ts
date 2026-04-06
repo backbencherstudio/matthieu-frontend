@@ -2,6 +2,13 @@ import baseApi from "../../api/baseApi";
 
 const tackProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    addToCard: builder.mutation({
+      query: (cartData) => ({
+        url: `/cart/add`,
+        method: "POST",
+        body: cartData,
+      }),
+    }),
     getAllTackProducts: builder.query({
       query: () => ({
         url: `/tackproduct/user/show-all/TACK`,
@@ -17,7 +24,10 @@ const tackProductApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllTackProductsQuery, useGetSingleTackProductQuery } =
-  tackProductApi;
+export const {
+  useGetAllTackProductsQuery,
+  useGetSingleTackProductQuery,
+  useAddToCardMutation,
+} = tackProductApi;
 
 export default tackProductApi;
