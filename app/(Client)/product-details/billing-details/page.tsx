@@ -9,12 +9,16 @@ export default function BillingPage() {
 
   const breadLink = [
     {
-      label: "PRODUCT DETAIL",
-      href: "/product-details/1",
+      label: 'PRODUCT DETAIL',
+      href: '/product-details/1',
     },
     {
-      label: "Billing Details",
-      href: "/billing-details",
+      label: 'Billing Details',
+      href: '/product-details/billing-details',
+    },
+    {
+      label: 'Summary',
+      href: '/product-details/billing-details/summary',
     },
   ];
 

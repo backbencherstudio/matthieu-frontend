@@ -61,6 +61,7 @@ export default function CartsDetails({
         id: item.itemId,
         name: item.itemName,
         sku:
+          item.sku ||
           item.variantId ||
           item.usedSaddleId ||
           item.tackProductId ||
