@@ -1,3 +1,5 @@
+"use client"
+
 import ActiveCustomerIcon from "@/components/Icons/AdminIcon/ActiveCustomerIcon";
 import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
 import LetterIcon from "@/components/Icons/AdminIcon/LetterIcon";
@@ -6,14 +8,21 @@ import UserGroupIcon from "@/components/Icons/AdminIcon/UserGroupIcon";
 import UserPlus from "@/components/Icons/AdminIcon/UserPlus";
 import HeaderCard from "../reusable/HeaderCard";
 import CustomerTable from "./CustomerTable";
+import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 
 export default function Customer() {
+
+  const { data, isLoading } = useGetCustomersQuery({ page: 1, limit: 10 });
+
+  const totalCustomers = data?.meta?.total || 0;
+
+
   const CustomerStats = [
     {
       id: 1,
       title: "Total Customers",
       icon: <UserGroupIcon />,
-      number: "9",
+      number: isLoading ? "..." : totalCustomers,
       iconBgColor: "#EDF3FB",
       iconColor: "#4A87D7",
     },
