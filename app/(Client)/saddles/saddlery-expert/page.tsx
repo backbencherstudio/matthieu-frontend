@@ -62,11 +62,11 @@ const SaddleryExpertPage = () => {
         <h4 className="text-[15px] textSecondary text-center leading-[1.8em] uppercase">
           SADDLE EXPERT
         </h4>
-        <p className="text-[50px] text-center text-wrap  leading-[130%] text-[#1f274b] mt-3">
+        <p className="text-lg lg:text-[50px] text-center text-wrap  leading-[130%] text-[#1f274b] mt-3">
           Get in touch with our experts to create the saddle of your dreams.
         </p>
 
-        <p className="text-[16px] text-[#1f274b] text-center text-wrap normal-case leading-[100%] mt-7">
+        <p className="text-sm lg:text-[16px] text-[#1f274b] text-center text-wrap normal-case leading-[100%] mt-7">
           Complete this form to be contacted by one of our experts!
         </p>
 
@@ -212,15 +212,27 @@ const SaddleryExpertPage = () => {
           <div>
             <p className="text-[#1f274b]  font-semibold mb-3">Discipline</p>
             <div className="flex lg:gap-10 md:gap-6 gap-4 flex-wrap ">
-              {["Hunter", "Jumper", "Equitation", "Cross-Country", "Dressage", "Other"].map((discipline) => (
-                <label key={discipline} className="flex items-center md:gap-3 gap-2 cursor-pointer group">
+              {[
+                "Hunter",
+                "Jumper",
+                "Equitation",
+                "Cross-Country",
+                "Dressage",
+                "Other",
+              ].map((discipline) => (
+                <label
+                  key={discipline}
+                  className="flex items-center md:gap-3 gap-2 cursor-pointer group"
+                >
                   <input
                     type="checkbox"
                     value={discipline}
                     {...register("saddle")}
                     className="w-4 h-4 accent-[#1f274b] cursor-pointer"
                   />
-                  <span className="text-[#1f274b] md:text-base text-sm">{discipline}</span>
+                  <span className="text-[#1f274b] md:text-base text-sm">
+                    {discipline}
+                  </span>
                 </label>
               ))}
             </div>
