@@ -143,6 +143,7 @@ const baseApi = createApi({
     'Cart',
     'Favorite',
     'Saddle',
+    'Order',
   ],
   endpoints: () => ({}),
 });
