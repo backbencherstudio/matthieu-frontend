@@ -15,12 +15,12 @@ export default function EditCouponModalDetail({
           <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
             Edit Coupon
           </h1>
-          <button
+          {/* <button
             onClick={onClose}
             className="cursor-pointer px-3 py-2.5 border border-[#989CAC] rounded-[4px]"
           >
             <CancelIcon />
-          </button>
+          </button> */}
         </div>
         <hr />
       </div>

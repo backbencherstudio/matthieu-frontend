@@ -31,9 +31,9 @@ type Inputs = {
 
 enum productcategory {
   SADDLES = "SADDLES",
-  TACK = "TACK",
+  // TACK = "TACK",
   LEADLINE = "LEADLINE",
-  USED = "USED",
+  // USED = "USED",
 }
 
 enum saddleSubcategory {
@@ -305,6 +305,7 @@ export default function SaddleProductForm() {
               type="text"
               className="cmn-input"
               placeholder="Enter Color"
+              readOnly
               value={colorInput}
               onChange={(e) => setColorInput(e.target.value)}
             />
@@ -365,6 +366,7 @@ export default function SaddleProductForm() {
             <Input
               type="text"
               className="cmn-input"
+              readOnly
               placeholder="Enter Piping Color"
               value={pipingColorInput}
               onChange={(e) => setPipingColorInput(e.target.value)}
@@ -455,7 +457,7 @@ export default function SaddleProductForm() {
 
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
-              Used Saddle Category*
+              Saddle Category*
             </Label>
             <Controller
               name="subcategory"
