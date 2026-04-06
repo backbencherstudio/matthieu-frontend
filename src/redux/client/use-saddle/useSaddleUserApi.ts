@@ -9,10 +9,11 @@ const useSaddleUserApi = baseApi.injectEndpoints({
         params,   
       }),
     }),
-    getSingleUseSaddleUser: builder.query({
-      query: (id) => ({
+   getSingleUseSaddleUser: builder.query({
+      query: ({ id, trialPeriod }) => ({
         url: `/used-saddles/public/${id}`,
         method: "GET",
+        params: trialPeriod ? { trialPeriod } : {},
       }),
     }),
 

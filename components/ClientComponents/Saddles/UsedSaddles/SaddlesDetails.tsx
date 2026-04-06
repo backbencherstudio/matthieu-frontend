@@ -11,40 +11,73 @@ import {
 } from "@/components/ui/select";
 import { useGetSingleUseSaddleUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
+
+
+const additionalInfo = [
+  { label: "BRAND", value: "ANTARES" },
+  { label: "COLOR", value: "Brown" },
+  { label: "DISCIPLINE", value: "Cross Country" },
+  { label: "SADDLE YEAR", value: "2023" },
+  { label: "SEAT SIZE", value: "17" },
+];
 
 export default function SaddlesDetails() {
   const { id } = useParams();
-  const breadLink = [
-    { label: "SADDLES", href: "/saddles" },
-    { label: "ARION", href: "/saddles/arion-saddles" },
-    { label: "JUMPING", href: "/saddles/jumping" },
-  ];
 
-  const { data } = useGetSingleUseSaddleUserQuery(id);
-  console.log(data);
+  const [selectedImage, setSelectedImage] = useState("");
+  const trialPeriodRef = useRef<HTMLDivElement>(null);
+  const additionalInfoRef = useRef<HTMLDivElement>(null);
 
-  const additionalInfo = [
-    { label: "BRAND", value: "ANTARES" },
-    { label: "COLOR", value: "Brown" },
-    { label: "DISCIPLINE", value: "Cross Country" },
-    { label: "SADDLE YEAR", value: "2023" },
-    { label: "SEAT SIZE", value: "17" },
-  ];
+  const [selectedTrial, setSelectedTrial] = useState<string>("");
+
+
+
+  const { data, isLoading } = useGetSingleUseSaddleUserQuery({
+    id,
+    trialPeriod: selectedTrial || undefined,
+  });
 
   const productImages =
     data?.data?.images?.map((img) => ({
       imgLink: img.url,
     })) || [];
 
-  const [selectedImage, setSelectedImage] = useState("");
+
+
+  // Fetch data with trialPeriod parameter
+
+
+  const handleTrialChange = (value: string) => {
+    setSelectedTrial(value);
+  };
 
   useEffect(() => {
     if (productImages.length > 0) {
       setSelectedImage(productImages[0].imgLink);
     }
   }, [data]);
+
+  const scrollToTrialPeriod = () => {
+    trialPeriodRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+  const scrollToAdditionalInfo = () => {
+    additionalInfoRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+
+  const breadLink = [
+    { label: "SADDLES", href: "/saddles" },
+    { label: "ARION", href: "/saddles/arion-saddles" },
+    { label: "JUMPING", href: "/saddles/jumping" },
+  ];
+
 
   return (
     <>
@@ -84,10 +117,9 @@ export default function SaddlesDetails() {
                   alt=""
                   onClick={() => setSelectedImage(img.imgLink)}
                   className={`cursor-pointer object-contain w-full h-[100px]
-                    ${
-                      selectedImage === img.imgLink
-                        ? "border-[#1F274B]"
-                        : "border-[#DFE1E7]"
+                    ${selectedImage === img.imgLink
+                      ? "border-[#1F274B]"
+                      : "border-[#DFE1E7]"
                     }`}
                 />
               ))}
@@ -136,13 +168,13 @@ export default function SaddlesDetails() {
 
             <div>
               <div className="flex gap-4 flex-wrap">
-                <button className="px-4 py-3 bg-[#1F274B]/90 hover:bg-[#1F274B] text-white cursor-pointer flex items-center gap-x-2.5">
+                <button className="px-4 py-3 bg-[#1F274B]/90 hover:bg-[#1F274B] text-white cursor-pointer flex items-center gap-x-2.5" onClick={scrollToTrialPeriod}>
                   <RefreshIcon className="size-6" />
-                  <span className="font-semibold">TRIAL PERIOD INFO</span>
+                  <span className="font-semibold cursor-pointer" >TRIAL PERIOD INFO</span>
                 </button>
-                <button className="px-4 py-3 bg-[#1F274B]/90 hover:bg-[#1F274B] text-white cursor-pointer flex items-center gap-x-2.5">
+                <button className="px-4 py-3 bg-[#1F274B]/90 hover:bg-[#1F274B] text-white cursor-pointer flex items-center gap-x-2.5" onClick={scrollToAdditionalInfo}>
                   <SaddlesIcon className="size-6" />
-                  <span className="font-semibold">SADDLE DETAILS</span>
+                  <span className="font-semibold" >SADDLE DETAILS</span>
                 </button>
               </div>
               <div className="mt-8">
@@ -154,24 +186,29 @@ export default function SaddlesDetails() {
               <div className="mt-8 flex items-center gap-x-5">
                 <h5 className="text-lg font-bold text-nowrap">TRIAL PERIOD</h5>
                 <div className="w-full">
-                  <Select>
-                    <SelectTrigger className="w-full">
+                  <Select onValueChange={handleTrialChange} value={selectedTrial}>
+                    <SelectTrigger className="w-full rounded-[4px] py-[23px] cursor-pointer">
                       <SelectValue placeholder="Select trial option" />
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="14-DAY TRIAL">14-DAY TRIAL</SelectItem>
-                      <SelectItem value="NO TRIAL NEEDED">
+                      <SelectItem value="1TRIAL_14_DAYS">14-DAY TRIAL</SelectItem>
+                      <SelectItem value="NO_TRIAL">
                         NO TRIAL NEEDED
                       </SelectItem>
-                      <SelectItem value="7-DAY TRIAL">7-DAY TRIAL</SelectItem>
+                      <SelectItem value="TRIAL_7_DAYS">7-DAY TRIAL</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
+              <div>
+                <p>Price {`${data?.data?.currency === "EUR" ? "€" : "$"}`}{`${data?.data?.selectedPrice}`}</p>
+                 <input type="number" name="" id="" className="border pl-4 w-[60px]"/> Quantity
+              </div>
+
               <div className="mt-8">
-                <button className="px-8 py-3 bg-[#1F274B] text-white rounded-md cursor-pointer">
+                <button className="px-8 py-3 bg-[#1F274B] text-white rounded-sm cursor-pointer">
                   Add to cart
                 </button>
               </div>
@@ -190,7 +227,7 @@ export default function SaddlesDetails() {
             additional information and personalized fitting advice.
           </p>
         </div>
-        <div className="mt-10">
+        <div className="mt-10" id="additionalInfo" ref={additionalInfoRef}>
           {/* Header */}
           <div className="bg-gray-200 px-4 py-2 mb-0">
             <h3 className="text-sm font-semibold text-gray-700">
@@ -224,7 +261,111 @@ export default function SaddlesDetails() {
             </div>
           </div>
         </div>
+
+        {/* trial period option */}
+        <div className="lg:mt-20 mt-8" id="trialPeriod" ref={trialPeriodRef}>
+          <TrialPeriodOptions />
+        </div>
       </div>
     </>
+  );
+}
+
+
+// components/TrialPeriodOptions.tsx
+
+function TrialPeriodOptions() {
+  const trialOptions = [
+    {
+      title: "14-DAY TRIAL",
+      price: "+ $150",
+      popular: false,
+      points: [
+        "An added fee of $150 will be added to your order when you select this trial option",
+        "Your 14-day trial will begin the day that your saddle shows delivered by our mailing system.",
+        "Take this time to ensure that the saddle is the right fit for you and your horse.",
+        "If the saddle does not suite you and/or your horse's needs reach out to our team, and we can see if there are any repairs that we can make to semi-customize the saddle that you chose or simply ship the saddle back.",
+      ],
+    },
+    {
+      title: "NO TRIAL NEEDED",
+      price: "- $150",
+      popular: true,
+      points: [
+        "If you know exactly what you are looking for in terms of size and brand, then no need to waste any time!",
+        "Save money and get your saddle with ease.",
+      ],
+    },
+    {
+      title: "7-DAY TRIAL",
+      price: "FREE",
+      popular: false,
+      points: [
+        "A free 7-day trial will begin the day that your saddle shows delivered by our mailing system.",
+        "Take this time to ensure that the saddle is the right fit for you and your horse.",
+        "If the saddle does not suite you and/or your horse's needs reach out to our team, and we can see if there are any repairs that we can make to semi-customize the saddle that you chose or simply ship the saddle back.",
+        "If you wish to extend your trial 7 days longer, to a total of 14 days, there will be an added fee of $150.",
+      ],
+    },
+  ];
+
+  return (
+    <div className="" >
+      {/* Title */}
+      <div className="flex items-center gap-4 justify-center mb-10">
+        <div className="h-[1px] w-16 bg-[#1F274B]" />
+        <h2 className="text-2xl font-bold text-[#1F274B]  text-center whitespace-nowrap">
+          TRIAL PERIOD OPTIONS
+        </h2>
+        <div className="h-[1px] w-16 bg-[#1F274B]" />
+      </div>
+
+      {/* Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {trialOptions.map((option) => (
+          <div
+            key={option.title}
+            className="border border-gray-200 flex flex-col relative overflow-hidden"
+          >
+            {/* Popular ribbon */}
+            {option.popular && (
+              <div className="absolute top-7 left-0 z-10">
+                <div
+                  className="bg-red-400 text-white text-[10px] font-bold tracking-widest text-center"
+                  style={{
+                    // width: "110px",
+                    padding: "6px 24px",
+                    transform: "rotate(-45deg) translate(-30%, 20%)",
+                    transformOrigin: "top left",
+                  }}
+                >
+                  POPULAR
+                </div>
+              </div>
+            )}
+
+            {/* Card Header */}
+            <div className="bgPrimary px-6 py-3 ">
+              <h3 className="text-white font-semibold text-center tracking-widest text-sm ">
+                {option.title}
+              </h3>
+            </div>
+
+            {/* Card Body */}
+            <div className="p-6 flex flex-col gap-5 flex-1">
+              <p className="text-4xl  text-[#1F274B] text-center font-medium">{option.price}</p>
+              <ul className="space-y-4">
+                {option.points.map((text, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-gray-600">
+                    <span className="textSecondary mt-0.5 shrink-0 font-bold">✓</span>
+                    <span className="text-center">{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
