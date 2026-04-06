@@ -1,6 +1,5 @@
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import SAddlesCategoryItems from "@/components/ClientComponents/Saddles/SAddlesCategoryItems";
-import React from "react";
 
 const saddlesItems = {
   label: "ATLAS SADDLES",

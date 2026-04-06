@@ -1,6 +1,5 @@
 "use client";
 
-import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
 import SaddlesIcon from "@/components/Icons/SaddlesIcon";
 import {
@@ -10,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetSingleUseSaddleUserQuery } from "@/src/redux/client/saddle/useSaddleUserApi";
+import { useGetSingleUseSaddleUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
@@ -108,8 +107,10 @@ export default function SaddlesDetails() {
             </div>
 
             <p className="text-xl text-[#4C526F]">
-              {data?.data?.currency === "USD" ? "$" : "€"}{data?.data?.priceRange?.min} -  
-              {data?.data?.currency === "USD" ? " $" : " €"}{data?.data?.priceRange?.max}
+              {data?.data?.currency === "USD" ? "$" : "€"}
+              {data?.data?.priceRange?.min} -
+              {data?.data?.currency === "USD" ? " $" : " €"}
+              {data?.data?.priceRange?.max}
             </p>
 
             {/* <div className="h-[1px] bg-[#DFE1E7]" /> */}

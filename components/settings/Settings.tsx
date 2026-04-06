@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ import {
 import { CardContent } from "@/components/ui/card";
 
 import { useChangePasswordMutation } from "@/src/redux/client/settings/changePassApi";
+import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
 import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 
 const formSchema = z
@@ -54,62 +56,70 @@ export default function Settings() {
   });
 
   const { data: userData, isLoading: userLoading } = useGetUserQuery();
-  const [changePassword, { isLoading: passLoading }] =
-    useChangePasswordMutation();
+  
+  const [changePassword, { isLoading: passLoading }] = useChangePasswordMutation();
+
+  const [updateProfile, { isLoading: profileLoading }] = useUpdateProfileMutation();
 
   useEffect(() => {
     if (userData?.success) {
       const name = userData.data.name || "";
       const [firstName, lastName] = name.split(" ");
 
-      form.reset({
-        firstName: firstName || "",
-        lastName: lastName || "",
-        email: userData.data.email || "",
-        phone: userData.data.phone_number?.replace(/\D/g, "") || "",
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
+form.reset({
+  firstName: userData.data.first_name || "",
+  lastName: userData.data.last_name || "",
+  email: userData.data.email || "",
+  phone: userData.data.phone_number?.replace(/\D/g, "") || "",
+  currentPassword: "",
+  newPassword: "",
+  confirmPassword: "",
+});
     }
   }, [userData, form]);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      if (actionType === "profile") {
-        const payload = {
-          name: `${values.firstName} ${values.lastName || ""}`,
-          email: values.email,
-          phone_number: values.phone,
-        };
-        console.log("Profile updated:", payload);
-      }
+const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  try {
+    if (actionType === "profile") {
+      const payload = {
+        first_name: values.firstName,
+        last_name: values.lastName || "",
+        email: values.email,
+        phone_number: values.phone,
+      };
 
-      if (actionType === "password") {
-        if (values.newPassword !== values.confirmPassword) {
-          form.setError("confirmPassword", {
-            type: "manual",
-            message: "Passwords do not match",
-          });
-          return;
-        }
-
-        const payload = {
-          old_password: values.currentPassword,
-          new_password: values.newPassword,
-          confirm_password: values.confirmPassword,
-        };
-
-        await changePassword(payload).unwrap();
-
-        form.setValue("currentPassword", "");
-        form.setValue("newPassword", "");
-        form.setValue("confirmPassword", "");
-      }
-    } catch (error) {
-      console.error(error);
+      await updateProfile(payload).unwrap();
+      toast.success("Profile updated successfully");
     }
-  };
+
+    if (actionType === "password") {
+      if (values.newPassword !== values.confirmPassword) {
+        form.setError("confirmPassword", {
+          type: "manual",
+          message: "Passwords do not match",
+        });
+        return;
+      }
+
+      const payload = {
+        old_password: values.currentPassword,
+        new_password: values.newPassword,
+        confirm_password: values.confirmPassword,
+      };
+
+      await changePassword(payload).unwrap();
+
+      form.setValue("currentPassword", "");
+      form.setValue("newPassword", "");
+      form.setValue("confirmPassword", "");
+
+      toast.success("Password changed successfully");
+    }
+  } catch (error: any) {
+    console.error(error);
+    toast.error(error?.data?.message?.message || "Something went wrong");
+  }
+};
 
   if (userLoading) {
     return <p className="text-center">Loading...</p>;

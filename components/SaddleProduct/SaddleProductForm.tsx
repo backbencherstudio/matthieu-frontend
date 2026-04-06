@@ -1,7 +1,12 @@
 "use client";
 
+import { useCreateProductMutation } from "@/src/redux/admin/saddleProduct/saddleProduct";
 import { Label } from "@radix-ui/react-label";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SketchPicker } from "react-color";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Input } from "../ui/input";
 import {
   Select,
@@ -16,13 +21,12 @@ type Inputs = {
   name: string;
   header_title: string;
   description: string;
+  price_usd: string;
+  price_eur: string;
   header_description: string;
-  price: number;
-  color: string;
-  piping_color: string;
   category: string;
   subcategory: string;
-  stockQuantity: number;
+  country: string;
 };
 
 enum productcategory {
@@ -37,34 +41,109 @@ enum saddleSubcategory {
   ARION = "ARION",
   ATHENA = "ATHENA",
 }
-
-/* ✅ Named Colors */
-const namedColors = [
-  { name: "Black", value: "#000000" },
-  { name: "Brown", value: "#8B4513" },
-  { name: "Dark Brown", value: "#5C4033" },
-  { name: "Tan", value: "#D2B48C" },
-  { name: "Chestnut", value: "#954535" },
-  { name: "White", value: "#FFFFFF" },
-];
+enum countryItem {
+  USA = "USA",
+  EUROPE = "EUROPE",
+}
 
 export default function SaddleProductForm() {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     control,
     formState: { errors },
-  } = useForm<Inputs>({
-    defaultValues: {
-      color: "#000000",
-      piping_color: "#000000",
-    },
-  });
+    reset,
+  } = useForm<Inputs>();
 
+  const [leatherInput, setLeatherInput] = useState("");
+  const [leatherTags, setLeatherTags] = useState<string[]>([]);
+  const [colorInput, setColorInput] = useState("");
+  const [pipingColorInput, setPipingColorInput] = useState("");
+  const [colorTags, setColorTags] = useState<string[]>([]);
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showPipingColorPicker, setShowPipingColorPicker] = useState(false);
+  const [pipingTags, setPipingTags] = useState<string[]>([]);
+
+  const [images, setImages] = useState<File[]>([]);
+
+  const addTag = (
+    inputValue: string,
+    setInputValue: React.Dispatch<React.SetStateAction<string>>,
+    setTags: React.Dispatch<React.SetStateAction<string[]>>,
+  ) => {
+    const value = inputValue.trim();
+    if (!value) return;
+
+    setTags((prev) => {
+      if (prev.includes(value)) return prev;
+      return [...prev, value];
+    });
+    setInputValue("");
+  };
+
+  const removeTag = (
+    index: number,
+    setTags: React.Dispatch<React.SetStateAction<string[]>>,
+  ) => {
+    setTags((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleColorChange = (color: any) => {
+    setColorInput(color.hex);
+  };
+
+  const handlePipingColorChange = (color: any) => {
+    setPipingColorInput(color.hex);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setImages(files);
+  };
+
+  const router = useRouter();
+
+  const [createProduct, { isLoading }] = useCreateProductMutation();
   const onSubmit = async (data: Inputs) => {
-    console.log(data);
+    try {
+      const formData = new FormData();
+
+      formData.append("name", data.name);
+      formData.append("header_title", data.header_title);
+      formData.append("header_description", data.header_description);
+      formData.append("description", data.description || "");
+      formData.append("price_usd", data.price_usd);
+      formData.append("price_eur", data.price_eur);
+      formData.append("category", data.category);
+      formData.append("subcategory", data.subcategory);
+      formData.append("country", data.country);
+      leatherTags.forEach((item) => {
+        formData.append("leather_type", item);
+      });
+      colorTags.forEach((item) => {
+        formData.append("colors", item);
+      });
+      pipingTags.forEach((item) => {
+        formData.append("piping_color", item);
+      });
+
+      images.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      const result = await createProduct(formData);
+      if (result?.data?.success) {
+        toast.success(result?.data?.message);
+        router.push("/admin/saddle-product");
+        reset();
+        setLeatherTags([]);
+        setColorTags([]);
+        setPipingTags([]);
+        setImages([]);
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+    }
   };
 
   return (
@@ -74,7 +153,6 @@ export default function SaddleProductForm() {
           Add Saddle Product
         </h1>
 
-        {/* Name */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">Name *</Label>
           <Input
@@ -88,7 +166,6 @@ export default function SaddleProductForm() {
           )}
         </div>
 
-        {/* Header Title */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Header Title *
@@ -108,7 +185,6 @@ export default function SaddleProductForm() {
           )}
         </div>
 
-        {/* Header Description */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Header Description *
@@ -128,7 +204,6 @@ export default function SaddleProductForm() {
           )}
         </div>
 
-        {/* Description */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Description
@@ -140,81 +215,209 @@ export default function SaddleProductForm() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-x-3">
-          {/* Leather Color */}
-          <div className="mb-3">
+        <div className="grid grid-cols-2 gap-x-3 mb-3">
+          <div>
             <Label className="text-sm text-secondary-text mb-1">
-              Leather Color *
+              Price USD
             </Label>
-
-            <Controller
-              name="color"
-              control={control}
-              rules={{ required: "Leather Color is required" }}
-              render={({ field }) => (
-                <div className="flex items-center gap-3">
-                  {/* Color Picker */}
-                  <input
-                    type="color"
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    className="w-14 h-10 p-1 border rounded cursor-pointer"
-                  />
-
-                  {/* HEX Input */}
-                  <Input
-                    type="text"
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    className="cmn-input"
-                  />
-                </div>
-              )}
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter USD Price"
+              {...register("price_usd", {
+                required: "Price USD is required",
+              })}
             />
-
-            {errors.color && (
+            {errors.price_usd && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.color.message}
+                {errors.price_usd.message}
               </p>
             )}
           </div>
 
-          {/* Piping Color */}
-          <div className="mb-3">
+          <div>
             <Label className="text-sm text-secondary-text mb-1">
-              Piping Color *
+              Price EUR
             </Label>
-
-            <Controller
-              name="piping_color"
-              control={control}
-              rules={{ required: "Piping Color is required" }}
-              render={({ field }) => (
-                <div className="flex items-center gap-3">
-                  {/* Color Picker */}
-                  <input
-                    type="color"
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    className="w-14 h-10 p-1 border rounded cursor-pointer"
-                  />
-
-                  {/* HEX Input */}
-                  <Input
-                    type="text"
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    className="cmn-input"
-                  />
-                </div>
-              )}
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter EUR Price"
+              {...register("price_eur", {
+                required: "Price EUR is required",
+              })}
             />
-
-            {errors.piping_color && (
+            {errors.price_eur && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.piping_color.message}
+                {errors.price_eur.message}
               </p>
             )}
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <Label className="text-sm text-secondary-text mb-1">
+            Leather Type
+          </Label>
+          <div className="flex gap-2">
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Leather Type"
+              value={leatherInput}
+              onChange={(e) => setLeatherInput(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                addTag(leatherInput, setLeatherInput, setLeatherTags)
+              }
+              className="px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+            >
+              Add
+            </button>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-3">
+            {leatherTags.map((tag, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-full text-sm"
+              >
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => removeTag(index, setLeatherTags)}
+                  className="text-red-500 ml-1 cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Color Section */}
+        <div className="mb-3">
+          <Label className="text-sm text-secondary-text mb-1">Colors</Label>
+          <div className="flex gap-2">
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Color"
+              value={colorInput}
+              onChange={(e) => setColorInput(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() => addTag(colorInput, setColorInput, setColorTags)}
+              className="px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+            >
+              Add
+            </button>
+          </div>
+
+          {/* Toggle color picker button */}
+          <button
+            type="button"
+            onClick={() => setShowColorPicker(!showColorPicker)}
+            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+          >
+            {showColorPicker ? "Close Color Picker" : "Pick a Color"}
+          </button>
+
+          {/* Color Picker */}
+          {showColorPicker && (
+            <div className="mt-2">
+              <SketchPicker
+                color={colorInput}
+                onChangeComplete={handleColorChange}
+              />
+            </div>
+          )}
+
+          {/* Display Color Tags */}
+          <div className="flex flex-wrap gap-2 mt-3">
+            {colorTags.map((tag, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-full text-sm"
+              >
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => removeTag(index, setColorTags)}
+                  className="text-red-500 ml-1 cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Piping Color Section */}
+        <div className="mb-3">
+          <Label className="text-sm text-secondary-text mb-1">
+            Piping Color
+          </Label>
+          <div className="flex gap-2">
+            <Input
+              type="text"
+              className="cmn-input"
+              placeholder="Enter Piping Color"
+              value={pipingColorInput}
+              onChange={(e) => setPipingColorInput(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                addTag(pipingColorInput, setPipingColorInput, setPipingTags)
+              }
+              className="px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+            >
+              Add
+            </button>
+          </div>
+
+          {/* Toggle piping color picker */}
+          <button
+            type="button"
+            onClick={() => setShowPipingColorPicker(!showPipingColorPicker)}
+            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+          >
+            {showPipingColorPicker
+              ? "Close Piping Color Picker"
+              : "Pick a Piping Color"}
+          </button>
+
+          {/* Piping Color Picker */}
+          {showPipingColorPicker && (
+            <div className="mt-2">
+              <SketchPicker
+                color={pipingColorInput}
+                onChangeComplete={handlePipingColorChange}
+              />
+            </div>
+          )}
+
+          {/* Display Piping Color Tags */}
+          <div className="flex flex-wrap gap-2 mt-3">
+            {pipingTags.map((tag, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-full text-sm"
+              >
+                <span>{tag}</span>
+                <button
+                  type="button"
+                  onClick={() => removeTag(index, setPipingTags)}
+                  className="text-red-500 ml-1 cursor-pointer"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -223,7 +426,6 @@ export default function SaddleProductForm() {
             <Label className="text-sm text-secondary-text mb-1">
               Category*
             </Label>
-
             <Controller
               name="category"
               control={control}
@@ -246,16 +448,15 @@ export default function SaddleProductForm() {
                 </Select>
               )}
             />
-
             {errors.category && (
               <p className="text-red-500 text-sm">{errors.category.message}</p>
             )}
           </div>
+
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
               Used Saddle Category*
             </Label>
-
             <Controller
               name="subcategory"
               control={control}
@@ -278,7 +479,6 @@ export default function SaddleProductForm() {
                 </Select>
               )}
             />
-
             {errors.subcategory && (
               <p className="text-red-500 text-sm">
                 {errors.subcategory.message}
@@ -287,29 +487,51 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
-        {/* Stock Quantity */}
         <div className="mb-3">
-          <Label className="text-sm text-secondary-text mb-1">
-            Stock Quantity *
-          </Label>
-          <Input
-            type="number"
-            className="cmn-input"
-            placeholder="Enter Stock Quantity"
-            {...register("stockQuantity", {
-              required: "Stock Quantity is required",
-            })}
+          <Label className="text-sm text-secondary-text mb-1">Country*</Label>
+          <Controller
+            name="country"
+            control={control}
+            rules={{ required: "Country is required" }}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full py-5">
+                  <SelectValue placeholder="Select Country" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.values(countryItem).map((item) => (
+                    <SelectItem key={item} value={item}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
           />
-          {errors.stockQuantity && (
+          {errors.country && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.stockQuantity.message}
+              {errors.country.message}
             </p>
           )}
         </div>
 
+        <div className="mb-3">
+          <Label className="text-sm text-secondary-text mb-1">Images*</Label>
+          <Input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          <div className="mt-2 text-sm text-gray-500">
+            {images.length > 0 &&
+              images.map((file, index) => <p key={index}>{file.name}</p>)}
+          </div>
+        </div>
+
         <div>
-          <button type="submit" className="cmn-btn">
-            Add Saddle Product
+          <button type="submit" className="cmn-btn" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Add Saddle Product"}
           </button>
         </div>
       </form>

@@ -76,6 +76,7 @@ export interface TableRowItem extends TableItem {
   taxRate?: string;
   typeValue?: string;
   subject?: string;
+  basePrice_usd?: string;
   stage?: string;
   tasks?: string;
   followUpDate?: string;

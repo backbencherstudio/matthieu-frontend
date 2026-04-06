@@ -1,7 +1,6 @@
 "use client";
 
 import AccountSection from "@/components/AdminComponents/Settings/AccountSection";
-import NotificationSection from "@/components/AdminComponents/Settings/NotificationSection";
 import {
   SettingTabs,
   TabContent,
@@ -12,7 +11,7 @@ export default function AdminSettingsPage() {
   const [activeTab, setActiveTab] = useState("account");
   const tabs = [
     { value: "account", label: "Account" },
-    { value: "notifications", label: "Notifications" },
+    // { value: "notifications", label: "Notifications" },
   ];
 
   return (
@@ -28,9 +27,9 @@ export default function AdminSettingsPage() {
         <TabContent value="account" activeTab={activeTab}>
           <AccountSection />
         </TabContent>
-        <TabContent value="notifications" activeTab={activeTab}>
+        {/* <TabContent value="notifications" activeTab={activeTab}>
           <NotificationSection />
-        </TabContent>
+        </TabContent> */}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDeleteTackMutation } from "@/src/redux/admin/tackProduct/tackProduct";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function DeleteProduct({
@@ -18,12 +19,13 @@ export default function DeleteProduct({
   title: string;
 }) {
   const [deleteTack, { isLoading }] = useDeleteTackMutation();
-
+  const [open, setOpen] = useState(false);
   const handleDelete = async () => {
     try {
       const response = await deleteTack(id);
       if (response?.data?.data?.id) {
         toast.success("Product deleted successfully");
+        setOpen(false);
       }
     } catch (error) {
       toast.error("Failed to delete product");
@@ -32,7 +34,7 @@ export default function DeleteProduct({
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="cmn-action-btn delete !bg-error-bg">
         <TrashIcon />
       </DialogTrigger>

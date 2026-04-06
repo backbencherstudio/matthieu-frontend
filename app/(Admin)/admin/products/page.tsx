@@ -10,21 +10,21 @@ export default function ProductsPage() {
       value: "150",
       image: "/images/admin/product.svg",
     },
-    {
-      title: "Active Products",
-      value: "68",
-      image: "/images/admin/activeProduct.svg",
-    },
+    // {
+    //   title: "Active Products",
+    //   value: "68",
+    //   image: "/images/admin/activeProduct.svg",
+    // },
     {
       title: "Out of Stock",
       value: "8",
       image: "/images/admin/outOfStock.svg",
     },
-    {
-      title: "Total Value",
-      value: "$19,225.5",
-      image: "/images/admin/dollar.svg",
-    },
+    // {
+    //   title: "Total Value",
+    //   value: "$19,225.5",
+    //   image: "/images/admin/dollar.svg",
+    // },
   ];
   return (
     <div>
@@ -51,7 +51,7 @@ export default function ProductsPage() {
       </div>
       {/* Statistics Card */}
       <div className="pt-6">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {statisticCards.map((card) => (
             <StatisticCard key={card.title} card={card} />
           ))}

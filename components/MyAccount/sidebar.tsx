@@ -15,6 +15,8 @@ import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import CameraIcon from "../Icons/MyAccoountIcon/CameraIcon";
 import ImageUploader from "./imageUploader";
+import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
+import { toast } from "sonner";
 import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 
 const menuItems = [
@@ -33,8 +35,25 @@ export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, isLoading } = useGetUserQuery();
+  const { data, isLoading , refetch } = useGetUserQuery();
   const user = data?.data;
+  const [updateProfile] = useUpdateProfileMutation();
+
+
+
+  const handleImageUpload = async (file: File) => {
+  try {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    await updateProfile(formData).unwrap();
+    toast.success("Profile image updated successfully");
+    refetch();
+  } catch (error: any) {
+    console.error(error);
+    toast.error(error?.data?.message?.message || "Image update failed");
+  }
+};
   
   
 
@@ -54,7 +73,7 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed lg:static top-0 left-0 h-full lg:h-[740px] w-1/2 md:w-[40%] lg:w-full border border-[#DFE1E7] bg-[#F6F8FA] p-3 z-50 transition-transform duration-300 ease-in-out",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
         {/* Mobile Close Button (top-right corner) */}
@@ -71,7 +90,7 @@ export function Sidebar() {
           {/* Profile Section */}
           <div className="flex flex-col p-4 mb-12">
             <div className="relative w-20 h-20 mx-auto">
-              <ImageUploader />
+             <ImageUploader onImageUpload={handleImageUpload} />
               <label
                 htmlFor="avatarUploader"
                 className="absolute top-0 right-0 bg-[#1F274B] rounded-full p-1 border border-white cursor-pointer"
@@ -106,7 +125,7 @@ export function Sidebar() {
                     className={cn(
                       "w-full justify-start bg-[#F6F8FA] text-[#4A4C56] hover:bg-[#F6F8FA]/90 text-[16px] uppercase cursor-pointer rounded-none py-3.5 px-4 my-1.5 !h-auto",
                       isActive &&
-                        "w-full justify-start bg-[#1F274B] text-[#FFF] hover:bg-[#1F274B]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer my-1.5"
+                        "w-full justify-start bg-[#1F274B] text-[#FFF] hover:bg-[#1F274B]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer my-1.5",
                     )}
                   >
                     <div className="flex items-center w-full h-full gap-2">

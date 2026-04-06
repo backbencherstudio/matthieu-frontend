@@ -1,6 +1,8 @@
+"use client";
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import SAddlesCategoryItems from "@/components/ClientComponents/Saddles/SAddlesCategoryItems";
 import TailorMAade from "@/components/ClientComponents/Saddles/TailorMAade";
+import { useGetAllSaddlesQuery } from "@/src/redux/client/saddle/saddleApi";
 
 export default function AllSaddlesPage() {
   const breadLink = [
@@ -10,105 +12,44 @@ export default function AllSaddlesPage() {
     },
   ];
 
+  const { data, isLoading } = useGetAllSaddlesQuery("");
+  const saddlesItemsArion = data?.data?.ARION;
+  const saddlesItemsAtlas = data?.data?.ATLAS;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[300px]">
+        <p className="text-xl font-semibold">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <BreadCrumb breadLink={breadLink} />
       <div className="maxContainer">
-        <div className=" lg:pt-[80px] lg:pb-[60px] pt-[60px] pb-[50px]">
-          <SAddlesCategoryItems saddlesItems={saddlesItemsArion} />
+        <div className="lg:pt-[80px] lg:pb-[60px] pt-[60px] pb-[50px]">
+          <SAddlesCategoryItems
+            saddlesItems={{
+              name: "ARION SADDLES",
+              subtitle: "Fully Customizable",
+              products: saddlesItemsArion,
+            }}
+          />
         </div>
-        <div className=" lg:py-[60px] py-[50px]">
-          <SAddlesCategoryItems saddlesItems={saddlesItemsAtlas} />
+        <div className="lg:py-[60px] py-[50px]">
+          <SAddlesCategoryItems
+            saddlesItems={{
+              name: "ATLAS SADDLES",
+              subtitle: "Semi CUSTOM",
+              products: saddlesItemsAtlas,
+            }}
+          />
         </div>
-        <div className=" lg:py-[80px] py-[60px]">
+        <div className="lg:py-[80px] py-[60px]">
           <TailorMAade />
         </div>
       </div>
     </div>
   );
 }
-
-const saddlesItemsArion = {
-  label: "Arion Saddles",
-  subtitle: "Fully Customizable",
-  items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-  btns: [
-    { title: "Connect with a saddle expert", href: "" },
-    { title: "CUSTOMIZE YOUR SADDLE", href: "" },
-  ],
-  images: [
-    {
-      id: 1,
-      name: "JUMPING",
-      image: "/images/saddles/jumping.png",
-      startFrom: "$5,000",
-      link: "/saddles",
-      slug: "jumping",
-    },
-    {
-      id: 2,
-      name: "CROSS-COUNTRY",
-      image: "/images/saddles/cross.png",
-      startFrom: "$5,000",
-      link: "/saddles",
-      slug: "cross-country",
-    },
-    {
-      id: 3,
-      name: "DRESSAGE",
-      image: "/images/saddles/dressage.png",
-      startFrom: "$5,000",
-      link: "/saddles",
-      slug: "dressage",
-    },
-    {
-      id: 4,
-      name: "KIDS",
-      image: "/images/saddles/kids.png",
-      startFrom: "$5,000",
-      link: "/saddles",
-      slug: "kids",
-    },
-  ],
-};
-
-const saddlesItemsAtlas = {
-  label: "ATLAS SADDLES",
-  subtitle: "Semi CUSTOM",
-  items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-  btns: [{ title: "Connect with a saddle expert", href: "" }],
-  images: [
-    {
-      id: 1,
-      name: "JUMPING",
-      image: "/images/saddles/atlas-jumping.png",
-      startFrom: "$5,000",
-      link: "/saddles/atlas-saddles",
-      slug: "jumping",
-    },
-    {
-      id: 2,
-      name: "CROSS-COUNTRY",
-      image: "/images/saddles/atlas-cross.png",
-      startFrom: "$5,000",
-      link: "/saddles/atlas-saddles",
-      slug: "cross-country",
-    },
-    {
-      id: 3,
-      name: "DRESSAGE",
-      image: "/images/saddles/atlas-dressage.png",
-      startFrom: "$5,000",
-      link: "/saddles/atlas-saddles",
-      slug: "dressage",
-    },
-  ],
-};
-
-const saddlesItemsAthena = {
-  label: "ATHENA SADDLES",
-  subtitle: "TAILOR MADE",
-  items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-  btns: [{ title: "Connect with a saddle expert", href: "" }],
-  video: "/videos/athena.mp4",
-};

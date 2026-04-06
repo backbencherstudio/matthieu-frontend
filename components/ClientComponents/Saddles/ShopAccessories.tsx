@@ -1,7 +1,14 @@
+"use client";
+import { useGetAllTackProductsQuery } from "@/src/redux/client/tack-product/tackProduct";
 import Link from "next/link";
 
 function ShopAccessories() {
-  const cards = [1, 2, 3, 4];
+  const { data } = useGetAllTackProductsQuery("");
+  const leatherCare = data?.find(
+    (item) => item?.subcategory === "LEATHER_CARE",
+  );
+
+  const products = leatherCare?.products;
   return (
     <div>
       <h1 className="text-[32px] font-extrabold leading-[100%] text-center text-[#1F274B]">
@@ -9,22 +16,20 @@ function ShopAccessories() {
       </h1>
 
       <div className="grid grid-cols-2  md:grid-cols-4 gap-4 mt-10">
-        {cards.map((item, index) => (
-          <Link href={"/product-details/1"} key={index}>
+        {products?.slice(0, 4).map((item, index) => (
+          <Link href={`/product-details/${item.id}`} key={index}>
             <div className="p-3 bg-[#F8F9FB]">
               <div className="w-full bg-white overflow-hidden">
-                <img src="/home/bridles.png" alt="bridles" />
+                <img src={item?.thumbnailImage} alt="bridles" />
               </div>
 
               <div className="mt-5 flex flex-col gap-[14px]">
                 <p className="lg:text-xl md:text-lg font-extrabold leading-[124%] text-[#4C526F] text-base">
-                  BRIDLES
+                  {item?.name}
                 </p>
-                <h3 className="textSecondary leading-[124%] lg:text-xl md:text-lg text-base">
-                  Anatomical double noseband bridle
-                </h3>
+
                 <p className="textSecondary font-extrabold leading-[136%] lg:text-xl md:text-lg text-base">
-                  $370.00
+                  ${item?.price}
                 </p>
               </div>
             </div>
