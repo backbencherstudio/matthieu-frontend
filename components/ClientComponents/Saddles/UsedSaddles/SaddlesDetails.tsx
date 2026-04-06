@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
 import { Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
+import Link from "next/link";
 
 
 
@@ -192,7 +193,7 @@ export default function SaddlesDetails() {
               <p className="text-xl text-[#4C526F]">
                 Category:{" "}
                 <a href="#" className="font-bold text-black hover:underline">
-                  {data?.data?.category}
+                  {data?.data?.usedsaddlecategory}
                 </a>
               </p>
             </div>
@@ -211,7 +212,7 @@ export default function SaddlesDetails() {
               <div className="mt-8">
                 <p>
                   Have a question?{" "}
-                  <span className="text-primary-text">Contact Us</span>
+                  <Link href={"/contact-us"} className="text-primary-text underline">Contact Us</Link>
                 </p>
               </div>
               <div className="mt-8 flex items-center gap-x-5">
