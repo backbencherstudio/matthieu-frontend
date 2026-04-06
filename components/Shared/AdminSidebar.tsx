@@ -19,11 +19,11 @@ import SaddlesIcon from "../Icons/SaddlesIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
-  {
-    label: "Analytics",
-    href: "/admin/analytics",
-    icon: AnalyticsIcon,
-  },
+  // {
+  //   label: "Analytics",
+  //   href: "/admin/analytics",
+  //   icon: AnalyticsIcon,
+  // },
   {
     label: "Products",
     href: "/admin/products",
@@ -37,6 +37,11 @@ const menuItems = [
   {
     label: "Saddle Product",
     href: "/admin/saddle-product",
+    icon: SaddlesIcon,
+  },
+  {
+    label: "Leadline Saddle",
+    href: "/admin/leadline-saddle",
     icon: SaddlesIcon,
   },
   {
