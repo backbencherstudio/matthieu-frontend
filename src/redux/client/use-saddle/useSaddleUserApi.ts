@@ -25,10 +25,18 @@ const useSaddleUserApi = baseApi.injectEndpoints({
       }),
     }),
 
+     addUsedSaddleToCard: builder.mutation({
+      query: (cartData) => ({
+        url: `/cart/add`,
+        method: "POST",
+        body: cartData,
+      }),
+    }),
+
   }),
 });
 
-export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation } =
+export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation,useAddUsedSaddleToCardMutation } =
   useSaddleUserApi;
 
 export default useSaddleUserApi;

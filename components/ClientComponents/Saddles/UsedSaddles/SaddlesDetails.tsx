@@ -9,10 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetSingleUseSaddleUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
+import { useAddUsedSaddleToCardMutation, useGetSingleUseSaddleUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
+import { Minus, Plus } from "lucide-react";
+import { toast } from "sonner";
+
 
 
 const additionalInfo = [
@@ -31,13 +34,14 @@ export default function SaddlesDetails() {
   const additionalInfoRef = useRef<HTMLDivElement>(null);
 
   const [selectedTrial, setSelectedTrial] = useState<string>("");
-
+  const [quantity, setQuantity] = useState(1);
 
 
   const { data, isLoading } = useGetSingleUseSaddleUserQuery({
     id,
     trialPeriod: selectedTrial || undefined,
   });
+  const [addToCard] = useAddUsedSaddleToCardMutation();
 
   const productImages =
     data?.data?.images?.map((img) => ({
@@ -65,6 +69,33 @@ export default function SaddlesDetails() {
       block: "center",
     });
   };
+
+  const handleCart = async () => {
+    if (!data?.data) return;
+
+    try {
+      const cartData = {
+        usedSaddleId: data?.data?.id,
+        trialPeriod: selectedTrial,
+        quantity: quantity,
+      };
+
+      const response = await addToCard(cartData);
+      console.log(response);
+      if (response?.data?.success) {
+        toast.success("Added to cart!");
+      }
+      if (response?.error || !response) {
+        toast.error("Failed to add to cart. Please try again.");
+        return;
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+
   const scrollToAdditionalInfo = () => {
     additionalInfoRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -192,7 +223,7 @@ export default function SaddlesDetails() {
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="1TRIAL_14_DAYS">14-DAY TRIAL</SelectItem>
+                      <SelectItem value="TRIAL_14_DAYS">14-DAY TRIAL</SelectItem>
                       <SelectItem value="NO_TRIAL">
                         NO TRIAL NEEDED
                       </SelectItem>
@@ -203,13 +234,57 @@ export default function SaddlesDetails() {
               </div>
 
               <div>
-                <p>Price {`${data?.data?.currency === "EUR" ? "€" : "$"}`}{`${data?.data?.selectedPrice}`}</p>
-                 <input type="number" name="" id="" className="border pl-4 w-[60px]"/> Quantity
+                <p className="xl:text-2xl text-xl  text-[#1F274B] leading-[100%] upper-case mt-6 font-medium">Price {`${data?.data?.currency === "EUR" ? "€" : "$"}`}{`${data?.data?.selectedPrice}.00`}</p>
+                {/* <input type="number" name="" id="" className="border pl-4 w-[60px]"/> Quantity */}
               </div>
+              <div className="flex items-center gap-3 mt-6">
+                <button
+                  onClick={() =>
+                    setQuantity((prev) => Math.max(1, prev - 1))
+                  }
+                  disabled={
+                    !data?.data ||
+                    data?.data?.stockQuantity === 0 ||
+                    quantity <= 1
+                  }
+                  className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  <Minus size={16} />
+                </button>
+                <span className="min-w-[24px] text-center">{quantity}</span>
+                <button
+                  onClick={() =>
+                    setQuantity((prev) =>
+                      Math.min(
+                        data?.data?.stockQuantity ?? 1,
+                        prev + 1,
+                      ),
+                    )
+                  }
+                  disabled={
+                    !data?.data ||
+                    data?.data?.stockQuantity === 0 ||
+                    quantity >= data?.data?.stockQuantity
+                  }
+                  className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  <Plus size={16} />
+                </button>
 
+                <p className="xl:text-2xl text-xl tracking-[.64px] text-[#1F274B] leading-[100%] normal-case">
+                  {data?.data
+                    ? data?.data?.stockQuantity === 0
+                      ? "Out of stock"
+                      : `${data?.data.stockQuantity} in stock`
+                    : "N/A"}
+                </p>
+              </div>
               <div className="mt-8">
-                <button className="px-8 py-3 bg-[#1F274B] text-white rounded-sm cursor-pointer">
-                  Add to cart
+                <button onClick={handleCart} disabled={ !selectedTrial ||
+                          data?.data?.stockQuantity === 0 } className="px-8 py-3 bg-[#1F274B] text-white rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                  {data?.data?.stockQuantity === 0
+                          ? "OUT OF STOCK"
+                          : "ADD TO CART"}
                 </button>
               </div>
             </div>
