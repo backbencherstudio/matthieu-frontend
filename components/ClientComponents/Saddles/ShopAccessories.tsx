@@ -1,5 +1,6 @@
 "use client";
 import { useGetAllTackProductsQuery } from "@/src/redux/client/tack-product/tackProduct";
+import Image from "next/image";
 import Link from "next/link";
 
 function ShopAccessories() {
@@ -7,7 +8,18 @@ function ShopAccessories() {
   const leatherCare = data?.find(
     (item) => item?.subcategory === "LEATHER_CARE",
   );
+   const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
+   const getFixedImageUrl = (url: string) => {
+     if (!url) return '/placeholder.png';
+
+     try {
+       const parsed = new URL(url);
+       return `${IMAGE_BASE_URL}${parsed.pathname}`;
+     } catch {
+       return '/placeholder.png';
+     }
+   };
   const products = leatherCare?.products;
   return (
     <div>
@@ -20,7 +32,7 @@ function ShopAccessories() {
           <Link href={`/product-details/${item.id}`} key={index}>
             <div className="p-3 bg-[#F8F9FB]">
               <div className="w-full bg-white overflow-hidden">
-                <img src={item?.thumbnailImage} alt="bridles" />
+                <Image src={getFixedImageUrl(item?.thumbnailImage)} alt="bridles" width={220} height={220} unoptimized/>
               </div>
 
               <div className="mt-5 flex flex-col gap-[14px]">

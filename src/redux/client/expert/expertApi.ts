@@ -1,17 +1,42 @@
-import baseApi from "../../api/baseApi";
+import baseApi from '../../api/baseApi';
+
+export interface ExpertItem {
+  name: string;
+  email: string;
+  phone: string;
+  region: string;
+}
+
+export interface GetExpertsResponse {
+  success: boolean;
+  message: string;
+  data: {
+    data: Array<{
+      country?: string;
+      [key: string]: unknown;
+    }>;
+  };
+}
+
+export interface GetExpertByCountryResponse {
+  success: boolean;
+  message: string;
+  data: ExpertItem[];
+}
 
 const expertApi = baseApi.injectEndpoints({
-  endpoints: (builder) => ({
-    getExperts: builder.query({
+  endpoints: builder => ({
+    getExperts: builder.query<GetExpertsResponse, void>({
       query: () => ({
         url: `/experts`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
-    getExpertByCountry: builder.query({
-      query: (country) => ({
+
+    getExpertByCountry: builder.query<GetExpertByCountryResponse, string>({
+      query: country => ({
         url: `/experts/country/${country}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
   }),

@@ -139,7 +139,7 @@ export function Billing() {
         country: values.country,
       }).unwrap();
 
-      router.push('/product-details/billing-details/payment-details');
+      router.push('/product-details/billing-details/summary');
     } catch (error) {
       console.error('Failed to create checkout address', error);
     }
@@ -160,11 +160,11 @@ export function Billing() {
             />
             <input
               type="hidden"
-              {...register('state', { required: 'State is required' })}
+              {...register('state' )}
             />
             <input
               type="hidden"
-              {...register('city', { required: 'City is required' })}
+              {...register('city')}
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
