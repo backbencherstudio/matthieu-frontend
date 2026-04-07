@@ -104,7 +104,8 @@ export function BillingSummary() {
                 >
                   <div className="flex-shrink-0 flex md:gap-3 gap-4 items-center">
                     <Image
-                      src={getFixedImageUrl(item.itemImage)}
+                      // src={getFixedImageUrl(item.itemImage)}
+                      src={item?.itemImage}
                       width={102}
                       height={104}
                       alt={item.itemName}

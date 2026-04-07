@@ -23,9 +23,14 @@ interface TrackProductListProps {
 export default function UsedSaddlesProductList({ query = "" }: UsedSaddlesProductListProps) {
   // const { data, isLoading } = useGetAllUseSaddlesUserQuery("");
   const { data, isLoading, error } = useGetAllUseSaddlesUserQuery(query);
- 
+
+
+ console.log(data?.data?.length === 0)
   if (isLoading) {
     return <p>Loading...</p>;
+  }
+  if(data?.data?.length === 0){
+   return <p className="text-center mt-10">No Products Avilable</p>;
   }
 
 

@@ -9,10 +9,11 @@ const useSaddleUserApi = baseApi.injectEndpoints({
         params,   
       }),
     }),
-    getSingleUseSaddleUser: builder.query({
-      query: (id) => ({
+   getSingleUseSaddleUser: builder.query({
+      query: ({ id, trialPeriod }) => ({
         url: `/used-saddles/public/${id}`,
         method: "GET",
+        params: trialPeriod ? { trialPeriod } : {},
       }),
     }),
 
@@ -24,10 +25,18 @@ const useSaddleUserApi = baseApi.injectEndpoints({
       }),
     }),
 
+     addUsedSaddleToCard: builder.mutation({
+      query: (cartData) => ({
+        url: `/cart/add`,
+        method: "POST",
+        body: cartData,
+      }),
+    }),
+
   }),
 });
 
-export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation } =
+export const { useGetAllUseSaddlesUserQuery, useGetSingleUseSaddleUserQuery, useCreateSaddleAlertMutation,useAddUsedSaddleToCardMutation } =
   useSaddleUserApi;
 
 export default useSaddleUserApi;

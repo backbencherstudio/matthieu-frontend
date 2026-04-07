@@ -175,7 +175,8 @@ export default function CartsDetails({
             >
               <div className="flex-shrink-0 flex md:gap-3 gap-4 items-center">
                 <Image
-                  src={getFixedImageUrl(item.image)}
+                  // src={getFixedImageUrl(item.image)}
+                  src={item?.image}
                   width={102}
                   height={104}
                   alt={item.name}

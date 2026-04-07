@@ -248,7 +248,7 @@ export function SignUpForm() {
             <Button
               type="button"
               className="w-full bg-[#FFF] rounded-none !h-auto !leading-[100%] lg:px-8 px-7 lg:py-4 py-3 text-[#4A4C56] border broder-[#DFE1E7] hover:bg-[#FFF]/50 cursor-pointer text-[16px]"
-              onClick={() => console.log("Continue as guest")}
+               onClick={() => router.push("/")}
             >
               Continue as Guest
             </Button>
