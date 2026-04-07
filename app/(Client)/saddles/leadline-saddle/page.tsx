@@ -212,7 +212,11 @@ const LeadlineSaddlePage = () => {
                             key={index}
                             className="px-6 py-3 bg-[#4C526F] text-base leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer"
                           >
-                            {size}
+                            {size === "SIZE_12_5"
+                              ? "12.5"
+                              : size === "SIZE_14_5"
+                                ? "14.5"
+                                : size}
                           </button>
                         ))}
                       </div>
@@ -244,12 +248,12 @@ const LeadlineSaddlePage = () => {
                   </div>
 
                   <div className="space-x-4 w-full flex items-center">
-                    <button
+                    {/* <button
                       disabled={!data?.data?.stockQuantity}
                       className="w-full block px-8 py-4 bg-[#1F274B] text-lg leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer uppercase disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                       Buy The Saddle
-                    </button>
+                    </button> */}
                     <button
                       disabled={!data?.data?.stockQuantity}
                       onClick={addToCart}
