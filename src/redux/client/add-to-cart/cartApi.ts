@@ -5,6 +5,7 @@ export type CartCurrency = 'EUR' | 'USD' | string;
 export interface CartItemApi {
   itemId: string;
   quantity: number;
+  length: number;
   sku: string | null;
   itemName: string;
   itemImage: string;

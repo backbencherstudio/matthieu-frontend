@@ -151,7 +151,10 @@ const baseApi = createApi({
     'Allmember',
     'Ambassador',
     'Competitions',
-    'Experts'
+    'Experts',
+    'Tack',
+    'TackFavorite',
+    'AdminOrder',
   ],
   endpoints: () => ({}),
 });
