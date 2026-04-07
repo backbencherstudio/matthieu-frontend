@@ -41,7 +41,16 @@ export function SignInForm() {
       const response = await signup(data);
       console.log(response, "response")
       if (response?.data?.success) {
-        localStorage.setItem("token", response?.data?.authorization?.token);
+        const token =
+          response?.data?.authorization?.token ??
+          response?.data?.data?.authorization?.token ??
+          response?.data?.token ??
+          response?.data?.data?.token;
+        const userType =
+          response?.data?.type ?? response?.data?.data?.type;
+
+        if (token) localStorage.setItem("token", token);
+        if (userType) localStorage.setItem("userType", userType);
 
         toast.success(response?.data?.message);
         reset();

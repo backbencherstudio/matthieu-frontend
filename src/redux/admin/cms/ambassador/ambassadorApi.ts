@@ -8,6 +8,7 @@ const ambassadorApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Ambassador"]
     }),
 
     getAll: builder.query({
@@ -19,6 +20,7 @@ const ambassadorApi = baseApi.injectEndpoints({
           page,
         },
       }),
+      providesTags: ['Ambassador']
     }),
 
     updateAmbassador: builder.mutation({

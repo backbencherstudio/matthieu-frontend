@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Country, State } from 'country-state-city';
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface AddExpertFormValues {
   name: string;
@@ -41,8 +42,8 @@ const AddExpertsPage = () => {
   const [createExperts, { isLoading }] = useCreateExpertsMutation();
 
   const [selectedCountryIso, setSelectedCountryIso] = useState('');
-
   const countries = useMemo(() => Country.getAllCountries(), []);
+  const router = useRouter()
 
   const regions = useMemo(() => {
     if (!selectedCountryIso) return [];
@@ -56,6 +57,7 @@ const AddExpertsPage = () => {
         toast.success(response?.data?.message);
         reset();
         setSelectedCountryIso('');
+        router.push('/admin/cms')
       }
     } catch (error) {
       toast.error('Failed to add expert');
@@ -69,15 +71,15 @@ const AddExpertsPage = () => {
     );
 
     setSelectedCountryIso(isoCode);
-   const backendCountryValue =
-     selectedCountry?.isoCode === 'US'
-       ? 'usa'
-       : selectedCountry?.name?.toLowerCase() || '';
+    const backendCountryValue =
+      selectedCountry?.isoCode === 'US'
+        ? 'usa'
+        : selectedCountry?.name?.toLowerCase() || '';
 
-   setValue('country', backendCountryValue, {
-     shouldValidate: true,
-     shouldDirty: true,
-   });
+    setValue('country', backendCountryValue, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
     setValue('region', '', {
       shouldValidate: true,
       shouldDirty: true,

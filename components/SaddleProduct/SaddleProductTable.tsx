@@ -2,7 +2,7 @@
 import { useGetSaddleProductsQuery } from "@/src/redux/admin/saddleProduct/saddleProduct";
 import { TableRowItem } from "@/types/TableRowItem";
 import Image from "next/image";
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import PaginationComponent from "../reusable/Features/PaginationComponent";
 import ReuseAbleTable from "../reusable/Features/reuseable-table";
 import DeleteSaddleProduct from "./DeleteSaddleProduct";
@@ -10,8 +10,16 @@ import DeleteSaddleProduct from "./DeleteSaddleProduct";
 export default function SaddleProductTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, refetch } = useGetSaddleProductsQuery("");
-  const relevantData = data?.data?.ARION;
-  const currentItems = Array.isArray(relevantData) ? relevantData : [];
+  const allSaddles = React.useMemo(() => {
+    if (!data?.data) return [];
+
+    return Object.values(data.data)
+      .filter((value) => Array.isArray(value))
+      .flat();
+  }, [data]);
+
+  const relevantData = allSaddles;
+  const currentItems = relevantData;
   const meta = data?.meta;
   const tableHeader = ["Name", "price", "Image", "Action"];
   const tableRowDataRenderers: ((

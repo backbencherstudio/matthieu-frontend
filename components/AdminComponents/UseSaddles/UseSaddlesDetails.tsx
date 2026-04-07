@@ -16,7 +16,7 @@ export default function UseSaddlesDetails({ id, onClose }: DetailProps) {
   const applicant = data?.data;
 
   return (
-    <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
+    <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[720px] w-full overflow-y-auto max-h-[80vh]">
       <div className="flex items-center justify-between mb-[35px]">
         <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
           Use Saddles Details

@@ -4,7 +4,7 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
   const products = Array.isArray(saddlesItems?.products)
     ? saddlesItems.products
     : [];
-  console.log(products);
+
   return (
     <div>
       <div className="flex flex-col items-center gap-x-8 justify-center">
@@ -31,9 +31,7 @@ export default function SAddlesCategoryItems({ saddlesItems }) {
           </div>
         </div>
         {products?.length === 0 ? (
-          <div className="text-center text-black text-xl font-semibold">
-            Comming Soon
-          </div>
+          <div className="text-4xl text-center">Comming Soon</div>
         ) : (
           <div className="sm:max-w-[90%] w-full">
             {saddlesItems?.statusText ? (

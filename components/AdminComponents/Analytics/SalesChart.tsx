@@ -212,7 +212,7 @@ export default function SalesChart() {
     const ticks = [0];
     const step = max / 10; // 10 intervals
     for (let i = step; i <= max; i += step) {
-      ticks.push(Math.round(i));
+      ticks?.push(Math.round(i));
     }
     return ticks;
   };
