@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import LoveIcon from "@/components/Icons/LoveIcon";
+import LoveIcon from '@/components/Icons/LoveIcon';
 import {
   useAddToCardMutation,
   useGetSingleTackProductQuery,
-} from "@/src/redux/client/tack-product/tackProduct";
-import { Minus, Plus } from "lucide-react";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
-import ProductDetailsAccordion from "./ProductDetailsAccordion";
-import RelatedProduts from "./RelatedProduts";
+} from '@/src/redux/client/tack-product/tackProduct';
+import { Minus, Plus } from 'lucide-react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
+import { toast } from 'sonner';
+import ProductDetailsAccordion from './ProductDetailsAccordion';
+import RelatedProduts from './RelatedProduts';
 
 export default function ProductDetailsClient() {
   const id = useParams().id;
@@ -21,8 +21,7 @@ export default function ProductDetailsClient() {
 
   // Get default variant on load
   const defaultVariant =
-    productData?.variants?.find((v) => v.isDefault) ||
-    productData?.variants?.[0];
+    productData?.variants?.find(v => v.isDefault) || productData?.variants?.[0];
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -32,12 +31,12 @@ export default function ProductDetailsClient() {
     if (!productData?.variants) return [];
     const seen = new Set();
     return productData.variants
-      .filter((v) => {
+      .filter(v => {
         if (seen.has(v.colorId)) return false;
         seen.add(v.colorId);
         return true;
       })
-      .map((v) => ({
+      .map(v => ({
         id: v.colorId,
         name: v.color.toUpperCase(),
         raw: v.color,
@@ -49,12 +48,12 @@ export default function ProductDetailsClient() {
     if (!productData?.variants) return [];
     const seen = new Set();
     return productData.variants
-      .filter((v) => {
+      .filter(v => {
         if (seen.has(v.sizeId)) return false;
         seen.add(v.sizeId);
         return true;
       })
-      .map((v) => ({ id: v.sizeId, label: v.size.toUpperCase(), raw: v.size }));
+      .map(v => ({ id: v.sizeId, label: v.size.toUpperCase(), raw: v.size }));
   }, [productData]);
 
   // Active color/size with fallback to default variant
@@ -66,9 +65,9 @@ export default function ProductDetailsClient() {
     if (!productData?.variants) return null;
     return (
       productData.variants.find(
-        (v) => v.colorId === activeColor && v.sizeId === activeSize,
+        v => v.colorId === activeColor && v.sizeId === activeSize,
       ) ||
-      productData.variants.find((v) => v.colorId === activeColor) ||
+      productData.variants.find(v => v.colorId === activeColor) ||
       defaultVariant
     );
   }, [productData, activeColor, activeSize, defaultVariant]);
@@ -82,9 +81,9 @@ export default function ProductDetailsClient() {
   const displayMainImage = mainImage || variantImages[0];
 
   const benefits = [
-    "Relieves pressure on corners of the mouth",
-    "Foam padded headpiece and crown piece",
-    "Minimize jaw shifting and stabilize the bit with the lower strap",
+    'Relieves pressure on corners of the mouth',
+    'Foam padded headpiece and crown piece',
+    'Minimize jaw shifting and stabilize the bit with the lower strap',
   ];
 
   const handleCart = async () => {
@@ -100,15 +99,15 @@ export default function ProductDetailsClient() {
       const response = await addToCard(cartData);
       console.log(response);
       if (response?.data?.success) {
-        toast.success("Added to cart!");
+        toast.success('Added to cart!');
       }
       if (response?.error || !response) {
-        toast.error("Failed to add to cart. Please try again.");
+        toast.error('Failed to add to cart. Please try again.');
         return;
       }
     } catch (error) {
-      console.error("Add to cart error:", error);
-      toast.error("Something went wrong. Please try again.");
+      console.error('Add to cart error:', error);
+      toast.error('Something went wrong. Please try again.');
     }
   };
 
@@ -145,7 +144,7 @@ export default function ProductDetailsClient() {
                     {displayMainImage ? (
                       <img
                         src={displayMainImage}
-                        alt={productData?.name || "Product"}
+                        alt={productData?.name || 'Product'}
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -176,14 +175,14 @@ export default function ProductDetailsClient() {
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <div className="flex justify-between items-center">
                       <h1 className="xl:text-[32px] text-2xl font-extrabold leading-[100%] tracking-[0.64px] text-[#1F274B]">
-                        {productData?.name || "N/A"}
+                        {productData?.name || 'N/A'}
                       </h1>
                       <button>
                         <LoveIcon className="xl:size-12 size-8" />
                       </button>
                     </div>
                     <p className="xl:text-2xl md:text-xl text-lg leading-[100%] tracking-[.48px] textSecondary">
-                      SKU: {productData?.sku || "N/A"}
+                      SKU: {productData?.sku || 'N/A'}
                     </p>
                   </div>
 
@@ -193,27 +192,27 @@ export default function ProductDetailsClient() {
                   <p className="xl:text-[32px] text-2xl tracking-[.64px] text-[#1F274B] leading-[100%]">
                     {selectedVariant
                       ? `${selectedVariant.currency} $${selectedVariant.price.toFixed(2)}`
-                      : "N/A"}
+                      : 'N/A'}
                   </p>
                   <p className="xl:text-2xl text-xl tracking-[.64px] text-[#1F274B] leading-[100%] normal-case">
                     {selectedVariant
                       ? selectedVariant.stockQuantity === 0
-                        ? "Out of stock"
+                        ? 'Out of stock'
                         : `${selectedVariant.stockQuantity} in stock`
-                      : "N/A"}
+                      : 'N/A'}
                   </p>
 
                   {/* Color Selection */}
                   {colors.length > 0 && (
                     <div className="flex flex-col xl:gap-4 gap-3">
                       <p className="textSecondary xl:text-[20px] text-base tracking-[.40px] leading-[100%]">
-                        Color:{" "}
+                        Color:{' '}
                         <span className="capitalize">
-                          {colors.find((c) => c.id === activeColor)?.name || ""}
+                          {colors.find(c => c.id === activeColor)?.name || ''}
                         </span>
                       </p>
                       <div className="flex gap-4">
-                        {colors.map((color) => (
+                        {colors.map(color => (
                           <button
                             key={color.id}
                             onClick={() => {
@@ -224,8 +223,8 @@ export default function ProductDetailsClient() {
                             style={{ backgroundColor: color.raw }}
                             className={`xl:w-8 xl:h-8 rounded-full w-6 h-6 cursor-pointer transition-all ${
                               activeColor === color.id
-                                ? "outline outline-offset-2 outline-gray-600"
-                                : ""
+                                ? 'outline outline-offset-2 outline-gray-600'
+                                : ''
                             }`}
                           />
                         ))}
@@ -248,14 +247,14 @@ export default function ProductDetailsClient() {
                         </Link>
                       </div>
                       <div className="grid md:grid-cols-4 grid-cols-2 md:gap-3 gap-2">
-                        {sizes.map((size) => (
+                        {sizes.map(size => (
                           <button
                             key={size.id}
                             onClick={() => setSelectedSize(size.id)}
                             className={`md:py-3 py-2 w-full md:text-base text-sm transition-all leading-[100%] cursor-pointer ${
                               activeSize === size.id
-                                ? "bg-[#222842] text-white font-extrabold"
-                                : "bg-[#696E86] text-white"
+                                ? 'bg-[#222842] text-white font-extrabold'
+                                : 'bg-[#696E86] text-white'
                             }`}
                           >
                             {size.label}
@@ -266,9 +265,7 @@ export default function ProductDetailsClient() {
                   )}
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={() =>
-                        setQuantity((prev) => Math.max(1, prev - 1))
-                      }
+                      onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                       disabled={
                         !selectedVariant ||
                         selectedVariant.stockQuantity === 0 ||
@@ -281,7 +278,7 @@ export default function ProductDetailsClient() {
                     <span className="min-w-[24px] text-center">{quantity}</span>
                     <button
                       onClick={() =>
-                        setQuantity((prev) =>
+                        setQuantity(prev =>
                           Math.min(
                             selectedVariant?.stockQuantity ?? 1,
                             prev + 1,
@@ -339,8 +336,8 @@ export default function ProductDetailsClient() {
                         className="w-full cursor-pointer bg-white hover:bg-gray-50 text-gray-900 font-bold py-3 px-4 border-1 border-[#1F274B] transition lg:text-lg text-base disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {selectedVariant?.stockQuantity === 0
-                          ? "OUT OF STOCK"
-                          : "ADD TO CART"}
+                          ? 'OUT OF STOCK'
+                          : 'ADD TO CART'}
                       </button>
                     </div>
                   </div>

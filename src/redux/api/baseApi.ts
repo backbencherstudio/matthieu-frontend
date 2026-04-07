@@ -45,22 +45,22 @@
 // export default baseApi;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const rawBaseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_ENDPOINT,
-  credentials: "same-origin",
-  prepareHeaders: (headers) => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
+  credentials: 'same-origin',
+  prepareHeaders: headers => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
       if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
 
       // Region / country from cookie (keep only if you really use it)
       const match = document.cookie.match(/x-region=([^;]+)/);
-      const region = match ? match[1] : "other";
-      headers.set("x-country", region);
+      const region = match ? match[1] : 'other';
+      headers.set('x-country', region);
     }
     return headers;
   },
@@ -90,36 +90,36 @@ const baseQueryWithAutoTokenUpdate = async (
 
     if (newToken) {
       // Save to localStorage (optional – many keep it for faster client access)
-      localStorage.setItem("token", newToken);
+      localStorage.setItem('token', newToken);
 
       // Save to cookies – this is what you asked for
       document.cookie = `token=${newToken}; path=/; secure; samesite=strict; max-age=2592000`; // 30 days
 
       if (userType) {
-        localStorage.setItem("userType", userType);
+        localStorage.setItem('userType', userType);
         document.cookie = `userType=${userType}; path=/; secure; samesite=strict; max-age=2592000`;
       }
     }
   } catch (err) {
-    console.warn("Failed to save token/userType to cookies:", err);
+    console.warn('Failed to save token/userType to cookies:', err);
   }
 
   // ── Handle 401 Unauthorized ──
   if ((result as any)?.error?.status === 401) {
-    console.warn("401 Unauthorized – clearing session");
+    console.warn('401 Unauthorized – clearing session');
 
     // You can dispatch logout action here if you have one
     // api.dispatch({ type: "auth/logout" });
 
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userType");
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userType');
 
       // Clear cookies
       document.cookie =
-        "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+        'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;';
       document.cookie =
-        "userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;";
+        'userType=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=strict;';
 
       // Optional: redirect
       // window.location.href = "/signin";
@@ -143,6 +143,10 @@ const baseApi = createApi({
     'Cart',
     'Favorite',
     'Saddle',
+    'Order',
+    'Tack',
+    'TackFavorite',
+    'AdminOrder',
   ],
   endpoints: () => ({}),
 });

@@ -3,11 +3,16 @@
 import DeleteIcon from '@/components/Icons/DashboardIcons/DeleteIcon';
 import MinusIcon from '@/components/Icons/MinusIcon';
 import PlusIcon from '@/components/Icons/PlusIcon';
-import { CartItemApi, useClearCartMutation, useDeleteCartItemMutation, useGetCartQuery, useUpdateCartItemQuantityMutation } from '@/src/redux/client/add-to-cart/cartApi';
+import {
+  CartItemApi,
+  useClearCartMutation,
+  useDeleteCartItemMutation,
+  useGetCartQuery,
+  useUpdateCartItemQuantityMutation,
+} from '@/src/redux/client/add-to-cart/cartApi';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
-
 
 interface CartsDetailsProps {
   checkoutButton?: boolean;
@@ -49,31 +54,15 @@ export default function CartsDetails({
 
   const [updateCartItemQuantity, { isLoading: isUpdating }] =
     useUpdateCartItemQuantityMutation();
+  // const isUpdating = true;
+  // const isFetching = true;
 
   const [deleteCartItem, { isLoading: isDeleting }] =
     useDeleteCartItemMutation();
 
   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
 
-  const cartItems: CartItemUi[] = useMemo(() => {
-    return (
-      cartResponse?.data?.items?.map(item => ({
-        id: item.itemId,
-        name: item.itemName,
-        sku:
-          item.sku ||
-          item.variantId ||
-          item.usedSaddleId ||
-          item.tackProductId ||
-          item.itemId,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.itemImage,
-        currency: item.currency,
-        raw: item,
-      })) ?? []
-    );
-  }, [cartResponse]);
+  const cartItems = cartResponse?.data?.items ?? [];
 
   // console.log(cartItems, '--------------------------------------------------');
 
@@ -91,7 +80,6 @@ export default function CartsDetails({
   };
 
   const summary = cartResponse?.data?.summary;
-
 
   const currency = summary?.currency || cartItems?.[0]?.currency || 'USD';
   const currencySymbol = getCurrencySymbol(currency);
@@ -168,24 +156,25 @@ export default function CartsDetails({
         {cartItems.length === 0 ? (
           <div className="py-8 text-[#4C526F]">Your cart is empty.</div>
         ) : (
-          cartItems.map(item => (
+          cartItems?.map(item => (
             <div
-              key={item.id}
+              key={item.itemId}
               className="flex md:flex-row flex-col gap-4 bg-white py-4 border-b border-[#ECEFF3] last:border-b-0 items-stretch"
             >
               <div className="flex-shrink-0 flex md:gap-3 gap-4 items-center">
                 <Image
-                  src={getFixedImageUrl(item.image)}
+                  // src={getFixedImageUrl(item.image)}
+                  src={item?.itemImage}
                   width={102}
                   height={104}
-                  alt={item.name}
+                  alt={item.itemName}
                   className="w-[102px] h-[104px] object-cover rounded-lg aspect-square"
                   unoptimized
                 />
 
                 <div className="flex md:hidden flex-col gap-3">
                   <h3 className="text-[#4C526F] md:text-lg text-base normal-case leading-[100%] font-extrabold">
-                    {item.name}
+                    {item.itemName}
                   </h3>
                   <p className="text-sm text-[#4C526F] font-normal leading-[100%]">
                     SKU: {item.sku}
@@ -205,7 +194,7 @@ export default function CartsDetails({
                 <div className="flex flex-col justify-between gap-3 md:gap">
                   <div className="md:flex hidden flex-col gap-2">
                     <h3 className="text-[#4C526F] md:text-lg text-base leading-[100%] font-extrabold normal-case">
-                      {item.name}
+                      {item.itemName}
                     </h3>
                     <p className="text-sm text-[#4C526F] font-normal leading-[100%]">
                       SKU: {item.sku}
@@ -225,10 +214,10 @@ export default function CartsDetails({
                       <div className="flex gap-4 items-center bg-[#F3F3F4] p-1.5">
                         <button
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity, -1)
+                            updateQuantity(item.itemId, item.quantity, -1)
                           }
                           disabled={isUpdating || isFetching}
-                          className="flex items-center cursor-pointer text-[#1D1F2C] hover:text-[#1D1F2C]/50 disabled:opacity-50"
+                          className="flex items-center cursor-pointer text-[#1D1F2C] hover:text-[#1D1F2C]/50"
                         >
                           <MinusIcon className="" />
                         </button>
@@ -239,19 +228,19 @@ export default function CartsDetails({
 
                         <button
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity, 1)
+                            updateQuantity(item.itemId, item.quantity, 1)
                           }
                           disabled={isUpdating || isFetching}
-                          className="flex items-center cursor-pointer text-[#1D1F2C] hover:text-[#1D1F2C]/50 disabled:opacity-50"
+                          className="flex items-center cursor-pointer text-[#1D1F2C] hover:text-[#1D1F2C]/50"
                         >
                           <PlusIcon className="" />
                         </button>
                       </div>
 
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeItem(item.itemId)}
                         disabled={isDeleting || isFetching}
-                        className="cursor-pointer disabled:opacity-50"
+                        className="cursor-pointer"
                       >
                         <DeleteIcon className="size-5 scale-100 hover:scale-120 duration-200" />
                       </button>

@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
+import PaginationComponent from '@/components/reusable/Features/PaginationComponent';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useFilterPagination } from "@/hooks/useFilterHook";
-import { useRef, useState } from "react";
+} from '@/components/ui/select';
+import { useFilterPagination } from '@/hooks/useFilterHook';
+import { useMemo, useRef, useState } from 'react';
 
 export interface Order {
   id: string;
@@ -22,39 +22,45 @@ export interface Order {
 interface OrdersTableProps {
   title?: string;
   data: Order[];
+  isLoading?: boolean;
 }
 
-export function OrdersTable({ title, data }: OrdersTableProps) {
+export function OrdersTable({
+  title,
+  data,
+  isLoading = false,
+}: OrdersTableProps) {
   const idRef = useRef<HTMLDivElement>(null);
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(data, 6);
+  const [categories, setCategories] = useState('all');
 
-  const loading = false;
-  const [categories, setCategories] = useState("all");
+  const filteredData = useMemo(() => {
+    if (categories === 'all') return data;
+    return data.filter(order => order.status === categories);
+  }, [categories, data]);
+
+  const { currentItems, currentPage, totalPages, setCurrentPage } =
+    useFilterPagination(filteredData, 6);
 
   return (
     <div ref={idRef} className="p-4 bg-white border border-[#DFE1E7]">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-[20px] leading-[132%] uppercase font-extrabold">
           {title}
         </h1>
 
-        {/* Tailwind dropdown */}
         <Select value={categories} onValueChange={setCategories}>
           <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
             <SelectValue placeholder="All Status" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Status</SelectItem>
-            <SelectItem value="Saddles">In Process</SelectItem>
-            <SelectItem value="Tack & Accessories">Delivered</SelectItem>
+            <SelectItem value="In Process">In Process</SelectItem>
+            <SelectItem value="Delivered">Delivered</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      {/* Table */}
-      <div className="mt-5 border  md:w-full w-[380px] overflow-x-auto">
+      <div className="mt-5 border md:w-full w-[380px] overflow-x-auto">
         <table className="w-full">
           <thead className="bg-[#F6F8FA] normal-case text-left">
             <tr className="text-[14px] leading-[144%]">
@@ -74,9 +80,18 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
           </thead>
 
           <tbody>
-            {data.length > 0 ? (
+            {isLoading ? (
+              <tr>
+                <td
+                  colSpan={4}
+                  className="text-center py-8 text-gray-500 text-sm"
+                >
+                  Loading orders...
+                </td>
+              </tr>
+            ) : filteredData.length > 0 ? (
               currentItems.map((order, index) => (
-                <tr key={index}>
+                <tr key={`${order.id}-${index}`}>
                   <td className="py-3 px-4 text-[14px] text-[#14191F] text-nowrap">
                     {order.id}
                   </td>
@@ -85,9 +100,9 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
                       <div className="text-[14px] uppercase text-[#1F274B] text-nowrap">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86] text-nowrap">
+                      {/* <div className="text-[12px] mt-2.5 normal-case text-[#696E86] text-nowrap">
                         Size: {order.size}
-                      </div>
+                      </div> */}
                     </div>
                   </td>
                   <td className="py-3 px-4 text-[14px] text-[#14191F] text-nowrap">
@@ -96,9 +111,9 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
                   <td className="py-3 px-4 text-center">
                     <span
                       className={`px-2.5 py-1.5 text-[14px] leading-[100%] rounded text-nowrap ${
-                        order.status === "Delivered"
-                          ? "text-[#13AF81] bg-[#F2FCF9]"
-                          : "text-[#EDA217] bg-[#FFFBF4]"
+                        order.status === 'Delivered'
+                          ? 'text-[#13AF81] bg-[#F2FCF9]'
+                          : 'text-[#EDA217] bg-[#FFFBF4]'
                       }`}
                     >
                       {order.status}
@@ -120,13 +135,12 @@ export function OrdersTable({ title, data }: OrdersTableProps) {
         </table>
       </div>
 
-      {/* Pagination */}
       <div>
-        {!loading && (
+        {!isLoading && (
           <div
             className={`flex justify-center pt-12 pb-4 ${
-              data?.length >= 5 ? "block" : "hidden"
-            } `}
+              filteredData.length >= 5 ? 'block' : 'hidden'
+            }`}
           >
             <PaginationComponent
               currentPage={currentPage}

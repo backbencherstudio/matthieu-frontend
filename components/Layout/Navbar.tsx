@@ -1,152 +1,155 @@
-"use client";
-import { ArrowUp, BadgeEuro, EuroIcon, Menu, SearchIcon, X } from "lucide-react";
-import { AiOutlineClose } from "react-icons/ai";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import LanguageGlobalIcon from "../Icons/LanguageGlobalIcon";
-import UsdIcon from "../Icons/UsdIcon";
-import UserIcon from "../Icons/UserIcon";
-import HoverItems from "./HoverItems";
+'use client';
+import {
+  ArrowUp,
+  BadgeEuro,
+  EuroIcon,
+  Menu,
+  SearchIcon,
+  X,
+} from 'lucide-react';
+import { AiOutlineClose } from 'react-icons/ai';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import LanguageGlobalIcon from '../Icons/LanguageGlobalIcon';
+import UsdIcon from '../Icons/UsdIcon';
+import UserIcon from '../Icons/UserIcon';
+import HoverItems from './HoverItems';
 
-
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import LanguageSwitcher from "../Shared/LanguageSwitcher";
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import LanguageSwitcher from '../Shared/LanguageSwitcher';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "../ui/hover-card";
-import CartsProducts from "../ClientComponents/ProductDetailsClient/CartsProducts";
-import { getCookie } from "@/helper/RegionCookies";
-import UserMenu from "./UserMenu";
-import { IoIosArrowUp } from "react-icons/io";
-import { useGetCartQuery } from "@/src/redux/client/add-to-cart/cartApi";
-
-
+} from '../ui/hover-card';
+import CartsProducts from '../ClientComponents/ProductDetailsClient/CartsProducts';
+import { getCookie } from '@/helper/RegionCookies';
+import UserMenu from './UserMenu';
+import { IoIosArrowUp } from 'react-icons/io';
+import { useGetCartQuery } from '@/src/redux/client/add-to-cart/cartApi';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname();
 
-  
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const { data: cartResponse } = useGetCartQuery(undefined);
 
-  const cartCount =
-    cartResponse?.data?.items?.reduce(
-      (total, item) => total + item.quantity,
-      0,
-    ) ?? 0;
-
+  // const cartCount =
+  //   cartResponse?.data?.items?.reduce(
+  //     (total, item) => total+ item.quantity,
+  //     0,
+  //   ) ?? 0;
+  const cartCount = cartResponse?.data?.items?.length ?? 0;
   const navigationLinks = [
     {
-      label: "SADDLES",
-      href: "/saddles",
+      label: 'SADDLES',
+      href: '/saddles',
       hasDropdown: true,
       dropdownContent: [
         {
-          category: "BY COLLECTION",
+          category: 'BY COLLECTION',
           hasLink: true,
           items: [
             {
-              label: "Arion Saddles",
-              subtitle: "FULL CUSTOM",
+              label: 'Arion Saddles',
+              subtitle: 'FULL CUSTOM',
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
               items: [
-                { label: "JUMPING", href: "/saddles/jumping" },
-                { label: "DRESSAGE", href: "/saddles/dressage" },
-                { label: "CROSS-COUNTRY", href: "/saddles/cross-country" },
-                { label: "KIDS", href: "/saddles/kids" },
+                { label: 'JUMPING', href: '/saddles/jumping' },
+                { label: 'DRESSAGE', href: '/saddles/dressage' },
+                { label: 'CROSS-COUNTRY', href: '/saddles/cross-country' },
+                { label: 'KIDS', href: '/saddles/kids' },
               ],
-              href: "/saddles/arion-saddles",
+              href: '/saddles/arion-saddles',
             },
             {
-              label: "Atlas Saddles",
-              subtitle: "SEMI CUSTOM",
+              label: 'Atlas Saddles',
+              subtitle: 'SEMI CUSTOM',
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY"],
               items: [
                 {
-                  label: "JUMPING",
-                  href: "/saddles/atlas-saddles/jumping",
+                  label: 'JUMPING',
+                  href: '/saddles/atlas-saddles/jumping',
                 },
                 {
-                  label: "DRESSAGE",
-                  href: "/saddles/atlas-saddles/dressage",
+                  label: 'DRESSAGE',
+                  href: '/saddles/atlas-saddles/dressage',
                 },
                 {
-                  label: "CROSS-COUNTRY",
-                  href: "/saddles/atlas-saddles/cross-country",
+                  label: 'CROSS-COUNTRY',
+                  href: '/saddles/atlas-saddles/cross-country',
                 },
               ],
-              href: "/saddles/atlas-saddles",
+              href: '/saddles/atlas-saddles',
             },
             {
-              label: "Athena Saddles",
-              subtitle: "TAILOR MADE",
+              label: 'Athena Saddles',
+              subtitle: 'TAILOR MADE',
               // items: ["JUMPING", "DRESSAGE", "CROSS-COUNTRY", "KIDS"],
-              items: [{ label: "coming soon", href: "#" }],
+              items: [{ label: 'coming soon', href: '#' }],
               // items: [],
-              href: "/saddles/athena-saddles",
+              href: '/saddles/athena-saddles',
             },
           ],
         },
         {
-          category: "LEADLINE SADDLE",
+          category: 'LEADLINE SADDLE',
           items: [],
           hasLink: true,
-          href: "/saddles/leadline-saddle",
+          href: '/saddles/leadline-saddle',
         },
         {
-          category: "ALL SADDLES",
+          category: 'ALL SADDLES',
           items: [],
           hasLink: true,
-          href: "/saddles/all-saddles",
+          href: '/saddles/all-saddles',
         },
       ],
     },
     {
-      label: "TACK",
-      href: "/tack",
+      label: 'TACK',
+      href: '/tack',
       hasDropdown: true,
       dropdownContent: [
-        { category: "Bridles", href: "/tack/#bridles" },
-        { category: "Reins", href: "/tack/#reins" },
-        { category: "Martingales", href: "/tack/#breastplates" },
-        { category: "Girths", href: "/tack/#girths" },
-        { category: "Stirrup Leathers", href: "/tack/#stirrupLeathers" },
-        { category: "Pads", href: "/tack/#pads" },
-        { category: "Rider Apparel", href: "/tack/#riderApparel" },
-        { category: "Boots", href: "/tack/#boots" },
+        { category: 'Bridles', href: '/tack/#bridles' },
+        { category: 'Reins', href: '/tack/#reins' },
+        { category: 'Martingales', href: '/tack/#breastplates' },
+        { category: 'Girths', href: '/tack/#girths' },
+        { category: 'Stirrup Leathers', href: '/tack/#stirrupLeathers' },
+        { category: 'Pads', href: '/tack/#pads' },
+        { category: 'Rider Apparel', href: '/tack/#riderApparel' },
+        { category: 'Boots', href: '/tack/#boots' },
         // { category: "Leather Care", href: "/tack/#leatherCare" },
         // { category: "Halters & Ropes", href: "/tack/#halterRopes" },
-        { category: "Accessories", href: "/tack/#accessories" },
+        { category: 'Accessories', href: '/tack/#accessories' },
       ],
     },
     {
-      label: "BRAND",
-      href: "#",
+      label: 'BRAND',
+      href: '#',
       hasDropdown: true,
       dropdownContent: [
-        { category: "Our Story", href: "/brand/our-story" },
-        { category: "Meet The Team", href: "/brand/meet-the-team" },
-        { category: "Workshop", href: "/brand/our-workshop" },
-        { category: "Ambassadors", href: "/brand/arion-amabassadors" },
-        { category: "Blog", href: "/brand/blog" },
-        { category: "job offers", href: "/brand/job-offer" },
-        { category: "contact us", href: "/contact-us" },
+        { category: 'Our Story', href: '/brand/our-story' },
+        { category: 'Meet The Team', href: '/brand/meet-the-team' },
+        { category: 'Workshop', href: '/brand/our-workshop' },
+        { category: 'Ambassadors', href: '/brand/arion-amabassadors' },
+        { category: 'Blog', href: '/brand/blog' },
+        { category: 'job offers', href: '/brand/job-offer' },
+        { category: 'contact us', href: '/contact-us' },
       ],
     },
-    { label: "USED SADDLES", href: "/saddles/used-saddles" },
-    { label: "FIND US", href: "/find-us" },
+    { label: 'USED SADDLES', href: '/saddles/used-saddles' },
+    { label: 'FIND US', href: '/find-us' },
   ];
 
   // Left side options
   const leftOptions = [
-    { label: "USD", icon: <UsdIcon /> },
-    { label: "ENGLISH", icon: <LanguageGlobalIcon /> },
+    { label: 'USD', icon: <UsdIcon /> },
+    { label: 'ENGLISH', icon: <LanguageGlobalIcon /> },
   ];
 
   const toggleMenu = () => {
@@ -155,14 +158,13 @@ const Header = () => {
 
   const isLogInUers = false;
 
-  const region = getCookie("x-region");
-  const isAmerica = region === "america";
-  const icon = isAmerica ? "$" : "€";
-
-
+  const region = getCookie('x-region');
+  const isAmerica = region === 'america';
+  const icon = isAmerica ? '$' : '€';
 
   // Simple login check (runs once on mount)
-  const isLoggedIn = typeof window !== 'undefined' && !!localStorage.getItem('token');
+  const isLoggedIn =
+    typeof window !== 'undefined' && !!localStorage.getItem('token');
 
   // Close when clicking outside
   useEffect(() => {
@@ -193,7 +195,9 @@ const Header = () => {
               <span className="">
                 {isAmerica ? <UsdIcon /> : <BadgeEuro className="size-4" />}
               </span>
-              <span className="textSecondary text-xs leading-[100%]">{isAmerica ? "USD" : "EUR"}</span>
+              <span className="textSecondary text-xs leading-[100%]">
+                {isAmerica ? 'USD' : 'EUR'}
+              </span>
             </div>
             <div className="flex items-center gap-1.5">
               <LanguageSwitcher />
@@ -209,8 +213,9 @@ const Header = () => {
                   <HoverCardTrigger asChild>
                     <Link
                       href={link.href}
-                      className={`${isActive ? "font-semibold" : "font-normal"
-                        }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
+                      className={`${
+                        isActive ? 'font-semibold' : 'font-normal'
+                      }  textSecondary hover:font-semibold leading-[100%] xl:text-base text-sm `}
                     >
                       {link.label}
                     </Link>
@@ -227,7 +232,6 @@ const Header = () => {
               <div className="w-[156px] h-[56px]">
                 <Link href="/">
                   <img src="/matheiu-logo.png" alt="Logo" />
-                  
                 </Link>
               </div>
             </div>
@@ -271,21 +275,17 @@ const Header = () => {
             </div>
             <div>
               <div className="relative ml-auto flex items-center gap-3">
-
                 {/* Cart icon as relative anchor */}
                 <div className="textSecondary relative flex ">
                   <CartsProducts />
 
                   {/* Badge inside the cart wrapper */}
                   {cartCount > 0 && (
-                    <span
-                      className="absolute -top-2 -right-2 md:w-6 md:h-6 w-[20px] h-5 rounded-full  bg-red-500 border-2 border-white flex items-center justify-center  text-white text-xs font-bold px-1.5 shadow-md"
-                    >
+                    <span className="absolute -top-2 -right-2 md:w-6 md:h-6 w-[20px] h-5 rounded-full  bg-red-500 border-2 border-white flex items-center justify-center  text-white text-xs font-bold px-1.5 shadow-md">
                       {cartCount}
                     </span>
                   )}
                 </div>
-
               </div>
             </div>
 
@@ -304,13 +304,11 @@ const Header = () => {
         </div>
 
         {/* Mobile menu */}
- 
 
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="lg:hidden border-t border-gray-200 py-6 px-4 bg-white">
             <div className="flex flex-col space-y-6">
-
               {/* Mobile Navigation Links with Dropdown Support */}
               <div className="flex flex-col space-y-4">
                 {navigationLinks.map((link, index) => (
@@ -326,7 +324,6 @@ const Header = () => {
 };
 
 export default Header;
-
 
 function MobileNavLink({ link }: { link: any }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -349,7 +346,11 @@ function MobileNavLink({ link }: { link: any }) {
         className="flex items-center justify-between w-full py-3.5 text-base font-semibold tracking-widest text-[#1F274B] hover:text-[#FE5000] transition-colors uppercase"
       >
         <span>{link.label}</span>
-        <span className={`transition-transform duration-300 ${isOpen ? "" : "rotate-180"}`}><IoIosArrowUp className="md:size-5 size-4" /></span>
+        <span
+          className={`transition-transform duration-300 ${isOpen ? '' : 'rotate-180'}`}
+        >
+          <IoIosArrowUp className="md:size-5 size-4" />
+        </span>
       </button>
 
       {isOpen && (
@@ -365,7 +366,7 @@ function MobileNavLink({ link }: { link: any }) {
 
               {/* Category label */}
               <Link
-                href={category.href || "#"}
+                href={category.href || '#'}
                 className="block text-[12px] font-bold tracking-[0.07em] text-[#1F274B] pt-2.5 pb-1 hover:text-[#FE5000] transition-colors"
               >
                 {category.category}
@@ -383,7 +384,7 @@ function MobileNavLink({ link }: { link: any }) {
                       <div className="absolute left-0 top-[12px] w-4 h-[1.5px] bg-[#c5c9d8]" />
 
                       <Link
-                        href={sub.href || "#"}
+                        href={sub.href || '#'}
                         className="block text-[12px] font-medium text-[#1F274B] py-[5px] hover:text-[#FE5000] transition-colors"
                       >
                         {sub.label}
@@ -405,7 +406,7 @@ function MobileNavLink({ link }: { link: any }) {
                               {/* L3 horizontal tick */}
                               <div className="absolute left-0 top-[10px] w-[14px] h-[1.5px] bg-[#dde0ea]" />
                               <Link
-                                href={subSub.href || "#"}
+                                href={subSub.href || '#'}
                                 className="block text-[11px] tracking-[0.04em] text-[#6b7490] py-[3px] hover:text-[#1F274B] transition-colors"
                               >
                                 {subSub.label}
