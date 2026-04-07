@@ -142,6 +142,7 @@ const baseApi = createApi({
     'queries',
     'TackProduct',
     'SaddleProduct',
+    'leadlineSaddle',
     'UseSaddle',
     'Cart',
     'Favorite',

@@ -122,4 +122,8 @@ export interface TableRowItem extends TableItem {
   created_date?: string;
   basePrice?: string;
   usedsaddlecategory?: string;
+  size?: string;
+  stockQuantity? : string,
+  price_usd? : string,
+  price_eur? : string,
 }

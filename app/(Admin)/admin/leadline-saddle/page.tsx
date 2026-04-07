@@ -1,5 +1,5 @@
+import LeadlineSadleTable from "@/components/AdminComponents/LeadlineSaddles/LeadlineSaddleTable";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import SaddleProductTable from "@/components/SaddleProduct/SaddleProductTable";
 import Link from "next/link";
 
 export default function page() {
@@ -19,7 +19,7 @@ export default function page() {
           </Link>
         </div>
       </div>
-      <SaddleProductTable />
+      <LeadlineSadleTable />
     </div>
   );
 }

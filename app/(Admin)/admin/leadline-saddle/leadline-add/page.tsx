@@ -5,7 +5,7 @@ import AddUseSaadlesForm from "@/components/AdminComponents/UseSaddles/AddUseSaa
 const AddLeadlineSaddle = () => {
   const breadLink = [
     {
-      label: "leadline Management",
+      label: "Leadline Management",
       href: "/admin/leadline-saddle",
     },
     {
