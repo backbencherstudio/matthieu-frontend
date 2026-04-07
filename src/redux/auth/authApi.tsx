@@ -20,6 +20,7 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["User"],
     }),
 
     forgotPassword: builder.mutation({

@@ -29,9 +29,23 @@ const AddCompetition = () => {
   const [createCalendar, { isLoading }] = useCreateCalendarMutation();
   const router = useRouter()
 
+  const toDdMmYyyy = (isoDate: string) => {
+    if (!isoDate) return isoDate;
+    const [year, month, day] = isoDate.split("-");
+    if (year && month && day) {
+      const dd = day.padStart(2, "0");
+      const mm = month.padStart(2, "0");
+      return `${dd}/${mm}/${year}`;
+    }
+    return isoDate;
+  };
+
+
+
   const onSubmit = async (data: AddCompetitionFormValues) => {
     try {
-      const response = await createCalendar(data);
+      const payload = { ...data, date: toDdMmYyyy(data.date) };
+      const response = await createCalendar(payload);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         reset();
@@ -121,9 +135,9 @@ const AddCompetition = () => {
                 <label className="text-[12px] text-[#696E86]">Date</label>
                 <input
                   {...register("date", {
-                    required: "Date is required",
+                    required: "Invalid date format. Use dd/mm/yyyy",
                   })}
-                  // type="date"
+                  type="date"
                   className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
                   placeholder="01/12/2025"
                 />
