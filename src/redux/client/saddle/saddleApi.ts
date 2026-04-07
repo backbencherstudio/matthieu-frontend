@@ -43,6 +43,7 @@ export interface SaddleData {
   id: string;
   name: string;
   sku?: string | null;
+  stockQuantity?: string | null;
   price?: string | number | null;
   size?: string[] | string | null;
   images?: SaddleImage[];
@@ -160,6 +161,15 @@ const saddleApi = baseApi.injectEndpoints({
       invalidatesTags: ["Favorite"],
     }),
 
+    leadlineAddToCart: builder.mutation({
+      query: (body) => ({
+        url: `/cart/add`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Saddle"],
+    }),
+
     removeFavorite: builder.mutation<
       RemoveFavoriteResponse,
       { favoriteId: string }
@@ -189,6 +199,7 @@ export const {
   useAddSaddleToFavoriteMutation,
   useRemoveFavoriteMutation,
   useGetAllFavoritesQuery,
+  useLeadlineAddToCartMutation,
 } = saddleApi;
 
 export default saddleApi;

@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 export default function OurWorkShop() {
   return (
@@ -24,7 +23,7 @@ export default function OurWorkShop() {
             <h1 className="uppercase text-3xl md:text-[40px] font-extrabold text-primary-text">
               OUR WORKSHOP
             </h1>
-            <p className="textSecondary text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto tracking-[160%]">
+            <p className="textSecondary text-center text-base md:text-lg mt-4 normal-case max-w-[600px] w-full mx-auto leading-[160%]">
               Located in the beautiful southwest of France, in Basque county.
               Our workshop is filled with heritage and passion.
             </p>
