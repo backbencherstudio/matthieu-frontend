@@ -25,6 +25,8 @@ export default function AccountSection() {
   const { data, refetch } = useGetUserQuery();
   const user = data?.data;
 
+  console.log("adminData ---->", user)
+
   const [updateProfile] = useUpdateProfileMutation();
 
   const {
