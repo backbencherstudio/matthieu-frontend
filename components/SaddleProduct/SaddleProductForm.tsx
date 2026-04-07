@@ -64,6 +64,27 @@ export default function SaddleProductForm() {
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
+  // Add this state at the top of your component
+const [colorName, setColorName] = useState("Navy");
+const [pipingColorName, setPipingColorName] = useState("Burnt Orange");
+
+const PRESET_COLORS = [
+  { hex: "#1F274B", name: "Navy" },
+  { hex: "#111927", name: "Charcoal" },
+  { hex: "#6B7280", name: "Slate" },
+  { hex: "#D85A30", name: "Burnt Orange" },
+  { hex: "#FE5000", name: "Orange" },
+  { hex: "#c6a35d", name: "Gold" },
+  { hex: "#8B6914", name: "Tan" },
+  { hex: "#F5F0E8", name: "Cream" },
+  { hex: "#1D9E75", name: "Teal" },
+  { hex: "#185FA5", name: "Blue" },
+  { hex: "#534AB7", name: "Purple" },
+  { hex: "#D4537E", name: "Pink" },
+  { hex: "#374151", name: "Dark Gray" },
+  { hex: "#E5E7EB", name: "Light Gray" },
+];
+
   const addTag = (
     inputValue: string,
     setInputValue: React.Dispatch<React.SetStateAction<string>>,
@@ -111,39 +132,82 @@ export default function SaddleProductForm() {
 
   const [createProduct, { isLoading }] = useCreateProductMutation();
 
+  // const onSubmit = async (data: Inputs) => {
+  //   try {
+  //     const formData = new FormData();
+
+  //     formData.append("name", data.name);
+  //     formData.append("header_title", data.header_title);
+  //     formData.append("header_description", data.header_description);
+  //     formData.append("description", data.description || "");
+  //     formData.append("price_usd", data.price_usd);
+  //     formData.append("price_eur", data.price_eur);
+  //     formData.append("category", data.category);
+  //     formData.append("subcategory", data.subcategory);
+  //     formData.append("country", data.country);
+  //     leatherTags.forEach((item) => formData.append("leather_type", item));
+  //     colorTags.forEach((item) => formData.append("colors", item));
+  //     pipingTags.forEach((item) => formData.append("piping_color", item));
+  //     images.forEach((file) => formData.append("images", file));
+
+  //     const result = await createProduct(formData);
+  //     if (result?.data?.success) {
+  //       toast.success(result?.data?.message);
+  //       router.push("/admin/saddle-product");
+  //       reset();
+  //       setLeatherTags([]);
+  //       setColorTags([]);
+  //       setPipingTags([]);
+  //       setImages([]);
+  //       setImagePreviews([]);
+  //     }
+  //   } catch (error) {
+  //     console.error("Submit error:", error);
+  //   }
+  // };
+
+
   const onSubmit = async (data: Inputs) => {
-    try {
-      const formData = new FormData();
+  try {
+    const formData = new FormData();
 
-      formData.append("name", data.name);
-      formData.append("header_title", data.header_title);
-      formData.append("header_description", data.header_description);
-      formData.append("description", data.description || "");
-      formData.append("price_usd", data.price_usd);
-      formData.append("price_eur", data.price_eur);
-      formData.append("category", data.category);
-      formData.append("subcategory", data.subcategory);
-      formData.append("country", data.country);
-      leatherTags.forEach((item) => formData.append("leather_type", item));
-      colorTags.forEach((item) => formData.append("colors", item));
-      pipingTags.forEach((item) => formData.append("piping_color", item));
-      images.forEach((file) => formData.append("images", file));
+    formData.append("name", data.name);
+    formData.append("header_title", data.header_title);
+    formData.append("header_description", data.header_description);
+    formData.append("description", data.description || "");
+    formData.append("price_usd", data.price_usd);
+    formData.append("price_eur", data.price_eur);
+    formData.append("category", data.category);
+    formData.append("subcategory", data.subcategory);
+    formData.append("country", data.country);
 
-      const result = await createProduct(formData);
-      if (result?.data?.success) {
-        toast.success(result?.data?.message);
-        router.push("/admin/saddle-product");
-        reset();
-        setLeatherTags([]);
-        setColorTags([]);
-        setPipingTags([]);
-        setImages([]);
-        setImagePreviews([]);
-      }
-    } catch (error) {
-      console.error("Submit error:", error);
+    // === Send Arrays Correctly ===
+    leatherTags.forEach((item) => formData.append("leather_type[]", item));   // Note: leather_type[]
+    colorTags.forEach((item) => formData.append("colors[]", item));           // Note: colors[]
+    pipingTags.forEach((item) => formData.append("piping_color[]", item));    // Note: piping_color[]
+
+    // Append images
+    images.forEach((file) => formData.append("images", file));
+
+    const result = await createProduct(formData);
+
+    if (result?.data?.success) {
+      toast.success(result?.data?.message || "Product added successfully");
+      router.push("/admin/saddle-product");
+      reset();
+
+      // Clear all tags and images after success
+      setLeatherTags([]);
+      setColorTags([]);
+      setPipingTags([]);
+      setImages([]);
+      setImagePreviews([]);
     }
-  };
+  } catch (error: any) {
+    console.error("Submit error:", error);
+    toast.error(error?.data?.message || "Failed to add product");
+  }
+};
 
   return (
     <div className="bg-white p-4 rounded-[8px]">
@@ -255,7 +319,7 @@ export default function SaddleProductForm() {
         </div>
 
         {/* Leather Type */}
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Leather Type
           </Label>
@@ -294,10 +358,99 @@ export default function SaddleProductForm() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
+
+        {/* ── LEATHER TYPE ── */}
+<div className="mb-4 bg-white border border-gray-200 rounded-xl p-5">
+  <p className="text-[13px] font-semibold text-[#1F274B] mb-1">Leather Type</p>
+  <p className="text-xs text-gray-400 mb-3">Type a leather type and click Add</p>
+  <div className="flex gap-2">
+    <input
+      className="flex-1 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm text-[#1F274B] outline-none focus:border-[#1F274B] placeholder:text-gray-300 transition-colors"
+      placeholder="e.g. Full Grain, Nubuck, Suede..."
+      value={leatherInput}
+      onChange={(e) => setLeatherInput(e.target.value)}
+      onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addTag(leatherInput, setLeatherInput, setLeatherTags); }}}
+    />
+    <button type="button" onClick={() => addTag(leatherInput, setLeatherInput, setLeatherTags)}
+      className="bg-[#1F274B] hover:bg-[#2d3a5e] text-white px-5 rounded-lg text-sm font-semibold transition-colors">
+      + Add
+    </button>
+  </div>
+  <div className="flex flex-wrap gap-2 mt-3">
+    {leatherTags.length === 0 && <span className="text-xs text-gray-300 italic">No leather types added yet</span>}
+    {leatherTags.map((tag, i) => (
+      <span key={i} className="inline-flex items-center gap-1.5 bg-gray-100 border border-gray-200 text-[#1F274B] rounded-lg px-3 py-1.5 text-sm font-medium">
+        {tag}
+        <button type="button" onClick={() => removeTag(i, setLeatherTags)} className="text-gray-400 hover:text-gray-700 text-xs">✕</button>
+      </span>
+    ))}
+  </div>
+</div>
+
+{/* ── COLOR PICKER BLOCK (reuse for both Colors and Piping Color) ── */}
+{(["Colors", "Piping Color"] as const).map((label) => {
+  const isColor = label === "Colors";
+  const currentHex = isColor ? colorInput : pipingColorInput;
+  const currentName = isColor ? colorName : pipingColorName;
+  const tags = isColor ? colorTags : pipingTags;
+  const setHex = isColor ? setColorInput : setPipingColorInput;
+  const setName = isColor ? setColorName : setPipingColorName;
+  const setTags = isColor ? setColorTags : setPipingTags;
+
+  return (
+    <div key={label} className="mb-4 bg-white border border-gray-200 rounded-xl p-5">
+      <p className="text-[13px] font-semibold text-[#1F274B] mb-1">{label}</p>
+      <p className="text-xs text-gray-400 mb-4">Pick from presets or choose a custom color, then click Add</p>
+
+      {/* Step 1 — Swatches */}
+      <p className="text-[11px] font-bold text-gray-400 tracking-widest uppercase mb-2">1 — Choose a color</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {PRESET_COLORS.map(({ hex, name }) => (
+          <button key={hex} type="button"
+            onClick={() => { setHex(hex); setName(name); }}
+            className={`w-8 h-8 rounded-lg border transition-transform hover:scale-110 ${currentHex === hex ? "ring-2 ring-[#1F274B] ring-offset-2 scale-110" : "border-black/10"}`}
+            style={{ background: hex }}
+            title={name}
+          />
+        ))}
+        {/* Custom picker */}
+        <label className="w-8 h-8 rounded-lg border border-dashed border-gray-300 hover:border-[#1F274B] flex items-center justify-center cursor-pointer transition-colors" title="Custom color">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" strokeWidth="1.2"/><path d="M7 4v6M4 7h6" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round"/></svg>
+          <input type="color" className="sr-only" value={currentHex} onChange={(e) => { setHex(e.target.value); setName("Custom"); }} />
+        </label>
+      </div>
+
+      {/* Step 2 — Preview */}
+      <p className="text-[11px] font-bold text-gray-400 tracking-widest uppercase mb-2">2 — Selected</p>
+      <div className="flex items-center gap-3 bg-gray-50 border border-gray-100 rounded-lg px-4 py-2.5 mb-3">
+        <div className="w-6 h-6 rounded-md border border-black/10 flex-shrink-0" style={{ background: currentHex }} />
+        <span className="text-sm font-semibold text-[#1F274B]">{currentName}</span>
+        <span className="text-xs font-mono text-gray-400">{currentHex}</span>
+      </div>
+
+      <button type="button" onClick={() => { if (!tags.find(t => t === currentHex)) setTags(prev => [...prev, currentHex]); }}
+        className="w-full bg-[#1F274B] hover:bg-[#2d3a5e] text-white py-2.5 rounded-lg text-sm font-semibold transition-colors mb-3">
+        + Add This Color
+      </button>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2">
+        {tags.length === 0 && <span className="text-xs text-gray-300 italic">No colors added yet</span>}
+        {tags.map((hex, i) => (
+          <div key={i} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-black/5 bg-gray-50 text-sm">
+            <div className="w-4 h-4 rounded border border-black/10 flex-shrink-0" style={{ background: hex }} />
+            <span className="text-xs font-mono text-[#1F274B]">{hex}</span>
+            <button type="button" onClick={() => removeTag(i, setTags)} className="text-gray-400 hover:text-gray-700 text-xs">✕</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+})}
 
         {/* Colors */}
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">Colors</Label>
           <div className="flex gap-2">
             <Input
@@ -349,10 +502,10 @@ export default function SaddleProductForm() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Piping Color */}
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Piping Color
           </Label>
@@ -410,7 +563,7 @@ export default function SaddleProductForm() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Category & Subcategory */}
         <div className="grid grid-cols-2 gap-3 mt-3">
