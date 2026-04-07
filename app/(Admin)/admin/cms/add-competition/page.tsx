@@ -2,6 +2,7 @@
 
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import { useCreateCalendarMutation } from "@/src/redux/admin/cms/calendar/calendarApi";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,14 +27,19 @@ const AddCompetition = () => {
   } = useForm<AddCompetitionFormValues>();
 
   const [createCalendar, { isLoading }] = useCreateCalendarMutation();
+  const router = useRouter()
 
   const onSubmit = async (data: AddCompetitionFormValues) => {
     try {
       const response = await createCalendar(data);
-      console.log(response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         reset();
+        router.push('/admin/cms')
+      }
+      else {
+        // console.log(response?.error?.data?.message?.message)
+        toast.error(response?.error?.data?.message?.message);
       }
     } catch (error) {
       console.error("Create failed", error);
@@ -117,8 +123,9 @@ const AddCompetition = () => {
                   {...register("date", {
                     required: "Date is required",
                   })}
+                  // type="date"
                   className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
-                  placeholder="01/12/25"
+                  placeholder="01/12/2025"
                 />
                 {errors.date && (
                   <p className="text-xs text-red-500 mt-1">

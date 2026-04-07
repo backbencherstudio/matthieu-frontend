@@ -3,6 +3,7 @@
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
 import { useCreateMutation } from "@/src/redux/admin/cms/arionTeam/arionTeamApi";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -21,6 +22,7 @@ const AddMember = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const router = useRouter()
 
   const {
     register,
@@ -56,6 +58,7 @@ const AddMember = () => {
       if (response?.data?.success) {
         reset();
         toast.success(response?.data?.message);
+        router.push('/admin/cms')
       }
     } catch (error) {
       console.error("Create failed", error);

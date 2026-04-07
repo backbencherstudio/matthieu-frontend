@@ -8,6 +8,7 @@ const expertApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Experts"]
     }),
 
     getAllExperts: builder.query({
@@ -19,6 +20,7 @@ const expertApi = baseApi.injectEndpoints({
           page,
         },
       }),
+      providesTags: ["Experts"]
     }),
 
     getSingleExpert: builder.query({
