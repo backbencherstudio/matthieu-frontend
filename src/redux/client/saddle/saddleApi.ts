@@ -31,7 +31,7 @@
 
 // export default useSaddleApi;
 
-import baseApi from '../../api/baseApi';
+import baseApi from "../../api/baseApi";
 
 export interface SaddleImage {
   id?: string;
@@ -111,7 +111,7 @@ export interface RemoveFavoriteResponse {
 
 export interface FavoriteListItem {
   id: string;
-  type: 'SADDLE_PRODUCT' | 'TACK_PRODUCT' | string;
+  type: "SADDLE_PRODUCT" | "TACK_PRODUCT" | string;
   savedAt: string;
   product: {
     id: string;
@@ -123,41 +123,41 @@ export interface FavoriteListItem {
 }
 
 const saddleApi = baseApi.injectEndpoints({
-  endpoints: builder => ({
-    getAllSaddles: builder.query<GetAllSaddlesResponse, void>({
+  endpoints: (builder) => ({
+    getAllSaddles: builder.query({
       query: () => ({
         url: `/sadlles`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Saddle', 'Favorite'],
+      providesTags: ["Saddle", "Favorite"],
     }),
 
-    getSingleSaddle: builder.query<GetSingleSaddleResponse, { id: string }>({
+    getSingleSaddle: builder.query({
       query: ({ id }) => ({
         url: `/sadlles/${id}`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Saddle', 'Favorite'],
+      providesTags: ["Saddle", "Favorite"],
     }),
 
     getLeadLineSaddle: builder.query<GetLeadLineSaddleResponse, void>({
       query: () => ({
         url: `/sadlles/leadline/product`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Saddle', 'Favorite'],
+      providesTags: ["Saddle", "Favorite"],
     }),
 
     addSaddleToFavorite: builder.mutation<
       AddSaddleFavoriteResponse,
       AddSaddleFavoritePayload
     >({
-      query: body => ({
+      query: (body) => ({
         url: `/saved-product`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Favorite'],
+      invalidatesTags: ["Favorite"],
     }),
 
     removeFavorite: builder.mutation<
@@ -166,17 +166,17 @@ const saddleApi = baseApi.injectEndpoints({
     >({
       query: ({ favoriteId }) => ({
         url: `/saved-product/${favoriteId}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Favorite'],
+      invalidatesTags: ["Favorite"],
     }),
 
     getAllFavorites: builder.query<FavoriteListItem[], void>({
       query: () => ({
         url: `/saved-product`,
-        method: 'GET',
+        method: "GET",
       }),
-      providesTags: ['Favorite'],
+      providesTags: ["Favorite"],
     }),
   }),
   overrideExisting: false,
