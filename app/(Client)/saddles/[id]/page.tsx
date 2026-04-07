@@ -35,8 +35,9 @@ export default function JumpingPage() {
 
   const { data } = useGetSingleSaddleQuery({ id: id });
   const saddleDetails = data?.data;
+
   const [selectedImage, setSelectedImage] = useState(
-    saddleDetails?.images[0].url,
+    saddleDetails?.images[0]?.url,
   );
   const [selectedColor, setSelectedColor] = useState("BLACK");
 

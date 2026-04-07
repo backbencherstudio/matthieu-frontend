@@ -31,9 +31,7 @@ type Inputs = {
 
 enum productcategory {
   SADDLES = "SADDLES",
-  // TACK = "TACK",
-  LEADLINE = "LEADLINE",
-  // USED = "USED",
+  // LEADLINE = "LEADLINE",
 }
 
 enum saddleSubcategory {
@@ -63,8 +61,8 @@ export default function SaddleProductForm() {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showPipingColorPicker, setShowPipingColorPicker] = useState(false);
   const [pipingTags, setPipingTags] = useState<string[]>([]);
-
   const [images, setImages] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   const addTag = (
     inputValue: string,
@@ -73,7 +71,6 @@ export default function SaddleProductForm() {
   ) => {
     const value = inputValue.trim();
     if (!value) return;
-
     setTags((prev) => {
       if (prev.includes(value)) return prev;
       return [...prev, value];
@@ -96,14 +93,24 @@ export default function SaddleProductForm() {
     setPipingColorInput(color.hex);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    setImages(files);
+    if (!files.length) return;
+    setImages((prev) => [...prev, ...files]);
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setImagePreviews((prev) => [...prev, ...newPreviews]);
+    e.target.value = "";
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
   const router = useRouter();
 
   const [createProduct, { isLoading }] = useCreateProductMutation();
+
   const onSubmit = async (data: Inputs) => {
     try {
       const formData = new FormData();
@@ -117,19 +124,10 @@ export default function SaddleProductForm() {
       formData.append("category", data.category);
       formData.append("subcategory", data.subcategory);
       formData.append("country", data.country);
-      leatherTags.forEach((item) => {
-        formData.append("leather_type", item);
-      });
-      colorTags.forEach((item) => {
-        formData.append("colors", item);
-      });
-      pipingTags.forEach((item) => {
-        formData.append("piping_color", item);
-      });
-
-      images.forEach((file) => {
-        formData.append("images", file);
-      });
+      leatherTags.forEach((item) => formData.append("leather_type", item));
+      colorTags.forEach((item) => formData.append("colors", item));
+      pipingTags.forEach((item) => formData.append("piping_color", item));
+      images.forEach((file) => formData.append("images", file));
 
       const result = await createProduct(formData);
       if (result?.data?.success) {
@@ -140,6 +138,7 @@ export default function SaddleProductForm() {
         setColorTags([]);
         setPipingTags([]);
         setImages([]);
+        setImagePreviews([]);
       }
     } catch (error) {
       console.error("Submit error:", error);
@@ -153,6 +152,7 @@ export default function SaddleProductForm() {
           Add Saddle Product
         </h1>
 
+        {/* Name */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">Name *</Label>
           <Input
@@ -166,6 +166,7 @@ export default function SaddleProductForm() {
           )}
         </div>
 
+        {/* Header Title */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Header Title *
@@ -185,6 +186,7 @@ export default function SaddleProductForm() {
           )}
         </div>
 
+        {/* Header Description */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Header Description *
@@ -204,6 +206,7 @@ export default function SaddleProductForm() {
           )}
         </div>
 
+        {/* Description */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Description
@@ -215,18 +218,17 @@ export default function SaddleProductForm() {
           />
         </div>
 
+        {/* Price */}
         <div className="grid grid-cols-2 gap-x-3 mb-3">
           <div>
             <Label className="text-sm text-secondary-text mb-1">
-              Price USD
+              Price USD *
             </Label>
             <Input
               type="text"
               className="cmn-input"
               placeholder="Enter USD Price"
-              {...register("price_usd", {
-                required: "Price USD is required",
-              })}
+              {...register("price_usd", { required: "Price USD is required" })}
             />
             {errors.price_usd && (
               <p className="text-red-500 text-sm mt-1">
@@ -234,18 +236,15 @@ export default function SaddleProductForm() {
               </p>
             )}
           </div>
-
           <div>
             <Label className="text-sm text-secondary-text mb-1">
-              Price EUR
+              Price EUR *
             </Label>
             <Input
               type="text"
               className="cmn-input"
               placeholder="Enter EUR Price"
-              {...register("price_eur", {
-                required: "Price EUR is required",
-              })}
+              {...register("price_eur", { required: "Price EUR is required" })}
             />
             {errors.price_eur && (
               <p className="text-red-500 text-sm mt-1">
@@ -255,6 +254,7 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
+        {/* Leather Type */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Leather Type
@@ -277,7 +277,6 @@ export default function SaddleProductForm() {
               Add
             </button>
           </div>
-
           <div className="flex flex-wrap gap-2 mt-3">
             {leatherTags.map((tag, index) => (
               <div
@@ -297,7 +296,7 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
-        {/* Color Section */}
+        {/* Colors */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">Colors</Label>
           <div className="flex gap-2">
@@ -317,17 +316,13 @@ export default function SaddleProductForm() {
               Add
             </button>
           </div>
-
-          {/* Toggle color picker button */}
           <button
             type="button"
             onClick={() => setShowColorPicker(!showColorPicker)}
-            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+            className="mt-2 px-4 py-1 bg-[#111927] text-white rounded-md cursor-pointer"
           >
             {showColorPicker ? "Close Color Picker" : "Pick a Color"}
           </button>
-
-          {/* Color Picker */}
           {showColorPicker && (
             <div className="mt-2">
               <SketchPicker
@@ -336,19 +331,18 @@ export default function SaddleProductForm() {
               />
             </div>
           )}
-
-          {/* Display Color Tags */}
           <div className="flex flex-wrap gap-2 mt-3">
             {colorTags.map((tag, index) => (
               <div
                 key={index}
-                className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-full text-sm"
+                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm text-white"
+                style={{ backgroundColor: tag }}
               >
                 <span>{tag}</span>
                 <button
                   type="button"
                   onClick={() => removeTag(index, setColorTags)}
-                  className="text-red-500 ml-1 cursor-pointer"
+                  className="ml-1 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -357,7 +351,7 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
-        {/* Piping Color Section */}
+        {/* Piping Color */}
         <div className="mb-3">
           <Label className="text-sm text-secondary-text mb-1">
             Piping Color
@@ -381,19 +375,15 @@ export default function SaddleProductForm() {
               Add
             </button>
           </div>
-
-          {/* Toggle piping color picker */}
           <button
             type="button"
             onClick={() => setShowPipingColorPicker(!showPipingColorPicker)}
-            className="mt-2 px-4 bg-[#111927] text-white rounded-md cursor-pointer"
+            className="mt-2 px-4 py-1 bg-[#111927] text-white rounded-md cursor-pointer"
           >
             {showPipingColorPicker
               ? "Close Piping Color Picker"
               : "Pick a Piping Color"}
           </button>
-
-          {/* Piping Color Picker */}
           {showPipingColorPicker && (
             <div className="mt-2">
               <SketchPicker
@@ -402,19 +392,18 @@ export default function SaddleProductForm() {
               />
             </div>
           )}
-
-          {/* Display Piping Color Tags */}
           <div className="flex flex-wrap gap-2 mt-3">
             {pipingTags.map((tag, index) => (
               <div
                 key={index}
-                className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-full text-sm"
+                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm text-white"
+                style={{ backgroundColor: tag }}
               >
                 <span>{tag}</span>
                 <button
                   type="button"
                   onClick={() => removeTag(index, setPipingTags)}
-                  className="text-red-500 ml-1 cursor-pointer"
+                  className="ml-1 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -423,10 +412,11 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
+        {/* Category & Subcategory */}
         <div className="grid grid-cols-2 gap-3 mt-3">
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
-              Category*
+              Category *
             </Label>
             <Controller
               name="category"
@@ -457,7 +447,7 @@ export default function SaddleProductForm() {
 
           <div className="mb-3">
             <Label className="text-sm text-secondary-text mb-1">
-              Saddle Category*
+              Saddle Category *
             </Label>
             <Controller
               name="subcategory"
@@ -489,8 +479,9 @@ export default function SaddleProductForm() {
           </div>
         </div>
 
+        {/* Country */}
         <div className="mb-3">
-          <Label className="text-sm text-secondary-text mb-1">Country*</Label>
+          <Label className="text-sm text-secondary-text mb-1">Country *</Label>
           <Controller
             name="country"
             control={control}
@@ -517,20 +508,44 @@ export default function SaddleProductForm() {
           )}
         </div>
 
-        <div className="mb-3">
-          <Label className="text-sm text-secondary-text mb-1">Images*</Label>
-          <Input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          <div className="mt-2 text-sm text-gray-500">
-            {images.length > 0 &&
-              images.map((file, index) => <p key={index}>{file.name}</p>)}
+        {/* Images */}
+        <div className="mb-4">
+          <Label className="text-sm text-secondary-text mb-2 block">
+            Images *
+          </Label>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {imagePreviews.map((preview, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={preview}
+                  alt={`preview-${index}`}
+                  className="w-full h-28 object-cover rounded border"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(index)}
+                  className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center cursor-pointer text-xs"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+
+            {/* Add Button */}
+            <label className="flex items-center justify-center cursor-pointer w-full h-28 bg-white rounded border border-dashed border-gray-400 hover:bg-gray-50 transition">
+              <span className="text-sm text-gray-500">+ Add</span>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageUpload}
+              />
+            </label>
           </div>
         </div>
 
+        {/* Submit */}
         <div>
           <button type="submit" className="cmn-btn" disabled={isLoading}>
             {isLoading ? "Submitting..." : "Add Saddle Product"}

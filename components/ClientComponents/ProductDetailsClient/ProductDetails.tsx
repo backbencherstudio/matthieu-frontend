@@ -130,7 +130,7 @@ export default function ProductDetailsClient() {
                   src={img}
                   alt={`Product thumbnail ${index + 1}`}
                   onClick={() => setMainImage(img)}
-                  className="object-contain w-full h-full cursor-pointer hover:opacity-80 transition"
+                  className="object-contain w-[60px] h-[60px] cursor-pointer hover:opacity-80 transition"
                 />
               ))}
             </div>

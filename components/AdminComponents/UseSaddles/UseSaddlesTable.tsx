@@ -12,6 +12,7 @@ const UseSaddlesTable = () => {
   const { data, isLoading, refetch } = useGetAllUseSadlesAdminQuery({});
   const relevantData = data?.data;
   const currentItems = relevantData ?? [];
+
   const meta = data?.meta;
   const tableHeader = [
     "Saddle Id",
