@@ -135,7 +135,6 @@ export default function ProductDetailsClient() {
               ))}
             </div>
           </div>
-
           <div className="w-full">
             <div className="bg-white">
               <div className="grid md:grid-cols-2 xl:gap-8 lg:gap-6 gap-4">
