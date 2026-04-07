@@ -35,12 +35,12 @@ const Header = () => {
 
   const { data: cartResponse } = useGetCartQuery(undefined);
 
-  const cartCount =
-    cartResponse?.data?.items?.reduce(
-      (total, item) => total + item.quantity,
-      0,
-    ) ?? 0;
-
+  // const cartCount =
+  //   cartResponse?.data?.items?.reduce(
+  //     (total, item) => total+ item.quantity,
+  //     0,
+  //   ) ?? 0;
+  const cartCount = cartResponse?.data?.items?.length ?? 0;
   const navigationLinks = [
     {
       label: "SADDLES",

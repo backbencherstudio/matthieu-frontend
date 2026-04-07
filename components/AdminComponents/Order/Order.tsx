@@ -48,7 +48,7 @@ export default function Order() {
         <h1 className="text-2xl font-extrabold text-primary-text">
           Orders Management
         </h1>
-        <div className="flex flex-wrap items-center gap-4">
+        {/* <div className="flex flex-wrap items-center gap-4">
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
             href="/admin/orders/track-shipment"
@@ -63,7 +63,7 @@ export default function Order() {
             <RefreshIcon className="h-4 w-4" />
             <span>Refresh</span>
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
         {CustomerStats.map((status) => (

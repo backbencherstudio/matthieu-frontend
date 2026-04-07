@@ -4,16 +4,17 @@ import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetail
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
 import LoveIcon from "@/components/Icons/LoveIcon";
+import MinusIcon from "@/components/Icons/MinusIcon";
 import {
   useAddSaddleToFavoriteMutation,
   useGetAllFavoritesQuery,
   useGetLeadLineSaddleQuery,
   useLeadlineAddToCartMutation,
   useRemoveFavoriteMutation,
-} from "@/src/redux/client/saddle/saddleApi";
-import { Minus, Plus } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+} from '@/src/redux/client/saddle/saddleApi';
+import { Heart, Minus, Plus } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from "sonner";
 
 const LeadlineSaddlePage = () => {
@@ -181,7 +182,7 @@ const LeadlineSaddlePage = () => {
                             : "Add to favorite"
                         }
                       >
-                        <LoveIcon
+                        <Heart
                           className={`xl:size-12 size-8 ${
                             isFavorited
                               ? "text-red-500 fill-red-500"
