@@ -10,6 +10,7 @@ import {
   useGetLeadLineSaddleQuery,
   useRemoveFavoriteMutation,
 } from '@/src/redux/client/saddle/saddleApi';
+import { Heart } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -177,7 +178,7 @@ const LeadlineSaddlePage = () => {
                             : 'Add to favorite'
                         }
                       >
-                        <LoveIcon
+                        <Heart
                           className={`xl:size-12 size-8 ${
                             isFavorited
                               ? 'text-red-500 fill-red-500'

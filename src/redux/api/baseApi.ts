@@ -144,6 +144,9 @@ const baseApi = createApi({
     'Favorite',
     'Saddle',
     'Order',
+    'Tack',
+    'TackFavorite',
+    'AdminOrder',
   ],
   endpoints: () => ({}),
 });

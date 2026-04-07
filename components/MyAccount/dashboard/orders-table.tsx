@@ -100,9 +100,9 @@ export function OrdersTable({
                       <div className="text-[14px] uppercase text-[#1F274B] text-nowrap">
                         {order.product}
                       </div>
-                      <div className="text-[12px] mt-2.5 normal-case text-[#696E86] text-nowrap">
+                      {/* <div className="text-[12px] mt-2.5 normal-case text-[#696E86] text-nowrap">
                         Size: {order.size}
-                      </div>
+                      </div> */}
                     </div>
                   </td>
                   <td className="py-3 px-4 text-[14px] text-[#14191F] text-nowrap">
