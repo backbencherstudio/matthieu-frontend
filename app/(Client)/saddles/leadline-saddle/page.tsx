@@ -1,71 +1,56 @@
-'use client';
+"use client";
 
-import ProductDetailsAccordion from '@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion';
-import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
-import ShopAccessories from '@/components/ClientComponents/Saddles/ShopAccessories';
-import LoveIcon from '@/components/Icons/LoveIcon';
+import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion";
+import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
+import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
+import LoveIcon from "@/components/Icons/LoveIcon";
+import MinusIcon from "@/components/Icons/MinusIcon";
 import {
   useAddSaddleToFavoriteMutation,
   useGetAllFavoritesQuery,
   useGetLeadLineSaddleQuery,
+  useLeadlineAddToCartMutation,
   useRemoveFavoriteMutation,
 } from '@/src/redux/client/saddle/saddleApi';
-import { Heart } from 'lucide-react';
+import { Heart, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
+import { toast } from "sonner";
 
 const LeadlineSaddlePage = () => {
+  const [quantity, setQuantity] = useState(1);
   const { data, isLoading } = useGetLeadLineSaddleQuery();
   const { data: favorites = [] } = useGetAllFavoritesQuery();
+  const [leadlineAddToCart] = useLeadlineAddToCartMutation();
 
   const [addSaddleToFavorite, { isLoading: isAddingFavorite }] =
     useAddSaddleToFavoriteMutation();
   const [removeFavorite, { isLoading: isRemovingFavorite }] =
     useRemoveFavoriteMutation();
 
-  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
-
-  const getFixedImageUrl = (url?: string) => {
-    if (!url) return '/placeholder.png';
-
-    try {
-      const parsed = new URL(url);
-      return `${IMAGE_BASE_URL}${parsed.pathname}`;
-    } catch {
-      return '/placeholder.png';
-    }
-  };
-
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
-    undefined,
+    data?.data?.images[0]?.url,
   );
 
   useEffect(() => {
     if (data?.data?.images?.[0]?.url) {
-      setSelectedImage(data.data.images[0].url);
+      setSelectedImage(data?.data?.images[0]?.url);
     }
   }, [data]);
 
   const breadLink = [
     {
-      label: 'SADDLES',
-      href: '/saddles',
+      label: "SADDLES",
+      href: "/saddles",
     },
     {
-      label: 'ARION',
-      href: '/saddles/arion-saddles',
+      label: "ARION",
+      href: "/saddles/arion-saddles",
     },
     {
-      label: 'JUMPING',
-      href: '/saddles/jumping',
+      label: "JUMPING",
+      href: "/saddles/jumping",
     },
-  ];
-
-  const productImages = [
-    { imgLink: '/leadline/leadline-1.png' },
-    { imgLink: '/leadline/leadline-2.png' },
-    { imgLink: '/leadline/leadline-3.png' },
-    { imgLink: '/leadline/leadline-4.png' },
   ];
 
   const sizes = data?.data?.size
@@ -81,8 +66,8 @@ const LeadlineSaddlePage = () => {
 
     return (
       favorites.find(
-        item =>
-          item.type === 'SADDLE_PRODUCT' &&
+        (item) =>
+          item.type === "SADDLE_PRODUCT" &&
           item.product?.id === currentSaddleId,
       ) ?? null
     );
@@ -103,7 +88,26 @@ const LeadlineSaddlePage = () => {
         }).unwrap();
       }
     } catch (error) {
-      console.error('Favorite action failed:', error);
+      console.error("Favorite action failed:", error);
+    }
+  };
+
+  const addToCart = async () => {
+    if (!data?.data) return;
+
+    try {
+      const response = await leadlineAddToCart({
+        leadlineId: data?.data?.id,
+        quantity,
+      });
+      if (response?.data?.success) {
+        toast.success(response?.data?.message);
+      }
+      if (response?.data?.success === false) {
+        toast.error(response?.data?.message);
+      }
+    } catch (error) {
+      console.error("Add to cart failed:", error);
     }
   };
 
@@ -119,8 +123,8 @@ const LeadlineSaddlePage = () => {
               {data?.data?.images?.map((img, index) => (
                 <Image
                   key={index}
-                  onClick={() => setSelectedImage(img.url)}
-                  src={getFixedImageUrl(img?.url)}
+                  onClick={() => setSelectedImage(img?.url)}
+                  src={img?.url}
                   alt=""
                   width={220}
                   height={220}
@@ -137,7 +141,7 @@ const LeadlineSaddlePage = () => {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center">
                     <Image
-                      src={getFixedImageUrl(selectedImage)}
+                      src={selectedImage}
                       alt="Double"
                       className="w-[586px] h-[628px] object-cover "
                       width={586}
@@ -148,13 +152,13 @@ const LeadlineSaddlePage = () => {
 
                   <div className="block xl:hidden">
                     <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 outline-4">
-                      {productImages?.map((img, index) => (
+                      {data?.data?.images?.map((img, index) => (
                         <Image
                           fill
                           key={index}
-                          src={getFixedImageUrl(img?.imgLink)}
+                          src={img?.url}
                           alt=""
-                          className="object-contain w-full h-full "
+                          className="object-contain w-full h-full"
                         />
                       ))}
                     </div>
@@ -165,7 +169,7 @@ const LeadlineSaddlePage = () => {
                   <div className="flex flex-col xl:gap-4 gap-3">
                     <div className="flex justify-between items-center">
                       <h1 className="xl:text-[32px] text-2xl font-extrabold leading-[100%] tracking-[0.64px] text-[#1F274B]">
-                        {data?.data?.name || 'Leadline Saddle'}
+                        {data?.data?.name || "Leadline Saddle"}
                       </h1>
 
                       <button
@@ -174,15 +178,15 @@ const LeadlineSaddlePage = () => {
                         disabled={isFavoriteActionLoading}
                         aria-label={
                           isFavorited
-                            ? 'Remove from favorite'
-                            : 'Add to favorite'
+                            ? "Remove from favorite"
+                            : "Add to favorite"
                         }
                       >
                         <Heart
                           className={`xl:size-12 size-8 ${
                             isFavorited
-                              ? 'text-red-500 fill-red-500'
-                              : 'text-[#4C526F]'
+                              ? "text-red-500 fill-red-500"
+                              : "text-[#4C526F]"
                           }`}
                         />
                       </button>
@@ -192,7 +196,10 @@ const LeadlineSaddlePage = () => {
                   <div className="h-[1px] bg-[#DFE1E7] w-full "></div>
 
                   <p className="xl:text-[32px]  text-2xl tracking-[.64px] text-[#1F274B] leading-[100%] font-extrabold">
-                    ${data?.data?.price || '0.00'}
+                    Price: ${data?.data?.price || "0.00"}
+                  </p>
+                  <p className="xl:text-[32px]  text-2xl tracking-[.64px] text-[#1F274B] leading-[100%] font-extrabold">
+                    Stock Quantity: {data?.data?.stockQuantity}
                   </p>
 
                   <div className="flex flex-col xl:gap-4 gap-3">
@@ -206,18 +213,53 @@ const LeadlineSaddlePage = () => {
                             key={index}
                             className="px-6 py-3 bg-[#4C526F] text-base leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer"
                           >
-                            {size}
+                            {size === "SIZE_12_5"
+                              ? "12.5"
+                              : size === "SIZE_14_5"
+                                ? "14.5"
+                                : size}
                           </button>
                         ))}
                       </div>
                     </div>
                   </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
+                      className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      <Minus size={16} />
+                    </button>
+                    <span className="min-w-[24px] text-center">{quantity}</span>
+                    <button
+                      onClick={() =>
+                        setQuantity((prev) =>
+                          Math.min(
+                            Number(data?.data?.stockQuantity ?? prev),
+                            prev + 1,
+                          ),
+                        )
+                      }
+                      className="border border-[#1F274B] p-1 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                    >
+                      <Plus size={16} />
+                    </button>
+                  </div>
 
                   <div className="space-x-4 w-full flex items-center">
-                    <button className="w-full block px-8 py-4 bg-[#1F274B] text-lg leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer uppercase">
+                    {/* <button
+                      disabled={!data?.data?.stockQuantity}
+                      className="w-full block px-8 py-4 bg-[#1F274B] text-lg leading-[100%] tracking-[.32px] text-[#FFF] cursor-pointer uppercase disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
                       Buy The Saddle
-                    </button>
-                    <button className="w-full block px-8 py-4 text-lg leading-[100%] tracking-[.32px] text-[#4C526F] bg-[#E9E9ED] cursor-pointer uppercase border border-[#262626]">
+                    </button> */}
+                    <button
+                      disabled={!data?.data?.stockQuantity}
+                      onClick={addToCart}
+                      className="w-full block px-8 py-4 text-lg leading-[100%] tracking-[.32px] text-[#4C526F] bg-[#E9E9ED] cursor-pointer uppercase border border-[#262626] disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
                       ADD TO CART
                     </button>
                   </div>

@@ -1,40 +1,47 @@
+"use client"
 import Link from "next/link";
 import React from "react";
 import CouponIcon from "@/components/Icons/AdminIcon/CouponIcon";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import StatisticCard from "@/components/AdminComponents/reusable/StatisticCard";
 import TopCard from "@/components/AdminComponents/Dashboard/TopCard";
+import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 
 export default function DashboardPage() {
+
+      const { data, isLoading } = useGetCustomersQuery({ page: 1, limit: 10 });
+  
+    const totalCustomers = data?.meta?.total || 0;
+
   const statisticCards = [
     {
       title: "Customers",
-      value: "1,429",
+      value: totalCustomers,
       positiveValue: "+20.1%",
       negativeValue: "",
       image: "/images/admin/customers.svg",
     },
-    {
-      title: "Products",
-      value: "6,225",
-      positiveValue: "+12.1%",
-      negativeValue: "",
-      image: "/images/admin/product.svg",
-    },
+    // {
+    //   title: "Products",
+    //   value: "6,225",
+    //   positiveValue: "+12.1%",
+    //   negativeValue: "",
+    //   image: "/images/admin/product.svg",
+    // },
     {
       title: "Orders",
-      value: "3,247",
+      value: "7",
       positiveValue: "",
       negativeValue: "-6.6%",
       image: "/images/admin/cart.svg",
     },
-    {
-      title: "Total Revenue",
-      value: "$12,567",
-      positiveValue: "+3.6%",
-      negativeValue: "",
-      image: "/images/admin/dollar.svg",
-    },
+    // {
+    //   title: "Total Revenue",
+    //   value: "$12,567",
+    //   positiveValue: "+3.6%",
+    //   negativeValue: "",
+    //   image: "/images/admin/dollar.svg",
+    // },
   ];
 
   const topProduct = [
@@ -143,7 +150,7 @@ export default function DashboardPage() {
       </div>
       {/* Statistics Card */}
       <div className="pt-6">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-3">
           {statisticCards.map((card) => (
             <StatisticCard key={card.title} card={card} />
           ))}
@@ -153,9 +160,9 @@ export default function DashboardPage() {
       <div className="pt-6">
         <div className="grid xl:grid-cols-2 gap-3">
           {/* Products */}
-          <TopCard cards={topProduct[0]} />
+          {/* <TopCard cards={topProduct[0]} /> */}
           {/* Orders */}
-          <TopCard cards={recentOrder[0]} />
+          {/* <TopCard cards={recentOrder[0]} /> */}
         </div>
       </div>
     </div>

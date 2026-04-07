@@ -43,6 +43,9 @@ export default function Settings() {
     "profile"
   );
 
+  const { data: userData, isLoading: userLoading } = useGetUserQuery();
+  console.log("userData---->", userData)
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       firstName: "",
@@ -54,8 +57,6 @@ export default function Settings() {
       confirmPassword: "",
     },
   });
-
-  const { data: userData, isLoading: userLoading } = useGetUserQuery();
   
   const [changePassword, { isLoading: passLoading }] = useChangePasswordMutation();
 

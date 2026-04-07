@@ -2,6 +2,7 @@
 
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import { useCreateCalendarMutation } from "@/src/redux/admin/cms/calendar/calendarApi";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,14 +27,33 @@ const AddCompetition = () => {
   } = useForm<AddCompetitionFormValues>();
 
   const [createCalendar, { isLoading }] = useCreateCalendarMutation();
+  const router = useRouter()
+
+  const toDdMmYyyy = (isoDate: string) => {
+    if (!isoDate) return isoDate;
+    const [year, month, day] = isoDate.split("-");
+    if (year && month && day) {
+      const dd = day.padStart(2, "0");
+      const mm = month.padStart(2, "0");
+      return `${dd}/${mm}/${year}`;
+    }
+    return isoDate;
+  };
+
+
 
   const onSubmit = async (data: AddCompetitionFormValues) => {
     try {
-      const response = await createCalendar(data);
-      console.log(response);
+      const payload = { ...data, date: toDdMmYyyy(data.date) };
+      const response = await createCalendar(payload);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         reset();
+        router.push('/admin/cms')
+      }
+      else {
+        // console.log(response?.error?.data?.message?.message)
+        toast.error(response?.error?.data?.message?.message);
       }
     } catch (error) {
       console.error("Create failed", error);
@@ -115,10 +135,11 @@ const AddCompetition = () => {
                 <label className="text-[12px] text-[#696E86]">Date</label>
                 <input
                   {...register("date", {
-                    required: "Date is required",
+                    required: "Invalid date format. Use dd/mm/yyyy",
                   })}
+                  type="date"
                   className="p-3 border border-[#ECEFF3] w-full rounded-[4px]"
-                  placeholder="01/12/25"
+                  placeholder="01/12/2025"
                 />
                 {errors.date && (
                   <p className="text-xs text-red-500 mt-1">

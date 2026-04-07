@@ -49,13 +49,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const rawBaseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_ENDPOINT,
-  credentials: 'same-origin',
-  prepareHeaders: headers => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
+  credentials: "same-origin",
+  prepareHeaders: (headers) => {
+    if (typeof window !== "undefined") {
+      // Prefer localStorage, but fall back to cookie token if needed.
+      const cookieToken = document.cookie
+        .match(/(?:^|; )token=([^;]*)/)
+        ?.[1];
+      const token = localStorage.getItem("token") || cookieToken;
+      if (token) headers.set("Authorization", `Bearer ${token}`);
 
       // Region / country from cookie (keep only if you really use it)
       const match = document.cookie.match(/x-region=([^;]+)/);
@@ -74,30 +76,33 @@ const baseQueryWithAutoTokenUpdate = async (
   const result = await rawBaseQuery(args, api, extraOptions);
 
   // ── Extract and save token + type when present ──
-  const responseData = result?.data as
-    | {
-        authorization?: {
-          token?: string;
-          type?: string;
-        };
-        type?: string; // fallback if type is at root level
-      }
-    | undefined;
+  const responseData = result?.data as any | undefined;
 
   try {
-    const newToken = responseData?.authorization?.token;
-    const userType = responseData?.type;
+    const newToken =
+      responseData?.authorization?.token ??
+      responseData?.data?.authorization?.token ??
+      responseData?.token ??
+      responseData?.data?.token ??
+      responseData?.access_token;
+    const userType =
+      responseData?.type ?? responseData?.data?.type ?? responseData?.authorization?.type;
 
     if (newToken) {
       // Save to localStorage (optional – many keep it for faster client access)
       localStorage.setItem('token', newToken);
 
       // Save to cookies – this is what you asked for
-      document.cookie = `token=${newToken}; path=/; secure; samesite=strict; max-age=2592000`; // 30 days
+      const isHttps = window?.location?.protocol === "https:";
+      document.cookie = `token=${newToken}; path=/; ${isHttps ? "secure; " : ""
+        }samesite=strict; max-age=2592000`; // 30 days
 
       if (userType) {
         localStorage.setItem('userType', userType);
         document.cookie = `userType=${userType}; path=/; secure; samesite=strict; max-age=2592000`;
+        localStorage.setItem("userType", userType);
+        document.cookie = `userType=${userType}; path=/; ${isHttps ? "secure; " : ""
+          }samesite=strict; max-age=2592000`;
       }
     }
   } catch (err) {
@@ -139,11 +144,16 @@ const baseApi = createApi({
     'queries',
     'TackProduct',
     'SaddleProduct',
+    'leadlineSaddle',
     'UseSaddle',
     'Cart',
     'Favorite',
     'Saddle',
     'Order',
+    'Allmember',
+    'Ambassador',
+    'Competitions',
+    'Experts',
     'Tack',
     'TackFavorite',
     'AdminOrder',

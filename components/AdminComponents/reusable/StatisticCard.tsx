@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import React from "react";
 
@@ -10,12 +11,15 @@ interface Card {
 }
 
 export default function StatisticCard({ card }: { card: Card }) {
+
+
+
   return (
     <div className="p-4 rounded-[8px] border border-[#ECEFF3] bg-white flex justify-between">
       <div>
         <p className="text-base">{card.title}</p>
         <h1 className="text-2xl font-extrabold mt-5 mb-3">{card.value}</h1>
-        {card.positiveValue ||
+        {/* {card.positiveValue ||
           (card.negativeValue && (
             <div className="flex items-center gap-2 text-base text-gray-black">
               {card.positiveValue && (
@@ -30,7 +34,7 @@ export default function StatisticCard({ card }: { card: Card }) {
               )}
               <p>vs last month</p>
             </div>
-          ))}
+          ))} */}
       </div>
       <div>
         <Image

@@ -42,7 +42,7 @@ const NotifcationAndProfile = () => {
         <ul className="flex items-center gap-4">
           {navLinksUser.map((link) => (
             <li key={link.label} className="relative group">
-              <Link
+              {/* <Link
                 href="/admin/notifications"
                 className="flex items-center justify-center h-12 w-12 rounded-full bg-[#F8FAFB] transition duration-300 cursor-pointer relative"
               >
@@ -50,7 +50,7 @@ const NotifcationAndProfile = () => {
                 <span className="absolute top-0 right-0 bg-error-text text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center">
                   3
                 </span>
-              </Link>
+              </Link> */}
             </li>
           ))}
         </ul>

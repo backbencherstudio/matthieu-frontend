@@ -8,6 +8,7 @@ const arionTeamApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Allmember"]
     }),
 
     showAllMember: builder.query({
@@ -19,6 +20,7 @@ const arionTeamApi = baseApi.injectEndpoints({
           page,
         },
       }),
+      providesTags: ['Allmember']
     }),
 
     updateArionMember: builder.mutation({

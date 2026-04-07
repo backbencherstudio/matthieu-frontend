@@ -1,23 +1,31 @@
 'use client';
-
 import LoveIcon from '@/components/Icons/LoveIcon';
 import {
-  useAddToCardMutation,
-  useGetSingleTackProductQuery,
-} from '@/src/redux/client/tack-product/tackProduct';
-import { Minus, Plus } from 'lucide-react';
+  useAddTackToFavoriteMutation,
+  useRemoveFavoriteMutation,
+  useGetAllFavoritesQuery,
+} from '@/src/redux/client/tack/tackApi';
+import { Heart, HeartIcon, Minus, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import ProductDetailsAccordion from './ProductDetailsAccordion';
 import RelatedProduts from './RelatedProduts';
+import {
+  useAddToCardMutation,
+  useGetSingleTackProductQuery,
+} from '@/src/redux/client/tack-product/tackProduct';
 
 export default function ProductDetailsClient() {
   const id = useParams().id;
   const [quantity, setQuantity] = useState(1);
   const { data: productData, isLoading } = useGetSingleTackProductQuery(id);
   const [addToCard] = useAddToCardMutation();
+
+  const [addTackToFavorite] = useAddTackToFavoriteMutation();
+  const [removeFavorite] = useRemoveFavoriteMutation();
+  const { data: favorites = [] } = useGetAllFavoritesQuery();
 
   // Get default variant on load
   const defaultVariant =
@@ -66,7 +74,9 @@ export default function ProductDetailsClient() {
     return (
       productData.variants.find(
         v => v.colorId === activeColor && v.sizeId === activeSize,
+        v => v.colorId === activeColor && v.sizeId === activeSize,
       ) ||
+      productData.variants.find(v => v.colorId === activeColor) ||
       productData.variants.find(v => v.colorId === activeColor) ||
       defaultVariant
     );
@@ -84,6 +94,9 @@ export default function ProductDetailsClient() {
     'Relieves pressure on corners of the mouth',
     'Foam padded headpiece and crown piece',
     'Minimize jaw shifting and stabilize the bit with the lower strap',
+    'Relieves pressure on corners of the mouth',
+    'Foam padded headpiece and crown piece',
+    'Minimize jaw shifting and stabilize the bit with the lower strap',
   ];
 
   const handleCart = async () => {
@@ -97,8 +110,8 @@ export default function ProductDetailsClient() {
       };
 
       const response = await addToCard(cartData);
-      console.log(response);
       if (response?.data?.success) {
+        toast.success('Added to cart!');
         toast.success('Added to cart!');
       }
       if (response?.error || !response) {
@@ -106,14 +119,31 @@ export default function ProductDetailsClient() {
         return;
       }
     } catch (error) {
-      console.error('Add to cart error:', error);
       toast.error('Something went wrong. Please try again.');
+    }
+  };
+
+  const currentFavorite = favorites.find(
+    item => item.product.id === productData?.id,
+  );
+  const isFavorited = Boolean(currentFavorite);
+
+  const handleToggleFavorite = async () => {
+    if (isFavorited && currentFavorite?.id) {
+      // Remove from favorites
+      await removeFavorite({ favoriteId: currentFavorite.id }).unwrap();
+      toast.success('Removed from favorites');
+    } else {
+      // Add to favorites
+      await addTackToFavorite({ tackProductId: productData?.id }).unwrap();
+      toast.success('Added to favorites');
     }
   };
 
   useEffect(() => {
     setQuantity(1);
   }, [selectedVariant?.id]);
+
   if (isLoading) return <div className="maxContainer py-8">Loading...</div>;
 
   return (
@@ -129,12 +159,11 @@ export default function ProductDetailsClient() {
                   src={img}
                   alt={`Product thumbnail ${index + 1}`}
                   onClick={() => setMainImage(img)}
-                  className="object-contain w-full h-full cursor-pointer hover:opacity-80 transition"
+                  className="object-contain w-[60px] h-[60px] cursor-pointer hover:opacity-80 transition"
                 />
               ))}
             </div>
           </div>
-
           <div className="w-full">
             <div className="bg-white">
               <div className="grid md:grid-cols-2 xl:gap-8 lg:gap-6 gap-4">
@@ -176,12 +205,23 @@ export default function ProductDetailsClient() {
                     <div className="flex justify-between items-center">
                       <h1 className="xl:text-[32px] text-2xl font-extrabold leading-[100%] tracking-[0.64px] text-[#1F274B]">
                         {productData?.name || 'N/A'}
+                        {productData?.name || 'N/A'}
                       </h1>
-                      <button>
-                        <LoveIcon className="xl:size-12 size-8" />
+                      <button
+                        onClick={handleToggleFavorite}
+                        className="cursor-pointer"
+                      >
+                        <Heart
+                          className={`${
+                            isFavorited
+                              ? 'text-red-500 fill-red-500'
+                              : 'text-[#4C526F]'
+                          } xl:size-12 size-8`}
+                        />
                       </button>
                     </div>
                     <p className="xl:text-2xl md:text-xl text-lg leading-[100%] tracking-[.48px] textSecondary">
+                      SKU: {productData?.sku || 'N/A'}
                       SKU: {productData?.sku || 'N/A'}
                     </p>
                   </div>
@@ -320,13 +360,6 @@ export default function ProductDetailsClient() {
                   {/* Buttons */}
                   <div className="xl:space-y-4 space-y-3">
                     <div className="flex gap-3">
-                      {/* <button className="w-full bg-[#1F274B] hover:bg-[#1F274B]/90 text-white flex items-center justify-center cursor-pointer lg:text-lg text-base">
-                        <span className="flex items-center gap-2">
-                          BUY NOW
-                          <AppleIcon className="lg:size-[54px] size-12" />
-                        </span>
-                      </button> */}
-
                       <button
                         onClick={handleCart}
                         disabled={
@@ -349,6 +382,7 @@ export default function ProductDetailsClient() {
             </div>
           </div>
         </div>
+
         <div>
           <RelatedProduts />
         </div>

@@ -8,6 +8,7 @@ const calendarApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Competitions"]
     }),
 
     getAllCalendar: builder.query({
@@ -19,6 +20,7 @@ const calendarApi = baseApi.injectEndpoints({
           page,
         },
       }),
+      providesTags: ["Competitions"]
     }),
 
     updateCalendar: builder.mutation({

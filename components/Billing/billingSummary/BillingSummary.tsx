@@ -49,14 +49,15 @@ export function BillingSummary() {
     { label: 'Coupon Discount', value: -(summary?.couponDiscount ?? 0) },
   ];
 
-   const handleNext = async () => {
-     try {
-       await createOrder().unwrap();
-       router.push('/product-details/billing-details/payment-details');
-     } catch (error) {
-       console.error('Failed to create order', error);
-     }
-   };
+  const handleNext = async () => {
+    try {
+      const res = await createOrder().unwrap();
+      const id = res?.data?.address?.orderId
+      router.push(`/product-details/billing-details/payment-details?order_id=${id}`);
+    } catch (error) {
+      console.error('Failed to create order', error);
+    }
+  };
 
   return (
     <div className="maxContainer lg:my-12 md:my-10 my-8">
@@ -104,7 +105,8 @@ export function BillingSummary() {
                 >
                   <div className="flex-shrink-0 flex md:gap-3 gap-4 items-center">
                     <Image
-                      src={getFixedImageUrl(item.itemImage)}
+                      // src={getFixedImageUrl(item.itemImage)}
+                      src={item?.itemImage}
                       width={102}
                       height={104}
                       alt={item.itemName}
