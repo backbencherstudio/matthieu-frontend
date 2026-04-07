@@ -76,12 +76,12 @@ const baseQueryWithAutoTokenUpdate = async (
   // ── Extract and save token + type when present ──
   const responseData = result?.data as
     | {
-        authorization?: {
-          token?: string;
-          type?: string;
-        };
-        type?: string; // fallback if type is at root level
-      }
+      authorization?: {
+        token?: string;
+        type?: string;
+      };
+      type?: string; // fallback if type is at root level
+    }
     | undefined;
 
   try {
@@ -144,6 +144,10 @@ const baseApi = createApi({
     'Favorite',
     'Saddle',
     'Order',
+    'Allmember',
+    'Ambassador',
+    'Competitions',
+    'Experts'
   ],
   endpoints: () => ({}),
 });

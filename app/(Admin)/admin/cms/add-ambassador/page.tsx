@@ -3,6 +3,7 @@
 import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
 import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
 import { useCreateAmbassadorMutation } from "@/src/redux/admin/cms/ambassador/ambassadorApi";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -32,6 +33,7 @@ const AddAmbassador = () => {
   // Preview states
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [flagPreview, setFlagPreview] = useState<string | null>(null);
+  const router = useRouter()
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const flagInputRef = useRef<HTMLInputElement>(null);
@@ -73,9 +75,10 @@ const AddAmbassador = () => {
       if (response?.data?.success) {
         reset();
         toast.success(response?.data?.message);
+        router.push('/admin/cms')
       }
     } catch (error) {
-      console.error("Create failed", error);
+      // console.error("Create failed", error);
       toast.error("Failed to add member");
     }
   };
