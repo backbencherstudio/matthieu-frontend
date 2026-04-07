@@ -34,12 +34,12 @@ export default function ProductsPage() {
           Products Management
         </h1>
         <div className="flex flex-wrap items-center gap-4">
-          <Link
+          {/* <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
             href="/admin/products/manage-category"
           >
             <span>Manage Category</span>
-          </Link>
+          </Link> */}
           <Link
             className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
             href="/admin/products/add"
