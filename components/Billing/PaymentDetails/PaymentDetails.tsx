@@ -65,7 +65,7 @@ const PaymentForm = () => {
     setPaymentStatus("processing");
 
     try {
-      // 👉 1. Create Payment Intent
+      // Create Payment Intent
       const res = await createPaymentIntent({
         order_id: orderId,
       }).unwrap();
@@ -74,11 +74,11 @@ const PaymentForm = () => {
 
       // console.log("clientSecret --->", clientSecret);
 
-      // 👉 2. Get Card Element
+      //  Get Card Element
       const cardNumberElement = elements.getElement(CardNumberElement);
       if (!cardNumberElement) throw new Error("Card element not found");
 
-      // 👉 3. Confirm Payment
+      //  Confirm Payment
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardNumberElement,
@@ -108,7 +108,7 @@ const PaymentForm = () => {
 
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 w-full">
       {/* Card Title */}
       <div className="mt-8">
         <label className="text-[16px] leading-[160%] text-[#4A4C56] tracking-[0.08px] normal-case">
@@ -208,7 +208,7 @@ const PaymentDetails = () => {
   return (
     <div className="maxContainer lg:my-12 md:my-10 my-8">
       <div className="flex lg:flex-row flex-col xl:gap-8 lg:gap-6">
-        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 xl:w-[65%] lg:w-full normal-case">
+        <div className="border-[#DFE1E7] border-1 lg:p-8 p-6 ] w-full normal-case">
           <h2 className="text-[32px] font-extrabold text-[#1F274B] leading-[100%] normal-case">
             Payment Details
           </h2>
