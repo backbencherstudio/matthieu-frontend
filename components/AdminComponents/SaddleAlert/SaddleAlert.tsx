@@ -20,7 +20,6 @@ export default function SaddleAlert() {
     search: debouncedSearch,
     page: currentPage,
   });
-  console.log(data);
   const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
   const meta = data?.data?.pagination;
@@ -78,7 +77,13 @@ export default function SaddleAlert() {
         <h1 className="lg:text-2xl md:text-xl text-lg font-extrabold text-[#1F274B]">
           Used Saddle Alert Overview
         </h1>
-        <button className="flex items-center justify-center px-4 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+        <button
+          onClick={() => {
+            setSearch("");
+            setCurrentPage(1);
+          }}
+          className="flex items-center justify-center px-4 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
+        >
           <RefreshIcon />
           <span>Refresh</span>
         </button>
@@ -94,6 +99,7 @@ export default function SaddleAlert() {
             <div className="relative">
               <input
                 type="text"
+                value={search}
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search by customer name, email, or brand..."
                 onChange={(e) => {

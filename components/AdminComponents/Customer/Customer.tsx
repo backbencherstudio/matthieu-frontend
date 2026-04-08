@@ -5,7 +5,6 @@ import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
 import UserGroupIcon from "@/components/Icons/AdminIcon/UserGroupIcon";
 import UserPlus from "@/components/Icons/AdminIcon/UserPlus";
 import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
-import HeaderCard from "../reusable/HeaderCard";
 import CustomerTable from "./CustomerTable";
 
 export default function Customer() {
@@ -65,7 +64,7 @@ export default function Customer() {
           </button>
         </div> */}
       </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
+      {/* <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
         {CustomerStats.map((status) => (
           <HeaderCard
             key={status?.id}
@@ -76,7 +75,7 @@ export default function Customer() {
             iconColor={status.iconColor}
           />
         ))}
-      </div>
+      </div> */}
       <CustomerTable />
     </div>
   );

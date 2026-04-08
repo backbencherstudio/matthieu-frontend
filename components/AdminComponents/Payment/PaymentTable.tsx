@@ -9,22 +9,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useDebounce } from "@/src/hooks/useDebounce";
 import { useGetAllPaymentsQuery } from "@/src/redux/admin/payment/paymentApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 export default function PaymentTable() {
-  const [page, setPage] = useState(1);
-  const { data } = useGetAllPaymentsQuery("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("all");
+  const [duration, setDuration] = useState("day");
+  const debouncedSearch = useDebounce(search, 500);
+  const { data } = useGetAllPaymentsQuery({
+    search: debouncedSearch,
+    page: currentPage,
+    status,
+    duration,
+  });
   const relevantData = data?.data || [];
   const currentItems = relevantData;
-  const totalPages = data?.meta_data?.total || 1;
+  const meta = data?.meta_data?.total || 1;
 
   const tableHeader = [
     "Transaction ID",
-    "Customer",
     "Payment Method",
+    "Status",
     // "Product price",
     // "Delivery Fee",
     "Total Amount",
@@ -41,11 +51,8 @@ export default function PaymentTable() {
       </span>
     ),
     (item) => (
-      <span className="text-[14px] text-[#1F274B]">
-        {item?.customer} <br />
-        <span className="text-[14px] leading-[100%] text-[#777980]">
-          {item?.email}
-        </span>
+      <span className="text-[14px] text-[#14191F] leading-[114%]">
+        {item?.status}
       </span>
     ),
     (item) => (
@@ -97,34 +104,48 @@ export default function PaymentTable() {
                   type="text"
                   className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                   placeholder="Search by customer name, email, or brand..."
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
               <div>
-                <Select>
+                <Select
+                  value={duration}
+                  onValueChange={(val) => {
+                    setDuration(val);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="Today" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="today">Today</SelectItem>
-                    <SelectItem value="lat7day">Last 7 days</SelectItem>
-                    <SelectItem value="lat30day">Last 30 days</SelectItem>
-                    <SelectItem value="lat90day">Last 90 days</SelectItem>
-                    <SelectItem value="latyear">Last year</SelectItem>
+                    <SelectItem value="day">Today</SelectItem>
+                    <SelectItem value="week">Last 7 days</SelectItem>
+                    <SelectItem value="month">Last 30 days</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+
               <div>
-                <Select>
+                <Select
+                  value={status}
+                  onValueChange={(val) => {
+                    setStatus(val);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="today">All Status</SelectItem>
-                    <SelectItem value="lat7day">In Process</SelectItem>
-                    <SelectItem value="lat30day">Delivered</SelectItem>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="paid">Paid</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -151,9 +172,9 @@ export default function PaymentTable() {
               }`}
             >
               <PaginationComponent
-                currentPage={page}
-                totalPages={totalPages}
-                onPageChange={setPage}
+                currentPage={meta?.page}
+                totalPages={meta?.totalPages}
+                onPageChange={setCurrentPage}
               />
             </div>
           )}
