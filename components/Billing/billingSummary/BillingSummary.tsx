@@ -52,8 +52,12 @@ export function BillingSummary() {
   const handleNext = async () => {
     try {
       const res = await createOrder().unwrap();
-      const id = res?.data?.address?.orderId
-      router.push(`/product-details/billing-details/payment-details?order_id=${id}`);
+      // `createOrder` response's `data` contains the created order fields (including `id`)
+      const orderId = res?.data?.id;
+      if (!orderId) throw new Error('Missing order id from createOrder response');
+      router.push(
+        `/product-details/billing-details/payment-details?order_id=${orderId}`,
+      );
     } catch (error) {
       console.error('Failed to create order', error);
     }
