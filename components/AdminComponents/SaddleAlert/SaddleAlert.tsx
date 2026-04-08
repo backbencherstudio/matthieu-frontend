@@ -20,7 +20,6 @@ export default function SaddleAlert() {
     search: debouncedSearch,
     page: currentPage,
   });
-  console.log(data);
   const relevantData = data?.data?.data;
   const currentItems = relevantData || [];
   const meta = data?.data?.pagination;
