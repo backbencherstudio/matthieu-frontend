@@ -1,21 +1,17 @@
-"use client"
+"use client";
 
 import ActiveCustomerIcon from "@/components/Icons/AdminIcon/ActiveCustomerIcon";
 import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
-import LetterIcon from "@/components/Icons/AdminIcon/LetterIcon";
-import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import UserGroupIcon from "@/components/Icons/AdminIcon/UserGroupIcon";
 import UserPlus from "@/components/Icons/AdminIcon/UserPlus";
+import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 import HeaderCard from "../reusable/HeaderCard";
 import CustomerTable from "./CustomerTable";
-import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 
 export default function Customer() {
-
   const { data, isLoading } = useGetCustomersQuery({ page: 1, limit: 10 });
 
   const totalCustomers = data?.meta?.total || 0;
-
 
   const CustomerStats = [
     {
@@ -58,7 +54,7 @@ export default function Customer() {
         <h1 className="text-2xl font-extrabold text-primary-text">
           Customer Management
         </h1>
-        <div className="flex flex-wrap items-center gap-4">
+        {/* <div className="flex flex-wrap items-center gap-4">
           <button className="flex items-center justify-center px-3 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
             <LetterIcon className="h-4 w-4" />
             <span>Send Campaign</span>
@@ -67,7 +63,7 @@ export default function Customer() {
             <PlusIcon className="h-4 w-4" />
             <span>Add Customer</span>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
         {CustomerStats.map((status) => (

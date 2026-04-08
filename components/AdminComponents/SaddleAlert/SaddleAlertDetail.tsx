@@ -1,4 +1,3 @@
-import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 import { useGetSingleSaddleAlertQuery } from "@/src/redux/admin/saddleAlert/saddleAlertApi";
 
 interface SaddleAlertDetailProps {
@@ -23,12 +22,6 @@ export default function SaddleAlertDetail({
         <h1 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
           Used Saddle Alert Details
         </h1>
-        <button
-          onClick={onClose}
-          className="cursor-pointer px-3 py-2.5 border border-[#989CAC] rounded-[4px]"
-        >
-          <CancelIcon />
-        </button>
       </div>
 
       {/* BODY */}

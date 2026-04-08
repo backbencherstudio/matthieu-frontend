@@ -127,7 +127,7 @@ const saddleApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSaddles: builder.query({
       query: () => ({
-        url: `/sadlles`,
+        url: `/sadlles/public`,
         method: "GET",
       }),
       providesTags: ["Saddle", "Favorite"],
@@ -135,7 +135,7 @@ const saddleApi = baseApi.injectEndpoints({
 
     getSingleSaddle: builder.query({
       query: ({ id }) => ({
-        url: `/sadlles/${id}`,
+        url: `/sadlles/public/${id}`,
         method: "GET",
       }),
       providesTags: ["Saddle", "Favorite"],
@@ -143,7 +143,7 @@ const saddleApi = baseApi.injectEndpoints({
 
     getLeadLineSaddle: builder.query<GetLeadLineSaddleResponse, void>({
       query: () => ({
-        url: `/sadlles/leadline/product`,
+        url: `/sadlles/public/leadline/product`,
         method: "GET",
       }),
       providesTags: ["Saddle", "Favorite"],

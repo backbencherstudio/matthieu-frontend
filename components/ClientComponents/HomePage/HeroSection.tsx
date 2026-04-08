@@ -15,7 +15,7 @@ export default function HeroSection() {
 
   const products = data?.flatMap((category) => category.products || []) || [];
 
-  const homeProducts = products.slice(0, 4);
+  const homeProducts = products.slice(0, 3);
 
   return (
     <div className="maxContainer mb-12">
