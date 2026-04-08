@@ -5,6 +5,8 @@ export interface TableRowItem extends TableItem {
   name?: string;
   designation?: string;
   title?: string;
+  custom_transaction_id?: string;
+  payment_gateway?: string;
   service?: string;
   price?: string;
   deliveryTime?: string;
@@ -124,7 +126,7 @@ export interface TableRowItem extends TableItem {
   basePrice?: string;
   usedsaddlecategory?: string;
   size?: string;
-  stockQuantity? : string,
-  price_usd? : string,
-  price_eur? : string,
+  stockQuantity?: string;
+  price_usd?: string;
+  price_eur?: string;
 }

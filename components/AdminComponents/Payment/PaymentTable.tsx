@@ -1,6 +1,5 @@
 "use client";
 
-import PaymentDownLoadIcon from "@/components/Icons/AdminIcon/PaymentDownloadIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import {
@@ -10,98 +9,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useGetAllPaymentsQuery } from "@/src/redux/admin/payment/paymentApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export default function PaymentTable() {
-  const relevantData = [
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$584.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$584.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcelo X",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$361.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$361.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Elon Mask",
-      email: "elon@ukclub.ccm",
-      paymentMethod: "Google Pay",
-      productPrice: "$158.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$158.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Donal Tramp",
-      email: "donal@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$236.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$236.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$258.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$258.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Elon Mask",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Google Pay",
-      productPrice: "$736.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$736.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Donal Tramp",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$158.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$158.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$336.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$336.00",
-    },
-  ];
-
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const [page, setPage] = useState(1);
+  const { data } = useGetAllPaymentsQuery("");
+  const relevantData = data?.data || [];
+  const currentItems = relevantData;
+  const totalPages = data?.meta_data?.total || 1;
 
   const tableHeader = [
     "Transaction ID",
     "Customer",
     "Payment Method",
-    "Product price",
-    "Delivery Fee",
+    // "Product price",
+    // "Delivery Fee",
     "Total Amount",
-    "Actions",
+    // "Actions",
   ];
 
   const tableRowDataRenderers: ((
@@ -110,7 +37,7 @@ export default function PaymentTable() {
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.id}
+        {item?.custom_transaction_id}
       </span>
     ),
     (item) => (
@@ -123,33 +50,34 @@ export default function PaymentTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.paymentMethod}
+        {item?.payment_gateway}
       </span>
     ),
+    // (item) => (
+    //   <span className="text-[14px] text-[#14191F] leading-[114%]">
+    //     {item?.productPrice}
+    //   </span>
+    // ),
+    // (item) => (
+    //   <span className="text-[14px] text-[#14191F] leading-[114%]">
+    //     {item?.deliveryFee}
+    //   </span>
+    // ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.productPrice}
+        {item?.currency === "usd" ? "$ " : item?.currency === "eur" ? "€ " : ""}
+        {item?.amount}
       </span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.deliveryFee}
-      </span>
-    ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.totalAmount}
-      </span>
-    ),
-    (item) => (
-      <div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <PaymentDownLoadIcon />
-          </button>
-        </div>
-      </div>
-    ),
+    // (item) => (
+    //   <div>
+    //     <div>
+    //       <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+    //         <PaymentDownLoadIcon />
+    //       </button>
+    //     </div>
+    //   </div>
+    // ),
   ];
 
   const isLoadings = false;
@@ -223,9 +151,9 @@ export default function PaymentTable() {
               }`}
             >
               <PaginationComponent
-                currentPage={currentPage}
+                currentPage={page}
                 totalPages={totalPages}
-                onPageChange={setCurrentPage}
+                onPageChange={setPage}
               />
             </div>
           )}

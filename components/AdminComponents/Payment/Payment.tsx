@@ -41,6 +41,7 @@ export default function Payment() {
       iconColor: "#22CAAD",
     },
   ];
+
   return (
     <div>
       <h1 className="text-2xl font-extrabold text-primary-text mb-5">
