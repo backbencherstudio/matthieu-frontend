@@ -5,7 +5,7 @@ const LeadlineSaddle = baseApi.injectEndpoints({
 
         createLeadlineSaddle: builder.mutation({
             query: (formData) => ({
-                url: "/sadlles",
+                url: "sadlles/admin",
                 method: "POST",
                 body: formData,
             }),
@@ -14,7 +14,8 @@ const LeadlineSaddle = baseApi.injectEndpoints({
 
         getallLeadlineSaddle: builder.query({
             query: () => ({
-                url: "/sadlles/leadlines/admin",
+                // url: "/sadlles/leadlines/admin",
+                url: "/sadlles/admin/leadlines",
                 method: "GET",
             }),
             providesTags: ["leadlineSaddle"],
