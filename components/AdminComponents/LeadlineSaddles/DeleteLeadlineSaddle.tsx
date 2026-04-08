@@ -16,12 +16,12 @@ export default function DeleteLeadlineSaddle({
   refetch,
 }: DeleteSaddleProductProps) {
   const [open, setOpen] = useState(false);
-  const [deleteSaddleProduct, { isLoading }] = useDeleteLeadlineSaddleMutation();
+  const [deleteSaddleProduct, { isLoading }] =
+    useDeleteLeadlineSaddleMutation();
 
   const handelDelete = async () => {
     try {
       const response = await deleteSaddleProduct(id);
-      console.log(response);
       if (response?.data?.success) {
         refetch();
         setOpen(false);
