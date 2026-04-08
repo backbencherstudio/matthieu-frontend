@@ -1,45 +1,45 @@
-import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
-import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
-import ShipmentIcon from "@/components/Icons/AdminIcon/ShipmentIcon";
-import ShoppingCardIcon from "@/components/Icons/MyAccoountIcon/ShoppingCardIcon";
-import SuccessIcon from "@/components/Icons/MyAccoountIcon/SuccessIcon";
-import Link from "next/link";
-import HeaderCard from "../reusable/HeaderCard";
-import OrderTable from "./OrderTable";
+import DollarIcon from '@/components/Icons/AdminIcon/DollarIcon';
+import RefreshIcon from '@/components/Icons/AdminIcon/RefreshIcon';
+import ShipmentIcon from '@/components/Icons/AdminIcon/ShipmentIcon';
+import ShoppingCardIcon from '@/components/Icons/MyAccoountIcon/ShoppingCardIcon';
+import SuccessIcon from '@/components/Icons/MyAccoountIcon/SuccessIcon';
+import Link from 'next/link';
+import HeaderCard from '../reusable/HeaderCard';
+import OrderTable from './OrderTable';
 
 export default function Order() {
   const CustomerStats = [
     {
       id: 1,
-      title: "Total Orders",
+      title: 'Total Orders',
       icon: <ShoppingCardIcon />,
-      number: "12",
-      iconBgColor: "#EDF3FB",
-      iconColor: "#4A87D7",
+      number: '12',
+      iconBgColor: '#EDF3FB',
+      iconColor: '#4A87D7',
     },
     {
       id: 2,
-      title: "Delivered Orders",
+      title: 'Delivered Orders',
       icon: <SuccessIcon />,
-      number: "4",
-      iconBgColor: "#E9FAF7",
-      iconColor: "#22CAAD",
+      number: '4',
+      iconBgColor: '#E9FAF7',
+      iconColor: '#22CAAD',
     },
     {
       id: 3,
-      title: "Processing",
+      title: 'Processing',
       icon: <RefreshIcon />,
-      number: "6",
-      iconBgColor: "#FFFAE8",
-      iconColor: "#FFA600",
+      number: '6',
+      iconBgColor: '#FFFAE8',
+      iconColor: '#FFA600',
     },
     {
       id: 4,
-      title: "Revenue",
+      title: 'Revenue',
       icon: <DollarIcon />,
-      number: "$899.92",
-      iconBgColor: "#F4F1FF",
-      iconColor: "#B081FF",
+      number: '$899.92',
+      iconBgColor: '#F4F1FF',
+      iconColor: '#B081FF',
     },
   ];
   return (
@@ -66,7 +66,7 @@ export default function Order() {
         </div> */}
       </div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
-        {CustomerStats.map((status) => (
+        {CustomerStats.map(status => (
           <HeaderCard
             key={status?.id}
             title={status?.title}
