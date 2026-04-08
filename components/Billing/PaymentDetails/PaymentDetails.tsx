@@ -90,6 +90,7 @@ const PaymentForm = () => {
 
       if (result.error) {
         console.error(result.error.message);
+        toast.error("Payment Failed")
         setPaymentStatus("error");
       } else if (result.paymentIntent?.status === "succeeded") {
 

@@ -8,6 +8,8 @@ import { SketchPicker } from "react-color";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
+import { FaPlusCircle } from "react-icons/fa";
+
 import {
   Select,
   SelectContent,
@@ -416,7 +418,8 @@ const PRESET_COLORS = [
         ))}
         {/* Custom picker */}
         <label className="w-8 h-8 rounded-lg border border-dashed border-gray-300 hover:border-[#1F274B] flex items-center justify-center cursor-pointer transition-colors" title="Custom color">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" strokeWidth="1.2"/><path d="M7 4v6M4 7h6" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round"/></svg>
+          {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#9ca3af" strokeWidth="1.2"/><path d="M7 4v6M4 7h6" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round"/></svg> */}
+          <FaPlusCircle />
           <input type="color" className="sr-only" value={currentHex} onChange={(e) => { setHex(e.target.value); setName("Custom"); }} />
         </label>
       </div>
