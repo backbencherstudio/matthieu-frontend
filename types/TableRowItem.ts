@@ -14,6 +14,7 @@ export interface TableRowItem extends TableItem {
   serviceType?: string;
   trackingNumber?: string;
   destination?: string;
+  subcategory?: string;
   date?: string;
   daysLeft?: string;
   productName?: string;

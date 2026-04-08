@@ -4,7 +4,7 @@ const SaddleProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createProduct: builder.mutation({
       query: (formData) => ({
-        url: "/sadlles",
+        url: "/sadlles/admin",
         method: "POST",
         body: formData,
       }),
@@ -13,7 +13,7 @@ const SaddleProductApi = baseApi.injectEndpoints({
 
     getSaddleProducts: builder.query({
       query: () => ({
-        url: "/sadlles",
+        url: "/sadlles/admin/all-saddles",
         method: "GET",
       }),
       providesTags: ["SaddleProduct"],
@@ -21,7 +21,7 @@ const SaddleProductApi = baseApi.injectEndpoints({
 
     deleteSaddleProduct: builder.mutation({
       query: (id) => ({
-        url: `/sadlles/${id}`,
+        url: `/sadlles/admin/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["SaddleProduct"],

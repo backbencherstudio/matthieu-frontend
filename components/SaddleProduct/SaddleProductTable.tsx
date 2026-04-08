@@ -20,8 +20,15 @@ export default function SaddleProductTable() {
 
   const relevantData = allSaddles;
   const currentItems = relevantData;
-  const meta = data?.meta;
-  const tableHeader = ["Name", "price", "Image", "Action"];
+  const meta = data?.pagination;
+  const tableHeader = [
+    "Name",
+    "Category",
+    "Price $",
+    "Price €",
+    "Image",
+    "Action",
+  ];
   const tableRowDataRenderers: ((
     item: TableRowItem,
     index: number,
@@ -33,7 +40,17 @@ export default function SaddleProductTable() {
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.price}
+        {item?.subcategory}
+      </span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#14191F] leading-[114%]">
+        ${item?.price_usd}
+      </span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#14191F] leading-[114%]">
+        €{item?.price_eur}
       </span>
     ),
     (item) => (
