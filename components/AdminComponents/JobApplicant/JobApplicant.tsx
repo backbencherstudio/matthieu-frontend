@@ -69,7 +69,13 @@ export default function JobApplicant() {
         <h1 className="lg:text-2xl md:text-xl text-lg font-extrabold text-[#1F274B]">
           Job Applicants Overview
         </h1>
-        <button className="flex items-center justify-center px-4 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer">
+        <button
+          className="flex items-center justify-center px-4 py-2.5 bg-[#1F274B] rounded-[4px] text-[#FFF] space-x-2 cursor-pointer"
+          onClick={() => {
+            setSearch("");
+            setCurrentPage(1);
+          }}
+        >
           <RefreshIcon />
           <span>Refresh</span>
         </button>
@@ -85,6 +91,7 @@ export default function JobApplicant() {
             <div className="relative">
               <input
                 type="text"
+                value={search}
                 className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                 placeholder="Search candidates..."
                 onChange={(e) => {

@@ -2,26 +2,21 @@
 
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 import { Search } from "lucide-react";
 import { ReactNode, useState } from "react";
-import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 
 export default function CustomerTable() {
-
-  //  Backend page state
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [page, setPage] = useState(1);
 
   //  API call with page
   const { data, isLoading } = useGetCustomersQuery({
     page,
     limit: 10,
+    search: debouncedSearch,
   });
 
   //  Map API data
@@ -49,30 +44,13 @@ export default function CustomerTable() {
     "Created At",
   ];
 
-  const tableRowDataRenderers: ((
-    item: any,
-    index: number
-  ) => ReactNode)[] = [
+  const tableRowDataRenderers: ((item: any, index: number) => ReactNode)[] = [
+    (item) => <span className="text-[14px] text-[#1F274B]">{item.email}</span>,
+    (item) => <span className="text-[14px] text-[#4A4C56]">{item.name}</span>,
     (item) => (
-      <span className="text-[14px] text-[#1F274B]">
-        {item.email}
-      </span>
+      <span className="text-[14px] text-[#1F274B]">{item.country}</span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#4A4C56]">
-        {item.name}
-      </span>
-    ),
-    (item) => (
-      <span className="text-[14px] text-[#1F274B]">
-        {item.country}
-      </span>
-    ),
-    (item) => (
-      <span className="text-[14px] text-[#696E86]">
-        {item.city}
-      </span>
-    ),
+    (item) => <span className="text-[14px] text-[#696E86]">{item.city}</span>,
     (item) => (
       <span
         className={`text-[14px] ${
@@ -95,7 +73,6 @@ export default function CustomerTable() {
     <div>
       <div className="overflow-auto">
         <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
-
           {/* search bar (unchanged UI) */}
           <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
             <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
@@ -106,6 +83,9 @@ export default function CustomerTable() {
               <div className="relative">
                 <input
                   type="text"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                   className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                   placeholder="Search customers..."
                 />
@@ -114,7 +94,7 @@ export default function CustomerTable() {
                 </div>
               </div>
 
-              <div>
+              {/* <div>
                 <Select>
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
@@ -125,9 +105,9 @@ export default function CustomerTable() {
                     <SelectItem value="inactive">Inactive</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <Select>
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Segments" />
@@ -142,7 +122,7 @@ export default function CustomerTable() {
                     <SelectItem value="atRisk">At Risk</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -168,28 +148,11 @@ export default function CustomerTable() {
               />
             </div>
           )}
-
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // "use client";
 
