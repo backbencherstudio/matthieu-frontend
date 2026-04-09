@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/select";
 import { useAddUsedSaddleToCardMutation, useGetSingleUseSaddleUserQuery } from "@/src/redux/client/use-saddle/useSaddleUserApi";
 import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ZoomImage } from "./ZoomedImage";
-import { Minus, Plus } from "lucide-react";
+import { Heart, Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useAddSaddleToFavoriteMutation, useGetAllFavoritesQuery, useRemoveFavoriteMutation } from "@/src/redux/client/saddle/saddleApi";
 
 
 
@@ -43,6 +44,48 @@ export default function SaddlesDetails() {
     trialPeriod: selectedTrial || undefined,
   });
   const [addToCard] = useAddUsedSaddleToCardMutation();
+
+  const { data: favorites = [] } = useGetAllFavoritesQuery();
+  const [addSaddleToFavorite, { isLoading: isAddingFavorite }] =
+    useAddSaddleToFavoriteMutation();
+  const [removeFavorite, { isLoading: isRemovingFavorite }] =
+    useRemoveFavoriteMutation();
+
+  const currentSaddleId = data?.data?.id;
+
+  const currentFavorite = useMemo(() => {
+    if (!currentSaddleId) return null;
+
+    return (
+      favorites.find(
+        (item) =>
+          item.type === "SADDLE_PRODUCT" &&
+          item.product?.id === currentSaddleId,
+      ) ?? null
+    );
+  }, [favorites, currentSaddleId]);
+
+  const isFavorited = Boolean(currentFavorite);
+  const isFavoriteActionLoading = isAddingFavorite || isRemovingFavorite;
+
+  const handleToggleFavorite = async () => {
+    if (!currentSaddleId || isFavoriteActionLoading) return;
+
+    try {
+      if (isFavorited && currentFavorite?.id) {
+        await removeFavorite({ favoriteId: currentFavorite.id }).unwrap();
+      } else {
+       const result =  await addSaddleToFavorite({
+          saddleProductId: currentSaddleId,
+        }).unwrap();
+        console.log(result,currentSaddleId,"-----")
+
+      }
+    } catch (error) {
+      toast.error("Login first")
+      console.error("Favorite action failed:", error);
+    }
+  };
 
   const productImages =
     data?.data?.images?.map((img) => ({
@@ -168,6 +211,23 @@ export default function SaddlesDetails() {
               {/* <button className="cursor-pointer">
                 <LoveIcon className="size-10" />
               </button> */}
+              <button
+                className="cursor-pointer disabled:opacity-60"
+                onClick={handleToggleFavorite}
+                disabled={isFavoriteActionLoading}
+                aria-label={
+                  isFavorited
+                    ? "Remove from favorite"
+                    : "Add to favorite"
+                }
+              >
+                <Heart
+                  className={`xl:size-12 size-8 ${isFavorited
+                      ? "text-red-500 fill-red-500"
+                      : "text-[#4C526F]"
+                    }`}
+                />
+              </button>
             </div>
 
             <p className="text-xl text-[#4C526F]">
@@ -281,11 +341,11 @@ export default function SaddlesDetails() {
                 </p>
               </div>
               <div className="mt-8">
-                <button onClick={handleCart} disabled={ !selectedTrial ||
-                          data?.data?.stockQuantity === 0 } className="px-8 py-3 bg-[#1F274B] text-white rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                <button onClick={handleCart} disabled={!selectedTrial ||
+                  data?.data?.stockQuantity === 0} className="px-8 py-3 bg-[#1F274B] text-white rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                   {data?.data?.stockQuantity === 0
-                          ? "OUT OF STOCK"
-                          : "ADD TO CART"}
+                    ? "OUT OF STOCK"
+                    : "ADD TO CART"}
                 </button>
               </div>
             </div>
