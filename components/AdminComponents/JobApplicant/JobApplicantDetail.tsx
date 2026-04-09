@@ -1,4 +1,3 @@
-import CancelIcon from "@/components/Icons/AdminIcon/CancelIcon";
 import DownloadIcon from "@/components/Icons/AdminIcon/DownloadIcon";
 import { useGetSingleJobApplicantQuery } from "@/src/redux/admin/jobApplicant/jobApplicantApi";
 
@@ -13,8 +12,34 @@ const Skeleton = ({ className = "" }: { className?: string }) => (
 
 export default function JobApplicantDetail({ id, onClose }: DetailProps) {
   const { data, isLoading } = useGetSingleJobApplicantQuery(id);
-
   const applicant = data?.data;
+
+  // ✅ Extract filename from URL
+  const getFileName = (url: string) => {
+    if (!url) return "document";
+    const parts = url.split("/");
+    const rawName = parts[parts.length - 1]; // e.g. "1775708310911-photo_2026-02-07_11-00-56.jpg"
+    // Remove the timestamp prefix (numbers + dash at the start)
+    return rawName.replace(/^\d+-/, "");
+  };
+
+  // ✅ Download handler
+  const handleDownload = async (fileUrl: string) => {
+    try {
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = getFileName(fileUrl);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
 
   return (
     <div className="px-6 py-8 rounded-[8px] bg-[#FFF] md:w-[520px] w-full">
@@ -117,18 +142,24 @@ export default function JobApplicantDetail({ id, onClose }: DetailProps) {
 
           {isLoading ? (
             <Skeleton className="h-12 w-full mt-3" />
-          ) : (
+          ) : applicant?.files ? (
+            // ✅ Show real filename and trigger download on click
             <div className="flex items-center justify-between px-4 py-3 bg-[#E9EAED] rounded-[8px] mt-3">
-              <span className="text-[14px] text-[#1F274B]">
-                Emma Taylor Cv.pdf
+              <span className="text-[14px] text-[#1F274B] truncate max-w-[350px]">
+                {getFileName(applicant.files)}
               </span>
               <button
                 type="button"
-                className="flex items-center justify-center p-1.5 rounded-[6px] bg-[#1F274B] cursor-pointer"
+                onClick={() => handleDownload(applicant.files)}
+                className="flex items-center justify-center p-1.5 rounded-[6px] bg-[#1F274B] cursor-pointer flex-shrink-0"
               >
                 <DownloadIcon />
               </button>
             </div>
+          ) : (
+            <p className="text-[14px] text-[#696E86] mt-3">
+              No document attached
+            </p>
           )}
         </div>
       </div>
