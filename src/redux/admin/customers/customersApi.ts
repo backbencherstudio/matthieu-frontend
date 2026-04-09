@@ -4,10 +4,10 @@ const customersApi = baseApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getCustomers: builder.query<any, any>({
-      query: ({ page = 1, limit = 10 } = {}) => ({
+      query: ({ page = 1, limit = 10, search } = {}) => ({
         url: "/auth/users",
         method: "GET",
-        params: { page, limit },
+        params: { page, limit, search },
       }),
     }),
   }),

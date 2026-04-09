@@ -2,18 +2,21 @@
 
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
+import { useDebounce } from "@/src/hooks/useDebounce";
 import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 import { Search } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 export default function CustomerTable() {
-  //  Backend page state
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
   const [page, setPage] = useState(1);
 
   //  API call with page
   const { data, isLoading } = useGetCustomersQuery({
     page,
     limit: 10,
+    search: debouncedSearch,
   });
 
   //  Map API data
@@ -80,6 +83,9 @@ export default function CustomerTable() {
               <div className="relative">
                 <input
                   type="text"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                   className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                   placeholder="Search customers..."
                 />
