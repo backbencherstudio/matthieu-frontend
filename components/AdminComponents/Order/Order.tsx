@@ -81,14 +81,14 @@ export default function Order() {
       iconBgColor: '#FFFAE8',
       iconColor: '#FFA600',
     },
-    {
-      id: 4,
-      title: 'Revenue',
-      icon: <EyeIcon />,
-      number: revenue,
-      iconBgColor: '#F4F1FF',
-      iconColor: '#B081FF',
-    },
+    // {
+    //   id: 4,
+    //   title: 'Revenue',
+    //   icon: <EyeIcon />,
+    //   number: revenue,
+    //   iconBgColor: '#F4F1FF',
+    //   iconColor: '#B081FF',
+    // },
   ];
 
   return (
@@ -98,7 +98,7 @@ export default function Order() {
           Orders Management
         </h1>
       </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 my-5">
         {CustomerStats.map(status => (
           <HeaderCard key={status.id} {...status} />
         ))}

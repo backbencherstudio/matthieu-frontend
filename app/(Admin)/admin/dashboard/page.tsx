@@ -73,12 +73,12 @@ export default function DashboardPage() {
       negativeValue: '-2%',
     },
 
-    {
-      title: 'Revenue',
-      value: revenue,
-      image: '/images/dash-image/reveneu.png',
-      positiveValue: '+5%',
-    },
+    // {
+    //   title: 'Revenue',
+    //   value: revenue,
+    //   image: '/images/dash-image/reveneu.png',
+    //   positiveValue: '+5%',
+    // },
   ];
 
 
@@ -142,7 +142,7 @@ export default function DashboardPage() {
 
       {/* Statistics Cards Section */}
       <div className="pt-6">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-3">
           {cards.map((card, index) => (
             <StatisticCard key={index} card={card} />
           ))}
