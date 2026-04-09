@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { MdClose } from "react-icons/md";
 import AlertIcon from "../Icons/AdminIcon/AlertIcon";
-import AnalyticsIcon from "../Icons/AdminIcon/AnalyticsIcon";
 import CardIcon from "../Icons/AdminIcon/CardIcon";
 import CartIcon from "../Icons/AdminIcon/CartIcon";
 import CMSIcon from "../Icons/AdminIcon/CMSIcon";
@@ -16,6 +15,7 @@ import ProductIcon from "../Icons/AdminIcon/ProductIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import UsersIcon from "../Icons/AdminIcon/UsersIcon";
 import SaddlesIcon from "../Icons/SaddlesIcon";
+import UserIcon from "../Icons/UserIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -25,7 +25,7 @@ const menuItems = [
   //   icon: AnalyticsIcon,
   // },
   {
-    label: "Products",
+    label: "Tack Products",
     href: "/admin/products",
     icon: ProductIcon,
   },
@@ -75,7 +75,7 @@ const menuItems = [
     icon: AlertIcon,
   },
   {
-    label: "Saddle Experts",
+    label: "Try Saddle",
     href: "/admin/saddle-expert",
     icon: UsersIcon,
   },
@@ -83,6 +83,11 @@ const menuItems = [
     label: "Job Applicants",
     href: "/admin/job-applicants",
     icon: JobIcon,
+  },
+  {
+    label: "Contact Us",
+    href: "/admin/contact-us",
+    icon: UserIcon,
   },
   {
     label: "Settings",

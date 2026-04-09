@@ -68,7 +68,8 @@ export interface GetLeadLineSaddleResponse {
 }
 
 export interface AddSaddleFavoritePayload {
-  saddleProductId: string;
+  saddleProductId?: string;
+  usedSaddleProductId?: string;
 }
 
 export interface AddSaddleFavoriteResponse {
@@ -76,8 +77,8 @@ export interface AddSaddleFavoriteResponse {
   createdAt: string;
   userId: string;
   tackProductId: string | null;
-  saddleProductId: string | null;
-  usedSaddleProductId: string | null;
+  saddleProductId?: string | null;
+  usedSaddleProductId?: string | null;
   savedProduct: {
     id: string;
     name: string;
