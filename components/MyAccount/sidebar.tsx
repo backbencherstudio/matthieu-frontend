@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,14 +9,13 @@ import AddressBookIcon from "@/components/Icons/MyAccoountIcon/AddressBookIcon";
 import DashboardLayoutIcon from "@/components/Icons/MyAccoountIcon/DashboardLayoutIcon";
 import HeartIcon from "@/components/Icons/MyAccoountIcon/HeartIcon";
 import SideBarShoppingIcon from "@/components/Icons/MyAccoountIcon/SideBarShoppingIcon";
+import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
+import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 import { Menu, X } from "lucide-react";
-import LogoutIcon from "../Icons/AdminIcon/LogoutIcon";
+import { toast } from "sonner";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import CameraIcon from "../Icons/MyAccoountIcon/CameraIcon";
 import ImageUploader from "./imageUploader";
-import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
-import { toast } from "sonner";
-import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 
 const menuItems = [
   {
@@ -35,27 +33,23 @@ export function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, isLoading , refetch } = useGetUserQuery();
+  const { data, isLoading, refetch } = useGetUserQuery();
   const user = data?.data;
   const [updateProfile] = useUpdateProfileMutation();
 
-
-
   const handleImageUpload = async (file: File) => {
-  try {
-    const formData = new FormData();
-    formData.append("image", file);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
 
-    await updateProfile(formData).unwrap();
-    toast.success("Profile image updated successfully");
-    refetch();
-  } catch (error: any) {
-    console.error(error);
-    toast.error(error?.data?.message?.message || "Image update failed");
-  }
-};
-  
-  
+      await updateProfile(formData).unwrap();
+      toast.success("Profile image updated successfully");
+      refetch();
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.data?.message?.message || "Image update failed");
+    }
+  };
 
   return (
     <>
@@ -90,7 +84,7 @@ export function Sidebar() {
           {/* Profile Section */}
           <div className="flex flex-col p-4 mb-12">
             <div className="relative w-20 h-20 mx-auto">
-             <ImageUploader onImageUpload={handleImageUpload} />
+              <ImageUploader onImageUpload={handleImageUpload} />
               <label
                 htmlFor="avatarUploader"
                 className="absolute top-0 right-0 bg-[#1F274B] rounded-full p-1 border border-white cursor-pointer"
@@ -139,12 +133,6 @@ export function Sidebar() {
               );
             })}
           </nav>
-
-          {/* Logout Button */}
-          <Button className="w-full justify-start bg-[#F6F8FA] text-[#EB3D4D] hover:bg-[#F6F8FA]/90 text-[16px] font-extrabold uppercase leading-[100%] cursor-pointer rounded-none py-3.5 my-1.5 mt-auto">
-            <LogoutIcon />
-            LOGOUT
-          </Button>
         </div>
       </aside>
 

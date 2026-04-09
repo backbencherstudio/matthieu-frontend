@@ -1,18 +1,22 @@
+"use client";
 import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
 import ProcessingIcon from "@/components/Icons/AdminIcon/ProcessingIcon";
 import TransactionIcon from "@/components/Icons/AdminIcon/TransactionIcon";
 import SuccessIcon from "@/components/Icons/MyAccoountIcon/SuccessIcon";
 
+import { useGetPaymentStatsQuery } from "@/src/redux/admin/payment/paymentApi";
 import HeaderCard from "../reusable/HeaderCard";
 import PaymentTable from "./PaymentTable";
 
 export default function Payment() {
+  const { data } = useGetPaymentStatsQuery("");
+  console.log(data?.data);
   const paymentStats = [
     {
       id: 1,
       title: "Total Revenue",
       icon: <DollarIcon />,
-      number: "$58,429",
+      number: data?.data?.total_revenue || "$0",
       iconBgColor: "#F4F1FF",
       iconColor: "#B081FF",
     },
@@ -20,7 +24,7 @@ export default function Payment() {
       id: 2,
       title: "Transactions",
       icon: <TransactionIcon />,
-      number: "247",
+      number: data?.data?.total_transactions || "0",
       iconBgColor: "#FAE9EB",
       iconColor: "#CA2233",
     },
@@ -28,7 +32,7 @@ export default function Payment() {
       id: 3,
       title: "Processing Fees",
       icon: <ProcessingIcon />,
-      number: "$1,847",
+      number: data?.data?.paid_transactions || "$0",
       iconBgColor: "#E7F3FE",
       iconColor: "#0077FF",
     },
@@ -36,11 +40,12 @@ export default function Payment() {
       id: 4,
       title: "Success Rate",
       icon: <SuccessIcon />,
-      number: "97.8%",
+      number: data?.data?.success_rate ? `${data?.data?.success_rate}%` : "0%",
       iconBgColor: "#E9FAF7",
       iconColor: "#22CAAD",
     },
   ];
+
   return (
     <div>
       <h1 className="text-2xl font-extrabold text-primary-text mb-5">

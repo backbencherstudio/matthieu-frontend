@@ -1,10 +1,8 @@
-
 "use client";
 import AvgUsageRateIcon from "@/components/Icons/AdminIcon/AvgUsageRateIcon";
 import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
 import TotalCouponIcon from "@/components/Icons/AdminIcon/TotalCouponIcon";
 import TotalUsageIcon from "@/components/Icons/AdminIcon/TotalUsageIcon";
-import HeaderCard from "../reusable/HeaderCard";
 import CouponTable from "./CouponTable";
 import CreateCouponModal from "./CreateCouponModal";
 
@@ -12,9 +10,8 @@ import CreateCouponModal from "./CreateCouponModal";
 import { useGetCouponsQuery } from "@/src/redux/admin/coupon/couponApi";
 
 export default function Coupon() {
-
   //  fetch data
-  const { data, isLoading, isError ,refetch } = useGetCouponsQuery();
+  const { data, isLoading, isError, refetch } = useGetCouponsQuery();
 
   const coupons = data?.data || [];
 
@@ -32,9 +29,9 @@ export default function Coupon() {
       id: 2,
       title: "Active Coupons",
       icon: <EyeIcon />,
-      number: coupons.filter(
-        (c) => new Date(c.expiresAt) > new Date()
-      ).length.toString(),
+      number: coupons
+        .filter((c) => new Date(c.expiresAt) > new Date())
+        .length.toString(),
       iconBgColor: "#F3E6F3",
       iconColor: "#800080",
     },
@@ -42,10 +39,9 @@ export default function Coupon() {
       id: 3,
       title: "Total Usage",
       icon: <TotalUsageIcon />,
-      number: coupons.reduce(
-        (acc, c) => acc + (c.maxUsesPerUser || 0),
-        0
-      ).toString(),
+      number: coupons
+        .reduce((acc, c) => acc + (c.maxUsesPerUser || 0), 0)
+        .toString(),
       iconBgColor: "#EAF3FC",
       iconColor: "#2987DF",
     },
@@ -56,10 +52,8 @@ export default function Coupon() {
       number:
         coupons.length > 0
           ? (
-              coupons.reduce(
-                (acc, c) => acc + (c.maxUsesPerUser || 0),
-                0
-              ) / coupons.length
+              coupons.reduce((acc, c) => acc + (c.maxUsesPerUser || 0), 0) /
+              coupons.length
             ).toFixed(2)
           : "0",
       iconBgColor: "#E6F3E6",
@@ -78,11 +72,11 @@ export default function Coupon() {
           Coupons & Discounts
         </h1>
         <button className="bg-primary-bg text-white rounded py-2.5 px-3 whitespace-nowrap cursor-pointer">
-          <CreateCouponModal  refetch={refetch}/>
+          <CreateCouponModal refetch={refetch} />
         </button>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-4 mb-9">
+      {/* <div className="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-4 mb-9">
         {couponStats.map((status) => (
           <HeaderCard
             key={status?.id}
@@ -93,35 +87,12 @@ export default function Coupon() {
             iconColor={status.iconColor}
           />
         ))}
-      </div>
+      </div> */}
 
-     
-      <CouponTable  />
+      <CouponTable />
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // "use client";
 // import AvgUsageRateIcon from "@/components/Icons/AdminIcon/AvgUsageRateIcon";

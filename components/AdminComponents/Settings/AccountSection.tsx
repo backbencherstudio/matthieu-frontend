@@ -2,12 +2,12 @@
 import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
 import ImageSelectIcon from "@/components/Icons/DashboardIcons/ImageSelectIcon";
 import { Label } from "@/components/ui/label";
+import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
+import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import UpdatePasswordSection from "./UpdatePasswordSection";
-import { useGetUserQuery } from "@/src/redux/client/settings/userApi";
-import { useUpdateProfileMutation } from "@/src/redux/client/settings/updateProfileApi";
 import { toast } from "sonner";
+import UpdatePasswordSection from "./UpdatePasswordSection";
 
 type adminInfoFormData = {
   firstName: string;
@@ -25,7 +25,7 @@ export default function AccountSection() {
   const { data, refetch } = useGetUserQuery();
   const user = data?.data;
 
-  console.log("adminData ---->", user)
+  console.log("adminData ---->", user);
 
   const [updateProfile] = useUpdateProfileMutation();
 
@@ -195,7 +195,7 @@ export default function AccountSection() {
                 <input
                   id="firstName"
                   type="text"
-                  placeholder="Md"
+                  placeholder="Enter first name"
                   className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("firstName", {
                     required: "First Name is required",
@@ -217,7 +217,7 @@ export default function AccountSection() {
                 <input
                   id="lastName"
                   type="text"
-                  placeholder="Yasir"
+                  placeholder="Enter last name"
                   className="bg-[#FFF] border leading-[150%] lg:px-4 px-3 lg:py-3 py-2 w-full focus:outline-1 focus:outline-[#1F274B] rounded-[8px]"
                   {...register("lastName", {
                     required: "Last Name is required",
@@ -298,26 +298,6 @@ export default function AccountSection() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // "use client";
 // import DeleteIcon from "@/components/Icons/DashboardIcons/DeleteIcon";
