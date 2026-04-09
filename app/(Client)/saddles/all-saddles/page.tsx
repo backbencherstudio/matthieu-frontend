@@ -13,7 +13,6 @@ export default function AllSaddlesPage() {
   ];
 
   const { data, isLoading } = useGetAllSaddlesQuery("");
-  console.log(data);
   const saddlesItemsArion = data?.data?.ARION;
   const saddlesItemsAtlas = data?.data?.ATLAS;
 

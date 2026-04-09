@@ -19,6 +19,7 @@ import {
   useSizeListQuery,
 } from "@/src/redux/admin/tackProduct/tackProduct";
 import { Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Controller,
@@ -314,7 +315,7 @@ export default function AddForm() {
       shouldValidate: true,
     });
   };
-
+  const router = useRouter();
   // Form Submit
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const formData = new FormData();
@@ -352,9 +353,9 @@ export default function AddForm() {
 
     try {
       const response = await createTackProduct(formData);
-      console.log(response);
       if (response?.data?.id) {
         toast.success("Product Created Successfully!");
+        router.push("/admin/products");
         reset();
       }
     } catch (error: any) {

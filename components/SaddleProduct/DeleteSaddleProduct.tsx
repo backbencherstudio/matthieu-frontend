@@ -21,7 +21,6 @@ export default function DeleteSaddleProduct({
   const handelDelete = async () => {
     try {
       const response = await deleteSaddleProduct(id);
-      console.log(response);
       if (response?.data?.success) {
         refetch();
         setOpen(false);

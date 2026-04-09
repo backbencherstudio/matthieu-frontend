@@ -1,6 +1,5 @@
 "use client";
 
-import PaymentDownLoadIcon from "@/components/Icons/AdminIcon/PaymentDownloadIcon";
 import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
 import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
 import {
@@ -10,98 +9,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFilterPagination } from "@/hooks/useFilterHook";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllPaymentsQuery } from "@/src/redux/admin/payment/paymentApi";
 import { TableRowItem } from "@/types/TableRowItem";
 import { Search } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export default function PaymentTable() {
-  const relevantData = [
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$584.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$584.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcelo X",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$361.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$361.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Elon Mask",
-      email: "elon@ukclub.ccm",
-      paymentMethod: "Google Pay",
-      productPrice: "$158.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$158.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Donal Tramp",
-      email: "donal@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$236.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$236.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$258.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$258.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Elon Mask",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Google Pay",
-      productPrice: "$736.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$736.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Donal Tramp",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Apple Pay",
-      productPrice: "$158.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$158.00",
-    },
-    {
-      id: "#A5-AB7D-8NS",
-      customer: "Marcus Thompson",
-      email: "marcus@ukclub.ccm",
-      paymentMethod: "Stripe",
-      productPrice: "$336.00",
-      deliveryFee: "$20.00",
-      totalAmount: "$336.00",
-    },
-  ];
-
-  const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("all");
+  const [duration, setDuration] = useState("day");
+  const debouncedSearch = useDebounce(search, 500);
+  const { data } = useGetAllPaymentsQuery({
+    search: debouncedSearch,
+    page: currentPage,
+    status,
+    duration,
+  });
+  const relevantData = data?.data || [];
+  const currentItems = relevantData;
+  const meta = data?.meta_data?.total || 1;
 
   const tableHeader = [
     "Transaction ID",
-    "Customer",
     "Payment Method",
-    "Product price",
-    "Delivery Fee",
+    "Status",
+    // "Product price",
+    // "Delivery Fee",
     "Total Amount",
-    "Actions",
+    // "Actions",
   ];
 
   const tableRowDataRenderers: ((
@@ -110,46 +47,44 @@ export default function PaymentTable() {
   ) => ReactNode)[] = [
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.id}
-      </span>
-    ),
-    (item) => (
-      <span className="text-[14px] text-[#1F274B]">
-        {item?.customer} <br />
-        <span className="text-[14px] leading-[100%] text-[#777980]">
-          {item?.email}
-        </span>
+        {item?.custom_transaction_id}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.paymentMethod}
+        {item?.status}
       </span>
     ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.productPrice}
+        {item?.payment_gateway}
       </span>
     ),
+    // (item) => (
+    //   <span className="text-[14px] text-[#14191F] leading-[114%]">
+    //     {item?.productPrice}
+    //   </span>
+    // ),
+    // (item) => (
+    //   <span className="text-[14px] text-[#14191F] leading-[114%]">
+    //     {item?.deliveryFee}
+    //   </span>
+    // ),
     (item) => (
       <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.deliveryFee}
+        {item?.currency === "usd" ? "$ " : item?.currency === "eur" ? "€ " : ""}
+        {item?.amount}
       </span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.totalAmount}
-      </span>
-    ),
-    (item) => (
-      <div>
-        <div>
-          <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
-            <PaymentDownLoadIcon />
-          </button>
-        </div>
-      </div>
-    ),
+    // (item) => (
+    //   <div>
+    //     <div>
+    //       <button className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+    //         <PaymentDownLoadIcon />
+    //       </button>
+    //     </div>
+    //   </div>
+    // ),
   ];
 
   const isLoadings = false;
@@ -169,34 +104,48 @@ export default function PaymentTable() {
                   type="text"
                   className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
                   placeholder="Search by customer name, email, or brand..."
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
               <div>
-                <Select>
+                <Select
+                  value={duration}
+                  onValueChange={(val) => {
+                    setDuration(val);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="Today" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="today">Today</SelectItem>
-                    <SelectItem value="lat7day">Last 7 days</SelectItem>
-                    <SelectItem value="lat30day">Last 30 days</SelectItem>
-                    <SelectItem value="lat90day">Last 90 days</SelectItem>
-                    <SelectItem value="latyear">Last year</SelectItem>
+                    <SelectItem value="day">Today</SelectItem>
+                    <SelectItem value="week">Last 7 days</SelectItem>
+                    <SelectItem value="month">Last 30 days</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+
               <div>
-                <Select>
+                <Select
+                  value={status}
+                  onValueChange={(val) => {
+                    setStatus(val);
+                    setCurrentPage(1);
+                  }}
+                >
                   <SelectTrigger className="py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
                     <SelectValue placeholder="All Status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="today">All Status</SelectItem>
-                    <SelectItem value="lat7day">In Process</SelectItem>
-                    <SelectItem value="lat30day">Delivered</SelectItem>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="paid">Paid</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -223,8 +172,8 @@ export default function PaymentTable() {
               }`}
             >
               <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
+                currentPage={meta?.page}
+                totalPages={meta?.totalPages}
                 onPageChange={setCurrentPage}
               />
             </div>
