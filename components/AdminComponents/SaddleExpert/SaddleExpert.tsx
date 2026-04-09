@@ -1,0 +1,124 @@
+"use client";
+
+import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
+import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
+import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
+import { useDebounce } from "@/src/hooks/useDebounce";
+import { useGetAllSaddleAlertQuery } from "@/src/redux/admin/saddleAlert/saddleAlertApi";
+import { TableRowItem } from "@/types/TableRowItem";
+import { format } from "date-fns";
+import { Search } from "lucide-react";
+import { ReactNode, useState } from "react";
+
+
+export default function SaddleExpert() {
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, isLoading, refetch } = useGetAllSaddleAlertQuery({
+    search: debouncedSearch,
+    page: currentPage,
+  });
+  const relevantData = data?.data?.data;
+  const currentItems = relevantData || [];
+  const meta = data?.data?.pagination;
+
+  const tableHeader = [
+    "Alert ID",
+    "Customer",
+    "Preferences",
+    "Price Range",
+    "Created Date",
+    "Actions",
+  ];
+
+  const tableRowDataRenderers: ((
+    item: TableRowItem,
+    index: number,
+  ) => ReactNode)[] = [
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">{item?.alert_id}</span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">{item?.customer}</span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">{item?.preferences}</span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">${item?.price_range}</span>
+    ),
+    (item) => (
+      <span className="text-[14px] text-[#1F274B]">
+        {item?.created_date
+          ? format(new Date(item.created_date), "MMM d, yyyy")
+          : ""}
+      </span>
+    ),
+
+    (item) => (
+      <div>
+        <div className="flex items-center justify-end gap-2">
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            {/* <SaddleAlertDetailModal id={String(item?.id)} /> */}
+          </div>
+          <div className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]">
+            {/* <SaddleDeleteModal id={String(item?.id)} refetch={refetch} /> */}
+          </div>
+        </div>
+      </div>
+    ),
+  ];
+
+  return (
+    <div>
+      
+
+      <div className="overflow-auto">
+        <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
+          {/* search bar */}
+          <div className="flex flex-col md:flex-row justify-between md:items-center gap-2.5 mb-[23px]">
+            <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%]">
+              Saddle Expert List
+            </h2>
+            <div className="relative">
+              <input
+                type="text"
+                value={search}
+                className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
+                placeholder="Search by customer name, email, or brand..."
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-gray-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* table */}
+          <div className="mt-4 overflow-x-auto">
+            <ReuseAbleTable
+              allClientDataList={relevantData}
+              isLoadings={isLoading}
+              currentItems={currentItems}
+              tableHeader={tableHeader}
+              tableRowDataRenderers={tableRowDataRenderers}
+              isBg={false}
+            />
+          </div>
+
+          {/* pagination */}
+          <div className={`flex justify-center pt-12 pb-4`}>
+            <PaginationComponent
+              currentPage={meta?.page}
+              totalPages={meta?.totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

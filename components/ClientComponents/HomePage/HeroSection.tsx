@@ -1,5 +1,6 @@
 "use client";
 
+import ProductCardSkeleton from "@/components/Loader/ProductCardSkeleton";
 import { useGetAllTackProductsQuery } from "@/src/redux/client/tack-product/tackProduct";
 import Link from "next/link";
 
@@ -11,7 +12,7 @@ const heroTitle = [
 ];
 
 export default function HeroSection() {
-  const { data } = useGetAllTackProductsQuery("");
+  const { data,isLoading } = useGetAllTackProductsQuery("");
 
   const products = data?.flatMap((category) => category.products || []) || [];
 
@@ -33,7 +34,10 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {homeProducts.length === 0 ? (
+        { isLoading ? (
+          <ProductCardSkeleton count={homeProducts?.length} />     // ← Added here (showing 4 skeletons)
+        ) : 
+          homeProducts?.length === 0 ? (
           <div className="col-span-full text-center text-xl font-semibold">
             No products available
           </div>

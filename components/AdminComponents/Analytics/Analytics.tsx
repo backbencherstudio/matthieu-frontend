@@ -1,3 +1,4 @@
+"use client"
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import {
   Select,

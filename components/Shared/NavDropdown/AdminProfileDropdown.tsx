@@ -22,7 +22,7 @@ const AdminProfileDropdown = () => {
     
     // Preferred: client-side navigation
     router.replace('/signin');          // or '/' or '/signin'
-    // router.refresh();               // optional: force refresh server components
+    router.refresh();               // optional: force refresh server components
   };
   
   return (
