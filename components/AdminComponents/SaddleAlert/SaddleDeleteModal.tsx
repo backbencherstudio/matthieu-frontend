@@ -21,7 +21,7 @@ export default function SaddleDeleteModal({
   const handelDelete = async () => {
     try {
       const response = await deleteSaddleAlert(id);
-      console.log(response);
+
       if (response?.data?.id) {
         refetch();
         setOpen(false);

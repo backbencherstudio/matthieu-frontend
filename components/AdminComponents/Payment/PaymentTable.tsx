@@ -33,8 +33,8 @@ export default function PaymentTable() {
 
   const tableHeader = [
     "Transaction ID",
-    "Payment Method",
     "Status",
+    "Payment Method",
     // "Product price",
     // "Delivery Fee",
     "Total Amount",

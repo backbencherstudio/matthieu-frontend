@@ -144,8 +144,8 @@ export function SignInForm() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-end">
+              {/* <div className="flex items-center space-x-2">
                 <Checkbox
                   id="remember"
                   {...register("rememberMe")}
@@ -157,7 +157,7 @@ export function SignInForm() {
                 >
                   Remember me
                 </Label>
-              </div>
+              </div> */}
               <Link
                 href="/forgot-password"
                 className="text-[16px] text-[#2A3988] hover:underline hover:underline-offset-4 leading-[100%] font-extrabold "

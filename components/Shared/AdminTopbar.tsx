@@ -1,6 +1,5 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { FiSearch } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 import NotifcationAndProfile from "./NavDropdown/NotifcationAndProfile";
@@ -66,8 +65,8 @@ export default function AdminTopBar({
           {!sidebarOpen && <HiOutlineMenuAlt1 size={26} />}
         </button>
       </div>
-      <div className="flex justify-between items-center w-full gap-1">
-        <form className={`max-w-[400px] w-full relative`}>
+      <div className="flex justify-end items-center w-full gap-1">
+        {/* <form className={`max-w-[400px] w-full relative`}>
           <input
             type="text"
             placeholder="Search products, orders, customers..."
@@ -79,7 +78,7 @@ export default function AdminTopBar({
           >
             <FiSearch className="size-4 text-primary-text" />
           </button>
-        </form>
+        </form> */}
 
         <NotifcationAndProfile />
       </div>

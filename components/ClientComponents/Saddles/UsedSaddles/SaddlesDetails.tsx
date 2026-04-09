@@ -59,11 +59,13 @@ export default function SaddlesDetails() {
     return (
       favorites.find(
         (item) =>
-          item.type === "SADDLE_PRODUCT" &&
+          item.type === "USED_SADDLE_PRODUCT" &&
           item.product?.id === currentSaddleId,
       ) ?? null
     );
   }, [favorites, currentSaddleId]);
+
+  console.log(favorites,"currentfacor")
 
   const isFavorited = Boolean(currentFavorite);
   const isFavoriteActionLoading = isAddingFavorite || isRemovingFavorite;
@@ -76,9 +78,8 @@ export default function SaddlesDetails() {
         await removeFavorite({ favoriteId: currentFavorite.id }).unwrap();
       } else {
        const result =  await addSaddleToFavorite({
-          saddleProductId: currentSaddleId,
+          usedSaddleProductId: currentSaddleId,
         }).unwrap();
-        console.log(result,currentSaddleId,"-----")
 
       }
     } catch (error) {

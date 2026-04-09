@@ -1,9 +1,5 @@
 "use client";
 
-import ActiveCustomerIcon from "@/components/Icons/AdminIcon/ActiveCustomerIcon";
-import DollarIcon from "@/components/Icons/AdminIcon/DollarIcon";
-import UserGroupIcon from "@/components/Icons/AdminIcon/UserGroupIcon";
-import UserPlus from "@/components/Icons/AdminIcon/UserPlus";
 import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
 import CustomerTable from "./CustomerTable";
 
@@ -12,45 +8,45 @@ export default function Customer() {
 
   const totalCustomers = data?.meta?.total || 0;
 
-  const CustomerStats = [
-    {
-      id: 1,
-      title: "Total Customers",
-      icon: <UserGroupIcon />,
-      number: isLoading ? "..." : totalCustomers,
-      iconBgColor: "#EDF3FB",
-      iconColor: "#4A87D7",
-    },
-    {
-      id: 2,
-      title: "Active Customers",
-      icon: <ActiveCustomerIcon />,
-      number: "4",
-      iconBgColor: "#E9FAF7",
-      iconColor: "#22CAAD",
-    },
-    {
-      id: 3,
-      title: "New (30 days)",
-      icon: <UserPlus />,
-      number: "6",
-      iconBgColor: "#FFFAE8",
-      iconColor: "#FFCC00",
-    },
-    {
-      id: 4,
-      title: "Total Revenue",
-      icon: <DollarIcon />,
-      number: "$899.92",
-      iconBgColor: "#F4F1FF",
-      iconColor: "#B081FF",
-    },
-  ];
+  // const CustomerStats = [
+  //   {
+  //     id: 1,
+  //     title: "Total Customers",
+  //     icon: <UserGroupIcon />,
+  //     number: isLoading ? "..." : totalCustomers,
+  //     iconBgColor: "#EDF3FB",
+  //     iconColor: "#4A87D7",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Active Customers",
+  //     icon: <ActiveCustomerIcon />,
+  //     number: "4",
+  //     iconBgColor: "#E9FAF7",
+  //     iconColor: "#22CAAD",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "New (30 days)",
+  //     icon: <UserPlus />,
+  //     number: "6",
+  //     iconBgColor: "#FFFAE8",
+  //     iconColor: "#FFCC00",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Total Revenue",
+  //     icon: <DollarIcon />,
+  //     number: "$899.92",
+  //     iconBgColor: "#F4F1FF",
+  //     iconColor: "#B081FF",
+  //   },
+  // ];
 
   return (
     <div>
       <div className="flex flex-wrap justify-between gap-2">
-        <h1 className="text-2xl font-extrabold text-primary-text">
+        <h1 className="text-2xl font-extrabold text-primary-text mb-4">
           Customer Management
         </h1>
         {/* <div className="flex flex-wrap items-center gap-4">

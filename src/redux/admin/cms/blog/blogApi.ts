@@ -13,13 +13,16 @@ const blogApi = baseApi.injectEndpoints({
     }),
 
     getAllBlogs: builder.query({
-      query: ({ search, page, status }) => ({
+      query: ({ search, page, status, category, year, month }) => ({
         url: "/blogs",
         method: "GET",
         params: {
           search,
           page,
           status,
+          category,
+          year,
+          month,
         },
       }),
     }),
