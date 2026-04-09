@@ -75,6 +75,11 @@ const menuItems = [
     icon: AlertIcon,
   },
   {
+    label: "Saddle Experts",
+    href: "/admin/saddle-expert",
+    icon: UsersIcon,
+  },
+  {
     label: "Job Applicants",
     href: "/admin/job-applicants",
     icon: JobIcon,
