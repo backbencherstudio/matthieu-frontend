@@ -15,6 +15,7 @@ import {
 import { useGetSingleSaddleQuery } from "@/src/redux/client/saddle/saddleApi";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { ZoomImage } from "@/components/ClientComponents/Saddles/UsedSaddles/ZoomedImage";
 
 export default function AtlasSaddleDetailsPage() {
   const path = usePathname();
@@ -132,11 +133,12 @@ export default function AtlasSaddleDetailsPage() {
                 {/* Image Section */}
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center">
-                    <img
+                    {/* <img
                       src={displayedImage}
                       alt="Saddle"
                       className="max-w-[500px] w-full h-full object-cover"
-                    />
+                    /> */}
+                      <ZoomImage src={displayedImage} alt="Jumping Saddle" zoomLevel={2} />
                   </div>
 
                   {/* Mobile Thumbnails */}

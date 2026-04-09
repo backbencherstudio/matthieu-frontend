@@ -3,6 +3,7 @@
 import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion";
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
+import { ZoomImage } from "@/components/ClientComponents/Saddles/UsedSaddles/ZoomedImage";
 import LoveIcon from "@/components/Icons/LoveIcon";
 import { useGetSingleSaddleQuery } from "@/src/redux/client/saddle/saddleApi";
 import Link from "next/link";
@@ -71,11 +72,12 @@ export default function JumpingPage() {
           <div className="flex flex-col gap-4">
             {/* Big Image */}
             <div className="flex justify-center items-center bg-white">
-              <img
+              {/* <img
                 src={displayedImage}
                 alt="Jumping Saddle"
                 className="max-w-[500px] w-full object-contain"
-              />
+              /> */}
+              <ZoomImage src={displayedImage} alt="Jumping Saddle" zoomLevel={2} />
             </div>
 
             {/* Thumbnails BELOW big image */}

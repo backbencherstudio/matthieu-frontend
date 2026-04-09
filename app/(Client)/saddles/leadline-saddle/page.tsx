@@ -3,6 +3,7 @@
 import ProductDetailsAccordion from "@/components/ClientComponents/ProductDetailsClient/ProductDetailsAccordion";
 import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import ShopAccessories from "@/components/ClientComponents/Saddles/ShopAccessories";
+import { ZoomImage } from "@/components/ClientComponents/Saddles/UsedSaddles/ZoomedImage";
 import {
   useAddSaddleToFavoriteMutation,
   useGetAllFavoritesQuery,
@@ -143,14 +144,16 @@ const LeadlineSaddlePage = () => {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center">
                     {currentImage && (
-                      <Image
-                        src={currentImage}
-                        alt={activeProduct.name}
-                        className="w-[586px] h-[628px] object-cover"
-                        width={586}
-                        height={628}
-                        unoptimized
-                      />
+                      // <Image
+                      //   src={currentImage}
+                      //   alt={activeProduct.name}
+                      //   className="w-[586px] h-[628px] object-cover"
+                      //   width={586}
+                      //   height={628}
+                      //   unoptimized
+                      // />
+                        <ZoomImage src={currentImage} alt="Jumping Saddle" zoomLevel={2} />
+                      
                     )}
                   </div>
 
