@@ -132,7 +132,6 @@ export default function AtlasSaddleDetailsPage() {
                 {/* Image Section */}
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center">
-                    {/* ✅ Use displayedImage here */}
                     <img
                       src={displayedImage}
                       alt="Saddle"
