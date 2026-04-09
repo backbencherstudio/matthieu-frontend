@@ -1,5 +1,5 @@
-import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
-// import AllSaddlesPage from "./all-saddles/page";
+
+import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
 import AllSaddles from "@/components/ClientComponents/Saddles/AllSaddles";
 
 export default function SaddlesPage() {
