@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import ProductDetailsAccordion from "./ProductDetailsAccordion";
 import RelatedProduts from "./RelatedProduts";
+import { ZoomImage } from "../Saddles/UsedSaddles/ZoomedImage";
 
 export default function ProductDetailsClient() {
   const id = useParams().id;
@@ -151,14 +152,14 @@ export default function ProductDetailsClient() {
         <div className="flex xl:flex-row flex-col gap-6">
           {/* Thumbnail column — desktop */}
           <div className="xl:block hidden">
-            <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4">
+            <div className="xl:flex xl:flex-col grid grid-cols-4 gap-4 ">
               {variantImages.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={`Product thumbnail ${index + 1}`}
                   onClick={() => setMainImage(img)}
-                  className="object-contain w-[60px] h-[60px] cursor-pointer hover:opacity-80 transition"
+                  className="object-contain w-[220px] h-[120px] border  cursor-pointer hover:opacity-80 transition"
                 />
               ))}
             </div>
@@ -170,11 +171,13 @@ export default function ProductDetailsClient() {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-center">
                     {displayMainImage ? (
-                      <img
-                        src={displayMainImage}
-                        alt={productData?.name || "Product"}
-                        className="w-full h-full object-cover"
-                      />
+                      // <img
+                      //   src={displayMainImage}
+                      //   alt={productData?.name || "Product"}
+                      //   className="w-full h-full object-cover"
+                      // />
+                      <ZoomImage src={displayMainImage} alt="Jumping Saddle" zoomLevel={2} />
+
                     ) : (
                       <div className="w-full aspect-square bg-gray-100 flex items-center justify-center text-gray-400">
                         No Image
@@ -211,11 +214,10 @@ export default function ProductDetailsClient() {
                         className="cursor-pointer"
                       >
                         <Heart
-                          className={`${
-                            isFavorited
+                          className={`${isFavorited
                               ? "text-red-500 fill-red-500"
                               : "text-[#4C526F]"
-                          } xl:size-12 size-8`}
+                            } xl:size-12 size-8`}
                         />
                       </button>
                     </div>
@@ -260,11 +262,10 @@ export default function ProductDetailsClient() {
                             }}
                             title={color.name}
                             style={{ backgroundColor: color.raw }}
-                            className={`xl:w-8 xl:h-8 rounded-full w-6 h-6 cursor-pointer transition-all ${
-                              activeColor === color.id
+                            className={`xl:w-8 xl:h-8 rounded-full w-6 h-6 cursor-pointer transition-all ${activeColor === color.id
                                 ? "outline outline-offset-2 outline-gray-600"
                                 : ""
-                            }`}
+                              }`}
                           />
                         ))}
                       </div>
@@ -290,11 +291,10 @@ export default function ProductDetailsClient() {
                           <button
                             key={size.id}
                             onClick={() => setSelectedSize(size.id)}
-                            className={`md:py-3 py-2 w-full md:text-base text-sm transition-all leading-[100%] cursor-pointer ${
-                              activeSize === size.id
+                            className={`md:py-3 py-2 w-full md:text-base text-sm transition-all leading-[100%] cursor-pointer ${activeSize === size.id
                                 ? "bg-[#222842] text-white font-extrabold"
                                 : "bg-[#696E86] text-white"
-                            }`}
+                              }`}
                           >
                             {size.label}
                           </button>
