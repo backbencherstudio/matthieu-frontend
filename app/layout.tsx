@@ -6,6 +6,8 @@ import Script from "next/script";
 import { Toaster } from "sonner";
 import "./globals.css";
 import GeoInitializer from "@/components/Geolocation/GeoInitializer";
+import PageLoader from "./loading";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: AppConfig().app.name,
@@ -43,7 +45,11 @@ export default function RootLayout({
         <div id="google_translate_element" className="hidden"></div>
         <GeoInitializer />
         <Providers>
-          <TranslatePatchProvider>{children}</TranslatePatchProvider>
+          <TranslatePatchProvider>
+            <Suspense fallback={<PageLoader count={6} />}>
+              {children}
+            </Suspense>
+          </TranslatePatchProvider>
         </Providers>
         <Toaster position="top-right" richColors />
       </body>
