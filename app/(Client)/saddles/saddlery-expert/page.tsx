@@ -1,7 +1,14 @@
-"use client";
 
-import BreadCrumb from "@/components/ClientComponents/reuseable/BreadCrumb";
-import { useForm } from "react-hook-form";
+
+'use client';
+
+import BreadCrumb from '@/components/ClientComponents/reuseable/BreadCrumb';
+import { useForm, Controller } from 'react-hook-form';
+import { Country, State, City } from 'country-state-city';
+
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
+import { useCreateTrySaddleMutation } from '@/src/redux/client/try-shaddle/tryShaddleApi';
 
 interface ContactFormData {
   firstName: string;
@@ -19,50 +26,81 @@ interface ContactFormData {
 }
 
 const SaddleryExpertPage = () => {
+  const [createRequest, { isLoading }] = useCreateTrySaddleMutation();
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+
   const breadLink = [
-    {
-      label: "SADDLES",
-      href: "/saddles",
-    },
-    {
-      label: "Expert",
-      href: "/saddles/saddlery-expert",
-    },
+    { label: 'SADDLES', href: '/saddles' },
+    { label: 'Expert', href: '/saddles/saddlery-expert' },
   ];
 
   const {
     register,
     handleSubmit,
+    control,
+    watch,
+    reset,
     formState: { errors },
   } = useForm<ContactFormData>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      address1: "",
-      address2: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      country: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: '',
       saddle: [],
-      comments: "",
+      comments: '',
     },
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log("Form data:", data);
+  // Watch for changes to update selectors
+  const watchCountry = watch('country');
+  const watchState = watch('state');
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      // Find names from codes for the API payload
+      const countryName =
+        Country.getCountryByCode(data.country)?.name || data.country;
+      const stateName =
+        State.getStateByCodeAndCountry(data.state, data.country)?.name ||
+        data.state;
+
+      await createRequest({
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        address: `${data.address1} ${data.address2}`.trim(),
+        country: countryName,
+        city: data.city,
+        state: stateName,
+        zip_code: data.zipCode,
+        message: data.comments,
+        discipline: data.saddle.join(', '),
+      }).unwrap();
+
+      toast.success('Form submitted successfully!');
+      reset();
+    } catch (error) {
+      toast.error('Failed to submit. Please try again.');
+    }
   };
 
   return (
     <div>
       <BreadCrumb breadLink={breadLink} />
-      <div className="my-8  maxContainer">
+      <div className="my-8 maxContainer">
         <h4 className="text-[15px] textSecondary text-center leading-[1.8em] uppercase">
           SADDLE EXPERT
         </h4>
-        <p className="text-lg lg:text-[50px] text-center text-wrap  leading-[130%] text-[#1f274b] mt-3">
+        <p className="text-lg lg:text-[50px] text-center text-wrap leading-[130%] text-[#1f274b] mt-3">
           Get in touch with our experts to create the saddle of your dreams.
         </p>
 
@@ -71,155 +109,106 @@ const SaddleryExpertPage = () => {
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-10">
-          {/* First Name & Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
-              {...register("firstName")}
+              {...register('firstName', { required: true })}
               placeholder="First Name"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
             <input
-              {...register("lastName")}
+              {...register('lastName', { required: true })}
               placeholder="Last Name"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
           </div>
 
-          {/* Email & Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
-              {...register("email")}
+              {...register('email', { required: true })}
               type="email"
               placeholder="Email Address"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
             <input
-              {...register("phone")}
+              {...register('phone')}
               placeholder="Phone Number"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
           </div>
 
-          {/* Address */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
-              {...register("address1")}
+              {...register('address1')}
               placeholder="Address 1"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
             <input
-              {...register("address2")}
+              {...register('address2')}
               placeholder="Address 2"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
           </div>
 
-          {/* City & State */}
+          {/* Country & State Selectors */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input
-              {...register("city")}
-              placeholder="City"
-              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
-            />
             <select
-              {...register("state")}
+              {...register('country')}
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 appearance-none cursor-pointer"
             >
+              <option value="">Country</option>
+              {Country.getAllCountries().map(item => (
+                <option key={item.isoCode} value={item.isoCode}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+
+            <select
+              {...register('state')}
+              disabled={!watchCountry}
+              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 appearance-none cursor-pointer disabled:opacity-50"
+            >
               <option value="">State</option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="IA">Iowa</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="ME">Maine</option>
-              <option value="MD">Maryland</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MS">Mississippi</option>
-              <option value="MO">Missouri</option>
-              <option value="MT">Montana</option>
-              <option value="NE">Nebraska</option>
-              <option value="NV">Nevada</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NY">New York</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VT">Vermont</option>
-              <option value="VA">Virginia</option>
-              <option value="WA">Washington</option>
-              <option value="WV">West Virginia</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
+              {State.getStatesOfCountry(watchCountry).map(item => (
+                <option key={item.isoCode} value={item.isoCode}>
+                  {item.name}
+                </option>
+              ))}
             </select>
           </div>
 
-          {/* Zip Code & Country */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <select
+              {...register('city')}
+              disabled={!watchState}
+              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 appearance-none cursor-pointer disabled:opacity-50"
+            >
+              <option value="">City</option>
+              {City.getCitiesOfState(watchCountry, watchState).map(item => (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+
             <input
-              {...register("zipCode")}
+              {...register('zipCode')}
               placeholder="Zip Code"
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
             />
-            <input
-              {...register("country")}
-              placeholder="Country"
-              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500"
-            />
           </div>
 
-          {/* Saddle Interest
           <div>
-            <select
-              {...register("saddle")}
-              className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 appearance-none cursor-pointer"
-            >
-              <option value="">What Saddle are you interested in?</option>
-              <option value="western">Western</option>
-              <option value="english">English</option>
-              <option value="dressage">Dressage</option>
-              <option value="jumping">Jumping</option>
-              <option value="trail">Trail</option>
-            </select>
-          </div> */}
-
-          {/* Discipline */}
-          <div>
-            <p className="text-[#1f274b]  font-semibold mb-3">Discipline</p>
+            <p className="text-[#1f274b] font-semibold mb-3">Discipline</p>
             <div className="flex lg:gap-10 md:gap-6 gap-4 flex-wrap ">
               {[
-                "Hunter",
-                "Jumper",
-                "Equitation",
-                "Cross-Country",
-                "Dressage",
-                "Other",
-              ].map((discipline) => (
+                'HUNTER',
+                'JUMPER',
+                'EQUTATION',
+                'DRESSAGE',
+                'CROSS_COUNTRY',
+                'OTHER',
+              ].map(discipline => (
                 <label
                   key={discipline}
                   className="flex items-center md:gap-3 gap-2 cursor-pointer group"
@@ -227,7 +216,7 @@ const SaddleryExpertPage = () => {
                   <input
                     type="checkbox"
                     value={discipline}
-                    {...register("saddle")}
+                    {...register('saddle')}
                     className="w-4 h-4 accent-[#1f274b] cursor-pointer"
                   />
                   <span className="text-[#1f274b] md:text-base text-sm">
@@ -238,23 +227,22 @@ const SaddleryExpertPage = () => {
             </div>
           </div>
 
-          {/* Comments */}
           <div>
             <textarea
-              {...register("comments")}
+              {...register('comments')}
               placeholder="Message"
               rows={6}
               className="w-full px-4 py-3 bg-[#E5E5E5] text-gray-700 placeholder-gray-500 resize-none"
             />
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 bg-[#1f274b] text-white font-semibold hover:bg-[#1f274b]/90 cursor-pointer"
+              disabled={isLoading}
+              className="px-6 py-3 bg-[#1f274b] text-white font-semibold hover:bg-[#1f274b]/90 cursor-pointer disabled:bg-gray-400"
             >
-              Submit
+              {isLoading ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         </form>
