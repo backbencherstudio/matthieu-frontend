@@ -15,6 +15,7 @@ import ProductIcon from "../Icons/AdminIcon/ProductIcon";
 import SettingIcon from "../Icons/AdminIcon/SettingIcon";
 import UsersIcon from "../Icons/AdminIcon/UsersIcon";
 import SaddlesIcon from "../Icons/SaddlesIcon";
+import UserIcon from "../Icons/UserIcon";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: DashboardIcon },
@@ -74,7 +75,7 @@ const menuItems = [
     icon: AlertIcon,
   },
   {
-    label: "Saddle Experts",
+    label: "Try Saddle",
     href: "/admin/saddle-expert",
     icon: UsersIcon,
   },
@@ -82,6 +83,11 @@ const menuItems = [
     label: "Job Applicants",
     href: "/admin/job-applicants",
     icon: JobIcon,
+  },
+  {
+    label: "Contact Us",
+    href: "/admin/contact-us",
+    icon: UserIcon,
   },
   {
     label: "Settings",

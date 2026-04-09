@@ -129,4 +129,5 @@ export interface TableRowItem extends TableItem {
   stockQuantity?: string;
   price_usd?: string;
   price_eur?: string;
+  city?:string;
 }
