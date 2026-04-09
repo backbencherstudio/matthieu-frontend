@@ -200,7 +200,8 @@ const LeadlineSaddlePage = () => {
                   <div className="h-[1px] bg-[#DFE1E7] w-full"></div>
 
                   <p className="xl:text-[32px] text-2xl tracking-[.64px] text-[#1F274B] leading-[100%] font-extrabold">
-                    Price: {activeProduct.currency} {activeProduct.price}
+                    Price: {activeProduct.currency === "USD" ? "$" : "€"}{" "}
+                    {activeProduct.price}
                   </p>
                   <p className="xl:text-[32px] text-2xl tracking-[.64px] text-[#1F274B] leading-[100%] font-extrabold">
                     Stock Quantity: {activeProduct.stockQuantity}
