@@ -36,9 +36,11 @@ export default function JumpingPage() {
   const { data } = useGetSingleSaddleQuery({ id: id });
   const saddleDetails = data?.data;
 
-  const [selectedImage, setSelectedImage] = useState(
-    saddleDetails?.images[0]?.url,
+  // ✅ Fix: initialize as undefined, not from unloaded data
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    undefined,
   );
+  const displayedImage = selectedImage ?? saddleDetails?.images[0]?.url;
   const [selectedColor, setSelectedColor] = useState("BLACK");
 
   return (
@@ -59,7 +61,7 @@ export default function JumpingPage() {
         </div>
         <p className="text-center lg:text-[20px] md:text-base text-sm text-[#4C526F] mt-4 normal-case">
           Personalize your saddle! Add a pop of color, customize your nameplate,
-          & much more. Let’s create the saddle of your dreams!
+          & much more. Let's create the saddle of your dreams!
         </p>
       </div>
 
@@ -70,7 +72,7 @@ export default function JumpingPage() {
             {/* Big Image */}
             <div className="flex justify-center items-center bg-white">
               <img
-                src={selectedImage}
+                src={displayedImage}
                 alt="Jumping Saddle"
                 className="max-w-[500px] w-full object-contain"
               />
@@ -81,15 +83,14 @@ export default function JumpingPage() {
               {saddleDetails?.images?.map((img, index) => (
                 <img
                   key={index}
-                  src={img.url}
+                  src={img?.url}
                   alt=""
-                  onClick={() => setSelectedImage(img.url)}
-                  className={`cursor-pointer object-contain w-full h-[120px]
-                    ${
-                      selectedImage === img.url
-                        ? "border-[#1F274B]"
-                        : "border-[#DFE1E7]"
-                    }`}
+                  onClick={() => setSelectedImage(img?.url)}
+                  className={`cursor-pointer object-contain w-full h-[120px] border-2 ${
+                    displayedImage === img.url
+                      ? "border-[#1F274B]"
+                      : "border-[#DFE1E7]"
+                  }`}
                 />
               ))}
             </div>
@@ -152,6 +153,7 @@ export default function JumpingPage() {
             <div>
               <div className="flex justify-between mb-3">
                 <p className="text-xl text-[#262626]">Leather Type</p>
+
                 <a
                   href="#leather-type"
                   className="underline text-[#4C526F] cursor-pointer"

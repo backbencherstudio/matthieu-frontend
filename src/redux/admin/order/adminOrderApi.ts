@@ -3,11 +3,9 @@ import baseApi from '../../api/baseApi';
 export type AdminOrderCurrency = 'USD' | 'EUR' | string;
 export type AdminOrderStatus =
   | 'PENDING'
-  | 'PROCESSING'
-  | 'CONFIRMED'
+  | 'INPROCESS'
   | 'DELIVERED'
-  | 'COMPLETED'
-  | 'CANCELLED'
+  | 'CANCEL'
   | string;
 
 export interface AdminOrderItemApi {
@@ -51,26 +49,76 @@ export interface AdminOrderApi {
   address: AdminOrderAddressApi;
 }
 
+// Response type for fetching all orders
 export interface GetAdminOrdersResponse {
   success: boolean;
   message: string;
   data: AdminOrderApi[];
+  meta?: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
 
+// Response type for a specific order
+export interface GetSpecificOrderResponse {
+  success: boolean;
+  message: string;
+  data: AdminOrderApi;
+}
+
+// Request type for updating order status
+export interface UpdateOrderStatusRequest {
+  status: AdminOrderStatus;
+}
+
+// Admin order API service
 const adminOrderApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getAdminOrders: builder.query<GetAdminOrdersResponse, void>({
-      query: () => ({
-        url: '/order',
+
+    getAdminOrders: builder.query<
+      GetAdminOrdersResponse,
+      { search?: string; status?: string; page?: number; limit?: number } | void
+    >({
+      query: (params) => ({
+        url: '/admin/orders',
+        method: 'GET',
+        params: params || {}, 
+      }),
+      providesTags: ['Order'],
+    }),
+
+    // Get specific order by ID
+    getSpecificOrder: builder.query<GetSpecificOrderResponse, string>({
+      query: id => ({
+        url: `/admin/orders/${id}`,
         method: 'GET',
       }),
       providesTags: ['Order'],
     }),
-    // Other endpoints like createOrder, updateOrder can be added as needed
+
+    // Update order status by ID
+    updateOrderStatus: builder.mutation<
+      AdminOrderApi,
+      { id: string; status: AdminOrderStatus }
+    >({
+      query: ({ id, status }) => ({
+        url: `/admin/orders/${id}/status`,
+        method: 'PUT',
+        body: { status },
+      }),
+      invalidatesTags: ['Order'],
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetAdminOrdersQuery } = adminOrderApi;
+export const {
+  useGetAdminOrdersQuery,
+  useGetSpecificOrderQuery,
+  useUpdateOrderStatusMutation,
+} = adminOrderApi;
 
 export default adminOrderApi;

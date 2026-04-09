@@ -1,84 +1,119 @@
-import DollarIcon from '@/components/Icons/AdminIcon/DollarIcon';
-import RefreshIcon from '@/components/Icons/AdminIcon/RefreshIcon';
-import ShipmentIcon from '@/components/Icons/AdminIcon/ShipmentIcon';
-import ShoppingCardIcon from '@/components/Icons/MyAccoountIcon/ShoppingCardIcon';
-import SuccessIcon from '@/components/Icons/MyAccoountIcon/SuccessIcon';
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
+import EyeIcon from '@/components/Icons/AdminIcon/EyeIcon';
+import EditIcon from '@/components/Icons/AdminIcon/EditIcon';
 import HeaderCard from '../reusable/HeaderCard';
 import OrderTable from './OrderTable';
+import {
+  useGetAdminOrdersQuery,
+  useUpdateOrderStatusMutation,
+} from '@/src/redux/admin/order/adminOrderApi';
+import { useDebounce } from '@/src/hooks/useDebounce';
+
 
 export default function Order() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
+  // Debounce search to avoid too many API calls while typing
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  // Pass filters to the query
+  const {
+    data: ordersData,
+    isLoading,
+    error,
+  } = useGetAdminOrdersQuery({
+    search: debouncedSearch,
+    status: statusFilter,
+  });
+
+  const [updateOrderStatus] = useUpdateOrderStatusMutation();
+
+  const handleUpdateStatus = async (orderId: string, status: string) => {
+    try {
+      await updateOrderStatus({ id: orderId, status }).unwrap();
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+    }
+  };
+
+  const getStatistics = () => {
+    // Note: Stats usually reflect the whole dataset, but here they reflect filtered data
+    const totalOrders = ordersData?.data?.length || 0;
+    const deliveredOrders =
+      ordersData?.data?.filter(o => o.status === 'DELIVERED').length || 0;
+    const inProcessOrders =
+      ordersData?.data?.filter(o => o.status === 'INPROCESS').length || 0;
+    const revenue = ordersData?.data
+      ? `$${ordersData.data.reduce((acc, order) => acc + order.total, 0).toFixed(2)}`
+      : '$0.00';
+
+    return { totalOrders, deliveredOrders, inProcessOrders, revenue };
+  };
+
+  const { totalOrders, deliveredOrders, inProcessOrders, revenue } =
+    getStatistics();
+
   const CustomerStats = [
     {
       id: 1,
       title: 'Total Orders',
-      icon: <ShoppingCardIcon />,
-      number: '12',
+      icon: <EyeIcon />,
+      number: totalOrders.toString(),
       iconBgColor: '#EDF3FB',
       iconColor: '#4A87D7',
     },
     {
       id: 2,
       title: 'Delivered Orders',
-      icon: <SuccessIcon />,
-      number: '4',
+      icon: <EyeIcon />,
+      number: deliveredOrders.toString(),
       iconBgColor: '#E9FAF7',
       iconColor: '#22CAAD',
     },
     {
       id: 3,
-      title: 'Processing',
-      icon: <RefreshIcon />,
-      number: '6',
+      title: 'Processing Orders',
+      icon: <EditIcon />,
+      number: inProcessOrders.toString(),
       iconBgColor: '#FFFAE8',
       iconColor: '#FFA600',
     },
-    {
-      id: 4,
-      title: 'Revenue',
-      icon: <DollarIcon />,
-      number: '$899.92',
-      iconBgColor: '#F4F1FF',
-      iconColor: '#B081FF',
-    },
+    // {
+    //   id: 4,
+    //   title: 'Revenue',
+    //   icon: <EyeIcon />,
+    //   number: revenue,
+    //   iconBgColor: '#F4F1FF',
+    //   iconColor: '#B081FF',
+    // },
   ];
+
   return (
     <div>
       <div className="flex flex-wrap justify-between gap-2">
         <h1 className="text-2xl font-extrabold text-primary-text">
           Orders Management
         </h1>
-        {/* <div className="flex flex-wrap items-center gap-4">
-          <Link
-            className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
-            href="/admin/orders/track-shipment"
-          >
-            <ShipmentIcon className="h-4 w-4" />
-            <span>Track Shipment</span>
-          </Link>
-          <Link
-            className="bg-primary-bg text-white rounded py-2.5 px-3 gap-2 flex items-center whitespace-nowrap"
-            href="/admin/products/add"
-          >
-            <RefreshIcon className="h-4 w-4" />
-            <span>Refresh</span>
-          </Link>
-        </div> */}
       </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 my-5">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3 my-5">
         {CustomerStats.map(status => (
-          <HeaderCard
-            key={status?.id}
-            title={status?.title}
-            icon={status.icon}
-            number={status.number}
-            iconBgColor={status?.iconBgColor}
-            iconColor={status.iconColor}
-          />
+          <HeaderCard key={status.id} {...status} />
         ))}
       </div>
 
-      <OrderTable />
+      <OrderTable
+        orders={ordersData?.data || []}
+        handleUpdateStatus={handleUpdateStatus}
+        isLoading={isLoading}
+        error={error}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+      />
     </div>
   );
 }

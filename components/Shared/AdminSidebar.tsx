@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { MdClose } from "react-icons/md";
 import AlertIcon from "../Icons/AdminIcon/AlertIcon";
-import AnalyticsIcon from "../Icons/AdminIcon/AnalyticsIcon";
 import CardIcon from "../Icons/AdminIcon/CardIcon";
 import CartIcon from "../Icons/AdminIcon/CartIcon";
 import CMSIcon from "../Icons/AdminIcon/CMSIcon";
@@ -26,7 +25,7 @@ const menuItems = [
   //   icon: AnalyticsIcon,
   // },
   {
-    label: "Products",
+    label: "Tack Products",
     href: "/admin/products",
     icon: ProductIcon,
   },

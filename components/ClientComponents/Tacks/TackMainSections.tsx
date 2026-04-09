@@ -28,10 +28,10 @@ const categories: Category[] = [
   { label: "BRIDLES", value: "BRIDLES" },
   { label: "REINS", value: "REINS" },
   { label: "BREASTPLATES", value: "BREASTPLATES" },
-  { label: "GIRTHS", value: "GIRTHS" },
+  { label: "GRITHSF", value: "GRITHSF" },
   { label: "HALTERS & ROPES", value: "HALTERS_AND_ROPES" },
   { label: "BOOTS", value: "BOOTS" },
-  { label: "LEATHER CARE", value: "LEATHER_CARE" },
+  { label: "LEATHER CARE", value: "STIRRUP_LEATHERS" },
   { label: "ACCESSORIES", value: "ACCESSORIES" },
   { label: "MARTINGALES", value: "MARTINGALES" },
 ];
@@ -187,10 +187,10 @@ export default function TackMainSections() {
               title="Breastplates"
             />
           </div>
-          <div className="lg:my-12 my-8" id="girths" ref={girthsRef}>
+          <div className="lg:my-12 my-8" id="GRITHSF" ref={girthsRef}>
             <TrackProductList
-              items={filtered.filter((p) => p.subcategory === "GIRTHS")}
-              title="Girths"
+              items={filtered.filter((p) => p.subcategory === "GRITHSF")}
+              title="GRITHSF"
             />
           </div>
           <div className="lg:my-12 my-8" id="halterRopes" ref={halterRopesRef}>
@@ -209,7 +209,9 @@ export default function TackMainSections() {
           </div>
           <div className="lg:my-12 my-8" id="leatherCare" ref={leatherCareRef}>
             <TrackProductList
-              items={filtered.filter((p) => p.subcategory === "LEATHER_CARE")}
+              items={filtered.filter(
+                (p) => p.subcategory === "STIRRUP_LEATHERS",
+              )}
               title="Leather Care"
             />
           </div>

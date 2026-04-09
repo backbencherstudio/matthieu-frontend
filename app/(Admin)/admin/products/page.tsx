@@ -1,5 +1,4 @@
 import ProductTable from "@/components/AdminComponents/Products/ProductTable";
-import StatisticCard from "@/components/AdminComponents/reusable/StatisticCard";
 import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
 import Link from "next/link";
 
@@ -51,11 +50,11 @@ export default function ProductsPage() {
       </div>
       {/* Statistics Card */}
       <div className="pt-6">
-        <div className="grid grid-cols-2 gap-3">
+        {/* <div className="grid grid-cols-2 gap-3">
           {statisticCards.map((card) => (
             <StatisticCard key={card.title} card={card} />
           ))}
-        </div>
+        </div> */}
       </div>
       {/* Table */}
       <ProductTable />
