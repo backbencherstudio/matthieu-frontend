@@ -1,281 +1,292 @@
-"use client";
-import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
-import PaginationComponent from "@/components/reusable/Features/PaginationComponent";
-import ReuseAbleTable from "@/components/reusable/Features/reuseable-table";
+'use client';
+
+import { useState } from 'react';
+import {
+  useUpdateOrderStatusMutation,
+  AdminOrderApi,
+} from '@/src/redux/admin/order/adminOrderApi';
+
+import PaginationComponent from '@/components/reusable/Features/PaginationComponent';
+import { Search } from 'lucide-react';
+import { ReactNode } from 'react';
+import Link from 'next/link';
+import EyeIcon from '@/components/Icons/AdminIcon/EyeIcon';
+import EditIcon from '@/components/Icons/AdminIcon/EditIcon';
+import { useFilterPagination } from '@/hooks/useFilterHook';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useFilterPagination } from "@/hooks/useFilterHook";
-import { TableRowItem } from "@/types/TableRowItem";
-import { Search } from "lucide-react";
-import Link from "next/link";
-import { ReactNode } from "react";
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import ReuseAbleTable from '@/components/reusable/Features/ReuseableTable';
 
-export default function OrderTable() {
-  const relevantData = [
-    {
-      id: "ORD-1001",
-      productName: "Leather Riding Boots",
-      productStatus: "+2 more items",
-      customer: "Marcus Thompson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$320.00",
-      orderType: "Online",
-      deliveryDate: "09 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Delivered",
-    },
-    {
-      id: "ORD-1002",
-      productName: "Jumping Saddle",
-      productStatus: "+2 more items",
-      customer: "Elon Musk",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$1,150.00",
-      orderType: "In-Store",
-      deliveryDate: "11 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Pending",
-    },
-    {
-      id: "ORD-1003",
-      productName: "Equestrian Helmet",
-      productStatus: "+2 more items",
-      customer: "Donal Tramp",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$250.00",
-      orderType: "Online",
-      deliveryDate: "13 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Cancelled",
-    },
-    {
-      id: "ORD-1004",
-      productName: "Show Jacket",
-      productStatus: "+2 more items",
-      customer: "Marcelo X",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$480.00",
-      orderType: "Online",
-      deliveryDate: "15 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "In Process",
-    },
-    {
-      id: "ORD-1005",
-      productName: "Riding Gloves",
-      productStatus: "+2 more items",
-      customer: "Sophia Williams",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$90.00",
-      orderType: "Online",
-      deliveryDate: "18 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Delivered",
-    },
-    {
-      id: "ORD-1006",
-      productName: "Dressage Whip",
-      productStatus: "+2 more items",
-      customer: "Emma Watson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$65.00",
-      orderType: "In-Store",
-      deliveryDate: "20 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Delivered",
-    },
-    {
-      id: "ORD-1007",
-      productName: "Horse Blanket",
-      productStatus: "+2 more items",
-      customer: "Jack Johnson",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$210.00",
-      orderType: "Online",
-      deliveryDate: "22 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Pending",
-    },
-    {
-      id: "ORD-1008",
-      productName: "Stable Rug",
-      customer: "Liam Brown",
-      email: "liambrown@ukclub.ccm",
-      totalPrice: "$185.00",
-      orderType: "In-Store",
-      deliveryDate: "25 June, 2025",
-      estimatedDelivery: "Estimated",
-      deliveryStatus: "Processing",
-    },
-  ];
+interface OrderTableProps {
+  orders: AdminOrderApi[];
+  handleUpdateStatus: (orderId: string, status: string) => Promise<void>;
+  isLoading: boolean;
+  error: any;
+  searchTerm: string;
+  setSearchTerm: (val: string) => void;
+  statusFilter: string;
+  setStatusFilter: (val: string) => void;
+}
 
+export default function OrderTable({
+  orders,
+  isLoading,
+  error,
+  searchTerm,
+  setSearchTerm,
+  statusFilter,
+  setStatusFilter,
+}: OrderTableProps) {
+  // REMOVED: useGetAdminOrdersQuery call from here.
+  // We use the 'orders' prop which is already filtered by the parent.
+
+  const [updateOrderStatus, { isLoading: isUpdating }] =
+    useUpdateOrderStatusMutation();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<AdminOrderApi | null>(
+    null,
+  );
+  const [newStatus, setNewStatus] = useState<string>('');
+
+  const handleOpenModal = (order: AdminOrderApi) => {
+    setSelectedOrder(order);
+    setNewStatus(order.status);
+    setIsModalOpen(true);
+  };
+
+  const handleLocalUpdateStatus = async () => {
+    if (!selectedOrder) return;
+    try {
+      await updateOrderStatus({
+        id: selectedOrder.id,
+        status: newStatus,
+      }).unwrap();
+      toast.success('Order status updated successfully');
+      setIsModalOpen(false);
+    } catch (error) {
+      toast.error('Failed to update order status');
+    }
+  };
+
+  // Pagination based on the 'orders' prop passed from parent
   const { currentItems, currentPage, totalPages, setCurrentPage } =
-    useFilterPagination(relevantData, 6);
+    useFilterPagination(orders || [], 6);
 
   const tableHeader = [
-    "Order ID",
-    "Product Name",
-    "Customer",
-    "Total Price",
-    "Order Type",
-    "Delivery Date",
-    "Delivery Status",
-    "Actions",
+    'Order ID',
+    'Product Name',
+    'Customer',
+    'Total Price',
+    'Order Type',
+    'Delivery Date',
+    'Delivery Status',
+    'Actions',
   ];
 
   const tableRowDataRenderers: ((
-    item: TableRowItem,
+    item: AdminOrderApi,
     index: number,
   ) => ReactNode)[] = [
-    (item) => (
-      <span className="text-[14px] text-[#4A4C56] leading-[114%]">
-        {item?.id}
+    item => (
+      <span className="text-[14px] text-[#4A4C56] font-medium">
+        {item?.orderNumber}
       </span>
     ),
-    (item) => (
+    item => (
       <span className="text-[14px] text-[#1F274B] leading-[100%]">
-        {item?.productName} <br />
-        <span className="text-[12px] leading-[100%] text-[#696E86]">
-          {item?.productStatus}
-        </span>
+        {item?.items[0]?.itemName || 'No Items'} <br />
+        {item?.items.length > 1 && (
+          <span className="text-[12px] leading-[100%] text-[#696E86]">
+            + {item.items.length - 1} more items
+          </span>
+        )}
       </span>
     ),
-    (item) => (
+    item => (
       <span className="text-[14px] text-[#1F274B] leading-[114%]">
-        {item?.customer} <br />
-        <span className="text-[12px] leading-[100%] text-[#696E86]">
-          {item?.email}
+        {item?.address?.firstName} {item?.address?.lastName} <br />
+        <span className="text-[12px] text-[#696E86]">
+          {item?.address?.email}
         </span>
       </span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.totalPrice}
+    item => (
+      <span className="text-[14px] text-[#14191F] font-bold">
+        {item?.currency} {item?.total.toFixed(2)}
       </span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#14191F] leading-[114%]">
-        {item?.orderType}
+    item => <span className="text-[14px] text-[#14191F]">Online</span>,
+    item => (
+      <span className="text-[14px] text-[#1F274B]">
+        {new Date(item?.createdAt).toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        })}
       </span>
     ),
-    (item) => (
-      <span className="text-[14px] text-[#1F274B] leading-[117%]">
-        {item?.deliveryDate} <br />
-        <span className="text-[12px] leading-[100%] text-[#696E86]">
-          {item?.estimatedDelivery}
+    item => {
+      const status = item?.status;
+      let config = { bg: 'bg-[#E6EEFF]', text: 'text-[#1F3BB3]' };
+      if (status === 'DELIVERED')
+        config = { bg: 'bg-[#E9FAF5]', text: 'text-[#20C997]' };
+      if (status === 'INPROCESS')
+        config = { bg: 'bg-[#FFFAE8]', text: 'text-[#FFA600]' };
+      if (status === 'CANCEL')
+        config = { bg: 'bg-[#FFECEC]', text: 'text-[#D32F2F]' };
+
+      return (
+        <span
+          className={`px-3 py-1 rounded-[6px] text-[14px] font-medium ${config.bg} ${config.text}`}
+        >
+          {status}
         </span>
-      </span>
-    ),
-    (item) => (
-      <span
-        className={`px-3 py-1 rounded-[6px] text-[14px] font-medium ${
-          item.deliveryStatus === "Delivered"
-            ? "bg-[#E9FAF5] text-[#20C997]"
-            : item.deliveryStatus === "In Process"
-              ? "bg-[#FFFAE8] text-[#FFA600]"
-              : item.deliveryStatus === "Cancelled"
-                ? "bg-[#FFECEC] text-[#D32F2F]"
-                : "bg-[#E6EEFF] text-[#1F3BB3]"
-        }`}
-      >
-        {item?.deliveryStatus}
-      </span>
-    ),
-    (item) => (
-      <div>
-        <div className="flex justify-end">
-          <Link
-            href={`/admin/orders/${item?.id}`}
-            className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px]"
-          >
-            <EyeIcon />
-          </Link>
-        </div>
+      );
+    },
+    item => (
+      <div className="flex justify-end gap-2">
+        <Link
+          href={`/admin/orders/${item?.id}`}
+          className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px] hover:bg-gray-200"
+        >
+          <EyeIcon />
+        </Link>
+        <button
+          onClick={() => handleOpenModal(item)}
+          className="cursor-pointer bg-[#F8FAFB] rounded-[6px] p-[7px] hover:bg-gray-200"
+        >
+          <EditIcon />
+        </button>
       </div>
     ),
   ];
 
-  const isLoadings = false;
-  return (
-    <div>
-      <div className="overflow-auto">
-        <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
-          {/* search bar */}
-          <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
-            <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
-              Recent Orders
-            </h2>
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <input
-                  type="text"
-                  className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 focus:outline-0 border transition-colors duration-200"
-                  placeholder="Search orders, customers..."
-                />
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400" />
-                </div>
-              </div>
-              <div>
-                <Select>
-                  <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
-                    <SelectValue placeholder="All Typs" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="allTyps">All Typs</SelectItem>
-                    <SelectItem value="single">Single</SelectItem>
-                    <SelectItem value="multiple">Multiple</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Select>
-                  <SelectTrigger className=" py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
-                    <SelectValue placeholder="All Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="allSegments">All Status</SelectItem>
-                    <SelectItem value="inProcess">In Process</SelectItem>
-                    <SelectItem value="delivered">Delivered</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
+  if (error)
+    return <div className="p-4 text-red-500">Error loading orders.</div>;
 
-          {/* table */}
-          <div className="mt-4 overflow-x-auto">
-            <ReuseAbleTable
-              allClientDataList={relevantData}
-              isLoadings={isLoadings}
-              currentItems={currentItems}
-              tableHeader={tableHeader}
-              tableRowDataRenderers={tableRowDataRenderers}
-              isBg={false}
+  return (
+    <div className="overflow-auto">
+      <div className="p-4 rounded-[8px] bg-[#FFF] border border-[#DFE1E7]">
+        <div className="flex flex-col justify-between md:flex-row flex-wrap md:items-center gap-2.5 mb-[23px]">
+          <h2 className="md:text-xl text-lg font-extrabold text-[#1F274B]">
+            Recent Orders
+          </h2>
+
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="w-full md:w-[300px] rounded-[6px] border-[#DFE1E7] pl-10 pr-4 py-2 border"
+                placeholder="Search order ID..."
+              />
+              <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+            </div>
+
+            <Select
+              value={statusFilter || 'ALL'}
+              onValueChange={val => setStatusFilter(val === 'ALL' ? '' : val)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ALL">All Status</SelectItem>
+                <SelectItem value="PENDING">PENDING</SelectItem>
+                <SelectItem value="INPROCESS">IN PROCESS</SelectItem>
+                <SelectItem value="DELIVERED">DELIVERED</SelectItem>
+                <SelectItem value="CANCEL">CANCEL</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="mt-4 overflow-x-auto">
+          <ReuseAbleTable
+            allClientDataList={orders}
+            isLoadings={isLoading}
+            currentItems={currentItems}
+            tableHeader={tableHeader}
+            tableRowDataRenderers={tableRowDataRenderers}
+            isBg={false}
+          />
+        </div>
+
+        {/* Pagination Logic */}
+        {!isLoading && orders.length > 6 && (
+          <div className="flex justify-center pt-8 pb-4">
+            <PaginationComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
             />
           </div>
-
-          {/* pagination */}
-          {!isLoadings && (
-            <div
-              className={`flex justify-center pt-12 pb-4 ${
-                relevantData?.length >= 5 ? "block" : "hidden"
-              }`}
-            >
-              <PaginationComponent
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </div>
-          )}
-        </div>
+        )}
       </div>
+
+      {/* --- STATUS UPDATE MODAL --- */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-[#1F274B]">
+              Update Order Status
+            </DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">
+                Updating status for Order:{' '}
+                <span className="font-bold text-[#1F274B]">
+                  #{selectedOrder?.orderNumber}
+                </span>
+              </p>
+              <Select value={newStatus} onValueChange={setNewStatus}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="PENDING">PENDING</SelectItem>
+                  <SelectItem value="INPROCESS">IN PROCESS</SelectItem>
+                  <SelectItem value="DELIVERED">DELIVERED</SelectItem>
+                  <SelectItem value="CANCEL">CANCEL</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsModalOpen(false)}
+              className="border-[#DFE1E7]"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleLocalUpdateStatus}
+              disabled={isUpdating}
+              className="bg-[#1F274B] hover:bg-[#2a3563]"
+            >
+              {isUpdating ? 'Updating...' : 'Save Changes'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

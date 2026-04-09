@@ -39,7 +39,7 @@ export default function StatisticCard({ card }: { card: Card }) {
       <div>
         <Image
           src={card.image}
-          alt="customers"
+          alt="c"
           height={40}
           width={40}
           unoptimized

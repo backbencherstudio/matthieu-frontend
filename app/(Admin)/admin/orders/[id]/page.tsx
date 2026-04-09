@@ -1,16 +1,39 @@
-import BreadCrumb from "@/components/AdminComponents/reusable/BreadCrumb";
-import RefreshIcon from "@/components/Icons/AdminIcon/RefreshIcon";
+'use client';
+
+import BreadCrumb from '@/components/AdminComponents/reusable/BreadCrumb';
+import RefreshIcon from '@/components/Icons/AdminIcon/RefreshIcon';
+import { useParams } from 'next/navigation';
+import { useGetSpecificOrderQuery } from '@/src/redux/admin/order/adminOrderApi';
 
 export default function OrderDetailPage() {
+  const params = useParams();
+  const orderId = params.id as string;
+
+  // Fetch specific order data
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useGetSpecificOrderQuery(orderId);
+  const order = response?.data;
+
   const breadLink = [
     {
-      label: "Orders Management",
-      href: "/admin/orders",
+      label: 'Orders Management',
+      href: '/admin/orders',
     },
     {
-      label: "Orders Detail",
+      label: 'Orders Detail',
     },
   ];
+
+  if (isLoading)
+    return <div className="p-10 text-center">Loading Order Details...</div>;
+  if (error || !order)
+    return (
+      <div className="p-10 text-center text-red-500">Order not found.</div>
+    );
+
   return (
     <div>
       <BreadCrumb breadLink={breadLink} />
@@ -19,69 +42,51 @@ export default function OrderDetailPage() {
         <div className="mt-6 p-4 rounded-[8px] bg-[#FFF]">
           <div className="flex items-center justify-between mb-6">
             <h1 className="lg:text-xl text-lg font-extrabold text-[#1F274B] leading-[132%] tracking-[0.1px]">
-              Order #A5-AB7D-8NS
+              Order #{order.orderNumber}
             </h1>
-            <button className="flex items-center gap-2 px-2.5 py-1.5 bg-[#FFFAE8] text-[#FFA600] text-[14px] leading-[100%] tracking-[0.07px]">
+            <button
+              className={`flex items-center gap-2 px-2.5 py-1.5 rounded-[4px] text-[14px] leading-[100%] tracking-[0.07px] ${
+                order.status === 'DELIVERED'
+                  ? 'bg-[#E9FAF5] text-[#20C997]'
+                  : order.status === 'INPROCESS'
+                    ? 'bg-[#FFFAE8] text-[#FFA600]'
+                    : 'bg-[#E6EEFF] text-[#1F3BB3]'
+              }`}
+            >
               <RefreshIcon className="w-4 h-4" />
-              <span className="font-medium">In Process</span>
+              <span className="font-medium">{order.status}</span>
             </button>
           </div>
 
           {/* Order Items */}
           <div className="mt-[21px]">
-            {/* Item 1 */}
-            <div className="flex gap-4">
-              <div className="w-12 h-12">
-                <img
-                  src="/orderManagement/omimage-2.png"
-                  alt="Double Noseband Bridle"
-                  className="w-full h-full object-cover"
-                />
+            {order.items.map(item => (
+              <div key={item.id} className="flex gap-4 mb-4">
+                <div className="w-12 h-12 bg-gray-100 rounded">
+                  <img
+                    src="/orderManagement/omimage-2.png" // Replace with item.image if available in API
+                    alt={item.itemName}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-[14px] font-extrabold text-[#4C526F] leading-[100%]">
+                    {item.itemName}
+                  </h3>
+                  <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
+                    SKU: {item.id.slice(0, 8).toUpperCase()}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[14px] text-[#4C526F] font-extrabold leading-[100%]">
+                    {order.currency} {item.price.toFixed(2)}
+                  </p>
+                  <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
+                    Qty: {item.quantity}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h3 className="text-[14px] font-extrabold text-[#4C526F] leading-[100%]">
-                  Double Noseband Bridle
-                </h3>
-                <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
-                  SKU: BR7D2NS
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-[14px] text-[#4C526F] font-extrabold leading-[100%]">
-                  $260.00
-                </p>
-                <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
-                  Qty: 1
-                </p>
-              </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="flex gap-4 my-4">
-              <div className="w-12 h-12">
-                <img
-                  src="/orderManagement/omimage-1.png"
-                  alt="Double Noseband Bridle"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-[14px] font-extrabold text-[#4C526F] leading-[100%]">
-                  Hunter Jumper Saddle
-                </h3>
-                <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
-                  SKU: BR7D2NS
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-[14px] text-[#4C526F] font-extrabold leading-[100%]">
-                  $330.00
-                </p>
-                <p className="text-[14px] text-[#4C526F] leading-[100%] mt-3">
-                  Qty: 1
-                </p>
-              </div>
-            </div>
+            ))}
             <hr />
           </div>
 
@@ -89,43 +94,57 @@ export default function OrderDetailPage() {
           <div className="mt-6">
             <div className="flex justify-between text-[#4C526F] text-[14px]">
               <span>Subtotal</span>
-              <span className="font-medium">$590.00</span>
+              <span className="font-medium">
+                {order.currency} {order.subtotal.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between text-[#4C526F] text-[14px] mt-5">
               <span>Shipping</span>
-              <span className="font-medium">$15.00</span>
+              <span className="font-medium">
+                {order.currency} {order.shipping.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between text-[#4C526F] text-[14px] mt-5 mb-4">
-              <span>Tax (8%)</span>
-              <span className="font-medium">$47.20</span>
+              <span>Tax</span>
+              <span className="font-medium">
+                {order.currency} {order.tax.toFixed(2)}
+              </span>
             </div>
+            {order.discount > 0 && (
+              <div className="flex justify-between text-[#D32F2F] text-[14px] mb-4">
+                <span>Discount</span>
+                <span className="font-medium">
+                  -{order.currency} {order.discount.toFixed(2)}
+                </span>
+              </div>
+            )}
             <hr />
             <div className="flex justify-between mt-5 mb-4">
               <span className="font-extrabold text-[#4C526F] text-[14px] leading-[100%]">
                 Total Amount
               </span>
-              <span className="text-[14px] text-[#4C526F] leading-[100%]">
-                $652.20
+              <span className="text-[14px] font-bold text-[#4C526F] leading-[100%]">
+                {order.currency} {order.total.toFixed(2)}
               </span>
             </div>
           </div>
         </div>
 
         {/* Customer & Shipping Info */}
-        <div className="p-4 mt-5 rounded-[8px] bg-[#FFF] grid grid-cols-2">
+        <div className="p-4 mt-5 rounded-[8px] bg-[#FFF] grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-xl font-extrabold leading-[132%] tracking-[0.1px]">
               Customer
             </h2>
             <div className="space-y-3 mt-5">
               <p className="font-extrabold text-[#777980] text-[14px] leading-[100%]">
-                Marcus Thompson
+                {order.address.firstName} {order.address.lastName}
               </p>
               <p className="text-[#777980] text-[14px] leading-[100%]">
-                marcus@ukclub.com
+                {order.address.email}
               </p>
               <p className="text-[#777980] text-[14px] leading-[100%]">
-                +1 (555) 123-4567
+                {order.address.phone}
               </p>
             </div>
           </div>
@@ -134,11 +153,11 @@ export default function OrderDetailPage() {
               Shipping Address
             </h2>
             <div className="space-y-3 mt-5">
-              <p className="font-extrabold text-[#777980] text-[14px] leading-[100%]">
-                Tracking Number: 1Z999AA1234S67890
-              </p>
-              <p className="text-[#777980] text-[14px] leading-[100%]">
-                123 Equestrian Lane Wellington, FL 33414 United States
+              <p className="text-[#777980] text-[14px] leading-[140%]">
+                {order.address.streetAddress}, 
+                {order.address.city}, {order.address.state}{' '}
+                {order.address.zipCode}, 
+                {order.address.country}
               </p>
             </div>
           </div>
