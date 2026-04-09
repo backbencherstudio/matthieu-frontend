@@ -6,13 +6,6 @@ import { DataTable } from "../reusable/DataTable";
 
 import EditIcon from "@/components/Icons/AdminIcon/EditIcon";
 import EyeIcon from "@/components/Icons/AdminIcon/EyeIcon";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useTackListsQuery } from "@/src/redux/admin/tackProduct/tackProduct";
 import Link from "next/link";
 import DeleteProduct from "./DeleteProduct";
@@ -128,7 +121,7 @@ export default function ProductTable() {
   // Dropdown filters
   const dropFilters = (
     <>
-      <Select value={categories} onValueChange={setCategories}>
+      {/* <Select value={categories} onValueChange={setCategories}>
         <SelectTrigger className="w-[180px] py-5 rounded-[6px] shadow-none outline-none focus-visible:ring-0 cursor-pointer">
           <SelectValue placeholder="All Categories" />
         </SelectTrigger>
@@ -137,7 +130,7 @@ export default function ProductTable() {
           <SelectItem value="Saddles">Saddles</SelectItem>
           <SelectItem value="Tack & Accessories">Tack & Accessories</SelectItem>
         </SelectContent>
-      </Select>
+      </Select> */}
     </>
   );
 
