@@ -1,126 +1,117 @@
-"use client"
-import Link from "next/link";
-import React from "react";
-import CouponIcon from "@/components/Icons/AdminIcon/CouponIcon";
-import PlusIcon from "@/components/Icons/AdminIcon/PlusIcon";
-import StatisticCard from "@/components/AdminComponents/reusable/StatisticCard";
-import TopCard from "@/components/AdminComponents/Dashboard/TopCard";
-import { useGetCustomersQuery } from "@/src/redux/admin/customers/customersApi";
+'use client';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import CouponIcon from '@/components/Icons/AdminIcon/CouponIcon';
+import PlusIcon from '@/components/Icons/AdminIcon/PlusIcon';
+import StatisticCard from '@/components/AdminComponents/reusable/StatisticCard';
+import EyeIcon from '@/components/Icons/AdminIcon/EyeIcon'; // Import icons for the cards
+import EditIcon from '@/components/Icons/AdminIcon/EditIcon';
+import { useGetCustomersQuery } from '@/src/redux/admin/customers/customersApi';
+import {
+  useGetAdminOrdersQuery,
+  useUpdateOrderStatusMutation,
+} from '@/src/redux/admin/order/adminOrderApi';
+import { useDebounce } from '@/src/hooks/useDebounce';
+import OrderTable from '@/components/AdminComponents/Order/OrderTable';
 
 export default function DashboardPage() {
+  const { data: customerData } = useGetCustomersQuery({ page: 1, limit: 1 });
+  const totalCustomers = customerData?.meta?.total || 0;
 
-      const { data, isLoading } = useGetCustomersQuery({ page: 1, limit: 10 });
-  
-    const totalCustomers = data?.meta?.total || 0;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
 
-  const statisticCards = [
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  const {
+    data: ordersData,
+    isLoading,
+    error,
+  } = useGetAdminOrdersQuery({
+    search: debouncedSearch,
+    status: statusFilter,
+  });
+
+  const [updateOrderStatus] = useUpdateOrderStatusMutation();
+
+  const getStatistics = () => {
+    // Note: To get true totals for the cards, you'd typically want
+    // an API response that provides meta totals regardless of current filters.
+    const totalOrdersCount =
+      ordersData?.meta?.total || ordersData?.data?.length || 0;
+    const deliveredOrders =
+      ordersData?.data?.filter(o => o.status === 'DELIVERED').length || 0;
+    const inProcessOrders =
+      ordersData?.data?.filter(o => o.status === 'INPROCESS').length || 0;
+    const revenue = ordersData?.data
+      ? `$${ordersData.data.reduce((acc, order) => acc + order.total, 0).toFixed(2)}`
+      : '$0.00';
+
+    return { totalOrdersCount, deliveredOrders, inProcessOrders, revenue };
+  };
+  const handleUpdateStatus = async (orderId: string, status: string) => {
+    try {
+      await updateOrderStatus({ id: orderId, status }).unwrap();
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+    }
+  };
+  const { totalOrdersCount, deliveredOrders, inProcessOrders, revenue } =
+    getStatistics();
+
+  const cards = [
     {
-      title: "Customers",
-      value: totalCustomers,
-      positiveValue: "+20.1%",
-      negativeValue: "",
-      image: "/images/admin/customers.svg",
+      title: 'Total Customers',
+      value: totalCustomers.toString(),
+      image: '/images/dash-image/profile01.png',
+      positiveValue: '+12%',
     },
-    // {
-    //   title: "Products",
-    //   value: "6,225",
-    //   positiveValue: "+12.1%",
-    //   negativeValue: "",
-    //   image: "/images/admin/product.svg",
-    // },
     {
-      title: "Orders",
-      value: "7",
-      positiveValue: "",
-      negativeValue: "-6.6%",
-      image: "/images/admin/cart.svg",
+      title: 'Total Orders',
+      value: totalOrdersCount.toString(),
+      image: '/images/dash-image/orders.png',
+      negativeValue: '-2%',
     },
-    // {
-    //   title: "Total Revenue",
-    //   value: "$12,567",
-    //   positiveValue: "+3.6%",
-    //   negativeValue: "",
-    //   image: "/images/admin/dollar.svg",
-    // },
-  ];
 
-  const topProduct = [
     {
-      title: "Top Performing Products",
-      btnText: "See all",
-      btnLink: "/admin/products",
-      list: [
-        {
-          image: "/images/admin/dashboard/top-product-1.png",
-          name: "Racing saddle",
-          sale: "4252",
-          price: "$369,020",
-          positivePercentage: "+20.1%",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-2.png",
-          name: "Racing saddle",
-          sale: "4252",
-          price: "$369,020",
-          positivePercentage: "+20.1%",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-3.png",
-          name: "Racing saddle",
-          sale: "4252",
-          price: "$369,020",
-          positivePercentage: "+20.1%",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-1.png",
-          name: "Racing saddle",
-          sale: "4252",
-          price: "$369,020",
-          positivePercentage: "+20.1%",
-        },
-      ],
+      title: 'Revenue',
+      value: revenue,
+      image: '/images/dash-image/reveneu.png',
+      positiveValue: '+5%',
     },
   ];
 
-  const recentOrder = [
+
+
+  // Define the card data array
+  const dashboardStats = [
     {
-      title: "Recent Orders",
-      btnText: "See all",
-      btnLink: "/admin/orders",
-      list: [
-        {
-          image: "/images/admin/dashboard/top-product-1.png",
-          orderID: "#A5AB7D8NS",
-          desc: "Hunter Jumper Saddle",
-          status: "Delivered",
-          price: "$369,020",
-          time: "2 hours ago",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-2.png",
-          orderID: "#A5AB7D8NS",
-          desc: "Hunter Jumper Saddle",
-          status: "In Progress",
-          price: "$369,020",
-          time: "2 hours ago",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-3.png",
-          orderID: "#A5AB7D8NS",
-          desc: "Hunter Jumper Saddle",
-          status: "On the way",
-          price: "$369,020",
-          time: "2 hours ago",
-        },
-        {
-          image: "/images/admin/dashboard/top-product-1.png",
-          orderID: "#A5AB7D8NS",
-          desc: "Hunter Jumper Saddle",
-          status: "Shipped",
-          price: "$369,020",
-          time: "2 hours ago",
-        },
-      ],
+      title: 'Total Customers',
+      value: totalCustomers.toString(),
+      icon: <EyeIcon />,
+      bgColor: 'bg-[#EDF3FB]',
+      iconColor: 'text-[#4A87D7]',
+    },
+    {
+      title: 'Total Orders',
+      value: totalOrdersCount.toString(),
+      icon: <EyeIcon />,
+      bgColor: 'bg-[#E9FAF7]',
+      iconColor: 'text-[#22CAAD]',
+    },
+    {
+      title: 'Processing Orders',
+      value: inProcessOrders.toString(),
+      icon: <EditIcon />,
+      bgColor: 'bg-[#FFFAE8]',
+      iconColor: 'text-[#FFA600]',
+    },
+    {
+      title: 'Revenue',
+      value: revenue,
+      icon: <EyeIcon />,
+      bgColor: 'bg-[#F4F1FF]',
+      iconColor: 'text-[#B081FF]',
     },
   ];
 
@@ -148,22 +139,28 @@ export default function DashboardPage() {
           </Link>
         </div>
       </div>
-      {/* Statistics Card */}
+
+      {/* Statistics Cards Section */}
       <div className="pt-6">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-3">
-          {statisticCards.map((card) => (
-            <StatisticCard key={card.title} card={card} />
+        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+          {cards.map((card, index) => (
+            <StatisticCard key={index} card={card} />
           ))}
         </div>
       </div>
-      {/* Top Products & Orders*/}
+
+      {/* Order Table Section */}
       <div className="pt-6">
-        <div className="grid xl:grid-cols-2 gap-3">
-          {/* Products */}
-          {/* <TopCard cards={topProduct[0]} /> */}
-          {/* Orders */}
-          {/* <TopCard cards={recentOrder[0]} /> */}
-        </div>
+        <OrderTable
+          orders={ordersData?.data || []}
+          handleUpdateStatus={handleUpdateStatus}
+          isLoading={isLoading}
+          error={error}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+        />
       </div>
     </div>
   );
